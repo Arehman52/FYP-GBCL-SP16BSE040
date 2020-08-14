@@ -1,0 +1,18 @@
+.IndexaboutusDiv h2{
+    font-weight: 900;
+    color: #cbf3f0;
+
+}
+.IndexaboutusDiv{
+    padding: 40px;
+    width: 100%;
+    text-align: center;
+}
+
+.IndexaboutusDiv p{
+    font-size: 20px;
+    color: #8dc7c3;
+}
+#Indexrow-Aboutus{
+    height: fit-content;
+}
