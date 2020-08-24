@@ -2,9 +2,10 @@
 body{
     font-family: "Roboto", sans-serif;
 
-    background: #000046;  /* fallback for old browsers */
-    background-image: -webkit-linear-gradient(to right, #2494b3, #000064);  /* Chrome 10-25, Safari 5.1-6 */
-    background-image: linear-gradient(to right, #2494b3, #000064); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #ced4da;
+     /* fallback for old browsers */
+    background-image: -webkit-linear-gradient(to right, #858e91, #000064);  /* Chrome 10-25, Safari 5.1-6 */
+    background-image: linear-gradient(to right, #858e91, #000064); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 
     /* background-color: #f8961e; */

@@ -9,10 +9,14 @@ import { TEACHERComponent } from './teacher/teacher.component';
 import { UNIVERSITYComponent } from './university/university.component';
 import { GBCLHomepageComponent } from './gbcl-homepage/gbcl-homepage.component';
 import { Error404Component } from './MISC/error404/error404.component';
+import { EditUniComponent } from './admin/subpages/edit-uni/edit-uni.component';
+import { ViewUnisComponent } from './admin/subpages/view-unis/view-unis.component';
 
 const routes: Routes = [
     { path: '', component: GBCLHomepageComponent},
     { path: 'ADMIN', component: AdminComponent},
+    { path: 'ADMIN/EditUniversity', component: EditUniComponent},
+    { path: 'ADMIN/ViewUniversity', component: ViewUnisComponent},
     { path: 'STUDENT', component: STUDENTComponent},
     { path: 'TEACHER', component: TEACHERComponent},
     { path: 'UNIVERSITY', component: UNIVERSITYComponent},
