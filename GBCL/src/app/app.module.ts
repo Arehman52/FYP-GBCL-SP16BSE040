@@ -17,13 +17,13 @@ import { AdminMainareaComponent } from './admin/admin-mainarea/admin-mainarea.co
 import { ViewUnisComponent } from './admin/subpages/view-unis/view-unis.component';
 import { EditUniComponent } from './admin/subpages/edit-uni/edit-uni.component';
 import { StudentLabComponent } from './student/student-lab/student-lab.component';
-import { StudentCpaComponent } from './student/student-cpa/student-cpa.component';
 import { TeacherOutlineManagementComponent } from './teacher/teacher-outline-management/teacher-outline-management.component';
 import { UniViewLabsComponent } from './university/labs/uni-view-labs/uni-view-labs.component';
 import { UniViewLabMembersComponent } from './university/labs/uni-view-lab-members/uni-view-lab-members.component';
 import { UniViewLabJoinRequestsComponent } from './university/labs/uni-view-lab-join-requests/uni-view-lab-join-requests.component';
 import { UniCreateLabComponent } from './university/labs/uni-create-lab/uni-create-lab.component';
 import { LabsComponent } from './university/labs/labs.component';
+import { StudentLabCpaComponent } from './student/student-lab/student-lab-cpa/student-lab-cpa.component';
 
 
 
@@ -44,13 +44,13 @@ import { LabsComponent } from './university/labs/labs.component';
     ViewUnisComponent,
     EditUniComponent,
     StudentLabComponent,
-    StudentCpaComponent,
     TeacherOutlineManagementComponent,
     UniViewLabsComponent,
     UniViewLabMembersComponent,
     UniViewLabJoinRequestsComponent,
     UniCreateLabComponent,
-    LabsComponent
+    LabsComponent,
+    StudentLabCpaComponent
   ],
   imports: [
     BrowserModule,
