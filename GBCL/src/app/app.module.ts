@@ -23,7 +23,7 @@ import { UniViewLabMembersComponent } from './university/labs/uni-view-lab-membe
 import { UniViewLabJoinRequestsComponent } from './university/labs/uni-view-lab-join-requests/uni-view-lab-join-requests.component';
 import { UniCreateLabComponent } from './university/labs/uni-create-lab/uni-create-lab.component';
 import { LabsComponent } from './university/labs/labs.component';
-import { StudentLabCpaComponent } from './student/student-lab/student-lab-cpa/student-lab-cpa.component';
+import { StudentCpaComponent } from './student/student-cpa/student-cpa.component';
 
 
 
@@ -50,7 +50,7 @@ import { StudentLabCpaComponent } from './student/student-lab/student-lab-cpa/st
     UniViewLabJoinRequestsComponent,
     UniCreateLabComponent,
     LabsComponent,
-    StudentLabCpaComponent
+    StudentCpaComponent
   ],
   imports: [
     BrowserModule,

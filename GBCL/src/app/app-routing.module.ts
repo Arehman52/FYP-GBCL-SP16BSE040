@@ -12,7 +12,7 @@ import { Error404Component } from './MISC/error404/error404.component';
 import { EditUniComponent } from './admin/subpages/edit-uni/edit-uni.component';
 import { ViewUnisComponent } from './admin/subpages/view-unis/view-unis.component';
 import { LabsComponent } from './university/labs/labs.component';
-import { StudentLabCpaComponent } from './student/student-lab/student-lab-cpa/student-lab-cpa.component';
+import { StudentCpaComponent } from './student/student-cpa/student-cpa.component';
 
 const routes: Routes = [
     { path: '', component: GBCLHomepageComponent},
@@ -20,8 +20,7 @@ const routes: Routes = [
     { path: 'ADMIN/EditUniversity', component: EditUniComponent},
     { path: 'ADMIN/ViewUniversity', component: ViewUnisComponent},
     { path: 'STUDENT', component: STUDENTComponent},
-    { path: 'STUDENT/Lab/CPA', component: StudentLabCpaComponent},
-    // StudentLabCpaComponent is making trouble, visit lab button is not presenting this component!!!
+    { path: 'STUDENT/CPA', component: StudentCpaComponent},
     { path: 'TEACHER', component: TEACHERComponent},
     { path: 'UNIVERSITY', component: UNIVERSITYComponent},
     { path: 'UNIVERSITY/Labs-Dashboard', component: LabsComponent},

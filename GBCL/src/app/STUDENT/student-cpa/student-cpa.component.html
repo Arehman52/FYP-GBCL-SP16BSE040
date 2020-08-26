@@ -113,14 +113,40 @@
   <!-- -------------------------------------------------------------------------------------- -->
   <!--SIDENAV MENU OF STUDENT STARTS in [container-fluid>>div.row]-->
   <!-- ----------------------------------------------------------------------------------------->
-      <div class="col-12 col-md-3 col-lg-2 minHeight83pt6" >
-          <div class="d-flex flex-column pt-3 sideNavAnchorsHovering" id="sideNavAnchorParentDiv">
-             <a class="sideNavLink">Dashboard</a>
-             <a class="sideNavLink">Labs</a>
-             <a class="sideNavLink" title="Code Practice Area">CPA</a>
-             <a class="sideNavLink">View Leaderboard</a>
-             <a class="sideNavLink">Take Challenge</a>
+      <div class="col-12 col-sm-4 col-lg-3 p-0 m-0" >
+       <div class="overflow-auto border border-warning ">
+
+        <div class="maxHeight50 rounded" id="sideNavAnchorParentDiv">
+          <div id="accordion" >
+
+            <!-- single lab task -->
+            <div class="card bg-dark text-light mb-1">
+              <div class="card-header bg-dark" id="headingOne">
+                <h5 class="mb-0 w-100">
+                  <a class="btn btn-link btn-lg text-left w-100" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Lab Task 01 and this is a long task
+                    <span class="text-light">5 XPs</span>
+                  </a>
+                </h5>
+              </div>
+
+              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+
+
+            <!-- single lab task -->
+
+
+
+
           </div>
+        </div>
+
+       </div>
       </div>
   <!-- -------------------------------------------------------------------------------------- -->
   <!--SIDENAV MENU OF STUDENT ENDS-->
@@ -136,7 +162,7 @@
   <!-- -------------------------------------------------------------------------------------- -->
   <!--MAIN AREA OF STUDENT STARTS in [container-fluid>>div.row]-->
   <!-- ----------------------------------------------------------------------------------------->
-      <div class="col-12 col-md-9 col-lg-10 minHeight83pt6 bg-secondary" >
+      <div class="col-12 col-sm-8 col-lg-9 minHeight83pt6 bg-secfondary" >
           <div class="row"><div class="col-12 bg-success minHeight6vh"></div></div>
           <div class="row"><div class="col-12 bg-dark minHeight6vh"></div></div>
       </div>

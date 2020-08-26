@@ -1,7 +1,159 @@
-<!-- <div class="col-12 col-md-6 col-lg-4 px-2 py-3"> -->
+<div class="container-fluid">
 
 
- <div class="card border-secondary  text-warning">
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- TOP ROW STARTS, in a [container-fluid]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+  <div class="row">
+    <div class="col-12 maTopRow ">
+      <!-- this column isfurther divided into three portions -->
+      <!-- first portion for logo -->
+      <!-- second portion for Student Stats -->
+      <!-- third portion for Logout n student name -->
+      <!-- <div class="row text-center">
+              <div class="col-12 col-sm-3 col-md-2 bg-success">LOGO</div>
+              <div class="col-12 col-sm-6 col-md-8 bg-primary">Stats</div>
+              <div class="col-12 col-sm-3 col-md-2 bg-secondary">logout n profile</div>
+          </div> -->
+      <div class="row text-center">
+
+        <!-- ---------------- -->
+        <!-- GBCL LOGO COLUMN -->
+
+        <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
+          <a class="btn  border-warning w-100 logoText" href="#" title="Gamification Based Coding Labs"><img
+              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+        </div>
+
+        <!-- GBCL LOGO COLUMN-END -->
+        <!-- -------------------- -->
+
+
+
+
+
+
+        <!-- ----------- -->
+        <!-- Stats column -->
+        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto  CurrentStatsHover">
+
+
+          <div class="row childSpansHoverYellow">
+            <div class="col-12 text-center text-underline pb-1 hoverYellow"><span><u>
+                  <h5 class="">Current Stats</h5>
+                </u></span></div>
+            <div class="col-6 col-lg-4 Text12px">Current XPs: <span>0 XP</span></div>
+            <div class="col-6 col-lg-4 Text12px">Current CPPs: <span>0 CPP</span></div>
+            <div class="col-6 col-lg-4 Text12px"><span>Level: 0</span></div>
+            <div class="col-6 col-lg-4 Text12px">Current Badge: <span>ABC</span></div>
+            <div class="col-6 col-lg-4 Text12px">Next Badge: <span>XYZ</span></div>
+            <div class="col-6 col-lg-4 Text10pxItalicYellow text-right">--XPs Required for Promotion:
+              <span>120 XP</span></div>
+          </div>
+        </div>
+        <!-- STATS COL END -->
+        <!-- ------------- -->
+
+
+
+
+        <!-- ---------- -->
+        <!-- LOGOUT COL -->
+        <div class="col-12 col-sm-3 col-md-2">
+          <div class="row">
+            <div class="col-12 pt-3 pb-2">Abdur Rehman</div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <a class="btn btn-outline-danger MaSmallsizeBtns w-75 " href="../index.html">Logout</a>
+            </div>
+          </div>
+        </div>
+        <!-- LOGOUT COL ENDS-->
+        <!-- ----------------->
+
+      </div>
+
+    </div>
+  </div>
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- TOP ROW ENDS-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- AREA UNDER TOP ROW OF STUDENT STARTS in [container-fluid]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+
+  <!-- [] represents row and () represents column ENCLOSINGS -->
+  <!-- OuterRow[col12(InnerRow[col(InnerRow[MainAreaCol()])] -->
+
+  <div class="row LabsHeaderRow">
+
+    <!-- -------------------------------------------------------------------------------------- -->
+    <!--MAIN AREA OF STUDENT STARTS in [container-fluid>>div.row]-->
+    <!-- ----------------------------------------------------------------------------------------->
+    <div class="col-12 minHeight84 LabsHeader">
+      <div class="row ">
+        <div class="col-12 col-sm-8 col-md-9 minHeight10vh pt-2 pb-2">
+          <span class="">Registered Labs</span>
+        </div>
+
+        <div class="col-12 col-sm-3 col-md-2 minHeight10vh pt-2 pb-2">
+          <form class="">
+            <div class="formContainerJoinLab">
+              <input type="text" class="LabCodeTextInput" placeholder="ENTER LAB CODE" onfocus="this.placeholder = ''"
+                onblur="this.placeholder = 'ENTER LAB CODE'">
+              <a class="btn btn-outline-warning MaSmallsizeBtns">Join Lab</a>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!--LABS HEADER STUDENT ENDS]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!--LABS ROW STUDENT STARTSS]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+  <div class="row ">
+    <div class="col-12">
+      <div class="container pt-3">
+        <div class="row">
+
+          <!-- A single Lab -->
+          <div class="col-12 col-md-6 col-lg-4 px-2 py-3">
+            <div class="card border-secondary  text-warning">
               <div class="card-header bg-warning text-dark  py-4 text-warning">
                   <b>BSE-7B/OOP</b>
               </div>
@@ -21,6 +173,52 @@
                   </div>
               </div>
             </div>
+          </div>
+          <!-- A single Lab ENDS -->
+
+          <!-- <app-student-lab ></app-student-lab> -->
 
 
-<!-- </div> -->
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+  </div>
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!--LABS ROW STUDENT ENDS]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!--MAIN AREA OF STUDENT ENDS-->
+<!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- AREA UNDER TOP ROW OF STUDENT ENDS-->
+<!-- ----------------------------------------------------------------------------------------->
