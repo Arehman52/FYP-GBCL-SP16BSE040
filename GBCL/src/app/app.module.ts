@@ -12,18 +12,15 @@ import { GBCLHomepageComponent } from './gbcl-homepage/gbcl-homepage.component';
 import { TEACHERComponent } from './teacher/teacher.component';
 import { UNIVERSITYComponent } from './university/university.component';
 import { Error404Component } from './MISC/error404/error404.component';
-import { AdminSidenavComponent } from './admin/admin-sidenav/admin-sidenav.component';
-import { AdminMainareaComponent } from './admin/admin-mainarea/admin-mainarea.component';
-import { ViewUnisComponent } from './admin/subpages/view-unis/view-unis.component';
-import { EditUniComponent } from './admin/subpages/edit-uni/edit-uni.component';
-import { StudentLabComponent } from './student/student-lab/student-lab.component';
-import { TeacherOutlineManagementComponent } from './teacher/teacher-outline-management/teacher-outline-management.component';
-import { UniViewLabsComponent } from './university/labs/uni-view-labs/uni-view-labs.component';
-import { UniViewLabMembersComponent } from './university/labs/uni-view-lab-members/uni-view-lab-members.component';
-import { UniViewLabJoinRequestsComponent } from './university/labs/uni-view-lab-join-requests/uni-view-lab-join-requests.component';
-import { UniCreateLabComponent } from './university/labs/uni-create-lab/uni-create-lab.component';
-import { LabsComponent } from './university/labs/labs.component';
-import { StudentCpaComponent } from './student/student-cpa/student-cpa.component';
+import { SlabDashboardComponent } from './student/slab-dashboard/slab-dashboard.component';
+import { CpaComponent } from './student/slab-dashboard/cpa/cpa.component';
+// import { LeaderoardComponent } from './student/slab-dashboard/leaderoard/leaderoard.component';
+import { LeaderboardComponent } from './student/slab-dashboard/leaderboard/leaderboard.component';
+// import { UniViewLabsComponent } from './university/labs/uni-view-labs/uni-view-labs.component';
+// import { UniViewLabMembersComponent } from './university/labs/uni-view-lab-members/uni-view-lab-members.component';
+// import { UniViewLabJoinRequestsComponent } from './university/labs/uni-view-lab-join-requests/uni-view-lab-join-requests.component';
+// import { UniCreateLabComponent } from './university/labs/uni-create-lab/uni-create-lab.component';
+// import { LabsComponent } from './university/labs/labs.component';
 
 
 
@@ -39,18 +36,16 @@ import { StudentCpaComponent } from './student/student-cpa/student-cpa.component
     TEACHERComponent,
     UNIVERSITYComponent,
     Error404Component,
-    AdminSidenavComponent,
-    AdminMainareaComponent,
-    ViewUnisComponent,
-    EditUniComponent,
-    StudentLabComponent,
-    TeacherOutlineManagementComponent,
-    UniViewLabsComponent,
-    UniViewLabMembersComponent,
-    UniViewLabJoinRequestsComponent,
-    UniCreateLabComponent,
-    LabsComponent,
-    StudentCpaComponent
+    SlabDashboardComponent,
+    CpaComponent,
+    // LeaderoardComponent,
+    LeaderboardComponent
+    // TeacherOutlineManagementComponent,
+    // UniViewLabsComponent,
+    // UniViewLabMembersComponent,
+    // UniViewLabJoinRequestsComponent,
+    // UniCreateLabComponent,
+    // LabsComponent
   ],
   imports: [
     BrowserModule,

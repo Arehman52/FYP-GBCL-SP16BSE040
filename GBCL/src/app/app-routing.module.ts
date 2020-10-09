@@ -9,21 +9,19 @@ import { TEACHERComponent } from './teacher/teacher.component';
 import { UNIVERSITYComponent } from './university/university.component';
 import { GBCLHomepageComponent } from './gbcl-homepage/gbcl-homepage.component';
 import { Error404Component } from './MISC/error404/error404.component';
-import { EditUniComponent } from './admin/subpages/edit-uni/edit-uni.component';
-import { ViewUnisComponent } from './admin/subpages/view-unis/view-unis.component';
-import { LabsComponent } from './university/labs/labs.component';
-import { StudentCpaComponent } from './student/student-cpa/student-cpa.component';
+import { SlabDashboardComponent } from './student/slab-dashboard/slab-dashboard.component';
+import { CpaComponent } from './student/slab-dashboard/cpa/cpa.component';
+import { LeaderboardComponent } from './student/slab-dashboard/leaderboard/leaderboard.component';
 
 const routes: Routes = [
     { path: '', component: GBCLHomepageComponent},
     { path: 'ADMIN', component: AdminComponent},
-    { path: 'ADMIN/EditUniversity', component: EditUniComponent},
-    { path: 'ADMIN/ViewUniversity', component: ViewUnisComponent},
     { path: 'STUDENT', component: STUDENTComponent},
-    { path: 'STUDENT/CPA', component: StudentCpaComponent},
+    { path: 'STUDENT/Lab', component: SlabDashboardComponent},
+    { path: 'STUDENT/Lab/CPA', component: CpaComponent},
+    { path: 'STUDENT/Lab/Leaderboard', component: LeaderboardComponent},
     { path: 'TEACHER', component: TEACHERComponent},
     { path: 'UNIVERSITY', component: UNIVERSITYComponent},
-    { path: 'UNIVERSITY/Labs-Dashboard', component: LabsComponent},
     { path: '**', component: Error404Component}
 ];
 

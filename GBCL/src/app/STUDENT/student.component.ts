@@ -12,4 +12,6 @@ export class STUDENTComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  labs = [ {} ];
+
 }

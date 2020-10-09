@@ -126,7 +126,9 @@ hr{
 
 
 /* SIDENAV CSS STARTS
-
+.minHeight84{
+  min-height: 84.0vh;
+}
 .sideNavLink{
   background-color: #fff;
   font-weight: 500;
@@ -145,36 +147,30 @@ SIDENAV CSS ENDS */
 
 
 /* UTILITY CSS CLASSES */
-.minHeight84{
-  min-height: 84.0vh;
-}
-.maxHeight50{
-  max-height: 50vh;
-  min-height: 48vh;
-}
 .minHeight10vh{
   min-height: 10vh;
 }
 .borderOnHover :hover{
   border: 1px solid whitesmoke;
 }
+
+.secondaryColorOfChildrenOnHover *:hover{
+background-color: #6C757D;
+color: #fff;
+}
 /* UTILITY CSS CLASSES END*/
-
-
-
-
-/* classes after importing to mean stack */
-.btn-lg{
-text-decoration: none;
-color: whitesmoke;
-font-weight: bolder;
+.sideNavLink{
+  background-color: #fff;
+  font-weight: 500;
+  border: solid transparent 2px;
+  border-radius: 2px;
+  margin: 0 0 4px 0;
+  padding: 8px 2px 4px 8px;
 }
-.btn-lg:hover{
-  color: #FFC107;
+#sideNavAnchorParentDiv a:hover{
+  color: #0d6ccc;
 }
-.btn-lg span{
-  margin-left: 24%;
-  border: solid 1px aqua;
-  padding: 1.5px;
-  border-radius: 4px;
-}
+
+
+
+

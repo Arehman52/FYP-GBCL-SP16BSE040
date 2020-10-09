@@ -1,3 +1,16 @@
+<!-- This is the Dashboard for student,  -->
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container-fluid">
 
 
@@ -81,6 +94,7 @@
       </div>
 
     </div>
+    <hr class="bg-dark p-0 m-0">
   </div>
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- TOP ROW ENDS-->
@@ -94,7 +108,6 @@
 
 
   <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
-
 
 
 
@@ -151,8 +164,13 @@
       <div class="container pt-3">
         <div class="row">
 
+          <div *ngIf="labs.length<=0">
+            <p>
+              You have not registered any labs yet.
+            </p>
+          </div>
           <!-- A single Lab -->
-          <div class="col-12 col-md-6 col-lg-4 px-2 py-3">
+          <div class="col-12 col-md-6 col-lg-4 px-2 py-3" *ngFor="let lab of labs">
             <div class="card border-secondary  text-warning">
               <div class="card-header bg-warning text-dark  py-4 text-warning">
                   <b>BSE-7B/OOP</b>
@@ -167,7 +185,7 @@
                   <hr>
                   <div class="container text-center">
 
-                      <a [routerLink]="'/STUDENT/CPA'"  class="btn btn-outline-warning w-75 mt-3 "><b>VISIT LAB</b></a>
+                      <a [routerLink]="'/STUDENT/Lab'"  class="btn btn-outline-warning w-75 mt-3 "><b>VISIT LAB</b></a>
 
 
                   </div>
