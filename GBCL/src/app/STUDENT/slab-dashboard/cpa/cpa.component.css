@@ -17,21 +17,12 @@ body{
   padding-bottom: 4px;
   color: #fff;
 }
-.CurrentStatsHover :hover{
-  background-color: #1b1d49;
-
-}
 
 
 /* GBCL LOGO CSS STARTS */
-.logoText{
-  font-size: 20px;
-  color: #333F4F;
-  font-weight: bolder;
-  margin: 2% 0%;
-}
+
 #logoImg{
-  background: transparent;
+  /* background: transparent; */
   width: 36px;
   display: block;
   margin: auto;
@@ -48,8 +39,8 @@ body{
   text-decoration: none;
   font-weight: bolder;
 }
-.childSpansHoverYellow span:hover{
-  color: #FFC107;
+.childSpansHoverYellow:hover span{
+  background:  #FFC107;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
@@ -71,23 +62,7 @@ font-style: italic;
 /* TOP ROW CSS ENDS */
 
 
-/* MainArea STARTS */
-.formContainerJoinLab{
-  background: transparent;
-}
-.LabCodeTextInput{
-  display: block;
-  width: 100%;
-  min-width: fit-content;
-  margin: auto;
-  border-radius: 4px;
-  height: 32px;
-  margin-bottom: 7px;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: center;
 
-}
 .MaSmallsizeBtns{
   display: block;
   width: 100%;
@@ -97,6 +72,28 @@ font-style: italic;
   padding: 0px 14px;
 }
 
+
+.EditorBtns{
+  width: fit-content;
+  margin: auto;
+  height:fit-content;
+  text-transform: capitalize;
+  padding: 4px 14px;
+  margin: 3px 3px 3px 6px;
+}
+
+.OutlineTaskTitleBtns{
+  text-align: start;
+  display: block;
+  width: 100%;
+  color: #0E103D;
+  font-weight: bold;
+  /* margin: auto; */
+  height:fit-content;
+  /* text-transform: capitalize; */
+  padding: 10px 14px;
+}
+
 hr{
   background: #FFC107;
   width: 100%;
@@ -104,45 +101,6 @@ hr{
   height: 0;
   margin: 2px;
 }
-.LabsHeaderRow{
-  background-color: rgb(120, 120, 128, 9);
-}
-.LabsHeader{
-  margin: auto;
-  color:whitesmoke;
-  font-size: 2em;
-  background-color:  rgba(3, 2, 53, 0.85);
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-radius: 2px;
-  padding-left: 8%;
-  /* border-top: 0.9em solid navy;
-  border-bottom: 0.5em solid navy;
-  border-left: 4em solid navy;
-  border-right: 4em solid navy; */
-}
-/* MainArea ENDSS */
-
-
-
-/* SIDENAV CSS STARTS
-.minHeight84{
-  min-height: 84.0vh;
-}
-.sideNavLink{
-  background-color: #fff;
-  font-weight: 500;
-  border: solid transparent 2px;
-  border-radius: 2px;
-  margin: 0 0 4px 0;
-  padding: 8px 2px 4px 8px;
-}
-#sideNavAnchorParentDiv a:hover{
-  color: #0d6ccc;
-}
-SIDENAV CSS ENDS */
-
-
 
 
 
@@ -150,14 +108,66 @@ SIDENAV CSS ENDS */
 .minHeight10vh{
   min-height: 10vh;
 }
+
+.minHeight40vh{
+  min-height: 40vh;
+}
+
+.minmaxHeight40vh{
+  min-height: 40vh;
+  max-height: 40vh;
+}
+
+.minmaxHeight75vh{
+  min-height: 75vh;
+  max-height: 75vh;
+}
+.minmaxHeight50vh{
+  min-height: 50vh;
+  max-height: 50vh;
+}
+
+.minmaxHeight35vh{
+  min-height: 35vh;
+  max-height: 35vh;
+}
+
+.minmaxHeight45vh{
+  min-height: 45vh;
+  max-height: 45vh;
+}
+
+.minmaxHeight84vh{
+  min-height: 83.8vh;
+  max-height: 83.8vh;
+}
+
+
+.minmaxHeight33vh{
+  min-height: 33vh;
+  max-height: 33vh;
+}
+
+
+
+
+
 .borderOnHover :hover{
   border: 1px solid whitesmoke;
 }
 
-.secondaryColorOfChildrenOnHover *:hover{
-background-color: #6C757D;
-color: #fff;
-}
+.secondaryColorOfChildrenOnHover:hover button{
+  background-color: #6C757D;
+  color: #fff;
+  }
+
+/* .secondaryColorOfChildrenOnHover span:hover{
+  background-color: #FFC107;
+  color: #fff;
+  } */
+
+
+
 /* UTILITY CSS CLASSES END*/
 .sideNavLink{
   background-color: #fff;
@@ -171,6 +181,18 @@ color: #fff;
   color: #0d6ccc;
 }
 
+.maSmallerFonts{
+  font-size: 12px;
+  padding-left: 18px 14px 18px 14px;
+  /* color: #fff; */
+}
+
+.card-header a:hover{
+  color: #1f27b9;
+}
 
 
 
+.bg-Outline{
+  background-color: #020264;
+}
