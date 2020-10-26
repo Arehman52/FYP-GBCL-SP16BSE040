@@ -6,10 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./cpa.component.css'],
 })
 export class CpaComponent {
-  members = [
+
+
+
+  student = [
     {
       StudentID: 's1',
       status: 'online',
+      name: 'Abdur Rehman'
     }
   ];
   tasks = [

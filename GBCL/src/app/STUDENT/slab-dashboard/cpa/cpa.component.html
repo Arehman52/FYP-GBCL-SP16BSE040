@@ -27,7 +27,7 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn w-100" href="#" title="Gamification Based Coding Labs"><img
+          <a class="btn w-100 border border-warning" [routerLink]="'/'" title="Gamification Based Coding Labs"><img
               src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
         </div>
 
@@ -58,12 +58,23 @@
         <!-- LOGOUT COL -->
         <div class="col-12 col-sm-3 col-md-2">
           <div class="row">
-            <div class="col-12 pt-3 pb-2">Abdur Rehman</div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <a class="btn btn-outline-danger MaSmallsizeBtns w-75 " href="../index.html">Logout</a>
+            <div class="col-12 btn-group">
+              <!-- Example single danger button -->
+
+  <button type="button" *ngFor="let stud of student" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{stud.name}}
+  </button>
+  <div class="dropdown-menu bg-warning" >
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab'">Lab's Dashboard</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/'">Exit Lab</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" [routerLink]="'/'">Logout</a>
+  </div>
+
             </div>
+
           </div>
         </div>
         <!-- LOGOUT COL ENDS-->
@@ -164,9 +175,9 @@
           <h5 class="text-center text-warning"><b>CODE EDITOR</b></h5>
           <form class="text-right">
             <div class="form-group p-0 m-0">
-              <textarea class="form-control m-0" id="CodeEditor" rows="9"></textarea>
+              <textarea class="form-control m-0" id="CodeEditor" rows="8"></textarea>
             </div>
-            <button class="btn btn-primary EditorBtns">Run</button>
+            <button class="btn btn-primary EditorBtns" >Run</button>
           </form>
         </div>
       </div>
@@ -177,7 +188,13 @@
           <button class="btn btn-primary EditorBtns">Clear</button>
         </div>
         <div class="col-12 col-lg-6 border rounded border-warning">
-          <h6 class="text-center text-warning m-1"><b>Test Cases</b></h6></div>
+          <h6 class="text-center text-warning m-1"><b>Test Cases</b></h6>
+          <hr> <hr>
+          <div class="text-light">
+          <span>has variables : Pass,&nbsp;</span>
+          <span>has variables : Pass</span>
+          </div>
+        </div>
       </div>
     </div>
 

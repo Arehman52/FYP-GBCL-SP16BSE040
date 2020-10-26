@@ -196,3 +196,7 @@ hr{
 .bg-Outline{
   background-color: #020264;
 }
+
+p:hover span{
+  color: #FFC107;
+}

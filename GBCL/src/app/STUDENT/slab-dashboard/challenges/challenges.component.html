@@ -1,0 +1,149 @@
+<div class="container-fluid">
+
+
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- TOP ROW STARTS, in a [container-fluid]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+  <div class="row">
+    <div class="col-12 maTopRow ">
+      <!-- this column isfurther divided into three portions -->
+      <!-- first portion for logo -->
+      <!-- second portion for Student Stats -->
+      <!-- third portion for Logout n student name -->
+      <!-- <div class="row text-center">
+              <div class="col-12 col-sm-3 col-md-2 bg-success">LOGO</div>
+              <div class="col-12 col-sm-6 col-md-8 bg-primary">Stats</div>
+              <div class="col-12 col-sm-3 col-md-2 bg-secondary">logout n profile</div>
+          </div> -->
+      <div class="row text-center">
+
+        <!-- ---------------- -->
+        <!-- GBCL LOGO COLUMN -->
+
+        <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
+          <a class="btn w-100  border border-warning" [routerLink]="'/'" title="Gamification Based Coding Labs"><img
+              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+        </div>
+
+        <!-- GBCL LOGO COLUMN-END -->
+        <!-- -------------------- -->
+
+
+
+
+
+
+        <!-- ----------- -->
+        <!-- Stats column -->
+        <div class="col-12 col-sm-4 col-md-5 border rounded text-left h-100 m-auto p-2 text-center">
+          <h5><b>Challenges Window</b></h5>
+        </div>
+        <!-- Stats column -->
+        <div class="col-12 col-sm-2 col-md-3 border rounded text-left h-100 m-auto p-2 text-center">
+          <h5 class="text-warning">Unchanged Stats</h5>
+        </div>
+        <!-- STATS COL END -->
+        <!-- ------------- -->
+
+
+
+
+        <!-- ---------- -->
+        <!-- LOGOUT COL -->
+        <div class="col-12 col-sm-3 col-md-2">
+          <div class="row">
+            <div class="col-12 btn-group">
+              <!-- Example single danger button -->
+
+              <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                afsaadf
+              </button>
+              <div class="dropdown-menu bg-warning">
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab'">Lab's Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">Code Practice Area</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/'">Exit Lab</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" [routerLink]="'/'">Logout</a>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- LOGOUT COL ENDS-->
+        <!-- ----------------->
+
+      </div>
+
+    </div>
+    <hr class="bg-warning p-0 m-0">
+
+  </div>
+  <!--1st row ends-->
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- TOP ROW ENDS-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+  <div class="row" >
+    <div class="col-12">
+      <!-- <button (click)='startTimer()'>Start Timer</button>
+<button (click)='pauseTimer()'>Pause</button> -->
+
+
+      <div class="row text-center text-warning bg-dark">
+        <div class="col-sm-8 p-2">
+          <h2>{{getTitle()}}</h2>
+
+        </div>
+        <div class="col-sm-4 my-auto"> <span>{{timeLeft}} Seconds Left</span></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8 p-2 bg-light rounded pt-4 pl-5 minHeight40vh">
+          <h4>Question {{this.challenges[this.i].Qnumber}} of {{this.challenges.length}}:</h4>
+
+
+          <div>{{this.challenges[this.i].Question}} </div>
+          <div *ngIf="this.challenges[this.i].Qtype == 'mcq'">
+          a. {{this.challenges[this.i].options.a}} <br>
+          b. {{this.challenges[this.i].options.b}} <br>
+          c. {{this.challenges[this.i].options.c}} <br>
+          d. {{this.challenges[this.i].options.d}}</div>
+        </div>
+        <div class="col-sm-4">
+
+          <div class="container border border-warning rounded mt-1 text-light">
+            <h5 class="text-center pt-1">current stats</h5>
+          </div>
+          <div class="container border border-warning rounded text-light">
+
+            <p class="mt-1">Current XPs: <span>168 XP</span></p>
+
+            <p class="mct-1">Current Level: <span>3</span></p>
+            <p class="mct-1">XPs required for promotion: <span>168</span> </p>
+            <p class="mct-1">Current Badge: <span>Master 1</span> </p>
+            <p class="mct-1">Next Badge: <span>Master 2</span> </p>
+
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-8 mt-1">
+          <button class="btn btn-small px-4 float-right btn-outline-warning" (click)="nextQuestion()">next</button>
+          <button class="btn btn-small px-4 float-right btn-outline-warning mr-1" >take hint</button>
+        </div>
+      </div>
+
+    </div>
+  </div>

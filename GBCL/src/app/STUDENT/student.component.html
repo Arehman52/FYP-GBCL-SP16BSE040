@@ -54,21 +54,8 @@
 
         <!-- ----------- -->
         <!-- Stats column -->
-        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto  CurrentStatsHover">
-
-
-          <div class="row childSpansHoverYellow">
-            <div class="col-12 text-center text-underline pb-1 hoverYellow"><span><u>
-                  <h5 class="">Current Stats</h5>
-                </u></span></div>
-            <div class="col-6 col-lg-4 Text12px">Current XPs: <span>0 XP</span></div>
-            <div class="col-6 col-lg-4 Text12px">Current CPPs: <span>0 CPP</span></div>
-            <div class="col-6 col-lg-4 Text12px"><span>Level: 0</span></div>
-            <div class="col-6 col-lg-4 Text12px">Current Badge: <span>ABC</span></div>
-            <div class="col-6 col-lg-4 Text12px">Next Badge: <span>XYZ</span></div>
-            <div class="col-6 col-lg-4 Text10pxItalicYellow text-right">--XPs Required for Promotion:
-              <span>120 XP</span></div>
-          </div>
+        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto p-2 text-center">
+          <h3>Student Dashboard</h3>
         </div>
         <!-- STATS COL END -->
         <!-- ------------- -->
@@ -79,13 +66,19 @@
         <!-- ---------- -->
         <!-- LOGOUT COL -->
         <div class="col-12 col-sm-3 col-md-2">
-          <div class="row">
-            <div class="col-12 pt-3 pb-2">Abdur Rehman</div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <a class="btn btn-outline-danger MaSmallsizeBtns w-75 " href="../index.html">Logout</a>
-            </div>
+
+          <div class="col-12 btn-group">
+            <!-- Example single danger button -->
+
+<button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  name here
+</button>
+<div class="dropdown-menu bg-warning" >
+  <a class="dropdown-item" [routerLink]="'/STUDENT/Settings'">Profile Settings</a>
+  <div class="dropdown-divider"></div>
+  <a class="dropdown-item" [routerLink]="'/'">Logout</a>
+</div>
+
           </div>
         </div>
         <!-- LOGOUT COL ENDS-->

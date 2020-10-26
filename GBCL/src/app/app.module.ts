@@ -1,51 +1,67 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
+
+
+
+// =============================================My imports below
+// Angular n other imports
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { STUDENTComponent } from './student/student.component';
-import { HomepageNavSearchComponent } from './gbcl-homepage/homepage-nav-search/homepage-nav-search.component';
+
+// Homepage imports
 import { AboutusComponent } from './gbcl-homepage/aboutus/aboutus.component';
 import { SignupFormComponent } from './gbcl-homepage/signup-form/signup-form.component';
-import { AdminComponent } from './admin/admin.component';
 import { GBCLHomepageComponent } from './gbcl-homepage/gbcl-homepage.component';
-import { TEACHERComponent } from './teacher/teacher.component';
-import { UNIVERSITYComponent } from './university/university.component';
-import { Error404Component } from './MISC/error404/error404.component';
+import { HomepageNavSearchComponent } from './gbcl-homepage/homepage-nav-search/homepage-nav-search.component';
+
+// Admin imports
+import { AdminComponent } from './admin/admin.component';
+
+// Student imports
+import { STUDENTComponent } from './student/student.component';
 import { SlabDashboardComponent } from './student/slab-dashboard/slab-dashboard.component';
 import { CpaComponent } from './student/slab-dashboard/cpa/cpa.component';
-// import { LeaderoardComponent } from './student/slab-dashboard/leaderoard/leaderoard.component';
 import { LeaderboardComponent } from './student/slab-dashboard/leaderboard/leaderboard.component';
-// import { UniViewLabsComponent } from './university/labs/uni-view-labs/uni-view-labs.component';
-// import { UniViewLabMembersComponent } from './university/labs/uni-view-lab-members/uni-view-lab-members.component';
-// import { UniViewLabJoinRequestsComponent } from './university/labs/uni-view-lab-join-requests/uni-view-lab-join-requests.component';
-// import { UniCreateLabComponent } from './university/labs/uni-create-lab/uni-create-lab.component';
-// import { LabsComponent } from './university/labs/labs.component';
+import { ChallengesComponent } from './student/slab-dashboard/challenges/challenges.component';
+
+// Teacher imports
+import { TEACHERComponent } from './teacher/teacher.component';
+
+// University imports
+import { UNIVERSITYComponent } from './university/university.component';
+
+// Misc imports
+import { Error404Component } from './MISC/error404/error404.component';
+import { SsettingsComponent } from './student/ssettings/ssettings.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    STUDENTComponent,
+
     HomepageNavSearchComponent,
     AboutusComponent,
     SignupFormComponent,
-    AdminComponent,
     GBCLHomepageComponent,
-    TEACHERComponent,
-    UNIVERSITYComponent,
-    Error404Component,
+
+    AdminComponent,
+
+    STUDENTComponent,
     SlabDashboardComponent,
     CpaComponent,
-    // LeaderoardComponent,
-    LeaderboardComponent
-    // TeacherOutlineManagementComponent,
-    // UniViewLabsComponent,
-    // UniViewLabMembersComponent,
-    // UniViewLabJoinRequestsComponent,
-    // UniCreateLabComponent,
-    // LabsComponent
+    LeaderboardComponent,
+    ChallengesComponent,
+
+    TEACHERComponent,
+
+    UNIVERSITYComponent,
+
+    Error404Component,
+
+    SsettingsComponent
   ],
   imports: [
     BrowserModule,

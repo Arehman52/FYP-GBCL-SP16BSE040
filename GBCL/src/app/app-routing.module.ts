@@ -12,16 +12,26 @@ import { Error404Component } from './MISC/error404/error404.component';
 import { SlabDashboardComponent } from './student/slab-dashboard/slab-dashboard.component';
 import { CpaComponent } from './student/slab-dashboard/cpa/cpa.component';
 import { LeaderboardComponent } from './student/slab-dashboard/leaderboard/leaderboard.component';
+import { ChallengesComponent } from './student/slab-dashboard/challenges/challenges.component';
+import { SsettingsComponent } from './student/ssettings/ssettings.component';
 
 const routes: Routes = [
+  // Homepage routes
     { path: '', component: GBCLHomepageComponent},
-    { path: 'ADMIN', component: AdminComponent},
-    { path: 'STUDENT', component: STUDENTComponent},
-    { path: 'STUDENT/Lab', component: SlabDashboardComponent},
-    { path: 'STUDENT/Lab/CPA', component: CpaComponent},
-    { path: 'STUDENT/Lab/Leaderboard', component: LeaderboardComponent},
-    { path: 'TEACHER', component: TEACHERComponent},
+  // Admin routes
+  { path: 'ADMIN', component: AdminComponent},
+  // Student routes
+  { path: 'STUDENT', component: STUDENTComponent}, // dashboard
+  { path: 'STUDENT/Lab', component: SlabDashboardComponent}, // lab dashboard for student
+  { path: 'STUDENT/Lab/Challenges', component: ChallengesComponent},
+  { path: 'STUDENT/Lab/CPA', component: CpaComponent},
+  { path: 'STUDENT/Lab/Leaderboard', component: LeaderboardComponent},
+  { path: 'STUDENT/Settings', component: SsettingsComponent},
+  // Teacher routes
+  { path: 'TEACHER', component: TEACHERComponent},
+  // University routes
     { path: 'UNIVERSITY', component: UNIVERSITYComponent},
+  // Misc routes
     { path: '**', component: Error404Component}
 ];
 
