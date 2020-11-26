@@ -11,5 +11,5 @@ export class TEACHERComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  labs = [ {}, {}, {} ];
 }

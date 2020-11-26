@@ -10,11 +10,16 @@
 
       <hr class="bg-warning">
       <div class="card-body" id="myCardbody">
-        <form class="p-3  m-auto">
+        <form class="p-3  m-auto" (submit)="onSignUpClicked(signupForm)" #signupForm="ngForm">
+
+
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1">
-
+            <input type="email" class="form-control"
+            name="EnteredEmailAddress"
+            ngModel
+            required
+            minlength="7">
           </div>
 
 
@@ -22,7 +27,7 @@
             <div class="col-sm-6">
               <div class="form-group ">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control " id="exampleInputPassword1">
+                <input type="password" class="form-control " name="EnteredPassword" ngModel>
               </div>
             </div>
             <div class="col-sm-6">
@@ -41,12 +46,12 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="inputGroupSelect01">Sign up as</label>
                 </div>
-                <select class="custom-select" id="inputGroupSelect01">
+                <select class="custom-select"  >
                   <option selected disabled>You are?</option>
-                  <option [value]="'1'"><b>a Student</b></option>
-                  <option [value]="'2'"><b>a Teacher</b>
+                  <option value="student"><b>a Student</b></option>
+                  <option value="teacher"><b>a Teacher</b>
                   </option>
-                  <option [value]="'3'"><b>a University</b></option>
+                  <option value="university"><b>a University</b></option>
                 </select>
               </div>
 
@@ -76,7 +81,9 @@
 
 
           <div class="text-center">
-            <button type="submit" class="btn btn-primary w-50 m-auto ">Sign up</button>
+            <button class="btn btn-primary w-50 m-auto" type="submit">Sign up</button>
+            <br>
+            <button class="btn btn-primary w-50 m-auto" (click)="getTheUser()">Create User</button>
             <br>
             <button type="button" [routerLink]="'/ADMIN'" class="btn btn-primary w-25 mx-2 mt-1">Admin</button>
             <button type="button" [routerLink]="'/STUDENT'" class="btn btn-primary w-25 mx-2 mt-1">STUDENT</button>

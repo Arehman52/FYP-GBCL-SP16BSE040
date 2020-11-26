@@ -126,9 +126,7 @@ hr{
 
 
 /* SIDENAV CSS STARTS
-.minHeight84{
-  min-height: 84.0vh;
-}
+
 .sideNavLink{
   background-color: #fff;
   font-weight: 500;
@@ -149,6 +147,13 @@ SIDENAV CSS ENDS */
 /* UTILITY CSS CLASSES */
 .minHeight10vh{
   min-height: 10vh;
+}
+.minHeight84{
+  min-height: 84.0vh;
+
+}
+.minHeight838{
+  min-height: 83.8vh;
 }
 .borderOnHover :hover{
   border: 1px solid whitesmoke;

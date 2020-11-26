@@ -35,7 +35,12 @@ import { UNIVERSITYComponent } from './university/university.component';
 // Misc imports
 import { Error404Component } from './MISC/error404/error404.component';
 import { SsettingsComponent } from './student/ssettings/ssettings.component';
-
+import { RivalsComponent } from './student/slab-dashboard/rivals/rivals.component';
+import { TlabDashboardComponent } from './teacher/tlab-dashboard/tlab-dashboard.component';
+import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
+import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
+import { TeachersettingsComponent } from './TEACHER/tsettings/tsettings.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -61,11 +66,20 @@ import { SsettingsComponent } from './student/ssettings/ssettings.component';
 
     Error404Component,
 
-    SsettingsComponent
+    SsettingsComponent,
+
+    RivalsComponent,
+
+    TlabDashboardComponent,
+
+    ManageeChallengesComponent,
+    TeachersettingsComponent,
+    ManageeLabtasksComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -9,6 +9,10 @@ body{
   background-color: #090839;
 }
 
+.maNav-bg-color{
+  background-color: #0E103D;
+}
+
 /* Top Row CSS starts*/
 .maTopRow{
   background-color: #0e103d;
@@ -126,9 +130,6 @@ hr{
 
 
 /* SIDENAV CSS STARTS
-.minHeight84{
-  min-height: 84.0vh;
-}
 .sideNavLink{
   background-color: #fff;
   font-weight: 500;
@@ -147,10 +148,18 @@ SIDENAV CSS ENDS */
 
 
 /* UTILITY CSS CLASSES */
+.minHeight838{
+  min-height: 83.8vh;
+}
 .minHeight10vh{
   min-height: 10vh;
 }
 .borderOnHover :hover{
   border: 1px solid whitesmoke;
+}
+
+.secondaryColorOfChildrenOnHover *:hover{
+background-color: #6C757D;
+color: #fff;
 }
 /* UTILITY CSS CLASSES END*/

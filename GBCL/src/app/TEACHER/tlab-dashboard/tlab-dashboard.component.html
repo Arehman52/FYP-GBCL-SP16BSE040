@@ -1,3 +1,8 @@
+<!-- This is the Dashboard for student,  -->
+
+
+
+
 
 
 
@@ -35,7 +40,7 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn  border-warning w-100 logoText" href="#" title="Gamification Based Coding Labs"><img
+          <a class="btn  border-warning w-100 logoText" title="Gamification Based Coding Labs"><img
               src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
         </div>
 
@@ -49,8 +54,22 @@
 
         <!-- ----------- -->
         <!-- Stats column -->
-        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto p-2 text-center">
-          <h3>Leaderboard</h3>
+
+        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto  CurrentStatsHover">
+
+
+          <div class="row childSpansHoverYellow">
+            <div class="col-12 text-center text-underline pb-1 hoverYellow"><span><u>
+                  <h5 class="">Own Statistics</h5>
+                </u></span></div>
+            <div class="col-6 col-lg-4 Text12px">Current XPs: <span>0 XP</span></div>
+            <div class="col-6 col-lg-4 Text12px">Current CPPs: <span>0 CPP</span></div>
+            <div class="col-6 col-lg-4 Text12px"><span>Level: 0</span></div>
+            <div class="col-6 col-lg-4 Text12px">Current Badge: <span>ABC</span></div>
+            <div class="col-6 col-lg-4 Text12px">Next Badge: <span>XYZ</span></div>
+            <div class="col-6 col-lg-4 Text10pxItalicYellow text-right">--XPs Required for Promotion:
+              <span>120 XP</span></div>
+          </div>
         </div>
         <!-- STATS COL END -->
         <!-- ------------- -->
@@ -69,10 +88,10 @@
     name here
   </button>
   <div class="dropdown-menu bg-warning" >
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab'">Lab's Dashboard</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/'">Exit Lab</a>
+    <!-- <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a> -->
+    <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" [routerLink]="'/'">Logout</a>
   </div>
@@ -97,44 +116,71 @@
 
 
 <div class="row">  <!--2nd row starts-->
-  <div class="col-12 col-sm-3 col-lg-2  p-1 maNav-bg-color minHeight838">
+  <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
     <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
       <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/STUDENT/Lab'" >Lab Dashboard</a>
+        <a class="nav-link active" [routerLink]="'/TEACHER/Lab'" >Lab Dashboard</a>
       </li>
-      <li class="nav-item text-left">
+      <!-- <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
       </li>
       <li class="nav-item text-left">
-        <a class="nav-link active" [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
+        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
       </li>
       <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
       </li>
       <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Recent Activities</a>
-      </li>
-
+        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Notifications</a>
+      </li> -->
     </ul>
-
   </div>
-  <div class="col-12 col-sm-9 col-lg-10 p-0">
+  <div class="col-12 col-sm-9 col-lg-10 p-1">
 
 
-    <h4 class="text-warning text-center p-3 m-1 mt-4 border rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4>
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Lab Details
+            </button>
+          </h5>
+        </div>
 
-    <!-- below div represents : 1 student only. -->
-  <div class="border rounded p-3 m-3 bg-dark font-weight-bold" *ngFor="let lead of leaderboard"
-[style]="'color:#'+lead.color">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Rank: {{lead.rank}}</span>
-      =>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{lead.name}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>XPs: {{lead.XPs}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>CPPs: {{lead.CPPs}}</span>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-5 m-1">Lab Code: bf90D3</div>
+              <div class="col-5 m-1">Lab Name: Introduction to Computer Programming</div>
+              <div class="col-5 m-1">Lab Members: 64</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Members
+            </button>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4 text-center mb-1" *ngFor="let member of members">
 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Level: {{lead.level}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Badge: {{lead.badge}}</span>
+                <div class="ml-2 p-1 text-small border border-warning p-2 mb-1">
+                  <span >Abdur Rehman</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
   </div>
 
 

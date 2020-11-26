@@ -35,8 +35,7 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn  border-warning w-100 logoText" href="#" title="Gamification Based Coding Labs"><img
-              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+          <a class="btn  border-warning w-100 logoText" href="#" title="Gamification Based Coding Labs"><img src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
         </div>
 
         <!-- GBCL LOGO COLUMN-END -->
@@ -106,13 +105,13 @@
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
       </li>
       <li class="nav-item text-left">
-        <a class="nav-link active" [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
+        <a class="nav-link " [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
       </li>
       <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
       </li>
       <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Recent Activities</a>
+        <a class="nav-link active" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Recent Activities</a>
       </li>
 
     </ul>
@@ -121,19 +120,40 @@
   <div class="col-12 col-sm-9 col-lg-10 p-0">
 
 
-    <h4 class="text-warning text-center p-3 m-1 mt-4 border rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4>
+    <h5 class="text-warning text-center p-2 mx-5 my-3 border rounded"><b>Rivals' Activity below</b></h5>
 
-    <!-- below div represents : 1 student only. -->
-  <div class="border rounded p-3 m-3 bg-dark font-weight-bold" *ngFor="let lead of leaderboard"
-[style]="'color:#'+lead.color">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Rank: {{lead.rank}}</span>
-      =>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{lead.name}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>XPs: {{lead.XPs}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>CPPs: {{lead.CPPs}}</span>
+    <div class="border rounded border-dark border-2 minHeight64 m-1">
+      <h4 class="text-center p-2 mx-5 my-3 text-light" *ngIf="rivalNotifications.length==0">You have not set anybody as your rival yet</h4>
 
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Level: {{lead.level}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Badge: {{lead.badge}}</span>
+      <div class="border rounded border-warning border-2 m-1">
+
+        <div id="accordion">
+          <div class="card m-3" *ngFor="let rival of rivalNotifications" multiple="true">
+            <div class="card-header childSpansHoverYellow"
+              [attr.id]="'heading'+rival.rivalID">
+
+              <button class="btn OutlineTaskTitleBtns " data-toggle="collapse"
+                [attr.data-target]="'#collapse' + rival.rivalID" aria-expanded="true"
+                [attr.aria-controls]="'collapse'+rival.rivalID">
+                {{rival.rivalName}}
+              </button>
+
+            </div>
+
+            <div [id]="'collapse'+rival.rivalID" class="collapse hide" [attr.aria-labelledby]="'heading'+rival.rivalID"
+              data-parent="#accordion">
+              <div class="card-body ">
+                Activity Description
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
+
+
 
   </div>
 
