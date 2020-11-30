@@ -1,4 +1,12 @@
 #Indexrow-Registration{
     margin-bottom: 100px;
     }
-    
+
+.errorText{
+  border: red;
+  border-radius: 2px;
+  font-size: 10px;
+  color: yellow;
+  background: rgba(255,20,20,0.3);
+  width: fit-content;
+}

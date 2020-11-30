@@ -1,57 +1,40 @@
 <div class="row" id="Indexrow-Registration">
-  <div class="col-sm-7 m-auto">
+  <div class="col-12 col-md-10 col-lg-9 m-auto">
 
 
 
     <div class="card text-white bg-dark mb-3">
-      <div class="card-header border border-dark text-light bg-dark p-4" id="SIGNUP">
+      <div class="card-header border border-dark text-light bg-dark px-3 pt-4" id="SIGNUP">
         <h3>Register with GBCL</h3>
       </div>
 
       <hr class="bg-warning">
       <div class="card-body" id="myCardbody">
-        <form class="p-3  m-auto" (submit)="onSignUpClicked(signupForm)" #signupForm="ngForm">
 
 
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control"
-            name="EnteredEmailAddress"
-            ngModel
-            required
-            minlength="7">
-          </div>
+
+        <!-- THE FORM -->
+
+        <form class="px-3  m-auto" (submit)="onSignUpClicked(signupForm)" #signupForm="ngForm">
 
 
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group ">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control " name="EnteredPassword" ngModel>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="form-group">
-                <label for="reenterPassInput">Re-Enter Password</label>
-                <input type="password" class="form-control  " id="reenterPassInput">
-              </div>
-            </div>
-          </div>
+          <!-- //1st Element : UserType here! -->
 
 
-          <div class="row">
-            <div class="col-sm-12 text-center">
+          <div class="row ">
+            <div class="col-sm-12">
 
+              <!-- //1st Element : UserType here! -->
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="inputGroupSelect01">Sign up as</label>
                 </div>
-                <select class="custom-select"  >
-                  <option selected disabled>You are?</option>
-                  <option value="student"><b>a Student</b></option>
-                  <option value="teacher"><b>a Teacher</b>
+                <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect>
+                  <option selected disabled>You are ... ?</option>
+                  <option value="student"><b>Student</b></option>
+                  <option value="teacher"><b>Teacher</b>
                   </option>
-                  <option value="university"><b>a University</b></option>
+                  <option value="university"><b>University</b></option>
                 </select>
               </div>
 
@@ -60,19 +43,22 @@
 
 
 
-
-
           <div class="row">
-            <div class="col-sm-12 text-center">
-
-
-              <div class="form-group " *ngIf="">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="text" class="form-control " id="exampleInputPassword1">
+            <!-- //2nd Element: Choose University -->
+            <div class="col-sm-12">
+              <div class="input-group mb-3" *ngIf="this.user.UserType =='student' || this.user.UserType =='teacher'">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">University : </label>
+                </div>
+                <select class="custom-select" value="dsfsd" name="UsersSelectedUniversity"
+                #UniversitiesList
+                ngModel
+                (change)="onUniversitiesSelectChange(UniversitiesList)">
+                  <option value="{{list.uniID}}" name="UsersSelectedUniversity"
+                    *ngFor="let list of UniversitiesListFromDB"><b>{{list.uniName}}</b>
+                  </option>
+                </select>
               </div>
-
-
-
             </div>
           </div>
 
@@ -80,9 +66,159 @@
 
 
 
-          <div class="text-center">
-            <button class="btn btn-primary w-50 m-auto" type="submit">Sign up</button>
-            <br>
+
+          <!-- //For Teacher and Student Usertypes -->
+          <!-- //Student OR Teacher bordered Division -->
+
+          <div class="border rounded border-light my-2 mx-1 p-3 "
+          *ngIf=" this.user.UniversityIDOfUser != 'NotListedHere'">
+            <!-- Start of std divis -->
+
+            <div class="row">
+              <div class="col-sm-6">
+
+                <!-- //3rd Element: Enter Username -->
+                <div class="form-group">
+                  <label for="UN">Username</label>
+                  <input type="text" id="UN" class="form-control" name="UsersEnteredUsername" ngModel>
+                  <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+                    <span>--{{this.Errors.invalidUsername.message}}</span>
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group ">
+                  <label for="PW">Password</label>
+                  <input type="text" id="PW" class="form-control " name="UsersEnteredPassword" ngModel>
+                  <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                    <span>--{{this.Errors.invalidPassword.message}}</span>
+                  </small>
+                </div>
+              </div>
+            </div>
+            <!--sdgsd  -->
+
+            <div class="row">
+
+              <div class="form-group col-sm-6">
+                <label for="FN">First Name</label>
+                <input type="text" id="FN" class="form-control" name="UsersEnteredFName" ngModel >
+                <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
+                  <span>--{{this.Errors.invalidFName.message}}</span>
+                </small>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label for="LN">Last Name</label>
+                <input type="text" id="LN" class="form-control" name="UsersEnteredLName" ngModel>
+                <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
+                  <span>--{{this.Errors.invalidLName.message}}</span>
+                </small>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <label for="RegN">Your ID in University</label>
+                <input type="text" id="RegN" class="form-control" name="UsersEnteredRegistrationNumber" ngModel
+                  required>
+                <small class="form-text text-muted">
+                  Your registration ID through which your university can identify you in their records.
+                </small>
+                <small class="form-text errorText" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                  <span>--{{this.Errors.invalidRegistrationNumber.message}}</span>
+                </small>
+
+
+
+
+
+              </div>
+            </div>
+
+            <!-- SIGNUP BUTTON BELOW -->
+            <div class="text-center">
+              <button class="btn btn-primary w-50 m-auto" type="submit">Sign up</button>
+            </div>
+
+          </div> <!-- ends student/tch division -->
+
+
+
+          <!-- //For Teacher and Student Usertypes -->
+
+
+          <!-- //Student OR Teacher bordered Division -->
+
+          <div class="border rounded border-light my-2 mx-1 p-3 " *ngIf="this.user.UserType=='university'">
+            <!-- Start of std divis -->
+            <div class="row">
+              <div class="col-sm-6">
+
+                <!-- //3rd Element: Enter Username -->
+                <div class="form-group">
+                  <label for="UN">Username</label>
+                  <input type="text" id="UN" class="form-control" name="UsersEnteredUsername" ngModel>
+                  <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+                    <span>--{{this.Errors.invalidUsername.message}}</span>
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group ">
+                  <label for="PW">Password</label>
+                  <input type="text" id="PW" class="form-control " name="UsersEnteredPassword" ngModel>
+                  <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                    <span>--{{this.Errors.invalidPassword.message}}</span>
+                  </small>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group ">
+                  <label for="HECID">HEC ID for your Institute or University.</label>
+                  <input type="text" id="HECID" class="form-control " name="UniversitysEnteredHECID" ngModel>
+                  <small class="form-text errorText" *ngIf="this.Errors.invalidHECID.status == true">
+                    <span>--{{this.Errors.invalidHECID.message}}</span>
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="form-group ">
+                  <label for="Uname">Enter your Institues Name:</label>
+                  <input type="text" id="Uname" class="form-control " name="UniversitysEnteredName" ngModel>
+                  <small class="form-text errorText" *ngIf="this.Errors.invalidNameOfTheUNIVERSITY.status == true">
+                    <span>--{{this.Errors.invalidNameOfTheUNIVERSITY.message}}</span>
+                  </small>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+<!--
+
+          <div class="row p-0 m-0">
+            <div class="col-12 col-md-6 form-text p-0 m-0" style="color: rgb(255,255,0);" *ngFor="let error of Errors">
+              <small class="mt-1 mr-1" *ngIf="error.status == 'true'">
+                <span>--{{error.message}}</span>
+              </small>
+            </div>
+          </div> -->
+
+
+
+          <!-- //Below are the Buttons -->
+
+          <div class="text-center" *ngIf="">
             <button class="btn btn-primary w-50 m-auto" (click)="getTheUser()">Create User</button>
             <br>
             <button type="button" [routerLink]="'/ADMIN'" class="btn btn-primary w-25 mx-2 mt-1">Admin</button>
