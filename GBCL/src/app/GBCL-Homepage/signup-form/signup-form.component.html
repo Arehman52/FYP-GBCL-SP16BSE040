@@ -29,7 +29,9 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="inputGroupSelect01">Sign up as</label>
                 </div>
-                <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect>
+                <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect
+                name="UserTypeSelection"
+                ngModel>
                   <option selected disabled>You are ... ?</option>
                   <option value="student"><b>Student</b></option>
                   <option value="teacher"><b>Teacher</b>
@@ -52,9 +54,10 @@
                 </div>
                 <select class="custom-select" value="dsfsd" name="UsersSelectedUniversity"
                 #UniversitiesList
+                name="UniversitiesSelection"
                 ngModel
                 (change)="onUniversitiesSelectChange(UniversitiesList)">
-                  <option value="{{list.uniID}}" name="UsersSelectedUniversity"
+                  <option value="{{list.uniName}}" name="UsersSelectedUniversity"
                     *ngFor="let list of UniversitiesListFromDB"><b>{{list.uniName}}</b>
                   </option>
                 </select>
@@ -71,7 +74,7 @@
           <!-- //Student OR Teacher bordered Division -->
 
           <div class="border rounded border-light my-2 mx-1 p-3 "
-          *ngIf=" this.user.UniversityIDOfUser != 'NotListedHere'">
+          *ngIf=" this.user.UniversityNameOfUser != 'NotListedHere' && this.user.UserType!='university'">
             <!-- Start of std divis -->
 
             <div class="row">
@@ -130,11 +133,6 @@
                 <small class="form-text errorText" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
                   <span>--{{this.Errors.invalidRegistrationNumber.message}}</span>
                 </small>
-
-
-
-
-
               </div>
             </div>
 
@@ -199,6 +197,12 @@
                   </small>
                 </div>
               </div>
+            </div>
+
+
+            <!-- SIGNUP BUTTON BELOW -->
+            <div class="text-center">
+              <button class="btn btn-primary w-50 m-auto" type="submit">Sign up</button>
             </div>
 
           </div>
