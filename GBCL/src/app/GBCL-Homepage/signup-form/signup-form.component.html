@@ -15,7 +15,9 @@
 
         <!-- THE FORM -->
 
-        <form class="px-3  m-auto" (submit)="onSignUpClicked(signupForm)" #signupForm="ngForm">
+        <form class="px-3  m-auto" (submit)="onSignUpClicked(signupForm)"
+        (change)="myFn(signupForm)"
+        #signupForm="ngForm">
 
 
           <!-- //1st Element : UserType here! -->
@@ -73,8 +75,10 @@
           <!-- //For Teacher and Student Usertypes -->
           <!-- //Student OR Teacher bordered Division -->
 
+<!-- this.user.UniversityNameOfUser != 'NotListedHere' -->
+
           <div class="border rounded border-light my-2 mx-1 p-3 "
-          *ngIf=" this.user.UniversityNameOfUser != 'NotListedHere' && this.user.UserType!='university'">
+          *ngIf="anyUniversitySelected" >
             <!-- Start of std divis -->
 
             <div class="row">
@@ -83,9 +87,16 @@
                 <!-- //3rd Element: Enter Username -->
                 <div class="form-group">
                   <label for="UN">Username</label>
-                  <input type="text" id="UN" class="form-control" name="UsersEnteredUsername" ngModel>
+                  <input type="text" id="UN" class="form-control"
+                  name="UsersEnteredUsername"
+                  ngModel
+                  (focusout)="checkIfUniqueUserName()"
+                  >
                   <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
                     <span>--{{this.Errors.invalidUsername.message}}</span>
+                  </small>
+                  <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
+                    <span>--{{this.Errors.usernameNotUnique.message}}</span>
                   </small>
                 </div>
               </div>
@@ -223,8 +234,6 @@
           <!-- //Below are the Buttons -->
 
           <div class="text-center" *ngIf="">
-            <button class="btn btn-primary w-50 m-auto" (click)="getTheUser()">Create User</button>
-            <br>
             <button type="button" [routerLink]="'/ADMIN'" class="btn btn-primary w-25 mx-2 mt-1">Admin</button>
             <button type="button" [routerLink]="'/STUDENT'" class="btn btn-primary w-25 mx-2 mt-1">STUDENT</button>
             <br>

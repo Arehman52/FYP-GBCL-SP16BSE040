@@ -4,3 +4,19 @@
 .maWidth-100{
   width: 100px;
 }
+
+.errorText{
+  padding: 0px 13px 0px 5px;
+  border: red;
+  border-radius: 2px;
+  font-size: 10px;
+  color: yellow;
+  background: rgba(138, 68, 68, 0.3);
+  width: fit-content;
+}
+
+.displayBelow{
+  display: block;
+  margin: 0;
+  padding: 0;
+}
