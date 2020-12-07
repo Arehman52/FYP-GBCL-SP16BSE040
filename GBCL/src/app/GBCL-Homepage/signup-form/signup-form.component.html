@@ -54,11 +54,12 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="inputGroupSelect01">University : </label>
                 </div>
-                <select class="custom-select" value="dsfsd" name="UsersSelectedUniversity"
+                <select class="custom-select" name="UsersSelectedUniversity"
                 #UniversitiesList
                 name="UniversitiesSelection"
                 ngModel
                 (change)="onUniversitiesSelectChange(UniversitiesList)">
+                  <option value="Selectone" selected disabled><b>Select one</b></option>
                   <option value="{{list.uniName}}" name="UsersSelectedUniversity"
                     *ngFor="let list of UniversitiesListFromDB"><b>{{list.uniName}}</b>
                   </option>
@@ -77,8 +78,9 @@
 
 <!-- this.user.UniversityNameOfUser != 'NotListedHere' -->
 
-          <div class="border rounded border-light my-2 mx-1 p-3 "
-          *ngIf="anyUniversitySelected" >
+          <div class="  "
+          *ngIf="(this.user.UserType=='student' || this.user.UserType=='teacher')" >
+          <div class="border rounded border-light my-2 mx-1 p-3" *ngIf="anyUniversitySelected" >
             <!-- Start of std divis -->
 
             <div class="row">
@@ -90,7 +92,7 @@
                   <input type="text" id="UN" class="form-control"
                   name="UsersEnteredUsername"
                   ngModel
-                  (focusout)="checkIfUniqueUserName()"
+                  (keyup)="checkUsernameOfUser()"
                   >
                   <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
                     <span>--{{this.Errors.invalidUsername.message}}</span>
@@ -104,7 +106,10 @@
               <div class="col-sm-6">
                 <div class="form-group ">
                   <label for="PW">Password</label>
-                  <input type="text" id="PW" class="form-control " name="UsersEnteredPassword" ngModel>
+                  <input type="text" id="PW" class="form-control "
+                  name="UsersEnteredPassword"
+                  ngModel
+                  (keyup)="checkPasswordOfUser()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>--{{this.Errors.invalidPassword.message}}</span>
                   </small>
@@ -117,7 +122,10 @@
 
               <div class="form-group col-sm-6">
                 <label for="FN">First Name</label>
-                <input type="text" id="FN" class="form-control" name="UsersEnteredFName" ngModel >
+                <input type="text" id="FN" class="form-control"
+                name="UsersEnteredFName"
+                ngModel
+                (keyup)="checkFirstNameOfUser()" >
                 <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
                   <span>--{{this.Errors.invalidFName.message}}</span>
                 </small>
@@ -125,7 +133,8 @@
 
               <div class="form-group col-sm-6">
                 <label for="LN">Last Name</label>
-                <input type="text" id="LN" class="form-control" name="UsersEnteredLName" ngModel>
+                <input type="text" id="LN" class="form-control" name="UsersEnteredLName" ngModel
+                (keyup)="checkLastNameOfUser()">
                 <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
                   <span>--{{this.Errors.invalidLName.message}}</span>
                 </small>
@@ -137,7 +146,8 @@
               <div class="form-group col-sm-12">
                 <label for="RegN">Your ID in University</label>
                 <input type="text" id="RegN" class="form-control" name="UsersEnteredRegistrationNumber" ngModel
-                  required>
+                  required
+                  (keyup)="checkRegistrationNumberOfUser()">
                 <small class="form-text text-muted">
                   Your registration ID through which your university can identify you in their records.
                 </small>
@@ -152,6 +162,18 @@
               <button class="btn btn-primary w-50 m-auto" type="submit">Sign up</button>
             </div>
 
+            <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
+              <span>--{{this.Errors.formHasErrors.message}}</span>
+            </small>
+
+            <small class="form-text p-2 mt-4 formSubmissionSuccessText"
+            *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
+              <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
+            </small>
+
+
+
+            </div>
           </div> <!-- ends student/tch division -->
 
 
@@ -169,9 +191,15 @@
                 <!-- //3rd Element: Enter Username -->
                 <div class="form-group">
                   <label for="UN">Username</label>
-                  <input type="text" id="UN" class="form-control" name="UsersEnteredUsername" ngModel>
+                  <input type="text" id="UN" class="form-control"
+                  name="UsernameOfUniversity"
+                  ngModel
+                  (keyup)="checkUsernameOfUniversity()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
                     <span>--{{this.Errors.invalidUsername.message}}</span>
+                  </small>
+                  <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
+                    <span>--{{this.Errors.usernameNotUnique.message}}</span>
                   </small>
                 </div>
               </div>
@@ -179,7 +207,9 @@
               <div class="col-sm-6">
                 <div class="form-group ">
                   <label for="PW">Password</label>
-                  <input type="text" id="PW" class="form-control " name="UsersEnteredPassword" ngModel>
+                  <input type="text" id="PW" class="form-control " name="PasswordOfUniversity"
+                  ngModel
+                  (keyup)="checkPasswordOfUniversity()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>--{{this.Errors.invalidPassword.message}}</span>
                   </small>
@@ -191,8 +221,11 @@
             <div class="row">
               <div class="col-6">
                 <div class="form-group ">
-                  <label for="HECID">HEC ID for your Institute or University.</label>
-                  <input type="text" id="HECID" class="form-control " name="UniversitysEnteredHECID" ngModel>
+                  <label for="HECID">HEC ID of your University.</label>
+                  <input type="text" id="HECID" class="form-control "
+                  name="HECIDOfUniversity"
+                  ngModel
+                  (keyup)="checkHECIDOfUniversity()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidHECID.status == true">
                     <span>--{{this.Errors.invalidHECID.message}}</span>
                   </small>
@@ -201,8 +234,11 @@
 
               <div class="col-6">
                 <div class="form-group ">
-                  <label for="Uname">Enter your Institues Name:</label>
-                  <input type="text" id="Uname" class="form-control " name="UniversitysEnteredName" ngModel>
+                  <label for="Uname">Enter your University's Name:</label>
+                  <input type="text" id="Uname" class="form-control "
+                  name="UniversitysEnteredName"
+                  ngModel
+                  (keyup)="checkUniversitysEnteredName()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidNameOfTheUNIVERSITY.status == true">
                     <span>--{{this.Errors.invalidNameOfTheUNIVERSITY.message}}</span>
                   </small>
@@ -215,6 +251,15 @@
             <div class="text-center">
               <button class="btn btn-primary w-50 m-auto" type="submit">Sign up</button>
             </div>
+
+            <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
+              <span>--{{this.Errors.formHasErrors.message}}</span>
+            </small>
+
+            <small class="form-text p-2 mt-4 formSubmissionSuccessText"
+            *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
+              <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
+            </small>
 
           </div>
 

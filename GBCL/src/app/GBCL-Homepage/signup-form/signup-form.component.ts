@@ -60,6 +60,14 @@ export class SignupFormComponent implements OnInit {
       status: true,
       message: 'This username has already been taken. kindly enter some other.',
     },
+    formHasErrors: {
+      status: true,
+      message: 'Form not submitted due to errors, kindly resolve them first.',
+    },
+    formSubmittedSuccessfuly: {
+      status: true,
+      message: 'Form submitted to your University successfuly.\nYou can Login now.',
+    },
     //below are for fields of non UNIVERSITY users.
     invalidFName: {
       status: true,
@@ -85,24 +93,27 @@ export class SignupFormComponent implements OnInit {
   };
 
   onSignUpClicked(form: NgForm) {
-    //assign remaining inputs to user
+    //assigns remaining inputs to user
     this.assignRemainingInputs(form, this.user.UserType);
-    //returns true id no errors found.
-    if (this.checknDisplayErrors(form, this.user.UserType)) {
-      alert('Form not submitted due to errors!');
-      console.log('Form not submitted due to errors!');
-      console.log(this.user);
+
+    //returns true if errors found.
+    if (this.checknErrors(form, this.user.UserType)) {
+      this.Errors.formHasErrors.status = true;
+      this.Errors.formSubmittedSuccessfuly.status = false;
       return;
     } else {
+
+
       //call the service method here and update the fields in Database
-      console.log(this.user);
-      // const user = {
-      //   EmailAddress: form.value.EnteredEmaildsadasasdsad,
-      //   Password: form.value.EnteredPasswordcdsdslvnlsdj,
-      // };
       this.homepageService.createUser(this.user); //<--- this method should update user to DB
-      alert('Form has no errors and has been sent to server.');
-      console.log('User has been sent to DB...');
+
+      this.Errors.formSubmittedSuccessfuly.status = true;
+      this.Errors.formHasErrors.status = false;
+      // console.log('User has been sent to DB...');
+      // setTimeout(() => { window.location.reload(); },10000);
+
+      // console.log('User has been sent to DB...');
+      // this.ngOnInit();
     }
   }
 
@@ -131,18 +142,21 @@ export class SignupFormComponent implements OnInit {
       this.setAllFieldsToNull();
       this.setAllErrorsToTrueForUser('non-uni');
       console.log(this.user.UserType);
+      console.log(this.user);
       // console.log(this.user);
     } else if (opt.value == 'student') {
       this.user.UserType = 'student';
       this.setAllFieldsToNull();
       this.setAllErrorsToTrueForUser('non-uni');
       console.log(this.user.UserType);
+      console.log(this.user);
       // console.log(this.user);
     } else if (opt.value == 'university') {
       this.user.UserType = 'university';
       this.setAllFieldsToNull();
       this.setAllErrorsToTrueForUser('uni');
       console.log(this.user.UserType);
+      console.log(this.user);
       // console.log(this.user);
     } else {
       alert('something fishy');
@@ -151,7 +165,8 @@ export class SignupFormComponent implements OnInit {
 
   onUniversitiesSelectChange(optUni: HTMLSelectElement) {
     // Not Listed!
-    if (optUni.value === 'NotListedHere' || optUni.value === 'Not Listed!') {
+    // console.log('optUni.value : ' + optUni.value);
+    if (optUni.value === 'Not Listed!' || optUni.value === 'Selectone') {
       this.anyUniversitySelected = false;
       // console.log(optUni.value);
       // this.user.UniversityNameOfUser = optUni.value;
@@ -179,7 +194,91 @@ export class SignupFormComponent implements OnInit {
   //================================================================ utility Functions
   //===================================================================================
 
-  checkIfUniqueUserName() {
+
+  checkUniversitysEnteredName(){
+    this.SignupForm.value.UniversitysEnteredName.length < 2
+    ? (this.Errors.invalidNameOfTheUNIVERSITY.status = true)
+    : (this.Errors.invalidNameOfTheUNIVERSITY.status = false);
+  }
+
+  checkHECIDOfUniversity(){
+    this.SignupForm.value.HECIDOfUniversity.length < 3
+    ? (this.Errors.invalidHECID.status = true)
+    : (this.Errors.invalidHECID.status = false);
+  }
+
+  checkPasswordOfUniversity()
+  {
+    this.SignupForm.value.PasswordOfUniversity.length < 8
+        ? (this.Errors.invalidPassword.status = true)
+        : (this.Errors.invalidPassword.status = false);
+
+  }
+  checkUsernameOfUniversity(){
+    this.SignupForm.value.UsernameOfUniversity.length < 5
+        ? (this.Errors.invalidUsername.status = true)
+        : (this.Errors.invalidUsername.status = false);
+    // checks uniqienes
+    var universitysEnteredUN = '';
+    if (this.SignupForm.value.UsernameOfUniversity != null) {
+      universitysEnteredUN = this.SignupForm.value.UsernameOfUniversity;
+      if (this.usersInfoListFromDB != null) {
+        for (var i = 0; i < Object.keys(this.usersInfoListFromDB).length; i++) {
+          var re = '"' + universitysEnteredUN + '"';
+          var usnm: string = JSON.stringify(
+            this.usersInfoListFromDB[i].Username
+          );
+          if (usnm.toLowerCase() === re.toLowerCase()) {
+            this.Errors.usernameNotUnique.status = true;
+            console.log('user was matched');
+            // console.log(this.Errors.usernameNotUnique);
+            return;
+          } else {
+            this.Errors.usernameNotUnique.status = false;
+            console.log('user was NOT matched');
+            // console.log(this.Errors.usernameNotUnique);
+          }
+        }
+      }
+    }
+  }
+
+
+
+
+
+
+  checkRegistrationNumberOfUser(){
+    this.SignupForm.value.UsersEnteredRegistrationNumber.length < 4
+        ? (this.Errors.invalidRegistrationNumber.status = true)
+        : (this.Errors.invalidRegistrationNumber.status = false);
+  }
+
+  checkLastNameOfUser(){
+    this.SignupForm.value.UsersEnteredLName.length < 3
+        ? (this.Errors.invalidLName.status = true)
+        : (this.Errors.invalidLName.status = false);
+  }
+
+  checkFirstNameOfUser(){
+    this.SignupForm.value.UsersEnteredFName.length < 3
+        ? (this.Errors.invalidFName.status = true)
+        : (this.Errors.invalidFName.status = false);
+  }
+
+  checkPasswordOfUser()
+  {
+    this.SignupForm.value.UsersEnteredPassword.length < 8
+        ? (this.Errors.invalidPassword.status = true)
+        : (this.Errors.invalidPassword.status = false);
+
+  }
+  checkUsernameOfUser() {
+    //
+    this.SignupForm.value.UsersEnteredUsername.length < 5
+        ? (this.Errors.invalidUsername.status = true)
+        : (this.Errors.invalidUsername.status = false);
+    // checks uniqienes
     var userEnteredUN = '';
     if (this.SignupForm.value.UsersEnteredUsername != null) {
       userEnteredUN = this.SignupForm.value.UsersEnteredUsername;
@@ -254,54 +353,56 @@ export class SignupFormComponent implements OnInit {
     this.user.Username = form.value.UsersEnteredUsername;
     this.user.Password = form.value.UsersEnteredPassword;
     this.user.UniversityNameOfUser = form.value.UniversitiesSelection; //assign uni selection's value
-    console.log('User below after assignRemInps() executiion');
-    // console.log(this.user);
-    console.log('and form below after  assignRemInps() executiion');
-    // console.log(form);
-
-    console.log('\n\nassignRemainingInputs() executed successfully.');
   }
 
+
+
   //this fuction only sets active error's statuses to true
-  checknDisplayErrors(form: NgForm, user: string): Boolean {
+  checknErrors(form: NgForm, user: string): Boolean {
+
+    var isUniNotSelected: Boolean = false;
     if (user != 'university') {
-      this.user.FirstName.length < 3
-        ? (this.Errors.invalidFName.status = true)
-        : (this.Errors.invalidFName.status = false);
-      this.user.LastName.length < 3
-        ? (this.Errors.invalidLName.status = true)
-        : (this.Errors.invalidLName.status = false);
-      this.user.RegistrationNumberInUni.length < 4
-        ? (this.Errors.invalidRegistrationNumber.status = true)
-        : (this.Errors.invalidRegistrationNumber.status = false);
-    } else {
-      this.user.HECIDforTheUniversity.length < 3
-        ? (this.Errors.invalidHECID.status = true)
-        : (this.Errors.invalidHECID.status = false);
-      this.user.TheUniversityName.length < 2
-        ? (this.Errors.invalidNameOfTheUNIVERSITY.status = true)
-        : (this.Errors.invalidNameOfTheUNIVERSITY.status = false);
+      if (this.user.UniversityNameOfUser == "") {
+        alert('You have not selected any university.');
+        isUniNotSelected = true;
+      }
+
+
+      if (
+        this.Errors.invalidFName.status ||
+        this.Errors.invalidLName.status ||
+        this.Errors.invalidPassword.status ||
+        this.Errors.invalidRegistrationNumber.status ||
+        this.Errors.invalidUsername.status ||
+        this.Errors.usernameNotUnique.status  ||
+        isUniNotSelected
+      )
+        return true;
+      else return false;
+    } else if (user == 'university') {
+      // this.user.HECIDforTheUniversity.length < 3
+      //   ? (this.Errors.invalidHECID.status = true)
+      //   : (this.Errors.invalidHECID.status = false);
+      // this.user.TheUniversityName.length < 2
+      //   ? (this.Errors.invalidNameOfTheUNIVERSITY.status = true)
+      //   : (this.Errors.invalidNameOfTheUNIVERSITY.status = false);
+      // this.user.Password.length < 8
+      //   ? (this.Errors.invalidPassword.status = true)
+      //   : (this.Errors.invalidPassword.status = false);
+      // this.user.Username.length < 5
+      //   ? (this.Errors.invalidUsername.status = true)
+      //   : (this.Errors.invalidUsername.status = false);
+
+      if (
+        this.Errors.invalidHECID.status ||
+        this.Errors.invalidNameOfTheUNIVERSITY.status ||
+        this.Errors.invalidPassword.status ||
+        this.Errors.invalidUsername.status ||
+        this.Errors.usernameNotUnique.status
+      )
+        return true;
+      else return false;
     }
-
-    this.user.Password.length < 8
-      ? (this.Errors.invalidPassword.status = true)
-      : (this.Errors.invalidPassword.status = false);
-    this.user.Username.length < 5
-      ? (this.Errors.invalidUsername.status = true)
-      : (this.Errors.invalidUsername.status = false);
-    console.log('inside cheknDispErrz');
-    // console.log(this.Errors);
-    // console.log(this.user);
-
-    if (
-      this.Errors.invalidFName.status ||
-      this.Errors.invalidLName.status ||
-      this.Errors.invalidPassword.status ||
-      this.Errors.invalidRegistrationNumber.status ||
-      this.Errors.invalidUsername.status
-    )
-      return true;
-    else return false;
   }
   // checkErrorss(form: NgForm){
   //   //check values against the fields
@@ -322,6 +423,8 @@ export class SignupFormComponent implements OnInit {
     this.Errors.invalidHECID.status = false;
     this.Errors.usernameNotUnique.status = false;
     this.Errors.invalidNameOfTheUNIVERSITY.status = false;
+    this.Errors.formHasErrors.status = false;
+    this.Errors.formSubmittedSuccessfuly.status = false;
     // this.Errors.UniversityNotSelected.status = false;
   }
 }
