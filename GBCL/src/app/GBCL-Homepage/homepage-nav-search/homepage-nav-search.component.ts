@@ -15,6 +15,7 @@ export class HomepageNavSearchComponent implements OnInit {
     this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
   }
 
+
   //   Download a copy of registered usenames, Take Input from Input Fields,
   //   match the entered username with downloaded inputs on focusout.
   //   IF FOUNDAMATCH THEN SHOWnSET ERROR TRUE ELSE SET FALSE.

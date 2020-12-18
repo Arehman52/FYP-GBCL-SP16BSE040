@@ -1,15 +1,10 @@
-import { Usersmodel } from './usersmodel.model';
+import { Usersmodel } from './../MODELS/usersmodel.model';
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
-export class HomepageService implements OnInit {
+export class HomepageService {
   constructor(private http: HttpClient) {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  // private user: Usersmodel[] = [];
   usersInfoFromDB = [
     {
       Username: 'user1',
@@ -104,3 +99,70 @@ export class HomepageService implements OnInit {
     return this.universitiesListFromDB;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////WHEN MONGODB WILL BE HANDLED,FOLLOWING ETHODS WILL BE HANDY
+
+
+
+
+// getUsersInfoFromDB() {
+//   // this.http
+//   //   .get<{ message: string; usersInResponse: Usersmodel[] }>(
+//   //     'http://localhost:3000/api/GetUsersListFromDB'
+//   //   )
+//   //   .subscribe((responseData) => {
+//   //     console.log('========  01  ==========');
+//   //     // for(var i=0; i<Object.keys(responseData.usersInResponse).length; i++ ){
+//   //     // this.usersInfoFromDB.push(responseData.usersInResponse[i]);
+//   //     // }
+
+//   //     this.usersInfoFromDB = responseData.usersInResponse;
+//   //     console.log('console.log(this.usersInfoFromDB);');
+//   //     console.log(this.usersInfoFromDB);
+
+//   //   });
+//     // returns this.usersInfoFromDB list to GBCL's Homepage Component's .ts file
+//     if (this.usersStorageArray.length <= 0) {
+//       console.log('Users from DB are null');
+//       return null;
+//     } else return this.usersStorageArray;
+// }
+
+
+
+
+
+
+// createUser(User: Usersmodel) {
+//   this.http
+//     .post<{ message: string }>('http://localhost:3000/api/CreateUser', User)
+//     .subscribe((responseData) => {
+//       console.log(responseData.message);
+//     });
+// }

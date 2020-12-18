@@ -1,16 +1,18 @@
 export interface Usersmodel {
+  _id: string;
 UserType: string;
 // attribs of UserType = Student/Teacher
-FirstName: string;
-LastName: string;
+FirstNameOfUser: string;
+LastNameOfUser: string;
 UniversityNameOfUser: string;
-RegistrationNumberInUni: string;
+RegistrationNumberOfUser: string;
 // attribs of UserType = University
-TheUniversityName: string;
-HECIDforTheUniversity: string;
+TitleOfUniversity: string;
+HECIDofUniversity: string;
 // common attribs
 Username: string;
 Password: string;
+
 
 
 
