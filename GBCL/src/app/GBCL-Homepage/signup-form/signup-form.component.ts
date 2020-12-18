@@ -94,6 +94,7 @@ export class SignupFormComponent implements OnInit {
     },
   };
 
+
   onSignUpClicked(form: NgForm) {
     //assigns remaining inputs to user
     this.assignRemainingInputs(form, this.user.UserType);
