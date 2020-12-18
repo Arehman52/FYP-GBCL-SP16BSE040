@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { Usersmodel } from '../usersmodel.model';
+import { Usersmodel } from '../../MODELS/usersmodel.model';
 import { HomepageService } from '../homepage.service';
 
 @Component({
@@ -30,17 +30,19 @@ export class SignupFormComponent implements OnInit {
   // UniS:HTMLSelectElement = null;
 
   usersInfoListFromDB = {};
+
   UniversitiesListFromDB = [];
   user: Usersmodel = {
+    _id: null,
     UserType: '',
     // attribs of UserType = Student/Teacher
-    FirstName: '',
-    LastName: '',
+    FirstNameOfUser: '',
+    LastNameOfUser: '',
     UniversityNameOfUser: 'NotListedHere',
-    RegistrationNumberInUni: '',
+    RegistrationNumberOfUser: '',
     // attribs of UserType = University
-    TheUniversityName: '',
-    HECIDforTheUniversity: '',
+    TitleOfUniversity: '',
+    HECIDofUniversity: '',
     //common attribs
     Username: '',
     Password: '',
@@ -98,7 +100,9 @@ export class SignupFormComponent implements OnInit {
 
     //returns true if errors found.
     if (this.checknErrors(form, this.user.UserType)) {
+      //following variable enables/disables Error div below the Signup Button
       this.Errors.formHasErrors.status = true;
+      //following variable enables/disables Success div below the Signup Button
       this.Errors.formSubmittedSuccessfuly.status = false;
       return;
     } else {
@@ -107,13 +111,14 @@ export class SignupFormComponent implements OnInit {
       //call the service method here and update the fields in Database
       this.homepageService.createUser(this.user); //<--- this method should update user to DB
 
-      this.Errors.formSubmittedSuccessfuly.status = true;
       this.Errors.formHasErrors.status = false;
+      this.Errors.formSubmittedSuccessfuly.status = true;
       // console.log('User has been sent to DB...');
       // setTimeout(() => { window.location.reload(); },10000);
 
       // console.log('User has been sent to DB...');
       // this.ngOnInit();
+
     }
   }
 
@@ -304,11 +309,11 @@ export class SignupFormComponent implements OnInit {
   }
 
   setAllFieldsToNull() {
-    this.user.HECIDforTheUniversity = null;
-    this.user.TheUniversityName = null;
-    this.user.FirstName = null;
-    this.user.LastName = null;
-    this.user.RegistrationNumberInUni = null;
+    this.user.HECIDofUniversity = null;
+    this.user.TitleOfUniversity = null;
+    this.user.FirstNameOfUser = null;
+    this.user.LastNameOfUser = null;
+    this.user.RegistrationNumberOfUser = null;
     this.user.UniversityNameOfUser = null;
     this.user.Username = null;
     this.user.Password = null;
@@ -342,13 +347,13 @@ export class SignupFormComponent implements OnInit {
 
   assignRemainingInputs(form: NgForm, user: string) {
     if (user == 'teacher' || user == 'student') {
-      this.user.FirstName = form.value.UsersEnteredFName;
-      this.user.LastName = form.value.UsersEnteredLName;
-      this.user.RegistrationNumberInUni =
+      this.user.FirstNameOfUser = form.value.UsersEnteredFName;
+      this.user.LastNameOfUser = form.value.UsersEnteredLName;
+      this.user.RegistrationNumberOfUser =
         form.value.UsersEnteredRegistrationNumber;
     } else {
-      this.user.HECIDforTheUniversity = form.value.UniversitysEnteredHECID;
-      this.user.TheUniversityName = form.value.UniversitysEnteredName;
+      this.user.HECIDofUniversity = form.value.UniversitysEnteredHECID;
+      this.user.TitleOfUniversity = form.value.UniversitysEnteredName;
     }
     this.user.Username = form.value.UsersEnteredUsername;
     this.user.Password = form.value.UsersEnteredPassword;
@@ -380,10 +385,10 @@ export class SignupFormComponent implements OnInit {
         return true;
       else return false;
     } else if (user == 'university') {
-      // this.user.HECIDforTheUniversity.length < 3
+      // this.user.HECIDofUniversity.length < 3
       //   ? (this.Errors.invalidHECID.status = true)
       //   : (this.Errors.invalidHECID.status = false);
-      // this.user.TheUniversityName.length < 2
+      // this.user.TitleOfUniversity.length < 2
       //   ? (this.Errors.invalidNameOfTheUNIVERSITY.status = true)
       //   : (this.Errors.invalidNameOfTheUNIVERSITY.status = false);
       // this.user.Password.length < 8
