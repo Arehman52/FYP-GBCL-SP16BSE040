@@ -54,6 +54,164 @@ app.get("/api/GetUsersListFromDB", (req, res, next) => {
 
 
 
+
+// Db.collection.distinct
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+// ===========================================MUZZI CODE BELOW
+//
+//
+// exports.userLogin= (req,res,next) =>
+// {
+//   //console.log("sucesfully");
+//   let fethcedUser;
+//   User.findOne({cnicNumber:req.body.cnicNumber})
+//     .then(user =>
+//     {
+//       if(!user)
+//       {
+//         return res.status(401).json(
+//         {
+//           message: "Authentication Failed"
+//         });
+//       }
+//       fethcedUser = user;
+//       return bcrypt.compare(req.body.password, user.password);
+//     })
+//       .then(result =>
+//           {
+//             if(!result)
+//             {
+//               return res.status(401).json(
+//                 {
+//                   message: "Invalid Authentication Credentials"
+//                 });
+//             }
+//             //the second parameter "'secret_this_should_be_longer'" this would be changed in our real application for security purpose...and it is used in self created middleware check-auth
+//             const token = jwt.sign({cnicNumber: fethcedUser.cnicNumber, userId: fethcedUser._id, accountStatus: fethcedUser.accountStatus},
+//               process.env.JWT_KEY,
+//               {expiresIn: "1h"});
+//             res.status(200).json(
+//               {
+//                 token : token,
+//                 expiresIn: 3600,
+//                 userId: fethcedUser._id,
+//                 accountStatus: fethcedUser.accountStatus
+//                 //message: "Succesfull"
+//               });
+//           })
+//           .catch(error =>
+//             {
+//               return res.status(401).json(
+//                 {
+//                   message: "Authentication Failed"
+//                 });
+//             });
+//     }
+// ===========================================MUZZI CODE ABOVE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get("/api/FindUserInDB", (req, res, next) => {
+
+
+  Users.findOne({"Username": "AttiqueZaffar100" }).exec().then( document => {
+    res.status(200).json({
+      message: "USER HAS BEEN RETRIEVED FOR SIGNIN",
+      user: document
+
+    });
+    console.log("USER HAS BEEN RETRIEVED FOR SIGNIN");
+
+  });
+});
+
+
+
+
+
+app.get("/api/RecieveUsersFromDB", (req, res, next) => {
+
+  Users.find().then( documents => {
+    res.status(200).json({
+      message: "this is a list of users recieved from DB",
+      users: documents
+    });
+    console.log("SUCCESSFUL TIL HERE");
+    // console.log(documents);
+
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.get("/api/GetUniversitiesListFromDB", (req, res, next) => {
+
+  Users.find().then( documents => {
+    res.status(200).json({
+      message: "If this message is displayed, means universities are retrieved from mongoDB",
+      usersInResponse: documents
+    });
+  });
+
+  // console.log("get  rEQUEST.");
+  // res.status(200).json("MESSAGadawdadE RECD");
+});
+
+
+
 //following is a POST request to create User.
 app.post("/api/CreateUser", (req, res, next) => {
 

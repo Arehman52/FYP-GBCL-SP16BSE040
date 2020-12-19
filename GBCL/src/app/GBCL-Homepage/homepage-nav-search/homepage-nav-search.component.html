@@ -18,8 +18,9 @@
       <!-- Username -->
       <input class="form-control mt-3 mt-sm-0" type="text" placeholder="Username" name="UsersEnteredUsername"
       ngModel
-      (focusout)="checkNDisplayErrors()">
-    <small class="displayBelow form-text errorText " *ngIf="this.Errors.invalidUsername.status == true">
+      (keyup)="checkNDisplayErrors()">
+    <small class="displayBelow form-text errorText "
+    *ngIf="this.Errors.invalidUsername.status == true">
       <span>--{{this.Errors.invalidUsername.message}}</span>
     </small>
     <small class="form-text errorText" *ngIf="this.Errors.notAUser.status == true">
@@ -37,7 +38,7 @@
     <!-- Password -->
     <input class="form-control mt-3 mt-sm-0" type="text" placeholder="Password" name="UsersEnteredPassword"
     ngModel
-    (focusout)="checkNDisplayErrors()">
+    (keyup)="checkNDisplayErrors()">
   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
     <span>--{{this.Errors.invalidPassword.message}}</span>
   </small>

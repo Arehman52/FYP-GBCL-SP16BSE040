@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 
 import { HomepageService } from '../homepage.service';
 
@@ -12,17 +13,29 @@ export class HomepageNavSearchComponent implements OnInit {
   constructor(public homepageService: HomepageService) {}
 
   ngOnInit(): void {
-    this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
+    // this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
+    // this.FetchedUsers = this.homepageService.FecthUsers();
+    this.UsersRecievedFromDB = this.homepageService.RecieveUsersFromDB();
+    console.log(this.UsersRecievedFromDB);
   }
 
+  UsersRecievedFromDB: Usersmodel[] = [];
 
-  //   Download a copy of registered usenames, Take Input from Input Fields,
-  //   match the entered username with downloaded inputs on focusout.
-  //   IF FOUNDAMATCH THEN SHOWnSET ERROR TRUE ELSE SET FALSE.
-  //   onSigninClick check if errors are resolved? if true then login else alert('theERRORmessage')
+  //  FetchedUsers: Usersmodel[] = [] ;
 
-  user = { username: '', password: '' };
-  // {      Username: 'user1', Password: 'user1', UserType: 'teacher', RegisteredWithGBCL: true },
+  user: Usersmodel = {
+    FirstNameOfUser: null,
+    HECIDofUniversity: null,
+    LastNameOfUser: null,
+    Password: '',
+    RegistrationNumberOfUser: null,
+    TitleOfUniversity: null,
+    UniversityNameOfUser: null,
+    UserType: null,
+    _id: null,
+    Username: '',
+  };
+
   usersInfoListFromDB: any = {}; //downloaded list of all users
 
   Errors = {
@@ -42,54 +55,84 @@ export class HomepageNavSearchComponent implements OnInit {
     incorrectPassword: {
       status: true,
       message: 'password incorrect',
-    }
+    },
   };
 
   //assigns value of inputs when they change from earlier after focus outs but here The Event being handled is onChange()
   assignInputs(form: NgForm) {
     //both inputs to local variables
 
-    this.user.username = form.value.UsersEnteredUsername;
-    this.user.password = form.value.UsersEnteredPassword;
+    this.user.Username = form.value.UsersEnteredUsername;
+    this.user.Password = form.value.UsersEnteredPassword;
 
-    console.log('AFTER ASSIGNING:');
-    console.log(this.user);
+    // console.log('AFTER ASSIGNING:');
+    // console.log(this.user);
   }
 
   loginUser(form: NgForm) {
+    if (form.value.UsersEnteredUsername == 'Admin') {
+      this.homepageService.loginAdmin(form.value.UsersEnteredPassword);
+      return;
+    }
+
     // checkErrors and if no error then proceed the LOGIN
     if (this.checkNDisplayErrors()) {
-      console.log(
-        'Errors in the Sigin form, returned/stopped here.\nThe error-full FORM:'
-      );
-      console.log(form);
+      alert('Errors in the Sigin process.\nThe error-full FORM:');
+      // console.log(form);
       return;
     } else {
-      console.log(
-        'Form has no errors...and user shall be proceeded witht the access.\nThe ERROR-FREE FORM:'
-      );
-      console.log(form);
+      //if signin fields have valid inputs than this block will execute.
+
+      var userFetchedMatch: Usersmodel = null;
+      var EnteredUN: string = form.value.UsersEnteredUsername;
+      EnteredUN.toLowerCase();
+      for (let i = 0; i < Object.keys(this.UsersRecievedFromDB).length; i++) {
+        var fetchedUN: string = this.UsersRecievedFromDB[i].Username;
+        fetchedUN.toLowerCase();
+        if (fetchedUN == EnteredUN) {  //checks if Username matches?
+          if (
+            this.UsersRecievedFromDB[i].Password ==
+            form.value.UsersEnteredPassword //checks if Password matches?
+          ) {
+            //if both matched, then according to usertype, visit their location.
+            if (this.UsersRecievedFromDB[i].UserType == 'student')
+              window.location.href = '/STUDENT';
+            if (this.UsersRecievedFromDB[i].UserType == 'teacher')
+              window.location.href = '/TEACHER';
+            if (this.UsersRecievedFromDB[i].UserType == 'university')
+              window.location.href = '/UNIVERSITY';
+
+              console.log("THIS MESSAGE SHALL NEVEr BE DISPLAYED");
+            return;
+          } else {
+            alert('Enter correct Password');
+            return;
+          }
+        }
+      }
+      alert('This Username is not registered in GBCL');
+      return;
     }
   }
 
   //each time focusouts of both inputs, it checks for the errors
   checkNDisplayErrors(): Boolean {
-    this.user.username.length < 3
+    this.user.Username.length < 3
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
-    this.user.password.length < 8
+    this.user.Password.length < 8
       ? (this.Errors.invalidPassword.status = true)
       : (this.Errors.invalidPassword.status = false);
     this.notAUser()
       ? (this.Errors.notAUser.status = true)
       : (this.Errors.notAUser.status = false);
-    console.log('password from db: ' + this.usersInfoListFromDB.Password);
-    console.log('user PRINTED INSIDE checkNDisplayErrors(): \n' + this.user);
+    // console.log('password from db: ' + this.usersInfoListFromDB.Password);
+    // console.log('user PRINTED INSIDE checkNDisplayErrors(): \n' + this.user);
 
     if (
-      this.Errors.invalidPassword ||
-      this.Errors.invalidUsername ||
-      this.Errors.notAUser
+      this.Errors.invalidPassword.status ||
+      this.Errors.invalidUsername.status
+      // || this.Errors.notAUser
     )
       return true;
     else return false;
@@ -99,7 +142,7 @@ export class HomepageNavSearchComponent implements OnInit {
     var isAUser: Boolean = false;
     if (this.usersInfoListFromDB != null) {
       for (var i = 0; i < Object.keys(this.usersInfoListFromDB).length; i++) {
-        if (this.user.username == this.usersInfoListFromDB[i].Username) {
+        if (this.user.Username == this.usersInfoListFromDB[i].Username) {
           isAUser = true;
           return isAUser;
         }

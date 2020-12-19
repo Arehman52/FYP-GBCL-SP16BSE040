@@ -9,6 +9,8 @@ import { HomepageService } from '../homepage.service';
   templateUrl: './signup-form.component.html',
   styleUrls: ['./signup-form.component.css'],
 })
+
+
 export class SignupFormComponent implements OnInit {
   constructor(public homepageService: HomepageService) {}
 
@@ -16,10 +18,52 @@ export class SignupFormComponent implements OnInit {
     // this.user.UniversityIDOfUser = 'zeroindexuniselect';
     this.setALLErrorsToFalse();
     this.user.UniversityNameOfUser = 'NotListedHere';
+
+
+
     this.UniversitiesListFromDB = this.homepageService.getUniversitiesListFromDB();
     //following is for signIn and in signup for unique username enterances
-    this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
+    // this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
+    // this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
+
+
+
+    this.UsersRecievedFromDB = this.homepageService.RecieveUsersFromDB();
+    console.log(this.UsersRecievedFromDB);
   }
+
+
+  UsersRecievedFromDB:Usersmodel[] = [];
+
+
+  // A create User Fn to create the User.
+
+  onSignUpClicked(form: NgForm) {
+    //assigns remaining inputs to user
+    this.assignRemainingInputs(form, this.user.UserType);
+
+    //returns true if errors found.
+    if (this.checknErrors(form, this.user.UserType)) {
+      //following variable enables/disables Error div below the Signup Button
+      this.Errors.formHasErrors.status = true;
+      //following variable enables/disables Success div below the Signup Button
+      this.Errors.formSubmittedSuccessfuly.status = false;
+      return;
+    } else {
+      this.homepageService.createUser(this.user); //<--- this method should update user to DB
+
+      this.Errors.formHasErrors.status = false;
+      this.Errors.formSubmittedSuccessfuly.status = true;
+    }
+  }
+
+
+
+
+
+
+
+
 
   SignupForm: NgForm;
   anyUniversitySelected: Boolean = false;
@@ -32,6 +76,9 @@ export class SignupFormComponent implements OnInit {
   usersInfoListFromDB = {};
 
   UniversitiesListFromDB = [];
+
+  // console.log(this.UniversitiesListFromDB);
+
   user: Usersmodel = {
     _id: null,
     UserType: '',
@@ -68,7 +115,8 @@ export class SignupFormComponent implements OnInit {
     },
     formSubmittedSuccessfuly: {
       status: true,
-      message: 'Form submitted to your University successfuly.\nYou can Login now.',
+      message:
+        'Form submitted to your University successfuly.\nYou can Login now.',
     },
     //below are for fields of non UNIVERSITY users.
     invalidFName: {
@@ -94,35 +142,6 @@ export class SignupFormComponent implements OnInit {
     },
   };
 
-
-  onSignUpClicked(form: NgForm) {
-    //assigns remaining inputs to user
-    this.assignRemainingInputs(form, this.user.UserType);
-
-    //returns true if errors found.
-    if (this.checknErrors(form, this.user.UserType)) {
-      //following variable enables/disables Error div below the Signup Button
-      this.Errors.formHasErrors.status = true;
-      //following variable enables/disables Success div below the Signup Button
-      this.Errors.formSubmittedSuccessfuly.status = false;
-      return;
-    } else {
-
-
-      //call the service method here and update the fields in Database
-      this.homepageService.createUser(this.user); //<--- this method should update user to DB
-
-      this.Errors.formHasErrors.status = false;
-      this.Errors.formSubmittedSuccessfuly.status = true;
-      // console.log('User has been sent to DB...');
-      // setTimeout(() => { window.location.reload(); },10000);
-
-      // console.log('User has been sent to DB...');
-      // this.ngOnInit();
-
-    }
-  }
-
   //=====================================================================
   //=====================================================================
   //=====================================================================
@@ -147,22 +166,22 @@ export class SignupFormComponent implements OnInit {
       this.user.UserType = 'teacher';
       this.setAllFieldsToNull();
       this.setAllErrorsToTrueForUser('non-uni');
-      console.log(this.user.UserType);
-      console.log(this.user);
+      // console.log(this.user.UserType);
+      // console.log(this.user);
       // console.log(this.user);
     } else if (opt.value == 'student') {
       this.user.UserType = 'student';
       this.setAllFieldsToNull();
       this.setAllErrorsToTrueForUser('non-uni');
-      console.log(this.user.UserType);
-      console.log(this.user);
+      // console.log(this.user.UserType);
+      // console.log(this.user);
       // console.log(this.user);
     } else if (opt.value == 'university') {
       this.user.UserType = 'university';
       this.setAllFieldsToNull();
       this.setAllErrorsToTrueForUser('uni');
-      console.log(this.user.UserType);
-      console.log(this.user);
+      // console.log(this.user.UserType);
+      // console.log(this.user);
       // console.log(this.user);
     } else {
       alert('something fishy');
@@ -200,30 +219,27 @@ export class SignupFormComponent implements OnInit {
   //================================================================ utility Functions
   //===================================================================================
 
-
-  checkUniversitysEnteredName(){
+  checkUniversitysEnteredName() {
     this.SignupForm.value.UniversitysEnteredName.length < 2
-    ? (this.Errors.invalidNameOfTheUNIVERSITY.status = true)
-    : (this.Errors.invalidNameOfTheUNIVERSITY.status = false);
+      ? (this.Errors.invalidNameOfTheUNIVERSITY.status = true)
+      : (this.Errors.invalidNameOfTheUNIVERSITY.status = false);
   }
 
-  checkHECIDOfUniversity(){
+  checkHECIDOfUniversity() {
     this.SignupForm.value.HECIDOfUniversity.length < 3
-    ? (this.Errors.invalidHECID.status = true)
-    : (this.Errors.invalidHECID.status = false);
+      ? (this.Errors.invalidHECID.status = true)
+      : (this.Errors.invalidHECID.status = false);
   }
 
-  checkPasswordOfUniversity()
-  {
+  checkPasswordOfUniversity() {
     this.SignupForm.value.PasswordOfUniversity.length < 8
-        ? (this.Errors.invalidPassword.status = true)
-        : (this.Errors.invalidPassword.status = false);
-
+      ? (this.Errors.invalidPassword.status = true)
+      : (this.Errors.invalidPassword.status = false);
   }
-  checkUsernameOfUniversity(){
+  checkUsernameOfUniversity() {
     this.SignupForm.value.UsernameOfUniversity.length < 5
-        ? (this.Errors.invalidUsername.status = true)
-        : (this.Errors.invalidUsername.status = false);
+      ? (this.Errors.invalidUsername.status = true)
+      : (this.Errors.invalidUsername.status = false);
     // checks uniqienes
     var universitysEnteredUN = '';
     if (this.SignupForm.value.UsernameOfUniversity != null) {
@@ -249,41 +265,34 @@ export class SignupFormComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-  checkRegistrationNumberOfUser(){
+  checkRegistrationNumberOfUser() {
     this.SignupForm.value.UsersEnteredRegistrationNumber.length < 4
-        ? (this.Errors.invalidRegistrationNumber.status = true)
-        : (this.Errors.invalidRegistrationNumber.status = false);
+      ? (this.Errors.invalidRegistrationNumber.status = true)
+      : (this.Errors.invalidRegistrationNumber.status = false);
   }
 
-  checkLastNameOfUser(){
+  checkLastNameOfUser() {
     this.SignupForm.value.UsersEnteredLName.length < 3
-        ? (this.Errors.invalidLName.status = true)
-        : (this.Errors.invalidLName.status = false);
+      ? (this.Errors.invalidLName.status = true)
+      : (this.Errors.invalidLName.status = false);
   }
 
-  checkFirstNameOfUser(){
+  checkFirstNameOfUser() {
     this.SignupForm.value.UsersEnteredFName.length < 3
-        ? (this.Errors.invalidFName.status = true)
-        : (this.Errors.invalidFName.status = false);
+      ? (this.Errors.invalidFName.status = true)
+      : (this.Errors.invalidFName.status = false);
   }
 
-  checkPasswordOfUser()
-  {
+  checkPasswordOfUser() {
     this.SignupForm.value.UsersEnteredPassword.length < 8
-        ? (this.Errors.invalidPassword.status = true)
-        : (this.Errors.invalidPassword.status = false);
-
+      ? (this.Errors.invalidPassword.status = true)
+      : (this.Errors.invalidPassword.status = false);
   }
   checkUsernameOfUser() {
     //
     this.SignupForm.value.UsersEnteredUsername.length < 5
-        ? (this.Errors.invalidUsername.status = true)
-        : (this.Errors.invalidUsername.status = false);
+      ? (this.Errors.invalidUsername.status = true)
+      : (this.Errors.invalidUsername.status = false);
     // checks uniqienes
     var userEnteredUN = '';
     if (this.SignupForm.value.UsersEnteredUsername != null) {
@@ -318,6 +327,7 @@ export class SignupFormComponent implements OnInit {
     this.user.UniversityNameOfUser = null;
     this.user.Username = null;
     this.user.Password = null;
+    this.user._id = null;
     // this.user = null;
     // console.log("nulled user below:");
     // console.log(this.user);
@@ -350,29 +360,25 @@ export class SignupFormComponent implements OnInit {
     if (user == 'teacher' || user == 'student') {
       this.user.FirstNameOfUser = form.value.UsersEnteredFName;
       this.user.LastNameOfUser = form.value.UsersEnteredLName;
-      this.user.RegistrationNumberOfUser =
-        form.value.UsersEnteredRegistrationNumber;
+      this.user.RegistrationNumberOfUser = form.value.UsersEnteredRegistrationNumber;
+      this.user.Username = form.value.UsersEnteredUsername;
+      this.user.Password = form.value.UsersEnteredPassword;
     } else {
-      this.user.HECIDofUniversity = form.value.UniversitysEnteredHECID;
+      this.user.HECIDofUniversity = form.value.HECIDOfUniversity;
       this.user.TitleOfUniversity = form.value.UniversitysEnteredName;
+      this.user.Username = form.value.UsernameOfUniversity;
+      this.user.Password = form.value.PasswordOfUniversity;
     }
-    this.user.Username = form.value.UsersEnteredUsername;
-    this.user.Password = form.value.UsersEnteredPassword;
-    this.user.UniversityNameOfUser = form.value.UniversitiesSelection; //assign uni selection's value
   }
-
-
 
   //this fuction only sets active error's statuses to true
   checknErrors(form: NgForm, user: string): Boolean {
-
     var isUniNotSelected: Boolean = false;
     if (user != 'university') {
-      if (this.user.UniversityNameOfUser == "") {
+      if (this.user.UniversityNameOfUser == '') {
         alert('You have not selected any university.');
         isUniNotSelected = true;
       }
-
 
       if (
         this.Errors.invalidFName.status ||
@@ -380,7 +386,7 @@ export class SignupFormComponent implements OnInit {
         this.Errors.invalidPassword.status ||
         this.Errors.invalidRegistrationNumber.status ||
         this.Errors.invalidUsername.status ||
-        this.Errors.usernameNotUnique.status  ||
+        this.Errors.usernameNotUnique.status ||
         isUniNotSelected
       )
         return true;
@@ -410,11 +416,8 @@ export class SignupFormComponent implements OnInit {
       else return false;
     }
   }
-  // checkErrorss(form: NgForm){
-  //   //check values against the fields
-  //   //if invalid value then set related error's status to true else false.
 
-  // }
+
 
   //=====================================
 
