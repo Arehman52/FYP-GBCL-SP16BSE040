@@ -11,5 +11,7 @@ export class TEACHERComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  labs = [ {}, {}, {} ];
+
+  labs = [ {title: 'JAVA OOP', Class: 'BSE-2B', Instructor: 'Mr. Ashfaq Hussain Farooqi',
+              members: 41} ];
 }

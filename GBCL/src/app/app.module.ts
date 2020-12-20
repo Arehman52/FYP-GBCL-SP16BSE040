@@ -73,9 +73,9 @@ import { HttpClientModule } from '@angular/common/http';
 
     TlabDashboardComponent,
 
-    ManageeChallengesComponent,
-    TeachersettingsComponent,
-    ManageeLabtasksComponent
+    // ManageeChallengesComponent,
+    TeachersettingsComponent
+    // ManageeLabtasksComponent
   ],
   imports: [
     BrowserModule,

@@ -17,8 +17,8 @@ import { SsettingsComponent } from './student/ssettings/ssettings.component';
 import { TeachersettingsComponent } from './TEACHER/tsettings/tsettings.component';
 import { RivalsComponent } from './student/slab-dashboard/rivals/rivals.component';
 import { TlabDashboardComponent } from './teacher/tlab-dashboard/tlab-dashboard.component';
-import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
-import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
+// import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
+// import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
 
 const routes: Routes = [
   // Homepage routes
@@ -36,8 +36,8 @@ const routes: Routes = [
   // Teacher routes
   { path: 'TEACHER', component: TEACHERComponent},
   { path: 'TEACHER/Lab', component: TlabDashboardComponent},
-  { path: 'TEACHER/Lab/challengesManagement', component: ManageeChallengesComponent},
-  { path: 'TEACHER/Lab/labtasksManagement', component: ManageeLabtasksComponent},
+  // { path: 'TEACHER/Lab/challengesManagement', component: ManageeChallengesComponent},
+  // { path: 'TEACHER/Lab/labtasksManagement', component: ManageeLabtasksComponent},
   { path: 'TEACHER/Settings', component: TeachersettingsComponent},
   // University routes
     { path: 'UNIVERSITY', component: UNIVERSITYComponent},
