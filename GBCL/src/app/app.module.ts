@@ -37,11 +37,14 @@ import { Error404Component } from './MISC/error404/error404.component';
 import { SsettingsComponent } from './student/ssettings/ssettings.component';
 import { RivalsComponent } from './student/slab-dashboard/rivals/rivals.component';
 import { TlabDashboardComponent } from './teacher/tlab-dashboard/tlab-dashboard.component';
-import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
-import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
+// import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
+// import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
 import { TeachersettingsComponent } from './TEACHER/tsettings/tsettings.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtasks/manage-labtasks.component';
+import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
+import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderboard/view-leaderboard.component';
 
 
 @NgModule({
@@ -74,7 +77,13 @@ import { HttpClientModule } from '@angular/common/http';
     TlabDashboardComponent,
 
     // ManageeChallengesComponent,
-    TeachersettingsComponent
+    TeachersettingsComponent,
+
+    ManageLabtasksComponent,
+
+    ManageChallengesComponent,
+
+    ViewLeaderboardComponent
     // ManageeLabtasksComponent
   ],
   imports: [

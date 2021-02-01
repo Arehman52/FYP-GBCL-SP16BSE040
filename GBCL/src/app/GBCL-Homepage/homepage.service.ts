@@ -52,6 +52,7 @@ export class HomepageService {
    return this.tempUsers;
   }
   completeHTTPforRecieveUsersFromDB(){
+    console.log("OUTSIDE HTTP");
     this.http
     .get<{ message: string; users: Usersmodel[] }>(
       'http://localhost:3000/api/RecieveUsersFromDB'
@@ -62,6 +63,30 @@ export class HomepageService {
       for (let i = 0; i < Object.keys(responseData.users).length; i++) {
         this.tempUsers.push(responseData.users[i]);
       }
+      return;
+
+    });
+  }
+
+
+
+  RecieveUsersFromDBForSignup() {
+   this.completeHTTPforRecieveUsersFromDBForSignup();
+   return this.tempUsers;
+  }
+  completeHTTPforRecieveUsersFromDBForSignup(){
+    console.log("OUTSIDE HTTP 2nd");
+    this.http
+    .get<{ message: string; users: Usersmodel[] }>(
+      'http://localhost:3000/api/RecieveUsersFromDB'
+    )
+    .subscribe((responseData) => {
+      // setTimeout('2000');
+      console.log('SUCCESSFUL TILL HERE but working');
+      for (let i = 0; i < Object.keys(responseData.users).length; i++) {
+        this.tempUsers.push(responseData.users[i]);
+      }
+      return;
 
     });
   }
@@ -70,17 +95,43 @@ export class HomepageService {
 
 
 
-  FecthUsers():Usersmodel[]{
+  // FecthUsers():Usersmodel[]{
+  //   //get Request to findOne username entry, return back
+  //   var usersFetched: Usersmodel[] = [];
+
+  //   this.http
+  //   .get<{ message: string; user: any }>(
+  //     'http://localhost:3000/api/FetchUsersFromDB'
+  //   )
+  //   .subscribe((responseData) => {
+  //     console.log("responseData.user : ", responseData.user);
+  //     usersFetched = responseData.user;
+  //   });
+
+
+
+  //   // setTimeout(700);
+  //   setTimeout(()=>{console.log("HELLO ARS")}, 700);
+
+  //   return usersFetched;
+  // }
+
+
+
+  //posibly i might have to send whole user:UserModel in case type mismatch wala error comes.
+  FecthTheMatchingUserForLogin(userToBeSearched: Usersmodel):Usersmodel{
     //get Request to findOne username entry, return back
-    var usersFetched: Usersmodel[] = [];
+    var userFetchednMtched: Usersmodel = null;
 
     this.http
-    .get<{ message: string; user: any }>(
-      'http://localhost:3000/api/FetchUsersFromDB'
+    .post<{ message: string; user: Usersmodel }>(
+      'http://localhost:3000/api/FetchTHISUser', userToBeSearched
     )
     .subscribe((responseData) => {
+
+      console.log("IF THIS MESSAGE IS THERE, THAN THINGS TILL SERVICE ARE OK. and below WILL RESPONSRDATA.USER");
       console.log("responseData.user : ", responseData.user);
-      usersFetched = responseData.user;
+      userFetchednMtched = responseData.user;
     });
 
 
@@ -88,7 +139,7 @@ export class HomepageService {
     // setTimeout(700);
     setTimeout(()=>{console.log("HELLO ARS")}, 700);
 
-    return usersFetched;
+    return userFetchednMtched;
   }
 
 
@@ -177,21 +228,21 @@ export class HomepageService {
     // console.log('currently createUser() Method of service doesnt do anything.');
   }
 
-  getUsersInfoFromDB() {
-    //////////////////////////////////////////////////////UsersInfo TO BE RETRIEVED
-    ////////////////////////////////////////////////////// FROM HERE FOR SIGNIN
-    // this.http.get<{ message: string }>(
-    //   'http://localhost:3000/api/GetUsersListFromDB')
-    //   .subscribe((responseData)=>{
-    //     console.log(responseData.message);
-    //   });
+  // getUsersInfoFromDB() {
+  //   //////////////////////////////////////////////////////UsersInfo TO BE RETRIEVED
+  //   ////////////////////////////////////////////////////// FROM HERE FOR SIGNIN
+  //   // this.http.get<{ message: string }>(
+  //   //   'http://localhost:3000/api/GetUsersListFromDB')
+  //   //   .subscribe((responseData)=>{
+  //   //     console.log(responseData.message);
+  //   //   });
 
-    //returns this.usersInfoFromDB list to GBCL's Homepage Component's .ts file
-    if (this.usersInfoFromDB.length <= 0) {
-      console.log('Users from DB are null');
-      return null;
-    } else return this.usersInfoFromDB;
-  }
+  //   //returns this.usersInfoFromDB list to GBCL's Homepage Component's .ts file
+  //   if (this.usersInfoFromDB.length <= 0) {
+  //     console.log('Users from DB are null');
+  //     return null;
+  //   } else return this.usersInfoFromDB;
+  // }
 
   getUniversitiesListFromDB() {
     // this.http

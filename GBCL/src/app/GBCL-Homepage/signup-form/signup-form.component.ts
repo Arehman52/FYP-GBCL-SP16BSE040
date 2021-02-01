@@ -28,12 +28,12 @@ export class SignupFormComponent implements OnInit {
 
 
 
-    this.UsersRecievedFromDB = this.homepageService.RecieveUsersFromDB();
-    console.log(this.UsersRecievedFromDB);
+    this.UsersRecievedFromDBForSignup = this.homepageService.RecieveUsersFromDBForSignup();
+    console.log(this.UsersRecievedFromDBForSignup);
   }
 
 
-  UsersRecievedFromDB:Usersmodel[] = [];
+   private UsersRecievedFromDBForSignup:Usersmodel[] = [];
 
 
   // A create User Fn to create the User.

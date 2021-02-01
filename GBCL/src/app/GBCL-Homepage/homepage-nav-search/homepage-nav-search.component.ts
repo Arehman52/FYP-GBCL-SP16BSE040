@@ -15,13 +15,14 @@ export class HomepageNavSearchComponent implements OnInit {
   ngOnInit(): void {
     // this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
     // this.FetchedUsers = this.homepageService.FecthUsers();
-    this.UsersRecievedFromDB = this.homepageService.RecieveUsersFromDB();
-    console.log(this.UsersRecievedFromDB);
+    this.FetchedTotalUsersForSignin = this.homepageService.RecieveUsersFromDB();
+    console.log(this.FetchedTotalUsersForSignin);
   }
 
-  UsersRecievedFromDB: Usersmodel[] = [];
+  //This array has a list of ALL users currently in MongoDB.
+  private FetchedTotalUsersForSignin: Usersmodel[] = [];
 
-  //  FetchedUsers: Usersmodel[] = [] ;
+  //  FetchedUsers: Usersmodel[] = null ;
 
   user: Usersmodel = {
     FirstNameOfUser: null,
@@ -70,48 +71,76 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
   loginUser(form: NgForm) {
-    if (form.value.UsersEnteredUsername == 'Admin') {
-      this.homepageService.loginAdmin(form.value.UsersEnteredPassword);
-      return;
-    }
-
-    // checkErrors and if no error then proceed the LOGIN
+    // // checkErrors and if no error then proceed the LOGIN
     if (this.checkNDisplayErrors()) {
       alert('Errors in the Sigin process.\nThe error-full FORM:');
-      // console.log(form);
+      console.log(form);
       return;
     } else {
       //if signin fields have valid inputs than this block will execute.
+      //this block running means both inputs are entered valid.
 
-      var userFetchedMatch: Usersmodel = null;
-      var EnteredUN: string = form.value.UsersEnteredUsername;
-      EnteredUN.toLowerCase();
-      for (let i = 0; i < Object.keys(this.UsersRecievedFromDB).length; i++) {
-        var fetchedUN: string = this.UsersRecievedFromDB[i].Username;
+      //if username entered is Admin, then only following 4 lines will execute.
+      if (form.value.UsersEnteredUsername == 'Admin') {
+        this.homepageService.loginAdmin(form.value.UsersEnteredPassword);
+        return;
+      }
+
+      //following code will be executed if username is not entered as Admin.
+      var userToBeSearched: Usersmodel = {
+        FirstNameOfUser: null,
+        HECIDofUniversity: null,
+        LastNameOfUser: null,
+        Password: null,
+        RegistrationNumberOfUser: null,
+        TitleOfUniversity: null,
+        UniversityNameOfUser: null,
+        UserType: null,
+        Username: form.value.UsersEnteredUsername,
+        _id: null,
+      };
+
+      var TheMatchedUser: Usersmodel = this.homepageService.FecthTheMatchingUserForLogin(
+        userToBeSearched
+      );
+
+      //if fetched user == null then show error and return
+      //else user will be either uni, std or tchr and proceed to their login
+      if (TheMatchedUser == null) {
+        alert('This username is not registered with GBCL 1111');
+        return;
+      } else {
+        var EnteredUN: string = form.value.UsersEnteredUsername;
+        EnteredUN.toLowerCase();
+        var fetchedUN: string = TheMatchedUser.Username;
         fetchedUN.toLowerCase();
-        if (fetchedUN == EnteredUN) {  //checks if Username matches?
-          if (
-            this.UsersRecievedFromDB[i].Password ==
-            form.value.UsersEnteredPassword //checks if Password matches?
-          ) {
+        // for (let i = 0; i < Object.keys(this.FetchedTotalUsersForSignin).length; i++) {
+        // fetchedUN.toLowerCase();
+        if (fetchedUN == EnteredUN) {
+          //checked if Username matched?
+
+           //checks if Password matches?
+          if (TheMatchedUser.Password == form.value.UsersEnteredPassword)
+          {
             //if both matched, then according to usertype, visit their location.
-            if (this.UsersRecievedFromDB[i].UserType == 'student')
+            if (TheMatchedUser.UserType == 'student')
               window.location.href = '/STUDENT';
-            if (this.UsersRecievedFromDB[i].UserType == 'teacher')
+            if (TheMatchedUser.UserType == 'teacher')
               window.location.href = '/TEACHER';
-            if (this.UsersRecievedFromDB[i].UserType == 'university')
+            if (TheMatchedUser.UserType == 'university')
               window.location.href = '/UNIVERSITY';
 
-              console.log("THIS MESSAGE SHALL NEVEr BE DISPLAYED");
-            return;
+            alert('THIS MESSAGE SHALL NEVEr BE DISPLAYED');
+            // return;
           } else {
             alert('Enter correct Password');
             return;
           }
         }
+        // }
+        alert('This Username is not registered in GBCL 22222');
+        return;
       }
-      alert('This Username is not registered in GBCL');
-      return;
     }
   }
 
@@ -123,9 +152,9 @@ export class HomepageNavSearchComponent implements OnInit {
     this.user.Password.length < 8
       ? (this.Errors.invalidPassword.status = true)
       : (this.Errors.invalidPassword.status = false);
-    this.notAUser()
-      ? (this.Errors.notAUser.status = true)
-      : (this.Errors.notAUser.status = false);
+    // this.notAUser()
+    //   ? (this.Errors.notAUser.status = true)
+    //   : (this.Errors.notAUser.status = false);
     // console.log('password from db: ' + this.usersInfoListFromDB.Password);
     // console.log('user PRINTED INSIDE checkNDisplayErrors(): \n' + this.user);
 

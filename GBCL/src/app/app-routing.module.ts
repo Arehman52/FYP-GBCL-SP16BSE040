@@ -17,6 +17,9 @@ import { SsettingsComponent } from './student/ssettings/ssettings.component';
 import { TeachersettingsComponent } from './TEACHER/tsettings/tsettings.component';
 import { RivalsComponent } from './student/slab-dashboard/rivals/rivals.component';
 import { TlabDashboardComponent } from './teacher/tlab-dashboard/tlab-dashboard.component';
+import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderboard/view-leaderboard.component';
+import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtasks/manage-labtasks.component';
+import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
 // import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
 // import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
 
@@ -36,6 +39,9 @@ const routes: Routes = [
   // Teacher routes
   { path: 'TEACHER', component: TEACHERComponent},
   { path: 'TEACHER/Lab', component: TlabDashboardComponent},
+  { path: 'TEACHER/Lab/Leaderboard', component: ViewLeaderboardComponent},
+  { path: 'TEACHER/Lab/Labtasks', component: ManageLabtasksComponent},
+  { path: 'TEACHER/Lab/Challenges', component: ManageChallengesComponent},
   // { path: 'TEACHER/Lab/challengesManagement', component: ManageeChallengesComponent},
   // { path: 'TEACHER/Lab/labtasksManagement', component: ManageeLabtasksComponent},
   { path: 'TEACHER/Settings', component: TeachersettingsComponent},

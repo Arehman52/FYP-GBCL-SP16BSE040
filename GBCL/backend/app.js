@@ -32,7 +32,7 @@ app.use((req, res, next) => {
     "Origin, X-Requested-with, Content-Type, Accept, Authorization");
 
   res.setHeader("Access-Control-Allow-Methods",
-    "GET,POST,PATCH,PUT,DELETE,OPTIONS");
+    "GET,POST,PATCH,PUT,DELETE");
 
   next();
 
@@ -139,17 +139,21 @@ app.get("/api/GetUsersListFromDB", (req, res, next) => {
 
 
 
-app.get("/api/FindUserInDB", (req, res, next) => {
+app.post("/api/FetchTHISUser", (req, res, next) => {
 
 
-  Users.findOne({"Username": "AttiqueZaffar100" }).exec().then( document => {
+  Users.findOne({"Username": req.body.Username }).exec().then( document => {
     res.status(200).json({
-      message: "USER HAS BEEN RETRIEVED FOR SIGNIN",
+      message: "USER HAS BEEN Attiqa aya abbb?? RETRIEVED FOR SIGNIN",
       user: document
 
-    });
+    }).catch((err)=>{
+      console.log("JSoooooooN",err);
+    });;
     console.log("USER HAS BEEN RETRIEVED FOR SIGNIN");
 
+  }).catch((err)=>{
+    console.log("theeeen eeerrrororrorr",err);
   });
 });
 
