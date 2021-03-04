@@ -18,6 +18,7 @@ import { HomepageNavSearchComponent } from './gbcl-homepage/homepage-nav-search/
 
 // Admin imports
 import { AdminComponent } from './admin/admin.component';
+// import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 // Student imports
 import { STUDENTComponent } from './student/student.component';
@@ -25,18 +26,18 @@ import { SlabDashboardComponent } from './student/slab-dashboard/slab-dashboard.
 import { CpaComponent } from './student/slab-dashboard/cpa/cpa.component';
 import { LeaderboardComponent } from './student/slab-dashboard/leaderboard/leaderboard.component';
 import { ChallengesComponent } from './student/slab-dashboard/challenges/challenges.component';
+import { SsettingsComponent } from './student/ssettings/ssettings.component';
+import { RivalsComponent } from './student/slab-dashboard/rivals/rivals.component';
 
 // Teacher imports
 import { TEACHERComponent } from './teacher/teacher.component';
+import { TlabDashboardComponent } from './teacher/tlab-dashboard/tlab-dashboard.component';
 
 // University imports
 import { UNIVERSITYComponent } from './university/university.component';
 
 // Misc imports
 import { Error404Component } from './MISC/error404/error404.component';
-import { SsettingsComponent } from './student/ssettings/ssettings.component';
-import { RivalsComponent } from './student/slab-dashboard/rivals/rivals.component';
-import { TlabDashboardComponent } from './teacher/tlab-dashboard/tlab-dashboard.component';
 // import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
 // import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
 import { TeachersettingsComponent } from './TEACHER/tsettings/tsettings.component';
@@ -45,7 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtasks/manage-labtasks.component';
 import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
 import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderboard/view-leaderboard.component';
-
+// import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,9 @@ import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderbo
 
     ManageChallengesComponent,
 
-    ViewLeaderboardComponent
+    ViewLeaderboardComponent,
+
+    // AdminDashboardComponent
     // ManageeLabtasksComponent
   ],
   imports: [

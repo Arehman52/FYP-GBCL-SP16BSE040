@@ -11,5 +11,15 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+
+  Unis = [
+    {uniTitle: 'CUI Isb', id: 'ab'},
+    {uniTitle: 'CUI Lhr', id: 'bc'},
+    {uniTitle: 'CUI Wah', id: 'cd'},
+    {uniTitle: 'CUI Vehari', id: 'de'},
+    {uniTitle: 'CUI Taxila', id: 'ef'}
+]
+
 
 }

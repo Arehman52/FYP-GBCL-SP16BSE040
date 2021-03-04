@@ -1,17 +1,219 @@
+<!-- This is the Dashboard for student,  -->
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container-fluid">
 
 
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- TOP ROW STARTS, in a [container-fluid]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
   <div class="row">
-    <div class="col-2">
-      <!-- col-2 in a row in a container-fluid -->
-      <!-- SIDEBAR HERE -->
-      <!-- <app-admin-sidenav></app-admin-sidenav> -->
+    <div class="col-12 maTopRow ">
+      <!-- this column isfurther divided into three portions -->
+      <!-- first portion for logo -->
+      <!-- second portion for Student Stats -->
+      <!-- third portion for Logout n student name -->
+      <!-- <div class="row text-center">
+              <div class="col-12 col-sm-3 col-md-2 bg-success">LOGO</div>
+              <div class="col-12 col-sm-6 col-md-8 bg-primary">Stats</div>
+              <div class="col-12 col-sm-3 col-md-2 bg-secondary">logout n profile</div>
+          </div> -->
+      <div class="row text-center">
+
+        <!-- ---------------- -->
+        <!-- GBCL LOGO COLUMN -->
+
+        <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
+          <a class="btn  border-warning w-100 logoText" title="Gamification Based Coding Labs"><img
+              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+        </div>
+
+        <!-- GBCL LOGO COLUMN-END -->
+        <!-- -------------------- -->
+
+
+
+
+
+
+        <!-- ----------- -->
+        <!-- Stats column -->
+
+        <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover">
+
+
+          <div class="row text-center  childSpansHoverYellow">
+            <div class="col"><span class="mx-2"><h3>Admin Dashboard</h3></span></div>
+          </div>
+        </div>
+        <!-- STATS COL END -->
+        <!-- ------------- -->
+
+
+
+
+        <!-- ---------- -->
+        <!-- LOGOUT COL -->
+        <div class="col-12 col-sm-3 col-md-2">
+          <div class="row">
+            <div class="col-12 btn-group">
+              <!-- Example single danger button -->
+
+              <a class="btn btn-warning mt-4 maSmallerFonts" [routerLink]="'/'">Logout</a>
+  <!-- <a type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Logout
+  </a>
+  <div class="dropdown-menu bg-warning" >
+     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a> -->
+    <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Settings</a> -->
+    <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a> -->
+    <!-- <div class="dropdown-divider"></div> 
+    
+  </div> -->
+
+            </div>
+
+          </div>
+        </div>
+        <!-- LOGOUT COL ENDS-->
+        <!-- ----------------->
+
+      </div>
+
     </div>
-    <div class="col-10">
-      <!-- col-10 in a row in a container-fluid -->
-      <!-- MAIN AREA HERE -->
-      <!-- <app-admin-mainarea></app-admin-mainarea> -->
+    <hr class="bg-warning p-0 m-0">
+  </div> <!--1st row ends-->
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- TOP ROW ENDS-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+<div class="row">  <!--2nd row starts-->
+  <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
+    <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
+      <li class="nav-item text-left">
+        <a class="nav-link active" [routerLink]="'/ADMIN'" >Dashboard</a>
+      </li>
+      <li class="nav-item text-left">
+        <a class="nav-link" [routerLink]="'/ADMIN/ManageUniversities'">Manage Universities</a>
+      </li>
+      <li class="nav-item text-left">
+        <a class="nav-link" [routerLink]="'/ADMIN/JoinRequests'">Join Requests</a>
+      </li>
+      <!-- <li class="nav-item text-left">
+        <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
+      </li>
+      <li class="nav-item text-left">
+        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
+      </li>
+      <li class="nav-item text-left">
+        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Notifications</a>
+      </li> -->
+    </ul>
+  </div>
+  <div class="col-12 col-sm-9 col-lg-10 p-1">
+
+
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Registered Universities
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+
+
+
+            <!-- Cards within card -->
+            <div class="card" *ngFor="let uni of Unis">
+              
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    {{uni.uniTitle}}
+                  </button>
+                </h5>
+              </div>
+      
+              <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#collapseOne">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-5 m-1">Lab Code: bf90D3</div>
+                    <div class="col-5 m-1">Lab Name: Introduction to Computer Programming</div>
+                    <div class="col-5 m-1">Lab Members: 64</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!-- Cards within card -->
+
+
+          </div>
+        </div>
+      </div>
+     
     </div>
   </div>
 
+
+
+</div> <!--2nd row ends-->
+
+
+
+  <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- AREA UNDER TOP ROW OF STUDENT STARTS in [container-fluid]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+
 </div>
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!--MAIN AREA OF STUDENT ENDS-->
+<!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- AREA UNDER TOP ROW OF STUDENT ENDS-->
+<!-- ----------------------------------------------------------------------------------------->

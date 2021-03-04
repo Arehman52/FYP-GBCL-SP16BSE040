@@ -20,6 +20,7 @@ import { TlabDashboardComponent } from './teacher/tlab-dashboard/tlab-dashboard.
 import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderboard/view-leaderboard.component';
 import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtasks/manage-labtasks.component';
 import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
+// import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 // import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
 // import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
 
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: '', component: GBCLHomepageComponent},
   // Admin routes
   { path: 'ADMIN', component: AdminComponent},
+  // { path: 'ADMIN', component: AdminDashboardComponent},
   // Student routes
   { path: 'STUDENT', component: STUDENTComponent}, // dashboard
   { path: 'STUDENT/Lab', component: SlabDashboardComponent}, // lab dashboard for student
