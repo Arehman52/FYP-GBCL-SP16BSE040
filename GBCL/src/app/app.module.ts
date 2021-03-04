@@ -19,6 +19,7 @@ import { HomepageNavSearchComponent } from './gbcl-homepage/homepage-nav-search/
 // Admin imports
 import { AdminComponent } from './admin/admin.component';
 import { ManageUniversitiesComponent } from './admin/manage-universities/manage-universities.component';
+import { JoinRequestsComponent } from './admin/join-requests/join-requests.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 // Student imports
@@ -61,6 +62,7 @@ import { RouterModule } from '@angular/router';
 
     AdminComponent,
     ManageUniversitiesComponent,
+    JoinRequestsComponent,
 
     STUDENTComponent,
     SlabDashboardComponent,

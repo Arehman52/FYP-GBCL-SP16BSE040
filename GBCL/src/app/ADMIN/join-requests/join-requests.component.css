@@ -1,0 +1,166 @@
+.container-fluid{
+    min-height: 100vh;
+  }
+  *{
+    box-sizing: border-box;
+  }
+  body{
+  
+    background-color: #090839;
+  }
+  
+  .maNav-bg-color{
+    background-color: #0E103D;
+  }
+  
+  /* Top Row CSS starts*/
+  .maTopRow{
+    background-color: #0e103d;
+    min-height: 16vh;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    color: #fff;
+  }
+  .CurrentStatsHover :hover{
+    background-color: #1b1d49;
+  
+  }
+  
+  
+  /* GBCL LOGO CSS STARTS */
+  .logoText{
+    font-size: 20px;
+    color: #333F4F;
+    font-weight: bolder;
+    margin: 2% 0%;
+  }
+  #logoImg{
+    background: transparent;
+    width: 36px;
+    display: block;
+    margin: auto;
+  }
+  .bgYellowOnHover :hover{
+    background:  #FFC107;
+    color: #333F4F;
+    transition: ease 0.5s;
+  }
+  /* GBCL LOGO CSS ENDS */
+  
+  .hoverYellow :hover{
+    color: #FFC107;
+    text-decoration: none;
+    font-weight: bolder;
+  }
+  .childSpansHoverYellow span:hover{
+    color: #FFC107;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .Text12px{
+  font-size: 12px;
+  }
+  
+  .Text10pxItalicYellow:hover{
+    color: white;
+    font-weight: bolder;
+  }
+  .Text10pxItalicYellow{
+  font-size: 10px;
+  color: #FFC107;
+  font-style: italic;
+  }
+  /* TOP ROW CSS ENDS */
+  
+  
+  /* MainArea STARTS */
+  .formContainerJoinLab{
+    background: transparent;
+  }
+  .LabCodeTextInput{
+    display: block;
+    width: 100%;
+    min-width: fit-content;
+    margin: auto;
+    border-radius: 4px;
+    height: 32px;
+    margin-bottom: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  
+  }
+  .MaSmallsizeBtns{
+    display: block;
+    width: 100%;
+    margin: auto;
+    height:fit-content;
+    text-transform: capitalize;
+    padding: 0px 14px;
+  }
+  
+  hr{
+    background: #FFC107;
+    width: 100%;
+    padding: 0;
+    height: 0;
+    margin: 2px;
+  }
+  .LabsHeaderRow{
+    background-color: rgb(120, 120, 128, 9);
+  }
+  .LabsHeader{
+    margin: auto;
+    color:whitesmoke;
+    font-size: 2em;
+    background-color:  rgba(3, 2, 53, 0.85);
+    font-weight: bolder;
+    text-transform: uppercase;
+    border-radius: 2px;
+    padding-left: 8%;
+    /* border-top: 0.9em solid navy;
+    border-bottom: 0.5em solid navy;
+    border-left: 4em solid navy;
+    border-right: 4em solid navy; */
+  }
+  /* MainArea ENDSS */
+  
+  
+  
+  /* SIDENAV CSS STARTS
+  .sideNavLink{
+    background-color: #fff;
+    font-weight: 500;
+    border: solid transparent 2px;
+    border-radius: 2px;
+    margin: 0 0 4px 0;
+    padding: 8px 2px 4px 8px;
+  }
+  #sideNavAnchorParentDiv a:hover{
+    color: #0d6ccc;
+  }
+  SIDENAV CSS ENDS */
+  
+  
+  
+  
+  
+  /* UTILITY CSS CLASSES */
+  .minHeight838{
+    min-height: 83.8vh;
+  }
+  .minHeight10vh{
+    min-height: 10vh;
+  }
+  .borderOnHover :hover{
+    border: 1px solid whitesmoke;
+  }
+  
+  .secondaryColorOfChildrenOnHover *:hover{
+  background-color: #6C757D;
+  color: #fff;
+  }
+  /* UTILITY CSS CLASSES END*/
+  
