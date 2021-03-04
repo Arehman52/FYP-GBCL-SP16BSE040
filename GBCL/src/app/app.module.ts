@@ -18,6 +18,7 @@ import { HomepageNavSearchComponent } from './gbcl-homepage/homepage-nav-search/
 
 // Admin imports
 import { AdminComponent } from './admin/admin.component';
+import { ManageUniversitiesComponent } from './admin/manage-universities/manage-universities.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 // Student imports
@@ -46,6 +47,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtasks/manage-labtasks.component';
 import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
 import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderboard/view-leaderboard.component';
+import { RouterModule } from '@angular/router';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
@@ -58,6 +60,7 @@ import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderbo
     GBCLHomepageComponent,
 
     AdminComponent,
+    ManageUniversitiesComponent,
 
     STUDENTComponent,
     SlabDashboardComponent,
@@ -93,7 +96,8 @@ import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderbo
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

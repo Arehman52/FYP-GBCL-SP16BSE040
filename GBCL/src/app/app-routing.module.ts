@@ -29,6 +29,7 @@ const routes: Routes = [
     { path: '', component: GBCLHomepageComponent},
   // Admin routes
   { path: 'ADMIN', component: AdminComponent},
+  // { path: 'ADMIN', component: ManageUniversitiesC},
   // { path: 'ADMIN', component: AdminDashboardComponent},
   // Student routes
   { path: 'STUDENT', component: STUDENTComponent}, // dashboard

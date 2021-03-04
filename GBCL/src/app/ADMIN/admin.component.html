@@ -134,7 +134,7 @@
   <div class="col-12 col-sm-9 col-lg-10 p-1">
 
 
-    <div id="accordion">
+    <div id="accordionOuter">
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
@@ -143,33 +143,57 @@
             </button>
           </h5>
         </div>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
           <div class="card-body">
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <!-- Cards within card -->
-            <div class="card" *ngFor="let uni of Unis">
-              
-              <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    {{uni.uniTitle}}
+            
+            <div id="accordionInner">
+              <div class="card mb-1" *ngFor="let uni of Unis">
+                <div class="card-header"
+                  [attr.id]="'heading'+uni.id">
+  
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#collapse' + uni.id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse'+uni.id">
+                    {{uni.uniTitle}} 
                   </button>
-                </h5>
-              </div>
-      
-              <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#collapseOne">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-5 m-1">Lab Code: bf90D3</div>
-                    <div class="col-5 m-1">Lab Name: Introduction to Computer Programming</div>
-                    <div class="col-5 m-1">Lab Members: 64</div>
+  
+                </div>
+  
+                <div [id]="'collapse'+uni.id" class="collapse hide" [attr.aria-labelledby]="'heading'+uni.id"
+                  data-parent="#accordionInner">
+                  <div class="card-body ">
+                    this is the body of this university'a card.
                   </div>
                 </div>
               </div>
             </div>
-        <!-- Cards within card -->
+
+            <!-- Cards within card -->
 
 
           </div>
