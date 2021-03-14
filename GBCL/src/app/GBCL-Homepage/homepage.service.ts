@@ -24,10 +24,6 @@ export class HomepageService {
 
 
   RecieveUsersFromDBForSignup() {
-   this.completeHTTPforRecieveUsersFromDBForSignup();
-   return this.tempUsers;
-  }
-  completeHTTPforRecieveUsersFromDBForSignup(){
     console.log("OUTSIDE HTTP 2nd");
     this.http
     .get<{ message: string; users: Usersmodel[] }>(
@@ -42,6 +38,7 @@ export class HomepageService {
       return;
 
     });
+    return this.tempUsers;
   }
 
 

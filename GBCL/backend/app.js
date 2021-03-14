@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Users = require('./models/user');
+const TestLeaderboard = require('./models/test-leaderboard');
 
 
 
@@ -160,10 +161,25 @@ app.post("/api/FetchTHISUser", (req, res, next) => {
 
 
 
-
+//following is working properly in signup page for fetching users.
 app.get("/api/RecieveUsersFromDB", (req, res, next) => {
 
   Users.find().then( documents => {
+    res.status(200).json({
+      message: "this is a list of users recieved from DB",
+      users: documents
+    });
+    console.log("SUCCESSFUL TIL HERE");
+    // console.log(documents);
+
+  });
+});
+
+
+//TESTING=========================================================================================================
+app.get("/api/fetchLatestLeaderboardData", (req, res, next) => {
+
+  TestLeaderboard.find().then( documents => {
     res.status(200).json({
       message: "this is a list of users recieved from DB",
       users: documents

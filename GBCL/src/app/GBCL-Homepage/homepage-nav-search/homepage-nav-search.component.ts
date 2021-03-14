@@ -11,7 +11,7 @@ import { LoginService } from '../login.service';
   styleUrls: ['./homepage-nav-search.component.css'],
 })
 export class HomepageNavSearchComponent implements OnInit {
-  constructor(public loginService: LoginService) {}
+  constructor(public loginService: LoginService) { }
 
   ngOnInit(): void {
     // this.FetchedTotalUsersForSignin = this.loginService.RecieveUsersFromDB();
@@ -70,7 +70,7 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
   loginUser(form: NgForm) {
-      var userToBeSearched: Usersmodel = {
+    var userToBeSearched: Usersmodel = {
       FirstNameOfUser: null,
       HECIDofUniversity: null,
       LastNameOfUser: null,
@@ -84,20 +84,31 @@ export class HomepageNavSearchComponent implements OnInit {
     };
 
 
-    if(!formIsValid(form)){
+    if (!formIsValid(form)) {
       alert("Sign in fields are invalid!");
     }
-    else
-    {
-      var TypeOfUser: string | String;
-      setTimeout( () => {TypeOfUser = this.loginService.getUsertypeIfUserIsRegistered(userToBeSearched)} , 3000);
+    else {
+      // var TypeOfUser: string | String;
+      // setTimeout( () => {TypeOfUser = this.loginService.getUsertypeIfUserIsRegistered(userToBeSearched)} , 3000);
+      var TheMatchedUser: Usersmodel[] = [];
 
-      if (TypeOfUser == 'student')
+      setTimeout(() => {
+        TheMatchedUser = this.loginService.FecthTheMatchingUserForLogin(
+          userToBeSearched);
+
+      }, 4000);
+
+      setTimeout(() => {
+        console.log("TheMatchedUserTheMatchedUserTheMatchedUser", TheMatchedUser);
+
+      if (TheMatchedUser[0].UserType == 'student')
       window.location.href = '/STUDENT';
-      if (TypeOfUser == 'teacher')
+    if (TheMatchedUser[0].UserType == 'teacher')
       window.location.href = '/TEACHER';
-      if (TypeOfUser == 'university')
+    if (TheMatchedUser[0].UserType == 'university')
       window.location.href = '/UNIVERSITY';
+      }, 5000);
+
     }
 
 
@@ -120,7 +131,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
       //if username entered is Admin, then only following 4 lines will execute.
       // if (form.value.UsersEnteredUsername == 'Admin') {
-      //   this.loginService.loginAdmin(form.value.UsersEnteredPassword);
+        //   this.loginService.loginAdmin(form.value.UsersEnteredPassword);
       //   return;
       // }
 
@@ -221,7 +232,7 @@ export class HomepageNavSearchComponent implements OnInit {
     } else return false;
   }
 }
-function formIsValid(form: NgForm):Boolean {
+function formIsValid(form: NgForm): Boolean {
   //lets suppose there are no errors and signin fields have valid input.
   return true;
 }
