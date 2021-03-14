@@ -1,30 +1,12 @@
 <!-- This is the Dashboard for student,  -->
 
-
-
-
-
-
-
-
-
-
-
-
 <div class="container-fluid">
-
-
-
-
-
-
-
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- TOP ROW STARTS, in a [container-fluid]-->
   <!-- ----------------------------------------------------------------------------------------->
 
   <div class="row">
-    <div class="col-12 maTopRow ">
+    <div class="col-12 maTopRow">
       <!-- this column isfurther divided into three portions -->
       <!-- first portion for logo -->
       <!-- second portion for Student Stats -->
@@ -35,38 +17,31 @@
               <div class="col-12 col-sm-3 col-md-2 bg-secondary">logout n profile</div>
           </div> -->
       <div class="row text-center">
-
         <!-- ---------------- -->
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn  border-warning w-100 logoText" title="Gamification Based Coding Labs"><img
-              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+          <a class="btn border-warning w-100 logoText" title="Gamification Based Coding Labs"><img
+              src="../../assets/images/logo.png" alt="logo" id="logoImg" /><b>GBCL</b></a>
         </div>
 
         <!-- GBCL LOGO COLUMN-END -->
         <!-- -------------------- -->
 
-
-
-
-
-
         <!-- ----------- -->
         <!-- Stats column -->
 
         <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover">
-
-
-          <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span class="mx-2"><h3>Admin Dashboard</h3></span></div>
+          <div class="row text-center childSpansHoverYellow">
+            <div class="col">
+              <span class="mx-2">
+                <h3>Admin Dashboard</h3>
+              </span>
+            </div>
           </div>
         </div>
         <!-- STATS COL END -->
         <!-- ------------- -->
-
-
-
 
         <!-- ---------- -->
         <!-- LOGOUT COL -->
@@ -76,51 +51,46 @@
               <!-- Example single danger button -->
 
               <a class="btn btn-warning mt-4 maSmallerFonts" [routerLink]="'/'">Logout</a>
-  <!-- <a type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <!-- <a type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Logout
   </a>
   <div class="dropdown-menu bg-warning" >
      <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a> -->
-    <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Settings</a> -->
-    <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a> -->
-    <!-- <div class="dropdown-divider"></div> 
-    
+              <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Settings</a> -->
+              <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a> -->
+              <!-- <div class="dropdown-divider"></div>
+
   </div> -->
-
             </div>
-
           </div>
         </div>
         <!-- LOGOUT COL ENDS-->
         <!-- ----------------->
-
       </div>
-
     </div>
-    <hr class="bg-warning p-0 m-0">
-  </div> <!--1st row ends-->
+    <hr class="bg-warning p-0 m-0" />
+  </div>
+  <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- TOP ROW ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
 
-
-
-
-<div class="row">  <!--2nd row starts-->
-  <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
-    <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/ADMIN'" >Dashboard</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link active" [routerLink]="'/ADMIN/ManageUniversities'">Manage Universities</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/ADMIN/JoinRequests'">Join Requests</a>
-      </li>
-      <!-- <li class="nav-item text-left">
+  <div class="row">
+    <!--2nd row starts-->
+    <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
+      <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/ADMIN'">Dashboard</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link active" [routerLink]="'/ADMIN/ManageUniversities'">Manage Universities</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/ADMIN/JoinRequests'">Join Requests</a>
+        </li>
+        <!-- <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
       </li>
       <li class="nav-item text-left">
@@ -129,65 +99,110 @@
       <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Notifications</a>
       </li> -->
-    </ul>
-  </div>
-  <div class="col-12 col-sm-9 col-lg-10 p-1">
+      </ul>
+    </div>
+    <div class="col-12 col-sm-9 col-lg-10 p-1 mb-5">
+
+
 
 
     <div id="accordionOuter">
-      <div class="card">
+
+
+
+      <div class="card mt-2 mx-3">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Register a University
+            <button class="btn btn-link text-secondary py-2 px-1"  data-toggle="collapse" data-target="#collapseOneRegisteredUniversities" aria-expanded="true"
+            aria-controls="collapseOneRegisteredUniversities">
+             <h4><b>Registered Universities</b></h4>
             </button>
           </h5>
         </div>
-        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
+        <div id="collapseOneRegisteredUniversities" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
           <div class="card-body">
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                  <!-- Search form -->
+            <div class="row mb-2">
+              <div class="col-12 d-flex justify-content-end">
+                <form class="form-inline">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+                  <!-- Search form -->
 
 
 
 
             <!-- Cards within card -->
-            
+
             <div id="accordionInner">
               <div class="card mb-1" *ngFor="let uni of Unis">
                 <div class="card-header"
-                  [attr.id]="'RegisterUniversityCard'">
-  
+                  [attr.id]="'heading'+uni.id">
+
                   <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                    [attr.data-target]="'#RegisterUniversityCollapse'" aria-expanded="true"
+                    [attr.data-target]="'#collapse' + uni.id" aria-expanded="true"
                     [attr.aria-controls]="'collapse'+uni.id">
-                    {{uni.uniTitle}} 
+                    {{uni.uniTitle}}
                   </button>
-  
+
                 </div>
-  
-                <div [id]="'RegisterUniversityCollapse'" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
+
+                <div [id]="'collapse'+uni.id" class="collapse hide" [attr.aria-labelledby]="'heading'+uni.id"
                   data-parent="#accordionInner">
                   <div class="card-body ">
-                    this is the body of this university'a card.
+
+
+
+
+                    <div class="row">
+                      <div class="col-11 m-auto"><!-- remove bg dark -->
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>HECID</th>
+                              <th>Faculty Count</th>
+                              <th>Labs Count</th>
+                              <th>Students Count</th>
+                              <th>Access Status</th>
+                              <!-- UniTitle: String;
+                              AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'};
+                              AccessStatus: String;
+                              HECID: String;
+                              FacultyCount: number;
+                              LabsCount: number;
+                              StudentsCount: number; -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+
+                              <td>{{uni.UniTitle}}</td>
+                              <td>{{uni.FacultyCount}}</td>
+                              <td>{{uni.LabsCount}}</td>
+                              <td>{{uni.StudentsCount}}</td>
+                              <td>{{uni.AccessStatus}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                        <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2">Terminate Access</button>
+                        <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2">Edit</button>
+                        <button class="btn btn-outline-danger w-25 maSmallerFonts my-2 mx-2">Delete</button>
+
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
                   </div>
                 </div>
               </div>
@@ -199,44 +214,62 @@
           </div>
         </div>
       </div>
-     
+
+    </div>
+
+
+
+
+      <div id="accordionOuter">
+        <div class="card mt-2 mx-3">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                <h4><b>Register a University</b></h4>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
+            <div class="card-body">
+              <form class="m-2 ">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="EnterUniTitle">University Title:</label>
+                      <input type="text" class="form-control" placeholder="Enter University's Title:" id="EnterUniTitle">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="EnterHECIDFroUniversity">University HECID:</label>
+                      <input type="text" class="form-control" placeholder="Enter HECID of university" id="EnterHECIDFroUniversity">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                  <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2">Register</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-
-
-</div> <!--2nd row ends-->
-
-
+  <!--2nd row ends-->
 
   <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
-
-
-
-
-
-
 
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- AREA UNDER TOP ROW OF STUDENT STARTS in [container-fluid]-->
   <!-- ----------------------------------------------------------------------------------------->
-
-
-
-
-
-
-
-
-
 </div>
 
 <!-- -------------------------------------------------------------------------------------- -->
 <!--MAIN AREA OF STUDENT ENDS-->
 <!-- ----------------------------------------------------------------------------------------->
-
-
-
 
 <!-- -------------------------------------------------------------------------------------- -->
 <!-- AREA UNDER TOP ROW OF STUDENT ENDS-->

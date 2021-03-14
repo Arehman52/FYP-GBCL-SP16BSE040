@@ -142,18 +142,18 @@ app.get("/api/GetUsersListFromDB", (req, res, next) => {
 app.post("/api/FetchTHISUser", (req, res, next) => {
 
 
-  Users.findOne({"Username": req.body.Username }).exec().then( document => {
+  Users.findOne({"Username": req.body.Username }).then( document => {
     res.status(200).json({
-      message: "USER HAS BEEN Attiqa aya abbb?? RETRIEVED FOR SIGNIN",
+      message: " 001 USER HAS BEEN aiqa aya abbb?? RETRIEVED FOR SIGNIN",
       user: document
 
     }).catch((err)=>{
-      console.log("JSoooooooN",err);
-    });;
-    console.log("USER HAS BEEN RETRIEVED FOR SIGNIN");
+      console.log(" 002 JSoooooooN",err);
+    });
+    console.log(" 003 USER HAS BEEN RETRIEVED FOR SIGNIN");
 
   }).catch((err)=>{
-    console.log("theeeen eeerrrororrorr",err);
+    console.log(" 004 theeeen eeerrrororrorr",err);
   });
 });
 

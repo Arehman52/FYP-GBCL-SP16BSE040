@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 
 import { HomepageService } from '../homepage.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-homepage-nav-search',
@@ -10,12 +11,10 @@ import { HomepageService } from '../homepage.service';
   styleUrls: ['./homepage-nav-search.component.css'],
 })
 export class HomepageNavSearchComponent implements OnInit {
-  constructor(public homepageService: HomepageService) {}
+  constructor(public loginService: LoginService) {}
 
   ngOnInit(): void {
-    // this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
-    // this.FetchedUsers = this.homepageService.FecthUsers();
-    this.FetchedTotalUsersForSignin = this.homepageService.RecieveUsersFromDB();
+    // this.FetchedTotalUsersForSignin = this.loginService.RecieveUsersFromDB();
     console.log(this.FetchedTotalUsersForSignin);
   }
 
@@ -71,43 +70,85 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
   loginUser(form: NgForm) {
-    // // checkErrors and if no error then proceed the LOGIN
+      var userToBeSearched: Usersmodel = {
+      FirstNameOfUser: null,
+      HECIDofUniversity: null,
+      LastNameOfUser: null,
+      Password: null,
+      RegistrationNumberOfUser: null,
+      TitleOfUniversity: null,
+      UniversityNameOfUser: null,
+      UserType: null,
+      Username: form.value.UsersEnteredUsername,
+      _id: null,
+    };
+
+
+    if(!formIsValid(form)){
+      alert("Sign in fields are invalid!");
+    }
+    else
+    {
+      var TypeOfUser: string | String;
+      setTimeout( () => {TypeOfUser = this.loginService.getUsertypeIfUserIsRegistered(userToBeSearched)} , 3000);
+
+      if (TypeOfUser == 'student')
+      window.location.href = '/STUDENT';
+      if (TypeOfUser == 'teacher')
+      window.location.href = '/TEACHER';
+      if (TypeOfUser == 'university')
+      window.location.href = '/UNIVERSITY';
+    }
+
+
+
+
+
+
+
+
+
+    /**
     if (this.checkNDisplayErrors()) {
       alert('Errors in the Sigin process.\nThe error-full FORM:');
       console.log(form);
       return;
-    } else {
+    } else
+    {
       //if signin fields have valid inputs than this block will execute.
       //this block running means both inputs are entered valid.
 
       //if username entered is Admin, then only following 4 lines will execute.
-      if (form.value.UsersEnteredUsername == 'Admin') {
-        this.homepageService.loginAdmin(form.value.UsersEnteredPassword);
-        return;
-      }
+      // if (form.value.UsersEnteredUsername == 'Admin') {
+      //   this.loginService.loginAdmin(form.value.UsersEnteredPassword);
+      //   return;
+      // }
 
       //following code will be executed if username is not entered as Admin.
-      var userToBeSearched: Usersmodel = {
-        FirstNameOfUser: null,
-        HECIDofUniversity: null,
-        LastNameOfUser: null,
-        Password: null,
-        RegistrationNumberOfUser: null,
-        TitleOfUniversity: null,
-        UniversityNameOfUser: null,
-        UserType: null,
-        Username: form.value.UsersEnteredUsername,
-        _id: null,
-      };
 
-      var TheMatchedUser: Usersmodel = this.homepageService.FecthTheMatchingUserForLogin(
+
+
+
+
+
+
+
+
+
+
+
+
+
+      //following is returning null
+      var TheMatchedUser: Usersmodel = this.loginService.FecthTheMatchingUserForLogin(
         userToBeSearched
       );
 
+      console.log("TheMatchedUser :>>>",TheMatchedUser);
       //if fetched user == null then show error and return
       //else user will be either uni, std or tchr and proceed to their login
       if (TheMatchedUser == null) {
-        alert('This username is not registered with GBCL 1111');
+        alert('This username is not registered with GBCL --');
         return;
       } else {
         var EnteredUN: string = form.value.UsersEnteredUsername;
@@ -141,7 +182,7 @@ export class HomepageNavSearchComponent implements OnInit {
         alert('This Username is not registered in GBCL 22222');
         return;
       }
-    }
+    }*/
   }
 
   //each time focusouts of both inputs, it checks for the errors
@@ -180,3 +221,8 @@ export class HomepageNavSearchComponent implements OnInit {
     } else return false;
   }
 }
+function formIsValid(form: NgForm):Boolean {
+  //lets suppose there are no errors and signin fields have valid input.
+  return true;
+}
+

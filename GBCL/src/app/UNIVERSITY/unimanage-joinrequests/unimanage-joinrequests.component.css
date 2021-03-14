@@ -130,7 +130,6 @@ hr{
 
 
 /* SIDENAV CSS STARTS
-
 .sideNavLink{
   background-color: #fff;
   font-weight: 500;
@@ -149,14 +148,8 @@ SIDENAV CSS ENDS */
 
 
 /* UTILITY CSS CLASSES */
-.minHeight84{
-  min-height: 84.0vh;
-}
 .minHeight838{
   min-height: 83.8vh;
-}
-.minHeight64{
-  min-height: 64.0vh;
 }
 .minHeight10vh{
   min-height: 10vh;
@@ -170,18 +163,3 @@ background-color: #6C757D;
 color: #fff;
 }
 /* UTILITY CSS CLASSES END*/
-.sideNavLink{
-  background-color: #fff;
-  font-weight: 500;
-  border: solid transparent 2px;
-  border-radius: 2px;
-  margin: 0 0 4px 0;
-  padding: 8px 2px 4px 8px;
-}
-#sideNavAnchorParentDiv a:hover{
-  color: #0d6ccc;
-}
-
-
-
-

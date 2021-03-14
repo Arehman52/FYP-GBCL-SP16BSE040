@@ -15,19 +15,9 @@ export class SignupFormComponent implements OnInit {
   constructor(public homepageService: HomepageService) {}
 
   ngOnInit() {
-    // this.user.UniversityIDOfUser = 'zeroindexuniselect';
     this.setALLErrorsToFalse();
     this.user.UniversityNameOfUser = 'NotListedHere';
-
-
-
-    this.UniversitiesListFromDB = this.homepageService.getUniversitiesListFromDB();
-    //following is for signIn and in signup for unique username enterances
-    // this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
-    // this.usersInfoListFromDB = this.homepageService.getUsersInfoFromDB();
-
-
-
+    // this.UniversitiesListFromDB = this.homepageService.getUniversitiesListFromDB();
     this.UsersRecievedFromDBForSignup = this.homepageService.RecieveUsersFromDBForSignup();
     console.log(this.UsersRecievedFromDBForSignup);
   }
@@ -75,7 +65,7 @@ export class SignupFormComponent implements OnInit {
 
   usersInfoListFromDB = {};
 
-  UniversitiesListFromDB = [];
+  // UniversitiesListFromDB = [];
 
   // console.log(this.UniversitiesListFromDB);
 

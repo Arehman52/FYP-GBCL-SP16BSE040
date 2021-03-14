@@ -49,6 +49,7 @@ import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtask
 import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
 import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderboard/view-leaderboard.component';
 import { RouterModule } from '@angular/router';
+import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
@@ -90,6 +91,8 @@ import { RouterModule } from '@angular/router';
     ManageChallengesComponent,
 
     ViewLeaderboardComponent,
+
+    UnimanageJoinrequestsComponent,
 
     // AdminDashboardComponent
     // ManageeLabtasksComponent

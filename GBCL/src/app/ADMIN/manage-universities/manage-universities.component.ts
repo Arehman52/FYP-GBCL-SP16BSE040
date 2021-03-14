@@ -14,11 +14,11 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
   Unis = [
-    {uniTitle: 'CUI Isb', id: 'ab'},
-    {uniTitle: 'CUI Lhr', id: 'bc'},
-    {uniTitle: 'CUI Wah', id: 'cd'},
-    {uniTitle: 'CUI Vehari', id: 'de'},
-    {uniTitle: 'CUI Taxila', id: 'ef'}
+    {uniTitle: 'CUI Isb', id: 'ab', status: 'allowed'},
+    {uniTitle: 'CUI Lhr', id: 'bc', status: 'allowed'},
+    {uniTitle: 'CUI Wah', id: 'cd', status: 'allowed'},
+    {uniTitle: 'CUI Vehari', id: 'de', status: 'allowed'},
+    {uniTitle: 'CUI Taxila', id: 'ef', status: 'allowed'                                                                          }
 ]
 
 

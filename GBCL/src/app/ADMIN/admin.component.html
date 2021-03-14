@@ -85,8 +85,8 @@
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a> -->
     <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Settings</a> -->
     <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a> -->
-    <!-- <div class="dropdown-divider"></div> 
-    
+    <!-- <div class="dropdown-divider"></div>
+
   </div> -->
 
             </div>
@@ -135,12 +135,15 @@
 
 
     <div id="accordionOuter">
-      <div class="card">
+
+
+
+      <div class="card mt-2 mx-3">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Registered Universities
-            </button>
+            <h4 class="text-secondary py-2 px-1 text-center" >
+             <b>Overall Universities Data</b>
+            </h4>
           </h5>
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
@@ -148,58 +151,38 @@
 
 
 
+            <table class="table table-striped text-center">
+              <thead>
+                <tr>
+                  <th>Total regd. Universities</th>
+                  <th>Faculty Count</th>
+                  <th>Labs Count</th>
+                  <th>Students Count</th>
+                  <!-- UniTitle: String;
+                  AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'};
+                  AccessStatus: String;
+                  HECID: String;
+                  FacultyCount: number;
+                  LabsCount: number;
+                  StudentsCount: number; -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr >
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- Cards within card -->
-            
-            <div id="accordionInner">
-              <div class="card mb-1" *ngFor="let uni of Unis">
-                <div class="card-header"
-                  [attr.id]="'heading'+uni.id">
-  
-                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                    [attr.data-target]="'#collapse' + uni.id" aria-expanded="true"
-                    [attr.aria-controls]="'collapse'+uni.id">
-                    {{uni.uniTitle}} 
-                  </button>
-  
-                </div>
-  
-                <div [id]="'collapse'+uni.id" class="collapse hide" [attr.aria-labelledby]="'heading'+uni.id"
-                  data-parent="#accordionInner">
-                  <div class="card-body ">
-                    this is the body of this university'a card.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Cards within card -->
-
+                  <td>12</td>
+                  <td>342</td>
+                  <td>98</td>
+                  <td>5263</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
         </div>
       </div>
-     
+
     </div>
   </div>
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { UniversityModel } from '../../MODELS/universitymodel.model';
+
 @Component({
   selector: 'app-join-requests',
   templateUrl: './join-requests.component.html',
@@ -12,14 +14,35 @@ export class JoinRequestsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  UniversitiesData: UniversityModel[] = [{
+    Id: 'uni1',
+    UniTitle: 'COMSATS University Islamabad',
+    AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'},
+    AccessStatus: 'Pending',
+    HECID: 'FAC241',
+    FacultyCount: 85,
+    LabsCount: 34,
+    StudentsCount: 391
+  },
+  {
+    Id: 'uni2',
+    UniTitle: 'COMSATS University Lahore',
+    AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'},
+    AccessStatus: 'Pending',
+    HECID: 'FAC242',
+    FacultyCount: 25,
+    LabsCount: 28,
+    StudentsCount: 208
+  }];
 
   Unis = [
-    {uniTitle: 'CUI Isb', id: 'ab'},
-    {uniTitle: 'CUI Lhr', id: 'bc'},
-    {uniTitle: 'CUI Wah', id: 'cd'},
-    {uniTitle: 'CUI Vehari', id: 'de'},
-    {uniTitle: 'CUI Taxila', id: 'ef'}
-]
+    {uniTitle: 'CUI Isb', id: 'ab', status:'pending'},
+    {uniTitle: 'CUI Lhr', id: 'bc', status:'pending'},
+    {uniTitle: 'CUI Wah', id: 'cd', status:'allowed'},
+    {uniTitle: 'CUI Vehari', id: 'de', status:'pending'},
+    {uniTitle: 'CUI Taxila', id: 'ef', status:'pending'}
+];
+
 
 
 tasks = [

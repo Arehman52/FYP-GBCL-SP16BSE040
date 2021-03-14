@@ -22,7 +22,7 @@
     <!-- -------------------------------------------------------------------------------------- -->
     <!-- TOP ROW STARTS, in a [container-fluid]-->
     <!-- ----------------------------------------------------------------------------------------->
-  
+
     <div class="row">
       <div class="col-12 maTopRow ">
         <!-- this column isfurther divided into three portions -->
@@ -35,46 +35,46 @@
                 <div class="col-12 col-sm-3 col-md-2 bg-secondary">logout n profile</div>
             </div> -->
         <div class="row text-center">
-  
+
           <!-- ---------------- -->
           <!-- GBCL LOGO COLUMN -->
-  
+
           <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
             <a class="btn  border-warning w-100 logoText" title="Gamification Based Coding Labs"><img
                 src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
           </div>
-  
+
           <!-- GBCL LOGO COLUMN-END -->
           <!-- -------------------- -->
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
           <!-- ----------- -->
           <!-- Stats column -->
-  
+
           <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover">
-  
-  
+
+
             <div class="row text-center  childSpansHoverYellow">
               <div class="col"><span class="mx-2"><h3>Admin Dashboard</h3></span></div>
             </div>
           </div>
           <!-- STATS COL END -->
           <!-- ------------- -->
-  
-  
-  
-  
+
+
+
+
           <!-- ---------- -->
           <!-- LOGOUT COL -->
           <div class="col-12 col-sm-3 col-md-2">
             <div class="row">
               <div class="col-12 btn-group">
                 <!-- Example single danger button -->
-  
+
                 <a class="btn btn-warning mt-4 maSmallerFonts" [routerLink]="'/'">Logout</a>
     <!-- <a type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Logout
@@ -85,29 +85,29 @@
       <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a> -->
       <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Settings</a> -->
       <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a> -->
-      <!-- <div class="dropdown-divider"></div> 
-      
+      <!-- <div class="dropdown-divider"></div>
+
     </div> -->
-  
+
               </div>
-  
+
             </div>
           </div>
           <!-- LOGOUT COL ENDS-->
           <!-- ----------------->
-  
+
         </div>
-  
+
       </div>
       <hr class="bg-warning p-0 m-0">
     </div> <!--1st row ends-->
     <!-- -------------------------------------------------------------------------------------- -->
     <!-- TOP ROW ENDS-->
     <!-- ----------------------------------------------------------------------------------------->
-  
-  
-  
-  
+
+
+
+
   <div class="row">  <!--2nd row starts-->
     <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
       <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
@@ -132,113 +132,152 @@
       </ul>
     </div>
     <div class="col-12 col-sm-9 col-lg-10 p-1">
-  
-  
+
+
       <div id="accordionOuter">
-        <div class="card">
+        <div class="card  mt-2 mx-3">
           <div class="card-header" id="headingOne">
             <h5 class="mb-0">
               <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Register a University
+                JOIN REQUESTS
               </button>
             </h5>
           </div>
-          <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
             <div class="card-body">
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <!-- Cards within card -->
-              
+
               <div id="accordionInner">
-                <div class="card mb-1" *ngFor="let uni of Unis">
+                <div class="card mb-1" *ngFor="let uni of UniversitiesData">
                   <div class="card-header"
                     [attr.id]="'RegisterUniversityCard'">
-    
+
                     <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                      [attr.data-target]="'#RegisterUniversityCollapse'" aria-expanded="true"
-                      [attr.aria-controls]="'collapse'+uni.id">
-                      {{uni.uniTitle}} 
+                      [attr.data-target]="'#RegisterUniversityCollapse' + uni.Id" aria-expanded="true"
+                      [attr.aria-controls]="'collapse' + uni.Id">
+                      {{uni.UniTitle}}
                     </button>
-    
+
                   </div>
-    
-                  <div [id]="'RegisterUniversityCollapse'" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
+
+                  <div [id]="'RegisterUniversityCollapse' + uni.Id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
                     data-parent="#accordionInner">
                     <div class="card-body ">
-                      this is the body of this university'a card.
+
+                      <div class="row">
+                        <div class="col-11 m-auto"><!-- remove bg dark -->
+                          <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6>
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>HECID</th>
+                                <th>Faculty Count *</th>
+                                <th>Labs Count *</th>
+                                <th>Students Count *</th>
+                                <th>Access Status</th>
+                                <!-- UniTitle: String;
+                                AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'};
+                                AccessStatus: String;
+                                HECID: String;
+                                FacultyCount: number;
+                                LabsCount: number;
+                                StudentsCount: number; -->
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+
+
+                                <td>{{uni.HECID}}</td>
+                                <td>{{uni.FacultyCount}}</td>
+                                <td>{{uni.LabsCount}}</td>
+                                <td>{{uni.StudentsCount}}</td>
+                                <td>{{uni.AccessStatus}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="d-flex justify-content-end mr-3">
+                          <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
+                          <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
+                          </div>
+                        </div>
+                      </div>
+
+
                     </div>
                   </div>
                 </div>
               </div>
-  
+
               <!-- Cards within card -->
-  
-  
+
+
             </div>
           </div>
         </div>
-       
+
       </div>
     </div>
-  
-  
-  
+
+
+
   </div> <!--2nd row ends-->
-  
-  
-  
+
+
+
     <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
     <!-- -------------------------------------------------------------------------------------- -->
     <!-- AREA UNDER TOP ROW OF STUDENT STARTS in [container-fluid]-->
     <!-- ----------------------------------------------------------------------------------------->
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
   </div>
-  
+
   <!-- -------------------------------------------------------------------------------------- -->
   <!--MAIN AREA OF STUDENT ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
-  
-  
-  
-  
+
+
+
+
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- AREA UNDER TOP ROW OF STUDENT ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
-  
