@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
   // common attribs
   Username: String,
   Password: String
-}); //,{ versionKey: false } can be 2nd parameter passing.
+});
 
 
 module.exports = mongoose.model('User', userSchema);

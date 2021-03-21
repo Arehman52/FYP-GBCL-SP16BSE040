@@ -49,7 +49,7 @@ export class LoginService {
       )
       .subscribe((responseData) => {
         temp.push(responseData.user);
-        console.log("temp[0].Username [[[[", temp[0].Username, "]]]]], ");
+        console.log("INSIDE HTTP temp[0].Username [[[[", temp[0].Username, "]]]]], ");
 
         return;
 

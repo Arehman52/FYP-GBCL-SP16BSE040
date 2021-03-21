@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark darkBrownNav">
-  <a class="navbar-brand border border-warning ml-lg-auto ml-sm-3 mb-3 mt-2 px-3 rounded bg-success"
-    href="#"><b>GBCL</b></a>
+  <a class="navbar-brand border border-warning ml-lg-auto ml-sm-3 mb-3 mt-2 px-3 rounded bg-success" href="#"><b>GBCL</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,23 +7,26 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <form class="ml-auto" (submit)="loginUser(signInForm)" #signInForm="ngForm">
+    <form class="ml-auto" (change)="assignInputs(signInForm)" (submit)="loginUser(signInForm)"
+      #signInForm="ngForm">
 
 
       <div class="row ml-auto m-0">
         <div class="col-5  m-0">
 
 
-          <!-- Username -->
-          <input class="form-control mt-3 mt-sm-0" type="text" placeholder=" Enter Username" name="UsersEnteredUsername"
-            ngModel (keydown)="checkNDisplayErrors()">
-          <small class="displayBelow form-text errorText " *ngIf="this.Errors.invalidUsername.status == true">
-            <span>--{{this.Errors.invalidUsername.message}}</span>
-          </small>
-          <!-- <small class="form-text errorText" *ngIf="this.Errors.notAUser.status == true">
+      <!-- Username -->
+      <input class="form-control mt-3 mt-sm-0" type="text" placeholder=" Enter Username" name="UsersEnteredUsername"
+      ngModel
+      (keydown)="checkNDisplayErrors()">
+    <small class="displayBelow form-text errorText "
+    *ngIf="this.Errors.invalidUsername.status == true">
+      <span>--{{this.Errors.invalidUsername.message}}</span>
+    </small>
+    <!-- <small class="form-text errorText" *ngIf="this.Errors.notAUser.status == true">
       <span>--{{this.Errors.notAUser.message}}</span>
     </small> -->
-          <!-- (focusout)="checkIfUniqueUserName()" -->
+    <!-- (focusout)="checkIfUniqueUserName()" -->
 
 
 
@@ -33,12 +35,13 @@
 
 
 
-          <!-- Password -->
-          <input class="form-control mt-3 mt-sm-0" type="password" placeholder="Password" name="UsersEnteredPassword"
-            ngModel (keydown)="checkNDisplayErrors()">
-          <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
-            <span>--{{this.Errors.invalidPassword.message}}</span>
-          </small>
+    <!-- Password -->
+    <input class="form-control mt-3 mt-sm-0" type="password" placeholder="Password" name="UsersEnteredPassword"
+    ngModel
+    (keydown)="checkNDisplayErrors()">
+  <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+    <span>--{{this.Errors.invalidPassword.message}}</span>
+  </small>
 
 
 
@@ -47,8 +50,8 @@
         </div>
         <div class="col-1 mr-2">
 
-          <!-- Login Button -->
-          <button class="btn btn-outline-success ml-auto maWidth-100 my-2 my-sm-0 " type="submit">Login</button>
+  <!-- Login Button -->
+  <button class="btn btn-outline-success ml-auto maWidth-100 my-2 my-sm-0 " type="submit">Login</button>
 
         </div>
       </div>
