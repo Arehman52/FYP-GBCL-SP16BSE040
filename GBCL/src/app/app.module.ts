@@ -101,8 +101,8 @@ import { UnimanageJoinrequestsComponent } from './university/unimanage-joinreque
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

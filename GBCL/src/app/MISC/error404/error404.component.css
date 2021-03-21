@@ -1,0 +1,13 @@
+.body{
+  font: 110%/1.5 system-ui, sans-serif;
+  background: #131417;
+  color: white;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+* {
+  box-sizing: border-box;
+}
