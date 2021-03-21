@@ -1,14 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 body{
-    font-family: "Roboto", sans-serif;
+  font: 110%/1.5 system-ui, sans-serif;
+
+    /* font-family: "Roboto", sans-serif; */
 
     background: #ced4da;
      /* fallback for old browsers */
     background-image: -webkit-linear-gradient(to right, #858e91, #000064);  /* Chrome 10-25, Safari 5.1-6 */
-    background-image: linear-gradient(to right, #858e91, #000064); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-image: linear-gradient(to right, #18191f, #05052c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 
     /* background-color: #f8961e; */
 }
 /* .bg-gradient-index{background-image: linear-gradient(to left bottom, #164080, #004d86, #005888, #006388, #0e6d87); }*/
+
 
