@@ -28,17 +28,17 @@ body{
 
 
 /* GBCL LOGO CSS STARTS */
-.logoText{
-  font-size: 20px;
-  color: #333F4F;
-  font-weight: bolder;
-  margin: 2% 0%;
-}
 #logoImg{
   background: transparent;
   width: 36px;
   display: block;
   margin: auto;
+}
+.logoText{
+  font-size: 20px;
+  color: #333F4F;
+  font-weight: bolder;
+  margin: 2% 0%;
 }
 .bgYellowOnHover :hover{
   background:  #FFC107;
