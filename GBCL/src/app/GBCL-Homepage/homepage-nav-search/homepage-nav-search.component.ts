@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 
-import { HomepageService } from '../homepage.service';
+// import { HomepageService } from '../homepage.service';
 import { LoginService } from '../login.service';
 
 @Component({
@@ -13,15 +13,53 @@ import { LoginService } from '../login.service';
 export class HomepageNavSearchComponent implements OnInit {
   constructor(public loginService: LoginService) { }
 
+
+
   ngOnInit(): void {
-    // this.FetchedTotalUsersForSignin = this.loginService.RecieveUsersFromDB();
-    console.log(this.FetchedTotalUsersForSignin);
+    this.setAllErrorsToFalse();
   }
 
-  //This array has a list of ALL users currently in MongoDB.
-  private FetchedTotalUsersForSignin: Usersmodel[] = [];
 
-  //  FetchedUsers: Usersmodel[] = null ;
+
+
+
+
+
+
+
+
+
+  onKeyUpUsernameInput(UsernameInput: String){
+    if(UsernameInput.length < 5){
+      this.Errors.invalidUsername.status=true;
+    }else{
+      this.Errors.invalidUsername.status=false;
+    }
+  }
+
+  onKeyUpPasswordInput(PasswordInput: String){
+    if(PasswordInput.length < 8){
+      this.Errors.invalidPassword.status=true;
+    }else{
+      this.Errors.invalidPassword.status=false;
+    }
+  }
+
+
+  //////=========================================
+  ////CORRECT CODE ABOVE THIS POINT
+  //////=========================================
+
+
+
+
+
+
+
+
+
+
+
 
   user: Usersmodel = {
     FirstNameOfUser: null,
@@ -36,7 +74,7 @@ export class HomepageNavSearchComponent implements OnInit {
     Username: '',
   };
 
-  usersInfoListFromDB: any = {}; //downloaded list of all users
+  // usersInfoListFromDB: any = {}; //downloaded list of all users
 
   Errors = {
     //below errors are for fields in common.
@@ -84,7 +122,7 @@ export class HomepageNavSearchComponent implements OnInit {
     };
 
 
-    if (!formIsValid(form)) {
+    if (!this.formIsValid(form)) {
       alert("Sign in fields are invalid!");
     }
     else {
@@ -197,7 +235,7 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
   //each time focusouts of both inputs, it checks for the errors
-  checkNDisplayErrors(): Boolean {
+  checkErrors(): Boolean {
     this.user.Username.length < 3
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
@@ -219,21 +257,35 @@ export class HomepageNavSearchComponent implements OnInit {
     else return false;
   }
 
-  notAUser(): Boolean {
-    var isAUser: Boolean = false;
-    if (this.usersInfoListFromDB != null) {
-      for (var i = 0; i < Object.keys(this.usersInfoListFromDB).length; i++) {
-        if (this.user.Username == this.usersInfoListFromDB[i].Username) {
-          isAUser = true;
-          return isAUser;
-        }
-      }
-      return isAUser; //returned isUser = false, because no match was found in the list.
-    } else return false;
+  notAUser(): Boolean {  //keeper
+    // var isAUser: Boolean = false;
+    // if (this.usersInfoListFromDB != null) {
+    //   for (var i = 0; i < Object.keys(this.usersInfoListFromDB).length; i++) {
+    //     if (this.user.Username == this.usersInfoListFromDB[i].Username) {
+    //       isAUser = true;
+    //       return isAUser;
+    //     }
+    //   }
+    //   return isAUser; //returned isUser = false, because no match was found in the list.
+    // } else return false;
+    return false;
   }
-}
-function formIsValid(form: NgForm): Boolean {
-  //lets suppose there are no errors and signin fields have valid input.
-  return true;
-}
+
+
+  setAllErrorsToFalse(){  //keeper
+    this.Errors.incorrectPassword.status = false;
+    this.Errors.invalidPassword.status = false;
+    this.Errors.invalidUsername.status = false;
+    this.Errors.notAUser.status = false;
+  }
+
+
+  formIsValid(form: NgForm): Boolean {
+    //lets suppose there are no errors and signin fields have valid input.
+    return true;
+  }
+
+
+
+}//end of .ts class
 

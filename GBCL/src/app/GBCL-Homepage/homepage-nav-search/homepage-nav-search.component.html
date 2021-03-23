@@ -1,136 +1,124 @@
+<div class="row p-0 m-0">
+  <div class="col-12 maTopRow p-0">
+    <div class="row text-center m-0 p-0">
 
+      <!-- ---------------- -->
+      <!-- GBCL LOGO COLUMN -->
 
-
-  <div class="row p-0 m-0">
-    <div class="col-12 maTopRow p-0">
-
-
-
-
-
-      <div class="row text-center m-0 p-0">
-
-        <!-- ---------------- -->
-        <!-- GBCL LOGO COLUMN -->
-
-        <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover mr-sm-5">
-          <a class="btn  border-warning w-100 logoText mx-3 my-2" href="#" title="Gamification Based Coding Labs"><img
-              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
-        </div>
-
-        <!-- GBCL LOGO COLUMN-END -->
-        <!-- -------------------- -->
-
-
-
-
-
-
-        <!-- ----------- -->
-        <!-- Stats column -->
-        <div class="col-12 col-sm-9 col-md-9 ml-auto">
-          <nav class="navbar navbar-expand-lg bg-warnding navbar-dark">
-
-  <button class="navbar-toggler text-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-  <form class="ml-auto"  (submit)="loginUser(signInForm)"
-    #signInForm="ngForm">
-
-
-    <div class="row ml-auto m-0">
-      <div class="col-5  mt-1">
-
-
-    <!-- Username -->
-    <input class="form-control mt-3 mt-sm-0" type="text" placeholder=" Enter Username" name="UsersEnteredUsername"
-    ngModel
-    (keydown)="checkNDisplayErrors()">
-  <small class="d-block errorText"
-  *ngIf="this.Errors.invalidUsername.status == true">
-    <span>--{{this.Errors.invalidUsername.message}}</span>
-  </small>
-  <small class="d-block errorText">
-    <span>--{{this.Errors.notAUser.message}}</span>
-  </small>
-  <!-- (focusout)="checkIfUniqueUserName()" -->
-
-
-
+      <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover mr-sm-5">
+        <a class="btn  border-warning w-100 logoText mx-3 my-2" href="#" title="Gamification Based Coding Labs"><img
+            src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
       </div>
-      <div class="col-5  mt-1">
 
-
-
-  <!-- Password -->
-  <input class="form-control mt-3 mt-sm-0" type="password" placeholder="Password" name="UsersEnteredPassword"
-  ngModel
-  (keydown)="checkNDisplayErrors()">
-<small class="form-text d-block errorText" *ngIf="this.Errors.invalidPassword.status == true">
-  <span>--{{this.Errors.invalidPassword.message}}</span>
-</small>
-<small class="form-text d-block errorText" >
-  <span>--{{this.Errors.incorrectPassword.message}}</span>
-</small>
+      <!-- GBCL LOGO COLUMN-END -->
+      <!-- -------------------- -->
 
 
 
 
 
+
+      <!-- ----------- -->
+      <!-- Stats column -->
+      <div class="col-12 col-sm-9 col-md-9 ml-auto">
+        <nav class="navbar navbar-expand-lg bg-warnding navbar-dark">
+
+          <button class="navbar-toggler text-light" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <form class="ml-auto" (submit)="loginUser(signInForm)" #signInForm="ngForm">
+
+
+              <div class="row ml-auto m-0">
+                <div class="col-5  mt-1">
+
+
+                  <!-- Username -->
+                  <input class="form-control mt-3 mt-sm-0" type="text" placeholder=" Enter Username"
+                    name="UsersEnteredUsername" ngModel #UsernameInput
+                    (keyup)="onKeyUpUsernameInput(UsernameInput.value)">
+                  <small class="d-block errorText" *ngIf="this.Errors.invalidUsername.status == true">
+                    <span>--{{this.Errors.invalidUsername.message}}</span>
+                  </small>
+                  <small class="d-block errorText" *ngIf="this.Errors.notAUser.status == true">
+                    <span>--{{this.Errors.notAUser.message}}</span>
+                  </small>
+                </div>
+                <div class="col-5  mt-1">
+
+
+
+                  <!-- Password -->
+                  <input class="form-control mt-3 mt-sm-0" type="password" placeholder="Password"
+                    name="UsersEnteredPassword" ngModel #PasswordInput
+                    (keyup)="onKeyUpPasswordInput(PasswordInput.value)">
+                  <small class="form-text d-block errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                    <span>--{{this.Errors.invalidPassword.message}}</span>
+                  </small>
+                  <small class="form-text d-block errorText" *ngIf="this.Errors.incorrectPassword.status == true">
+                    <span>--{{this.Errors.incorrectPassword.message}}</span>
+                  </small>
+
+
+
+
+
+                </div>
+                <div class="col-1 mt-1">
+
+                  <!-- Login Button -->
+                  <button class="btn btn-outline-success ml-auto maWidth-100 my-2 my-sm-0 " type="submit">Login</button>
+
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </nav>
       </div>
-      <div class="col-1 mr-3 mt-1">
+      <!-- STATS COL END -->
+      <!-- ------------- -->
 
-<!-- Login Button -->
-<button class="btn btn-outline-success ml-auto maWidth-100 my-2 my-sm-0 " type="submit">Login</button>
 
-      </div>
+
+
+
     </div>
 
-  </form>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+  <hr class="bg-warning p-0 m-0">
 </div>
-</nav>
-        </div>
-        <!-- STATS COL END -->
-        <!-- ------------- -->
-
-
-
-
-
-      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-<hr class="bg-warning p-0 m-0">
-</div> <!--1st row ends-->
+<!--1st row ends-->
