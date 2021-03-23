@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body{
+  margin: 0;
   font: 110%/1.5 system-ui, sans-serif;
 
   /* font-family: "Roboto", sans-serif; */
