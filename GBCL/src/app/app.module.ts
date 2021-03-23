@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -106,6 +107,7 @@ import { TestConceptsComponent } from './misc/concepts/test-concepts/test-concep
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     FormsModule,
     RouterModule,
     HttpClientModule

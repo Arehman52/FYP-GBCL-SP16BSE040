@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 
-// import { HomepageService } from '../homepage.service';
+import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 import { LoginService } from '../login.service';
+
+
+
 
 @Component({
   selector: 'app-homepage-nav-search',
@@ -12,7 +14,6 @@ import { LoginService } from '../login.service';
 })
 export class HomepageNavSearchComponent implements OnInit {
   constructor(public loginService: LoginService) { }
-
 
 
   ngOnInit(): void {
@@ -35,6 +36,7 @@ export class HomepageNavSearchComponent implements OnInit {
     }else{
       this.Errors.invalidUsername.status=false;
     }
+    this.Errors.notAUser.status=false;
   }
 
   onKeyUpPasswordInput(PasswordInput: String){
@@ -94,25 +96,44 @@ export class HomepageNavSearchComponent implements OnInit {
       alert("Sign in fields are invalid!");
     }
     else {
-      // var TypeOfUser: string | String;
-      // setTimeout( () => {TypeOfUser = this.loginService.getUsertypeIfUserIsRegistered(userToBeSearched)} , 3000);
-      var TheMatchedUser: Usersmodel[] = [];
+
+      var TheMatchedUser: Usersmodel = {
+        FirstNameOfUser: null,
+        HECIDofUniversity: null,
+        LastNameOfUser: null,
+        Password: form.value.UsersEnteredPassword,
+        RegistrationNumberOfUser: null,
+        TitleOfUniversity: null,
+        UniversityNameOfUser: null,
+        UserType: null,
+        Username: form.value.UsersEnteredUsername,
+        _id: null,
+      };
+
 
       setTimeout(() => {
         TheMatchedUser = this.loginService.FecthTheMatchingUserForLogin(
           userToBeSearched);
+          // console.log("TheMatchedUserTheMatchedUserTheMatchedUser in", TheMatchedUser[0].Username);
 
-      }, 4000);
+          console.log("ISTHIS??",TheMatchedUser);
+
+
+      }, 4500);
+
 
       setTimeout(() => {
-        console.log("TheMatchedUserTheMatchedUserTheMatchedUser", TheMatchedUser);
 
-      if (TheMatchedUser[0].UserType == 'student')
-      window.location.href = '/STUDENT';
-    if (TheMatchedUser[0].UserType == 'teacher')
-      window.location.href = '/TEACHER';
-    if (TheMatchedUser[0].UserType == 'university')
-      window.location.href = '/UNIVERSITY';
+        if(TheMatchedUser.UserType == 'null' ){
+          this.Errors.notAUser.status = true;
+        }else{
+           if (TheMatchedUser.UserType == 'student')
+          window.location.href = '/STUDENT';
+           if (TheMatchedUser.UserType == 'teacher')
+          window.location.href = '/TEACHER';
+           if (TheMatchedUser.UserType == 'university')
+          window.location.href = '/UNIVERSITY';
+        }
       }, 5000);
 
     }

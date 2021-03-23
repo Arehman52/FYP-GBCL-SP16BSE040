@@ -28,7 +28,7 @@ export class LoginService {
 
 
 
-  FecthTheMatchingUserForLogin(userToBeSearched: Usersmodel): Usersmodel[] {
+  FecthTheMatchingUserForLogin(userToBeSearched: Usersmodel): Usersmodel {
     var userFetchednMtched: Usersmodel = {
       FirstNameOfUser : '',
       HECIDofUniversity : '',
@@ -37,7 +37,7 @@ export class LoginService {
       RegistrationNumberOfUser: '',
       TitleOfUniversity: '',
       UniversityNameOfUser: '',
-      UserType: '',
+      UserType: 'null',
       Username: '',
       _id: ''
     };
@@ -48,8 +48,9 @@ export class LoginService {
         'http://localhost:3000/api/FetchTHISUser', userToBeSearched
       )
       .subscribe((responseData) => {
-        temp.push(responseData.user);
-        console.log("INSIDE HTTP temp[0].Username [[[[", temp[0].Username, "]]]]], ");
+        // temp.push(responseData.user);
+        userFetchednMtched.UserType = responseData.user.UserType;
+        // console.log("INSIDE HTTP temp[0].Username [[[[", temp[0].Username, "]]]]], ");
 
         return;
 
@@ -67,10 +68,10 @@ export class LoginService {
     // userFetchednMtched.Username = temp[0].Username;
     // userFetchednMtched._id = temp[0]._id;
 
-    userFetchednMtched = temp[0];
-    console.log("temptemptemptemp==", temp);
-    console.log("userFetchednMtcheduserFetchednMtched==", userFetchednMtched);
-    return temp;
+    // userFetchednMtched = temp[0];
+    console.log("temptemptemptemp==", userFetchednMtched);
+    console.log("userFetchednMtcheduserFetchednMcdefsef$$$$$$tched==", userFetchednMtched);
+    return userFetchednMtched;
   }
 
 
