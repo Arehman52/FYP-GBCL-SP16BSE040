@@ -45,37 +45,6 @@ export class HomepageNavSearchComponent implements OnInit {
     }
   }
 
-
-  //////=========================================
-  ////CORRECT CODE ABOVE THIS POINT
-  //////=========================================
-
-
-
-
-
-
-
-
-
-
-
-
-  user: Usersmodel = {
-    FirstNameOfUser: null,
-    HECIDofUniversity: null,
-    LastNameOfUser: null,
-    Password: '',
-    RegistrationNumberOfUser: null,
-    TitleOfUniversity: null,
-    UniversityNameOfUser: null,
-    UserType: null,
-    _id: null,
-    Username: '',
-  };
-
-  // usersInfoListFromDB: any = {}; //downloaded list of all users
-
   Errors = {
     //below errors are for fields in common.
     invalidUsername: {
@@ -96,23 +65,22 @@ export class HomepageNavSearchComponent implements OnInit {
     },
   };
 
-  //assigns value of inputs when they change from earlier after focus outs but here The Event being handled is onChange()
-  assignInputs(form: NgForm) {
-    //both inputs to local variables
 
-    this.user.Username = form.value.UsersEnteredUsername;
-    this.user.Password = form.value.UsersEnteredPassword;
-
-    // console.log('AFTER ASSIGNING:');
-    // console.log(this.user);
+  setAllErrorsToFalse(){  //keeper
+    this.Errors.incorrectPassword.status = false;
+    this.Errors.invalidPassword.status = false;
+    this.Errors.invalidUsername.status = false;
+    this.Errors.notAUser.status = false;
   }
+
+
 
   loginUser(form: NgForm) {
     var userToBeSearched: Usersmodel = {
       FirstNameOfUser: null,
       HECIDofUniversity: null,
       LastNameOfUser: null,
-      Password: null,
+      Password: form.value.UsersEnteredPassword,
       RegistrationNumberOfUser: null,
       TitleOfUniversity: null,
       UniversityNameOfUser: null,
@@ -122,7 +90,7 @@ export class HomepageNavSearchComponent implements OnInit {
     };
 
 
-    if (!this.formIsValid(form)) {
+    if (this.checkErrors(userToBeSearched)) {
       alert("Sign in fields are invalid!");
     }
     else {
@@ -148,6 +116,94 @@ export class HomepageNavSearchComponent implements OnInit {
       }, 5000);
 
     }
+
+  }
+
+
+  //each time focusouts of both inputs, it checks for the errors
+  checkErrors(user: Usersmodel): Boolean {
+    user.Username.length < 5
+      ? (this.Errors.invalidUsername.status = true)
+      : (this.Errors.invalidUsername.status = false);
+    user.Password.length < 8
+      ? (this.Errors.invalidPassword.status = true)
+      : (this.Errors.invalidPassword.status = false);
+    // this.notAUser()
+    //   ? (this.Errors.notAUser.status = true)
+    //   : (this.Errors.notAUser.status = false);
+    // console.log('password from db: ' + this.usersInfoListFromDB.Password);
+    // console.log('user PRINTED INSIDE checkNDisplayErrors(): \n' + this.user);
+
+
+    console.log("this.Errors.invalidPassword.status ||this.Errors.invalidUsername.status = ",
+    (this.Errors.invalidPassword.status || this.Errors.invalidUsername.status));
+    if (
+      this.Errors.invalidPassword.status ||
+      this.Errors.invalidUsername.status
+      // || this.Errors.notAUser
+      // || this.Errors.incorrectPassword
+    )
+      return true;
+    else return false;
+  }
+
+  notAUser(): Boolean {  //keeper
+    // var isAUser: Boolean = false;
+    // if (this.usersInfoListFromDB != null) {
+    //   for (var i = 0; i < Object.keys(this.usersInfoListFromDB).length; i++) {
+    //     if (this.user.Username == this.usersInfoListFromDB[i].Username) {
+    //       isAUser = true;
+    //       return isAUser;
+    //     }
+    //   }
+    //   return isAUser; //returned isUser = false, because no match was found in the list.
+    // } else return false;
+    return false;
+  }
+
+
+
+  //////=========================================
+  ////CORRECT CODE ABOVE THIS POINT
+  //////=========================================
+
+
+
+
+
+
+
+
+
+
+
+
+  // usder: Usersmodel = {
+  //   FirstNameOfUser: null,
+  //   HECIDofUniversity: null,
+  //   LastNameOfUser: null,
+  //   Password: '',
+  //   RegistrationNumberOfUser: null,
+  //   TitleOfUniversity: null,
+  //   UniversityNameOfUser: null,
+  //   UserType: null,
+  //   _id: null,
+  //   Username: '',
+  // };
+
+  // usersInfoListFromDB: any = {}; //downloaded list of all users
+
+  //assigns value of inputs when they change from earlier after focus outs but here The Event being handled is onChange()
+  // assignInputs(form: NgForm) {
+  //   //both inputs to local variables
+
+  //   this.user.Username = form.value.UsersEnteredUsername;
+  //   this.user.Password = form.value.UsersEnteredPassword;
+
+  //   // console.log('AFTER ASSIGNING:');
+  //   // console.log(this.user);
+  // }
+
 
 
 
@@ -232,60 +288,14 @@ export class HomepageNavSearchComponent implements OnInit {
         return;
       }
     }*/
-  }
-
-  //each time focusouts of both inputs, it checks for the errors
-  checkErrors(): Boolean {
-    this.user.Username.length < 3
-      ? (this.Errors.invalidUsername.status = true)
-      : (this.Errors.invalidUsername.status = false);
-    this.user.Password.length < 8
-      ? (this.Errors.invalidPassword.status = true)
-      : (this.Errors.invalidPassword.status = false);
-    // this.notAUser()
-    //   ? (this.Errors.notAUser.status = true)
-    //   : (this.Errors.notAUser.status = false);
-    // console.log('password from db: ' + this.usersInfoListFromDB.Password);
-    // console.log('user PRINTED INSIDE checkNDisplayErrors(): \n' + this.user);
-
-    if (
-      this.Errors.invalidPassword.status ||
-      this.Errors.invalidUsername.status
-      // || this.Errors.notAUser
-    )
-      return true;
-    else return false;
-  }
-
-  notAUser(): Boolean {  //keeper
-    // var isAUser: Boolean = false;
-    // if (this.usersInfoListFromDB != null) {
-    //   for (var i = 0; i < Object.keys(this.usersInfoListFromDB).length; i++) {
-    //     if (this.user.Username == this.usersInfoListFromDB[i].Username) {
-    //       isAUser = true;
-    //       return isAUser;
-    //     }
-    //   }
-    //   return isAUser; //returned isUser = false, because no match was found in the list.
-    // } else return false;
-    return false;
-  }
-
-
-  setAllErrorsToFalse(){  //keeper
-    this.Errors.incorrectPassword.status = false;
-    this.Errors.invalidPassword.status = false;
-    this.Errors.invalidUsername.status = false;
-    this.Errors.notAUser.status = false;
-  }
-
-
-  formIsValid(form: NgForm): Boolean {
-    //lets suppose there are no errors and signin fields have valid input.
-    return true;
-  }
 
 
 
-}//end of .ts class
+
+  }//end of .ts class
+
+
+
+
+
 
