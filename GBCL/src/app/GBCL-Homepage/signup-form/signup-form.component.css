@@ -2,6 +2,16 @@
   margin-bottom: 100px;
 }
 
+*{
+  box-sizing: border-box;
+}
+.ars{
+  color: #CBF3F0;
+  margin: 1% 3.5%;
+  font-size: 26px;
+  font-weight: bolder;
+}
+
 .errorText {
   padding: 3px 13px 3px 5px;
   border: red;
