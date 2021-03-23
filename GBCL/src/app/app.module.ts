@@ -50,6 +50,8 @@ import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-chall
 import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderboard/view-leaderboard.component';
 import { RouterModule } from '@angular/router';
 import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
+import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcodeforformvalidation/githubcodeforformvalidation.component';
+import { TestConceptsComponent } from './misc/concepts/test-concepts/test-concepts.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
@@ -93,6 +95,10 @@ import { UnimanageJoinrequestsComponent } from './university/unimanage-joinreque
     ViewLeaderboardComponent,
 
     UnimanageJoinrequestsComponent,
+
+    GithubcodeforformvalidationComponent,
+
+    TestConceptsComponent,
 
     // AdminDashboardComponent
     // ManageeLabtasksComponent

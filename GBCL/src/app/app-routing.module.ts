@@ -23,6 +23,7 @@ import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-chall
 import { ManageUniversitiesComponent } from './admin/manage-universities/manage-universities.component';
 import { JoinRequestsComponent } from './admin/join-requests/join-requests.component';
 import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
+import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcodeforformvalidation/githubcodeforformvalidation.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 // import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
 // import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
@@ -54,10 +55,12 @@ const routes: Routes = [
   // { path: 'TEACHER/Lab/labtasksManagement', component: ManageeLabtasksComponent},
   { path: 'TEACHER/Settings', component: TeachersettingsComponent},
   // University routes
-    { path: 'UNIVERSITY', component: UNIVERSITYComponent},
-    { path: 'UNIVERSITY/ManageJoinRequests', component: UnimanageJoinrequestsComponent},
+  { path: 'UNIVERSITY', component: UNIVERSITYComponent},
+  { path: 'UNIVERSITY/ManageJoinRequests', component: UnimanageJoinrequestsComponent},
   // Misc routes
-    { path: '**', component: Error404Component}
+  { path: 'Testconcepts', component: GithubcodeforformvalidationComponent},
+  { path: '**', component: Error404Component}
+  // { path: 'TestConcept', component: GithubcodeforformvalidationComponent}
 ];
 
 @NgModule({
