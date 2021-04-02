@@ -21,29 +21,34 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
 
+  // showSpinner:boolean = true;
+  // spinnerbtn:HTMLButtonElement
 
 
 
+  // onClickToggleSpinner(){
+  //   this.showSpinner = !this.showSpinner;
+  // }
+
+  // setSpinnerVisible(opt:boolean){
+  //   this.showSpinner = opt;
+  // }
 
 
-
-
-
-
-  onKeyUpUsernameInput(UsernameInput: String){
-    if(UsernameInput.length < 5){
-      this.Errors.invalidUsername.status=true;
-    }else{
-      this.Errors.invalidUsername.status=false;
+  onKeyUpUsernameInput(UsernameInput: String) {
+    if (UsernameInput.length < 5) {
+      this.Errors.invalidUsername.status = true;
+    } else {
+      this.Errors.invalidUsername.status = false;
     }
-    this.Errors.notAUser.status=false;
+    this.Errors.notAUser.status = false;
   }
 
-  onKeyUpPasswordInput(PasswordInput: String){
-    if(PasswordInput.length < 8){
-      this.Errors.invalidPassword.status=true;
-    }else{
-      this.Errors.invalidPassword.status=false;
+  onKeyUpPasswordInput(PasswordInput: String) {
+    if (PasswordInput.length < 8) {
+      this.Errors.invalidPassword.status = true;
+    } else {
+      this.Errors.invalidPassword.status = false;
     }
   }
 
@@ -68,7 +73,7 @@ export class HomepageNavSearchComponent implements OnInit {
   };
 
 
-  setAllErrorsToFalse(){  //keeper
+  setAllErrorsToFalse() {  //keeper
     this.Errors.incorrectPassword.status = false;
     this.Errors.invalidPassword.status = false;
     this.Errors.invalidUsername.status = false;
@@ -78,6 +83,12 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
   loginUser(form: NgForm) {
+    // this.showSpinner = true;
+    // this.setSpinnerVisible(true);
+
+    // btnSpinner.click;
+    // console.dir();
+
     var userToBeSearched: Usersmodel = {
       FirstNameOfUser: null,
       HECIDofUniversity: null,
@@ -114,29 +125,34 @@ export class HomepageNavSearchComponent implements OnInit {
       setTimeout(() => {
         TheMatchedUser = this.loginService.FecthTheMatchingUserForLogin(
           userToBeSearched);
-          // console.log("TheMatchedUserTheMatchedUserTheMatchedUser in", TheMatchedUser[0].Username);
+        // console.log("TheMatchedUserTheMatchedUserTheMatchedUser in", TheMatchedUser[0].Username);
 
-          console.log("ISTHIS??",TheMatchedUser);
+        console.log("ISTHIS??", TheMatchedUser);
 
+        // this.showSpinner = true;
+        // this.setSpinnerVisible(false);
 
       }, 4500);
 
 
       setTimeout(() => {
 
-        if(TheMatchedUser.UserType == 'null' ){
+        if (TheMatchedUser.UserType == 'null') {
           this.Errors.notAUser.status = true;
-        }else{
-           if (TheMatchedUser.UserType == 'student')
-          window.location.href = '/STUDENT';
-           if (TheMatchedUser.UserType == 'teacher')
-          window.location.href = '/TEACHER';
-           if (TheMatchedUser.UserType == 'university')
-          window.location.href = '/UNIVERSITY';
+        } else {
+          if (TheMatchedUser.UserType == 'student')
+            window.location.href = '/STUDENT';
+          if (TheMatchedUser.UserType == 'teacher')
+            window.location.href = '/TEACHER';
+          if (TheMatchedUser.UserType == 'university')
+            window.location.href = '/UNIVERSITY';
         }
       }, 5000);
 
     }
+
+    // this.showSpinner = false;
+    // this.setSpinnerVisible(false);
 
   }
 
@@ -157,7 +173,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
     console.log("this.Errors.invalidPassword.status ||this.Errors.invalidUsername.status = ",
-    (this.Errors.invalidPassword.status || this.Errors.invalidUsername.status));
+      (this.Errors.invalidPassword.status || this.Errors.invalidUsername.status));
     if (
       this.Errors.invalidPassword.status ||
       this.Errors.invalidUsername.status
@@ -234,86 +250,86 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
 
-    /**
-    if (this.checkNDisplayErrors()) {
-      alert('Errors in the Sigin process.\nThe error-full FORM:');
-      console.log(form);
+  /**
+  if (this.checkNDisplayErrors()) {
+    alert('Errors in the Sigin process.\nThe error-full FORM:');
+    console.log(form);
+    return;
+  } else
+  {
+    //if signin fields have valid inputs than this block will execute.
+    //this block running means both inputs are entered valid.
+
+    //if username entered is Admin, then only following 4 lines will execute.
+    // if (form.value.UsersEnteredUsername == 'Admin') {
+      //   this.loginService.loginAdmin(form.value.UsersEnteredPassword);
+    //   return;
+    // }
+
+    //following code will be executed if username is not entered as Admin.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //following is returning null
+    var TheMatchedUser: Usersmodel = this.loginService.FecthTheMatchingUserForLogin(
+      userToBeSearched
+    );
+
+    console.log("TheMatchedUser :>>>",TheMatchedUser);
+    //if fetched user == null then show error and return
+    //else user will be either uni, std or tchr and proceed to their login
+    if (TheMatchedUser == null) {
+      alert('This username is not registered with GBCL --');
       return;
-    } else
-    {
-      //if signin fields have valid inputs than this block will execute.
-      //this block running means both inputs are entered valid.
+    } else {
+      var EnteredUN: string = form.value.UsersEnteredUsername;
+      EnteredUN.toLowerCase();
+      var fetchedUN: string = TheMatchedUser.Username;
+      fetchedUN.toLowerCase();
+      // for (let i = 0; i < Object.keys(this.FetchedTotalUsersForSignin).length; i++) {
+      // fetchedUN.toLowerCase();
+      if (fetchedUN == EnteredUN) {
+        //checked if Username matched?
 
-      //if username entered is Admin, then only following 4 lines will execute.
-      // if (form.value.UsersEnteredUsername == 'Admin') {
-        //   this.loginService.loginAdmin(form.value.UsersEnteredPassword);
-      //   return;
-      // }
+         //checks if Password matches?
+        if (TheMatchedUser.Password == form.value.UsersEnteredPassword)
+        {
+          //if both matched, then according to usertype, visit their location.
+          if (TheMatchedUser.UserType == 'student')
+            window.location.href = '/STUDENT';
+          if (TheMatchedUser.UserType == 'teacher')
+            window.location.href = '/TEACHER';
+          if (TheMatchedUser.UserType == 'university')
+            window.location.href = '/UNIVERSITY';
 
-      //following code will be executed if username is not entered as Admin.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      //following is returning null
-      var TheMatchedUser: Usersmodel = this.loginService.FecthTheMatchingUserForLogin(
-        userToBeSearched
-      );
-
-      console.log("TheMatchedUser :>>>",TheMatchedUser);
-      //if fetched user == null then show error and return
-      //else user will be either uni, std or tchr and proceed to their login
-      if (TheMatchedUser == null) {
-        alert('This username is not registered with GBCL --');
-        return;
-      } else {
-        var EnteredUN: string = form.value.UsersEnteredUsername;
-        EnteredUN.toLowerCase();
-        var fetchedUN: string = TheMatchedUser.Username;
-        fetchedUN.toLowerCase();
-        // for (let i = 0; i < Object.keys(this.FetchedTotalUsersForSignin).length; i++) {
-        // fetchedUN.toLowerCase();
-        if (fetchedUN == EnteredUN) {
-          //checked if Username matched?
-
-           //checks if Password matches?
-          if (TheMatchedUser.Password == form.value.UsersEnteredPassword)
-          {
-            //if both matched, then according to usertype, visit their location.
-            if (TheMatchedUser.UserType == 'student')
-              window.location.href = '/STUDENT';
-            if (TheMatchedUser.UserType == 'teacher')
-              window.location.href = '/TEACHER';
-            if (TheMatchedUser.UserType == 'university')
-              window.location.href = '/UNIVERSITY';
-
-            alert('THIS MESSAGE SHALL NEVEr BE DISPLAYED');
-            // return;
-          } else {
-            alert('Enter correct Password');
-            return;
-          }
+          alert('THIS MESSAGE SHALL NEVEr BE DISPLAYED');
+          // return;
+        } else {
+          alert('Enter correct Password');
+          return;
         }
-        // }
-        alert('This Username is not registered in GBCL 22222');
-        return;
       }
-    }*/
+      // }
+      alert('This Username is not registered in GBCL 22222');
+      return;
+    }
+  }*/
 
 
 
 
-  }//end of .ts class
+}//end of .ts class
 
 
 
