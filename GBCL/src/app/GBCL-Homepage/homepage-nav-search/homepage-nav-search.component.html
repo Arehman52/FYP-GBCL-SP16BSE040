@@ -21,7 +21,7 @@
       <!-- ----------- -->
       <!-- Stats column -->
       <div class="col-12 col-sm-9 col-md-9 ml-auto">
-        <nav class="navbar navbar-expand-md bg-warnding navbar-dark">
+        <nav class="navbar navbar-expand-md navbar-dark">
 
           <button class="navbar-toggler text-light" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -96,12 +96,25 @@
 
 
 
-<!-- Button trigger modal -->
+
+
+
+
+  <div *ngIf="showSpinner">
+
+    <div id="opaque" class="d-block"></div>
+    <div id="spinner" class="loader"></div>
+  </div>
+
+<!--
+
+
+// Button trigger modal
 <button  #spinnerBtn ngModel type="button" class=" btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
 </button>
 
-<!-- Modal -->
+// Modal
 <div class="modal fade"   id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog spinnerPlacing" role="document">
 
@@ -112,7 +125,7 @@
 
 
   </div>
-</div>
+</div> -->
 
 
 

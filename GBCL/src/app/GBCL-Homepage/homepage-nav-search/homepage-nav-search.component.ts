@@ -21,7 +21,7 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
 
-  // showSpinner:boolean = true;
+  showSpinner:boolean = false;
   // spinnerbtn:HTMLButtonElement
 
 
@@ -122,6 +122,7 @@ export class HomepageNavSearchComponent implements OnInit {
       };
 
 
+      this.showSpinner = true;
       setTimeout(() => {
         TheMatchedUser = this.loginService.FecthTheMatchingUserForLogin(
           userToBeSearched);
@@ -129,7 +130,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
         console.log("ISTHIS??", TheMatchedUser);
 
-        // this.showSpinner = true;
+        this.showSpinner = false;
         // this.setSpinnerVisible(false);
 
       }, 4500);
