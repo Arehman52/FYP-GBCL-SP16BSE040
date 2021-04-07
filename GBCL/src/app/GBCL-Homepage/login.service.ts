@@ -51,6 +51,7 @@ export class LoginService {
         // temp.push(responseData.user);
         if(responseData.user != null){
           userFetchednMtched.UserType = responseData.user.UserType;
+          userFetchednMtched.Password = responseData.user.Password;
           // temp = {...responseData.user};
         //  temp = Object.assign({}, responseData.user);
         // temp = JSON.parse(JSON.stringify(responseData.user));

@@ -1,7 +1,0 @@
-Functionalit: >>> [[[   loginUser()  ]]]
-
-
-in HTML===========================
-
-
-in Typescript===========================

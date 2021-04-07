@@ -125,7 +125,6 @@ export class HomepageNavSearchComponent implements OnInit {
 
         console.log("ISTHIS??", TheMatchedUser);
 
-        this.showSpinner = false;
         // this.setSpinnerVisible(false);
 
       }, 4500);
@@ -135,13 +134,24 @@ export class HomepageNavSearchComponent implements OnInit {
 
         if (TheMatchedUser.UserType == '-1') {
           this.Errors.notAUser.status = true;
+          this.showSpinner = false;
         } else {
-          if (TheMatchedUser.UserType == 'student')
+
+          if(userToBeSearched.Password === TheMatchedUser.Password){
+            this.Errors.incorrectPassword.status = false;
+            if (TheMatchedUser.UserType == 'student')
             window.location.href = '/STUDENT';
-          if (TheMatchedUser.UserType == 'teacher')
+            if (TheMatchedUser.UserType == 'teacher')
             window.location.href = '/TEACHER';
-          if (TheMatchedUser.UserType == 'university')
+            if (TheMatchedUser.UserType == 'university')
             window.location.href = '/UNIVERSITY';
+          }else{
+            this.Errors.incorrectPassword.status = true;
+            this.showSpinner = false;
+          }
+
+
+
         }
       }, 5000);
 

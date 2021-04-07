@@ -148,8 +148,6 @@ app.post("/api/FetchTHISUser", (req, res, next) => {
       message: " 001 USER HAS BEEN aiqa aya abbb?? RETRIEVED FOR SIGNIN",
       user: document
 
-    }).catch((err)=>{
-      console.log(" 002 JSoooooooN",err);
     });
     console.log(" 003 USER HAS BEEN RETRIEVED FOR SIGNIN");
 
