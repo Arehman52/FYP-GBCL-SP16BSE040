@@ -37,11 +37,11 @@ export class LoginService {
       RegistrationNumberOfUser: '',
       TitleOfUniversity: '',
       UniversityNameOfUser: '',
-      UserType: 'null',
+      UserType: '-1',
       Username: '',
       _id: ''
     };
-    var temp: Usersmodel[] = [];
+    let temp: Usersmodel;
 
     this.http
       .post<{ message: string; user: Usersmodel }>(
@@ -49,7 +49,15 @@ export class LoginService {
       )
       .subscribe((responseData) => {
         // temp.push(responseData.user);
-        userFetchednMtched.UserType = responseData.user.UserType;
+        if(responseData.user != null){
+          userFetchednMtched.UserType = responseData.user.UserType;
+          // temp = {...responseData.user};
+        //  temp = Object.assign({}, responseData.user);
+        // temp = JSON.parse(JSON.stringify(responseData.user));
+
+
+        }
+        // console.log('YE USER TYOE KIA H? :',responseData.user);
         // console.log("INSIDE HTTP temp[0].Username [[[[", temp[0].Username, "]]]]], ");
 
         return;
@@ -69,7 +77,7 @@ export class LoginService {
     // userFetchednMtched._id = temp[0]._id;
 
     // userFetchednMtched = temp[0];
-    console.log("temptemptemptemp==", userFetchednMtched);
+    console.log("TEEEMPP==", temp);
     console.log("userFetchednMtcheduserFetchednMcdefsef$$$$$$tched==", userFetchednMtched);
     return userFetchednMtched;
   }

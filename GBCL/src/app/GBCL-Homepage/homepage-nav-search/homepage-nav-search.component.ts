@@ -83,13 +83,8 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
   loginUser(form: NgForm) {
-    // this.showSpinner = true;
-    // this.setSpinnerVisible(true);
 
-    // btnSpinner.click;
-    // console.dir();
-
-    var userToBeSearched: Usersmodel = {
+      var userToBeSearched: Usersmodel = {
       FirstNameOfUser: null,
       HECIDofUniversity: null,
       LastNameOfUser: null,
@@ -97,7 +92,7 @@ export class HomepageNavSearchComponent implements OnInit {
       RegistrationNumberOfUser: null,
       TitleOfUniversity: null,
       UniversityNameOfUser: null,
-      UserType: null,
+      UserType: '-1',
       Username: form.value.UsersEnteredUsername,
       _id: null,
     };
@@ -116,7 +111,7 @@ export class HomepageNavSearchComponent implements OnInit {
         RegistrationNumberOfUser: null,
         TitleOfUniversity: null,
         UniversityNameOfUser: null,
-        UserType: null,
+        UserType: '-1',
         Username: form.value.UsersEnteredUsername,
         _id: null,
       };
@@ -138,7 +133,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
       setTimeout(() => {
 
-        if (TheMatchedUser.UserType == 'null') {
+        if (TheMatchedUser.UserType == '-1') {
           this.Errors.notAUser.status = true;
         } else {
           if (TheMatchedUser.UserType == 'student')
