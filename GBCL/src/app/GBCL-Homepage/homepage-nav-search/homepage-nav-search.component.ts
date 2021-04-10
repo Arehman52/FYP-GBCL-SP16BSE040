@@ -21,7 +21,7 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
 
-  showSpinner:boolean = false;
+  showSpinner: boolean = false;
   // spinnerbtn:HTMLButtonElement
 
 
@@ -84,7 +84,18 @@ export class HomepageNavSearchComponent implements OnInit {
 
   loginUser(form: NgForm) {
 
-      var userToBeSearched: Usersmodel = {
+    // var re = '"' + universitysEnteredUN + '"';
+    //       var usnm: string = JSON.stringify(
+    //         this.usersInfoListFromDB[i].Username
+    //       );
+
+
+    var EnteredUN =  form.value.UsersEnteredUsername.toLowerCase();
+
+
+    console.log(EnteredUN);
+    console.log(typeof (form.value.UsersEnteredUsername));
+    var userToBeSearched: Usersmodel = {
       FirstNameOfUser: null,
       HECIDofUniversity: null,
       LastNameOfUser: null,
@@ -93,7 +104,7 @@ export class HomepageNavSearchComponent implements OnInit {
       TitleOfUniversity: null,
       UniversityNameOfUser: null,
       UserType: '-1',
-      Username: form.value.UsersEnteredUsername,
+      Username: EnteredUN,
       _id: null,
     };
 
@@ -102,6 +113,7 @@ export class HomepageNavSearchComponent implements OnInit {
       alert("Sign in fields are invalid!");
     }
     else {
+
 
       var TheMatchedUser: Usersmodel = {
         FirstNameOfUser: null,
@@ -129,7 +141,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
       }, 4500);
 
-
+      // 0454230251002480
       setTimeout(() => {
 
         if (TheMatchedUser.UserType == '-1') {
@@ -137,15 +149,15 @@ export class HomepageNavSearchComponent implements OnInit {
           this.showSpinner = false;
         } else {
 
-          if(userToBeSearched.Password === TheMatchedUser.Password){
+          if (userToBeSearched.Password === TheMatchedUser.Password) {
             this.Errors.incorrectPassword.status = false;
             if (TheMatchedUser.UserType == 'student')
-            window.location.href = '/STUDENT';
+              window.location.href = '/STUDENT';
             if (TheMatchedUser.UserType == 'teacher')
-            window.location.href = '/TEACHER';
+              window.location.href = '/TEACHER';
             if (TheMatchedUser.UserType == 'university')
-            window.location.href = '/UNIVERSITY';
-          }else{
+              window.location.href = '/UNIVERSITY';
+          } else {
             this.Errors.incorrectPassword.status = true;
             this.showSpinner = false;
           }
