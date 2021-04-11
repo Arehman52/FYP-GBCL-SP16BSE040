@@ -45,7 +45,7 @@ export class LoginService {
 
     this.http
       .post<{ message: string; user: Usersmodel }>(
-        'http://localhost:3000/api/FetchTHISUser', userToBeSearched
+        'http://localhost:3000/api/Homepage/FetchTHISUser', userToBeSearched
       )
       .subscribe((responseData) => {
         // temp.push(responseData.user);

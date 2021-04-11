@@ -1,0 +1,22 @@
+==================================================================
+===================        TODAY'S AGENDA       ==================================================================
+
+
+1. without wasting time on fb. twitter and youtube.
+learn stuff. get knowledge and go out of the way to do stuff.
+build career not project.
+
+2. meet supervisor in these days. tell him your progress.
+
+Deadline:   ==>> Friday, saturday, sunday, monday, tuesday.
+Tasks for deadline;
+
+Elon Musk completed 6 months work in 3 days without sleeping.
+
+a.   Complete Login functionality, error free, catch wrong username, wrong password errors.
+b.   Complete Signup functionality.
+c.    Protect and secure routes, tokens of users, each user must access its own routes and data.
+d.    complete CPA functionalities.
+e.    complete admin functionalities.
+f.    complete teacher functionalities.
+g.    complete student functionalities.

@@ -27,7 +27,7 @@ export class HomepageService {
     console.log("OUTSIDE HTTP 2nd");
     this.http
     .get<{ message: string; users: Usersmodel[] }>(
-      'http://localhost:3000/api/RecieveUsersFromDB'
+      'http://localhost:3000/api/Homepage/RecieveUsersFromDB'
     )
     .subscribe((responseData) => {
       // setTimeout('2000');
@@ -45,7 +45,7 @@ export class HomepageService {
 
   createUser(User: Usersmodel) {
     this.http
-      .post<{ message: string }>('http://localhost:3000/api/CreateUser', User)
+      .post<{ message: string }>('http://localhost:3000/api/Homepage/CreateUser', User)
       .subscribe((responseData) => {
         console.log(responseData.message);
       });

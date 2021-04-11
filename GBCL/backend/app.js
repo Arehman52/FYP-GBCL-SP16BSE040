@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Users = require('./models/user');
+const homepageRoutes = require('./routes/hompage-routes');
 const TestLeaderboard = require('./models/test-leaderboard');
 
 
@@ -139,57 +140,20 @@ app.get("/api/GetUsersListFromDB", (req, res, next) => {
 
 
 
-
-app.post("/api/FetchTHISUser", (req, res, next) => {
-
-
-  Users.findOne({"Username": req.body.Username }).then( document => {
-    res.status(200).json({
-      message: " 001 USER HAS BEEN aiqa aya abbb?? RETRIEVED FOR SIGNIN",
-      user: document
-
-    });
-    console.log(" 003 USER HAS BEEN RETRIEVED FOR SIGNIN");
-
-  }).catch((err)=>{
-    console.log(" 004 theeeen eeerrrororrorr",err);
-  });
-});
-
-
-
-
-//following is working properly in signup page for fetching users.
-app.get("/api/RecieveUsersFromDB", (req, res, next) => {
-
-  Users.find().then( documents => {
-    res.status(200).json({
-      message: "this is a list of users recieved from DB",
-      users: documents
-    });
-    console.log("SUCCESSFUL TIL HERE");
-    // console.log(documents);
-
-  });
-});
-
-
 //TESTING=========================================================================================================
-app.get("/api/fetchLatestLeaderboardData", (req, res, next) => {
+//used in Student/slab-dashboard/leaderboard's  test-leadercoard-sevice.ts file
+// app.get("/api/fetchLatdestLeaderboardData", (req, res, next) => {
 
-  TestLeaderboard.find().then( documents => {
-    res.status(200).json({
-      message: "this is a list of users recieved from DB",
-      users: documents
-    });
-    console.log("SUCCESSFUL TIL HERE");
-    // console.log(documents);
+//   TestLeaderboard.find().then( documents => {
+//     res.status(200).json({
+//       message: "this is a list of users recieved from DB",
+//       users: documents
+//     });
+//     console.log("SUCCESSFUL TIL HERE");
+//     // console.log(documents);
 
-  });
-});
-
-
-
+//   });
+// });
 
 
 
@@ -215,47 +179,32 @@ app.get("/api/fetchLatestLeaderboardData", (req, res, next) => {
 
 
 
-app.get("/api/GetUniversitiesListFromDB", (req, res, next) => {
-
-  Users.find().then( documents => {
-    res.status(200).json({
-      message: "If this message is displayed, means universities are retrieved from mongoDB",
-      usersInResponse: documents
-    });
-  });
-
-  // console.log("get  rEQUEST.");
-  // res.status(200).json("MESSAGadawdadE RECD");
-});
 
 
 
-//following is a POST request to create User.
-app.post("/api/CreateUser", (req, res, next) => {
+// app.get("/api/GetUniversitiesListFromDB", (req, res, next) => {
 
-  const user = new Users({
-    UserType: req.body.UserType,
-    FirstNameOfUser: req.body.FirstNameOfUser,
-    LastNameOfUser: req.body.LastNameOfUser,
-    UniversityNameOfUser: req.body.UniversityNameOfUser,
-    RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
-    TitleOfUniversity: req.body.TitleOfUniversity,
-    HECIDofUniversity: req.body.HECIDofUniversity,
-    Username: req.body.Username,
-    Password: req.body.Password
-  });
+//   Users.find().then( documents => {
+//     res.status(200).json({
+//       message: "If this message is displayed, means universities are retrieved from mongoDB",
+//       usersInResponse: documents
+//     });
+//   });
 
-  user.save();
-  console.log("User's Data has been recieved at the server and saved in the Database.");
-  // console.log(user);
-  res.status(201).json({
-    message: 'User has been created succefully! resposne from app.js file.'
-  })
-});
+//   // console.log("get  rEQUEST.");
+//   // res.status(200).json("MESSAGadawdadE RECD");
+// });
+
+
 
 app.get("/", (req, res, next) => {
   res.status(200).json("Server is running!");
 });
+
+
+
+//-->  /api/Homepage + [/CreateUser && /FetchTHISUser]
+app.use("/api/Homepage", homepageRoutes);
 
 module.exports = app;
 
