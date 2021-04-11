@@ -351,7 +351,7 @@ export class SignupFormComponent implements OnInit {
       this.user.FirstNameOfUser = form.value.UsersEnteredFName;
       this.user.LastNameOfUser = form.value.UsersEnteredLName;
       this.user.RegistrationNumberOfUser = form.value.UsersEnteredRegistrationNumber;
-      this.user.Username = form.value.UsersEnteredUsername;
+      this.user.Username = form.value.UsersEnteredUsername.toLowerCase();
       this.user.Password = form.value.UsersEnteredPassword;
     } else {
       this.user.HECIDofUniversity = form.value.HECIDOfUniversity;
