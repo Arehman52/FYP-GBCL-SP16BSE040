@@ -59,7 +59,7 @@ router.get("/RecieveUsersFromDB", (req, res, next) => {
       message: "this is a list of users recieved from DB",
       users: documents
     });
-    console.log("SUCCESSFUL TIL HERE");
+    console.log("SUCCESSFUL TIL HERE : Homepage-routes.js:62");
     // console.log(documents);
 
   });
