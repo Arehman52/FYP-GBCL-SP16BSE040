@@ -46,9 +46,10 @@ export class HomepageService {
 
   createUser(User: Usersmodel) {
     this.http
-      .post<{ message: string }>('http://localhost:3000/api/Homepage/CreateUser', User)
+      .post('http://localhost:3000/api/Homepage/CreateUser', User)
       .subscribe((responseData) => {
-        console.log(responseData.message);
+        // console.log(responseData.message);
+        console.log(responseData);
       });
 
   }

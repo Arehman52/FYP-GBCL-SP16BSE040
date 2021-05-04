@@ -1,4 +1,6 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
+
 
 const Users = require('../models/user');
 
@@ -11,24 +13,42 @@ const router = express.Router();
 //following is a POST request to create User.
 router.post("/CreateUser", (req, res, next) => {
 
-  const user = new Users({
-    UserType: req.body.UserType,
-    FirstNameOfUser: req.body.FirstNameOfUser,
-    LastNameOfUser: req.body.LastNameOfUser,
-    UniversityNameOfUser: req.body.UniversityNameOfUser,
-    RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
-    TitleOfUniversity: req.body.TitleOfUniversity,
-    HECIDofUniversity: req.body.HECIDofUniversity,
-    Username: req.body.Username,
-    Password: req.body.Password
-  });
+  bcrypt.hash(req.body.Password, 10)
+  .then(hash => {
+    const user = new Users({
+      UserType: req.body.UserType,
+      FirstNameOfUser: req.body.FirstNameOfUser,
+      LastNameOfUser: req.body.LastNameOfUser,
+      UniversityNameOfUser: req.body.UniversityNameOfUser,
+      RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
+      TitleOfUniversity: req.body.TitleOfUniversity,
+      HECIDofUniversity: req.body.HECIDofUniversity,
+      Username: req.body.Username,
+      Password: hash
+    });
 
-  user.save();
-  console.log("User's Data has been recieved at the server and saved in the Database.");
-  // console.log(user);
-  res.status(201).json({
-    message: 'User has been created succefully! resposne from app.js file.'
-  })
+
+    user.save().then(
+      result => {
+        res.status(201).json({
+          message: 'User has been created succefully! resposne from app.js file.',
+          result: result
+        });
+      })
+      .catch(err =>{
+        res.status(500).json({
+          error: err
+        });
+      });
+
+      console.log("User's Data has been recieved at the server and saved in the Database.");
+      console.log(user);
+
+
+
+    });
+
+
 });
 
 

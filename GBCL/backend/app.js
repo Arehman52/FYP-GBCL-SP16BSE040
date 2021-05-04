@@ -12,7 +12,7 @@ const app = express();
 
 
 // following line establishes the connection with GBCLDatabase.
-mongoose.connect("mongodb+srv://abdurrehman:MvceaEr8JnRkWkl7@cluster0.jlslm.mongodb.net/GBCLDatabse?retryWrites=true&w=majority",{ useNewUrlParser: true,
+mongoose.connect("mongodb+srv://abdurrehman:MvceaEr8JnRkWkl7@cluster0.jlslm.mongodb.net/GBCLDatabse",{ useNewUrlParser: true,
 useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to DB.");
