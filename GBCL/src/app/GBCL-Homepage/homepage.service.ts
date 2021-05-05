@@ -12,12 +12,12 @@ export class HomepageService {
   // dw
 
   universitiesListFromDB = [
-      { uniName: 'COMSATS University Islamabad' },
-      { uniName: 'IIUI Islamabad' },
-      { uniName: 'Islamic University Islamabad' },
-      { uniName: 'IBA Karachi' },
-      { uniName: 'UET Lahore' },
-      { uniName: 'FAST NUCES Islamabad' },
+      // { uniName: 'COMSATS University Islamabad' },
+      // { uniName: 'IIUI Islamabad' },
+      // { uniName: 'Islamic University Islamabad' },
+      // { uniName: 'IBA Karachi' },
+      // { uniName: 'UET Lahore' },
+      // { uniName: 'FAST NUCES Islamabad' },
     ];
 
 
@@ -58,6 +58,51 @@ export class HomepageService {
 
     return this.universitiesListFromDB;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //============================
+  //============================
+
+  // UniListArr: {uniName:String}[] = [];
+
+  // newGetUniList(): {uniName:String}[] {
+
+
+  //   this.http
+  //   .get<{  theList: String[] }>(
+  //     'http://localhost:3000/api/Homepage/getUniversitiesList'
+  //   )
+  //   .subscribe((responseData) => {
+  //     // setTimeout('2000');
+  //     // console.log('SUCCESSFUL TILL HERE but working');
+  //     for (let i = 0; i < Object.keys(responseData.theList).length; i++) {
+  //       // this.UniListArr.push(responseData.theList[i]);
+  //     }
+  //     return this.UniListArr;
+
+  //   });
+  //   return this.UniListArr;
+  // }
+
+
+
+
+
+
+
 
 
 }

@@ -20,10 +20,37 @@ export class SignupFormComponent implements OnInit {
     this.UniversitiesListFromDB = this.homepageService.getUniversitiesListFromDB();
     this.UsersRecievedFromDBForSignup = this.homepageService.RecieveUsersFromDBForSignup();
     console.log(this.UsersRecievedFromDBForSignup);
+    setTimeout(()=>{
+      this.fnUpdListUnis();
+    },700);
   }
 
 
-   private UsersRecievedFromDBForSignup:Usersmodel[] = [];
+  /**universitiesListFromDB = [
+      { uniName: 'COMSATS University Islamabad' },
+      { uniName: 'IIUI Islamabad' },
+      { uniName: 'Islamic University Islamabad' },
+      { uniName: 'IBA Karachi' },
+      { uniName: 'UET Lahore' },
+      { uniName: 'FAST NUCES Islamabad' },
+    ]; */
+
+  private UsersRecievedFromDBForSignup:Usersmodel[] = [];
+  // private listOfUniversities: {uniName: String}[] = []
+  UniversitiesListFromDB = [];
+
+  // FOLLOWING FN UPDATES Uni LIST FROM DB
+  fnUpdListUnis(){
+
+    for(var i=0; i<this.UsersRecievedFromDBForSignup.length;i++){
+
+      if(this.UsersRecievedFromDBForSignup[i].TitleOfUniversity != null){
+
+        const arr: {uniName:String} = {uniName : this.UsersRecievedFromDBForSignup[i].TitleOfUniversity };
+        this.UniversitiesListFromDB.push(arr);
+      }
+    }
+  }
 
 
   // A create User Fn to create the User.
@@ -65,7 +92,6 @@ export class SignupFormComponent implements OnInit {
 
   usersInfoListFromDB = {};
 
-  UniversitiesListFromDB = [];
 
   // console.log(this.UniversitiesListFromDB);
 
