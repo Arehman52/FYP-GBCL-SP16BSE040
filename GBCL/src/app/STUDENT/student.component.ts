@@ -14,4 +14,11 @@ export class STUDENTComponent implements OnInit {
 
   labs = [ {} ];
 
+  localStorageUsername = localStorage.getItem("UsersUsername");
+
+  onLogout(){
+    localStorage.clear();
+    window.location.href="/";
+  }
+
 }

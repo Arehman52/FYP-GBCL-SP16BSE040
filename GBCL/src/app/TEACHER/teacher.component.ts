@@ -14,4 +14,15 @@ export class TEACHERComponent implements OnInit {
 
   labs = [ {title: 'JAVA OOP', Class: 'BSE-2B', Instructor: 'Mr. Ashfaq Hussain Farooqi',
               members: 41} ];
+
+
+
+localStorageUsername = localStorage.getItem("UsersUsername");
+
+onLogout(){
+  localStorage.clear();
+  window.location.href="/";
+}
+
+
 }

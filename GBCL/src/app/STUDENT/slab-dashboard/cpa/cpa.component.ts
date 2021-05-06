@@ -9,13 +9,7 @@ export class CpaComponent {
 
 
 
-  student = [
-    {
-      StudentID: 's1',
-      status: 'online',
-      name: 'Abdur Rehman'
-    }
-  ];
+
   tasks = [
     {
       taskID: '1',
@@ -42,4 +36,18 @@ export class CpaComponent {
       taskContent: 'This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.',
     },
   ];
+
+
+
+
+localStorageUsername = localStorage.getItem("UsersUsername");
+
+onLogout(){
+  localStorage.clear();
+  window.location.href="/";
+}
+
+
+
+
 }

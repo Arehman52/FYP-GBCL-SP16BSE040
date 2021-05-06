@@ -21,4 +21,12 @@ export class RivalsComponent implements OnInit {
   {rivalID:'id126',rivalName:'AAmir'}
 ];
 
+
+
+localStorageUsername = localStorage.getItem("UsersUsername");
+
+  onLogout(){
+    localStorage.clear();
+    window.location.href="/";
+  }
 }

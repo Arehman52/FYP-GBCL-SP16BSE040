@@ -9,4 +9,19 @@ export class SlabDashboardComponent  {
 
 members = [{},{},{},{},{},{},{},{},{},{},{},{},{},{}];
 
+
+
+localStorageUsername = localStorage.getItem("UsersUsername");
+
+  onLogout(){
+    localStorage.clear();
+    window.location.href="/";
+  }
+
+
+
+
+
+
+
 }

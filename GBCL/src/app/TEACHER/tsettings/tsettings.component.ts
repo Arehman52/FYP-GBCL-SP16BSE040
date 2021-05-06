@@ -10,4 +10,16 @@ export class TeachersettingsComponent {
   constructor() { }
   labs = [ {} ];
 
+
+
+
+
+localStorageUsername = localStorage.getItem("UsersUsername");
+
+onLogout(){
+  localStorage.clear();
+  window.location.href="/";
+}
+
+
 }

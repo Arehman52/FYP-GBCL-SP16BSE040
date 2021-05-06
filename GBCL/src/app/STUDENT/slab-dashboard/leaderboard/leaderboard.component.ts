@@ -22,4 +22,11 @@ export class LeaderboardComponent implements OnInit {
     {rank:'7',name:'Abdur Raffay',XPs:'728',CPPs:'285',level:'16', badge:'Master 5',color: '9d4edd'},
   ];
 
+
+  localStorageUsername = localStorage.getItem("UsersUsername");
+
+  onLogout(){
+    localStorage.clear();
+    window.location.href="/";
+  }
 }

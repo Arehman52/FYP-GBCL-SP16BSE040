@@ -83,4 +83,15 @@ export class ChallengesComponent implements OnInit {
     if (this.challenges[this.i].Qtype == 'mcq') return 'MCQs Challenge';
     if (this.challenges[this.i].Qtype == 'doc') return 'Desired Output Challenge';
   }
+
+
+localStorageUsername = localStorage.getItem("UsersUsername");
+
+onLogout(){
+  localStorage.clear();
+  window.location.href="/";
+}
+
+
+
 }

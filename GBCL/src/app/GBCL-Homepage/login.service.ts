@@ -27,8 +27,10 @@ export class LoginService {
 
 
 
+  // userFetchednMtched1;
 
-  FecthTheMatchingUserForLogin(userToBeSearched: Usersmodel): Usersmodel {
+  arr: any[] = [];
+  FecthTheMatchingUserForLogin(userToBeSearched: Usersmodel): any[] {
     var userFetchednMtched: Usersmodel = {
       FirstNameOfUser : '',
       HECIDofUniversity : '',
@@ -41,46 +43,26 @@ export class LoginService {
       Username: '',
       _id: ''
     };
-    let temp: Usersmodel;
+
 
     this.http
       .post<{ message: string; user: Usersmodel }>(
         'http://localhost:3000/api/Homepage/FetchTHISUser', userToBeSearched
       )
       .subscribe((responseData) => {
-        // temp.push(responseData.user);
-        if(responseData.user != null){
-          userFetchednMtched.UserType = responseData.user.UserType;
-          userFetchednMtched.Password = responseData.user.Password;
-          // temp = {...responseData.user};
-        //  temp = Object.assign({}, responseData.user);
-        // temp = JSON.parse(JSON.stringify(responseData.user));
 
+        if(responseData.user != null){
+
+
+          this.arr.push(responseData.user);
 
         }
-        // console.log('YE USER TYOE KIA H? :',responseData.user);
-        // console.log("INSIDE HTTP temp[0].Username [[[[", temp[0].Username, "]]]]], ");
-
-        return;
 
       });
 
-    // console.log("OUTSIDE HTTP temp[0].Username [[[[",temp[0].Username,"]]]]], ",temp[0].UserType);
-    // userFetchednMtched.UserType = temp[0].UserType;
-    // userFetchednMtched.FirstNameOfUser = temp[0].FirstNameOfUser;
-    // userFetchednMtched.HECIDofUniversity = temp[0].HECIDofUniversity;
-    // userFetchednMtched.LastNameOfUser = temp[0].LastNameOfUser;
-    // userFetchednMtched.Password = temp[0].Password;
-    // userFetchednMtched.RegistrationNumberOfUser = temp[0].RegistrationNumberOfUser;
-    // userFetchednMtched.TitleOfUniversity = temp[0].TitleOfUniversity;
-    // userFetchednMtched.UniversityNameOfUser = temp[0].UniversityNameOfUser;
-    // userFetchednMtched.Username = temp[0].Username;
-    // userFetchednMtched._id = temp[0]._id;
+      console.log("this.arr", this.arr);
 
-    // userFetchednMtched = temp[0];
-    console.log("TEEEMPP==", temp);
-    console.log("userFetchednMtcheduserFetchednMcdefsef$$$$$$tched==", userFetchednMtched);
-    return userFetchednMtched;
+      return this.arr;
   }
 
 

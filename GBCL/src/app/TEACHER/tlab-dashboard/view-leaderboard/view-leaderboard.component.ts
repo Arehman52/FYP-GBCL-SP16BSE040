@@ -21,4 +21,14 @@ export class ViewLeaderboardComponent implements OnInit {
     {rank:'6',name:'Abdur Raheem',XPs:'987',CPPs:'265',level:'24',badge:'Honoury 1',color:'81b29a'},
     {rank:'7',name:'Abdur Raffay',XPs:'987',CPPs:'265',level:'24', badge:'Master 5',color: '9d4edd'},
   ];
+
+
+  localStorageUsername = localStorage.getItem("UsersUsername");
+
+  onLogout(){
+    localStorage.clear();
+    window.location.href="/";
+  }
+
+
 }

@@ -12,4 +12,16 @@ export class ManageLabtasksComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
+
+  
+  localStorageUsername = localStorage.getItem("UsersUsername");
+
+  onLogout(){
+    localStorage.clear();
+    window.location.href="/";
+  }
+
+
 }

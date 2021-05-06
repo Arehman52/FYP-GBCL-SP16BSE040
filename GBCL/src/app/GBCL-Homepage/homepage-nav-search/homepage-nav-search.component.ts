@@ -115,47 +115,36 @@ export class HomepageNavSearchComponent implements OnInit {
     else {
 
 
-      var TheMatchedUser: Usersmodel = {
-        FirstNameOfUser: null,
-        HECIDofUniversity: null,
-        LastNameOfUser: null,
-        Password: form.value.UsersEnteredPassword,
-        RegistrationNumberOfUser: null,
-        TitleOfUniversity: null,
-        UniversityNameOfUser: null,
-        UserType: '-1',
-        Username: form.value.UsersEnteredUsername,
-        _id: null,
-      };
+      var TheMatchedUser: any[];
+
 
 
       this.showSpinner = true;
       setTimeout(() => {
         TheMatchedUser = this.loginService.FecthTheMatchingUserForLogin(
           userToBeSearched);
-        // console.log("TheMatchedUserTheMatchedUserTheMatchedUser in", TheMatchedUser[0].Username);
 
-        console.log("ISTHIS??", TheMatchedUser);
-
-        // this.setSpinnerVisible(false);
 
       }, 4500);
 
-      // 0454230251002480
       setTimeout(() => {
 
-        if (TheMatchedUser.UserType == '-1') {
+        if (TheMatchedUser[0].UserType == '-1') {
           this.Errors.notAUser.status = true;
           this.showSpinner = false;
         } else {
 
-          if (userToBeSearched.Password === TheMatchedUser.Password) {
+          if (userToBeSearched.Password === TheMatchedUser[0].Password) {
+
+            localStorage.setItem("UsersUsername",TheMatchedUser[0].Username);
+            localStorage.setItem("UsersUsertype",TheMatchedUser[0].UserType);
+
             this.Errors.incorrectPassword.status = false;
-            if (TheMatchedUser.UserType == 'student')
+            if (TheMatchedUser[0].UserType == 'student')
               window.location.href = '/STUDENT';
-            if (TheMatchedUser.UserType == 'teacher')
+            if (TheMatchedUser[0].UserType == 'teacher')
               window.location.href = '/TEACHER';
-            if (TheMatchedUser.UserType == 'university')
+            if (TheMatchedUser[0].UserType == 'university')
               window.location.href = '/UNIVERSITY';
           } else {
             this.Errors.incorrectPassword.status = true;

@@ -15,4 +15,14 @@ export class TlabDashboardComponent implements OnInit {
 
   members = [{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
 
+
+
+localStorageUsername = localStorage.getItem("UsersUsername");
+
+onLogout(){
+  localStorage.clear();
+  window.location.href="/";
+}
+
+
 }

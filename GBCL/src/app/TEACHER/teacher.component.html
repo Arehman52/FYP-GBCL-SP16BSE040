@@ -71,12 +71,13 @@
             <!-- Example single danger button -->
 
 <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  name here
+  {{localStorageUsername}}
 </button>
 <div class="dropdown-menu bg-warning" >
   <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Profile Settings</a>
   <div class="dropdown-divider"></div>
-  <a class="dropdown-item" [routerLink]="'/'">Logout</a>
+<button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+
 </div>
 
           </div>
