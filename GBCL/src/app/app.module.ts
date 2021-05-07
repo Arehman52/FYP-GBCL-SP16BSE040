@@ -53,6 +53,8 @@ import { RouterModule } from '@angular/router';
 import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
 import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcodeforformvalidation/githubcodeforformvalidation.component';
 import { TestConceptsComponent } from './misc/concepts/test-concepts/test-concepts.component';
+import { UnimanageMembersComponent } from './university/unimanage-members/unimanage-members.component';
+import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-labs.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
@@ -100,6 +102,10 @@ import { TestConceptsComponent } from './misc/concepts/test-concepts/test-concep
     GithubcodeforformvalidationComponent,
 
     TestConceptsComponent,
+
+    UnimanageMembersComponent,
+
+    UnimanageLabsComponent,
 
     // AdminDashboardComponent
     // ManageeLabtasksComponent

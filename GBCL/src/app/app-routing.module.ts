@@ -24,6 +24,8 @@ import { ManageUniversitiesComponent } from './admin/manage-universities/manage-
 import { JoinRequestsComponent } from './admin/join-requests/join-requests.component';
 import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
 import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcodeforformvalidation/githubcodeforformvalidation.component';
+import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-labs.component';
+import { UnimanageMembersComponent } from './university/unimanage-members/unimanage-members.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 // import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
 // import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
@@ -57,6 +59,8 @@ const routes: Routes = [
   // University routes
   { path: 'UNIVERSITY', component: UNIVERSITYComponent},
   { path: 'UNIVERSITY/ManageJoinRequests', component: UnimanageJoinrequestsComponent},
+  { path: 'UNIVERSITY/ManageMembers', component: UnimanageMembersComponent},
+  { path: 'UNIVERSITY/ManageLabs', component: UnimanageLabsComponent},
   // Misc routes
   { path: 'Testconcepts', component: GithubcodeforformvalidationComponent},
   { path: '**', component: Error404Component}

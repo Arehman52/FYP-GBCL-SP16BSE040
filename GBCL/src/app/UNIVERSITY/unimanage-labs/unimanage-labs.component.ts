@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+
 import { UniversityModel } from 'src/app/MODELS/universitymodel.model';
 
 @Component({
-  selector: 'app-unimanage-joinrequests',
-  templateUrl: './unimanage-joinrequests.component.html',
-  styleUrls: ['./unimanage-joinrequests.component.css']
+  selector: 'app-unimanage-labs',
+  templateUrl: './unimanage-labs.component.html',
+  styleUrls: ['./unimanage-labs.component.css']
 })
-export class UnimanageJoinrequestsComponent implements OnInit {
+export class UnimanageLabsComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
 
 
   UniversitiesData: UniversityModel[] = [{
@@ -89,5 +91,7 @@ localStorageUsername = localStorage.getItem("UsersUsername");
     localStorage.clear();
     window.location.href="/";
   }
+
+
 
 }

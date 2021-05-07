@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+
+
 import { UniversityModel } from 'src/app/MODELS/universitymodel.model';
 
 @Component({
-  selector: 'app-unimanage-joinrequests',
-  templateUrl: './unimanage-joinrequests.component.html',
-  styleUrls: ['./unimanage-joinrequests.component.css']
+  selector: 'app-unimanage-members',
+  templateUrl: './unimanage-members.component.html',
+  styleUrls: ['./unimanage-members.component.css']
 })
-export class UnimanageJoinrequestsComponent implements OnInit {
+export class UnimanageMembersComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
   }
+
+
 
 
   UniversitiesData: UniversityModel[] = [{
@@ -81,7 +85,9 @@ FacultyData = [{
 }
 ];
 
-
+// //////////////////////////////////////////\///
+// //////////////////////////////////////////\///  CORRECT CODE BELOW
+// //////////////////////////////////////////\///
 
 localStorageUsername = localStorage.getItem("UsersUsername");
 
@@ -90,4 +96,26 @@ localStorageUsername = localStorage.getItem("UsersUsername");
     window.location.href="/";
   }
 
+
+  MemberType = "Student";
+  FacultyEdit = false;
+
+
+  onMemberTypeButtonToggle(){
+    if(this.MemberType == "Student"){
+      this.MemberType = "Teacher";
+    }else{
+      this.MemberType = "Student";
+    }
+  }
+
+  onFacultyEditToggle(){
+    if(this.FacultyEdit == false){
+      this.FacultyEdit = true;
+    }else{
+      this.FacultyEdit = false;
+    }
+  }
+
+  
 }
