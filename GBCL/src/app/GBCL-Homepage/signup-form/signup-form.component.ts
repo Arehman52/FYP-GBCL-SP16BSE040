@@ -71,6 +71,7 @@ export class SignupFormComponent implements OnInit {
 
       this.Errors.formHasErrors.status = false;
       this.Errors.formSubmittedSuccessfuly.status = true;
+      setTimeout(()=>{window.location.reload()},1500);
     }
   }
 

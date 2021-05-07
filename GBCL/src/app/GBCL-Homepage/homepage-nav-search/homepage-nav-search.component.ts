@@ -89,12 +89,18 @@ export class HomepageNavSearchComponent implements OnInit {
     //         this.usersInfoListFromDB[i].Username
     //       );
 
+    // if(form.value.UsersEnteredUsername.toLowerCase() == "admin"){
+
+    // if(form.value.UsersEnteredPassword.toLowerCase() == "qwerty123"){
+
+    // }
+    // }
 
     var EnteredUN =  form.value.UsersEnteredUsername.toLowerCase();
 
 
-    console.log(EnteredUN);
-    console.log(typeof (form.value.UsersEnteredUsername));
+    // console.log(EnteredUN);
+    // console.log(typeof (form.value.UsersEnteredUsername));
     var userToBeSearched: Usersmodel = {
       FirstNameOfUser: null,
       HECIDofUniversity: null,
@@ -146,6 +152,8 @@ export class HomepageNavSearchComponent implements OnInit {
               window.location.href = '/TEACHER';
             if (TheMatchedUser[0].UserType == 'university')
               window.location.href = '/UNIVERSITY';
+            if (TheMatchedUser[0].UserType == 'admin')
+              window.location.href = '/ADMIN';
           } else {
             this.Errors.incorrectPassword.status = true;
             this.showSpinner = false;

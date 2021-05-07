@@ -145,6 +145,9 @@
                 data-parent="#accordion">
                 <div class="card-body ">
                   {{task.taskContent}}
+                  <div class="text-right">
+                    <button class="btn btn-primary btn-sm " >Submit Solution</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -178,25 +181,18 @@
             <div class="form-group p-0 m-0">
               <textarea class="form-control m-0" id="CodeEditor" rows="8"></textarea>
             </div>
-            <button class="btn btn-primary EditorBtns" >Submit Solution</button>
+
             <button class="btn btn-primary EditorBtns" >Run</button>
           </form>
         </div>
       </div>
-      <div class="row p-1">
-        <div class="col-12 col-lg-6 border rounded border-warning">
+      <div class="row p-1 ">
+        <div class="col-12 col-lg-11 m-auto border rounded border-warning">
           <h6 class="text-center text-warning"><b>OUTPUT CONSOLE</b></h6>
           <textarea class="form-control p-1 m-0" id="CodeEditor" rows="6" disabled></textarea>
           <button class="btn btn-primary EditorBtns">Clear</button>
         </div>
-        <div class="col-12 col-lg-6 border rounded border-warning">
-          <h6 class="text-center text-warning m-1"><b>Test Cases</b></h6>
-          <hr> <hr>
-          <div class="text-light">
-          <span>has variables : Pass,&nbsp;</span>
-          <span>has variables : Pass</span>
-          </div>
-        </div>
+
       </div>
     </div>
 

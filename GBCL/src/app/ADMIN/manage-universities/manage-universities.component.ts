@@ -49,4 +49,21 @@ tasks = [
   },
 ];
 
+
+EditButtonToggled = false;
+EditButtonText = "Edit";
+
+onEditButtonToggle(){
+
+  if(this.EditButtonToggled == false){
+    this.EditButtonText = "Hide Editing";
+    this.EditButtonToggled = true;
+  }else{
+    this.EditButtonText = "Edit";
+    this.EditButtonToggled = false;
+  }
+
+}
+
+
 }
