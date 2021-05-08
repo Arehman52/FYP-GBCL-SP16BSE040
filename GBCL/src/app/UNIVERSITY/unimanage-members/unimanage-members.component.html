@@ -60,7 +60,8 @@
 
           <div class="row text-center  childSpansHoverYellow">
             <div class="col"><span class="mx-2">
-                <h3>Join Requests</h3>
+                <h3>Manage Members</h3>
+                <h6>{{this.localStorageUsername.toUpperCase()}}</h6>
               </span></div>
           </div>
         </div>
@@ -188,9 +189,9 @@
 
                 <!-- //3rd Element: Enter Username -->
                 <div class="form-group">
-                <label for="UN"> {{this.MemberType}}'s Username</label>
-                  <input type="text" id="UN" class="form-control"
-                  name="UsersEnteredUsername"
+                <label > {{this.MemberType}}'s Username</label>
+                  <input type="text"  class="form-control"
+                  name="UNcreateProfile"
                   ngModel
                   >
                   <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
@@ -204,9 +205,9 @@
 
               <div class="col-sm-6">
                 <div class="form-group ">
-                  <label for="PW"> {{this.MemberType}}'s Password</label>
-                  <input type="text" id="PW" class="form-control "
-                  name="UsersEnteredPassword"
+                  <label > {{this.MemberType}}'s Password</label>
+                  <input type="text"  class="form-control "
+                  name="PWcreateProfile"
                   ngModel>
                   <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>--{{this.Errors.invalidPassword.message}}</span>
@@ -219,9 +220,9 @@
             <div class="row">
 
               <div class="form-group col-sm-6">
-                <label for="FN"> {{this.MemberType}}'s First Name</label>
-                <input type="text" id="FN" class="form-control"
-                name="UsersEnteredFName"
+                <label > {{this.MemberType}}'s First Name</label>
+                <input type="text"  class="form-control"
+                name="FNcreateProfile"
                 ngModel>
                 <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
                   <span>--{{this.Errors.invalidFName.message}}</span>
@@ -229,8 +230,8 @@
               </div>
 
               <div class="form-group col-sm-6">
-                <label for="LN"> {{this.MemberType}}'s Last Name</label>
-                <input type="text" id="LN" class="form-control" name="UsersEnteredLName" ngModel>
+                <label > {{this.MemberType}}'s Last Name</label>
+                <input type="text"  class="form-control" name="LNcreateProfile" ngModel>
                 <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
                   <span>--{{this.Errors.invalidLName.message}}</span>
                 </small> -->
@@ -240,8 +241,8 @@
 
             <div class="row">
               <div class="form-group col-sm-12">
-                <label for="RegN"> {{this.MemberType}}'s Registration Number</label>
-                <input type="text" id="RegN" class="form-control" name="UsersEnteredRegistrationNumber" ngModel
+                <label for="RegNcreateProfile"> {{this.MemberType}}'s Registration Number</label>
+                <input type="text" id="RegNcreateProfile" class="form-control" name="UsersEnteredRegistrationNumber" ngModel
                   required>
                 <!-- <small class="form-text text-muted">
                   Your registration ID through which your university can identify you in their records.
@@ -374,7 +375,7 @@
                             </tbody>
                           </table>
                           <div class="d-flex justify-content-end mr-3">
-                            <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2" (click)="onFacultyEditToggle()">Edit</button>
+                            <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2" (click)="onFacultyEditToggle()">{{this.EditFacultyButtonText}}</button>
                             <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
                           </div>
 
@@ -391,9 +392,9 @@
 
                 <!-- //3rd Element: Enter Username -->
                 <div class="form-group">
-                <label for="UN"> Faculty's Username</label>
-                  <input type="text" id="UN" class="form-control"
-                  name="UsersEnteredUsername"
+                <label > Faculty's Username</label>
+                  <input type="text" class="form-control"
+                  name="UNEditFacultyProfile"
                   ngModel
                   >
                   <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
@@ -407,9 +408,9 @@
 
               <div class="col-sm-6">
                 <div class="form-group ">
-                  <label for="PW"> Faculty's Password</label>
-                  <input type="text" id="PW" class="form-control "
-                  name="UsersEnteredPassword"
+                  <label > Faculty's Password</label>
+                  <input type="text" class="form-control "
+                  name="PassWordEditFacultyProfile"
                   ngModel>
                   <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>--{{this.Errors.invalidPassword.message}}</span>
@@ -422,9 +423,9 @@
             <div class="row">
 
               <div class="form-group col-sm-6">
-                <label for="FN"> Faculty's First Name</label>
-                <input type="text" id="FN" class="form-control"
-                name="UsersEnteredFName"
+                <label > Faculty's First Name</label>
+                <input type="text"  class="form-control"
+                name="FNEditFacultyProfile"
                 ngModel>
                 <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
                   <span>--{{this.Errors.invalidFName.message}}</span>
@@ -432,8 +433,8 @@
               </div>
 
               <div class="form-group col-sm-6">
-                <label for="LN"> Faculty's Last Name</label>
-                <input type="text" id="LN" class="form-control" name="UsersEnteredLName" ngModel>
+                <label > Faculty's Last Name</label>
+                <input type="text"  class="form-control" name="LNEditFacultyProfile" ngModel>
                 <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
                   <span>--{{this.Errors.invalidLName.message}}</span>
                 </small> -->
@@ -443,8 +444,8 @@
 
             <div class="row">
               <div class="form-group col-sm-12">
-                <label for="RegN"> Faculty's Registration Number</label>
-                <input type="text" id="RegN" class="form-control" name="UsersEnteredRegistrationNumber" ngModel
+                <label > Faculty's Registration Number</label>
+                <input type="text" class="form-control" name="RegNEditFacultyProfile" ngModel
                   required>
                 <!-- <small class="form-text text-muted">
                   Your registration ID through which your university can identify you in their records.
@@ -506,29 +507,18 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
       <div id="accordionOuterViewStuds">
-        <div class="card  mt-2 mx-3">
-          <div class="card-header" id="headingOne">
-            <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneViewStd" aria-expanded="true"
-                aria-controls="collapseOneViewStd">
-                View Registered Students
-              </button>
-            </h5>
-          </div>
-          <div id="collapseOneViewStd" class="collapse hide" aria-labelledby="headingOne"
-            data-parent="#accordionOuterViewStuds">
-            <div class="card-body">
+      <div class="card  mt-2 mx-3">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneViewStd" aria-expanded="true"
+              aria-controls="collapseOneViewStd">
+              View Registered Students
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOneViewStd" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterViewStuds">
+          <div class="card-body">
 
 
 
@@ -553,68 +543,190 @@
 
 
 
-              <!-- Cards within card -->
+            <!-- Cards within card -->
 
-              <div id="accordionInnerStds">
-                <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
-                <div class="card mb-1" *ngFor="let stu of StudentsData">
-                  <div class="card-header" [attr.id]="'RegisterUniversityCard'">
+            <div id="accordionInnerStds">
+              <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
+              <div class="card mb-1" *ngFor="let stude of StudentsData">
+                <div class="card-header" [attr.id]="'RegisterUniversityCard'">
 
-                    <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                      [attr.data-target]="'#RegisterUniversityCollapse' + stu.Id" aria-expanded="true"
-                      [attr.aria-controls]="'collapse' + stu.Id">
-                      {{stu.name}}
-                    </button>
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisterUniversityCollapse' + stude.Id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + stude.Id">
+                    {{stude.name}}
+                  </button>
 
-                  </div>
+                </div>
 
-                  <div [id]="'RegisterUniversityCollapse' + stu.Id" class="collapse hide"
-                    [attr.aria-labelledby]="'RegisterUniversityCard'" data-parent="#accordionInnerStds">
-                    <div class="card-body ">
+                <div [id]="'RegisterUniversityCollapse' + stude.Id" class="collapse hide"
+                  [attr.aria-labelledby]="'RegisterUniversityCard'" data-parent="#accordionInnerStds">
+                  <div class="card-body ">
 
-                      <div class="row">
-                        <div class="col-11 m-auto">
-                          <!-- remove bg dark -->
-                          <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>University</th>
-                                <th>ID</th>
-                                <th>Access Status</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
+                    <div class="row">
+                      <div class="col-11 m-auto">
+                        <!-- remove bg dark -->
+                        <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Registration Number</th>
+                              <th>Username</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
 
 
-                                <td>{{stu.UniTitle}}</td>
-                                <td>{{stu.Id}}</td>
-                                <td>{{stu.AccessStatus}}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <div class="d-flex justify-content-end mr-3">
-                            <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
-                            <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
-                          </div>
+                              <td>{{stude.Id}}</td>
+                              <td>{{stude.Id}}</td>
+                              <td>{{stude.AccessStatus}}</td>
+                              <td>{{stude.AccessStatus}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                          <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2" (click)="onStudentEditToggle()">{{this.EditStudentButtonText}}</button>
+                          <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
                         </div>
+
+
+
+
+                        <div [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.StudentEdit == true}"
+                        [ngClass]="{'d-none' : this.StudentEdit == false}"
+                        >
+          <!-- Start of std divis EditFacultyProfile-->
+
+          <div class="row">
+            <div class="col-sm-6">
+
+              <!-- //3rd Element: Enter Username -->
+              <div class="form-group">
+              <label > Student's Username</label>
+                <input type="text" class="form-control"
+                name="Users258EnteredUsername"
+                ngModel
+                >
+                <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+                  <span>--{{this.Errors.invalidUsername.message}}</span>
+                </small>
+                <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
+                  <span>--{{this.Errors.usernameNotUnique.message}}</span>
+                </small> -->
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <div class="form-group ">
+                <label > Student's Password</label>
+                <input type="text"  class="form-control "
+                name="UsersEnteredPassword"
+                ngModel>
+                <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                  <span>--{{this.Errors.invalidPassword.message}}</span>
+                </small> -->
+              </div>
+            </div>
+          </div>
+          <!--sdgsd  -->
+
+          <div class="row">
+
+            <div class="form-group col-sm-6">
+              <label > Student's First Name</label>
+              <input type="text"  class="form-control"
+              name="UsersEnteredFName"
+              ngModel>
+              <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
+                <span>--{{this.Errors.invalidFName.message}}</span>
+              </small> -->
+            </div>
+
+            <div class="form-group col-sm-6">
+              <label > Student's Last Name</label>
+              <input type="text"  class="form-control" name="LNEditStudentProfile" ngModel>
+              <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
+                <span>--{{this.Errors.invalidLName.message}}</span>
+              </small> -->
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <label > Student's Registration Number</label>
+              <input type="text"  class="form-control" name="RegNEditStudentProfile" ngModel
+                required>
+              <!-- <small class="form-text text-muted">
+                Your registration ID through which your university can identify you in their records.
+              </small>
+              <small class="form-text errorText" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                <span>--{{this.Errors.invalidRegistrationNumber.message}}</span>
+              </small> -->
+            </div>
+          </div>
+
+          <!-- SIGNUP BUTTON BELOW -->
+          <div class="text-center">
+            <button class="btn btn-primary w-50 m-auto" type="button">Update Profile</button>
+          </div>
+
+          <!-- <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
+            <span>--{{this.Errors.formHasErrors.message}}</span>
+          </small> -->
+
+          <!-- <small class="form-text p-2 mt-4 formSubmissionSuccessText"
+          *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
+            <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
+          </small>
+-->
+
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+
                       </div>
-
-
                     </div>
+
+
                   </div>
                 </div>
               </div>
-
-              <!-- Cards within card -->
-
-
             </div>
+
+            <!-- Cards within card -->
+
+
           </div>
         </div>
-
       </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 
 

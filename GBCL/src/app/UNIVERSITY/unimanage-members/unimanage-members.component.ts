@@ -98,7 +98,6 @@ localStorageUsername = localStorage.getItem("UsersUsername");
 
 
   MemberType = "Student";
-  FacultyEdit = false;
 
 
   onMemberTypeButtonToggle(){
@@ -109,13 +108,31 @@ localStorageUsername = localStorage.getItem("UsersUsername");
     }
   }
 
+
+  FacultyEdit = false;
+  EditFacultyButtonText = "Edit";
   onFacultyEditToggle(){
     if(this.FacultyEdit == false){
       this.FacultyEdit = true;
+      this.EditFacultyButtonText = "Hide Edit";
     }else{
+      this.EditFacultyButtonText = "Edit";
       this.FacultyEdit = false;
     }
   }
 
-  
+
+  StudentEdit = false;
+  EditStudentButtonText = "Edit";
+  onStudentEditToggle(){
+    if(this.StudentEdit == false){
+      this.StudentEdit = true;
+      this.EditStudentButtonText = "Hide Edit";
+    }else{
+      this.EditStudentButtonText = "Edit";
+      this.StudentEdit = false;
+    }
+  }
+
+
 }
