@@ -94,4 +94,16 @@ localStorageUsername = localStorage.getItem("UsersUsername");
 
 
 
+  EditLabButtonText = "Edit";
+  LabEdit = false;
+  onLabEditToggle(){
+    if(this.LabEdit == false){
+      this.LabEdit = true;
+      this.EditLabButtonText = "Hide Edit";
+    }else{
+      this.EditLabButtonText = "Edit";
+      this.LabEdit = false;
+    }
+  }
+
 }

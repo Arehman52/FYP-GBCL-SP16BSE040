@@ -152,124 +152,123 @@
   <div class="col-12 col-sm-9 col-lg-10 p-1">
 
 
-    <div id="accordionOuter">
-      <div class="card  mt-2 mx-3">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneFaculty" aria-expanded="true" aria-controls="collapseOneFaculty">
-              FACULTY JOIN REQUESTS
-            </button>
-          </h5>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="accordionOuter">
+  <div class="card  mt-2 mx-3">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneFaculty" aria-expanded="true"
+          aria-controls="collapseOneFaculty">
+          Create A Lab
+        </button>
+      </h5>
+    </div>
+    <div id="collapseOneFaculty" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
+      <div class="card-body">
+
+
+
+
+
+
+
+          <div class=""
+     >
+    <div class="border rounded border-light my-2 mx-1 p-3"  >
+      <!-- Start of std divis -->
+
+      <div class="row">
+        <div class="col-sm-6">
+
+          <!-- //3rd Element: Enter Username -->
+          <div class="form-group">
+          <label >  Lab's Title </label>
+            <input type="text"  class="form-control"
+            name="UNcreateProfile"
+            ngModel
+            >
+            <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+              <span>--{{this.Errors.invalidUsername.message}}</span>
+            </small>
+            <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
+              <span>--{{this.Errors.usernameNotUnique.message}}</span>
+            </small> -->
+          </div>
         </div>
-        <div id="collapseOneFaculty" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
-          <div class="card-body">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- Cards within card -->
-
-            <div id="accordionInner">
-              <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
-              <div class="card mb-1" *ngFor="let fac of FacultyData">
-                <div class="card-header"
-                  [attr.id]="'RegisterUniversityCard'">
-
-                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                    [attr.data-target]="'#RegisterUniversityCollapse' + fac.Id" aria-expanded="true"
-                    [attr.aria-controls]="'collapse' + fac.Id">
-                    {{fac.name}}
-                  </button>
-
-                </div>
-
-                <div [id]="'RegisterUniversityCollapse' + fac.Id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
-                  data-parent="#accordionInner">
-                  <div class="card-body ">
-
-                    <div class="row">
-                      <div class="col-11 m-auto"><!-- remove bg dark -->
-                        <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th>University</th>
-                              <th>ID</th>
-                              <th>Access Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-
-
-                              <td>{{fac.UniTitle}}</td>
-                              <td>{{fac.Id}}</td>
-                              <td>{{fac.AccessStatus}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div class="d-flex justify-content-end mr-3">
-                        <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
-                        <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
-                        </div>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Cards within card -->
-
-
+        <div class="col-sm-6">
+          <div class="form-group ">
+            <label >  Join Code  </label>
+            <input type="text"  class="form-control "
+            name="PWcreateProfile"
+            ngModel>
+            <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+              <span>--{{this.Errors.invalidPassword.message}}</span>
+            </small> -->
           </div>
         </div>
       </div>
+      <!--sdgsd  -->
 
+      <div class="row">
+
+        <div class="form-group col-sm-6">
+          <label >  Class  </label>
+          <input type="text"  class="form-control"
+          name="FNcreateProfile"
+          ngModel>
+          <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
+            <span>--{{this.Errors.invalidFName.message}}</span>
+          </small> -->
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label >  Select Instructor  </label>
+          <input type="text"  class="form-control" name="LNcreateProfile" ngModel>
+          <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
+            <span>--{{this.Errors.invalidLName.message}}</span>
+          </small> -->
+        </div>
+
+      </div>
+
+
+      <!--  BUTTON BELOW -->
+      <div class="text-center">
+        <button class="btn btn-primary w-50 m-auto" type="button">Create Lab</button>
+      </div>
+
+
+
+
+      </div>
     </div>
 
 
 
 
 
-    <!-- STUDNETS JOIN REQUESTS -->
 
 
 
 
-    <div id="accordionOuterStds">
-      <div class="card  mt-2 mx-3">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneStd" aria-expanded="true" aria-controls="collapseOneStd">
-              STUDENTS' JOIN REQUESTS
-            </button>
-          </h5>
-        </div>
-        <div id="collapseOneStd" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterStds">
-          <div class="card-body">
+      </div>
+    </div>
+  </div>
+
+</div>
 
 
 
@@ -283,6 +282,18 @@
 
 
 
+<div id="accordionOuterViewLabs">
+  <div class="card  mt-2 mx-3">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneViewLabs" aria-expanded="true"
+          aria-controls="collapseOneViewLabs">
+          View Registered Labs
+        </button>
+      </h5>
+    </div>
+    <div id="collapseOneViewLabs" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterViewLabs">
+      <div class="card-body">
 
 
 
@@ -294,68 +305,204 @@
 
 
 
-            <!-- Cards within card -->
-
-            <div id="accordionInnerStds">
-              <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
-              <div class="card mb-1" *ngFor="let stu of StudentsData">
-                <div class="card-header"
-                  [attr.id]="'RegisterUniversityCard'">
-
-                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                    [attr.data-target]="'#RegisterUniversityCollapse' + stu.Id" aria-expanded="true"
-                    [attr.aria-controls]="'collapse' + stu.Id">
-                    {{stu.name}}
-                  </button>
-
-                </div>
-
-                <div [id]="'RegisterUniversityCollapse' + stu.Id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
-                  data-parent="#accordionInnerStds">
-                  <div class="card-body ">
-
-                    <div class="row">
-                      <div class="col-11 m-auto"><!-- remove bg dark -->
-                        <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th>University</th>
-                              <th>ID</th>
-                              <th>Access Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
 
 
-                              <td>{{stu.UniTitle}}</td>
-                              <td>{{stu.Id}}</td>
-                              <td>{{stu.AccessStatus}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div class="d-flex justify-content-end mr-3">
-                        <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
-                        <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
-                        </div>
-                      </div>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Cards within card -->
+
+        <div id="accordionInnerViewLabs">
+          <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
+          <div class="card mb-1" *ngFor="let stude of StudentsData">
+            <div class="card-header" [attr.id]="'RegisterUniversityCard'">
+
+              <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                [attr.data-target]="'#RegisterUniversityCollapse' + stude.Id" aria-expanded="true"
+                [attr.aria-controls]="'collapse' + stude.Id">
+                {{stude.name}}
+              </button>
+
+            </div>
+
+            <div [id]="'RegisterUniversityCollapse' + stude.Id" class="collapse hide"
+              [attr.aria-labelledby]="'RegisterUniversityCard'" data-parent="#accordionInnerViewLabs">
+              <div class="card-body ">
+
+                <div class="row">
+                  <div class="col-11 m-auto">
+                    <!-- remove bg dark -->
+                    <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Lab Title</th>
+                          <th>Join Code</th>
+                          <th>Instructor</th>
+                          <th>Class</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+
+
+                          <td>OOP</td>
+                          <td>OOPCSC323</td>
+                          <td>Mr. Rizwan Rashid </td>
+                          <td>BSE-1B</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="d-flex justify-content-end mr-3">
+                      <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2" (click)="onLabEditToggle()">{{this.EditLabButtonText}}</button>
+                      <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2" >Remove</button>
+                      <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
                     </div>
+
+
+
+
+                    <div [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.LabEdit == true}"
+                    [ngClass]="{'d-none' : this.LabEdit == false}"
+                    >
+      <!-- Start of std divis EditFacultyProfile-->
+
+      <div class="row">
+        <div class="col-sm-6">
+
+          <!-- //3rd Element: Enter Username -->
+          <div class="form-group">
+          <label > Lab's Title </label>
+            <input type="text" class="form-control"
+            name="UsersEnteredUsername"
+            ngModel
+            >
+            <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+              <span>--{{this.Errors.invalidUsername.message}}</span>
+            </small>
+            <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
+              <span>--{{this.Errors.usernameNotUnique.message}}</span>
+            </small> -->
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group ">
+            <label > Join Code </label>
+            <input type="text"  class="form-control "
+            name="UsersEnteredPassword"
+            ngModel>
+            <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+              <span>--{{this.Errors.invalidPassword.message}}</span>
+            </small> -->
+          </div>
+        </div>
+      </div>
+      <!--sdgsd  -->
+
+      <div class="row">
+
+        <div class="form-group col-sm-6">
+          <label > Class </label>
+          <input type="text"  class="form-control"
+          name="UsersEnteredFName"
+          ngModel>
+          <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
+            <span>--{{this.Errors.invalidFName.message}}</span>
+          </small> -->
+        </div>
+
+        <div class="form-group col-sm-6">
+          <label > Change Instructor </label>
+          <input type="text"  class="form-control" name="LNEditStudentProfile" ngModel>
+          <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
+            <span>--{{this.Errors.invalidLName.message}}</span>
+          </small> -->
+        </div>
+
+      </div>
+
+
+
+      <!-- SIGNUP BUTTON BELOW -->
+      <div class="text-center">
+        <button class="btn btn-primary w-50 m-auto" type="button">Update Lab</button>
+      </div>
+
+      <!-- <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
+        <span>--{{this.Errors.formHasErrors.message}}</span>
+      </small> -->
+
+      <!-- <small class="form-text p-2 mt-4 formSubmissionSuccessText"
+      *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
+        <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
+      </small>
+-->
+
+
+      </div>
+
+
+
+
+
+
+
+
+
 
 
                   </div>
                 </div>
+
+
               </div>
             </div>
-
-            <!-- Cards within card -->
-
-
           </div>
         </div>
-      </div>
 
+        <!-- Cards within card -->
+
+
+      </div>
     </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
 
 

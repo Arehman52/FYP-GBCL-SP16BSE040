@@ -59,7 +59,7 @@
 
 
           <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span class="mx-2"><h3>Join Requests</h3>
+            <div class="col"><span class="mx-2"><h4>Join Requests</h4>
               <h6>{{this.localStorageUsername.toUpperCase()}}</h6></span></div>
           </div>
         </div>
@@ -213,8 +213,9 @@
                         <table class="table table-striped">
                           <thead>
                             <tr>
-                              <th>University</th>
-                              <th>ID</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Registration Number</th>
                               <th>Access Status</th>
                             </tr>
                           </thead>
@@ -222,7 +223,8 @@
                             <tr>
 
 
-                              <td>{{fac.UniTitle}}</td>
+                              <td>{{fac.Id}}</td>
+                              <td>{{fac.AccessStatus}}</td>
                               <td>{{fac.Id}}</td>
                               <td>{{fac.AccessStatus}}</td>
                             </tr>

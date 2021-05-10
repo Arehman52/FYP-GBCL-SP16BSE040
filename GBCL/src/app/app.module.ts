@@ -55,6 +55,8 @@ import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcode
 import { TestConceptsComponent } from './misc/concepts/test-concepts/test-concepts.component';
 import { UnimanageMembersComponent } from './university/unimanage-members/unimanage-members.component';
 import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-labs.component';
+import { ManageStudentsComponent } from './teacher/tlab-dashboard/manage-students/manage-students.component';
+import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-students/evaluate-students.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
@@ -106,6 +108,10 @@ import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-la
     UnimanageMembersComponent,
 
     UnimanageLabsComponent,
+
+    ManageStudentsComponent,
+
+    EvaluateStudentsComponent,
 
     // AdminDashboardComponent
     // ManageeLabtasksComponent

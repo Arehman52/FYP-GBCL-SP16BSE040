@@ -51,7 +51,7 @@
         <!-- Stats column -->
         <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover ">
           <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span class="mx-2"><h3>Manage Challenges</h3></span></div>
+            <div class="col"><span class="mx-2"><h3>Evaluate Students</h3></span></div>
           </div>
         </div>
         <!-- STATS COL END -->
@@ -78,6 +78,8 @@
     <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
     <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
     <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a>
+
+    <div class="dropdown-divider"></div>
     <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
 
   </div>
@@ -108,17 +110,17 @@
         <a class="nav-link " [routerLink]="'/TEACHER/Lab'" >Lab Dashboard</a>
       </li>
       <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+        <a class="nav-link" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
       </li>
       <li class="nav-item text-left">
 
-        <a class="nav-link active" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
+        <a class="nav-link" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
           </li>
           <li class="nav-item text-left">
             <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
           </li>
           <li class="nav-item text-left">
-            <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+            <a class="nav-link active" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
           </li>
       <li class="nav-item text-left">
         <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>

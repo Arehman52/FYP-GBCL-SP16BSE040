@@ -79,11 +79,14 @@
     {{localStorageUsername}}
   </button>
   <div class="dropdown-menu bg-warning" >
-    <!-- <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a> -->
-    <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Settings</a> -->
+    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
+    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
+    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
+    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
     <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a>
+
     <div class="dropdown-divider"></div>
     <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
 
@@ -119,7 +122,13 @@
       </li>
       <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
-      </li>
+          </li>
+          <li class="nav-item text-left">
+            <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
+          </li>
+          <li class="nav-item text-left">
+            <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+          </li>
       <li class="nav-item text-left">
         <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
       </li>
@@ -150,8 +159,9 @@
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
             <div class="row">
-              <div class="col-5 m-1">Lab Code: bf90D3</div>
-              <div class="col-5 m-1">Lab Name: Introduction to Computer Programming</div>
+              <div class="col-5 m-1">Lab Join Code: bf90D3</div>
+              <div class="col-5 m-1">Lab Title: Introduction to Computer Programming</div>
+              <div class="col-5 m-1">Class: BSE-1B</div>
               <div class="col-5 m-1">Lab Members: 64</div>
             </div>
           </div>

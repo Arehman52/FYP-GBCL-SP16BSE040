@@ -26,6 +26,8 @@ import { UnimanageJoinrequestsComponent } from './university/unimanage-joinreque
 import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcodeforformvalidation/githubcodeforformvalidation.component';
 import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-labs.component';
 import { UnimanageMembersComponent } from './university/unimanage-members/unimanage-members.component';
+import { ManageStudentsComponent } from './teacher/tlab-dashboard/manage-students/manage-students.component';
+import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-students/evaluate-students.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 // import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
 // import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
@@ -53,6 +55,8 @@ const routes: Routes = [
   { path: 'TEACHER/Lab/Leaderboard', component: ViewLeaderboardComponent},
   { path: 'TEACHER/Lab/Labtasks', component: ManageLabtasksComponent},
   { path: 'TEACHER/Lab/Challenges', component: ManageChallengesComponent},
+  { path: 'TEACHER/Lab/ManageStudents', component: ManageStudentsComponent},
+  { path: 'TEACHER/Lab/EvaluateStudents', component: EvaluateStudentsComponent},
   // { path: 'TEACHER/Lab/challengesManagement', component: ManageeChallengesComponent},
   // { path: 'TEACHER/Lab/labtasksManagement', component: ManageeLabtasksComponent},
   { path: 'TEACHER/Settings', component: TeachersettingsComponent},
