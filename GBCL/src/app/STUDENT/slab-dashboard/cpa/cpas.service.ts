@@ -17,14 +17,15 @@ export class CpasService {
 
     //
     var CODE_EVALUATION_URL = 'https://api.hackerearth.com/v4/partner/code-evaluation/submissions/';
-    var CLIENT_SECRET = '1f6418a4f1f691907bbab6d9eea66069e4f003ff'
+    var CLIENT_SECRET = 'd75b8e47d897a73a76d9b2416c77ce936079a647';
+
 
     // def execute(source_file_name, language):
     //     source = open(source_file_name, "r")
     //     input_file = open("input.txt", "r")
     // callback = "https://client.com/callback/"
 
-    var callback = 'http://xyz.com/callback/';
+    var callback = 'https://fyp-gbcl.herokuapp.com/api/';
 
     var data = {
       'source': code,
@@ -33,7 +34,7 @@ export class CpasService {
       'memory_limit': 246323,
       'input': input,
       'callback': callback,
-      'id': 'c9389a2d81b785605c04559361e3bfec2e890e6d9e30.api.hackerearth.com'
+      'id': '81e0773d35a211483fb2426a47cfecce33e3b42f02d0.api.hackerearth.com'
     }
 
     const options = {
