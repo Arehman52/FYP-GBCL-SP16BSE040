@@ -3,12 +3,22 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+<<<<<<< HEAD
     "start": "ng serve",
+=======
+<<<<<<< HEAD
+    "start": "node ./backend/server.js",
+    "start-KOCHANGEKAROLIKETHISfornode": "node ./backend/server.js",
+    "start-KOCHANGEKAROLIKETHIS2forangular":"ng serve",
+=======
+    "start": "ng serve",
+>>>>>>> parent of bf78988 (test1)
+>>>>>>> parent of a7c3bd7... removed max's all changes - RESETed
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:server": "nodemon ./server.js"
+    "start:server": "nodemon ./backend/server.js"
   },
   "private": true,
   "dependencies": {
