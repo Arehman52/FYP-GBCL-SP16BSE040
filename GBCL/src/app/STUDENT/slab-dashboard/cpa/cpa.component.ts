@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+import { CpasService } from './cpas.service';
 
 @Component({
   selector: 'app-cpa',
@@ -7,6 +10,7 @@ import { Component } from '@angular/core';
 })
 export class CpaComponent {
 
+  constructor(private cpasService: CpasService){}
 
 
 
@@ -36,6 +40,18 @@ export class CpaComponent {
       taskContent: 'This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.',
     },
   ];
+
+
+
+  OutputConsole = 'The output of the program will be displayed here!';
+
+  onRunClicked(codeForm: NgForm){
+
+    var results = this.cpasService.RunTheCOde(codeForm.value.Code);
+
+    console.log(results);
+    this.OutputConsole = results.toString();
+  }
 
 
 
