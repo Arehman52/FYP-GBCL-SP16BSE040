@@ -3,18 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-<<<<<<< HEAD
-    "start": "node ./backend/server.js",
-    "start-KOCHANGEKAROLIKETHISfornode": "node ./backend/server.js",
-    "start-KOCHANGEKAROLIKETHIS2forangular":"ng serve",
-=======
-    "start": "ng serve",
->>>>>>> parent of bf78988 (test1)
+    "start":"ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:server": "nodemon ./backend/server.js"
+    "start:server": "nodemon ./server.js"
   },
   "private": true,
   "dependencies": {
