@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { CpasService } from './cpas.service';
 
 @Component({
   selector: 'app-cpa',
@@ -8,6 +10,16 @@ import { Component } from '@angular/core';
 export class CpaComponent {
 
 
+  constructor(private cpaService: CpasService ){}
+
+  THE_OUTPUT = 'The Output of the program will be shown here!';
+
+  onRunClicked(CodeEditorForm: NgForm){
+
+    var RunResponse = this.cpaService.runCode(CodeEditorForm.value.code, '');
+    setTimeout(()=>{console.log(RunResponse);},2500);
+    this.THE_OUTPUT = RunResponse.toString();
+  }
 
 
   tasks = [

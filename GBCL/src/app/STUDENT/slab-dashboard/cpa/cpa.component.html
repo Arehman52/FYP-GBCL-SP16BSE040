@@ -174,26 +174,26 @@
     </div>
     <div class="col-12 col-lg-9">
       <!--MAIN AREA WHERE EDITOR AND CONSOLE WILL BE-->
+      <form class="text-right" spellcheck="false" #CodeEditorForm="ngForm" (submit)="onRunClicked(CodeEditorForm)">
       <div class="row">
         <div class="col">
           <h5 class="text-center text-warning"><b>CODE EDITOR</b></h5>
-          <form class="text-right">
             <div class="form-group p-0 m-0">
-              <textarea class="form-control m-0" id="CodeEditor" rows="8"></textarea>
+              <textarea class="form-control m-0" name="code" ngModel  rows="8"></textarea>
             </div>
 
-            <button class="btn btn-primary EditorBtns" >Run</button>
-          </form>
+            <button type="submit"  class="btn btn-primary EditorBtns" >Run</button>
+          </div>
         </div>
-      </div>
-      <div class="row p-1 ">
-        <div class="col-12 col-lg-11 m-auto border rounded border-warning">
-          <h6 class="text-center text-warning"><b>OUTPUT CONSOLE</b></h6>
-          <textarea class="form-control p-1 m-0" id="CodeEditor" rows="6" disabled></textarea>
-          <button class="btn btn-primary EditorBtns">Clear</button>
-        </div>
+        <div class="row p-1 ">
+          <div class="col-12 col-lg-11 m-auto border rounded border-warning">
+            <h6 class="text-center text-warning"><b>OUTPUT CONSOLE</b></h6>
+            <textarea class="form-control p-1 mb-1"  rows="8" disabled>{{this.THE_OUTPUT}}</textarea>
+            <!-- <button class="btn btn-primary EditorBtns" type="reset">Clear</button> -->
+          </div>
 
-      </div>
+        </div>
+      </form>
     </div>
 
 
