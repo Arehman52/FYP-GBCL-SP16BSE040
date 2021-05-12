@@ -199,14 +199,14 @@ app.get("/api/GetUsersListFromDB", (req, res, next) => {
 
 
 
-// app.get("/", (req, res, next) => {
-//   res.status(200).json("Server is running!");
-// });
-
-app.use(express.static(__dirname + '/dist/gbcl'));
-app.get("/*", (req, res, next) => {
-  res.sendFile(path.join(__dirname+'/dist/gbcl/index.html'));
+app.get("/", (req, res, next) => {
+  res.status(200).json("Server is running!");
 });
+
+// app.use(express.static(__dirname + '/dist/gbcl'));
+// app.get("/*", (req, res, next) => {
+//   res.sendFile(path.join(__dirname+'/dist/gbcl/index.html'));
+// });
 
 
 
