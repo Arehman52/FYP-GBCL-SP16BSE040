@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node ./backend/server.js",
-    "start-KOCHANGEKAROLIKETHIS":"ng serve",
+    "start-KOCHANGEKAROLIKETHISfornode": "node ./backend/server.js",
+    "start-KOCHANGEKAROLIKETHIS2forangular":"ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
