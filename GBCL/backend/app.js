@@ -1,9 +1,9 @@
 const express = require('express');
+const path = require("path");
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Users = require('./models/user');
 const homepageRoutes = require('./routes/hompage-routes');
-const TestLeaderboard = require('./models/test-leaderboard');
 
 
 
@@ -197,8 +197,15 @@ app.get("/api/GetUsersListFromDB", (req, res, next) => {
 
 
 
-app.get("/", (req, res, next) => {
-  res.status(200).json("Server is running!");
+
+
+// app.get("/", (req, res, next) => {
+//   res.status(200).json("Server is running!");
+// });
+
+app.use(express.static(__dirname + '/dist/gbcl'));
+app.get("/*", (req, res, next) => {
+  res.sendFile(path.join(__dirname+'/dist/gbcl/index.html'));
 });
 
 
