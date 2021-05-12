@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
 
 const Users = require('../models/user');
@@ -75,7 +75,7 @@ router.get("/getUniversitiesList", (req, res, next) => {
       theList: list
     });
     console.log("SUCCESSFUL TIL HERE : Homepage-routes.js:62");
-
+ 
   });
 });
 
