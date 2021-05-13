@@ -31,7 +31,7 @@
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="inputGroupSelect01">Sign up as</label>
                 </div>
-                <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect="ngModel"
+                <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect
                 name="UserTypeSelection"
                 ngModel>
                   <option selected disabled>Select user type</option>
@@ -55,7 +55,7 @@
                   <label class="input-group-text" for="inputGroupSelect01">University : </label>
                 </div>
                 <select class="custom-select" name="UsersSelectedUniversity"
-                #UniversitiesList="ngModel"
+                #UniversitiesList
                 name="UniversitiesSelection"
                 ngModel
                 (change)="onUniversitiesSelectChange(UniversitiesList)">

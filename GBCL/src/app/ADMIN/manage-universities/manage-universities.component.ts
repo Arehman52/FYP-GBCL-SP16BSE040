@@ -19,7 +19,7 @@ export class ManageUniversitiesComponent implements OnInit {
     {uniTitle: 'CUI Wah', id: 'cd', status: 'allowed'},
     {uniTitle: 'CUI Vehari', id: 'de', status: 'allowed'},
     {uniTitle: 'CUI Taxila', id: 'ef', status: 'allowed'                                                                          }
-]
+];
 
 
 tasks = [
