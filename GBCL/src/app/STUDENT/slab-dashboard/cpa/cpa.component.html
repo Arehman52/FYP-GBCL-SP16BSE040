@@ -147,7 +147,7 @@
                   {{task.taskContent}}
                   <div class="text-right">
                     <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a>
-                    <button class="btn btn-primary btn-sm mx-2" >Submit Solution</button>
+                    <button class="btn btn-primary btn-sm mx-2" (click)="onAttemptClicked(task)" >Attempt</button>
                   </div>
                 </div>
               </div>
@@ -173,23 +173,30 @@
       </div>
 
     </div>
-    <div class="col-12 col-lg-9">
+    <div class="col-12 col-lg-9" *ngIf="showEditorAndOthererWindows">
       <!--MAIN AREA WHERE EDITOR AND CONSOLE WILL BE-->
-      <form class="text-right" (submit)="onRunClicked(codeForm)" #codeForm="ngForm">
+      <form class="text-right" (submit)="onSubmitLabTaskClicked(codeForm)" #codeForm="ngForm">
       <div class="row">
         <div class="col">
-          <h5 class="text-center text-warning"><b>PASTE CODE BELOW</b></h5>
+          <h5 class="text-center text-warning"><b>PASTE CODE BELOW for Task : {{taskTitleOfTaskBeiingCurrentlyAttempted}}</b></h5>
             <div class="form-group p-0 m-0">
-              <textarea class="form-control m-0" spellcheck="false" name="Code" ngModel rows="8"></textarea>
+              <textarea class="form-control m-0" spellcheck="false" name="theCode" ngModel rows="8"></textarea>
             </div>
 
-            <button class="btn btn-primary EditorBtns" type="submit" >Run</button>
+
+            <button class="btn btn-primary EditorBtns" type="submit" >Submit Lab Task</button>
           </div>
         </div>
         <div class="row p-1 ">
           <div class="col-12 col-lg-5 m-auto border rounded border-warning">
-            <h6 class="text-center text-warning"><b>PASTE INPUT VALUES BELOW</b></h6>
-            <textarea class="form-control p-1 mb-2" rows="8" spellcheck="false">{{OutputConsole}}</textarea>
+            <h6 class="text-center text-warning"><b>INPUT</b></h6>
+            <textarea class="form-control p-1 mb-2" rows="8" name="theInput" ngModel spellcheck="false"></textarea>
+
+            <!-- <button class="btn btn-primary EditorBtns">Clear</button> -->
+          </div>
+          <div class="col-12 col-lg-5 m-auto border rounded border-warning">
+            <h6 class="text-center text-warning"><b>OUTPUT</b></h6>
+            <textarea class="form-control p-1 mb-2" rows="8" name="theOutput" ngModel spellcheck="false"></textarea>
             <!-- <button class="btn btn-primary EditorBtns">Clear</button> -->
           </div>
 

@@ -7,9 +7,9 @@
     "types": []
   },
   "angularCompilerOptions":{
-    "enableIvy": true,
-    "strictTemplates": true,
-    "strictInjectionParameters": true
+    "enableIvy": false,
+    "strictTemplates": false,
+    "strictInjectionParameters": false
   },
   "files": [
     "src/main.ts",

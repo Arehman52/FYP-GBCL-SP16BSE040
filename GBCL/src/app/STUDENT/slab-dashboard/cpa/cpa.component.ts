@@ -43,18 +43,45 @@ export class CpaComponent {
 
 
 
-  OutputConsole = 'The output of the program will be displayed here!';
+  // OutputConsole = 'The output of the program will be displayed here!';
 
-  onRunClicked(codeForm: NgForm){
+  onSubmitLabTaskClicked(codeForm: NgForm){
 
-    var results = this.cpasService.RunTheCOde(codeForm.value.Code);
+    // var results = this.cpasService.RunTheCOde(codeForm.value.Code);
+    if(codeForm.value.theCode == ""){
+      alert('You cannot submit empty Code');
+      return;
+    }
+    if(codeForm.value.theOutput == ""){
+      alert('You cannot submit empty Output');
+      return;
+    }
+    const data = {
+      theCode : codeForm.value.theCode,
+      theInput : codeForm.value.theInput,
+      theOutput : codeForm.value.theOutput
+    };
 
-    console.log(results);
-    this.OutputConsole = results.toString();
+
+
+    // console.log(results);
+    console.log(data);
+    // this.OutputConsole = results.toString();
   }
 
+  taskTitleOfTaskBeiingCurrentlyAttempted  = '';
 
 
+  showEditorAndOthererWindows = false;
+  onAttemptClicked(task:{
+    taskID: string,
+    taskTitle: string,
+    XPsAllocated: string,
+    taskContent: string} ){
+
+    this.showEditorAndOthererWindows = true;
+    this.taskTitleOfTaskBeiingCurrentlyAttempted = task.taskTitle;
+  }
 
 localStorageUsername = localStorage.getItem("UsersUsername");
 
