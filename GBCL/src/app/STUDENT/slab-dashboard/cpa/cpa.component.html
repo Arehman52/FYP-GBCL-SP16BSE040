@@ -41,13 +41,13 @@
 
         <!-- ----------- -->
         <!-- Stats column -->
-        <div class="col-12 col-sm-4 col-md-5 border rounded text-left h-100 m-auto p-2 text-center">
+        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto p-2 text-center">
           <h5><b>Code Practice Area</b></h5>
         </div>
         <!-- Stats column -->
-        <div class="col-12 col-sm-2 col-md-3 border rounded text-left h-100 m-auto p-2 text-center">
+        <!-- <div class="col-12 col-sm-2 col-md-3 border rounded text-left h-100 m-auto p-2 text-center">
           <h5 class="text-warning">Unchanged Stats</h5>
-        </div>
+        </div> -->
         <!-- STATS COL END -->
         <!-- ------------- -->
 
@@ -146,7 +146,8 @@
                 <div class="card-body ">
                   {{task.taskContent}}
                   <div class="text-right">
-                    <button class="btn btn-primary btn-sm " >Submit Solution</button>
+                    <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a>
+                    <button class="btn btn-primary btn-sm mx-2" >Submit Solution</button>
                   </div>
                 </div>
               </div>
@@ -177,9 +178,8 @@
       <form class="text-right" (submit)="onRunClicked(codeForm)" #codeForm="ngForm">
       <div class="row">
         <div class="col">
-          <h5 class="text-center text-warning"><b>CODE EDITOR</b></h5>
+          <h5 class="text-center text-warning"><b>PASTE CODE BELOW</b></h5>
             <div class="form-group p-0 m-0">
-              <label class="text-light">print("Hello Word!")</label>
               <textarea class="form-control m-0" spellcheck="false" name="Code" ngModel rows="8"></textarea>
             </div>
 
@@ -187,9 +187,9 @@
           </div>
         </div>
         <div class="row p-1 ">
-          <div class="col-12 col-lg-11 m-auto border rounded border-warning">
-            <h6 class="text-center text-warning"><b>OUTPUT CONSOLE</b></h6>
-            <textarea class="form-control p-1 mb-2" rows="8" disabled>{{OutputConsole}}</textarea>
+          <div class="col-12 col-lg-5 m-auto border rounded border-warning">
+            <h6 class="text-center text-warning"><b>PASTE INPUT VALUES BELOW</b></h6>
+            <textarea class="form-control p-1 mb-2" rows="8" spellcheck="false">{{OutputConsole}}</textarea>
             <!-- <button class="btn btn-primary EditorBtns">Clear</button> -->
           </div>
 
