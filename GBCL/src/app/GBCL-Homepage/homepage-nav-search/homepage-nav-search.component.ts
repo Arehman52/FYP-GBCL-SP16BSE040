@@ -111,6 +111,7 @@ export class HomepageNavSearchComponent implements OnInit {
       UniversityNameOfUser: null,
       UserType: '-1',
       Username: EnteredUN,
+      UserzAccessStatus: null,
       _id: null,
     };
 

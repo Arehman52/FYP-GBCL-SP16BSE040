@@ -19,10 +19,12 @@ export class SignupFormComponent implements OnInit {
     this.user.UniversityNameOfUser = 'NotListedHere';
     this.UniversitiesListFromDB = this.homepageService.getUniversitiesListFromDB();
     this.UsersRecievedFromDBForSignup = this.homepageService.RecieveUsersFromDBForSignup();
+    // this.usersInfoListFromDB = this.homepageService.RecieveUsersFromDBForSignup();
+    console.log("this.UsersRecievedFromDBForSignup FROM ngOnInit()");
     console.log(this.UsersRecievedFromDBForSignup);
     setTimeout(()=>{
-      this.fnUpdListUnis();
-    },700);
+      this.loadUnisListFromDatabase();
+    },2000);
   }
 
 
@@ -40,7 +42,8 @@ export class SignupFormComponent implements OnInit {
   UniversitiesListFromDB = [];
 
   // FOLLOWING FN UPDATES Uni LIST FROM DB
-  fnUpdListUnis(){
+  // fnUpdListUnis(){
+  loadUnisListFromDatabase(){
 
     for(var i=0; i<this.UsersRecievedFromDBForSignup.length;i++){
 
@@ -71,7 +74,7 @@ export class SignupFormComponent implements OnInit {
 
       this.Errors.formHasErrors.status = false;
       this.Errors.formSubmittedSuccessfuly.status = true;
-      setTimeout(()=>{window.location.reload()},1500);
+      setTimeout(()=>{form.resetForm},1500);
     }
   }
 
@@ -91,14 +94,13 @@ export class SignupFormComponent implements OnInit {
   }
   // UniS:HTMLSelectElement = null;
 
-  usersInfoListFromDB = {};
+  // usersInfoListFromDB:Usersmodel[] = [];
 
 
   // console.log(this.UniversitiesListFromDB);
 
   user: Usersmodel = {
     _id: null,
-    UserType: '',
     // attribs of UserType = Student/Teacher
     FirstNameOfUser: '',
     LastNameOfUser: '',
@@ -108,6 +110,8 @@ export class SignupFormComponent implements OnInit {
     TitleOfUniversity: '',
     HECIDofUniversity: '',
     //common attribs
+    UserType: '',
+    UserzAccessStatus: 'Pending',
     Username: '',
     Password: '',
   };
@@ -261,11 +265,11 @@ export class SignupFormComponent implements OnInit {
     var universitysEnteredUN = '';
     if (this.SignupForm.value.UsernameOfUniversity != null) {
       universitysEnteredUN = this.SignupForm.value.UsernameOfUniversity;
-      if (this.usersInfoListFromDB != null) {
-        for (var i = 0; i < Object.keys(this.usersInfoListFromDB).length; i++) {
+      if (this.UsersRecievedFromDBForSignup != null) {
+        for (var i = 0; i < Object.keys(this.UsersRecievedFromDBForSignup).length; i++) {
           var re = '"' + universitysEnteredUN + '"';
           var usnm: string = JSON.stringify(
-            this.usersInfoListFromDB[i].Username
+            this.UsersRecievedFromDBForSignup[i].Username
           );
           if (usnm.toLowerCase() === re.toLowerCase()) {
             this.Errors.usernameNotUnique.status = true;
@@ -310,17 +314,23 @@ export class SignupFormComponent implements OnInit {
     this.SignupForm.value.UsersEnteredUsername.length < 5
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
-    // checks uniqienes
+    // checks uniqieness
     var userEnteredUN = '';
-    if (this.SignupForm.value.UsersEnteredUsername != null) {
+    if (this.SignupForm.value.UsersEnteredUsername != null)
+     {
       userEnteredUN = this.SignupForm.value.UsersEnteredUsername;
-      if (this.usersInfoListFromDB != null) {
-        for (var i = 0; i < Object.keys(this.usersInfoListFromDB).length; i++) {
-          var re = '"' + userEnteredUN + '"';
-          var usnm: string = JSON.stringify(
-            this.usersInfoListFromDB[i].Username
+      // userEnteredUN = 'bIlalKhursheed';
+      console.log("this.usersInfoListFromDB");
+      // console.log(this.usersInfoListFromDB);
+      if (this.UsersRecievedFromDBForSignup != null)
+      {
+        for (var i = 0; i < Object.keys(this.UsersRecievedFromDBForSignup).length; i++)
+        {
+          var quotedUserEnteredUN = '"' + userEnteredUN + '"';
+          var IteratedUNinForLoop: string = JSON.stringify(
+            this.UsersRecievedFromDBForSignup[i].Username
           );
-          if (usnm.toLowerCase() === re.toLowerCase()) {
+          if (IteratedUNinForLoop.toLowerCase() == quotedUserEnteredUN.toLowerCase()) {
             this.Errors.usernameNotUnique.status = true;
             console.log('user was matched');
             // console.log(this.Errors.usernameNotUnique);

@@ -12,7 +12,7 @@ export class LoginService {
 
   usersCollectionFromMongoDB: Usersmodel[];
 
-
+//
 
 
 
@@ -31,18 +31,6 @@ export class LoginService {
 
   arr: any[] = [];
   FecthTheMatchingUserForLogin(userToBeSearched: Usersmodel): any[] {
-    var userFetchednMtched: Usersmodel = {
-      FirstNameOfUser : '',
-      HECIDofUniversity : '',
-      LastNameOfUser: '',
-      Password: '',
-      RegistrationNumberOfUser: '',
-      TitleOfUniversity: '',
-      UniversityNameOfUser: '',
-      UserType: '-1',
-      Username: '',
-      _id: ''
-    };
 
 
     this.http

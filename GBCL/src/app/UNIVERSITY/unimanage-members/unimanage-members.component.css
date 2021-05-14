@@ -1,3 +1,33 @@
+.errorText {
+  padding: 3px 13px 3px 5px;
+  border: red;
+  border-radius: 2px;
+  font-size: 12px;
+  color: yellow;
+  background: rgba(138, 68, 68, 0.3);
+  width: fit-content;
+}
+.formSubmissionErrorsText {
+  padding: 4px 13px 4px 15px;
+  border: 2px solid red;
+  /* border-color: seagreen; */
+  border-radius: 5px;
+  font-size: 12px;
+  color: rgb(236, 92, 95);
+  background: rgba(250, 36, 25, 0.301);
+  width: 100%;
+}
+
+.formSubmissionSuccessText {
+  padding: 4px 13px 4px 15px;
+  border: 2px solid seagreen;
+  /* border-color: seagreen; */
+  border-radius: 5px;
+  font-size: 12px;
+  color: rgba(8, 255, 25);
+  background: rgba(93, 194, 100, 0.3);
+  width: 100%;
+}
 .container-fluid{
   min-height: 100vh;
 }

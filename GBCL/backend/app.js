@@ -40,20 +40,7 @@ app.use((req, res, next) => {
 
 });
 
-
-app.get("/api/GetUsersListFromDB", (req, res, next) => {
-
-  Users.find().then( documents => {
-    res.status(200).json({
-      message: "this is a list of users recieved from DB",
-      usersInResponse: documents
-    });
-  });
-
-  // console.log("get  rEQUEST.");
-  // res.status(200).json("MESSAGadawdadE RECD");
-});
-
+// /api/Homepage/GetUsersListFromDB
 
 
 

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = mongoose.Schema({
-  UserType: String,
   // attribs of UserType = Student/Teacher
   FirstNameOfUser: String,
   LastNameOfUser: String,
@@ -12,6 +11,8 @@ const userSchema = mongoose.Schema({
   TitleOfUniversity: String,
   HECIDofUniversity: String,
   // common attribs
+  UserType: String,
+  UserzAccessStatus: String,
   Username: {type:String, required : true, unique:true},
   Password: String
 });

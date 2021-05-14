@@ -8,13 +8,26 @@ const Users = require('../models/user');
 const router = express.Router();
 
 
+// app.get("/GetUsersListFromDB", (req, res, next) => {
+
+//   Users.find().then( documents => {
+//     res.status(200).json({
+//       message: "this is a list of users recieved from DB",
+//       usersInResponse: documents
+//     });
+//   });
+
+//   // console.log("get  rEQUEST.");
+//   // res.status(200).json("MESSAGadawdadE RECD");
+// });
+
 
 
 //following is a POST request to create User.
 router.post("/CreateUser", (req, res, next) => {
 
 
-  const user = new Users({
+  const user  = new Users({
     UserType: req.body.UserType,
     FirstNameOfUser: req.body.FirstNameOfUser,
     LastNameOfUser: req.body.LastNameOfUser,
@@ -22,11 +35,10 @@ router.post("/CreateUser", (req, res, next) => {
     RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
     TitleOfUniversity: req.body.TitleOfUniversity,
     HECIDofUniversity: req.body.HECIDofUniversity,
+    UserzAccessStatus: req.body.UserzAccessStatus,
     Username: req.body.Username,
     Password: req.body.Password
   });
-
-
   user.save().then(
     result => {
       res.status(201).json({
@@ -47,19 +59,24 @@ router.post("/CreateUser", (req, res, next) => {
 });
 
 
+
+
+
 router.post("/FetchTHISUser", (req, res, next) => {
 
 
   Users.findOne({"Username": req.body.Username }).then( document => {
     res.status(200).json({
-      message: " 001 USER HAS BEEN aiqa aya abbb?? RETRIEVED FOR SIGNIN",
+      message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
       user: document
 
+    }).catch((err)=>{
+      console.log(" 006 res.status(200) in /FetchTHISUser eeerrrororrorr\n",err);
     });
     console.log(" 003 USER HAS BEEN RETRIEVED FOR SIGNIN");
 
   }).catch((err)=>{
-    console.log(" 004 theeeen eeerrrororrorr",err);
+    console.log(" 004 theeeen eeerrrororrorr\n",err);
   });
 });
 
@@ -75,7 +92,7 @@ router.get("/getUniversitiesList", (req, res, next) => {
       theList: list
     });
     console.log("SUCCESSFUL TIL HERE : Homepage-routes.js:62");
- 
+
   });
 });
 
