@@ -24,7 +24,7 @@ export class HomepageService {
   tempUsers: Usersmodel[] = [];
 
 
-  RecieveUsersFromDBForSignup() {
+  RecieveAllUsersFromDB() {
     console.log("OUTSIDE HTTP 2nd");
     this.http
     .get<{ message: string; users: Usersmodel[] }>(

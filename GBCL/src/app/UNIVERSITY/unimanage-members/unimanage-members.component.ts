@@ -16,7 +16,7 @@ export class UnimanageMembersComponent implements OnInit {
   constructor(private homepageService:HomepageService) { }
   ngOnInit() {
     this.setALLErrorsToFalse();
-    this.UsersRecievedFromDBForSignup = this.homepageService.RecieveUsersFromDBForSignup();
+    this.UsersRecievedFromDBForSignup = this.homepageService.RecieveAllUsersFromDB();
   }
 
 
@@ -40,6 +40,14 @@ export class UnimanageMembersComponent implements OnInit {
 // //////////////////////////////////////////\///
 // //////////////////////////////////////////\///  CORRECT CODE BELOW
 // //////////////////////////////////////////\///
+
+onMemberTypeButtonToggle(){
+  if(this.MemberType == "Student"){
+    this.MemberType = "Teacher";
+  }else{
+    this.MemberType = "Student";
+  }
+}
 
 
 on_CreateMemberProfileSubmitButton_Clicked(createMemberForm:NgForm){
@@ -126,20 +134,38 @@ checkRegNOfMember(createMemberForm:NgForm){
       : (this.Errors.invalidRegistrationNumber.status = false);
 }
 
+setALLErrorsToFalse() {
+  this.Errors.invalidFName.status = false;
+  this.Errors.invalidLName.status = false;
+  this.Errors.invalidPassword.status = false;
+  this.Errors.invalidUsername.status = false;
+  this.Errors.invalidRegistrationNumber.status = false;
+  this.Errors.usernameNotUnique.status = false;
+  this.Errors.formHasErrors.status = false;
+  this.Errors.formSubmittedSuccessfuly.status = false;
+}
+
+checkIfErrors(): boolean{
+  if (
+    this.Errors.invalidFName.status ||
+    this.Errors.invalidLName.status ||
+    this.Errors.invalidPassword.status ||
+    this.Errors.invalidRegistrationNumber.status ||
+    this.Errors.invalidUsername.status ||
+    this.Errors.usernameNotUnique.status
+  )
+    return true;
+  else return false;
+}
+
+
+
+
+
+
   onLogout(){
     localStorage.clear();
     window.location.href="/";
-  }
-
-
-
-
-  onMemberTypeButtonToggle(){
-    if(this.MemberType == "Student"){
-      this.MemberType = "Teacher";
-    }else{
-      this.MemberType = "Student";
-    }
   }
 
 
@@ -164,31 +190,6 @@ checkRegNOfMember(createMemberForm:NgForm){
     }
   }
 
-
-  setALLErrorsToFalse() {
-    this.Errors.invalidFName.status = false;
-    this.Errors.invalidLName.status = false;
-    this.Errors.invalidPassword.status = false;
-    this.Errors.invalidUsername.status = false;
-    this.Errors.invalidRegistrationNumber.status = false;
-    this.Errors.usernameNotUnique.status = false;
-    this.Errors.formHasErrors.status = false;
-    this.Errors.formSubmittedSuccessfuly.status = false;
-  }
-
-
-  checkIfErrors(): boolean{
-    if (
-      this.Errors.invalidFName.status ||
-      this.Errors.invalidLName.status ||
-      this.Errors.invalidPassword.status ||
-      this.Errors.invalidRegistrationNumber.status ||
-      this.Errors.invalidUsername.status ||
-      this.Errors.usernameNotUnique.status
-    )
-      return true;
-    else return false;
-  }
 
 // //////////////////////////////////////////\///
 // //////////////////////////////////////////\///  CORRECT CODE ABOVE

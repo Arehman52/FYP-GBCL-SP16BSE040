@@ -87,9 +87,9 @@
         <li class="nav-item text-left">
           <a class="nav-link active" [routerLink]="'/ADMIN/ManageUniversities'">Manage Universities</a>
         </li>
-        <li class="nav-item text-left">
+        <!-- <li class="nav-item text-left">
           <a class="nav-link" [routerLink]="'/ADMIN/JoinRequests'">Join Requests</a>
-        </li>
+        </li> -->
         <!-- <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
       </li>
@@ -168,9 +168,7 @@
                             <thead>
                               <tr>
                                 <th>HECID</th>
-                                <th>Faculty Count</th>
-                                <th>Labs Count</th>
-                                <th>Students Count</th>
+                                <th>University</th>
                                 <th>Access Status</th>
                                 <!-- UniTitle: String;
                               AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'};
@@ -186,9 +184,7 @@
 
 
                                 <td>{{uni.uniTitle}}</td>
-                                <td>{{uni.id}}</td>
-                                <td>{{uni.status}}</td>
-                                <td>{{uni.status}}</td>
+                                <td>{{uni.uniTitle}}</td>
                                 <td>{{uni.status}}</td>
                               </tr>
                             </tbody>
@@ -196,7 +192,7 @@
                           <div class="d-flex justify-content-end mr-3">
                             <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2">Terminate
                               Access</button>
-                            <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2"
+                            <button  class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2"
                               (click)="onEditButtonToggle()">{{this.EditButtonText}}</button>
                             <button class="btn btn-outline-danger w-25 maSmallerFonts my-2 mx-2">Delete</button>
 
@@ -206,25 +202,44 @@
 
 
                           </div>
-                          <div [ngClass]="{'d-none': this.EditButtonToggled == false}">
-                            <form class="m-2 ">
+                          <div  style="border-radius:8px;"
+                          [ngClass]="{'d-none': this.EditButtonToggled == false,
+                          'border border-warning bg-info text-dark m-3 p-2': this.EditButtonToggled == true}"
+                          >
+                            <form class="m-2 " #updateUniForm="ngForm" (submit)="onSubmit_UpdateButton(updateUniForm)">
                               <div class="row">
                                 <div class="col-sm-6">
                                   <div class="form-group">
-                                    <label for="EnterUniTitle">University Title:</label>
-                                    <input type="text" class="form-control" placeholder="Enter University's Title:" id="EnterUniTitle">
+                                    <label>University Title:</label>
+                                    <input type="text" class="form-control" placeholder="Enter University's Title:"
+                                    name="UniTitle" ngModel>
                                   </div>
                                 </div>
                                 <div class="col-sm-6">
                                   <div class="form-group">
-                                    <label for="EnterHECIDFroUniversity">University HECID:</label>
-                                    <input type="text" class="form-control" placeholder="Enter HECID of university" id="EnterHECIDFroUniversity">
+                                    <label >HECID:</label>
+                                    <input type="text" class="form-control" placeholder="Enter HECID of university"
+                                    name="UniHECID" ngModel>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label >Username:</label>
+                                    <input type="text" class="form-control" placeholder="Create Username for university"
+                                    name="UniUsername" ngModel>
+                                  </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label >Password:</label>
+                                    <input type="text" class="form-control" placeholder="Create Password for university"
+                                    name="UniPassword" ngModel>
                                   </div>
                                 </div>
                               </div>
 
-                              <div class="d-flex justify-content-end">
-                                <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2">Update</button>
+                              <div class="d-flex justify-content-center">
+                                <button class="btn btn-warning w-50 maSmallerFonts my-2 mx-2" type="submit">Update</button>
                               </div>
                             </form>
                           </div>
@@ -263,27 +278,66 @@
           </div>
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
             <div class="card-body">
-              <form class="m-2 ">
+              <form class="m-2 " #registerUniForm="ngForm" (submit)="onSubmit_RegisterButton(registerUniForm)">
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="EnterUniTitle">University Title:</label>
+                      <label>University Title:</label>
                       <input type="text" class="form-control" placeholder="Enter University's Title:"
-                        id="EnterUniTitle">
+                      (keyup)="checkTitleForRegisterUniversity(registerUniForm)"
+                      name="UniTitle" ngModel>
+                      <small class="form-text errorText" *ngIf="this.Errors.invalidTitle.status == true">
+                        {{this.Errors.invalidTitle.message}}
+                      </small>
+
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="EnterHECIDFroUniversity">University HECID:</label>
+                      <label>University HECID:</label>
                       <input type="text" class="form-control" placeholder="Enter HECID of university"
-                        id="EnterHECIDFroUniversity">
+                      (keyup)="checkHECIDForRegisterUniversity(registerUniForm)"
+                      name="UniHECID" ngModel>
+                      <small class="form-text errorText" *ngIf="this.Errors.invalidHECID.status == true">
+                        {{this.Errors.invalidHECID.message}}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label >Username:</label>
+                      <input type="text" class="form-control" placeholder="Create Username for university"
+                      (keyup)="checkUsernameOfUniversity(registerUniForm)"
+                      name="UniUsername" ngModel>
+                      <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+                        {{this.Errors.invalidUsername.message}}
+                      </small>
+                      <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
+                        {{this.Errors.usernameNotUnique.message}}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label >Password:</label>
+                      <input type="text" class="form-control" placeholder="Create Password for university"
+                      (keyup)="checkPasswordForRegisterUniversity(registerUniForm)"
+                      name="UniPassword" ngModel>
+                      <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                        {{this.Errors.invalidPassword.message}}
+                      </small>
                     </div>
                   </div>
                 </div>
 
                 <div class="d-flex justify-content-end">
-                  <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2">Register</button>
-                </div>
+                  <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2" type="submit">Register</button>
+                </div>                      <small class="form-text errorText" *ngIf="this.Errors.formHasErrors.status == true">
+                  {{this.Errors.formHasErrors.message}}
+                </small>
+                <small class="form-text errorText" *ngIf="this.Errors.profileCreated.status == true">
+                  {{this.Errors.profileCreated.message}}
+                </small>
               </form>
             </div>
           </div>

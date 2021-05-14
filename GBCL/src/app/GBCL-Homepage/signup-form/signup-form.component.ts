@@ -18,7 +18,7 @@ export class SignupFormComponent implements OnInit {
     this.setALLErrorsToFalse();
     this.user.UniversityNameOfUser = 'NotListedHere';
     this.UniversitiesListFromDB = this.homepageService.getUniversitiesListFromDB();
-    this.UsersRecievedFromDBForSignup = this.homepageService.RecieveUsersFromDBForSignup();
+    this.UsersRecievedFromDBForSignup = this.homepageService.RecieveAllUsersFromDB();
     // this.usersInfoListFromDB = this.homepageService.RecieveUsersFromDBForSignup();
     console.log("this.UsersRecievedFromDBForSignup FROM ngOnInit()");
     console.log(this.UsersRecievedFromDBForSignup);

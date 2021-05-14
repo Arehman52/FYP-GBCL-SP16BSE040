@@ -117,9 +117,9 @@
       <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/ADMIN/ManageUniversities'">Manage Universities</a>
       </li>
-      <li class="nav-item text-left">
+      <!-- <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/ADMIN/JoinRequests'">Join Requests</a>
-      </li>
+      </li> -->
       <!-- <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
       </li>
@@ -135,15 +135,12 @@
 
 
     <div id="accordionOuter">
-
-
-
-      <div class="card mt-2 mx-3">
+      <div class="card  mt-2 mx-3">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <h4 class="text-secondary py-2 px-1 text-center" >
-             <b>Overall Universities Data</b>
-            </h4>
+            <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <h4><b>JOIN REQUESTS</b></h4>
+            </button>
           </h5>
         </div>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
@@ -151,39 +148,95 @@
 
 
 
-            <table class="table table-striped text-center">
-              <thead>
-                <tr>
-                  <th>Total regd. Universities</th>
-                  <th>Faculty Count</th>
-                  <th>Labs Count</th>
-                  <th>Students Count</th>
-                  <!-- UniTitle: String;
-                  AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'};
-                  AccessStatus: String;
-                  HECID: String;
-                  FacultyCount: number;
-                  LabsCount: number;
-                  StudentsCount: number; -->
-                </tr>
-              </thead>
-              <tbody>
-                <tr >
 
 
-                  <td>12</td>
-                  <td>342</td>
-                  <td>98</td>
-                  <td>5263</td>
-                </tr>
-              </tbody>
-            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Cards within card -->
+
+            <div id="accordionInner">
+              <div class="card mb-1" *ngFor="let uni of UniversitiesData">
+                <div class="card-header"
+                  [attr.id]="'RegisterUniversityCard'">
+
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisterUniversityCollapse' + uni.Id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + uni.Id">
+                    {{uni.UniTitle}}
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisterUniversityCollapse' + uni.Id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
+                  data-parent="#accordionInner">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto"><!-- remove bg dark -->
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>HECID</th>
+                              <th>Uiversity</th>
+                              <th>Access Status</th>
+                              <!-- UniTitle: String;
+                              AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'};
+                              AccessStatus: String;
+                              HECID: String;
+                              FacultyCount: number;
+                              LabsCount: number;
+                              StudentsCount: number; -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+
+                              <td>{{uni.HECID}}</td>
+                              <td>{{uni.UniTitle}}</td>
+                              <td>{{uni.AccessStatus}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                        <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
+                        <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cards within card -->
+
 
           </div>
         </div>
       </div>
 
     </div>
+
   </div>
 
 
