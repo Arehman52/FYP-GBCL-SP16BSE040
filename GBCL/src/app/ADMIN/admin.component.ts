@@ -74,4 +74,12 @@ UniversitiesData: UniversityModel[] = [{
   LabsCount: 28,
   StudentsCount: 208
 }];
+
+
+
+onLogout(){
+  localStorage.clear();
+  window.location.href="/";
+}
+
 }
