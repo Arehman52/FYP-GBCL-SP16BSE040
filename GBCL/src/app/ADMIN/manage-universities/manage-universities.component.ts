@@ -25,6 +25,7 @@ export class ManageUniversitiesComponent implements OnInit {
   EditButtonToggled = false;
   EditButtonText = "Edit";
   private AllUsersRecievedFromDB: Usersmodel[] = [];
+  localStorageUsername = localStorage.getItem("UsersUsername");
 
   // //////////////////////////////////////////\///
   // //////////////////////////////////////////\///  VARIABLE DECLARATIONS ABOVE
@@ -68,6 +69,12 @@ export class ManageUniversitiesComponent implements OnInit {
   //    ABOVE is     (( ManageUniversities --> AffiliatedUniversities --> Edit ))
   // //////////////////////////////////////////\///////////////////////////\///
 
+
+
+onLogout(){
+  localStorage.clear();
+  window.location.href="/";
+}
 
   // //////////////////////////////////////////\///////////////////////////\///
   //    BELOW is     (( ManageUniversities --> Register a Unniversity ))

@@ -50,7 +50,7 @@
             <div class="col-12 btn-group">
               <!-- Example single danger button -->
 
-              <a class="btn btn-warning mt-4 maSmallerFonts" [routerLink]="'/'">Logout</a>
+              <button type="button" class="btn btn-warning w-50 mx-1 mt-3" (click)="onLogout()">Logout</button >
               <!-- <a type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Logout
   </a>
@@ -286,7 +286,7 @@
                       <input type="text" class="form-control" placeholder="Enter University's Title:"
                       (keyup)="checkTitleForRegisterUniversity(registerUniForm)"
                       name="UniTitle" ngModel>
-                      <small class="form-text errorText" *ngIf="this.Errors.invalidTitle.status == true">
+                      <small class="form-text alert-danger" *ngIf="this.Errors.invalidTitle.status == true">
                         {{this.Errors.invalidTitle.message}}
                       </small>
 
@@ -298,7 +298,7 @@
                       <input type="text" class="form-control" placeholder="Enter HECID of university"
                       (keyup)="checkHECIDForRegisterUniversity(registerUniForm)"
                       name="UniHECID" ngModel>
-                      <small class="form-text errorText" *ngIf="this.Errors.invalidHECID.status == true">
+                      <small class="form-text alert-danger" *ngIf="this.Errors.invalidHECID.status == true">
                         {{this.Errors.invalidHECID.message}}
                       </small>
                     </div>
@@ -309,10 +309,10 @@
                       <input type="text" class="form-control" placeholder="Create Username for university"
                       (keyup)="checkUsernameOfUniversity(registerUniForm)"
                       name="UniUsername" ngModel>
-                      <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+                      <small class="form-text alert-danger" *ngIf="this.Errors.invalidUsername.status == true">
                         {{this.Errors.invalidUsername.message}}
                       </small>
-                      <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
+                      <small class="form-text alert-danger" *ngIf="this.Errors.usernameNotUnique.status == true">
                         {{this.Errors.usernameNotUnique.message}}
                       </small>
                     </div>
@@ -323,7 +323,7 @@
                       <input type="text" class="form-control" placeholder="Create Password for university"
                       (keyup)="checkPasswordForRegisterUniversity(registerUniForm)"
                       name="UniPassword" ngModel>
-                      <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                      <small class="form-text alert-danger" *ngIf="this.Errors.invalidPassword.status == true">
                         {{this.Errors.invalidPassword.message}}
                       </small>
                     </div>
@@ -332,10 +332,11 @@
 
                 <div class="d-flex justify-content-end">
                   <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2" type="submit">Register</button>
-                </div>                      <small class="form-text errorText" *ngIf="this.Errors.formHasErrors.status == true">
+                </div>
+                <small class="alert alert-danger" *ngIf="this.Errors.formHasErrors.status == true">
                   {{this.Errors.formHasErrors.message}}
                 </small>
-                <small class="form-text errorText" *ngIf="this.Errors.profileCreated.status == true">
+                <small class="form-text alert alert-success" *ngIf="this.Errors.profileCreated.status == true">
                   {{this.Errors.profileCreated.message}}
                 </small>
               </form>
