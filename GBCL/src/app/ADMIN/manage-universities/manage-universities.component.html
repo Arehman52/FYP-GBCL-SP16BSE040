@@ -125,6 +125,11 @@
             <div class="card-body">
 
 
+              <div *ngIf="this.AffiliatedUniversitiesData.length==0">
+                <div class="alert alert-info">
+                  <h5>There are no universities yet registered with GBCL.</h5>
+                </div>
+              </div>
 
               <!-- Search form -->
               <!-- <div class="row mb-2">
@@ -143,18 +148,18 @@
               <!-- Cards within card -->
 
               <div id="accordionInner">
-                <div class="card mb-1" *ngFor="let uni of Unis">
-                  <div class="card-header" [attr.id]="'heading'+uni.id">
+                <div class="card mb-1" *ngFor="let uni of AffiliatedUniversitiesData">
+                  <div class="card-header" [attr.id]="'heading'+uni._id">
 
                     <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                      [attr.data-target]="'#collapse' + uni.id" aria-expanded="true"
-                      [attr.aria-controls]="'collapse'+uni.id">
-                      {{uni.uniTitle}}
+                      [attr.data-target]="'#collapse' + uni._id" aria-expanded="true"
+                      [attr.aria-controls]="'collapse'+uni._id">
+                      {{uni.TitleOfUniversity}}
                     </button>
 
                   </div>
 
-                  <div [id]="'collapse'+uni.id" class="collapse hide" [attr.aria-labelledby]="'heading'+uni.id"
+                  <div [id]="'collapse'+uni._id" class="collapse hide" [attr.aria-labelledby]="'heading'+uni._id"
                     data-parent="#accordionInner">
                     <div class="card-body ">
 
@@ -170,22 +175,15 @@
                                 <th>HECID</th>
                                 <th>University</th>
                                 <th>Access Status</th>
-                                <!-- UniTitle: String;
-                              AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'};
-                              AccessStatus: String;
-                              HECID: String;
-                              FacultyCount: number;
-                              LabsCount: number;
-                              StudentsCount: number; -->
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
 
 
-                                <td>{{uni.uniTitle}}</td>
-                                <td>{{uni.uniTitle}}</td>
-                                <td>{{uni.status}}</td>
+                                <td>{{uni.HECIDofUniversity}}</td>
+                                <td>{{uni.TitleOfUniversity}}</td>
+                                <td>{{uni.UserzAccessStatus}}</td>
                               </tr>
                             </tbody>
                           </table>

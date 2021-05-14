@@ -15,6 +15,9 @@ export class ManageUniversitiesComponent implements OnInit {
   ngOnInit(): void {
     this.setALLErrorsToFalse();
     this.AllUsersRecievedFromDB = this.homepageService.RecieveAllUsersFromDB();
+    setTimeout(()=>{
+      this.extractAffiliatedUniversitiesData();
+    },700);
   }
 
 
@@ -25,7 +28,9 @@ export class ManageUniversitiesComponent implements OnInit {
   EditButtonToggled = false;
   EditButtonText = "Edit";
   private AllUsersRecievedFromDB: Usersmodel[] = [];
+  AffiliatedUniversitiesData: Usersmodel[] = [];
   localStorageUsername = localStorage.getItem("UsersUsername");
+
 
   // //////////////////////////////////////////\///
   // //////////////////////////////////////////\///  VARIABLE DECLARATIONS ABOVE
@@ -41,6 +46,19 @@ export class ManageUniversitiesComponent implements OnInit {
   // //////////////////////////////////////////\///////////////////////////\///
   //    BELOW is     (( ManageUniversities --> AffiliatedUniversities --> Edit ))
   // //////////////////////////////////////////\///////////////////////////\///
+
+
+
+  extractAffiliatedUniversitiesData(){
+    for(var i=0; i<this.AllUsersRecievedFromDB.length;i++){
+      if(this.AllUsersRecievedFromDB[i].UserType == 'university'
+      && this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Allowed'
+      ){
+        this.AffiliatedUniversitiesData.push(this.AllUsersRecievedFromDB[i]);
+      }
+    }
+  }
+
 
   onEditButtonToggle() {
 
