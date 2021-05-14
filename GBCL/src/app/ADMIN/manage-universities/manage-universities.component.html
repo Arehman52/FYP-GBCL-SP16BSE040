@@ -173,8 +173,10 @@
                             <thead>
                               <tr>
                                 <th>HECID</th>
-                                <th>University</th>
+                                <th>University Title</th>
                                 <th>Access Status</th>
+                                <th>Username</th>
+                                <th>Password</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -184,6 +186,8 @@
                                 <td>{{uni.HECIDofUniversity}}</td>
                                 <td>{{uni.TitleOfUniversity}}</td>
                                 <td>{{uni.UserzAccessStatus}}</td>
+                                <td>{{uni.Username}}</td>
+                                <td>{{uni.Password}}</td>
                               </tr>
                             </tbody>
                           </table>
@@ -204,34 +208,55 @@
                           [ngClass]="{'d-none': this.EditButtonToggled == false,
                           'border border-warning bg-info text-dark m-3 p-2': this.EditButtonToggled == true}"
                           >
-                            <form class="m-2 " #updateUniForm="ngForm" (submit)="onSubmit_UpdateButton(updateUniForm)">
+                            <form class="m-2 " #updateUniForm="ngForm" (submit)="onSubmit_UpdateButton(updateUniForm,uni)">
+                              <h6 class="text-light text-center">## You can change any or all of the following fields ##</h6>
+                              <hr class="w-100 mb-3 bg-warning">
                               <div class="row">
                                 <div class="col-sm-6">
                                   <div class="form-group">
                                     <label>University Title:</label>
                                     <input type="text" class="form-control" placeholder="Enter University's Title:"
-                                    name="UniTitle" ngModel>
+                                    name="UniTitle" ngModel
+                                    (keyup)="checkTitleForRegisterUniversity(updateUniForm)">
+                                    <small class="form-text alert-danger" *ngIf="this.Errors.invalidTitle.status == true">
+                                      {{this.Errors.invalidTitle.message}}
+                                    </small>
                                   </div>
                                 </div>
                                 <div class="col-sm-6">
                                   <div class="form-group">
                                     <label >HECID:</label>
                                     <input type="text" class="form-control" placeholder="Enter HECID of university"
-                                    name="UniHECID" ngModel>
+                                    name="UniHECID" ngModel
+                                    (keyup)="checkHECIDForRegisterUniversity(updateUniForm)">
+                                    <small class="form-text alert-danger" *ngIf="this.Errors.invalidHECID.status == true">
+                                      {{this.Errors.invalidHECID.message}}
+                                    </small>
                                   </div>
                                 </div>
                                 <div class="col-sm-6">
                                   <div class="form-group">
                                     <label >Username:</label>
                                     <input type="text" class="form-control" placeholder="Create Username for university"
-                                    name="UniUsername" ngModel>
+                                    name="UniUsername" ngModel
+                                    (keyup)="checkUsernameOfUniversity(updateUniForm)">
+                                    <small class="form-text alert-danger" *ngIf="this.Errors.invalidUsername.status == true">
+                                      {{this.Errors.invalidUsername.message}}
+                                    </small>
+                                    <small class="form-text alert-danger" *ngIf="this.Errors.usernameNotUnique.status == true">
+                                      {{this.Errors.usernameNotUnique.message}}
+                                    </small>
                                   </div>
                                 </div>
                                 <div class="col-sm-6">
                                   <div class="form-group">
                                     <label >Password:</label>
                                     <input type="text" class="form-control" placeholder="Create Password for university"
-                                    name="UniPassword" ngModel>
+                                    name="UniPassword" ngModel
+                                    (keyup)="checkPasswordForRegisterUniversity(updateUniForm)">
+                                    <small class="form-text alert-danger" *ngIf="this.Errors.invalidPassword.status == true">
+                                      {{this.Errors.invalidPassword.message}}
+                                    </small>
                                   </div>
                                 </div>
                               </div>

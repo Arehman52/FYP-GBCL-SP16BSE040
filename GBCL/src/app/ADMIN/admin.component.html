@@ -148,6 +148,11 @@
 
 
 
+            <div *ngIf="this.JOINRequestsUniversitiesData.length==0">
+              <div class="alert alert-info">
+                <h5>There are no Join requests to process.</h5>
+              </div>
+            </div>
 
 
 
@@ -172,19 +177,19 @@
             <!-- Cards within card -->
 
             <div id="accordionInner">
-              <div class="card mb-1" *ngFor="let uni of UniversitiesData">
+              <div class="card mb-1" *ngFor="let uni of JOINRequestsUniversitiesData">
                 <div class="card-header"
                   [attr.id]="'RegisterUniversityCard'">
 
                   <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                    [attr.data-target]="'#RegisterUniversityCollapse' + uni.Id" aria-expanded="true"
-                    [attr.aria-controls]="'collapse' + uni.Id">
-                    {{uni.UniTitle}}
+                    [attr.data-target]="'#RegisterUniversityCollapse' + uni._id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + uni._id">
+                    {{uni.TitleOfUniversity}}
                   </button>
 
                 </div>
 
-                <div [id]="'RegisterUniversityCollapse' + uni.Id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
+                <div [id]="'RegisterUniversityCollapse' + uni._id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
                   data-parent="#accordionInner">
                   <div class="card-body ">
 
@@ -209,9 +214,9 @@
                             <tr>
 
 
-                              <td>{{uni.HECID}}</td>
-                              <td>{{uni.UniTitle}}</td>
-                              <td>{{uni.AccessStatus}}</td>
+                              <td>{{uni.HECIDofUniversity}}</td>
+                              <td>{{uni.TitleOfUniversity}}</td>
+                              <td>{{uni.UserzAccessStatus}}</td>
                             </tr>
                           </tbody>
                         </table>

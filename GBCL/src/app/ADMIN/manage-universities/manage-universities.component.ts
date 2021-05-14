@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HomepageService } from 'src/app/gbcl-homepage/homepage.service';
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
@@ -13,11 +13,11 @@ export class ManageUniversitiesComponent implements OnInit {
   constructor(private homepageService: HomepageService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.extractAffiliatedUniversitiesData();
+    }, 700);
     this.setALLErrorsToFalse();
     this.AllUsersRecievedFromDB = this.homepageService.RecieveAllUsersFromDB();
-    setTimeout(()=>{
-      this.extractAffiliatedUniversitiesData();
-    },700);
   }
 
 
@@ -49,14 +49,19 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
 
-  extractAffiliatedUniversitiesData(){
-    for(var i=0; i<this.AllUsersRecievedFromDB.length;i++){
-      if(this.AllUsersRecievedFromDB[i].UserType == 'university'
-      && this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Allowed'
-      ){
-        this.AffiliatedUniversitiesData.push(this.AllUsersRecievedFromDB[i]);
+  extractAffiliatedUniversitiesData() {
+    if (this.AffiliatedUniversitiesData.length == 0) {
+      for (var i = 0; i < this.AllUsersRecievedFromDB.length; i++) {
+        if (this.AllUsersRecievedFromDB[i].UserType == 'university'
+          &&
+          (this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Allowed'
+            || this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Terminated')
+        ) {
+          this.AffiliatedUniversitiesData.push(this.AllUsersRecievedFromDB[i]);
+        }
       }
     }
+
   }
 
 
@@ -72,15 +77,66 @@ export class ManageUniversitiesComponent implements OnInit {
 
   }
 
-  onSubmit_UpdateButton(updateUniForm: NgForm) {
-    var txt = '';
-    if (confirm("Are you sure you want to update these values for this University?")) {
-      txt = "You pressed OK!";
-    } else {
-      txt = "You pressed Cancel!";
+  onSubmit_UpdateButton(updateUniForm: NgForm, OriginalUniDetails: Usersmodel) {
+    if (updateUniForm.value.UniTitle == ''
+      && updateUniForm.value.UniHECID == ''
+      && updateUniForm.value.UniUsername == ''
+      && updateUniForm.value.UniPassword == ''
+    ) {
+      alert('You can\'t update empty fields');
       return;
     }
-    alert(txt);
+
+    var UpdatedUniTitle = '';
+    var UpdatedUniHECID = '';
+    var UpdatedUniUsername = '';
+    var UpdatedUniPassword = '';
+
+    if (updateUniForm.value.UniTitle == '') {
+      UpdatedUniTitle = OriginalUniDetails.TitleOfUniversity;
+    }
+    else {
+      UpdatedUniTitle = updateUniForm.value.UniTitle;
+    }
+
+
+    if (updateUniForm.value.UniHECID == '') {
+      UpdatedUniHECID = OriginalUniDetails.HECIDofUniversity;
+    } else {
+      UpdatedUniHECID = updateUniForm.value.UniHECID;
+    }
+
+    if (updateUniForm.value.UniUsername == '') {
+      UpdatedUniUsername = OriginalUniDetails.Username;
+    } else {
+      UpdatedUniUsername = updateUniForm.value.UniUsername;
+    }
+
+    if (updateUniForm.value.UniPassword == '') {
+      UpdatedUniPassword = OriginalUniDetails.Password;
+    } else {
+      UpdatedUniPassword = updateUniForm.value.UniPassword;
+    }
+
+
+
+    const UpdatedUniAsAUser: Usersmodel = {
+      FirstNameOfUser: OriginalUniDetails.FirstNameOfUser,
+      HECIDofUniversity: UpdatedUniHECID,
+      LastNameOfUser: OriginalUniDetails.LastNameOfUser,
+      Password: UpdatedUniPassword,
+      RegistrationNumberOfUser: OriginalUniDetails.RegistrationNumberOfUser,
+      TitleOfUniversity: UpdatedUniTitle,
+      UniversityNameOfUser: OriginalUniDetails.UniversityNameOfUser,
+      UserType: OriginalUniDetails.UserType,
+      Username: UpdatedUniUsername,
+      UserzAccessStatus: OriginalUniDetails.UserzAccessStatus,
+      _id: OriginalUniDetails._id
+    }
+
+
+    console.log('UpdatedUniAsAUser\n', UpdatedUniAsAUser);
+
   }
 
   // //////////////////////////////////////////\///////////////////////////\///
@@ -89,10 +145,10 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
 
-onLogout(){
-  localStorage.clear();
-  window.location.href="/";
-}
+  onLogout() {
+    localStorage.clear();
+    window.location.href = "/";
+  }
 
   // //////////////////////////////////////////\///////////////////////////\///
   //    BELOW is     (( ManageUniversities --> Register a Unniversity ))

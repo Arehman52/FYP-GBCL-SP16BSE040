@@ -6,6 +6,15 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class HomepageService {
   constructor(private http: HttpClient) {}
+
+
+  private count = 0;
+  countPlusPlus(){
+    this.count++;
+  }
+  getCount():number{
+    return this.count;
+  }
   usersInfoFromDB = [
 
   ];
@@ -21,10 +30,10 @@ export class HomepageService {
     ];
 
 
-  tempUsers: Usersmodel[] = [];
 
 
-  RecieveAllUsersFromDB() {
+    RecieveAllUsersFromDB() {
+    var tempUsers: Usersmodel[] = [];
     console.log("OUTSIDE HTTP 2nd");
     this.http
     .get<{ message: string; users: Usersmodel[] }>(
@@ -34,12 +43,12 @@ export class HomepageService {
       // setTimeout('2000');
       console.log('SUCCESSFUL TILL HERE but working');
       for (let i = 0; i < Object.keys(responseData.users).length; i++) {
-        this.tempUsers.push(responseData.users[i]);
+        tempUsers.push(responseData.users[i]);
       }
       return;
 
     });
-    return this.tempUsers;
+    return tempUsers;
   }
 
 
