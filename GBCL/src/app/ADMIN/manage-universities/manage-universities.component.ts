@@ -84,8 +84,25 @@ export class ManageUniversitiesComponent implements OnInit {
       this.EditButtonText = "Edit";
       this.EditButtonToggled = false;
     }
-
   }
+
+
+
+  DeleteThisUser(uni:Usersmodel){
+    if(confirm("Are you sure you want to delete "+uni.TitleOfUniversity+" University")){
+      this.usersService.deleteThisUser(uni._id);
+      this.Errors.userDeleted.status = true;
+      setTimeout(() => {
+        window.location.reload();
+      }, 2500);
+    }else{
+      return;
+    }
+  }
+
+
+
+
 
   onSubmit_UpdateButton(updateUniForm: NgForm, OriginalUniDetails: Usersmodel) {
     if (updateUniForm.value.UniTitle == ''
@@ -162,11 +179,13 @@ export class ManageUniversitiesComponent implements OnInit {
     } else {
       this.Errors.formHasErrors.status = false;
       if (confirm('Are you sure you want to update these values?')) {
-        this.usersService.updateThisUser(UpdatedUniAsAUser);
+        console.log(OriginalUniDetails._id);
+        console.log(OriginalUniDetails.Username);
+        this.usersService.updateThisUser(UpdatedUniAsAUser,OriginalUniDetails._id);
         this.Errors.profileUpdated.status = true;
         setTimeout(() => {
           window.location.reload();
-        }, 3000);
+        }, 2500);
       } else {
         return;
       }
@@ -278,6 +297,7 @@ export class ManageUniversitiesComponent implements OnInit {
       : (this.Errors.invalidTitle.status = false);
   }
   setALLErrorsToFalse() {
+    this.Errors.userDeleted.status = false;
     this.Errors.invalidPassword.status = false;
     this.Errors.invalidUsername.status = false;
     this.Errors.usernameNotUnique.status = false;
@@ -334,21 +354,25 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
   Errors = {
+    userDeleted: {
+      status: true,
+      message: 'Records of this university has been deleted.',
+    },
     invalidUsername: {
       status: true,
-      message: 'Username should be atleast 5 characters).',
+      message: 'Username should be atleast 5 characters.',
     },
     invalidPassword: {
       status: true,
-      message: 'Password should be atleast 8 characters).',
+      message: 'Password should be atleast 8 characters.',
     },
     invalidHECID: {
       status: true,
-      message: 'HECID should be atleast 3 characters).',
+      message: 'HECID should be atleast 3 characters.',
     },
     invalidTitle: {
       status: true,
-      message: 'Title should be atleast 2 characters).',
+      message: 'Title should be atleast 2 characters.',
     },
     usernameNotUnique: {
       status: true,

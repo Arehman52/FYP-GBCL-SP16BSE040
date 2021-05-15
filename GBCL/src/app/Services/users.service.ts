@@ -21,8 +21,20 @@ export class UsersService {
     ];
 
 
-    updateThisUser(UpdatedUser: Usersmodel) {
+    deleteThisUser(Id: string){
+      this.http.delete("http://localhost:3000/api/Users/DeleteThisUser/"+Id).subscribe(
+        response=>{
+          console.log(response);
+        }
+      );
+    }
 
+    updateThisUser(UpdatedUser: Usersmodel, Id: string) {
+      this.http.put("http://localhost:3000/api/Users/UpdateThisUser/"+Id, UpdatedUser).subscribe(
+        response=>{
+          console.log(response);
+        }
+      );
     }
 
 

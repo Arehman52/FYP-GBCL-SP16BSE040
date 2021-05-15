@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 
 
 const Users = require('../models/user');
+const { __assign } = require("tslib");
 
 
 const router = express.Router();
@@ -20,6 +21,60 @@ const router = express.Router();
 //   // console.log("get  rEQUEST.");
 //   // res.status(200).json("MESSAGadawdadE RECD");
 // });
+
+// UpdateThisUser
+
+
+router.delete("/DeleteThisUser/:Id", (req, res, next)=>{
+
+  Users.deleteOne({_id: req.params.Id}).then(
+    result=>{
+      res.status(200).json({
+        message: "User Deleted!",
+        result: result
+      });
+    });
+
+
+});
+
+
+
+
+
+
+
+
+router.put("/UpdateThisUser/:Id", (req, res, next)=>{
+  const user  = new Users({
+    _id: req.body._id,
+    UserType: req.body.UserType,
+    FirstNameOfUser: req.body.FirstNameOfUser,
+    LastNameOfUser: req.body.LastNameOfUser,
+    UniversityNameOfUser: req.body.UniversityNameOfUser,
+    RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
+    TitleOfUniversity: req.body.TitleOfUniversity,
+    HECIDofUniversity: req.body.HECIDofUniversity,
+    UserzAccessStatus: req.body.UserzAccessStatus,
+    Username: req.body.Username,
+    Password: req.body.Password
+  });
+  // console.log()
+  console.log('USER: \n',user);
+  // console.log('USER: \n');
+
+  // Users.updateOne
+  Users.updateOne({_id: req.params.Id} ,user).then(
+    result=>{
+      res.status(200).json({
+        message: "User Updated!",
+        result: result
+      });
+    });
+
+
+});
+
 
 
 

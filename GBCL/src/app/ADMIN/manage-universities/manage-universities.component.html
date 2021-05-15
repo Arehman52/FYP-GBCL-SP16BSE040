@@ -196,13 +196,14 @@
                               {{TerminateAccessButtonText}} </button>
                             <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2"
                               (click)="onEditButtonToggle()">{{this.EditButtonText}}</button>
-                            <button class="btn btn-outline-danger w-25 maSmallerFonts my-2 mx-2">Delete</button>
-
-
-
-
-
-
+                            <button (click)="DeleteThisUser(uni)"
+                            class="btn btn-outline-danger w-25 maSmallerFonts my-2 mx-2">Delete</button>
+                          </div>
+                          <div class="col-12">
+                            <small class="form-text alert alert-success"
+                            *ngIf="this.Errors.userDeleted.status == true">
+                            {{this.Errors.userDeleted.message}}
+                          </small>
                           </div>
                           <div style="border-radius:8px;" [ngClass]="{'d-none': this.EditButtonToggled == false,
                           'border border-warning bg-info text-dark m-3 p-2': this.EditButtonToggled == true}">

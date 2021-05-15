@@ -2,8 +2,8 @@ const express = require('express');
 const path = require("path");
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Users = require('./models/user');
-const homepageRoutes = require('./routes/hompage-routes');
+// const Users = require('./models/user');
+const UsersRoutes = require('./routes/users-routes');
 
 
 
@@ -31,11 +31,12 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
 
   res.setHeader("Access-Control-Allow-Headers",
-    "Origin, X-Requested-with, Content-Type, Accept, Authorization");
+    "Origin, X-Requested-With, Content-Type, Accept");
+
 
   res.setHeader("Access-Control-Allow-Methods",
-    "GET,POST,PATCH,PUT,DELETE");
-
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 
 });
@@ -198,7 +199,7 @@ app.get("/", (req, res, next) => {
 
 
 //-->  /api/Homepage + [/CreateUser && /FetchTHISUser]
-app.use("/api/Users", homepageRoutes);
+app.use("/api/Users", UsersRoutes);
 
 module.exports = app;
 
