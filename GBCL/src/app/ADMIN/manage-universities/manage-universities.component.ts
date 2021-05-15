@@ -30,6 +30,7 @@ export class ManageUniversitiesComponent implements OnInit {
   private AllUsersRecievedFromDB: Usersmodel[] = [];
   AffiliatedUniversitiesData: Usersmodel[] = [];
   localStorageUsername = localStorage.getItem("UsersUsername");
+  TerminateAccessButtonText = '';
 
 
   // //////////////////////////////////////////\///
@@ -65,6 +66,16 @@ export class ManageUniversitiesComponent implements OnInit {
   }
 
 
+  TerminateAccessButtonToggled(accessStatus: string) {
+
+    console.log('accessStatus  : ',accessStatus);
+    if (accessStatus == 'Terminated') {
+      this.TerminateAccessButtonText = "Allow Access";
+    } else {
+      this.TerminateAccessButtonText = "Terminate Access";
+    }
+
+  }
   onEditButtonToggle() {
 
     if (this.EditButtonToggled == false) {

@@ -8,17 +8,8 @@ export class HomepageService {
   constructor(private http: HttpClient) {}
 
 
-  private count = 0;
-  countPlusPlus(){
-    this.count++;
-  }
-  getCount():number{
-    return this.count;
-  }
-  usersInfoFromDB = [
+  usersInfoFromDB = [];
 
-  ];
-  // dw
 
   universitiesListFromDB = [
       // { uniName: 'COMSATS University Islamabad' },
