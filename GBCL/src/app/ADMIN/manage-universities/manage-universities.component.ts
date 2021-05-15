@@ -68,7 +68,7 @@ export class ManageUniversitiesComponent implements OnInit {
 
   TerminateAccessButtonToggled(accessStatus: string) {
 
-    console.log('accessStatus  : ',accessStatus);
+    // console.log('accessStatus  : ',accessStatus);
     if (accessStatus == 'Terminated') {
       this.TerminateAccessButtonText = "Allow Access";
     } else {
@@ -77,7 +77,6 @@ export class ManageUniversitiesComponent implements OnInit {
 
   }
   onEditButtonToggle() {
-
     if (this.EditButtonToggled == false) {
       this.EditButtonText = "Hide Editing";
       this.EditButtonToggled = true;
@@ -95,6 +94,15 @@ export class ManageUniversitiesComponent implements OnInit {
       && updateUniForm.value.UniPassword == ''
     ) {
       alert('You can\'t update empty fields');
+      return;
+    }
+
+    if (updateUniForm.value.UniTitle == OriginalUniDetails.TitleOfUniversity
+      && updateUniForm.value.UniHECID == OriginalUniDetails.HECIDofUniversity
+      && updateUniForm.value.UniUsername == OriginalUniDetails.Username
+      && updateUniForm.value.UniPassword == OriginalUniDetails.Password
+    ) {
+      alert('You haven\'t changed any field, same values cannot be updated');
       return;
     }
 
@@ -146,10 +154,37 @@ export class ManageUniversitiesComponent implements OnInit {
     }
 
 
-    console.log('UpdatedUniAsAUser\n', UpdatedUniAsAUser);
+    // console.log('UpdatedUniAsAUser\n', UpdatedUniAsAUser);
+    if (this.areThereAnyErrors()) {
+      this.Errors.formHasErrors.status = true;
+      this.Errors.profileUpdated.status = false;
+      return;
+    } else {
+      this.Errors.formHasErrors.status = false;
+      if (confirm('Are you sure you want to update these values?')) {
+        this.homepageService.updateThisUser(UpdatedUniAsAUser);
+        this.Errors.profileUpdated.status = true;
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      } else {
+        return;
+      }
+    }
+
 
   }
 
+  areThereAnyErrors(): boolean {
+
+    return (
+      this.Errors.invalidHECID.status ||
+      this.Errors.invalidPassword.status ||
+      this.Errors.invalidTitle.status ||
+      this.Errors.invalidUsername.status ||
+      this.Errors.usernameNotUnique.status
+    );
+  }
   // //////////////////////////////////////////\///////////////////////////\///
   //    ABOVE is     (( ManageUniversities --> AffiliatedUniversities --> Edit ))
   // //////////////////////////////////////////\///////////////////////////\///
@@ -198,7 +233,7 @@ export class ManageUniversitiesComponent implements OnInit {
   }
 
 
-  checkUsernameOfUniversity(registerUniForm: NgForm) {
+  checkUsernameIfUNIQUEorINVALID(registerUniForm: NgForm): boolean {
     registerUniForm.value.UniUsername.length < 5
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
@@ -215,9 +250,10 @@ export class ManageUniversitiesComponent implements OnInit {
           if (IteratedUNinForLoop.toLowerCase() == quotedUserEnteredUN.toLowerCase()) {
             this.Errors.usernameNotUnique.status = true;
             console.log('user was matched');
-            return;
+            return true;
           } else {
             this.Errors.usernameNotUnique.status = false;
+            return false;
           }
         }
       }

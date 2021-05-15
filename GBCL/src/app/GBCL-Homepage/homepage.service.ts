@@ -12,7 +12,7 @@ export class HomepageService {
 
 
   universitiesListFromDB = [
-      // { uniName: 'COMSATS University Islamabad' },
+    // { uniName: 'COMSATS University Islamabad' },
       // { uniName: 'IIUI Islamabad' },
       // { uniName: 'Islamic University Islamabad' },
       // { uniName: 'IBA Karachi' },
@@ -21,6 +21,9 @@ export class HomepageService {
     ];
 
 
+    updateThisUser(UpdatedUser: Usersmodel) {
+
+    }
 
 
     RecieveAllUsersFromDB() {
