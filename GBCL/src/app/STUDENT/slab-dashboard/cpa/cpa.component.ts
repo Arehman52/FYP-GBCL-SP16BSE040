@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { CpasService } from './cpas.service';
+import { CpasService } from '../../../Services/cpas.service';
 
 @Component({
   selector: 'app-cpa',

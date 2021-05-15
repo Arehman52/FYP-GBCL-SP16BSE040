@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HomepageService } from '../gbcl-homepage/homepage.service';
+import { UsersService } from '../Services/users.service';
 import { UniversityModel } from '../MODELS/universitymodel.model';
 import { Usersmodel } from '../MODELS/usersmodel.model';
 
@@ -10,10 +10,10 @@ import { Usersmodel } from '../MODELS/usersmodel.model';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private homepageService: HomepageService) { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.AllUsersRecievedFromDB = this.homepageService.RecieveAllUsersFromDB();
+    this.AllUsersRecievedFromDB = this.usersService.RecieveAllUsersFromDB();
     setTimeout(
       () => {
       this.extractJOINRequestsFromUniversitiesData();

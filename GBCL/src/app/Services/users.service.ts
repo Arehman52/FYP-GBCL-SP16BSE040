@@ -1,10 +1,10 @@
-import { Usersmodel } from './../MODELS/usersmodel.model';
+import { Usersmodel } from '../MODELS/usersmodel.model';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
-export class HomepageService {
+export class UsersService {
   constructor(private http: HttpClient) {}
 
 
@@ -31,7 +31,7 @@ export class HomepageService {
     console.log("OUTSIDE HTTP 2nd");
     this.http
     .get<{ message: string; users: Usersmodel[] }>(
-      'http://localhost:3000/api/Homepage/RecieveUsersFromDB'
+      'http://localhost:3000/api/Users/RecieveUsersFromDB'
     )
     .subscribe((responseData) => {
       // setTimeout('2000');
@@ -49,7 +49,7 @@ export class HomepageService {
 
   createUser(User: Usersmodel) {
     this.http
-      .post('http://localhost:3000/api/Homepage/CreateUser', User)
+      .post('http://localhost:3000/api/Users/CreateUser', User)
       .subscribe((responseData) => {
         // console.log(responseData.message);
         console.log(responseData);
@@ -86,7 +86,7 @@ export class HomepageService {
 
   //   this.http
   //   .get<{  theList: String[] }>(
-  //     'http://localhost:3000/api/Homepage/getUniversitiesList'
+  //     'http://localhost:3000/api/Users/getUniversitiesList'
   //   )
   //   .subscribe((responseData) => {
   //     // setTimeout('2000');

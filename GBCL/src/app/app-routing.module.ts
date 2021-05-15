@@ -22,7 +22,7 @@ import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtask
 import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
 import { ManageUniversitiesComponent } from './admin/manage-universities/manage-universities.component';
 import { JoinRequestsComponent } from './admin/join-requests/join-requests.component';
-import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
+// import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
 import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcodeforformvalidation/githubcodeforformvalidation.component';
 import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-labs.component';
 import { UnimanageMembersComponent } from './university/unimanage-members/unimanage-members.component';
@@ -62,7 +62,7 @@ const routes: Routes = [
   { path: 'TEACHER/Settings', component: TeachersettingsComponent},
   // University routes
   { path: 'UNIVERSITY', component: UNIVERSITYComponent},
-  { path: 'UNIVERSITY/ManageJoinRequests', component: UnimanageJoinrequestsComponent},
+  // { path: 'UNIVERSITY/ManageJoinRequests', component: UnimanageJoinrequestsComponent},
   { path: 'UNIVERSITY/ManageMembers', component: UnimanageMembersComponent},
   { path: 'UNIVERSITY/ManageLabs', component: UnimanageLabsComponent},
   // Misc routes

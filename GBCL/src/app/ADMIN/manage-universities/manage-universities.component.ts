@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HomepageService } from 'src/app/gbcl-homepage/homepage.service';
+import { UsersService } from 'src/app/Services/users.service';
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 
 @Component({
@@ -10,14 +10,14 @@ import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 })
 export class ManageUniversitiesComponent implements OnInit {
 
-  constructor(private homepageService: HomepageService) { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.extractAffiliatedUniversitiesData();
     }, 700);
     this.setALLErrorsToFalse();
-    this.AllUsersRecievedFromDB = this.homepageService.RecieveAllUsersFromDB();
+    this.AllUsersRecievedFromDB = this.usersService.RecieveAllUsersFromDB();
   }
 
 
@@ -162,11 +162,11 @@ export class ManageUniversitiesComponent implements OnInit {
     } else {
       this.Errors.formHasErrors.status = false;
       if (confirm('Are you sure you want to update these values?')) {
-        this.homepageService.updateThisUser(UpdatedUniAsAUser);
+        this.usersService.updateThisUser(UpdatedUniAsAUser);
         this.Errors.profileUpdated.status = true;
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 3000);
       } else {
         return;
       }
@@ -223,7 +223,7 @@ export class ManageUniversitiesComponent implements OnInit {
           UniversityNameOfUser: null,
           TitleOfUniversity: registerUniForm.value.UniTitle
         }
-        this.homepageService.createUser(UniUniAsAUser);
+        this.usersService.createUser(UniUniAsAUser);
         this.Errors.profileCreated.status = true;
       } else {
         return;

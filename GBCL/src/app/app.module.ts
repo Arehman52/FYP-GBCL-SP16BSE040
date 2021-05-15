@@ -39,10 +39,6 @@ import { TlabDashboardComponent } from './teacher/tlab-dashboard/tlab-dashboard.
 // University imports
 import { UNIVERSITYComponent } from './university/university.component';
 
-// Misc imports
-import { Error404Component } from './MISC/error404/error404.component';
-// import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
-// import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
 import { TeachersettingsComponent } from './TEACHER/tsettings/tsettings.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -50,14 +46,14 @@ import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtask
 import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
 import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderboard/view-leaderboard.component';
 import { RouterModule } from '@angular/router';
-import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
 import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcodeforformvalidation/githubcodeforformvalidation.component';
 import { TestConceptsComponent } from './misc/concepts/test-concepts/test-concepts.component';
 import { UnimanageMembersComponent } from './university/unimanage-members/unimanage-members.component';
 import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-labs.component';
 import { ManageStudentsComponent } from './teacher/tlab-dashboard/manage-students/manage-students.component';
 import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-students/evaluate-students.component';
-// import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+// Misc imports
+import { Error404Component } from './MISC/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +95,6 @@ import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-stu
 
     ViewLeaderboardComponent,
 
-    UnimanageJoinrequestsComponent,
 
     GithubcodeforformvalidationComponent,
 

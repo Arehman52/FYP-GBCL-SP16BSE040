@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 
 
-import { HomepageService } from 'src/app/gbcl-homepage/homepage.service';
+import { UsersService } from 'src/app/Services/users.service';
 import { UniversityModel } from 'src/app/MODELS/universitymodel.model';
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 
@@ -13,10 +13,10 @@ import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 })
 export class UnimanageMembersComponent implements OnInit {
 
-  constructor(private homepageService:HomepageService) { }
+  constructor(private usersService:UsersService) { }
   ngOnInit() {
     this.setALLErrorsToFalse();
-    this.UsersRecievedFromDBForSignup = this.homepageService.RecieveAllUsersFromDB();
+    this.UsersRecievedFromDBForSignup = this.usersService.RecieveAllUsersFromDB();
   }
 
 
@@ -73,7 +73,7 @@ on_CreateMemberProfileSubmitButton_Clicked(createMemberForm:NgForm){
       TitleOfUniversity: null
     };
 
-    this.homepageService.createUser(user); //<--- this method should update user to DB
+    this.usersService.createUser(user); //<--- this method should update user to DB
     setTimeout(()=>{createMemberForm.resetForm},1500);
 
 

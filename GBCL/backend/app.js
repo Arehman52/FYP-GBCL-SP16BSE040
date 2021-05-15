@@ -198,7 +198,7 @@ app.get("/", (req, res, next) => {
 
 
 //-->  /api/Homepage + [/CreateUser && /FetchTHISUser]
-app.use("/api/Homepage", homepageRoutes);
+app.use("/api/Users", homepageRoutes);
 
 module.exports = app;
 

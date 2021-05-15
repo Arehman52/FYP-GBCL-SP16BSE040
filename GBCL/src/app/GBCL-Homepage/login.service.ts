@@ -35,7 +35,7 @@ export class LoginService {
 
     this.http
       .post<{ message: string; user: Usersmodel }>(
-        'http://localhost:3000/api/Homepage/FetchTHISUser', userToBeSearched
+        'http://localhost:3000/api/Users/FetchTHISUser', userToBeSearched
       )
       .subscribe((responseData) => {
 

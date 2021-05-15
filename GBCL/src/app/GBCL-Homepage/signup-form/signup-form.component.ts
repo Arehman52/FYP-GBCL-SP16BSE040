@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Usersmodel } from '../../MODELS/usersmodel.model';
-import { HomepageService } from '../homepage.service';
+import { UsersService } from '../../Services/users.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -12,14 +12,14 @@ import { HomepageService } from '../homepage.service';
 
 
 export class SignupFormComponent implements OnInit {
-  constructor(public homepageService: HomepageService) {}
+  constructor(public usersService: UsersService) {}
 
   ngOnInit() {
     this.setALLErrorsToFalse();
     this.user.UniversityNameOfUser = 'NotListedHere';
-    this.UniversitiesListFromDB = this.homepageService.getUniversitiesListFromDB();
-    this.UsersRecievedFromDBForSignup = this.homepageService.RecieveAllUsersFromDB();
-    // this.usersInfoListFromDB = this.homepageService.RecieveUsersFromDBForSignup();
+    this.UniversitiesListFromDB = this.usersService.getUniversitiesListFromDB();
+    this.UsersRecievedFromDBForSignup = this.usersService.RecieveAllUsersFromDB();
+    // this.usersInfoListFromDB = this.usersService.RecieveUsersFromDBForSignup();
     console.log("this.UsersRecievedFromDBForSignup FROM ngOnInit()");
     console.log(this.UsersRecievedFromDBForSignup);
     setTimeout(()=>{
@@ -70,7 +70,7 @@ export class SignupFormComponent implements OnInit {
       this.Errors.formSubmittedSuccessfuly.status = false;
       return;
     } else {
-      this.homepageService.createUser(this.user); //<--- this method should update user to DB
+      this.usersService.createUser(this.user); //<--- this method should update user to DB
 
       this.Errors.formHasErrors.status = false;
       this.Errors.formSubmittedSuccessfuly.status = true;
@@ -171,7 +171,7 @@ export class SignupFormComponent implements OnInit {
 
   // getTheUser()
   // {
-  //   this.homepageService.getUser();
+  //   this.usersService.getUser();
   // }
 
   //==================
