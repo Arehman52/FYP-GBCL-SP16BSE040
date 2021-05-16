@@ -53,14 +53,30 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
   Errors = {
+    userTerminatedLoginAccess: {
+      status: true,
+      message: 'Your access to GBCL is temporarily terminated.',
+    },
+    userRejectedLoginAccess: {
+      status: true,
+      message: 'Your registration request was rejected.',
+    },
+    userPendingLoginAccess: {
+      status: true,
+      message: 'You cannot login yet, your registration is not approved yet.',
+    },
+    uniPendingLoginAccess: {
+      status: true,
+      message: 'You cannot login yet, Admin has to approve your registration.',
+    },
     //below errors are for fields in common.
     invalidUsername: {
       status: true,
-      message: 'Username should be atleast 5 characters).',
+      message: 'Username should be atleast 5 characters.',
     },
     invalidPassword: {
       status: true,
-      message: 'Password should be atleast 8 characters).',
+      message: 'Password should be atleast 8 characters.',
     },
     notAUser: {
       status: true,
@@ -74,6 +90,9 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
   setAllErrorsToFalse() {  //keeper
+    this.Errors.userRejectedLoginAccess.status = false;
+    this.Errors.userTerminatedLoginAccess.status = false;
+    this.Errors.uniPendingLoginAccess.status = false;
     this.Errors.incorrectPassword.status = false;
     this.Errors.invalidPassword.status = false;
     this.Errors.invalidUsername.status = false;
@@ -84,23 +103,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
   loginUser(form: NgForm) {
 
-    // var re = '"' + universitysEnteredUN + '"';
-    //       var usnm: string = JSON.stringify(
-    //         this.usersInfoListFromDB[i].Username
-    //       );
 
-    // if(form.value.UsersEnteredUsername.toLowerCase() == "admin"){
-
-    // if(form.value.UsersEnteredPassword.toLowerCase() == "qwerty123"){
-
-    // }
-    // }
-
-    var EnteredUN =  form.value.UsersEnteredUsername.toLowerCase();
-
-
-    // console.log(EnteredUN);
-    // console.log(typeof (form.value.UsersEnteredUsername));
     var userToBeSearched: Usersmodel = {
       FirstNameOfUser: null,
       HECIDofUniversity: null,
@@ -110,55 +113,90 @@ export class HomepageNavSearchComponent implements OnInit {
       TitleOfUniversity: null,
       UniversityNameOfUser: null,
       UserType: '-1',
-      Username: EnteredUN,
+      Username: form.value.UsersEnteredUsername.toLowerCase(),
       UserzAccessStatus: null,
       _id: null,
     };
 
+    var TheMatchedUser: Usersmodel[];
 
     if (this.checkErrors(userToBeSearched)) {
       alert("Sign in fields are invalid!");
     }
     else {
-
-
-      var TheMatchedUser: any[];
-
-
-
       this.showSpinner = true;
       setTimeout(() => {
-        TheMatchedUser = this.loginService.FecthTheMatchingUserForLogin(
+        TheMatchedUser = this.loginService.FetchThisUser(
           userToBeSearched);
-
-
+        // console.log('TheMatchedUser  :',TheMatchedUser);
       }, 4500);
 
       setTimeout(() => {
 
+        console.log('TheMatchedUser  :',TheMatchedUser);
+        if (TheMatchedUser.length == 0) {
+          this.showSpinner = false;
+          console.log('ooooooooooooooooo');
+          this.Errors.notAUser.status = true;
+          return;
+        }
         if (TheMatchedUser[0].UserType == '-1') {
+          console.log('lllllllllllllllllllllllll');
           this.Errors.notAUser.status = true;
           this.showSpinner = false;
         } else {
 
           if (userToBeSearched.Password === TheMatchedUser[0].Password) {
 
-            localStorage.setItem("UsersUsername",TheMatchedUser[0].Username);
-            localStorage.setItem("UsersUsertype",TheMatchedUser[0].UserType);
 
-            this.Errors.incorrectPassword.status = false;
-            if (TheMatchedUser[0].UserType == 'student')
-              window.location.href = '/STUDENT';
-            if (TheMatchedUser[0].UserType == 'teacher')
-              window.location.href = '/TEACHER';
-            if (TheMatchedUser[0].UserType == 'university')
-              window.location.href = '/UNIVERSITY';
-            if (TheMatchedUser[0].UserType == 'admin')
-              window.location.href = '/ADMIN';
+            if (TheMatchedUser[0].UserzAccessStatus == 'Allowed') {
+
+              localStorage.setItem("UsersUsername", TheMatchedUser[0].Username);
+              localStorage.setItem("UsersUsertype", TheMatchedUser[0].UserType);
+
+              this.Errors.incorrectPassword.status = false;
+              if (TheMatchedUser[0].UserType == 'student')
+                window.location.href = '/STUDENT';
+              if (TheMatchedUser[0].UserType == 'teacher')
+                window.location.href = '/TEACHER';
+              if (TheMatchedUser[0].UserType == 'university')
+                window.location.href = '/UNIVERSITY';
+              if (TheMatchedUser[0].UserType == 'admin')
+                window.location.href = '/ADMIN';
+            } else {
+              this.showSpinner = false;
+            }
+
+
+
+            if (TheMatchedUser[0].UserzAccessStatus == 'Pending') {
+              this.showSpinner = false;
+              if (TheMatchedUser[0].UserType == 'university') {
+                this.Errors.uniPendingLoginAccess.status = true;
+              } else {
+                this.Errors.userPendingLoginAccess.status = true;
+              }
+            }
+
+
+
+            if (TheMatchedUser[0].UserzAccessStatus == 'Rejected') {
+              this.Errors.userRejectedLoginAccess.status = true;
+              this.showSpinner = false;
+            }
+
+
+
+            if (TheMatchedUser[0].UserzAccessStatus == 'Terminated') {
+              this.showSpinner = false;
+              this.Errors.userTerminatedLoginAccess.status = true;
+            }
+
           } else {
             this.Errors.incorrectPassword.status = true;
             this.showSpinner = false;
           }
+
 
 
 

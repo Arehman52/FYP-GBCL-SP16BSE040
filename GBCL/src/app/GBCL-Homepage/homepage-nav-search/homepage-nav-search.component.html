@@ -1,6 +1,6 @@
 <div class="row p-0 m-0">
   <div class="col-12 maTopRow p-0">
-    <div class="row text-center m-0 p-0">
+    <div class="row  m-0 p-0">
 
       <!-- ---------------- -->
       <!-- GBCL LOGO COLUMN -->
@@ -35,48 +35,62 @@
 
 
               <div class="row ml-auto m-0">
+
                 <div class="col-5  mt-1">
-
-
-                  <!-- Username -->
+                    <!-- Username -->
                   <input class="form-control mt-3 mt-sm-0" type="text" placeholder=" Enter Username"
                     name="UsersEnteredUsername" ngModel #UsernameInput
                     (keyup)="onKeyUpUsernameInput(UsernameInput.value)">
-                  <small class="d-block errorText" *ngIf="this.Errors.invalidUsername.status == true">
-                    <span>--{{this.Errors.invalidUsername.message}}</span>
-                  </small>
-                  <small class="d-block errorText" *ngIf="this.Errors.notAUser.status == true">
-                    <span>--{{this.Errors.notAUser.message}}</span>
-                  </small>
+
                 </div>
+
                 <div class="col-5  mt-1">
-
-
-
                   <!-- Password -->
                   <input class="form-control mt-3 mt-sm-0" type="password" placeholder="Password"
                     name="UsersEnteredPassword" ngModel #PasswordInput
                     (keyup)="onKeyUpPasswordInput(PasswordInput.value)">
-                  <small class="form-text d-block errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                  <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>--{{this.Errors.invalidPassword.message}}</span>
                   </small>
-                  <small class="form-text d-block errorText" *ngIf="this.Errors.incorrectPassword.status == true">
+                  <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.incorrectPassword.status == true">
                     <span>--{{this.Errors.incorrectPassword.message}}</span>
                   </small>
 
 
-
-
-
                 </div>
-                <div class="col-1 mt-1">
 
+
+                <div class="col-1 mt-1">
                   <!-- Login Button -->
                   <button class="btn btn-outline-success ml-auto maWidth-100 my-2 my-sm-0 " type="submit">Login</button>
+                </div>
 
+
+              </div>
+              <div class="row p-0 m-0">
+                <div class="col-8 pt-1 m-0">
+                  <!-- USERNAME's Errors -->
+                  <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.invalidUsername.status == true">
+                    <span>--{{this.Errors.invalidUsername.message}}</span>
+                  </small>
+                  <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.notAUser.status == true">
+                    <span>--{{this.Errors.notAUser.message}}</span>
+                  </small>
+
+                  <!-- Access of User's Errors -->
+                  <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.uniPendingLoginAccess.status == true">
+                    <span>--{{this.Errors.uniPendingLoginAccess.message}}</span>
+                  </small>
+                  <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.userTerminatedLoginAccess.status == true">
+                    <span>--{{this.Errors.userTerminatedLoginAccess.message}}</span>
+                  </small>
+                  <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.userRejectedLoginAccess.status == true">
+                    <span>--{{this.Errors.userRejectedLoginAccess.message}}</span>
+                  </small>
                 </div>
               </div>
 
+              <!--   -->
             </form>
 
           </div>
@@ -101,7 +115,6 @@
 
 
   <div *ngIf="showSpinner">
-
     <div id="opaque" class="d-block"></div>
     <div id="spinner" class="loader"></div>
   </div>

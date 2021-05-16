@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 
 
 import { UsersService } from 'src/app/Services/users.service';
-import { UniversityModel } from 'src/app/MODELS/universitymodel.model';
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 
 @Component({
@@ -244,26 +243,6 @@ Errors = {
 };
 
 
-  UniversitiesData: UniversityModel[] = [{
-    Id: 'uni1',
-    UniTitle: 'COMSATS University Islamabad',
-    AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'},
-    AccessStatus: 'Pending',
-    HECID: 'FAC241',
-    FacultyCount: 85,
-    LabsCount: 34,
-    StudentsCount: 391
-  },
-  {
-    Id: 'uni2',
-    UniTitle: 'COMSATS University Lahore',
-    AccessStatuses: {allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted'},
-    AccessStatus: 'Pending',
-    HECID: 'FAC242',
-    FacultyCount: 25,
-    LabsCount: 28,
-    StudentsCount: 208
-  }];
 
 
   StudentsData = [{

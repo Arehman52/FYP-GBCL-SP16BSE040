@@ -29,8 +29,8 @@ export class LoginService {
 
   // userFetchednMtched1;
 
-  arr: any[] = [];
-  FecthTheMatchingUserForLogin(userToBeSearched: Usersmodel): any[] {
+  arr: Usersmodel[] = [];
+  FetchThisUser(userToBeSearched: Usersmodel): Usersmodel[] {
 
 
     this.http
@@ -43,6 +43,8 @@ export class LoginService {
 
 
           this.arr.push(responseData.user);
+
+          console.log('??????',responseData.user);
 
         }
 

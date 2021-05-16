@@ -168,9 +168,9 @@ export class ManageUniversitiesComponent implements OnInit {
     }
 
     if (updateUniForm.value.UniUsername == '') {
-      UpdatedUniUsername = OriginalUniDetails.Username;
+      UpdatedUniUsername = OriginalUniDetails.Username.toLocaleLowerCase();
     } else {
-      UpdatedUniUsername = updateUniForm.value.UniUsername;
+      UpdatedUniUsername = updateUniForm.value.UniUsername.toLocaleLowerCase();
     }
 
     if (updateUniForm.value.UniPassword == '') {

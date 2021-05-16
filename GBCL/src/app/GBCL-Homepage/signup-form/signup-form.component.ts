@@ -47,7 +47,12 @@ export class SignupFormComponent implements OnInit {
 
     for(var i=0; i<this.UsersRecievedFromDBForSignup.length;i++){
 
-      if(this.UsersRecievedFromDBForSignup[i].TitleOfUniversity != null){
+
+      if(
+        this.UsersRecievedFromDBForSignup[i].TitleOfUniversity != null &&
+        this.UsersRecievedFromDBForSignup[i].UserType == 'university' &&
+        this.UsersRecievedFromDBForSignup[i].UserzAccessStatus=='Allowed'
+        ){
 
         const arr: {uniName:String} = {uniName : this.UsersRecievedFromDBForSignup[i].TitleOfUniversity };
         this.UniversitiesListFromDB.push(arr);
@@ -393,7 +398,7 @@ export class SignupFormComponent implements OnInit {
     } else {
       this.user.HECIDofUniversity = form.value.HECIDOfUniversity;
       this.user.TitleOfUniversity = form.value.UniversitysEnteredName;
-      this.user.Username = form.value.UsernameOfUniversity;
+      this.user.Username = form.value.UsernameOfUniversity.toLowerCase();
       this.user.Password = form.value.PasswordOfUniversity;
     }
   }

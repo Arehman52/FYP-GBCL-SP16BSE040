@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../Services/users.service';
-import { UniversityModel } from '../MODELS/universitymodel.model';
 import { Usersmodel } from '../MODELS/usersmodel.model';
 
 @Component({

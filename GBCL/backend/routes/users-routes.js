@@ -100,12 +100,11 @@ router.post("/FetchTHISUser", (req, res, next) => {
 
 
   Users.findOne({"Username": req.body.Username }).then( document => {
+    console.log('document::....',document);
     res.status(200).json({
       message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
       user: document
 
-    }).catch((err)=>{
-      console.log(" 006 res.status(200) in /FetchTHISUser eeerrrororrorr\n",err);
     });
 
     console.log('   ==> {/FetchTHISUser} Username == ',req.body.Username);
