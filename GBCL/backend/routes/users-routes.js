@@ -1,28 +1,8 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
 
 
 const Users = require('../models/user');
-const { __assign } = require("tslib");
-
-
 const router = express.Router();
-
-
-// app.get("/GetUsersListFromDB", (req, res, next) => {
-
-//   Users.find().then( documents => {
-//     res.status(200).json({
-//       message: "this is a list of users recieved from DB",
-//       usersInResponse: documents
-//     });
-//   });
-
-//   // console.log("get  rEQUEST.");
-//   // res.status(200).json("MESSAGadawdadE RECD");
-// });
-
-// UpdateThisUser
 
 
 router.delete("/DeleteThisUser/:Id", (req, res, next)=>{
@@ -59,11 +39,7 @@ router.put("/UpdateThisUser/:Id", (req, res, next)=>{
     Username: req.body.Username,
     Password: req.body.Password
   });
-  // console.log()
-  console.log('USER: \n',user);
-  // console.log('USER: \n');
 
-  // Users.updateOne
   Users.updateOne({_id: req.params.Id} ,user).then(
     result=>{
       res.status(200).json({
@@ -71,6 +47,10 @@ router.put("/UpdateThisUser/:Id", (req, res, next)=>{
         result: result
       });
     });
+
+
+
+    console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 
 
 });
@@ -107,9 +87,8 @@ router.post("/CreateUser", (req, res, next) => {
       });
     });
 
-    console.log("User's Data has been recieved at the server and saved in the Database.");
-    console.log(user);
 
+    console.log('   ==> {/CreateUser} Username == ',user.Username);
 
 });
 
@@ -128,7 +107,8 @@ router.post("/FetchTHISUser", (req, res, next) => {
     }).catch((err)=>{
       console.log(" 006 res.status(200) in /FetchTHISUser eeerrrororrorr\n",err);
     });
-    console.log(" 003 USER HAS BEEN RETRIEVED FOR SIGNIN");
+
+    console.log('   ==> {/FetchTHISUser} Username == ',req.body.Username);
 
   }).catch((err)=>{
     console.log(" 004 theeeen eeerrrororrorr\n",err);
@@ -146,7 +126,7 @@ router.get("/getUniversitiesList", (req, res, next) => {
       // message: "this is a list of users recieved from DB",
       theList: list
     });
-    console.log("SUCCESSFUL TIL HERE : Homepage-routes.js:62");
+    console.log('   ==> {/getUniversitiesList} :: Universities List was downloaded.');
 
   });
 });
@@ -162,9 +142,8 @@ router.get("/RecieveUsersFromDB", (req, res, next) => {
       message: "this is a list of users recieved from DB",
       users: documents
     });
-    console.log("SUCCESSFUL TIL HERE : Homepage-routes.js:62");
-    // console.log(documents);
 
+    console.log('   ==> {/RecieveUsersFromDB} Users were downloaded.');
   });
 });
 
