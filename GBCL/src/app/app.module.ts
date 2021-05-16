@@ -20,8 +20,7 @@ import { HomepageNavSearchComponent } from './gbcl-homepage/homepage-nav-search/
 // Admin imports
 import { AdminComponent } from './admin/admin.component';
 import { ManageUniversitiesComponent } from './admin/manage-universities/manage-universities.component';
-import { JoinRequestsComponent } from './admin/join-requests/join-requests.component';
-// import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+
 
 // Student imports
 import { STUDENTComponent } from './student/student.component';
@@ -58,58 +57,37 @@ import { Error404Component } from './MISC/error404/error404.component';
 @NgModule({
   declarations: [
     AppComponent,
-
     HomepageNavSearchComponent,
     AboutusComponent,
     SignupFormComponent,
     GBCLHomepageComponent,
-
     AdminComponent,
     ManageUniversitiesComponent,
-    JoinRequestsComponent,
-
     STUDENTComponent,
     SlabDashboardComponent,
     CpaComponent,
     LeaderboardComponent,
     ChallengesComponent,
-
     TEACHERComponent,
-
     UNIVERSITYComponent,
-
     Error404Component,
-
     SsettingsComponent,
-
     RivalsComponent,
-
     TlabDashboardComponent,
-
-    // ManageeChallengesComponent,
     TeachersettingsComponent,
-
     ManageLabtasksComponent,
-
     ManageChallengesComponent,
-
     ViewLeaderboardComponent,
-
-
-    GithubcodeforformvalidationComponent,
-
-    TestConceptsComponent,
-
     UnimanageMembersComponent,
-
     UnimanageLabsComponent,
-
     ManageStudentsComponent,
-
     EvaluateStudentsComponent,
 
-    // AdminDashboardComponent
-    // ManageeLabtasksComponent
+
+
+    //delete following components
+    GithubcodeforformvalidationComponent,
+    TestConceptsComponent
   ],
   imports: [
     BrowserModule,

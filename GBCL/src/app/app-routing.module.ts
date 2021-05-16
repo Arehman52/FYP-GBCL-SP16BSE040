@@ -21,7 +21,7 @@ import { ViewLeaderboardComponent } from './teacher/tlab-dashboard/view-leaderbo
 import { ManageLabtasksComponent } from './teacher/tlab-dashboard/manage-labtasks/manage-labtasks.component';
 import { ManageChallengesComponent } from './teacher/tlab-dashboard/manage-challenges/manage-challenges.component';
 import { ManageUniversitiesComponent } from './admin/manage-universities/manage-universities.component';
-import { JoinRequestsComponent } from './admin/join-requests/join-requests.component';
+// import { JoinRequestsComponent } from './admin/join-requests/join-requests.component';
 // import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
 import { GithubcodeforformvalidationComponent } from './misc/concepts/githubcodeforformvalidation/githubcodeforformvalidation.component';
 import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-labs.component';
@@ -34,13 +34,10 @@ import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-stu
 
 const routes: Routes = [
   // Homepage routes
-    { path: '', component: GBCLHomepageComponent},
+  { path: '', component: GBCLHomepageComponent},
   // Admin routes
   { path: 'ADMIN', component: AdminComponent},
   { path: 'ADMIN/ManageUniversities', component: ManageUniversitiesComponent},
-  { path: 'ADMIN/JoinRequests', component: JoinRequestsComponent},
-  // { path: 'ADMIN', component: ManageUniversitiesC},
-  // { path: 'ADMIN', component: AdminDashboardComponent},
   // Student routes
   { path: 'STUDENT', component: STUDENTComponent}, // dashboard
   { path: 'STUDENT/Lab', component: SlabDashboardComponent}, // lab dashboard for student
@@ -57,18 +54,14 @@ const routes: Routes = [
   { path: 'TEACHER/Lab/Challenges', component: ManageChallengesComponent},
   { path: 'TEACHER/Lab/ManageStudents', component: ManageStudentsComponent},
   { path: 'TEACHER/Lab/EvaluateStudents', component: EvaluateStudentsComponent},
-  // { path: 'TEACHER/Lab/challengesManagement', component: ManageeChallengesComponent},
-  // { path: 'TEACHER/Lab/labtasksManagement', component: ManageeLabtasksComponent},
   { path: 'TEACHER/Settings', component: TeachersettingsComponent},
   // University routes
   { path: 'UNIVERSITY', component: UNIVERSITYComponent},
-  // { path: 'UNIVERSITY/ManageJoinRequests', component: UnimanageJoinrequestsComponent},
   { path: 'UNIVERSITY/ManageMembers', component: UnimanageMembersComponent},
   { path: 'UNIVERSITY/ManageLabs', component: UnimanageLabsComponent},
   // Misc routes
   { path: 'Testconcepts', component: GithubcodeforformvalidationComponent},
   { path: '**', component: Error404Component}
-  // { path: 'TestConcept', component: GithubcodeforformvalidationComponent}
 ];
 
 @NgModule({
