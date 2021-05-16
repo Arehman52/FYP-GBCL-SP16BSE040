@@ -66,13 +66,38 @@ export class ManageUniversitiesComponent implements OnInit {
   }
 
 
-  TerminateAccessButtonToggled(accessStatus: string) {
 
-    // console.log('accessStatus  : ',accessStatus);
-    if (accessStatus == 'Terminated') {
+  TerminateAccessButtonToggle(AccessStatus:string){
+    if (AccessStatus == 'Terminated') {
       this.TerminateAccessButtonText = "Allow Access";
-    } else {
+    }else{
       this.TerminateAccessButtonText = "Terminate Access";
+    }
+  }
+
+  TerminateAccessButtonClicked(Uni: Usersmodel) {
+    if (Uni.UserzAccessStatus == 'Terminated') {
+      if (confirm('Are you sure you want to allow access to university : ' + Uni.TitleOfUniversity)) {
+        const terminatedUni: Usersmodel = { ...Uni };
+        terminatedUni.UserzAccessStatus = 'Allowed';
+        this.usersService.updateThisUser(terminatedUni, Uni._id);
+        this.Errors.accessTerminated.status = false;
+        this.Errors.accessAllowed.status = true;
+        setTimeout(() => { window.location.reload() }, 2500);
+      } else {
+        return;
+      }
+    } else {
+      if (confirm('Are you sure you want to terminate access of university : ' + Uni.TitleOfUniversity)) {
+        const terminatedUni: Usersmodel = { ...Uni };
+        terminatedUni.UserzAccessStatus = 'Terminated';
+        this.usersService.updateThisUser(terminatedUni, Uni._id);
+        this.Errors.accessAllowed.status = false;
+        this.Errors.accessTerminated.status = true;
+        setTimeout(() => { window.location.reload() }, 2500);
+      } else {
+        return;
+      }
     }
 
   }
@@ -88,14 +113,14 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
 
-  DeleteThisUser(uni:Usersmodel){
-    if(confirm("Are you sure you want to delete "+uni.TitleOfUniversity+" University")){
+  DeleteThisUser(uni: Usersmodel) {
+    if (confirm("Are you sure you want to delete " + uni.TitleOfUniversity + " University")) {
       this.usersService.deleteThisUser(uni._id);
       this.Errors.userDeleted.status = true;
       setTimeout(() => {
         window.location.reload();
       }, 2500);
-    }else{
+    } else {
       return;
     }
   }
@@ -181,7 +206,7 @@ export class ManageUniversitiesComponent implements OnInit {
       if (confirm('Are you sure you want to update these values?')) {
         console.log(OriginalUniDetails._id);
         console.log(OriginalUniDetails.Username);
-        this.usersService.updateThisUser(UpdatedUniAsAUser,OriginalUniDetails._id);
+        this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
         this.Errors.profileUpdated.status = true;
         setTimeout(() => {
           window.location.reload();
@@ -297,6 +322,8 @@ export class ManageUniversitiesComponent implements OnInit {
       : (this.Errors.invalidTitle.status = false);
   }
   setALLErrorsToFalse() {
+    this.Errors.accessTerminated.status = false;
+    this.Errors.accessAllowed.status = false;
     this.Errors.userDeleted.status = false;
     this.Errors.invalidPassword.status = false;
     this.Errors.invalidUsername.status = false;
@@ -354,6 +381,14 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
   Errors = {
+    accessAllowed: {
+      status: true,
+      message: 'Access status of this university has been allowed',
+    },
+    accessTerminated: {
+      status: true,
+      message: 'Access status of this university has been terminated',
+    },
     userDeleted: {
       status: true,
       message: 'Records of this university has been deleted.',

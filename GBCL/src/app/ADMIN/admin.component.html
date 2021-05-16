@@ -221,9 +221,15 @@
                           </tbody>
                         </table>
                         <div class="d-flex justify-content-end mr-3">
-                        <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
-                        <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
+                        <button (click)="onAcceptButtonClicked(uni)" class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
+                        <button (click)="onRejectButtonClicked(uni)" class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
                         </div>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.joinRequestAccepted.status==true">
+                          {{this.Errors.joinRequestAccepted.message}}
+                        </small>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.joinRequestRejected.status==true">
+                          {{this.Errors.joinRequestRejected.message}}
+                        </small>
                       </div>
                     </div>
 

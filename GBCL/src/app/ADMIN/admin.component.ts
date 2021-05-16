@@ -13,6 +13,7 @@ export class AdminComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
+    this.setAllErrorsToFalse();
     this.AllUsersRecievedFromDB = this.usersService.RecieveAllUsersFromDB();
     setTimeout(
       () => {
@@ -35,6 +36,58 @@ export class AdminComponent implements OnInit {
     }
 
   }
+
+
+
+  onRejectButtonClicked(Uni: Usersmodel) {
+
+    if (confirm('Are you sure you want to REJECT join request of university : ' + Uni.TitleOfUniversity)) {
+      const RejectedUni: Usersmodel = { ...Uni };
+      RejectedUni.UserzAccessStatus = 'Rejected';
+      this.usersService.updateThisUser(RejectedUni, Uni._id);
+      this.Errors.joinRequestRejected.status = true;
+      setTimeout(()=>{window.location.reload();},2500);
+    } else {
+      return;
+    }
+
+  }
+
+
+  setAllErrorsToFalse(){
+    this.Errors.joinRequestAccepted.status = false;
+    this.Errors.joinRequestRejected.status = false;
+  }
+
+  onAcceptButtonClicked(Uni: Usersmodel) {
+
+    if (confirm('Are you sure you want to accept join request of university : ' + Uni.TitleOfUniversity)) {
+      const AllowedUni: Usersmodel = { ...Uni };
+      AllowedUni.UserzAccessStatus = 'Allowed';
+      this.usersService.updateThisUser(AllowedUni, Uni._id);
+      this.Errors.joinRequestAccepted.status = true;
+      setTimeout(()=>{window.location.reload();},2500);
+    } else {
+      return;
+    }
+
+  }
+
+
+
+
+
+  Errors = {
+    joinRequestRejected: {
+      status: true,
+      message: 'Join Request rejected.',
+    },
+    joinRequestAccepted: {
+      status: true,
+      message: 'Join Request accepted.',
+    }
+  };
+
 
   onLogout() {
     localStorage.clear();
