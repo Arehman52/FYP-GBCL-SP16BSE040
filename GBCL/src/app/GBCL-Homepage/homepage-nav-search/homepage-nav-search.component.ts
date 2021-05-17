@@ -250,7 +250,10 @@ export class HomepageNavSearchComponent implements OnInit {
 
     // this.showSpinner = false;
     // this.setSpinnerVisible(false);
-    TheMatchedUser.length = 0;
+    // console.log('TheMatchedUser before emptying : ',TheMatchedUser);
+    TheMatchedUser = [];
+    LoginUserzUniversityAsUser = [];
+    // console.log('TheMatchedUser before emptying : ',TheMatchedUser);
     // LoginUserzUniversityAsUser.len
 
 
