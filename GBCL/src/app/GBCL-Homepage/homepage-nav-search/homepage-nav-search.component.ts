@@ -14,7 +14,7 @@ import { LoginService } from '../login.service';
   styleUrls: ['./homepage-nav-search.component.css'],
 })
 export class HomepageNavSearchComponent implements OnInit {
-  constructor(private loginService: LoginService,private usersService: UsersService) { }
+  constructor(private loginService: LoginService, private usersService: UsersService) { }
 
 
   ngOnInit(): void {
@@ -109,6 +109,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
   loginUser(form: NgForm) {
+    var LoginUserzUniversityAsUser: Usersmodel[] = [];
 
     this.setAllErrorsToFalse();
 
@@ -136,7 +137,7 @@ export class HomepageNavSearchComponent implements OnInit {
       setTimeout(() => {
         TheMatchedUser = this.loginService.FetchThisUser(
           userToBeSearched);
-        // console.log('TheMatchedUser  :',TheMatchedUser);
+        console.log('TheMatchedUser  :', TheMatchedUser);
       }, 1000);
 
       setTimeout(() => {
@@ -144,17 +145,19 @@ export class HomepageNavSearchComponent implements OnInit {
         // console.log('TheMatchedUser  :', TheMatchedUser);
         if (TheMatchedUser.length == 0) {
           this.showSpinner = false;
-          console.log('ooooooooooooooooo');
+          console.log('length is == zerooooooooooooooooo');
           this.Errors.notAUser.status = true;
-          TheMatchedUser = [];
+          // TheMatchedUser.length = 0;
           return;
         }
-        if (TheMatchedUser[0].UserType == '-1') {
-          console.log('lllllllllllllllllllllllll');
-          this.Errors.notAUser.status = true;
-          this.showSpinner = false;
-          TheMatchedUser = [];
-        } else {
+        // if (TheMatchedUser[0].UserType == '-1') {
+        //   console.log('---lllllllllllllllllllllllll');
+        //   this.Errors.notAUser.status = true;
+        //   this.showSpinner = false;
+        //   // TheMatchedUser = [];
+        //   // TheMatchedUser.length = 0;
+        // }
+         else {
 
           this.showSpinner = false;
           if (userToBeSearched.Password === TheMatchedUser[0].Password) {
@@ -171,27 +174,34 @@ export class HomepageNavSearchComponent implements OnInit {
               this.Errors.incorrectPassword.status = false;
 
 
-              if(TheMatchedUser[0].UserType == 'student' || 'teacher'){
-                var LoginUserzUniversityAsUser: Usersmodel[] = this.loginService.FetchThisUniversityByItsTitle(TheMatchedUser[0].UniversityNameOfUser);
 
-                if(LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Terminated'){
-                  //display YOUR University is Terminated Error
-                  this.Errors.userTerminatedLoginAccessBecauseUniTerminated.status = true;
-                  return;
-                  //and Return
-                }
-                if(LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Allowed'){
-                  if (TheMatchedUser[0].UserType == 'student')
-                    window.location.href = '/STUDENT';
-                  if (TheMatchedUser[0].UserType == 'teacher')
-                    window.location.href = '/TEACHER';
+              if (TheMatchedUser[0].UserType == 'student' || 'teacher') {
+                LoginUserzUniversityAsUser = this.loginService.FetchThisUniversityByItsTitle(TheMatchedUser[0].UniversityNameOfUser);
 
-                }
+                setTimeout(() => {
+
+                  if (LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Terminated') {
+                    console.log('LoginUserzUniversityAsUser[0].UserzAccessStatus == "Terminated"');
+                    //display YOUR University is Terminated Error
+                    this.Errors.userTerminatedLoginAccessBecauseUniTerminated.status = true;
+                    return;
+                    //and Return
+                  }
+                  if (LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Allowed') {
+                    console.log("LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Allowed'");
+                    if (TheMatchedUser[0].UserType == 'student')
+                      window.location.href = '/STUDENT';
+                    if (TheMatchedUser[0].UserType == 'teacher')
+                      window.location.href = '/TEACHER';
+
+                  }
+                }, 1300);
               }
 
-              if (TheMatchedUser[0].UserType == 'university')
+              if (TheMatchedUser[0].UserType == 'university' && TheMatchedUser[0].UserzAccessStatus == 'Allowed'){
+                console.log("TheMatchedUser[0].UserType == 'university' && TheMatchedUser[0].UserzAccessStatus == 'Allowed'");
                 window.location.href = '/UNIVERSITY';
-              TheMatchedUser = [];
+              }
             }
 
 
@@ -205,7 +215,7 @@ export class HomepageNavSearchComponent implements OnInit {
                 this.Errors.userPendingLoginAccess.status = true;
               }
 
-              TheMatchedUser = [];
+              // TheMatchedUser.length = 0;
             }
 
 
@@ -213,7 +223,7 @@ export class HomepageNavSearchComponent implements OnInit {
             if (TheMatchedUser[0].UserzAccessStatus == 'Rejected') {
               this.Errors.userRejectedLoginAccess.status = true;
               // this.showSpinner = false;
-              TheMatchedUser = [];
+              // TheMatchedUser.length = 0;
             }
 
 
@@ -221,13 +231,13 @@ export class HomepageNavSearchComponent implements OnInit {
             if (TheMatchedUser[0].UserzAccessStatus == 'Terminated') {
               // this.showSpinner = false;
               this.Errors.userTerminatedLoginAccess.status = true;
-              TheMatchedUser = [];
+              // TheMatchedUser.length = 0;
             }
 
           } else {
             this.Errors.incorrectPassword.status = true;
             // this.showSpinner = false;
-            TheMatchedUser = [];
+            // TheMatchedUser.length = 0;
           }
 
 
@@ -240,6 +250,9 @@ export class HomepageNavSearchComponent implements OnInit {
 
     // this.showSpinner = false;
     // this.setSpinnerVisible(false);
+    TheMatchedUser.length = 0;
+    // LoginUserzUniversityAsUser.len
+
 
   }
 

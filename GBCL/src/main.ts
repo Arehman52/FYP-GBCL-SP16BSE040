@@ -9,8 +9,4 @@ if (environment.production) {
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => {
-    console.error(err);
-    console.log(err,"ARS::main.ts par line 12");
-  
-  });
+  .catch(err => console.error(err));

@@ -4,11 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "ars": "ng serve --configuration=production",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:server": "nodemon server.js"
+    "ss": "nodemon server.js"
   },
   "private": true,
   "dependencies": {
