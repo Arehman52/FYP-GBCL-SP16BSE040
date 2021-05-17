@@ -17,7 +17,7 @@
     <div id="accordion">
       <div class="card bg-dark">
         <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body">
+          <div class="card-body overflow-auto" style="max-height: 500px;">
             <!-- //=============================== -->
             <table class="table table-striped table-dark text-left" style="font-size: 14px;">
               <thead>
@@ -26,18 +26,23 @@
                   <th scope="col">User Type</th>
                   <th scope="col">Username</th>
                   <th scope="col">Password</th>
+                  <th scope="col">Access Status</th>
+                  <th scope="col">User's University</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row" class="text-warning">1</th>
-                  <td>Student</td>
-                  <td>BilalKhursheed</td>
-                  <td>qwerty123</td>
+                <tr *ngFor="let user of UsersRecieved; let i=index">
+                  <th scope="row" class="text-warning">{{i+1}}</th>
+                  <td>{{user.UserType}}</td>
+                  <td>{{user.Username}}</td>
+                  <td>{{user.Password}}</td>
+                  <td>{{user.UserzAccessStatus}}</td>
+                  <td *ngIf="user.UniversityNameOfUser != null">{{user.UniversityNameOfUser}}</td>
+                  <td *ngIf="user.UniversityNameOfUser == null">N/A</td>
                 </tr>
-                <tr>
+          <!-- <tr>
                   <th scope="row" class="text-warning">2</th>
-                  <td>University</td>
+          u        <td>University</td>
                   <td>PUCIT</td>
                   <td>qwerty123</td>
                 </tr>
@@ -46,7 +51,7 @@
                   <td>Teacher</td>
                   <td>MWaqar</td>
                   <td>qwerty123</td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
             <!-- //=============================== -->

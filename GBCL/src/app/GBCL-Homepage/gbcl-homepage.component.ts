@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usersmodel } from '../MODELS/usersmodel.model';
+import { UsersService } from '../Services/users.service';
 
 @Component({
   selector: 'app-gbcl-homepage',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GBCLHomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usersService:UsersService) {
 
-  ngOnInit(): void {
   }
 
+  ngOnInit(): void {
+    this.UsersRecieved = this.usersService.RecieveAllUsersFromDB();
+  }
+
+  UsersRecieved:Usersmodel[] = [];
+
+
+  // console.log('in homepage: this.UsersRecieved: ',this.UsersRecieved);
 }
