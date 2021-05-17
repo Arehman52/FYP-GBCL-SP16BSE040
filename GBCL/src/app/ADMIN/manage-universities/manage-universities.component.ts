@@ -163,6 +163,13 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
   onSubmit_UpdateButton(updateUniForm: NgForm, OriginalUniDetails: Usersmodel) {
+
+    const str: String = updateUniForm.value.UniUsername;
+    if(str != str.replace(/ /g,'')){
+      this.Errors.spacesAreNotAllowedInUsername.status = true;
+      return;
+    }
+
     if (updateUniForm.value.UniTitle == ''
       && updateUniForm.value.UniHECID == ''
       && updateUniForm.value.UniUsername == ''
@@ -294,6 +301,21 @@ export class ManageUniversitiesComponent implements OnInit {
   // //////////////////////////////////////////\///////////////////////////\///
 
   onSubmit_RegisterButton(registerUniForm: NgForm) {
+
+
+    //Warns any field is left empty before submission,
+    if (registerUniForm.value.UniTitle == ''
+      || registerUniForm.value.UniHECID == ''
+      || registerUniForm.value.UniUsername == ''
+      || registerUniForm.value.UniPassword == ''
+    ) {
+      alert('You must fill in all fields');
+      return;
+    }
+
+
+
+
     if (this.checkIfErrors()) {
       this.Errors.formHasErrors.status = true;
       this.Errors.profileCreated.status = false;
@@ -327,6 +349,17 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
   checkUsernameIfUNIQUEorINVALID(registerUniForm: NgForm): boolean {
+
+    //following checks if there are spaces in Username, then warns
+    const str: String = registerUniForm.value.UniUsername;
+    if(str != str.replace(/ /g,'')){
+      this.Errors.spacesAreNotAllowedInUsername.status = true;
+      // return;
+    }else{
+      this.Errors.spacesAreNotAllowedInUsername.status = false;
+    }
+
+
     registerUniForm.value.UniUsername.length < 5
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
@@ -371,6 +404,7 @@ export class ManageUniversitiesComponent implements OnInit {
       : (this.Errors.invalidTitle.status = false);
   }
   setALLErrorsToFalse() {
+    this.Errors.spacesAreNotAllowedInUsername.status = false;
     this.Errors.accessTerminated.status = false;
     this.Errors.accessAllowed.status = false;
     this.Errors.userDeleted.status = false;
@@ -430,6 +464,10 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
   Errors = {
+    spacesAreNotAllowedInUsername: {
+      status: true,
+      message: 'Spaces are not allowed in Username field',
+    },
     accessAllowed: {
       status: true,
       message: 'Access status of this university has been allowed',

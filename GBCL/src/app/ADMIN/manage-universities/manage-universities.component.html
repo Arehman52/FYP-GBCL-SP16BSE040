@@ -257,6 +257,10 @@
                                       {{this.Errors.invalidUsername.message}}
                                     </small>
                                     <small class="form-text rounded alert-danger py-0 px-3"
+                                      *ngIf="this.Errors.spacesAreNotAllowedInUsername.status == true">
+                                      {{this.Errors.spacesAreNotAllowedInUsername.message}}
+                                    </small>
+                                    <small class="form-text rounded alert-danger py-0 px-3"
                                       *ngIf="this.Errors.usernameNotUnique.status == true">
                                       {{this.Errors.usernameNotUnique.message}}
                                     </small>
@@ -359,6 +363,10 @@
                       <small class="form-text rounded alert-danger py-0 px-3"
                         *ngIf="this.Errors.invalidUsername.status == true">
                         {{this.Errors.invalidUsername.message}}
+                      </small>
+                      <small class="form-text rounded alert-danger py-0 px-3"
+                        *ngIf="this.Errors.spacesAreNotAllowedInUsername.status==true">
+                        {{this.Errors.spacesAreNotAllowedInUsername.message}}
                       </small>
                       <small class="form-text rounded alert-danger py-0 px-3"
                         *ngIf="this.Errors.usernameNotUnique.status == true">
@@ -534,6 +542,10 @@
                                     <small class="form-text rounded alert-danger py-0 px-3"
                                       *ngIf="this.Errors.invalidUsername.status == true">
                                       {{this.Errors.invalidUsername.message}}
+                                    </small>
+                                    <small class="form-text rounded alert-danger py-0 px-3"
+                                      *ngIf="this.Errors.spacesAreNotAllowedInUsername.status == true">
+                                      {{this.Errors.spacesAreNotAllowedInUsername.message}}
                                     </small>
                                     <small class="form-text rounded alert-danger py-0 px-3"
                                       *ngIf="this.Errors.usernameNotUnique.status == true">
