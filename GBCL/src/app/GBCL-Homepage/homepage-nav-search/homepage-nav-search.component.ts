@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
+import { UsersService } from 'src/app/Services/users.service';
 import { LoginService } from '../login.service';
 
 
@@ -13,7 +14,7 @@ import { LoginService } from '../login.service';
   styleUrls: ['./homepage-nav-search.component.css'],
 })
 export class HomepageNavSearchComponent implements OnInit {
-  constructor(public loginService: LoginService) { }
+  constructor(private loginService: LoginService,private usersService: UsersService) { }
 
 
   ngOnInit(): void {
@@ -53,6 +54,10 @@ export class HomepageNavSearchComponent implements OnInit {
   }
 
   Errors = {
+    userTerminatedLoginAccessBecauseUniTerminated: {
+      status: true,
+      message: 'Your access to GBCL is terminated because your university\'s access terminated temporarily',
+    },
     userTerminatedLoginAccess: {
       status: true,
       message: 'Your access to GBCL is temporarily terminated.',
@@ -89,20 +94,23 @@ export class HomepageNavSearchComponent implements OnInit {
   };
 
 
-  setAllErrorsToFalse() {  //keeper
-    this.Errors.userRejectedLoginAccess.status = false;
+  setAllErrorsToFalse() {  //total Errors count = 9
+    this.Errors.userTerminatedLoginAccessBecauseUniTerminated.status = false;
     this.Errors.userTerminatedLoginAccess.status = false;
+    this.Errors.userRejectedLoginAccess.status = false;
+    this.Errors.userPendingLoginAccess.status = false;
     this.Errors.uniPendingLoginAccess.status = false;
-    this.Errors.incorrectPassword.status = false;
-    this.Errors.invalidPassword.status = false;
     this.Errors.invalidUsername.status = false;
+    this.Errors.invalidPassword.status = false;
     this.Errors.notAUser.status = false;
+    this.Errors.incorrectPassword.status = false;
   }
 
 
 
   loginUser(form: NgForm) {
 
+    this.setAllErrorsToFalse();
 
     var userToBeSearched: Usersmodel = {
       FirstNameOfUser: null,
@@ -129,79 +137,104 @@ export class HomepageNavSearchComponent implements OnInit {
         TheMatchedUser = this.loginService.FetchThisUser(
           userToBeSearched);
         // console.log('TheMatchedUser  :',TheMatchedUser);
-      }, 4500);
+      }, 1000);
 
       setTimeout(() => {
 
-        console.log('TheMatchedUser  :',TheMatchedUser);
+        // console.log('TheMatchedUser  :', TheMatchedUser);
         if (TheMatchedUser.length == 0) {
           this.showSpinner = false;
           console.log('ooooooooooooooooo');
           this.Errors.notAUser.status = true;
+          TheMatchedUser = [];
           return;
         }
         if (TheMatchedUser[0].UserType == '-1') {
           console.log('lllllllllllllllllllllllll');
           this.Errors.notAUser.status = true;
           this.showSpinner = false;
+          TheMatchedUser = [];
         } else {
 
+          this.showSpinner = false;
           if (userToBeSearched.Password === TheMatchedUser[0].Password) {
+
+
+            if (TheMatchedUser[0].UserType == 'admin')
+              window.location.href = '/ADMIN';
 
 
             if (TheMatchedUser[0].UserzAccessStatus == 'Allowed') {
 
               localStorage.setItem("UsersUsername", TheMatchedUser[0].Username);
               localStorage.setItem("UsersUsertype", TheMatchedUser[0].UserType);
-
               this.Errors.incorrectPassword.status = false;
-              if (TheMatchedUser[0].UserType == 'student')
-                window.location.href = '/STUDENT';
-              if (TheMatchedUser[0].UserType == 'teacher')
-                window.location.href = '/TEACHER';
+
+
+              if(TheMatchedUser[0].UserType == 'student' || 'teacher'){
+                var LoginUserzUniversityAsUser: Usersmodel[] = this.loginService.FetchThisUniversityByItsTitle(TheMatchedUser[0].UniversityNameOfUser);
+
+                if(LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Terminated'){
+                  //display YOUR University is Terminated Error
+                  this.Errors.userTerminatedLoginAccessBecauseUniTerminated.status = true;
+                  return;
+                  //and Return
+                }
+                if(LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Allowed'){
+                  if (TheMatchedUser[0].UserType == 'student')
+                    window.location.href = '/STUDENT';
+                  if (TheMatchedUser[0].UserType == 'teacher')
+                    window.location.href = '/TEACHER';
+
+                }
+              }
+
               if (TheMatchedUser[0].UserType == 'university')
                 window.location.href = '/UNIVERSITY';
-              if (TheMatchedUser[0].UserType == 'admin')
-                window.location.href = '/ADMIN';
-            } else {
-              this.showSpinner = false;
+              TheMatchedUser = [];
             }
 
 
 
+
             if (TheMatchedUser[0].UserzAccessStatus == 'Pending') {
-              this.showSpinner = false;
+              // this.showSpinner = false;
               if (TheMatchedUser[0].UserType == 'university') {
                 this.Errors.uniPendingLoginAccess.status = true;
               } else {
                 this.Errors.userPendingLoginAccess.status = true;
               }
+
+              TheMatchedUser = [];
             }
 
 
 
             if (TheMatchedUser[0].UserzAccessStatus == 'Rejected') {
               this.Errors.userRejectedLoginAccess.status = true;
-              this.showSpinner = false;
+              // this.showSpinner = false;
+              TheMatchedUser = [];
             }
 
 
 
             if (TheMatchedUser[0].UserzAccessStatus == 'Terminated') {
-              this.showSpinner = false;
+              // this.showSpinner = false;
               this.Errors.userTerminatedLoginAccess.status = true;
+              TheMatchedUser = [];
             }
 
           } else {
             this.Errors.incorrectPassword.status = true;
-            this.showSpinner = false;
+            // this.showSpinner = false;
+            TheMatchedUser = [];
           }
 
 
 
 
         }
-      }, 5000);
+      }, 3000);
 
     }
 

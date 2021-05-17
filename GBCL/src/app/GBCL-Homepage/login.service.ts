@@ -29,10 +29,30 @@ export class LoginService {
 
   // userFetchednMtched1;
 
-  arr: Usersmodel[] = [];
+  private arrFetchThisUser: Usersmodel[] = [];
+  private arrFetchThisUserbyUsername: Usersmodel[] = [];
+  private arrFetchThisUniversityByItsTitle: Usersmodel[] = [];
+
+  FetchThisUniversityByItsTitle(UnizTitle: string): Usersmodel[] {
+    var objUnizTitle: {TitleOfUniversity:string} = {TitleOfUniversity : UnizTitle};
+    this.http
+      .post<{ message: string; user: Usersmodel }>(
+        'http://localhost:3000/api/Users/FetchThisUniversityByItsTitle', objUnizTitle
+      )
+      .subscribe((responseData) => {
+        if(responseData.user != null){
+          this.arrFetchThisUniversityByItsTitle.push(responseData.user);
+          console.log('??????',responseData.user);
+        }
+      });
+      console.log("this.arr", this.arrFetchThisUniversityByItsTitle);
+      return this.arrFetchThisUniversityByItsTitle;
+  }
+
+
+
+
   FetchThisUser(userToBeSearched: Usersmodel): Usersmodel[] {
-
-
     this.http
       .post<{ message: string; user: Usersmodel }>(
         'http://localhost:3000/api/Users/FetchTHISUser', userToBeSearched
@@ -42,7 +62,7 @@ export class LoginService {
         if(responseData.user != null){
 
 
-          this.arr.push(responseData.user);
+          this.arrFetchThisUser.push(responseData.user);
 
           console.log('??????',responseData.user);
 
@@ -50,9 +70,34 @@ export class LoginService {
 
       });
 
-      console.log("this.arr", this.arr);
+      console.log("this.arr", this.arrFetchThisUser);
 
-      return this.arr;
+      return this.arrFetchThisUser;
+  }
+
+  FetchThisUserbyUsername(username: string): Usersmodel[] {
+
+
+    this.http
+      .post<{ message: string; user: Usersmodel }>(
+        'http://localhost:3000/api/Users/FetchTHISUser', username
+      )
+      .subscribe((responseData) => {
+
+        if(responseData.user != null){
+
+
+          this.arrFetchThisUserbyUsername.push(responseData.user);
+
+          console.log('??????',responseData.user);
+
+        }
+
+      });
+
+      console.log("this.arr", this.arrFetchThisUserbyUsername);
+
+      return this.arrFetchThisUserbyUsername;
   }
 
 

@@ -96,6 +96,27 @@ router.post("/CreateUser", (req, res, next) => {
 
 
 
+router.post("/FetchThisUniversityByItsTitle", (req, res, next) => {
+
+
+console.log('TitleOfUniversity:: REQ.BODY ==',req.body.TitleOfUniversity);
+// console.log('TitleOfUniversity:: REQ.BODY ==',req.body);
+  Users.findOne({"TitleOfUniversity": req.body.TitleOfUniversity }).then( document => {
+    console.log('DOOCCUUMMEENNTTT::....',document);
+    res.status(200).json({
+      message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
+      user: document
+
+    });
+
+    console.log('   ==> {/FetchThisUniversityByItsTitle} TitleOfUniversity == ',req.body.TitleOfUniversity);
+
+  }).catch((err)=>{
+    console.log(" 004 theeeen eeerrrororrorr\n",err);
+  });
+});
+
+
 router.post("/FetchTHISUser", (req, res, next) => {
 
 

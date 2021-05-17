@@ -14,7 +14,7 @@ export class ManageUniversitiesComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.extractAffiliatedUniversitiesData();
+      this.extractAffiliatedAndRejectedUniversitiesData();
     }, 700);
     this.setALLErrorsToFalse();
     this.AllUsersRecievedFromDB = this.usersService.RecieveAllUsersFromDB();
@@ -27,8 +27,11 @@ export class ManageUniversitiesComponent implements OnInit {
 
   EditButtonToggled = false;
   EditButtonText = "Edit";
+  RejectedUniEditButtonToggled = false;
+  RejectedUniEditButtonText = "Edit";
   private AllUsersRecievedFromDB: Usersmodel[] = [];
   AffiliatedUniversitiesData: Usersmodel[] = [];
+  RejectedUniversitiesData: Usersmodel[] = [];
   localStorageUsername = localStorage.getItem("UsersUsername");
   TerminateAccessButtonText = '';
 
@@ -50,7 +53,7 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
 
-  extractAffiliatedUniversitiesData() {
+  extractAffiliatedAndRejectedUniversitiesData() {
     if (this.AffiliatedUniversitiesData.length == 0) {
       for (var i = 0; i < this.AllUsersRecievedFromDB.length; i++) {
         if (this.AllUsersRecievedFromDB[i].UserType == 'university'
@@ -59,6 +62,12 @@ export class ManageUniversitiesComponent implements OnInit {
             || this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Terminated')
         ) {
           this.AffiliatedUniversitiesData.push(this.AllUsersRecievedFromDB[i]);
+        }
+        if (this.AllUsersRecievedFromDB[i].UserType == 'university'
+          && this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Rejected'
+
+        ) {
+          this.RejectedUniversitiesData.push(this.AllUsersRecievedFromDB[i]);
         }
       }
     }
@@ -101,6 +110,21 @@ export class ManageUniversitiesComponent implements OnInit {
     }
 
   }
+  RejectedUniAllowAccessButtonClicked(Uni: Usersmodel) {
+    if (Uni.UserzAccessStatus == 'Rejected') {
+      if (confirm('Are you sure you want to allow access to university : ' + Uni.TitleOfUniversity)) {
+        const terminatedUni: Usersmodel = { ...Uni };
+        terminatedUni.UserzAccessStatus = 'Allowed';
+        this.usersService.updateThisUser(terminatedUni, Uni._id);
+        this.Errors.accessTerminated.status = false;
+        this.Errors.accessAllowed.status = true;
+        setTimeout(() => { window.location.reload() }, 2500);
+      } else {
+        return;
+      }
+    }
+
+  }
   onEditButtonToggle() {
     if (this.EditButtonToggled == false) {
       this.EditButtonText = "Hide Editing";
@@ -108,6 +132,15 @@ export class ManageUniversitiesComponent implements OnInit {
     } else {
       this.EditButtonText = "Edit";
       this.EditButtonToggled = false;
+    }
+  }
+  onRejectedUniEditButtonToggle() {
+    if (this.RejectedUniEditButtonToggled == false) {
+      this.RejectedUniEditButtonText = "Hide Editing";
+      this.RejectedUniEditButtonToggled = true;
+    } else {
+      this.RejectedUniEditButtonText = "Edit";
+      this.RejectedUniEditButtonToggled = false;
     }
   }
 
@@ -203,17 +236,33 @@ export class ManageUniversitiesComponent implements OnInit {
       return;
     } else {
       this.Errors.formHasErrors.status = false;
-      if (confirm('Are you sure you want to update these values?')) {
-        console.log(OriginalUniDetails._id);
-        console.log(OriginalUniDetails.Username);
-        this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
-        this.Errors.profileUpdated.status = true;
-        setTimeout(() => {
-          window.location.reload();
-        }, 2500);
-      } else {
-        return;
+      if(OriginalUniDetails.UserzAccessStatus == 'Rejected'){
+        if (confirm('Are you sure you want to update these values?\nThis will only update the fields,\nIt '+
+        'won\'t allow access to this university unless Allow Access Button clicked.')) {
+          console.log(OriginalUniDetails._id);
+          console.log(OriginalUniDetails.Username);
+          this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
+          this.Errors.profileUpdated.status = true;
+          setTimeout(() => {
+            window.location.reload();
+          }, 2500);
+        } else {
+          return;
+        }
+      }else{
+        if (confirm('Are you sure you want to update these values?')) {
+          console.log(OriginalUniDetails._id);
+          console.log(OriginalUniDetails.Username);
+          this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
+          this.Errors.profileUpdated.status = true;
+          setTimeout(() => {
+            window.location.reload();
+          }, 2500);
+        } else {
+          return;
+        }
       }
+
     }
 
 
