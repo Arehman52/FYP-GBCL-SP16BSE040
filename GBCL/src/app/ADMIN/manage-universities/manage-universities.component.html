@@ -227,10 +227,14 @@
                                     <label>University Title:</label>
                                     <input type="text" class="form-control" placeholder="Update University's Title:"
                                       name="UniTitle" [ngModel]="uni.TitleOfUniversity"
-                                      (keyup)="checkTitleForOfUniversityVALIDandUNIQUE(updateUniForm,uni.TitleOfUniversity)">
+                                      (keyup)="checkTitleForOfUniversityVALIDandUNIQUE(updateUniForm, uni.TitleOfUniversity)">
                                     <small class="form-text rounded alert-danger py-0 px-3"
                                       *ngIf="this.Errors.invalidTitle.status == true">
                                       {{this.Errors.invalidTitle.message}}
+                                    </small>
+                                    <small class="form-text rounded alert-danger py-0 px-3"
+                                      *ngIf="this.Errors.uniTitleNotUnique.status == true">
+                                      {{this.Errors.uniTitleNotUnique.message}}
                                     </small>
                                   </div>
                                 </div>
@@ -522,6 +526,10 @@
                                     <small class="form-text rounded alert-danger py-0 px-3"
                                       *ngIf="this.Errors.invalidTitle.status == true">
                                       {{this.Errors.invalidTitle.message}}
+                                    </small>
+                                    <small class="form-text rounded alert-danger py-0 px-3"
+                                      *ngIf="this.Errors.uniTitleNotUnique.status == true">
+                                      {{this.Errors.uniTitleNotUnique.message}}
                                     </small>
                                   </div>
                                 </div>

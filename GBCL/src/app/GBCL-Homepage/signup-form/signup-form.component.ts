@@ -12,19 +12,20 @@ import { UsersService } from '../../Services/users.service';
 
 
 export class SignupFormComponent implements OnInit {
-  constructor(public usersService: UsersService) {}
+  constructor(public usersService: UsersService) { }
 
   ngOnInit() {
-    this.setALLErrorsToFalse();
+    // this.setALLErrorsToFalse();
+    this.setAllErrorsToFalse();
     this.user.UniversityNameOfUser = 'NotListedHere';
     this.UniversitiesListFromDB = this.usersService.getUniversitiesListFromDB();
     this.UsersRecievedFromDBForSignup = this.usersService.RecieveAllUsersFromDB();
     // this.usersInfoListFromDB = this.usersService.RecieveUsersFromDBForSignup();
     console.log("this.UsersRecievedFromDBForSignup FROM ngOnInit()");
     console.log(this.UsersRecievedFromDBForSignup);
-    setTimeout(()=>{
+    setTimeout(() => {
       this.loadUnisListFromDatabase();
-    },2000);
+    }, 2000);
   }
 
 
@@ -37,24 +38,24 @@ export class SignupFormComponent implements OnInit {
       { uniName: 'FAST NUCES Islamabad' },
     ]; */
 
-  private UsersRecievedFromDBForSignup:Usersmodel[] = [];
+  private UsersRecievedFromDBForSignup: Usersmodel[] = [];
   // private listOfUniversities: {uniName: String}[] = []
   UniversitiesListFromDB = [];
 
   // FOLLOWING FN UPDATES Uni LIST FROM DB
   // fnUpdListUnis(){
-  loadUnisListFromDatabase(){
+  loadUnisListFromDatabase() {
 
-    for(var i=0; i<this.UsersRecievedFromDBForSignup.length;i++){
+    for (var i = 0; i < this.UsersRecievedFromDBForSignup.length; i++) {
 
 
-      if(
+      if (
         this.UsersRecievedFromDBForSignup[i].TitleOfUniversity != null &&
         this.UsersRecievedFromDBForSignup[i].UserType == 'university' &&
-        this.UsersRecievedFromDBForSignup[i].UserzAccessStatus=='Allowed'
-        ){
+        this.UsersRecievedFromDBForSignup[i].UserzAccessStatus == 'Allowed'
+      ) {
 
-        const arr: {uniName:String} = {uniName : this.UsersRecievedFromDBForSignup[i].TitleOfUniversity };
+        const arr: { uniName: String } = { uniName: this.UsersRecievedFromDBForSignup[i].TitleOfUniversity };
         this.UniversitiesListFromDB.push(arr);
       }
     }
@@ -79,7 +80,7 @@ export class SignupFormComponent implements OnInit {
 
       this.Errors.formHasErrors.status = false;
       this.Errors.formSubmittedSuccessfuly.status = true;
-      setTimeout(()=>{form.resetForm},1500);
+      setTimeout(() => { form.resetForm() }, 200);
     }
   }
 
@@ -122,6 +123,10 @@ export class SignupFormComponent implements OnInit {
   };
 
   Errors = {
+    uniTitleNotUnique: {
+      status: true,
+      message: 'This title is taken, Type a different one.',
+    },
     //below errors are for fields in common.
     invalidUsername: {
       status: true,
@@ -187,25 +192,25 @@ export class SignupFormComponent implements OnInit {
 
   //following method is called when usertype selection is changed,
   onUsersSelectChange(opt: HTMLSelectElement) {
-    // this.UsertypS = opt;
+    this.setALLErrorsToFalse();
     if (opt.value == 'teacher') {
       this.user.UserType = 'teacher';
       this.setAllFieldsToNull();
-      this.setAllErrorsToTrueForUser('non-uni');
+      // this.setAllErrorsToTrueForUser('non-uni');
       // console.log(this.user.UserType);
       // console.log(this.user);
       // console.log(this.user);
     } else if (opt.value == 'student') {
       this.user.UserType = 'student';
       this.setAllFieldsToNull();
-      this.setAllErrorsToTrueForUser('non-uni');
+      // this.setAllErrorsToTrueForUser('non-uni');
       // console.log(this.user.UserType);
       // console.log(this.user);
       // console.log(this.user);
     } else if (opt.value == 'university') {
       this.user.UserType = 'university';
       this.setAllFieldsToNull();
-      this.setAllErrorsToTrueForUser('uni');
+      // this.setAllErrorsToTrueForUser('uni');
       // console.log(this.user.UserType);
       // console.log(this.user);
       // console.log(this.user);
@@ -249,6 +254,34 @@ export class SignupFormComponent implements OnInit {
     this.SignupForm.value.UniversitysEnteredName.length < 2
       ? (this.Errors.invalidNameOfTheUNIVERSITY.status = true)
       : (this.Errors.invalidNameOfTheUNIVERSITY.status = false);
+
+
+
+
+    var EnteredUniTitle = '';
+    if (this.SignupForm.value.UniversitysEnteredName != null) {
+      EnteredUniTitle = this.SignupForm.value.UniversitysEnteredName;
+      if (this.UsersRecievedFromDBForSignup != null) {
+        for (var i = 0; i < Object.keys(this.UsersRecievedFromDBForSignup).length; i++) {
+          var quotedEnteredUniTitle = '"' + EnteredUniTitle + '"';
+          var IteratedTITLEinForLoop: string = JSON.stringify(
+            this.UsersRecievedFromDBForSignup[i].TitleOfUniversity
+          );
+          // console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
+          // console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
+          if (IteratedTITLEinForLoop.toLowerCase() == quotedEnteredUniTitle.toLowerCase()) {
+
+            this.Errors.uniTitleNotUnique.status = true;
+            console.log('user was matched');
+            return true;
+
+          } else {
+            this.Errors.uniTitleNotUnique.status = false;
+            // return false;
+          }
+        }
+      }
+    }
   }
 
   checkHECIDOfUniversity() {
@@ -321,16 +354,13 @@ export class SignupFormComponent implements OnInit {
       : (this.Errors.invalidUsername.status = false);
     // checks uniqieness
     var userEnteredUN = '';
-    if (this.SignupForm.value.UsersEnteredUsername != null)
-     {
+    if (this.SignupForm.value.UsersEnteredUsername != null) {
       userEnteredUN = this.SignupForm.value.UsersEnteredUsername;
       // userEnteredUN = 'bIlalKhursheed';
       console.log("this.usersInfoListFromDB");
       // console.log(this.usersInfoListFromDB);
-      if (this.UsersRecievedFromDBForSignup != null)
-      {
-        for (var i = 0; i < Object.keys(this.UsersRecievedFromDBForSignup).length; i++)
-        {
+      if (this.UsersRecievedFromDBForSignup != null) {
+        for (var i = 0; i < Object.keys(this.UsersRecievedFromDBForSignup).length; i++) {
           var quotedUserEnteredUN = '"' + userEnteredUN + '"';
           var IteratedUNinForLoop: string = JSON.stringify(
             this.UsersRecievedFromDBForSignup[i].Username
@@ -365,7 +395,22 @@ export class SignupFormComponent implements OnInit {
     // console.log(this.user);
   }
 
-  setAllErrorsToTrueForUser(user: string) {
+  setAllErrorsToFalse(){
+    this.Errors.formHasErrors.status = false;
+    this.Errors.formSubmittedSuccessfuly.status = false;
+    this.Errors.invalidFName.status = false;
+    this.Errors.invalidHECID.status = false;
+    this.Errors.invalidLName.status = false;
+    this.Errors.invalidNameOfTheUNIVERSITY.status = false;
+    this.Errors.invalidPassword.status = false;
+    this.Errors.invalidRegistrationNumber.status = false;
+    this.Errors.invalidUsername.status = false;
+    this.Errors.uniTitleNotUnique.status = false;
+    this.Errors.usernameNotUnique.status = false;
+    }
+
+
+  setAsllErrorsToTrueForUser(user: string) {
     if (user == 'uni') {
       // this.Errors.UniversityNotSelected.status = false;
       // this.Errors.invalidFName.status = false;

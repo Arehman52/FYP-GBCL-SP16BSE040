@@ -95,8 +95,8 @@
 
                 <!-- //3rd Element: Enter Username -->
                 <div class="form-group">
-                  <label for="UN">Username</label>
-                  <input type="text" id="UN" class="form-control"
+                  <label >Username</label>
+                  <input type="text" placeholder="Enter a Username" class="form-control"
                   name="UsersEnteredUsername"
                   ngModel
                   (keyup)="checkUsernameOfUser()"
@@ -112,8 +112,8 @@
 
               <div class="col-sm-6">
                 <div class="form-group ">
-                  <label for="PW">Password</label>
-                  <input type="text" id="PW" class="form-control "
+                  <label>Password</label>
+                  <input type="text" placeholder="Enter a Password" class="form-control "
                   name="UsersEnteredPassword"
                   ngModel
                   (keyup)="checkPasswordOfUser()">
@@ -128,8 +128,8 @@
             <div class="row">
 
               <div class="form-group col-sm-6">
-                <label for="FN">First Name</label>
-                <input type="text" id="FN" class="form-control"
+                <label >First Name</label>
+                <input type="text" placeholder="Enter your First Name" class="form-control"
                 name="UsersEnteredFName"
                 ngModel
                 (keyup)="checkFirstNameOfUser()" >
@@ -139,8 +139,8 @@
               </div>
 
               <div class="form-group col-sm-6">
-                <label for="LN">Last Name</label>
-                <input type="text" id="LN" class="form-control" name="UsersEnteredLName" ngModel
+                <label >Last Name</label>
+                <input type="text" placeholder="Enter your Last Name" class="form-control" name="UsersEnteredLName" ngModel
                 (keyup)="checkLastNameOfUser()">
                 <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
                   <span>--{{this.Errors.invalidLName.message}}</span>
@@ -151,8 +151,8 @@
 
             <div class="row">
               <div class="form-group col-sm-12">
-                <label for="RegN">Your ID in University</label>
-                <input type="text" id="RegN" class="form-control" name="UsersEnteredRegistrationNumber" ngModel
+                <label >Your ID in University</label>
+                <input type="text" placeholder="Enter your Registration Number" class="form-control" name="UsersEnteredRegistrationNumber" ngModel
                   required
                   (keyup)="checkRegistrationNumberOfUser()">
                 <small class="form-text text-muted">
@@ -197,8 +197,8 @@
 
                 <!-- //3rd Element: Enter Username -->
                 <div class="form-group">
-                  <label for="UN">Username</label>
-                  <input type="text" id="UN" class="form-control"
+                  <label >Username</label>
+                  <input type="text" placeholder="Enter a Username" class="form-control"
                   name="UsernameOfUniversity"
                   ngModel
                   (keyup)="checkUsernameOfUniversity()">
@@ -213,8 +213,8 @@
 
               <div class="col-sm-6">
                 <div class="form-group ">
-                  <label for="PW">Password</label>
-                  <input type="text" id="PW" class="form-control " name="PasswordOfUniversity"
+                  <label >Password</label>
+                  <input type="text" placeholder="Enter a Password" class="form-control " name="PasswordOfUniversity"
                   ngModel
                   (keyup)="checkPasswordOfUniversity()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
@@ -228,8 +228,8 @@
             <div class="row">
               <div class="col-6">
                 <div class="form-group ">
-                  <label for="HECID">HEC ID of your University.</label>
-                  <input type="text" id="HECID" class="form-control "
+                  <label >HEC ID of your University.</label>
+                  <input type="text" placeholder="Enter HEC ID" class="form-control "
                   name="HECIDOfUniversity"
                   ngModel
                   (keyup)="checkHECIDOfUniversity()">
@@ -241,13 +241,16 @@
 
               <div class="col-6">
                 <div class="form-group ">
-                  <label for="Uname">Enter your University's Name:</label>
-                  <input type="text" id="Uname" class="form-control "
+                  <label >University's Title:</label>
+                  <input type="text" placeholder="Enter a Title" class="form-control "
                   name="UniversitysEnteredName"
                   ngModel
                   (keyup)="checkUniversitysEnteredName()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidNameOfTheUNIVERSITY.status == true">
                     <span>--{{this.Errors.invalidNameOfTheUNIVERSITY.message}}</span>
+                  </small>
+                  <small class="form-text errorText" *ngIf="this.Errors.uniTitleNotUnique.status == true">
+                    <span>--{{this.Errors.uniTitleNotUnique.message}}</span>
                   </small>
                 </div>
               </div>

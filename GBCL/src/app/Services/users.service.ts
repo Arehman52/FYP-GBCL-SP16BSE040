@@ -8,7 +8,6 @@ export class UsersService {
   constructor(private http: HttpClient) {}
 
 
-  usersInfoFromDB = [];
 
 
   universitiesListFromDB = [
@@ -40,19 +39,14 @@ export class UsersService {
 
     RecieveAllUsersFromDB() {
     var tempUsers: Usersmodel[] = [];
-    console.log("OUTSIDE HTTP 2nd");
     this.http
     .get<{ message: string; users: Usersmodel[] }>(
       'http://localhost:3000/api/Users/RecieveUsersFromDB'
     )
     .subscribe((responseData) => {
-      // setTimeout('2000');
-      console.log('SUCCESSFUL TILL HERE but working');
       for (let i = 0; i < Object.keys(responseData.users).length; i++) {
         tempUsers.push(responseData.users[i]);
       }
-      return;
-
     });
     return tempUsers;
   }

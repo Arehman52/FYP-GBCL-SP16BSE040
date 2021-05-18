@@ -179,9 +179,9 @@ export class ManageUniversitiesComponent implements OnInit {
       return;
     }
 
-    if (updateUniForm.value.UniTitle == OriginalUniDetails.TitleOfUniversity
+    if (updateUniForm.value.UniTitle.toLowerCase() == OriginalUniDetails.TitleOfUniversity.toLowerCase()
       && updateUniForm.value.UniHECID == OriginalUniDetails.HECIDofUniversity
-      && updateUniForm.value.UniUsername == OriginalUniDetails.Username
+      && updateUniForm.value.UniUsername.toLowerCase() == OriginalUniDetails.Username.toLowerCase()
       && updateUniForm.value.UniPassword == OriginalUniDetails.Password
     ) {
       alert('You haven\'t changed any field, same values cannot be updated');
@@ -250,9 +250,10 @@ export class ManageUniversitiesComponent implements OnInit {
           console.log(OriginalUniDetails.Username);
           this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
           this.Errors.profileUpdated.status = true;
+          updateUniForm.resetForm();
           setTimeout(() => {
             window.location.reload();
-          }, 2500);
+          }, 3500);
         } else {
           return;
         }
@@ -262,9 +263,10 @@ export class ManageUniversitiesComponent implements OnInit {
           console.log(OriginalUniDetails.Username);
           this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
           this.Errors.profileUpdated.status = true;
+          updateUniForm.resetForm();
           setTimeout(() => {
             window.location.reload();
-          }, 2500);
+          }, 3500);
         } else {
           return;
         }
@@ -345,6 +347,8 @@ export class ManageUniversitiesComponent implements OnInit {
       }
     }
 
+
+    registerUniForm.resetForm();
     setTimeout(() => { window.location.reload() }, 3500);
 
   }
@@ -448,14 +452,28 @@ export class ManageUniversitiesComponent implements OnInit {
       ? (this.Errors.invalidHECID.status = true)
       : (this.Errors.invalidHECID.status = false);
   }
+
+
+
+
+
+  checkkk(val:string):boolean{
+    if(val.length < 2)
+    return true;
+    else
+    return false;
+  }
+
   checkTitleForOfUniversityVALIDandUNIQUE(form: NgForm, originalUniTitle: string) {
-    if (form.value.UniTitle.length < 2) {
-      this.Errors.invalidTitle.status = true
-      // return
-    }
-    else {
-      this.Errors.invalidTitle.status = false
-    }
+    // if (form.value.UniTitle.length < 2) {
+    //   this.Errors.invalidTitle.status = true
+    //   // returnqw
+    // }
+    // else {
+    // }
+    //this.AllUsersRecievedFromDB
+
+    this.Errors.invalidTitle.status = this.checkkk(form.value.UniTitle);
 
     var EnteredUniTitle = '';
     if (form.value.UniTitle != null) {
@@ -465,15 +483,16 @@ export class ManageUniversitiesComponent implements OnInit {
           var quotedEnteredUniTitle = '"' + EnteredUniTitle + '"';
           var IteratedTITLEinForLoop: string = JSON.stringify(
             this.AllUsersRecievedFromDB[i].TitleOfUniversity
-          );
+            );
           // console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
           // console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
-          if (IteratedTITLEinForLoop.toLowerCase() == quotedEnteredUniTitle.toLowerCase()) {
-            if (IteratedTITLEinForLoop.toLowerCase() != '"' + originalUniTitle + '"') {
+          if (IteratedTITLEinForLoop.toLowerCase() == quotedEnteredUniTitle.toLowerCase()
+          && IteratedTITLEinForLoop.toLowerCase() != '"' + originalUniTitle.toLowerCase() + '"') {
+
               this.Errors.uniTitleNotUnique.status = true;
               console.log('user was matched');
               return true;
-            }
+
           } else {
             this.Errors.uniTitleNotUnique.status = false;
             // return false;
