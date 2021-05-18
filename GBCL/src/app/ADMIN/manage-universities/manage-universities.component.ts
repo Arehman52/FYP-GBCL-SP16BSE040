@@ -76,10 +76,10 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
 
-  TerminateAccessButtonToggle(AccessStatus:string){
+  TerminateAccessButtonToggle(AccessStatus: string) {
     if (AccessStatus == 'Terminated') {
       this.TerminateAccessButtonText = "Allow Access";
-    }else{
+    } else {
       this.TerminateAccessButtonText = "Terminate Access";
     }
   }
@@ -165,7 +165,7 @@ export class ManageUniversitiesComponent implements OnInit {
   onSubmit_UpdateButton(updateUniForm: NgForm, OriginalUniDetails: Usersmodel) {
 
     const str: String = updateUniForm.value.UniUsername;
-    if(str != str.replace(/ /g,'')){
+    if (str != str.replace(/ /g, '')) {
       this.Errors.spacesAreNotAllowedInUsername.status = true;
       return;
     }
@@ -243,9 +243,9 @@ export class ManageUniversitiesComponent implements OnInit {
       return;
     } else {
       this.Errors.formHasErrors.status = false;
-      if(OriginalUniDetails.UserzAccessStatus == 'Rejected'){
-        if (confirm('Are you sure you want to update these values?\nThis will only update the fields,\nIt '+
-        'won\'t allow access to this university unless Allow Access Button clicked.')) {
+      if (OriginalUniDetails.UserzAccessStatus == 'Rejected') {
+        if (confirm('Are you sure you want to update these values?\nThis will only update the fields,\nIt ' +
+          'won\'t allow access to this university unless Allow Access Button clicked.')) {
           console.log(OriginalUniDetails._id);
           console.log(OriginalUniDetails.Username);
           this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
@@ -256,7 +256,7 @@ export class ManageUniversitiesComponent implements OnInit {
         } else {
           return;
         }
-      }else{
+      } else {
         if (confirm('Are you sure you want to update these values?')) {
           console.log(OriginalUniDetails._id);
           console.log(OriginalUniDetails.Username);
@@ -345,47 +345,97 @@ export class ManageUniversitiesComponent implements OnInit {
       }
     }
 
+    setTimeout(() => { window.location.reload() }, 3500);
+
   }
 
 
-  checkUsernameIfUNIQUEorINVALID(registerUniForm: NgForm): boolean {
+  // checkUsernameIfUNIQUEorINVALIDforRegisterUniForm0(registerUniForm: NgForm){
 
-    //following checks if there are spaces in Username, then warns
-    const str: String = registerUniForm.value.UniUsername;
-    if(str != str.replace(/ /g,'')){
+
+  //   const str: String = registerUniForm.value.UniUsername;
+  //   if(str != str.replace(/ /g,'')){
+  //     this.Errors.spacesAreNotAllowedInUsername.status = true;
+  //     // return;
+  //   }else{
+  //     this.Errors.spacesAreNotAllowedInUsername.status = false;
+  //   }
+
+
+  //   registerUniForm.value.UniUsername.length < 5
+  //     ? (this.Errors.invalidUsername.status = true)
+  //     : (this.Errors.invalidUsername.status = false);
+  //   // check uniqieness below
+  //   var userEnteredUN = '';
+  //   if (registerUniForm.value.UniUsername != null) {
+  //     userEnteredUN = registerUniForm.value.UniUsername;
+  //     if (this.AllUsersRecievedFromDB != null) {
+  //       for (var i = 0; i < Object.keys(this.AllUsersRecievedFromDB).length; i++) {
+  //         var quotedUserEnteredUN = '"' + userEnteredUN + '"';
+  //         var IteratedUNinForLoop: string = JSON.stringify(
+  //           this.AllUsersRecievedFromDB[i].Username
+  //         );
+  //         console.log("IteratedUNinForLoop.toLowerCase() ",IteratedUNinForLoop.toLowerCase());
+  //         console.log("quotedUserEnteredUN.toLowerCase() ",quotedUserEnteredUN.toLowerCase());
+  //         if (IteratedUNinForLoop.toLowerCase() == quotedUserEnteredUN.toLowerCase()) {
+  //           console.log('user was matched');
+  //           this.Errors.usernameNotUnique.status = true;
+  //           return true;
+  //         } else {
+  //           this.Errors.usernameNotUnique.status = false;
+  //           // return false;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  // }
+  checkUsernameIfUNIQUEorINVALIDinUniForm(updateUniForm: NgForm, originalUsername: string): boolean {
+
+    //this method isdifferent than checkUsernameIfUNIQUEorINVALIDupdateUniForm()
+    //difference is where user matches
+    const str: String = updateUniForm.value.UniUsername;
+    if (str != str.replace(/ /g, '')) {
       this.Errors.spacesAreNotAllowedInUsername.status = true;
       // return;
-    }else{
+    } else {
       this.Errors.spacesAreNotAllowedInUsername.status = false;
     }
 
 
-    registerUniForm.value.UniUsername.length < 5
+    updateUniForm.value.UniUsername.length < 5
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
     // check uniqieness below
     var userEnteredUN = '';
-    if (registerUniForm.value.UniUsername != null) {
-      userEnteredUN = registerUniForm.value.UniUsername;
+    if (updateUniForm.value.UniUsername != null) {
+      userEnteredUN = updateUniForm.value.UniUsername;
       if (this.AllUsersRecievedFromDB != null) {
         for (var i = 0; i < Object.keys(this.AllUsersRecievedFromDB).length; i++) {
           var quotedUserEnteredUN = '"' + userEnteredUN + '"';
           var IteratedUNinForLoop: string = JSON.stringify(
             this.AllUsersRecievedFromDB[i].Username
           );
+          console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
+          console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
           if (IteratedUNinForLoop.toLowerCase() == quotedUserEnteredUN.toLowerCase()) {
-            this.Errors.usernameNotUnique.status = true;
-            console.log('user was matched');
-            return true;
+            if (IteratedUNinForLoop.toLowerCase() != '"' + originalUsername + '"') {
+              this.Errors.usernameNotUnique.status = true;
+              console.log('user was matched');
+              return true;
+            }
           } else {
             this.Errors.usernameNotUnique.status = false;
-            return false;
+            // return false;
           }
         }
       }
     }
 
   }
+
+
+
 
   checkPasswordForRegisterUniversity(registerUniForm: NgForm) {
     registerUniForm.value.UniPassword.length < 8
@@ -398,12 +448,42 @@ export class ManageUniversitiesComponent implements OnInit {
       ? (this.Errors.invalidHECID.status = true)
       : (this.Errors.invalidHECID.status = false);
   }
-  checkTitleForRegisterUniversity(registerUniForm: NgForm) {
-    registerUniForm.value.UniTitle.length < 2
-      ? (this.Errors.invalidTitle.status = true)
-      : (this.Errors.invalidTitle.status = false);
+  checkTitleForOfUniversityVALIDandUNIQUE(form: NgForm, originalUniTitle: string) {
+    if (form.value.UniTitle.length < 2) {
+      this.Errors.invalidTitle.status = true
+      // return
+    }
+    else {
+      this.Errors.invalidTitle.status = false
+    }
+
+    var EnteredUniTitle = '';
+    if (form.value.UniTitle != null) {
+      EnteredUniTitle = form.value.UniTitle;
+      if (this.AllUsersRecievedFromDB != null) {
+        for (var i = 0; i < Object.keys(this.AllUsersRecievedFromDB).length; i++) {
+          var quotedEnteredUniTitle = '"' + EnteredUniTitle + '"';
+          var IteratedTITLEinForLoop: string = JSON.stringify(
+            this.AllUsersRecievedFromDB[i].TitleOfUniversity
+          );
+          // console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
+          // console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
+          if (IteratedTITLEinForLoop.toLowerCase() == quotedEnteredUniTitle.toLowerCase()) {
+            if (IteratedTITLEinForLoop.toLowerCase() != '"' + originalUniTitle + '"') {
+              this.Errors.uniTitleNotUnique.status = true;
+              console.log('user was matched');
+              return true;
+            }
+          } else {
+            this.Errors.uniTitleNotUnique.status = false;
+            // return false;
+          }
+        }
+      }
+    }
   }
   setALLErrorsToFalse() {
+    this.Errors.uniTitleNotUnique.status = false;
     this.Errors.spacesAreNotAllowedInUsername.status = false;
     this.Errors.accessTerminated.status = false;
     this.Errors.accessAllowed.status = false;
@@ -423,6 +503,7 @@ export class ManageUniversitiesComponent implements OnInit {
       this.Errors.invalidHECID.status ||
       this.Errors.invalidTitle.status ||
       this.Errors.invalidPassword.status ||
+      this.Errors.uniTitleNotUnique.status ||
       this.Errors.invalidUsername.status ||
       this.Errors.usernameNotUnique.status
     )
@@ -452,18 +533,22 @@ export class ManageUniversitiesComponent implements OnInit {
   // //////////////////////////////////////////\///
 
 
-  Unis = [
-    { uniTitle: 'CUI Isb', id: 'ab', status: 'allowed' },
-    { uniTitle: 'CUI Lhr', id: 'bc', status: 'allowed' },
-    { uniTitle: 'CUI Wah', id: 'cd', status: 'allowed' },
-    { uniTitle: 'CUI Vehari', id: 'de', status: 'allowed' },
-    { uniTitle: 'CUI Taxila', id: 'ef', status: 'allowed' }
-  ];
+  // Unis = [
+  //   { uniTitle: 'CUI Isb', id: 'ab', status: 'allowed' },
+  //   { uniTitle: 'CUI Lhr', id: 'bc', status: 'allowed' },
+  //   { uniTitle: 'CUI Wah', id: 'cd', status: 'allowed' },
+  //   { uniTitle: 'CUI Vehari', id: 'de', status: 'allowed' },
+  //   { uniTitle: 'CUI Taxila', id: 'ef', status: 'allowed' }
+  // ];
 
 
 
 
   Errors = {
+    uniTitleNotUnique: {
+      status: true,
+      message: 'This title is taken, Type a different one.',
+    },
     spacesAreNotAllowedInUsername: {
       status: true,
       message: 'Spaces are not allowed in Username field',
