@@ -81,6 +81,9 @@
                   <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.uniPendingLoginAccess.status == true">
                     <span>--{{this.Errors.uniPendingLoginAccess.message}}</span>
                   </small>
+                  <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.userPendingLoginAccess.status == true">
+                    <span>--{{this.Errors.userPendingLoginAccess.message}}</span>
+                  </small>
                   <small class="d-block alert alert-danger p-0 m-0" *ngIf="this.Errors.userTerminatedLoginAccess.status == true">
                     <span>--{{this.Errors.userTerminatedLoginAccess.message}}</span>
                   </small>

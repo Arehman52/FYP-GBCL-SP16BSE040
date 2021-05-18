@@ -147,17 +147,9 @@ export class HomepageNavSearchComponent implements OnInit {
           this.showSpinner = false;
           console.log('length is == zerooooooooooooooooo');
           this.Errors.notAUser.status = true;
-          // TheMatchedUser.length = 0;
           return;
         }
-        // if (TheMatchedUser[0].UserType == '-1') {
-        //   console.log('---lllllllllllllllllllllllll');
-        //   this.Errors.notAUser.status = true;
-        //   this.showSpinner = false;
-        //   // TheMatchedUser = [];
-        //   // TheMatchedUser.length = 0;
-        // }
-         else {
+        else {
 
           this.showSpinner = false;
           if (userToBeSearched.Password === TheMatchedUser[0].Password) {
@@ -176,7 +168,10 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
               if (TheMatchedUser[0].UserType == 'student' || 'teacher') {
+                console.log("TheMatchedUser[0].UserType == 'student' || 'teacher'");
+
                 LoginUserzUniversityAsUser = this.loginService.FetchThisUniversityByItsTitle(TheMatchedUser[0].UniversityNameOfUser);
+                console.log('LoginUserzUniversityAsUser : ', LoginUserzUniversityAsUser);
 
                 setTimeout(() => {
 
@@ -185,7 +180,6 @@ export class HomepageNavSearchComponent implements OnInit {
                     //display YOUR University is Terminated Error
                     this.Errors.userTerminatedLoginAccessBecauseUniTerminated.status = true;
                     return;
-                    //and Return
                   }
                   if (LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Allowed') {
                     console.log("LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Allowed'");
@@ -198,7 +192,7 @@ export class HomepageNavSearchComponent implements OnInit {
                 }, 1300);
               }
 
-              if (TheMatchedUser[0].UserType == 'university' && TheMatchedUser[0].UserzAccessStatus == 'Allowed'){
+              if (TheMatchedUser[0].UserType == 'university' && TheMatchedUser[0].UserzAccessStatus == 'Allowed') {
                 console.log("TheMatchedUser[0].UserType == 'university' && TheMatchedUser[0].UserzAccessStatus == 'Allowed'");
                 window.location.href = '/UNIVERSITY';
               }
@@ -209,10 +203,15 @@ export class HomepageNavSearchComponent implements OnInit {
 
             if (TheMatchedUser[0].UserzAccessStatus == 'Pending') {
               // this.showSpinner = false;
+              console.log("TheMatchedUser[0].UserzAccessStatus == 'Pending'");
               if (TheMatchedUser[0].UserType == 'university') {
                 this.Errors.uniPendingLoginAccess.status = true;
+
+                return;
               } else {
                 this.Errors.userPendingLoginAccess.status = true;
+
+                return;
               }
 
               // TheMatchedUser.length = 0;
@@ -221,23 +220,26 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
             if (TheMatchedUser[0].UserzAccessStatus == 'Rejected') {
+              console.log("TheMatchedUser[0].UserzAccessStatus == 'Rejected'");
               this.Errors.userRejectedLoginAccess.status = true;
               // this.showSpinner = false;
-              // TheMatchedUser.length = 0;
+
+              return;
             }
 
 
 
             if (TheMatchedUser[0].UserzAccessStatus == 'Terminated') {
+              console.log("TheMatchedUser[0].UserzAccessStatus == 'Terminated'");
               // this.showSpinner = false;
               this.Errors.userTerminatedLoginAccess.status = true;
-              // TheMatchedUser.length = 0;
+
+              return;
             }
 
           } else {
             this.Errors.incorrectPassword.status = true;
-            // this.showSpinner = false;
-            // TheMatchedUser.length = 0;
+            return;
           }
 
 
@@ -248,13 +250,6 @@ export class HomepageNavSearchComponent implements OnInit {
 
     }
 
-    // this.showSpinner = false;
-    // this.setSpinnerVisible(false);
-    // console.log('TheMatchedUser before emptying : ',TheMatchedUser);
-    TheMatchedUser = [];
-    LoginUserzUniversityAsUser = [];
-    // console.log('TheMatchedUser before emptying : ',TheMatchedUser);
-    // LoginUserzUniversityAsUser.len
 
 
   }

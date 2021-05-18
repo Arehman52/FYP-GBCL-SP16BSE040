@@ -34,16 +34,17 @@ export class LoginService {
   private arrFetchThisUniversityByItsTitle: Usersmodel[] = [];
 
   FetchThisUniversityByItsTitle(UnizTitle: string): Usersmodel[] {
+    this.arrFetchThisUniversityByItsTitle = [];
     var objUnizTitle: {TitleOfUniversity:string} = {TitleOfUniversity : UnizTitle};
     this.http
       .post<{ message: string; user: Usersmodel }>(
         'http://localhost:3000/api/Users/FetchThisUniversityByItsTitle', objUnizTitle
       )
       .subscribe((responseData) => {
-        if(responseData.user != null){
+        // if(responseData.user != null){
           this.arrFetchThisUniversityByItsTitle.push(responseData.user);
           console.log('??????',responseData.user);
-        }
+        // }
       });
       console.log("this.arr", this.arrFetchThisUniversityByItsTitle);
       return this.arrFetchThisUniversityByItsTitle;
@@ -53,20 +54,22 @@ export class LoginService {
 
 
   FetchThisUser(userToBeSearched: Usersmodel): Usersmodel[] {
+    this.arrFetchThisUser = [];
+
     this.http
       .post<{ message: string; user: Usersmodel }>(
         'http://localhost:3000/api/Users/FetchTHISUser', userToBeSearched
       )
       .subscribe((responseData) => {
 
-        if(responseData.user != null){
+        // if(responseData.user != null){
 
 
           this.arrFetchThisUser.push(responseData.user);
 
           console.log('??????',responseData.user);
 
-        }
+        // }
 
       });
 
@@ -76,7 +79,7 @@ export class LoginService {
   }
 
   FetchThisUserbyUsername(username: string): Usersmodel[] {
-
+    this.arrFetchThisUserbyUsername = [];
 
     this.http
       .post<{ message: string; user: Usersmodel }>(
@@ -84,14 +87,14 @@ export class LoginService {
       )
       .subscribe((responseData) => {
 
-        if(responseData.user != null){
+        // if(responseData.user != null){
 
 
           this.arrFetchThisUserbyUsername.push(responseData.user);
 
           console.log('??????',responseData.user);
 
-        }
+        // }
 
       });
 
