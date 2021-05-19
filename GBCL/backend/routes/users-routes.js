@@ -21,6 +21,56 @@ router.delete("/DeleteThisUser/:Id", (req, res, next)=>{
 
 
 
+router.put("/updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged/:OldTitle", (req, res, next)=>{
+  // const Updateduser  = new Users({
+  //   _id: req.body._id,
+  //   UserType: req.body.UserType,
+  //   FirstNameOfUser: req.body.FirstNameOfUser,
+  //   LastNameOfUser: req.body.LastNameOfUser,
+  //   UniversityNameOfUser: req.body.UniversityNameOfUser,
+  //   RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
+  //   TitleOfUniversity: req.body.TitleOfUniversity,
+  //   HECIDofUniversity: req.body.HECIDofUniversity,
+  //   UserzAccessStatus: req.body.UserzAccessStatus,
+  //   Username: req.body.Username,
+  //   Password: req.body.Password
+  // });
+
+
+
+    //1stly
+  //this will change UniversityNameOfUser for all matching students and teachers
+  queryConditions = {"TitleOfUniversity": null, "UniversityNameOfUser": req.params.OldTitle };
+  Users.updateMany(queryConditions, {UniversityNameOfUser: req.body.TitleOfUniversity}).then(
+    result=>{
+      console.log(result);
+      res.status(200).json({
+        message: "For All Users\' UniversityNameOfUser field Changed because Title of their University is updated!",
+        result: result
+      });
+    });
+    console.log('   ==> req.params.OldTitle == ',req.params.OldTitle);
+    // console.log('   ==> {/UpdateTitleOfUniversityANDUsersUniversityName/:OldTitle == ',Updateduser.Username);
+
+
+
+    //2ndly
+  //this will change TitleOfUniversity for that UNIVERSITY
+  // Users.updateOne({TitleOfUniversity: req.params.OldTitle} ,Updateduser).then(
+  //   result=>{
+  //     res.status(200).json({
+  //       message: "TitleOfUniversity and UniversityNameOfUser Updated everywhere!",
+  //       result: result
+  //     });
+  //   });
+    // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
+});
+
+
+
+
+
+
 
 
 
@@ -47,12 +97,7 @@ router.put("/UpdateThisUser/:Id", (req, res, next)=>{
         result: result
       });
     });
-
-
-
-    console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
-
-
+    // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 });
 
 

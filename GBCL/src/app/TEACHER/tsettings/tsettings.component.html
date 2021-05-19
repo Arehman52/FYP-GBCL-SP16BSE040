@@ -57,15 +57,16 @@
           <div class="col-12 btn-group">
             <!-- Example single danger button -->
 
-<button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  {{localStorageUsername}}
-</button>
-<div class="dropdown-menu bg-warning" >
-  <a class="dropdown-item" [routerLink]="'/TEACHER'">Dashboard</a>
-  <div class="dropdown-divider"></div>
-  <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+            <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              {{localStorageUsername}}
+            </button>
+            <div class="dropdown-menu bg-warning">
+              <a class="dropdown-item" [routerLink]="'/TEACHER'">Dashboard</a>
+              <div class="dropdown-divider"></div>
+              <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button>
 
-</div>
+            </div>
 
           </div>
         </div>
@@ -91,25 +92,47 @@
 
         <div class="container border rounded p-3  mt-4 text-light ">
           <div class="row">
-          <div class="col-12">  <h4 class="text-center mb-3 ">Teacher's Details</h4></div>
-          <hr class=" w-75 mx-auto mb-3">
-          <div class="col-sm-5 ml-3 mb-3"> <span class="">Name: Mr. Rizwan Rashid</span> </div>
-          <div class="col-sm-6 ml-3 mb-3"> <span class="">ID: ---Teacher ID here---</span> </div>
-          <div class="col-sm-11 ml-3 mb-3"> University: <span class=""> COMSATS UNIVERSITY ISLAMABAD</span> </div>
+            <div class="col-12">
 
-        </div>
+              <h4 class="text-center mb-3 ">Teacher's Details</h4>
+            </div>
+            <hr class=" w-75 mx-auto mb-3">
+            <div class="col-sm-5 ml-3 mb-3">
+              <b>Name:</b>
+              <span class="text-warning">
+                {{localStorageFirstName+' '+localStorageLastName}}</span>
+            </div>
+            <div class="col-sm-6 ml-3 mb-3">
+              <b>ID:</b>
+              <span class="text-warning">
+                {{localStorageUserzRegistrationNum}}</span>
+            </div>
+            <div class="col-sm-11 ml-3 mb-3">
+              <b>University:</b>
+              <span class="text-warning">
+                {{localStorageUserzUniversity}}</span>
 
 
-        <div class="col-12">  <h4 class="text-center mt-4 mb-3 ">Profile Settings</h4></div>
-        <hr class=" w-75 mx-auto mb-3">
-        <div class="row">
 
-        <div class="col-sm-4 col-lg-5 ml-3 mb-3"> <span class="">New Password: </span> <input type="text"  > </div>
-        <div class="col-sm-6 ml-3 mb-3"> <span class="">Re-enter Password: </span> <input type="text"  >
-        <button class="btn btn-small ml-2 btn-success">Update</button>
+
+
+            </div>
 
           </div>
-        </div>
+
+
+          <div class="col-12">
+            <h4 class="text-center mt-4 mb-3 ">Profile Settings</h4>
+          </div>
+          <hr class=" w-75 mx-auto mb-3">
+          <div class="row">
+
+            <div class="col-sm-4 col-lg-5 ml-3 mb-3"> <span class="">New Password: </span> <input type="text"> </div>
+            <div class="col-sm-6 ml-3 mb-3"> <span class="">Re-enter Password: </span> <input type="text">
+              <button class="btn btn-small ml-2 btn-success">Update</button>
+
+            </div>
+          </div>
           <hr>
         </div>
 

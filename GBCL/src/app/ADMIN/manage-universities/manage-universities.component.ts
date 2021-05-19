@@ -246,14 +246,18 @@ export class ManageUniversitiesComponent implements OnInit {
       if (OriginalUniDetails.UserzAccessStatus == 'Rejected') {
         if (confirm('Are you sure you want to update these values?\nThis will only update the fields,\nIt ' +
           'won\'t allow access to this university unless Allow Access Button clicked.')) {
-          console.log(OriginalUniDetails._id);
-          console.log(OriginalUniDetails.Username);
-          this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
+          // console.log(OriginalUniDetails._id);
+          // console.log(OriginalUniDetails.Username);
+          this.usersService.updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUniAsAUser, OriginalUniDetails);
+
+          setTimeout(() => {
+            this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
+          }, 750);
           this.Errors.profileUpdated.status = true;
           updateUniForm.resetForm();
-          setTimeout(() => {
-            window.location.reload();
-          }, 3500);
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 3500);
         } else {
           return;
         }
@@ -261,12 +265,16 @@ export class ManageUniversitiesComponent implements OnInit {
         if (confirm('Are you sure you want to update these values?')) {
           console.log(OriginalUniDetails._id);
           console.log(OriginalUniDetails.Username);
-          this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
+          this.usersService.updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUniAsAUser, OriginalUniDetails);
+
+          setTimeout(() => {
+            this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
+          }, 750);
           this.Errors.profileUpdated.status = true;
           updateUniForm.resetForm();
-          setTimeout(() => {
-            window.location.reload();
-          }, 3500);
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 3500);
         } else {
           return;
         }
@@ -284,6 +292,7 @@ export class ManageUniversitiesComponent implements OnInit {
       this.Errors.invalidPassword.status ||
       this.Errors.invalidTitle.status ||
       this.Errors.invalidUsername.status ||
+      this.Errors.uniTitleNotUnique.status ||
       this.Errors.usernameNotUnique.status
     );
   }
@@ -420,8 +429,8 @@ export class ManageUniversitiesComponent implements OnInit {
           var IteratedUNinForLoop: string = JSON.stringify(
             this.AllUsersRecievedFromDB[i].Username
           );
-          console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
-          console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
+          // console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
+          // console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
           if (IteratedUNinForLoop.toLowerCase() == quotedUserEnteredUN.toLowerCase()) {
             if (IteratedUNinForLoop.toLowerCase() != '"' + originalUsername + '"') {
               this.Errors.usernameNotUnique.status = true;
@@ -457,11 +466,11 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
 
-  checkkk(val:string):boolean{
-    if(val.length < 2)
-    return true;
+  checkkk(val: string): boolean {
+    if (val.length < 2)
+      return true;
     else
-    return false;
+      return false;
   }
 
   checkTitleForOfUniversityVALIDandUNIQUE(form: NgForm, originalUniTitle: string) {
@@ -475,27 +484,27 @@ export class ManageUniversitiesComponent implements OnInit {
 
     this.Errors.invalidTitle.status = this.checkkk(form.value.UniTitle);
 
-    var EnteredUniTitle = '';
-    if (form.value.UniTitle != null) {
-      EnteredUniTitle = form.value.UniTitle;
+    var EnteredUniTitle = form.value.UniTitle.toLowerCase();
+    if (EnteredUniTitle != null) {
+      // EnteredUniTitle =
       if (this.AllUsersRecievedFromDB != null) {
         for (var i = 0; i < Object.keys(this.AllUsersRecievedFromDB).length; i++) {
-          var quotedEnteredUniTitle = '"' + EnteredUniTitle + '"';
-          var IteratedTITLEinForLoop: string = JSON.stringify(
-            this.AllUsersRecievedFromDB[i].TitleOfUniversity
-            );
-          // console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
-          // console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
-          if (IteratedTITLEinForLoop.toLowerCase() == quotedEnteredUniTitle.toLowerCase()
-          && IteratedTITLEinForLoop.toLowerCase() != '"' + originalUniTitle.toLowerCase() + '"') {
+          if(this.AllUsersRecievedFromDB[i].UserType == 'university')
+          {    // var quotedEnteredUniTitle = '"' + EnteredUniTitle + '"';
+            var IteratedTITLEinForLoop: string = this.AllUsersRecievedFromDB[i].TitleOfUniversity.toLowerCase();
+            // console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
+            // console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
+            if (IteratedTITLEinForLoop == EnteredUniTitle
+              && IteratedTITLEinForLoop != originalUniTitle.toLowerCase()) {
 
               this.Errors.uniTitleNotUnique.status = true;
               console.log('user was matched');
               return true;
 
-          } else {
-            this.Errors.uniTitleNotUnique.status = false;
-            // return false;
+            } else {
+              this.Errors.uniTitleNotUnique.status = false;
+              // return false;
+            }
           }
         }
       }

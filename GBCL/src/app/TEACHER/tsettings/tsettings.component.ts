@@ -8,18 +8,25 @@ import { Component } from '@angular/core';
 export class TeachersettingsComponent {
 
   constructor() { }
-  labs = [ {} ];
+  labs = [{}];
+
+
+
+
+  localStorageUsername = localStorage.getItem("UsersUsername");
+  localStorageFirstName = localStorage.getItem("UserzFirstNameOfUser");
+  localStorageLastName = localStorage.getItem("UserzLastNameOfUser");
+  localStorageUserzRegistrationNum = localStorage.getItem("UserzRegistrationNumberOfUser");
+  localStorageUserzUniversity = localStorage.getItem("UserzUniversityNameOfUser");
 
 
 
 
 
-localStorageUsername = localStorage.getItem("UsersUsername");
-
-onLogout(){
-  localStorage.clear();
-  window.location.href="/";
-}
+  onLogout() {
+    localStorage.clear();
+    window.location.href = "/";
+  }
 
 
 }

@@ -10,6 +10,7 @@ export class UsersService {
 
 
 
+  //do not delete.
   universitiesListFromDB = [
     // { uniName: 'COMSATS University Islamabad' },
       // { uniName: 'IIUI Islamabad' },
@@ -27,6 +28,20 @@ export class UsersService {
         }
       );
     }
+
+
+
+    //updateUniversityNameOfUserBecauseTitleOfUniversityHasBeenChanged
+    updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUser: Usersmodel, OldUser: Usersmodel){
+      this.http.put("http://localhost:3000/api/Users/updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged/"+OldUser.TitleOfUniversity, UpdatedUser).subscribe(
+        response=>{
+          console.log(response);
+        }
+      );
+
+    }
+
+
 
     updateThisUser(UpdatedUser: Usersmodel, Id: string) {
       this.http.put("http://localhost:3000/api/Users/UpdateThisUser/"+Id, UpdatedUser).subscribe(
@@ -63,8 +78,12 @@ export class UsersService {
 
   }
 
-  getUniversitiesListFromDB() {
 
+
+
+
+  //do not delete this getUniversitiesListFromDB() fn.
+  getUniversitiesListFromDB() {
     return this.universitiesListFromDB;
   }
 

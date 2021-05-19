@@ -163,8 +163,12 @@ export class HomepageNavSearchComponent implements OnInit {
 
               localStorage.setItem("UsersUsername", TheMatchedUser[0].Username);
               localStorage.setItem("UsersUsertype", TheMatchedUser[0].UserType);
-              // if (TheMatchedUser[0].TitleOfUniversity != null || undefined || '')
               localStorage.setItem("UniversityTitle", TheMatchedUser[0].TitleOfUniversity);
+              localStorage.setItem("UserzUniversityNameOfUser", TheMatchedUser[0].UniversityNameOfUser);
+              localStorage.setItem("UserzUniversityNameOfUser", TheMatchedUser[0].UniversityNameOfUser);
+              localStorage.setItem("UserzFirstNameOfUser", TheMatchedUser[0].FirstNameOfUser);
+              localStorage.setItem("UserzLastNameOfUser", TheMatchedUser[0].LastNameOfUser);
+              localStorage.setItem("UserzRegistrationNumberOfUser", TheMatchedUser[0].RegistrationNumberOfUser);
               // alert(TheMatchedUser[0].TitleOfUniversity);
 
               if (TheMatchedUser[0].UserType != 'university' || 'admin')
