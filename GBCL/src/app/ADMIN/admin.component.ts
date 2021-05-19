@@ -38,6 +38,13 @@ export class AdminComponent implements OnInit {
 
 
 
+
+
+  setAllErrorsToFalse(){
+    this.Errors.joinRequestAccepted.status = false;
+    this.Errors.joinRequestRejected.status = false;
+  }
+
   onRejectButtonClicked(Uni: Usersmodel) {
 
     if (confirm('Are you sure you want to REJECT join request of university : ' + Uni.TitleOfUniversity)) {
@@ -51,13 +58,6 @@ export class AdminComponent implements OnInit {
     }
 
   }
-
-
-  setAllErrorsToFalse(){
-    this.Errors.joinRequestAccepted.status = false;
-    this.Errors.joinRequestRejected.status = false;
-  }
-
   onAcceptButtonClicked(Uni: Usersmodel) {
 
     if (confirm('Are you sure you want to accept join request of university : ' + Uni.TitleOfUniversity)) {

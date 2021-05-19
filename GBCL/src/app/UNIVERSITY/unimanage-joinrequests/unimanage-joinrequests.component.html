@@ -1,0 +1,429 @@
+<div class="container-fluid">
+
+
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- TOP ROW STARTS, in a [container-fluid]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+  <div class="row">
+    <div class="col-12 maTopRow ">
+      <!-- this column isfurther divided into three portions -->
+      <!-- first portion for logo -->
+      <!-- second portion for Student Stats -->
+      <!-- third portion for Logout n student name -->
+      <!-- <div class="row text-center">
+              <div class="col-12 col-sm-3 col-md-2 bg-success">LOGO</div>
+              <div class="col-12 col-sm-6 col-md-8 bg-primary">Stats</div>
+              <div class="col-12 col-sm-3 col-md-2 bg-secondary">logout n profile</div>
+          </div> -->
+      <div class="row text-center">
+
+        <!-- ---------------- -->
+        <!-- GBCL LOGO COLUMN -->
+
+        <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
+          <a class="btn  border-warning w-100 logoText" href="#" title="Gamification Based Coding Labs"><img
+              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+        </div>
+
+        <!-- GBCL LOGO COLUMN-END -->
+        <!-- -------------------- -->
+
+
+
+
+
+
+        <!-- ----------- -->
+        <!-- Stats column -->
+        <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover ">
+          <div class="row text-center  childSpansHoverYellow">
+            <div class="col"><span class="mx-2">
+                <h4>Manage Join Requests</h4>
+                <h6>{{this.localStorageUsername.toUpperCase()}}</h6>
+              </span></div>
+          </div>
+        </div>
+        <!-- STATS COL END -->
+        <!-- ------------- -->
+
+
+
+
+        <!-- ---------- -->
+        <!-- LOGOUT COL -->
+        <div class="col-12 col-sm-3 col-md-2">
+          <div class="row">
+            <div class="col-12 btn-group">
+              <!-- Example single danger button -->
+
+              <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{localStorageUsername}}
+              </button>
+              <div class="dropdown-menu bg-warning">
+                <a class="dropdown-item" [routerLink]="'/UNIVERSITY'">Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageJoinRequests'">Manage Join Reqs</a>
+                <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageMembers'">Manage Members</a>
+                <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageLabs'">Manage Labs</a>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!-- LOGOUT COL ENDS-->
+        <!-- ----------------->
+
+      </div>
+
+    </div>
+    <hr class="bg-warning p-0 m-0">
+  </div>
+  <!--1st row ends-->
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- TOP ROW ENDS-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+  <div class="row">
+    <!--2nd row starts-->
+    <div class="col-12 col-sm-3 col-lg-2  p-1 maNav-bg-color minHeight838">
+      <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/UNIVERSITY'">Dashboard</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link active" [routerLink]="'/UNIVERSITY/ManageJoinRequests'">Manage Join Requests</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/UNIVERSITY/ManageMembers'">Manage Members</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/UNIVERSITY/ManageLabs'">Manage Labs</a>
+        </li>
+
+      </ul>
+
+    </div>
+    <div class="col-12 col-sm-9 col-lg-10 p-0 text-light">
+
+
+      <div class="container-fluid">
+
+
+
+
+
+
+
+        <!-- -------------------------------------------------------------------------------------- -->
+        <!-- TOP ROW STARTS, in a [container-fluid]-->
+        <!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+        <div class="mx-2 mt-3" *ngIf="this.JOINRequestsTeachers.length==0 && this.JOINRequestsStudents.length==0">
+          <div class="alert alert-info p-4">
+            <h5>There are no Join requests from any member.</h5>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+    <div id="accordionOuter" *ngIf="this.JOINRequestsTeachers.length!=0">
+      <div class="card  mt-2 mx-3">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <h4><b> TEACHERS' JOIN REQUESTS</b></h4>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
+          <div class="card-body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Cards within card -->
+
+            <div id="accordionInner">
+              <div class="card mb-1" *ngFor="let tchr of JOINRequestsTeachers">
+                <div class="card-header"
+                  [attr.id]="'RegisterUniversityCard'">
+
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisterUniversityCollapse' + tchr._id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + tchr._id">
+                    {{tchr.FirstNameOfUser+ ' '+tchr.LastNameOfUser}}
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisterUniversityCollapse' + tchr._id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
+                  data-parent="#accordionInner">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto"><!-- remove bg dark -->
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Registration#</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Access Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+
+                              <td>{{tchr.RegistrationNumberOfUser}}</td>
+                              <td>{{tchr.FirstNameOfUser}}</td>
+                              <td>{{tchr.LastNameOfUser}}</td>
+                              <td>{{tchr.UserzAccessStatus}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                        <button (click)="onAcceptButtonClicked(tchr)" class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
+                        <button (click)="onRejectButtonClicked(tchr)" class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
+                        </div>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.joinRequestAccepted.status==true">
+                          {{this.Errors.joinRequestAccepted.message}}
+                        </small>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.joinRequestRejected.status==true">
+                          {{this.Errors.joinRequestRejected.message}}
+                        </small>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cards within card -->
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="accordionOuterstud" *ngIf="this.JOINRequestsStudents.length!=0">
+      <div class="card  mt-2 mx-3">
+        <div class="card-header" id="headingOnestud">
+          <h5 class="mb-0">
+            <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOnestud" aria-expanded="true" aria-controls="collapseOnestud">
+              <h4><b> STUDENTS' JOIN REQUESTS</b></h4>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOnestud" class="collapse show" aria-labelledby="headingOnestud" data-parent="#accordionOuterstud">
+          <div class="card-body">
+
+
+
+            <div *ngIf="this.JOINRequestsStudents.length==0">
+              <div class="alert alert-info">
+                <h5>There are no Join requests from students to process.</h5>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Cards within card -->
+
+            <div id="accordionInnerstud">
+              <div class="card mb-1" *ngFor="let stud of JOINRequestsStudents">
+                <div class="card-header"
+                  [attr.id]="'RegisterUniversityCard'">
+
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisterUniversityCollapse' + stud._id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + stud._id">
+                    {{stud.FirstNameOfUser+ ' '+stud.LastNameOfUser}}
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisterUniversityCollapse' + stud._id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
+                  data-parent="#accordionInnerstud">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto"><!-- remove bg dark -->
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Registration#</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Access Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+
+                              <td>{{stud.RegistrationNumberOfUser}}</td>
+                              <td>{{stud.FirstNameOfUser}}</td>
+                              <td>{{stud.LastNameOfUser}}</td>
+                              <td>{{stud.UserzAccessStatus}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                        <button (click)="onAcceptButtonClicked(stud)" class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept</button>
+                        <button (click)="onRejectButtonClicked(stud)" class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button>
+                        </div>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.joinRequestAccepted.status==true">
+                          {{this.Errors.joinRequestAccepted.message}}
+                        </small>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.joinRequestRejected.status==true">
+                          {{this.Errors.joinRequestRejected.message}}
+                        </small>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cards within card -->
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+  <!--2nd row ends-->
+
+
+
+  <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+  <!-- -------------------------------------------------------------------------------------- -->
+  <!-- AREA UNDER TOP ROW OF STUDENT STARTS in [container-fluid]-->
+  <!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+</div>
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!--MAIN AREA OF STUDENT ENDS-->
+<!-- ----------------------------------------------------------------------------------------->
+
+
+
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- AREA UNDER TOP ROW OF STUDENT ENDS-->
+<!-- ----------------------------------------------------------------------------------------->

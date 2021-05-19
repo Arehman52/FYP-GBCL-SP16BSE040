@@ -53,6 +53,7 @@ import { ManageStudentsComponent } from './teacher/tlab-dashboard/manage-student
 import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-students/evaluate-students.component';
 // Misc imports
 import { Error404Component } from './MISC/error404/error404.component';
+import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { Error404Component } from './MISC/error404/error404.component';
 
     //delete following components
     GithubcodeforformvalidationComponent,
-    TestConceptsComponent
+    TestConceptsComponent,
+    UnimanageJoinrequestsComponent
   ],
   imports: [
     BrowserModule,
