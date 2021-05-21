@@ -302,6 +302,11 @@ onSubmit_UpdateButton(updateMemberForm: NgForm, OriginalMemberDetails: Usersmode
 
 
 checkUsernameOfMemberIfVALIDandUNIQUE(UN:string) {
+
+  UN != UN.replace(/ /g, '')
+    ? (this.Errors.spacesAreNotAllowed.status = true)
+    : (this.Errors.spacesAreNotAllowed.status = false);
+
   UN.length < 5
     ? (this.Errors.invalidUsername.status = true)
     : (this.Errors.invalidUsername.status = false);
@@ -370,6 +375,7 @@ checkRegNOfMember(regNum:string){
 }
 
 setALLErrorsToFalse() {
+  this.Errors.spacesAreNotAllowed.status = false;
   this.Errors.invalidFName.status = false;
   this.Errors.invalidLName.status = false;
   this.Errors.invalidPassword.status = false;
@@ -382,6 +388,7 @@ setALLErrorsToFalse() {
 
 checkIfErrors(): boolean{
   if (
+    this.Errors.spacesAreNotAllowed.status ||
     this.Errors.emptyField.status ||
     this.Errors.invalidFName.status ||
     this.Errors.invalidLName.status ||

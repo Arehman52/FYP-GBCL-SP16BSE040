@@ -200,7 +200,7 @@
                             *ngIf="this.Errors.invalidUsername.status == true">
                             <span>--{{this.Errors.invalidUsername.message}}</span>
                           </small>
-                          <small class="form-text rounded alert-danger py-0 px-3"
+                          <small class="form-text alert alert-danger"
                             *ngIf="this.Errors.spacesAreNotAllowed.status == true">
                             {{this.Errors.spacesAreNotAllowed.message}}
                           </small>
@@ -817,15 +817,15 @@
                                     <input type="text" class="form-control" placeholder="Enter Username for university"
                                       name="MemberUsername" [ngModel]="RejectedMember.Username"
                                       (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(updateRejectedMemberForm.value.MemberUsername)">
-                                    <small class="form-text rounded alert-danger py-0 px-3"
+                                    <small class="form-text alert alert-danger"
                                       *ngIf="this.Errors.invalidUsername.status == true">
                                       {{this.Errors.invalidUsername.message}}
                                     </small>
-                                    <small class="form-text rounded alert-danger py-0 px-3"
+                                    <small class="form-text alert alert-danger"
                                       *ngIf="this.Errors.spacesAreNotAllowed.status == true">
                                       {{this.Errors.spacesAreNotAllowed.message}}
                                     </small>
-                                    <small class="form-text rounded alert-danger py-0 px-3"
+                                    <small class="form-text alert alert-danger"
                                       *ngIf="this.Errors.usernameNotUnique.status == true">
                                       {{this.Errors.usernameNotUnique.message}}
                                     </small>
@@ -837,7 +837,7 @@
                                     <input type="text" class="form-control" placeholder="Enter Password for university"
                                       name="MemberPassword" [ngModel]="RejectedMember.Password"
                                       (keyup)="checkPasswordOfMember(updateRejectedMemberForm.value.MemberPassword)">
-                                    <small class="form-text rounded alert-danger py-0 px-3"
+                                    <small class="form-text alert alert-danger"
                                       *ngIf="this.Errors.invalidPassword.status == true">
                                       {{this.Errors.invalidPassword.message}}
                                     </small>
@@ -852,7 +852,7 @@
                                   <input type="text" class="form-control" placeholder="Update First Name"
                                     name="MemberFN" [ngModel]="RejectedMember.FirstNameOfUser"
                                     (keyup)="checkFNameOfMember(updateRejectedMemberForm.value.MemberFN)">
-                                  <small class="form-text rounded alert-danger py-0 px-3"
+                                  <small class="form-text alert alert-danger"
                                     *ngIf="this.Errors.invalidFName.status == true">
                                     {{this.Errors.invalidFName.message}}
                                   </small>
@@ -864,7 +864,7 @@
                                   <input type="text" class="form-control" placeholder="Update Last Name" name="MemberLN"
                                     [ngModel]="RejectedMember.LastNameOfUser"
                                     (keyup)="checkLNameOfMember(updateRejectedMemberForm.value.MemberLN)">
-                                  <small class="form-text rounded alert-danger py-0 px-3"
+                                  <small class="form-text alert alert-danger"
                                     *ngIf="this.Errors.invalidLName.status == true">
                                     {{this.Errors.invalidLName.message}}
                                   </small>
