@@ -305,6 +305,10 @@ checkUsernameOfMemberIfVALIDandUNIQUE(UN:string) {
   UN.length < 5
     ? (this.Errors.invalidUsername.status = true)
     : (this.Errors.invalidUsername.status = false);
+
+  UN.length == 0
+    ? (this.Errors.emptyField.status = true)
+    : (this.Errors.emptyField.status = false);
   // check uniqieness below
   // var userEnteredUN = '';
   if (UN != null)
@@ -332,22 +336,34 @@ checkUsernameOfMemberIfVALIDandUNIQUE(UN:string) {
 }
 
 checkPasswordOfMember(PW:string){
+  PW.length == 0
+      ? (this.Errors.emptyField.status = true)
+      : (this.Errors.emptyField.status = false);
   PW.length < 8
       ? (this.Errors.invalidPassword.status = true)
       : (this.Errors.invalidPassword.status = false);
 }
 
 checkFNameOfMember(FName:string){
+  FName.length == 0
+      ? (this.Errors.emptyField.status = true)
+      : (this.Errors.emptyField.status = false);
   FName.length < 3
       ? (this.Errors.invalidFName.status = true)
       : (this.Errors.invalidFName.status = false);
 }
 checkLNameOfMember(LName:string){
+  LName.length == 0
+      ? (this.Errors.emptyField.status = true)
+      : (this.Errors.emptyField.status = false);
   LName.length < 3
       ? (this.Errors.invalidLName.status = true)
       : (this.Errors.invalidLName.status = false);
 }
 checkRegNOfMember(regNum:string){
+  regNum.length == 0
+      ? (this.Errors.emptyField.status = true)
+      : (this.Errors.emptyField.status = false);
   regNum.length < 4
       ? (this.Errors.invalidRegistrationNumber.status = true)
       : (this.Errors.invalidRegistrationNumber.status = false);
@@ -366,6 +382,7 @@ setALLErrorsToFalse() {
 
 checkIfErrors(): boolean{
   if (
+    this.Errors.emptyField.status ||
     this.Errors.invalidFName.status ||
     this.Errors.invalidLName.status ||
     this.Errors.invalidPassword.status ||
@@ -389,6 +406,7 @@ checkIfErrors(): boolean{
 
 
   onFacultyEditToggle(){
+    this.setALLErrorsToFalse();
     if(this.FacultyEdit == false){
       this.FacultyEdit = true;
       this.EditFacultyButtonText = "Hide Edit";
@@ -400,6 +418,7 @@ checkIfErrors(): boolean{
 
 
   onStudentEditToggle(){
+    this.setALLErrorsToFalse();
     if(this.StudentEdit == false){
       this.StudentEdit = true;
       this.EditStudentButtonText = "Hide Edit";
@@ -427,6 +446,10 @@ checkIfErrors(): boolean{
 
 
 Errors = {
+  emptyField: {
+    status: true,
+    message: 'One or more fields are empty.',
+  },
   userDeleted: {
     status: true,
     message: 'This member\'s profile has been delete.',
@@ -468,9 +491,9 @@ Errors = {
     status: true,
     message: 'Registration Number should be minimum of 4 characters).',
   },
-  spacesAreNotAllowedInUsername: {
+  spacesAreNotAllowed: {
     status: true,
-    message: 'Spaces are not allowed in Username field',
+    message: 'Spaces are not allowed this field',
   },
   profileUpdated: {
     status: true,

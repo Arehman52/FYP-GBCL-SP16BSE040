@@ -184,7 +184,8 @@
                   <!-- Start of std divis -->
 
                   <!-- -->
-                  <form (submit)="on_CreateMemberProfileSubmitButton_Clicked(createMemberForm)" #createMemberForm="ngForm">
+                  <form (submit)="on_CreateMemberProfileSubmitButton_Clicked(createMemberForm)"
+                    #createMemberForm="ngForm">
 
                     <div class="row">
                       <div class="col-sm-6">
@@ -193,11 +194,17 @@
                         <div class="form-group">
                           <label> {{this.MemberType}}'s Username</label>
                           <input type="text" class="form-control" name="UNcreateProfile"
-                            (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(createMemberForm.value.UNcreateProfile)" ngModel>
-                          <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+                            (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(createMemberForm.value.UNcreateProfile)"
+                            ngModel>
+                          <small class="form-text alert alert-danger"
+                            *ngIf="this.Errors.invalidUsername.status == true">
                             <span>--{{this.Errors.invalidUsername.message}}</span>
                           </small>
-                          <small class="form-text errorText" *ngIf="">
+                          <small class="form-text rounded alert-danger py-0 px-3"
+                            *ngIf="this.Errors.spacesAreNotAllowed.status == true">
+                            {{this.Errors.spacesAreNotAllowed.message}}
+                          </small>
+                          <small class="form-text alert alert-danger" *ngIf="this.Errors.usernameNotUnique.status">
                             <span>--{{this.Errors.usernameNotUnique.message}}</span>
                           </small>
                         </div>
@@ -208,7 +215,8 @@
                           <label> {{this.MemberType}}'s Password</label>
                           <input type="text" class="form-control " name="PWcreateProfile"
                             (keyup)="checkPasswordOfMember(createMemberForm.value.PWcreateProfile)" ngModel>
-                          <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                          <small class="form-text alert alert-danger"
+                            *ngIf="this.Errors.invalidPassword.status == true">
                             {{this.Errors.invalidPassword.message}}
                           </small>
                         </div>
@@ -220,18 +228,18 @@
 
                       <div class="form-group col-sm-6">
                         <label> {{this.MemberType}}'s First Name</label>
-                        <input type="text" class="form-control" name="FNcreateProfile" (keyup)="checkFNameOfMember(createMemberForm.value.FNcreateProfile)"
-                          ngModel>
-                        <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
+                        <input type="text" class="form-control" name="FNcreateProfile"
+                          (keyup)="checkFNameOfMember(createMemberForm.value.FNcreateProfile)" ngModel>
+                        <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidFName.status == true">
                           {{this.Errors.invalidFName.message}}
                         </small>
                       </div>
 
                       <div class="form-group col-sm-6">
                         <label> {{this.MemberType}}'s Last Name</label>
-                        <input type="text" class="form-control" name="LNcreateProfile" (keyup)="checkLNameOfMember(createMemberForm.value.LNcreateProfile)"
-                          ngModel>
-                        <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
+                        <input type="text" class="form-control" name="LNcreateProfile"
+                          (keyup)="checkLNameOfMember(createMemberForm.value.LNcreateProfile)" ngModel>
+                        <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidLName.status == true">
                           {{this.Errors.invalidLName.message}}
                         </small>
                       </div>
@@ -241,9 +249,10 @@
                     <div class="row">
                       <div class="form-group col-sm-12">
                         <label> {{this.MemberType}}'s Registration Number</label>
-                        <input type="text" class="form-control" name="RegNcreateProfile" (keyup)="checkRegNOfMember(createMemberForm.value.RegNcreateProfile)"
-                          ngModel>
-                        <small class="form-text errorText" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                        <input type="text" class="form-control" name="RegNcreateProfile"
+                          (keyup)="checkRegNOfMember(createMemberForm.value.RegNcreateProfile)" ngModel>
+                        <small class="form-text alert alert-danger"
+                          *ngIf="this.Errors.invalidRegistrationNumber.status == true">
                           {{this.Errors.invalidRegistrationNumber.message}}
                         </small>
                       </div>
@@ -251,15 +260,15 @@
 
 
                     <div class="text-center">
-                      <button class="btn btn-primary w-50 m-auto" type="submit">Create Member Profile</button>
+                      <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()" type="submit">Create
+                        Member Profile</button>
                     </div>
 
-                    <small class="form-text p-2 mt-4 formSubmissionErrorsText"
-                      *ngIf="this.Errors.formHasErrors.status == true">
+                    <small class="form-text alert alert-danger" *ngIf="this.Errors.formHasErrors.status == true">
                       {{this.Errors.formHasErrors.message}}
                     </small>
 
-                    <small class="form-text p-2 mt-4 formSubmissionSuccessText"
+                    <small class="form-text alert alert-success"
                       *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
                       {{this.Errors.formSubmittedSuccessfuly.message}}
                     </small>
@@ -373,12 +382,14 @@
                                 <div class="form-group">
                                   <label> Faculty's Username</label>
                                   <input type="text" class="form-control" name="UNEditFacultyProfile" ngModel>
-                                  <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
-                    <span>--{{this.Errors.invalidUsername.message}}</span>
-                  </small>
-                  <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
-                    <span>--{{this.Errors.usernameNotUnique.message}}</span>
-                  </small> -->
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidUsername.status == true">
+                                    <span>--{{this.Errors.invalidUsername.message}}</span>
+                                  </small>
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.usernameNotUnique.status == true">
+                                    <span>--{{this.Errors.usernameNotUnique.message}}</span>
+                                  </small>
                                 </div>
                               </div>
 
@@ -386,7 +397,7 @@
                                 <div class="form-group ">
                                   <label> Faculty's Password</label>
                                   <input type="text" class="form-control " name="PassWordEditFacultyProfile" ngModel>
-                                  <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                                  <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>--{{this.Errors.invalidPassword.message}}</span>
                   </small> -->
                                 </div>
@@ -399,7 +410,7 @@
                               <div class="form-group col-sm-6">
                                 <label> Faculty's First Name</label>
                                 <input type="text" class="form-control" name="FNEditFacultyProfile" ngModel>
-                                <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
+                                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidFName.status == true">
                   <span>--{{this.Errors.invalidFName.message}}</span>
                 </small> -->
                               </div>
@@ -407,7 +418,7 @@
                               <div class="form-group col-sm-6">
                                 <label> Faculty's Last Name</label>
                                 <input type="text" class="form-control" name="LNEditFacultyProfile" ngModel>
-                                <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
+                                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidLName.status == true">
                   <span>--{{this.Errors.invalidLName.message}}</span>
                 </small> -->
                               </div>
@@ -421,7 +432,7 @@
                                 <!-- <small class="form-text text-muted">
                   Your registration ID through which your university can identify you in their records.
                 </small>
-                <small class="form-text errorText" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
                   <span>--{{this.Errors.invalidRegistrationNumber.message}}</span>
                 </small> -->
                               </div>
@@ -583,10 +594,10 @@
                                 <div class="form-group">
                                   <label> Student's Username</label>
                                   <input type="text" class="form-control" name="Users258EnteredUsername" ngModel>
-                                  <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
+                                  <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidUsername.status == true">
                   <span>--{{this.Errors.invalidUsername.message}}</span>
                 </small>
-                <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
+                <small class="form-text alert alert-danger" *ngIf="this.Errors.usernameNotUnique.status == true">
                   <span>--{{this.Errors.usernameNotUnique.message}}</span>
                 </small> -->
                                 </div>
@@ -596,7 +607,7 @@
                                 <div class="form-group ">
                                   <label> Student's Password</label>
                                   <input type="text" class="form-control " name="UsersEnteredPassword" ngModel>
-                                  <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
+                                  <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidPassword.status == true">
                   <span>--{{this.Errors.invalidPassword.message}}</span>
                 </small> -->
                                 </div>
@@ -609,7 +620,7 @@
                               <div class="form-group col-sm-6">
                                 <label> Student's First Name</label>
                                 <input type="text" class="form-control" name="UsersEnteredFName" ngModel>
-                                <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
+                                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidFName.status == true">
                 <span>--{{this.Errors.invalidFName.message}}</span>
               </small> -->
                               </div>
@@ -617,7 +628,7 @@
                               <div class="form-group col-sm-6">
                                 <label> Student's Last Name</label>
                                 <input type="text" class="form-control" name="LNEditStudentProfile" ngModel>
-                                <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
+                                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidLName.status == true">
                 <span>--{{this.Errors.invalidLName.message}}</span>
               </small> -->
                               </div>
@@ -631,7 +642,7 @@
                                 <!-- <small class="form-text text-muted">
                 Your registration ID through which your university can identify you in their records.
               </small>
-              <small class="form-text errorText" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+              <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
                 <span>--{{this.Errors.invalidRegistrationNumber.message}}</span>
               </small> -->
                               </div>
@@ -729,8 +740,7 @@
                 <div class="card mb-1" *ngFor="let RejectedMember of RejectedMembers">
                   <div class="card-header" [attr.id]="'heading'+RejectedMember._id">
 
-                    <button class="btn"
-                      [ngClass]="{'btn-danger': RejectedMember.UserzAccessStatus == 'Rejected'}"
+                    <button class="btn" [ngClass]="{'btn-danger': RejectedMember.UserzAccessStatus == 'Rejected'}"
                       style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
                       [attr.data-target]="'#collapse' + RejectedMember._id" aria-expanded="true"
                       [attr.aria-controls]="'collapse'+RejectedMember._id">
@@ -739,8 +749,8 @@
 
                   </div>
 
-                  <div [id]="'collapse'+RejectedMember._id" class="collapse hide" [attr.aria-labelledby]="'heading'+RejectedMember._id"
-                    data-parent="#accordionInner">
+                  <div [id]="'collapse'+RejectedMember._id" class="collapse hide"
+                    [attr.aria-labelledby]="'heading'+RejectedMember._id" data-parent="#accordionInner">
                     <div class="card-body ">
 
 
@@ -772,8 +782,9 @@
                             </tbody>
                           </table>
                           <div class="d-flex justify-content-end mr-3">
-                            <button (click)="RejectedMemberAllowAccessButtonClicked(RejectedMember)" class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2">
-                              Allow Access  </button>
+                            <button (click)="RejectedMemberAllowAccessButtonClicked(RejectedMember)"
+                              class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2">
+                              Allow Access </button>
                             <button class="btn btn-outline-success w-25 maSmallerFonts my-2 mx-2"
                               (click)="onRejectedMemberEditButtonToggle()">{{this.RejectedMembersEditButtonText}}</button>
                             <button (click)="DeleteThisUser(RejectedMember)"
@@ -783,11 +794,13 @@
                             <small class="form-text alert alert-success" *ngIf="this.Errors.userDeleted.status == true">
                               {{this.Errors.userDeleted.message}}
                             </small>
-                            <small class="form-text alert alert-success" *ngIf="this.Errors.accessAllowed.status == true">
+                            <small class="form-text alert alert-success"
+                              *ngIf="this.Errors.accessAllowed.status == true">
                               {{this.Errors.accessAllowed.message}}
                             </small>
                           </div>
-                          <div style="border-radius:8px;" [ngClass]="{'d-none': this.RejectedMembersEditButtonToggled == false,
+                          <div style="border-radius:8px;"
+                            [ngClass]="{'d-none': this.RejectedMembersEditButtonToggled == false,
                           'border border-warning bg-info text-dark m-3 p-2': this.RejectedMembersEditButtonToggled == true}">
                             <form class="m-2 " #updateRejectedMemberForm="ngForm"
                               (submit)="onSubmit_UpdateButton(updateRejectedMemberForm,RejectedMember)">
@@ -809,8 +822,8 @@
                                       {{this.Errors.invalidUsername.message}}
                                     </small>
                                     <small class="form-text rounded alert-danger py-0 px-3"
-                                      *ngIf="this.Errors.spacesAreNotAllowedInUsername.status == true">
-                                      {{this.Errors.spacesAreNotAllowedInUsername.message}}
+                                      *ngIf="this.Errors.spacesAreNotAllowed.status == true">
+                                      {{this.Errors.spacesAreNotAllowed.message}}
                                     </small>
                                     <small class="form-text rounded alert-danger py-0 px-3"
                                       *ngIf="this.Errors.usernameNotUnique.status == true">
@@ -833,37 +846,39 @@
                               </div>
 
 
-                                <div class="col-sm-6">
-                                  <div class="form-group">
-                                    <label>Member First Name:</label>
-                                    <input type="text" class="form-control" placeholder="Update First Name"
-                                      name="MemberFN" [ngModel]="RejectedMember.FirstNameOfUser"
-                                      (keyup)="checkFNameOfMember(updateRejectedMemberForm.value.MemberFN)">
-                                    <small class="form-text rounded alert-danger py-0 px-3"
-                                      *ngIf="this.Errors.invalidFName.status == true">
-                                      {{this.Errors.invalidFName.message}}
-                                    </small>
-                                  </div>
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label>Member First Name:</label>
+                                  <input type="text" class="form-control" placeholder="Update First Name"
+                                    name="MemberFN" [ngModel]="RejectedMember.FirstNameOfUser"
+                                    (keyup)="checkFNameOfMember(updateRejectedMemberForm.value.MemberFN)">
+                                  <small class="form-text rounded alert-danger py-0 px-3"
+                                    *ngIf="this.Errors.invalidFName.status == true">
+                                    {{this.Errors.invalidFName.message}}
+                                  </small>
                                 </div>
-                                <div class="col-sm-6">
-                                  <div class="form-group">
-                                    <label>Member Last Name:</label>
-                                    <input type="text" class="form-control" placeholder="Update Last Name"
-                                      name="MemberLN" [ngModel]="RejectedMember.LastNameOfUser"
-                                      (keyup)="checkLNameOfMember(updateRejectedMemberForm.value.MemberLN)">
-                                    <small class="form-text rounded alert-danger py-0 px-3"
-                                      *ngIf="this.Errors.invalidLName.status == true">
-                                      {{this.Errors.invalidLName.message}}
-                                    </small>
-                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="form-group">
+                                  <label>Member Last Name:</label>
+                                  <input type="text" class="form-control" placeholder="Update Last Name" name="MemberLN"
+                                    [ngModel]="RejectedMember.LastNameOfUser"
+                                    (keyup)="checkLNameOfMember(updateRejectedMemberForm.value.MemberLN)">
+                                  <small class="form-text rounded alert-danger py-0 px-3"
+                                    *ngIf="this.Errors.invalidLName.status == true">
+                                    {{this.Errors.invalidLName.message}}
+                                  </small>
                                 </div>
+                              </div>
 
                               <div class="d-flex justify-content-center">
-                                <button class="btn btn-warning w-50 maSmallerFonts my-2 mx-2"type="submit">Update</button>
+                                <button class="btn btn-warning w-50 maSmallerFonts my-2 mx-2"
+                                  type="submit">Update</button>
 
                               </div>
                               <div class="col-12">
-                                <small class="form-text alert alert-danger" *ngIf="this.Errors.formHasErrors.status == true">
+                                <small class="form-text alert alert-danger"
+                                  *ngIf="this.Errors.formHasErrors.status == true">
                                   {{this.Errors.formHasErrors.message}}
                                 </small>
                                 <small class="form-text alert alert-success"
