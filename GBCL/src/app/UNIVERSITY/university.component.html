@@ -45,7 +45,7 @@
           <div class="row text-center  childSpansHoverYellow">
             <div class="col"><span class="mx-2">
                 <h4>University Dashboard</h4>
-                <h6>{{this.localStorageUsername.toUpperCase()}}</h6>
+                <h6>{{this.UNIVERSITY_TITLE}}</h6>
               </span></div>
           </div>
         </div>
@@ -126,83 +126,92 @@
 
 
 
-        <!-- -------------------------------------------------------------------------------------- -->
-        <!-- TOP ROW STARTS, in a [container-fluid]-->
-        <!-- ----------------------------------------------------------------------------------------->
-
-
-
-
-
-
-
-
 
         <div class="row ">
           <div class="col-12 p-0">
-            <div class="container-fluid bg-dark minHeight838 pt-3">
+            <div class="container-fluid bg-dark pt-3 text-light">
 
 
-              <div class="container border rounded p-3  mt-4 text-light ">
-                <!-- <div class="row">
+              <div class="border rounded p-3 mt-4 ">
 
-
-                  <div class="col-sm-5 ml-3 mb-3"> <span class="">Name: Abdur Rehman</span> </div>
-                  <div class="col-sm-6 ml-3 mb-3"> <span class="">ID: ---Student ID here---</span> </div>
-                  <div class="col-sm-11 ml-3 mb-3"> Registered with university: <span class=""> --Uni Name Here--</span>
-                  </div>
-
-                </div> -->
-
-
-                <div class="col-12">
-                  <h4 class="text-center mt-4 mb-3 ">Profile Settings</h4>
-                </div>
-                <hr class=" w-75 mx-auto mb-3">
                 <div class="row">
-
-                  <div class="col-sm-4 col-lg-5 ml-3 mb-3">
-                    <span class="">New Password: </span>
-                    <input type="text">
-                  </div>
-                  <div class="col-sm-5 ml-3 mb-3">
-                    <span class="">Re-enter Password: </span>
-                    <input type="text">
-                    <br>
+                  <div class="col-12">
+                    <h4 class="text-center mt-4 mb-3 ">Profile Settings</h4>
+                    <hr class=" w-100 mx-auto mb-3">
 
                   </div>
                 </div>
-                <div class="row mr-auto">
-                  <div class="col-11 text-right m-1">
-                    <button class="btn btn-small ml-2 btn-success mr-auto">Update Password</button>
-                  </div>
 
-                </div>
-                <hr>
+                    <div class="row m-2">
+                      <div class="col-sm-12 col-md-8 border border-secondary rounded m-auto onHoverBgInfo">
+                        <form #updateUniPasswordForm="ngForm" (submit)="onSubmit_updatePassword(updateUniPasswordForm.value.UniPassword)">
+                          <div class="form-group">
+                            <label>Update Password:</label>
+                            <input type="text" class="form-control" placeholder="Enter a new Password"
+                              name="UniPassword" (keyup)="checkNewPW(updateUniPasswordForm.value.UniPassword)" ngModel>
+                              <small class="form-text alert alert-success"
+                              *ngIf="this.Errors.passwordUpdated.status == true">
+                              {{this.Errors.passwordUpdated.message}}
+                            </small>
+                            <small class="form-text rounded alert-danger py-0 px-3"
+                              *ngIf="this.Errors.invalidPassword.status == true">
+                              {{this.Errors.invalidPassword.message}}
+                            </small>
+                            <small class="form-text rounded alert-danger py-0 px-3"
+                              *ngIf="this.Errors.spacesAreNotAllowed.status == true">
+                              {{this.Errors.spacesAreNotAllowed.message}}
+                            </small>
+                            <small class="form-text rounded alert-danger py-0 px-3"
+                              *ngIf="this.Errors.matchedWithOldPassword.status == true">
+                              {{this.Errors.matchedWithOldPassword.message}}
+                            </small>
+                          </div>
+                          <div class="d-flex justify-content-center">
+                            <button class="btn btn-outline-warning w-50 my-2 mx-2" [disabled]="checkIfThereAreErrorsForUpdatePassword()" type="submit">Update Password</button>
+                          </div>
+                        </form>
+                      </div>
+
+
+                    </div>
+
+                    <div class="row m-3">
+                      <div class="col-sm-12 col-md-8 border border-secondary rounded m-auto onHoverBgInfo">
+                        <form #updateUniTitleForm="ngForm" (submit)="onSubmit_updateTitle(updateUniTitleForm.value.UniTitle)">
+                          <div class="form-group">
+                            <label>Update Title:</label>
+                            <input type="text" class="form-control" placeholder="Enter a new Title"
+                              name="UniTitle" (keyup)="checkNewTitle(updateUniTitleForm.value.UniTitle)" ngModel>
+                            <small class="form-text rounded alert-danger py-0 px-3"
+                              *ngIf="this.Errors.invalidTitle.status == true">
+                              {{this.Errors.invalidTitle.message}}
+                            </small>
+                            <small class="form-text rounded alert-danger py-0 px-3"
+                              *ngIf="this.Errors.uniTitleNotUnique.status == true">
+                              {{this.Errors.uniTitleNotUnique.message}}
+                            </small>
+                            <small class="form-text alert alert-success"
+                              *ngIf="this.Errors.titleUpdated.status == true">
+                              {{this.Errors.titleUpdated.message}}
+                            </small>
+                          </div>
+                          <div class="d-flex justify-content-center">
+                            <button class="btn btn-outline-warning w-50 my-2 mx-2" [disabled]="checkIfThereAreErrorsForUpdateTitle()" type="submit">Update Title</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
 
 
 
-                <hr class=" w-75 mx-auto mb-3">
-                <div class="row">
 
-                  <div class="col-sm-4 col-lg-5 ml-3 mb-3">
-                    <span class="">New Title: </span>
-                    <input type="text">
-                  </div>
-                  <div class="col-sm-5 ml-3 mb-3">
-                    <span class="">Re-enter Title: </span>
-                    <input type="text">
-                    <br>
 
-                  </div>
-                </div>
-                <div class="row mr-auto">
-                  <div class="col-11 text-right m-1">
-                    <button class="btn btn-small ml-2 btn-success mr-auto">Update Title</button>
-                  </div>
 
-                </div>
-                <hr>
+
+
+
+
+
               </div>
 
             </div>

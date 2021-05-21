@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
+import { UsersService } from 'src/app/Services/users.service';
 
 
 @Component({
@@ -8,12 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnimanageLabsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
+    this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
+    // this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
+    this.UsernameObj = { Username: localStorage.getItem("UsersUsername") };
+    this.fetchedUni = this.usersService.FetchThisUser2(this.UsernameObj);
+    setTimeout(() => {
+      this.localStorageUsername = this.fetchedUni[0].Username;
+      this.UNIVERSITY_TITLE = this.fetchedUni[0].TitleOfUniversity;
+    }, 700);
   }
 
 
+  private fetchedUni:Usersmodel[] = [];
+  private AllUsersRecieved:Usersmodel[] = [];
+  localStorageUsername: string;
+  UsernameObj: { Username: string } = { Username: localStorage.getItem("UsersUsername") };
+  UNIVERSITY_TITLE: string;
 
 
 
@@ -64,7 +79,7 @@ FacultyData = [{
 
 
 
-localStorageUsername = localStorage.getItem("UsersUsername");
+// localStorageUsername = localStorage.getItem("UsersUsername");
 
   onLogout(){
     localStorage.clear();

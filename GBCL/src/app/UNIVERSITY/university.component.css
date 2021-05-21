@@ -40,6 +40,12 @@ body{
   display: block;
   margin: auto;
 }
+
+.onHoverBgInfo:hover{
+  background:  #324344;
+  transition: ease 0.9s;
+}
+
 .bgYellowOnHover :hover{
   background:  #FFC107;
   color: #333F4F;

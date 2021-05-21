@@ -15,7 +15,17 @@ export class UnimanageMembersComponent implements OnInit {
   constructor(private usersService:UsersService) { }
   ngOnInit() {
     this.setALLErrorsToFalse();
-    this.UsersRecievedFromDBForSignup = this.usersService.RecieveAllUsersFromDB();
+    this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
+    // this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
+    this.UsernameObj = { Username: localStorage.getItem("UsersUsername") };
+    this.fetchedUni = this.usersService.FetchThisUser2(this.UsernameObj);
+    setTimeout(() => {
+      this.localStorageUsername = this.fetchedUni[0].Username;
+      this.UNIVERSITY_TITLE = this.fetchedUni[0].TitleOfUniversity;
+      setTimeout(() => {
+      this.extractAffiliatedAndRejectedMembers();
+    }, 200);
+    }, 700);
   }
 
 
@@ -23,8 +33,11 @@ export class UnimanageMembersComponent implements OnInit {
 // //////////////////////////////////////////\///  VARIABLE DECLARATIONS BELOW
 // //////////////////////////////////////////\///
 
-  private UsersRecievedFromDBForSignup:Usersmodel[] = [];
-  localStorageUsername = localStorage.getItem("UsersUsername");
+  private AllUsersRecieved:Usersmodel[] = [];
+  private fetchedUni:Usersmodel[] = [];
+  localStorageUsername: string;
+  UsernameObj: { Username: string } = { Username: localStorage.getItem("UsersUsername") };
+  UNIVERSITY_TITLE: string;
   MemberType = "Student";
   FacultyEdit = false;
   EditFacultyButtonText = "Edit";
@@ -32,6 +45,11 @@ export class UnimanageMembersComponent implements OnInit {
   EditStudentButtonText = "Edit";
   // CreateMemberProfileForm: NgForm;
 
+  RejectedMembersEditButtonToggled = false;
+  RejectedMembersEditButtonText = "Edit";
+  RegisteredFaculty:Usersmodel[] = [];
+  RegisteredStudents:Usersmodel[] = [];
+  RejectedMembers:Usersmodel[] = [];
 // //////////////////////////////////////////\///
 // //////////////////////////////////////////\///  VARIABLE DECLARATIONS ABOVE
 // //////////////////////////////////////////\///
@@ -81,22 +99,224 @@ on_CreateMemberProfileSubmitButton_Clicked(createMemberForm:NgForm){
   }
 }
 
-checkUsernameOfMember(createMemberForm:NgForm) {
-  createMemberForm.value.UNcreateProfile.length < 5
+
+onRejectedMemberEditButtonToggle() {
+  if (this.RejectedMembersEditButtonToggled == false) {
+    this.RejectedMembersEditButtonText = "Hide Editing";
+    this.RejectedMembersEditButtonToggled = true;
+  } else {
+    this.RejectedMembersEditButtonText = "Edit";
+    this.RejectedMembersEditButtonToggled = false;
+  }
+}
+
+
+
+DeleteThisUser(member: Usersmodel) {
+  if (confirm("Are you sure you want to delete profile of :" + member.FirstNameOfUser + " "+member.LastNameOfUser)) {
+    this.usersService.deleteThisUser(member._id);
+    this.Errors.userDeleted.status = true;
+    setTimeout(() => {
+      window.location.reload();
+    }, 3500);
+  } else {
+    return;
+  }
+}
+
+
+
+
+RejectedMemberAllowAccessButtonClicked(member: Usersmodel) {
+  if (member.UserzAccessStatus == 'Rejected') {
+    if (confirm('Are you sure you want to allow access to : ' + member.FirstNameOfUser+' '+member.LastNameOfUser)) {
+      const terminatedMember: Usersmodel = { ...member };
+      terminatedMember.UserzAccessStatus = 'Allowed';
+      this.usersService.updateThisUser(terminatedMember, member._id);
+      // this.Errors.accessTerminated.status = false;
+      this.Errors.accessAllowed.status = true;
+      setTimeout(() => { window.location.reload() }, 3500);
+    } else {
+      return;
+    }
+  }
+
+}
+
+
+extractAffiliatedAndRejectedMembers() {
+  // if (this.AffiliatedUniversitiesData.length == 0) {
+    for (var i = 0; i < this.AllUsersRecieved.length; i++) {
+      if ((this.AllUsersRecieved[i].UserType != 'university' || 'admin')
+      &&  this.AllUsersRecieved[i].UniversityNameOfUser == this.UNIVERSITY_TITLE)
+       {
+
+        if(this.AllUsersRecieved[i].UserzAccessStatus == 'Rejected')
+        {this.RejectedMembers.push(this.AllUsersRecieved[i]);}
+
+
+        if(this.AllUsersRecieved[i].UserzAccessStatus == 'Allowed'
+        && this.AllUsersRecieved[i].UserType == 'student')
+        {this.RegisteredStudents.push(this.AllUsersRecieved[i]);}
+
+        if(this.AllUsersRecieved[i].UserzAccessStatus == 'Allowed'
+        && this.AllUsersRecieved[i].UserType == 'teacher')
+        {this.RegisteredFaculty.push(this.AllUsersRecieved[i]);}
+
+
+      }
+    }
+  // }
+
+}
+
+onSubmit_UpdateButton(updateMemberForm: NgForm, OriginalMemberDetails: Usersmodel) {
+
+  // const str: String = updateUniForm.value.UniUsername;
+  // if (str != str.replace(/ /g, '')) {
+  //   this.Errors.spacesAreNotAllowedInUsername.status = true;
+  //   return;
+  // }
+
+  // if (updateUniForm.value.UniTitle == ''
+  //   && updateUniForm.value.UniHECID == ''
+  //   && updateUniForm.value.UniUsername == ''
+  //   && updateUniForm.value.UniPassword == ''
+  // ) {
+  //   alert('You can\'t update empty fields');
+  //   return;
+  // }
+
+  // if (updateUniForm.value.UniTitle.toLowerCase() == OriginalUniDetails.TitleOfUniversity.toLowerCase()
+  //   && updateUniForm.value.UniHECID == OriginalUniDetails.HECIDofUniversity
+  //   && updateUniForm.value.UniUsername.toLowerCase() == OriginalUniDetails.Username.toLowerCase()
+  //   && updateUniForm.value.UniPassword == OriginalUniDetails.Password
+  // ) {
+  //   alert('You haven\'t changed any field, same values cannot be updated');
+  //   return;
+  // }
+
+  // var UpdatedUniTitle = '';
+  // var UpdatedUniHECID = '';
+  // var UpdatedUniUsername = '';
+  // var UpdatedUniPassword = '';
+
+  // if (updateUniForm.value.UniTitle == '') {
+  //   UpdatedUniTitle = OriginalUniDetails.TitleOfUniversity;
+  // }
+  // else {
+  //   UpdatedUniTitle = updateUniForm.value.UniTitle;
+  // }
+
+
+  // if (updateUniForm.value.UniHECID == '') {
+  //   UpdatedUniHECID = OriginalUniDetails.HECIDofUniversity;
+  // } else {
+  //   UpdatedUniHECID = updateUniForm.value.UniHECID;
+  // }
+
+  // if (updateUniForm.value.UniUsername == '') {
+  //   UpdatedUniUsername = OriginalUniDetails.Username.toLocaleLowerCase();
+  // } else {
+  //   UpdatedUniUsername = updateUniForm.value.UniUsername.toLocaleLowerCase();
+  // }
+
+  // if (updateUniForm.value.UniPassword == '') {
+  //   UpdatedUniPassword = OriginalUniDetails.Password;
+  // } else {
+  //   UpdatedUniPassword = updateUniForm.value.UniPassword;
+  // }
+
+
+
+  // const UpdatedUniAsAUser: Usersmodel = {
+  //   FirstNameOfUser: OriginalUniDetails.FirstNameOfUser,
+  //   HECIDofUniversity: UpdatedUniHECID,
+  //   LastNameOfUser: OriginalUniDetails.LastNameOfUser,
+  //   Password: UpdatedUniPassword,
+  //   RegistrationNumberOfUser: OriginalUniDetails.RegistrationNumberOfUser,
+  //   TitleOfUniversity: UpdatedUniTitle,
+  //   UniversityNameOfUser: OriginalUniDetails.UniversityNameOfUser,
+  //   UserType: OriginalUniDetails.UserType,
+  //   Username: UpdatedUniUsername,
+  //   UserzAccessStatus: OriginalUniDetails.UserzAccessStatus,
+  //   _id: OriginalUniDetails._id
+  // }
+
+
+  // // console.log('UpdatedUniAsAUser\n', UpdatedUniAsAUser);
+  // if (this.areThereAnyErrors()) {
+  //   this.Errors.formHasErrors.status = true;
+  //   this.Errors.profileUpdated.status = false;
+  //   return;
+  // } else {
+  //   this.Errors.formHasErrors.status = false;
+  //   if (OriginalUniDetails.UserzAccessStatus == 'Rejected') {
+  //     if (confirm('Are you sure you want to update these values?\nThis will only update the fields,\nIt ' +
+  //       'won\'t allow access to this university unless Allow Access Button clicked.')) {
+  //       // console.log(OriginalUniDetails._id);
+  //       // console.log(OriginalUniDetails.Username);
+  //       this.usersService.updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUniAsAUser, OriginalUniDetails);
+
+  //       setTimeout(() => {
+  //         this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
+  //       }, 750);
+  //       this.Errors.profileUpdated.status = true;
+  //       updateUniForm.resetForm();
+  //       // setTimeout(() => {
+  //       //   window.location.reload();
+  //       // }, 3500);
+  //     } else {
+  //       return;
+  //     }
+  //   } else {
+  //     if (confirm('Are you sure you want to update these values?')) {
+  //       console.log(OriginalUniDetails._id);
+  //       console.log(OriginalUniDetails.Username);
+  //       this.usersService.updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUniAsAUser, OriginalUniDetails);
+
+  //       setTimeout(() => {
+  //         this.usersService.updateThisUser(UpdatedUniAsAUser, OriginalUniDetails._id);
+  //       }, 750);
+  //       this.Errors.profileUpdated.status = true;
+  //       updateUniForm.resetForm();
+  //       // setTimeout(() => {
+  //       //   window.location.reload();
+  //       // }, 3500);
+  //     } else {
+  //       return;
+  //     }
+  //   }
+
+  // }
+
+
+}
+
+
+
+
+
+
+
+
+
+checkUsernameOfMemberIfVALIDandUNIQUE(UN:string) {
+  UN.length < 5
     ? (this.Errors.invalidUsername.status = true)
     : (this.Errors.invalidUsername.status = false);
   // check uniqieness below
-  var userEnteredUN = '';
-  if (createMemberForm.value.UNcreateProfile != null)
+  // var userEnteredUN = '';
+  if (UN != null)
    {
-    userEnteredUN = createMemberForm.value.UNcreateProfile;
-    if (this.UsersRecievedFromDBForSignup != null)
+    // userEnteredUN = UN;
+    if (this.AllUsersRecieved != null)
     {
-      for (var i = 0; i < Object.keys(this.UsersRecievedFromDBForSignup).length; i++)
+      for (var i = 0; i < Object.keys(this.AllUsersRecieved).length; i++)
       {
-        var quotedUserEnteredUN = '"' + userEnteredUN + '"';
+        var quotedUserEnteredUN = '"' + UN + '"';
         var IteratedUNinForLoop: string = JSON.stringify(
-          this.UsersRecievedFromDBForSignup[i].Username
+          this.AllUsersRecieved[i].Username
         );
         if (IteratedUNinForLoop.toLowerCase() == quotedUserEnteredUN.toLowerCase()) {
           this.Errors.usernameNotUnique.status = true;
@@ -111,24 +331,24 @@ checkUsernameOfMember(createMemberForm:NgForm) {
 
 }
 
-checkPasswordOfMember(createMemberForm:NgForm){
-  createMemberForm.value.PWcreateProfile.length < 8
+checkPasswordOfMember(PW:string){
+  PW.length < 8
       ? (this.Errors.invalidPassword.status = true)
       : (this.Errors.invalidPassword.status = false);
 }
 
-checkFNameOfMember(createMemberForm:NgForm){
-  createMemberForm.value.FNcreateProfile.length < 3
+checkFNameOfMember(FName:string){
+  FName.length < 3
       ? (this.Errors.invalidFName.status = true)
       : (this.Errors.invalidFName.status = false);
 }
-checkLNameOfMember(createMemberForm:NgForm){
-  createMemberForm.value.LNcreateProfile.length < 3
+checkLNameOfMember(LName:string){
+  LName.length < 3
       ? (this.Errors.invalidLName.status = true)
       : (this.Errors.invalidLName.status = false);
 }
-checkRegNOfMember(createMemberForm:NgForm){
-  createMemberForm.value.RegNcreateProfile.length < 4
+checkRegNOfMember(regNum:string){
+  regNum.length < 4
       ? (this.Errors.invalidRegistrationNumber.status = true)
       : (this.Errors.invalidRegistrationNumber.status = false);
 }
@@ -207,6 +427,14 @@ checkIfErrors(): boolean{
 
 
 Errors = {
+  userDeleted: {
+    status: true,
+    message: 'This member\'s profile has been delete.',
+  },
+  accessAllowed: {
+    status: true,
+    message: 'Access allowed for this member.',
+  },
   invalidUsername: {
     status: true,
     message: 'Username should be atleast 5 characters).',
@@ -240,6 +468,20 @@ Errors = {
     status: true,
     message: 'Registration Number should be minimum of 4 characters).',
   },
+  spacesAreNotAllowedInUsername: {
+    status: true,
+    message: 'Spaces are not allowed in Username field',
+  },
+  profileUpdated: {
+    status: true,
+    message:
+      'University\'s Profile updated successfully.',
+  },
+  profileCreated: {
+    status: true,
+    message:
+      'Profile created successfully.\nMember can Login now.',
+  }
 };
 
 

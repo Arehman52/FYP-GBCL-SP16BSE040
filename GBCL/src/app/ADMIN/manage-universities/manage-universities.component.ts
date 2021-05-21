@@ -29,9 +29,9 @@ export class ManageUniversitiesComponent implements OnInit {
   EditButtonText = "Edit";
   RejectedUniEditButtonToggled = false;
   RejectedUniEditButtonText = "Edit";
+  RejectedUniversitiesData: Usersmodel[] = [];
   private AllUsersRecievedFromDB: Usersmodel[] = [];
   AffiliatedUniversitiesData: Usersmodel[] = [];
-  RejectedUniversitiesData: Usersmodel[] = [];
   localStorageUsername = localStorage.getItem("UsersUsername");
   TerminateAccessButtonText = '';
 
@@ -263,8 +263,8 @@ export class ManageUniversitiesComponent implements OnInit {
         }
       } else {
         if (confirm('Are you sure you want to update these values?')) {
-          console.log(OriginalUniDetails._id);
-          console.log(OriginalUniDetails.Username);
+          // console.log(OriginalUniDetails._id);
+          // console.log(OriginalUniDetails.Username);
           this.usersService.updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUniAsAUser, OriginalUniDetails);
 
           setTimeout(() => {
@@ -573,13 +573,13 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
   Errors = {
+    invalidTitle: {
+      status: true,
+      message: 'Title should be atleast 2 characters.',
+    },
     uniTitleNotUnique: {
       status: true,
       message: 'This title is taken, Type a different one.',
-    },
-    spacesAreNotAllowedInUsername: {
-      status: true,
-      message: 'Spaces are not allowed in Username field',
     },
     accessAllowed: {
       status: true,
@@ -605,17 +605,18 @@ export class ManageUniversitiesComponent implements OnInit {
       status: true,
       message: 'HECID should be atleast 3 characters.',
     },
-    invalidTitle: {
+
+    formHasErrors: {
       status: true,
-      message: 'Title should be atleast 2 characters.',
+      message: 'Form has errors, kindly resolve them first.',
     },
     usernameNotUnique: {
       status: true,
       message: 'This username has already been taken. kindly enter some other.',
     },
-    formHasErrors: {
+    spacesAreNotAllowedInUsername: {
       status: true,
-      message: 'Form has errors, kindly resolve them first.',
+      message: 'Spaces are not allowed in Username field',
     },
     profileUpdated: {
       status: true,

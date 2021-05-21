@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 import { UsersService } from 'src/app/Services/users.service';
-import { LoginService } from '../login.service';
 
 
 
@@ -14,7 +13,8 @@ import { LoginService } from '../login.service';
   styleUrls: ['./homepage-nav-search.component.css'],
 })
 export class HomepageNavSearchComponent implements OnInit {
-  constructor(private loginService: LoginService, private usersService: UsersService) { }
+  constructor(private usersService: UsersService) { }
+
 
 
   ngOnInit(): void {
@@ -113,30 +113,32 @@ export class HomepageNavSearchComponent implements OnInit {
 
     this.setAllErrorsToFalse();
 
-    var userToBeSearched: Usersmodel = {
-      FirstNameOfUser: null,
-      HECIDofUniversity: null,
-      LastNameOfUser: null,
-      Password: form.value.UsersEnteredPassword,
-      RegistrationNumberOfUser: null,
-      TitleOfUniversity: null,
-      UniversityNameOfUser: null,
-      UserType: '-1',
-      Username: form.value.UsersEnteredUsername.toLowerCase(),
-      UserzAccessStatus: null,
-      _id: null,
-    };
+    var usernameToBeSearched:{Username:string} = {Username: form.value.UsersEnteredUsername.toLowerCase()};
+    // var userToBeSearched: Usersmodel = {
+    //   FirstNameOfUser: null,
+    //   HECIDofUniversity: null,
+    //   LastNameOfUser: null,
+    //   Password: form.value.UsersEnteredPassword,
+    //   RegistrationNumberOfUser: null,
+    //   TitleOfUniversity: null,
+    //   UniversityNameOfUser: null,
+    //   UserType: '-1',
+    //   Username: form.value.UsersEnteredUsername.toLowerCase(),
+    //   UserzAccessStatus: null,
+    //   _id: null,
+    // };
 
     var TheMatchedUser: Usersmodel[];
-
-    if (this.checkErrors(userToBeSearched)) {
+    var formValueUsername = form.value.UsersEnteredUsername.toLowerCase();
+    var formValuePassword = form.value.UsersEnteredPassword;
+    if (this.checkErrors(formValueUsername,formValuePassword)) {
       alert("Sign in fields are invalid!");
     }
     else {
       this.showSpinner = true;
       setTimeout(() => {
-        TheMatchedUser = this.loginService.FetchThisUser(
-          userToBeSearched);
+        TheMatchedUser = this.usersService.FetchThisUser2(
+          usernameToBeSearched);
         console.log('TheMatchedUser  :', TheMatchedUser);
       }, 1000);
 
@@ -152,7 +154,7 @@ export class HomepageNavSearchComponent implements OnInit {
         else {
 
           this.showSpinner = false;
-          if (userToBeSearched.Password === TheMatchedUser[0].Password) {
+          if (formValuePassword === TheMatchedUser[0].Password) {
 
 
             if (TheMatchedUser[0].UserType == 'admin')
@@ -179,7 +181,7 @@ export class HomepageNavSearchComponent implements OnInit {
               if (TheMatchedUser[0].UserType == 'student' || 'teacher') {
                 console.log("TheMatchedUser[0].UserType == 'student' || 'teacher'");
 
-                LoginUserzUniversityAsUser = this.loginService.FetchThisUniversityByItsTitle(TheMatchedUser[0].UniversityNameOfUser);
+                LoginUserzUniversityAsUser = this.usersService.FetchThisUniversityByItsTitle(TheMatchedUser[0].UniversityNameOfUser);
                 console.log('LoginUserzUniversityAsUser : ', LoginUserzUniversityAsUser);
 
                 setTimeout(() => {
@@ -265,11 +267,11 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
   //each time focusouts of both inputs, it checks for the errors
-  checkErrors(user: Usersmodel): Boolean {
-    user.Username.length < 5
+  checkErrors(username: string,pw: string): Boolean {
+    username.length < 5
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
-    user.Password.length < 8
+    pw.length < 8
       ? (this.Errors.invalidPassword.status = true)
       : (this.Errors.invalidPassword.status = false);
     // this.notAUser()
@@ -369,7 +371,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
     //if username entered is Admin, then only following 4 lines will execute.
     // if (form.value.UsersEnteredUsername == 'Admin') {
-      //   this.loginService.loginAdmin(form.value.UsersEnteredPassword);
+      //   this.usersService.loginAdmin(form.value.UsersEnteredPassword);
     //   return;
     // }
 
@@ -389,7 +391,7 @@ export class HomepageNavSearchComponent implements OnInit {
 
 
     //following is returning null
-    var TheMatchedUser: Usersmodel = this.loginService.FecthTheMatchingUserForLogin(
+    var TheMatchedUser: Usersmodel = this.usersService.FecthTheMatchingUserForLogin(
       userToBeSearched
     );
 

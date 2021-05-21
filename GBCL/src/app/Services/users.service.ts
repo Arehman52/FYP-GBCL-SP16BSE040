@@ -98,32 +98,106 @@ export class UsersService {
 
 
 
+  private arrFetchThisUser: Usersmodel[] = [];
+  private arrFetchThisUserbyUsername: Usersmodel[] = [];
+  private arrFetchThisUniversityByItsTitle: Usersmodel[] = [];
+
+  FetchThisUniversityByItsTitle(UnizTitle: string): Usersmodel[] {
+    this.arrFetchThisUniversityByItsTitle = [];
+    var objUnizTitle: {TitleOfUniversity:string} = {TitleOfUniversity : UnizTitle};
+    this.http
+      .post<{ message: string; user: Usersmodel }>(
+        'http://localhost:3000/api/Users/FetchThisUniversityByItsTitle', objUnizTitle
+      )
+      .subscribe((responseData) => {
+          this.arrFetchThisUniversityByItsTitle.push(responseData.user);
+          console.log('??????',responseData.user);
+      });
+      console.log("this.arr", this.arrFetchThisUniversityByItsTitle);
+      return this.arrFetchThisUniversityByItsTitle;
+  }
 
 
 
-  //============================
-  //============================
 
-  // UniListArr: {uniName:String}[] = [];
+  FetchThisUser(userToBeSearched: Usersmodel): Usersmodel[] {
+    this.arrFetchThisUser = [];
 
-  // newGetUniList(): {uniName:String}[] {
+    this.http
+      .post<{ message: string; user: Usersmodel }>(
+        'http://localhost:3000/api/Users/FetchTHISUser', userToBeSearched
+      )
+      .subscribe((responseData) => {
+
+        // if(responseData.user != null){
 
 
-  //   this.http
-  //   .get<{  theList: String[] }>(
-  //     'http://localhost:3000/api/Users/getUniversitiesList'
-  //   )
-  //   .subscribe((responseData) => {
-  //     // setTimeout('2000');
-  //     // console.log('SUCCESSFUL TILL HERE but working');
-  //     for (let i = 0; i < Object.keys(responseData.theList).length; i++) {
-  //       // this.UniListArr.push(responseData.theList[i]);
-  //     }
-  //     return this.UniListArr;
+          this.arrFetchThisUser.push(responseData.user);
 
-  //   });
-  //   return this.UniListArr;
-  // }
+          console.log('??????',responseData.user);
+
+        // }
+
+      });
+
+      console.log("this.arr", this.arrFetchThisUser);
+
+      return this.arrFetchThisUser;
+  }
+
+
+
+
+  FetchThisUser2(usernameToBeSearched: {Username:string}): Usersmodel[] {
+    this.arrFetchThisUser = [];
+
+    this.http
+      .post<{ message: string; user: Usersmodel }>(
+        'http://localhost:3000/api/Users/FetchTHISUser', usernameToBeSearched
+      )
+      .subscribe((responseData) => {
+
+        // if(responseData.user != null){
+
+
+          this.arrFetchThisUser.push(responseData.user);
+
+          console.log('??????',responseData.user);
+
+        // }
+
+      });
+
+      console.log("this.arrrrrrrrrrrrrrrrr", this.arrFetchThisUser);
+
+      return this.arrFetchThisUser;
+  }
+
+  FetchThisUserbyUsername(username: string): Usersmodel[] {
+    this.arrFetchThisUserbyUsername = [];
+
+    this.http
+      .post<{ message: string; user: Usersmodel }>(
+        'http://localhost:3000/api/Users/FetchTHISUser', username
+      )
+      .subscribe((responseData) => {
+
+        // if(responseData.user != null){
+
+
+          this.arrFetchThisUserbyUsername.push(responseData.user);
+
+          console.log('??????',responseData.user);
+
+        // }
+
+      });
+
+      console.log("this.arr", this.arrFetchThisUserbyUsername);
+
+      return this.arrFetchThisUserbyUsername;
+  }
+
 
 
 

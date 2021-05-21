@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "ars": "ng serve -o --configuration=production",
+    "sa": "ng serve -o --configuration=production",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
