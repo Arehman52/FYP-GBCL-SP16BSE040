@@ -5,7 +5,7 @@ const labSchema = mongoose.Schema({
   // LabJoinCode: String, //     replace _id with LabJoinCode
   LabTitle: String,
   LabInstructor: String,
-  LabCourse: String,
+  LabProgram: String,
   LabClass: String,
   UniversityNameOfLab: String
 });

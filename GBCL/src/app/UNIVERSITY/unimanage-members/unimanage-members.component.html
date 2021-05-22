@@ -158,11 +158,11 @@
 
       <div id="accordionOuter">
         <div class="card  mt-2 mx-3">
-          <div class="card-header" id="headingOne">
+          <div class="card-header noUnderlineForChildren" id="headingOne">
             <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneFaculty" aria-expanded="true"
+              <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse" data-target="#collapseOneFaculty" aria-expanded="true"
                 aria-controls="collapseOneFaculty">
-                Create A Member's Profile
+                <h5><b>Create A Member's Profile <span class="text-success">**</span></b></h5>
               </button>
             </h5>
           </div>
@@ -301,11 +301,11 @@
 
       <div id="accordionOuterStds">
         <div class="card  mt-2 mx-3">
-          <div class="card-header" id="headingOne">
+          <div class="card-header noUnderlineForChildren noUnderlineForChildren" id="headingOne">
             <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneStd" aria-expanded="true"
+              <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse" data-target="#collapseOneStd" aria-expanded="true"
                 aria-controls="collapseOneStd">
-                View Registered Faculty
+                <h5><b>View Registered Faculty <span class="text-info">**</span></b></h5>
               </button>
             </h5>
           </div>
@@ -331,7 +331,7 @@
               <div id="accordionInnerFac">
                 <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
                 <div class="card mb-1" *ngFor="let faculty of RegisteredFaculty">
-                  <div class="card-header" [attr.id]="'RegisteredFacultyCard'">
+                  <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
 
                     <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
                       [attr.data-target]="'#RegisteredFacultyCollapse' + faculty._id" aria-expanded="true"
@@ -526,11 +526,11 @@
 
       <div id="accordionOuterViewStuds">
         <div class="card  mt-2 mx-3">
-          <div class="card-header" id="headingOne">
+          <div class="card-header noUnderlineForChildren" id="headingOne">
             <h5 class="mb-0">
-              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneViewStd" aria-expanded="true"
+              <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse" data-target="#collapseOneViewStd" aria-expanded="true"
                 aria-controls="collapseOneViewStd">
-                View Registered Students
+                <h5><b>View Registered Students <span class="text-info">**</span></b></h5>
               </button>
             </h5>
           </div>
@@ -554,7 +554,7 @@
               <div id="accordionInnerStds">
                 <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
                 <div class="card mb-1" *ngFor="let student of RegisteredStudents">
-                  <div class="card-header" [attr.id]="'RegisterUniversityCard'">
+                  <div class="card-header noUnderlineForChildren" [attr.id]="'RegisterUniversityCard'">
 
                     <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
                       [attr.data-target]="'#RegisterUniversityCollapse' + student._id" aria-expanded="true"
@@ -752,12 +752,12 @@
 
 
         <div class="card mt-2 mx-3">
-          <div class="card-header" id="headingOne">
+          <div class="card-header noUnderlineForChildren" id="headingOne">
             <h5 class="mb-0">
-              <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse"
+              <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
                 data-target="#collapseOneRejectedMembers" aria-expanded="true"
                 aria-controls="collapseOneRejectedMembers">
-                <h5><b>Rejected Members</b></h5>
+                <h5><b>Rejected Members <span class="text-danger">**</span></b></h5>
               </button>
             </h5>
           </div>
@@ -784,7 +784,7 @@
 
               <div id="accordionInner">
                 <div class="card mb-1" *ngFor="let RejectedMember of RejectedMembers">
-                  <div class="card-header" [attr.id]="'heading'+RejectedMember._id">
+                  <div class="card-header noUnderlineForChildren" [attr.id]="'heading'+RejectedMember._id">
 
                     <button class="btn" [ngClass]="{'btn-danger': RejectedMember.UserzAccessStatus == 'Rejected'}"
                       style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"

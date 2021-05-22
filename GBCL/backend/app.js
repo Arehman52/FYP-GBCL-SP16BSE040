@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // const Users = require('./models/user');
 const UsersRoutes = require('./routes/users-routes');
+const LabsRoutes = require('./routes/labs-routes');
 
 
 
@@ -200,6 +201,7 @@ app.get("/", (req, res, next) => {
 
 //-->  /api/Homepage + [/CreateUser && /FetchTHISUser]
 app.use("/api/Users", UsersRoutes);
+app.use("/api/Labs", LabsRoutes);
 
 module.exports = app;
 

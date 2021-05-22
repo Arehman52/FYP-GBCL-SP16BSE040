@@ -7,6 +7,10 @@
   background: rgba(138, 68, 68, 0.3);
   width: fit-content;
 }
+.noUnderlineForChildren * :hover {
+  /* color: cyan; */
+  text-decoration: none;
+}
 .formSubmissionErrorsText {
   padding: 4px 13px 4px 15px;
   border: 2px solid red;
@@ -28,88 +32,84 @@
   background: rgba(93, 194, 100, 0.3);
   width: 100%;
 }
-.container-fluid{
+.container-fluid {
   min-height: 100vh;
 }
-*{
+* {
   box-sizing: border-box;
 }
-body{
-
+body {
   background-color: #090839;
 }
 
-.maNav-bg-color{
-  background-color: #0E103D;
+.maNav-bg-color {
+  background-color: #0e103d;
 }
 
 /* Top Row CSS starts*/
-.maTopRow{
+.maTopRow {
   background-color: #0e103d;
   min-height: 16vh;
   padding-top: 4px;
   padding-bottom: 4px;
   color: #fff;
 }
-.CurrentStatsHover :hover{
+.CurrentStatsHover :hover {
   background-color: #1b1d49;
-
 }
 
-
 /* GBCL LOGO CSS STARTS */
-.logoText{
+.logoText {
   font-size: 20px;
-  color: #333F4F;
+  color: #333f4f;
   font-weight: bolder;
   margin: 2% 0%;
 }
-#logoImg{
+#logoImg {
   background: transparent;
   width: 36px;
   display: block;
   margin: auto;
 }
-.bgYellowOnHover :hover{
-  background:  #FFC107;
-  color: #333F4F;
+.bgYellowOnHover :hover {
+  background: #ffc107;
+  color: #333f4f;
   transition: ease 0.5s;
 }
 /* GBCL LOGO CSS ENDS */
 
-.hoverYellow :hover{
-  color: #FFC107;
+.hoverYellow :hover {
+  color: #ffc107;
   text-decoration: none;
   font-weight: bolder;
 }
-.childSpansHoverYellow span:hover{
-  color: #FFC107;
+.childSpansHoverYellow span:hover {
+  color: #ffc107;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
 }
 
-.Text12px{
-font-size: 12px;
+.Text12px {
+  font-size: 12px;
 }
 
-.Text10pxItalicYellow:hover{
+.Text10pxItalicYellow:hover {
   color: white;
   font-weight: bolder;
 }
-.Text10pxItalicYellow{
-font-size: 10px;
-color: #FFC107;
-font-style: italic;
+.Text10pxItalicYellow {
+  font-size: 10px;
+  color: #ffc107;
+  font-style: italic;
 }
 /* TOP ROW CSS ENDS */
 
-
 /* MainArea STARTS */
-.formContainerJoinLab{
+.formContainerJoinLab {
   background: transparent;
 }
-.LabCodeTextInput{
+.LabCodeTextInput {
   display: block;
   width: 100%;
   min-width: fit-content;
@@ -120,32 +120,31 @@ font-style: italic;
   font-size: 14px;
   font-weight: bold;
   text-align: center;
-
 }
-.MaSmallsizeBtns{
+.MaSmallsizeBtns {
   display: block;
   width: 100%;
   margin: auto;
-  height:fit-content;
+  height: fit-content;
   text-transform: capitalize;
   padding: 0px 14px;
 }
 
-hr{
-  background: #FFC107;
+hr {
+  background: #ffc107;
   width: 100%;
   padding: 0;
   height: 0;
   margin: 2px;
 }
-.LabsHeaderRow{
+.LabsHeaderRow {
   background-color: rgb(120, 120, 128, 9);
 }
-.LabsHeader{
+.LabsHeader {
   margin: auto;
-  color:whitesmoke;
+  color: whitesmoke;
   font-size: 2em;
-  background-color:  rgba(3, 2, 53, 0.85);
+  background-color: rgba(3, 2, 53, 0.85);
   font-weight: bolder;
   text-transform: uppercase;
   border-radius: 2px;
@@ -156,8 +155,6 @@ hr{
   border-right: 4em solid navy; */
 }
 /* MainArea ENDSS */
-
-
 
 /* SIDENAV CSS STARTS
 .sideNavLink{
@@ -173,23 +170,19 @@ hr{
 }
 SIDENAV CSS ENDS */
 
-
-
-
-
 /* UTILITY CSS CLASSES */
-.minHeight838{
+.minHeight838 {
   min-height: 83.8vh;
 }
-.minHeight10vh{
+.minHeight10vh {
   min-height: 10vh;
 }
-.borderOnHover :hover{
+.borderOnHover :hover {
   border: 1px solid whitesmoke;
 }
 
-.secondaryColorOfChildrenOnHover *:hover{
-background-color: #6C757D;
-color: #fff;
+.secondaryColorOfChildrenOnHover *:hover {
+  background-color: #6c757d;
+  color: #fff;
 }
 /* UTILITY CSS CLASSES END*/

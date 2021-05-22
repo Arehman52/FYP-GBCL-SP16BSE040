@@ -29,11 +29,9 @@
               <!-- //1st Element : UserType here! -->
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <label class="input-group-text" for="inputGroupSelect01">Sign up as</label>
+                  <label class="input-group-text">Sign up as</label>
                 </div>
-                <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect
-                name="UserTypeSelection"
-                ngModel>
+                <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect>
                   <option selected disabled>Select user type</option>
                   <option value="student"><b>Student</b></option>
                   <option value="teacher"><b>Teacher</b>
@@ -52,12 +50,10 @@
             <div class="col-sm-12">
               <div class="input-group mb-3" *ngIf="this.user.UserType =='student' || this.user.UserType =='teacher'">
                 <div class="input-group-prepend">
-                  <label class="input-group-text" for="inputGroupSelect01">University : </label>
+                  <label class="input-group-text">University : </label>
                 </div>
                 <select class="custom-select" name="UsersSelectedUniversity"
                 #UniversitiesList
-                name="UniversitiesSelection"
-                ngModel
                 (change)="onUniversitiesSelectChange(UniversitiesList)">
                   <option value="Selectone" selected disabled><b>Select one</b></option>
                   <option value="Not Listed!"><b>Not Listed!</b></option>

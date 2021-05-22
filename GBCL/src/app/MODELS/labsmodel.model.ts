@@ -3,7 +3,7 @@ export interface Labsmodel {
   // LabJoinCode: string,  //     replace _id with LabJoinCode
   LabTitle: string,
   LabInstructor: string,
-  LabCourse: string,
+  LabProgram: string,
   LabClass: string,
   UniversityNameOfLab: string
 }

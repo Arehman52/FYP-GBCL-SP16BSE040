@@ -59,8 +59,10 @@
 
 
           <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span class="mx-2"><h4>Manage Labs</h4>
-              <h6>{{this.UNIVERSITY_TITLE}}</h6></span></div>
+            <div class="col"><span>
+                <h4 class="p-0 m-0">Manage Labs</h4>
+                <h6 class="p-0 m-0">{{this.UNIVERSITY_TITLE}}</h6>
+              </span></div>
           </div>
         </div>
         <!-- STATS COL END -->
@@ -77,27 +79,27 @@
               <!-- Example single danger button -->
 
               <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              {{localStorageUsername}}
-            </button>
-            <div class="dropdown-menu bg-warning">
-              <a class="dropdown-item" [routerLink]="'/UNIVERSITY'">Dashboard</a>
-              <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageJoinRequests'">Manage Join Reqs</a>
-              <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageMembers'">Manage Members</a>
-              <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageLabs'">Manage Labs</a>
-              <div class="dropdown-divider"></div>
-              <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button>
-            </div>
-  <!-- <a type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false">
+                {{localStorageUsername}}
+              </button>
+              <div class="dropdown-menu bg-warning">
+                <a class="dropdown-item" [routerLink]="'/UNIVERSITY'">Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageJoinRequests'">Manage Join Reqs</a>
+                <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageMembers'">Manage Members</a>
+                <a class="dropdown-item" [routerLink]="'/UNIVERSITY/ManageLabs'">Manage Labs</a>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button>
+              </div>
+              <!-- <a type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Logout
   </a>
   <div class="dropdown-menu bg-warning" >
      <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a> -->
-    <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Settings</a> -->
-    <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a> -->
-    <!-- <div class="dropdown-divider"></div>
+              <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Settings</a> -->
+              <!-- <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a> -->
+              <!-- <div class="dropdown-divider"></div>
 
   </div> -->
 
@@ -112,7 +114,8 @@
 
     </div>
     <hr class="bg-warning p-0 m-0">
-  </div> <!--1st row ends-->
+  </div>
+  <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- TOP ROW ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
@@ -120,25 +123,26 @@
 
 
 
-<div class="row">  <!--2nd row starts-->
-  <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
-    <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/UNIVERSITY'">Dashboard</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/UNIVERSITY/ManageJoinRequests'">Manage Join Requests</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/UNIVERSITY/ManageMembers'">Manage Members</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link active" [routerLink]="'/UNIVERSITY/ManageLabs'">Manage Labs</a>
-      </li>
-      <!-- <li class="nav-item text-left">
+  <div class="row">
+    <!--2nd row starts-->
+    <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
+      <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/UNIVERSITY'">Dashboard</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/UNIVERSITY/ManageJoinRequests'">Manage Join Requests</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/UNIVERSITY/ManageMembers'">Manage Members</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link active" [routerLink]="'/UNIVERSITY/ManageLabs'">Manage Labs</a>
+        </li>
+        <!-- <li class="nav-item text-left">
         <a class="nav-link active" [routerLink]="'/ADMIN/JoinRequests'">Join Requests</a>
       </li> -->
-      <!-- <li class="nav-item text-left">
+        <!-- <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
       </li>
       <li class="nav-item text-left">
@@ -147,36 +151,9 @@
       <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Notifications</a>
       </li> -->
-    </ul>
-  </div>
-  <div class="col-12 col-sm-9 col-lg-10 p-1">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="accordionOuter">
-  <div class="card  mt-2 mx-3">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneFaculty" aria-expanded="true"
-          aria-controls="collapseOneFaculty">
-          Create A Lab
-        </button>
-      </h5>
+      </ul>
     </div>
-    <div id="collapseOneFaculty" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
-      <div class="card-body">
+    <div class="col-12 col-sm-9 col-lg-10 p-1">
 
 
 
@@ -184,271 +161,158 @@
 
 
 
-          <div class=""
-     >
-    <div class="border rounded border-light my-2 mx-1 p-3"  >
-      <!-- Start of std divis -->
 
-      <div class="row">
-        <div class="col-sm-6">
 
-          <!-- //3rd Element: Enter Username -->
-          <div class="form-group">
-          <label >  Lab's Title </label>
-            <input type="text"  class="form-control"
-            name="UNcreateProfile"
-            ngModel
-            >
-            <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
-              <span>--{{this.Errors.invalidUsername.message}}</span>
-            </small>
-            <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
-              <span>--{{this.Errors.usernameNotUnique.message}}</span>
-            </small> -->
-          </div>
-        </div>
 
-        <div class="col-sm-6">
-          <div class="form-group ">
-            <label >  Join Code  </label>
-            <input type="text"  class="form-control "
-            name="PWcreateProfile"
-            ngModel>
-            <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
-              <span>--{{this.Errors.invalidPassword.message}}</span>
-            </small> -->
-          </div>
-        </div>
-      </div>
-      <!--sdgsd  -->
 
-      <div class="row">
 
-        <div class="form-group col-sm-6">
-          <label >  Class  </label>
-          <input type="text"  class="form-control"
-          name="FNcreateProfile"
-          ngModel>
-          <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
-            <span>--{{this.Errors.invalidFName.message}}</span>
-          </small> -->
-        </div>
-
-        <div class="form-group col-sm-6">
-          <label >  Select Instructor  </label>
-          <input type="text"  class="form-control" name="LNcreateProfile" ngModel>
-          <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
-            <span>--{{this.Errors.invalidLName.message}}</span>
-          </small> -->
-        </div>
-
-      </div>
-
-
-      <!--  BUTTON BELOW -->
-      <div class="text-center">
-        <button class="btn btn-primary w-50 m-auto" type="button">Create Lab</button>
-      </div>
-
-
-
-
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="accordionOuterViewLabs">
-  <div class="card  mt-2 mx-3">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOneViewLabs" aria-expanded="true"
-          aria-controls="collapseOneViewLabs">
-          View Registered Labs
-        </button>
-      </h5>
-    </div>
-    <div id="collapseOneViewLabs" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterViewLabs">
-      <div class="card-body">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- Cards within card -->
-
-        <div id="accordionInnerViewLabs">
-          <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
-          <div class="card mb-1" *ngFor="let stude of StudentsData">
-            <div class="card-header" [attr.id]="'RegisterUniversityCard'">
-
-              <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                [attr.data-target]="'#RegisterUniversityCollapse' + stude.Id" aria-expanded="true"
-                [attr.aria-controls]="'collapse' + stude.Id">
-                {{stude.name}}
+      <div id="accordionOuter">
+        <div class="card  mt-2 mx-3">
+          <div class="card-header noUnderlineForChildren" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
+                data-target="#collapseOneFaculty" aria-expanded="true" aria-controls="collapseOneFaculty">
+                <h5><b>Create A Lab <span class="text-success">**</span></b></h5>
               </button>
-
-            </div>
-
-            <div [id]="'RegisterUniversityCollapse' + stude.Id" class="collapse hide"
-              [attr.aria-labelledby]="'RegisterUniversityCard'" data-parent="#accordionInnerViewLabs">
-              <div class="card-body ">
-
-                <div class="row">
-                  <div class="col-11 m-auto">
-                    <!-- remove bg dark -->
-                    <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Lab Title</th>
-                          <th>Join Code</th>
-                          <th>Instructor</th>
-                          <th>Class</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
+            </h5>
+          </div>
+          <div id="collapseOneFaculty" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
+            <div class="card-body">
 
 
-                          <td>OOP</td>
-                          <td>OOPCSC323</td>
-                          <td>Mr. Rizwan Rashid </td>
-                          <td>BSE-1B</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="d-flex justify-content-end mr-3">
-                      <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2" (click)="onLabEditToggle()">{{this.EditLabButtonText}}</button>
-                      <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2" >Remove</button>
-                      <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
+
+
+              <!-- here working! -->
+              <!-- <label class="mx-2" for="xyz123">Creating a profile for: </label>
+            <button id="xyz123" class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+              (click)="onMemberTypeButtonToggle()">{{this.MemberType}}</button> -->
+
+
+
+              <div class="">
+                <div class="border rounded border-light my-2 mx-1 p-3">
+
+
+                  <form (submit)="on_CreateLabSubmitButton_Clicked(createLabForm, InstructorsSelect)" #createLabForm="ngForm">
+
+                    <div class="row">
+                      <div class="col-sm-6">
+
+                        <!-- //3rd Element: Enter Username -->
+                        <div class="form-group">
+                          <label>Title </label>
+                          <input type="text" class="form-control" name="LabTitle" placeholder="Enter a Title"
+                            (keyup)="checkLabTitle(createLabForm.value.LabTitle)" ngModel>
+                          <small class="form-text alert alert-danger"
+                            *ngIf="this.Errors.invalidLabTitle.status == true">
+                            <span>--{{this.Errors.invalidLabTitle.message}}</span>
+                          </small>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-6">
+                        <div class="form-group ">
+                          <label>Degree Program </label>
+                          <input type="text" class="form-control " name="DegreeProgram"
+                            placeholder="Enter a Degree Program like BSE or BCS"
+                            (keyup)="checkDegreeProgram(createLabForm.value.DegreeProgram)" ngModel>
+                          <small class="form-text alert alert-danger"
+                            *ngIf="this.Errors.invalidDegreeProgram.status == true">
+                            {{this.Errors.invalidDegreeProgram.message}}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                    <!--sdgsd  -->
+
+                    <div class="row">
+
+                      <div class="form-group col-sm-6">
+                        <label>Class and Section</label>
+                        <input type="text" class="form-control" name="LabClassnSection"
+                          placeholder="Enter the class and section"
+                          (keyup)="checkLabClassSection(createLabForm.value.LabClassnSection)" ngModel>
+                        <small class="form-text alert alert-danger"
+                          *ngIf="this.Errors.invalidLabClassSection.status == true">
+                          {{this.Errors.invalidLabClassSection.message}}
+                        </small>
+                      </div>
+
+                      <div class="form-group col-sm-6">
+                        <label>Select an Instructor</label>
+                        <select class="custom-select" #InstructorsSelect
+                          (change)="onInstructorsSelectChangeforCreateLab(InstructorsSelect)">
+                          <option selected disabled>Choose an Instructor</option>
+                          <option  [value]="'Not Listed!'"><b>Not Listed!</b></option>
+                          <option [value]="instructor.Username"
+                            *ngFor="let instructor of RegisteredFaculty"><b>{{instructor.FirstNameOfUser+' '+instructor.LastNameOfUser}}</b>
+                          </option>
+                        </select>
+                        <small class="form-text alert alert-danger"
+                          *ngIf="this.Errors.LabInstructorNotSelected.status == true">
+                          {{this.Errors.LabInstructorNotSelected.message}}
+                        </small>
+                        <small class="form-text alert alert-danger"
+                          *ngIf="this.Errors.InstructorNotListedforCreateLab.status == true">
+                          {{this.Errors.InstructorNotListedforCreateLab.message}}
+                        </small>
+                      </div>
+
                     </div>
 
 
+                    <div class="text-center">
+                      <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()" type="submit">Create
+                        Lab</button>
+                    </div>
+
+                    <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.formHasErrors.status == true">
+                      {{this.Errors.formHasErrors.message}}
+                    </small> -->
+
+                    <small class="form-text alert alert-success" *ngIf="this.Errors.LabCreated.status == true">
+                      {{this.Errors.LabCreated.message}}
+                    </small>
+                  </form>
+
+                </div>
+              </div> <!-- ends student/tch division -->
 
 
-                    <div [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.LabEdit == true}"
-                    [ngClass]="{'d-none' : this.LabEdit == false}"
-                    >
-      <!-- Start of std divis EditFacultyProfile-->
 
-      <div class="row">
-        <div class="col-sm-6">
 
-          <!-- //3rd Element: Enter Username -->
-          <div class="form-group">
-          <label > Lab's Title </label>
-            <input type="text" class="form-control"
-            name="UsersEnteredUsername"
-            ngModel
-            >
-            <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
-              <span>--{{this.Errors.invalidUsername.message}}</span>
-            </small>
-            <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
-              <span>--{{this.Errors.usernameNotUnique.message}}</span>
-            </small> -->
+
+
+
+
+
+            </div>
           </div>
         </div>
 
-        <div class="col-sm-6">
-          <div class="form-group ">
-            <label > Join Code </label>
-            <input type="text"  class="form-control "
-            name="UsersEnteredPassword"
-            ngModel>
-            <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
-              <span>--{{this.Errors.invalidPassword.message}}</span>
-            </small> -->
-          </div>
+      </div>
+
+
+
+
+
+      <!-- STUDNETS JOIN REQUESTS -->
+
+
+
+
+    <div id="accordionOuterStds">
+      <div class="card  mt-2 mx-3">
+        <div class="card-header noUnderlineForChildren noUnderlineForChildren" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse" data-target="#collapseOneStd" aria-expanded="true"
+              aria-controls="collapseOneStd">
+              <h5><b>View Registered Labs <span class="text-info">**</span></b></h5>
+            </button>
+          </h5>
         </div>
-      </div>
-      <!--sdgsd  -->
-
-      <div class="row">
-
-        <div class="form-group col-sm-6">
-          <label > Class </label>
-          <input type="text"  class="form-control"
-          name="UsersEnteredFName"
-          ngModel>
-          <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
-            <span>--{{this.Errors.invalidFName.message}}</span>
-          </small> -->
-        </div>
-
-        <div class="form-group col-sm-6">
-          <label > Change Instructor </label>
-          <input type="text"  class="form-control" name="LNEditStudentProfile" ngModel>
-          <!-- <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
-            <span>--{{this.Errors.invalidLName.message}}</span>
-          </small> -->
-        </div>
-
-      </div>
-
-
-
-      <!-- SIGNUP BUTTON BELOW -->
-      <div class="text-center">
-        <button class="btn btn-primary w-50 m-auto" type="button">Update Lab</button>
-      </div>
-
-      <!-- <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
-        <span>--{{this.Errors.formHasErrors.message}}</span>
-      </small> -->
-
-      <!-- <small class="form-text p-2 mt-4 formSubmissionSuccessText"
-      *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
-        <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
-      </small>
--->
-
-
-      </div>
+        <div id="collapseOneStd" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterStds">
+          <div class="card-body">
 
 
 
@@ -457,26 +321,191 @@
 
 
 
+            <div class="mx-2 mt-3" *ngIf="this.RegisteredLabs.length==0">
+              <div class="alert alert-info p-4">
+                <h5>No Labs registered with your university.</h5>
+              </div>
+            </div>
 
+
+
+            <div id="accordionInnerFac">
+              <div class="card mb-1" *ngFor="let lab of RegisteredLabs">
+                <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
+
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisteredFacultyCollapse' + lab._id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + lab._id" (click)="extractLabInstructorzFNandLN(lab.LabInstructor)">
+                    {{lab.LabTitle}}
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisteredFacultyCollapse' + lab._id" class="collapse hide"
+                  [attr.aria-labelledby]="'RegisteredFacultyCard'" data-parent="#accordionInnerFac">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Join Code</th>
+                              <th>Title</th>
+                              <th>Instructor</th>
+                              <th>Program</th>
+                              <th>Class</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+
+                              <td>{{lab._id}}</td>
+                              <td>{{lab.LabTitle}}</td>
+                              <td>{{this.LabInstructorzFN+' '+this.LabInstructorzLN}}</td>
+                              <td>{{lab.LabProgram}}</td>
+                              <td>{{lab.LabClass}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                          <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+                            (click)="onLabEditToggle(LabEditForm)">{{this.EditLabButtonText}}</button>
+                          <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                            (click)="DeleteThisLab(lab)">Delete</button>
+                        </div>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.labDeleted.status == true">
+                          {{this.Errors.labDeleted.message}}
+                        </small>
+
+
+
+                        <div [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.LabEdit == true}"
+                          [ngClass]="{'d-none' : this.LabEdit == false}">
+
+                          <form (submit)="onSubmit_UpdateButton(LabEditForm,lab,InstructorsSelect)" #LabEditForm="ngForm">
+
+                            <div class="row">
+                              <div class="col-sm-6">
+
+                                <div class="form-group">
+                                  <label> Lab Title</label>
+                                  <input type="text" class="form-control" placeholder="Update Lab's Title"
+                                    (keyup)="checkLabTitle(LabEditForm.value.LabTitle)"
+                                    name="LabTitle" [ngModel]="lab.LabTitle">
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidLabTitle.status == true">
+                                    <span>{{this.Errors.invalidLabTitle.message}}</span>
+                                  </small>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-6">
+                                <div class="form-group ">
+                                  <label> Update Degree Program</label>
+                                  <input type="text" class="form-control " placeholder="Update Degree Program of this lab"
+                                    (keyup)="checkDegreeProgram(LabEditForm.value.DegreeProgram)" name="DegreeProgram"
+                                    [ngModel]="lab.LabProgram">
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidDegreeProgram.status == true">
+                                    <span>{{this.Errors.invalidDegreeProgram.message}}</span>
+                                  </small>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+
+                              <div class="form-group col-sm-6">
+                                <label> Update Lab Class</label>
+                                <input type="text" class="form-control" placeholder="Update Lab's Class"
+                                  (keyup)="checkLabClassSection(LabEditForm.value.LabClassSection)" name="LabClassSection"
+                                  [ngModel]="lab.LabClass">
+                                <small class="form-text alert alert-danger"
+                                  *ngIf="this.Errors.invalidLabClassSection.status == true">
+                                  <span>--{{this.Errors.invalidLabClassSection.message}}</span>
+                                </small>
+                              </div>
+
+                              <div class="form-group col-sm-6">
+                                <label> Update the Instructor</label>
+
+
+
+
+
+
+                                <label>Update the Instructor</label>
+                                <select class="custom-select" #InstructorsSelect aria-placeholder="Choose an Instructor"
+                                  (change)="onInstructorsSelectChange(InstructorsSelect)">
+                                  <!-- <option  disabled>{{LabInstructorzFN+' '+LabInstructorzLN}}</option> -->
+                                  <option selected disabled>Change Instructor</option>
+                                  <option class="text-danger" [value]="'Not Listed!'"><b>Not Listed!</b></option>
+                                  <option [value]="instructor.Username"
+                                    *ngFor="let instructor of RegisteredFaculty"
+                                    ><b>{{instructor.FirstNameOfUser+' '+instructor.LastNameOfUser}}</b>
+                                  </option>
+                                </select>
+                                <small class="text-muted" *ngIf="showInstructorChangingWarning"><span class="text-danger mr-2">Warning!</span>
+                                  <span style="text-decoration: underline;">DON'T change unless necessary.</span>
+                                  <br>
+                                  Changing instructor will discontinue access of lab to the old instructor.
+                                </small>
+                                <small class="form-text alert alert-danger"
+                                  *ngIf="this.Errors.LabInstructorNotSelected.status == true">
+                                  {{this.Errors.LabInstructorNotSelected.message}}
+                                </small>
+                                <small class="form-text alert alert-danger"
+                                  *ngIf="this.Errors.InstructorNotListed.status == true">
+                                  {{this.Errors.InstructorNotListed.message}}
+                                </small>
+                              </div>
+
+                            </div>
+
+                            <div class="text-center">
+                              <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
+                                type="submit">Update Lab Details</button>
+                            </div>
+
+                          </form>
+
+                          <small class="form-text alert alert-success"
+                            *ngIf="this.Errors.labUpdated.status == true">
+                            <span>--{{this.Errors.labUpdated.message}}</span>
+                          </small>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                      </div>
+                    </div>
 
 
                   </div>
                 </div>
-
-
               </div>
             </div>
+
+
+
           </div>
         </div>
-
-        <!-- Cards within card -->
-
-
       </div>
+
     </div>
-  </div>
-
-</div>
 
 
 
@@ -486,28 +515,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    </div>
 
 
 
   </div>
-
-
-
-</div> <!--2nd row ends-->
+  <!--2nd row ends-->
 
 
 
