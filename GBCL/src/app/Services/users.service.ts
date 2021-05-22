@@ -121,7 +121,7 @@ export class UsersService {
 
 
 
-  FetchThisUser(userToBeSearched: Usersmodel): Usersmodel[] {
+  FetchThisddddUser(userToBeSearched: Usersmodel): Usersmodel[] {
     this.arrFetchThisUser = [];
 
     this.http
@@ -148,8 +148,8 @@ export class UsersService {
 
 
 
-
-  FetchThisUser2(usernameToBeSearched: {Username:string}): Usersmodel[] {
+//this one among the 3 is being used everywhere now
+  FetchThisUser(usernameToBeSearched: {Username:string}): Usersmodel[] {
     this.arrFetchThisUser = [];
 
     this.http

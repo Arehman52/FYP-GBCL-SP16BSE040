@@ -137,7 +137,7 @@ export class HomepageNavSearchComponent implements OnInit {
     else {
       this.showSpinner = true;
       setTimeout(() => {
-        TheMatchedUser = this.usersService.FetchThisUser2(
+        TheMatchedUser = this.usersService.FetchThisUser(
           usernameToBeSearched);
         console.log('TheMatchedUser  :', TheMatchedUser);
       }, 1000);

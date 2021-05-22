@@ -18,7 +18,7 @@ export class UnimanageMembersComponent implements OnInit {
     this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
     // this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
     this.UsernameObj = { Username: localStorage.getItem("UsersUsername") };
-    this.fetchedUni = this.usersService.FetchThisUser2(this.UsernameObj);
+    this.fetchedUni = this.usersService.FetchThisUser(this.UsernameObj);
     setTimeout(() => {
       console.log('this.AllUsersRecieved ===>',this.AllUsersRecieved);
       this.localStorageUsername = this.fetchedUni[0].Username;

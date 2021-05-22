@@ -16,7 +16,7 @@ export class UnimanageLabsComponent implements OnInit {
     this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
     // this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
     this.UsernameObj = { Username: localStorage.getItem("UsersUsername") };
-    this.fetchedUni = this.usersService.FetchThisUser2(this.UsernameObj);
+    this.fetchedUni = this.usersService.FetchThisUser(this.UsernameObj);
     setTimeout(() => {
       this.localStorageUsername = this.fetchedUni[0].Username;
       this.UNIVERSITY_TITLE = this.fetchedUni[0].TitleOfUniversity;

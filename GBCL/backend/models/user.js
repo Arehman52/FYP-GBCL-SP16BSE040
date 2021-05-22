@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const uniqueValidator = require('mongoose-unique-validator');
+const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = mongoose.Schema({
   // attribs of UserType = Student/Teacher
@@ -7,17 +7,17 @@ const userSchema = mongoose.Schema({
   LastNameOfUser: String,
   UniversityNameOfUser: String,
   RegistrationNumberOfUser: String,
+  LabJoinCodesOfJoinedLabs: [{ type: String }],
   // attribs of UserType = University
   TitleOfUniversity: String,
   HECIDofUniversity: String,
   // common attribs
   UserType: String,
   UserzAccessStatus: String,
-  Username: {type:String, required : true, unique:true},
-  Password: String
+  Username: { type: String, required: true, unique: true },
+  Password: String,
 });
-
 
 userSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
