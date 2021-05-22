@@ -194,7 +194,7 @@
                         <div class="form-group">
                           <label> {{this.MemberType}}'s Username</label>
                           <input type="text" class="form-control" name="UNcreateProfile"
-                            (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(createMemberForm.value.UNcreateProfile)"
+                            (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(createMemberForm.value.UNcreateProfile, '')"
                             ngModel>
                           <small class="form-text alert alert-danger"
                             *ngIf="this.Errors.invalidUsername.status == true">
@@ -268,9 +268,8 @@
                       {{this.Errors.formHasErrors.message}}
                     </small>
 
-                    <small class="form-text alert alert-success"
-                      *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
-                      {{this.Errors.formSubmittedSuccessfuly.message}}
+                    <small class="form-text alert alert-success" *ngIf="this.Errors.profileCreated.status == true">
+                      {{this.Errors.profileCreated.message}}
                     </small>
                   </form>
 
@@ -314,6 +313,19 @@
             <div class="card-body">
 
 
+
+
+
+
+
+
+              <div class="mx-2 mt-3" *ngIf="this.RegisteredFaculty.length==0">
+                <div class="alert alert-info p-4">
+                  <h5>No Faculty registered with your university.</h5>
+                </div>
+              </div>
+
+
               <!-- Cards within card -->
 
               <div id="accordionInnerFac">
@@ -335,7 +347,7 @@
 
                       <div class="row">
                         <div class="col-11 m-auto">
-                          <!-- remove bg dark -->
+                          <!-- delete bg dark -->
                           <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
                           <table class="table table-striped">
                             <thead>
@@ -363,11 +375,13 @@
                           </table>
                           <div class="d-flex justify-content-end mr-3">
                             <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
-                              (click)="onFacultyEditToggle()">{{this.EditFacultyButtonText}}</button>
-                            <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Remove</button>
-                            <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
+                              (click)="onFacultyEditToggle(FacultyEditForm,faculty.Username)">{{this.EditFacultyButtonText}}</button>
+                            <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                              (click)="DeleteThisUser(faculty)">Delete</button>
                           </div>
-
+                          <small class="form-text alert alert-success" *ngIf="this.Errors.userDeleted.status == true">
+                            {{this.Errors.userDeleted.message}}
+                          </small>
 
 
 
@@ -375,83 +389,104 @@
                             [ngClass]="{'d-none' : this.FacultyEdit == false}">
                             <!-- Start of std divis -->
 
-                            <div class="row">
-                              <div class="col-sm-6">
+                            <form (submit)="onSubmit_UpdateButton(FacultyEditForm,faculty)" #FacultyEditForm="ngForm">
 
-                                <!-- //3rd Element: Enter Username -->
-                                <div class="form-group">
-                                  <label> Faculty's Username</label>
-                                  <input type="text" class="form-control" name="UNEditFacultyProfile" ngModel>
+                              <div class="row">
+                                <div class="col-sm-6">
+
+                                  <!-- //3rd Element: Enter Username -->
+                                  <div class="form-group">
+                                    <label> Faculty's Username</label>
+                                    <input type="text" class="form-control" placeholder="Update Faculty's Username"
+                                      (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(FacultyEditForm.value.MemberUN,faculty.Username)"
+                                      name="MemberUN" [ngModel]="faculty.Username">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.spacesAreNotAllowed.status == true">
+                                      <span>{{this.Errors.spacesAreNotAllowed.message}}</span>
+                                    </small>
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidUsername.status == true">
+                                      <span>{{this.Errors.invalidUsername.message}}</span>
+                                    </small>
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.usernameNotUnique.status == true">
+                                      <span>{{this.Errors.usernameNotUnique.message}}</span>
+                                    </small>
+                                  </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <div class="form-group ">
+                                    <label> Faculty's Password</label>
+                                    <input type="text" class="form-control " placeholder="Update Faculty's Password"
+                                      (keyup)="checkPasswordOfMember(FacultyEditForm.value.MemberPW)" name="MemberPW"
+                                      [ngModel]="faculty.Password">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidPassword.status == true">
+                                      <span>{{this.Errors.invalidPassword.message}}</span>
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--sdgsd  -->
+
+                              <div class="row">
+
+                                <div class="form-group col-sm-6">
+                                  <label> Faculty's First Name</label>
+                                  <input type="text" class="form-control" placeholder="Update Faculty's First Name"
+                                    (keyup)="checkFNameOfMember(FacultyEditForm.value.MemberFN)" name="MemberFN"
+                                    [ngModel]="faculty.FirstNameOfUser">
                                   <small class="form-text alert alert-danger"
-                                    *ngIf="this.Errors.invalidUsername.status == true">
-                                    <span>--{{this.Errors.invalidUsername.message}}</span>
+                                    *ngIf="this.Errors.invalidFName.status == true">
+                                    <span>--{{this.Errors.invalidFName.message}}</span>
                                   </small>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                  <label> Faculty's Last Name</label>
+                                  <input type="text" class="form-control" placeholder="Update Faculty's Last Name"
+                                    (keyup)="checkLNameOfMember(FacultyEditForm.value.MemberLN)" name="MemberLN"
+                                    [ngModel]="faculty.LastNameOfUser">
                                   <small class="form-text alert alert-danger"
-                                    *ngIf="this.Errors.usernameNotUnique.status == true">
-                                    <span>--{{this.Errors.usernameNotUnique.message}}</span>
+                                    *ngIf="this.Errors.invalidLName.status == true">
+                                    <span>--{{this.Errors.invalidLName.message}}</span>
+                                  </small>
+                                </div>
+
+                              </div>
+
+                              <div class="row">
+                                <div class="form-group col-sm-12">
+                                  <label> Faculty's Registration Number</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="Update Faculty's Registration Number"
+                                    (keyup)="checkRegNOfMember(FacultyEditForm.value.MemberRegN)" name="MemberRegN"
+                                    [ngModel]="faculty.RegistrationNumberOfUser">
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                                    <span>{{this.Errors.invalidRegistrationNumber.message}}</span>
                                   </small>
                                 </div>
                               </div>
 
-                              <div class="col-sm-6">
-                                <div class="form-group ">
-                                  <label> Faculty's Password</label>
-                                  <input type="text" class="form-control " name="PassWordEditFacultyProfile" ngModel>
-                                  <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidPassword.status == true">
-                    <span>--{{this.Errors.invalidPassword.message}}</span>
-                  </small> -->
-                                </div>
-                              </div>
-                            </div>
-                            <!--sdgsd  -->
-
-                            <div class="row">
-
-                              <div class="form-group col-sm-6">
-                                <label> Faculty's First Name</label>
-                                <input type="text" class="form-control" name="FNEditFacultyProfile" ngModel>
-                                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidFName.status == true">
-                  <span>--{{this.Errors.invalidFName.message}}</span>
-                </small> -->
+                              <!-- SIGNUP BUTTON BELOW -->
+                              <div class="text-center">
+                                <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
+                                  type="submit">Update Profile</button>
                               </div>
 
-                              <div class="form-group col-sm-6">
-                                <label> Faculty's Last Name</label>
-                                <input type="text" class="form-control" name="LNEditFacultyProfile" ngModel>
-                                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidLName.status == true">
-                  <span>--{{this.Errors.invalidLName.message}}</span>
-                </small> -->
-                              </div>
+                            </form>
+                            <small class="form-text alert alert-danger"
+                              *ngIf="this.Errors.formHasErrors.status == true">
+                              <span>--{{this.Errors.formHasErrors.message}}</span>
+                            </small>
 
-                            </div>
+                            <small class="form-text alert alert-success"
+                              *ngIf="this.Errors.profileUpdated.status == true">
+                              <span>--{{this.Errors.profileUpdated.message}}</span>
+                            </small>
 
-                            <div class="row">
-                              <div class="form-group col-sm-12">
-                                <label> Faculty's Registration Number</label>
-                                <input type="text" class="form-control" name="RegNEditFacultyProfile" ngModel required>
-                                <!-- <small class="form-text text-muted">
-                  Your registration ID through which your university can identify you in their records.
-                </small>
-                <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
-                  <span>--{{this.Errors.invalidRegistrationNumber.message}}</span>
-                </small> -->
-                              </div>
-                            </div>
-
-                            <!-- SIGNUP BUTTON BELOW -->
-                            <div class="text-center">
-                              <button class="btn btn-primary w-50 m-auto" type="button">Update Profile</button>
-                            </div>
-
-                            <!-- <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
-              <span>--{{this.Errors.formHasErrors.message}}</span>
-            </small> -->
-
-                            <!-- <small class="form-text p-2 mt-4 formSubmissionSuccessText"
-            *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
-              <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
-            </small>
- -->
 
 
                           </div>
@@ -505,23 +540,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              <div class="mx-2 mt-3" *ngIf="this.RegisteredStudents.length==0">
+                <div class="alert alert-info p-4">
+                  <h5>No Students registered with your university.</h5>
+                </div>
+              </div>
 
 
 
@@ -547,7 +570,7 @@
 
                       <div class="row">
                         <div class="col-11 m-auto">
-                          <!-- remove bg dark -->
+                          <!-- delete bg dark -->
                           <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
                           <table class="table table-striped">
                             <thead>
@@ -575,8 +598,9 @@
                           </table>
                           <div class="d-flex justify-content-end mr-3">
                             <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
-                              (click)="onStudentEditToggle()">{{this.EditStudentButtonText}}</button>
-                            <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Remove</button>
+                              (click)="onStudentEditToggle(StudentEditForm,student.Username)">{{this.EditStudentButtonText}}</button>
+                            <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                              (click)="DeleteThisUser(student)">Delete</button>
                             <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
                           </div>
 
@@ -587,82 +611,104 @@
                             [ngClass]="{'d-none' : this.StudentEdit == false}">
                             <!-- Start of std divis EditFacultyProfile-->
 
-                            <div class="row">
-                              <div class="col-sm-6">
 
-                                <!-- //3rd Element: Enter Username -->
-                                <div class="form-group">
-                                  <label> Student's Username</label>
-                                  <input type="text" class="form-control" name="Users258EnteredUsername" ngModel>
-                                  <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidUsername.status == true">
-                  <span>--{{this.Errors.invalidUsername.message}}</span>
-                </small>
-                <small class="form-text alert alert-danger" *ngIf="this.Errors.usernameNotUnique.status == true">
-                  <span>--{{this.Errors.usernameNotUnique.message}}</span>
-                </small> -->
+                            <form (submit)="onSubmit_UpdateButton(StudentEditForm,student)" #StudentEditForm="ngForm">
+
+                              <div class="row">
+                                <div class="col-sm-6">
+
+                                  <!-- //3rd Element: Enter Username -->
+                                  <div class="form-group">
+                                    <label> Student's Username</label>
+                                    <input type="text" class="form-control" placeholder="Update Student's Username"
+                                      (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(StudentEditForm.value.MemberUN,student.Username)"
+                                      name="MemberUN" [ngModel]="student.Username">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.spacesAreNotAllowed.status == true">
+                                      <span>{{this.Errors.spacesAreNotAllowed.message}}</span>
+                                    </small>
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidUsername.status == true">
+                                      <span>{{this.Errors.invalidUsername.message}}</span>
+                                    </small>
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.usernameNotUnique.status == true">
+                                      <span>{{this.Errors.usernameNotUnique.message}}</span>
+                                    </small>
+                                  </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <div class="form-group ">
+                                    <label> Student's Password</label>
+                                    <input type="text" class="form-control " placeholder="Update Student's Password"
+                                      (keyup)="checkPasswordOfMember(StudentEditForm.value.MemberPW)" name="MemberPW"
+                                      [ngModel]="student.Password">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidPassword.status == true">
+                                      <span>{{this.Errors.invalidPassword.message}}</span>
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--sdgsd  -->
+
+                              <div class="row">
+
+                                <div class="form-group col-sm-6">
+                                  <label> Student's First Name</label>
+                                  <input type="text" class="form-control" placeholder="Update Student's First Name"
+                                    (keyup)="checkFNameOfMember(StudentEditForm.value.MemberFN)" name="MemberFN"
+                                    [ngModel]="student.FirstNameOfUser">
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidFName.status == true">
+                                    <span>--{{this.Errors.invalidFName.message}}</span>
+                                  </small>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                  <label> Student's Last Name</label>
+                                  <input type="text" class="form-control" placeholder="Update Student's Last Name"
+                                    (keyup)="checkLNameOfMember(StudentEditForm.value.MemberLN)" name="MemberLN"
+                                    [ngModel]="student.LastNameOfUser">
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidLName.status == true">
+                                    <span>--{{this.Errors.invalidLName.message}}</span>
+                                  </small>
+                                </div>
+
+                              </div>
+
+                              <div class="row">
+                                <div class="form-group col-sm-12">
+                                  <label> Student's Registration Number</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="Update Student's Registration Number"
+                                    (keyup)="checkRegNOfMember(StudentEditForm.value.MemberRegN)" name="MemberRegN"
+                                    [ngModel]="student.RegistrationNumberOfUser">
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                                    <span>{{this.Errors.invalidRegistrationNumber.message}}</span>
+                                  </small>
                                 </div>
                               </div>
 
-                              <div class="col-sm-6">
-                                <div class="form-group ">
-                                  <label> Student's Password</label>
-                                  <input type="text" class="form-control " name="UsersEnteredPassword" ngModel>
-                                  <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidPassword.status == true">
-                  <span>--{{this.Errors.invalidPassword.message}}</span>
-                </small> -->
-                                </div>
-                              </div>
-                            </div>
-                            <!--sdgsd  -->
-
-                            <div class="row">
-
-                              <div class="form-group col-sm-6">
-                                <label> Student's First Name</label>
-                                <input type="text" class="form-control" name="UsersEnteredFName" ngModel>
-                                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidFName.status == true">
-                <span>--{{this.Errors.invalidFName.message}}</span>
-              </small> -->
+                              <!-- SIGNUP BUTTON BELOW -->
+                              <div class="text-center">
+                                <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
+                                  type="submit">Update Profile</button>
                               </div>
 
-                              <div class="form-group col-sm-6">
-                                <label> Student's Last Name</label>
-                                <input type="text" class="form-control" name="LNEditStudentProfile" ngModel>
-                                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidLName.status == true">
-                <span>--{{this.Errors.invalidLName.message}}</span>
-              </small> -->
-                              </div>
+                            </form>
+                            <small class="form-text alert alert-success"
+                              *ngIf="this.Errors.formHasErrors.status == true">
+                              <span>--{{this.Errors.formHasErrors.message}}</span>
+                            </small>
 
-                            </div>
-
-                            <div class="row">
-                              <div class="form-group col-sm-12">
-                                <label> Student's Registration Number</label>
-                                <input type="text" class="form-control" name="RegNEditStudentProfile" ngModel required>
-                                <!-- <small class="form-text text-muted">
-                Your registration ID through which your university can identify you in their records.
-              </small>
-              <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
-                <span>--{{this.Errors.invalidRegistrationNumber.message}}</span>
-              </small> -->
-                              </div>
-                            </div>
-
-                            <!-- SIGNUP BUTTON BELOW -->
-                            <div class="text-center">
-                              <button class="btn btn-primary w-50 m-auto" type="button">Update Profile</button>
-                            </div>
-
-                            <!-- <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
-            <span>--{{this.Errors.formHasErrors.message}}</span>
-          </small> -->
-
-                            <!-- <small class="form-text p-2 mt-4 formSubmissionSuccessText"
-          *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
-            <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
-          </small>
--->
-
+                            <small class="form-text alert alert-success"
+                              *ngIf="this.Errors.profileUpdated.status == true">
+                              <span>--{{this.Errors.profileUpdated.message}}</span>
+                            </small>
 
                           </div>
 
@@ -758,7 +804,7 @@
 
                       <div class="row">
                         <div class="col-11 m-auto">
-                          <!-- remove bg dark -->
+                          <!-- delete bg dark -->
                           <table class="table table-striped">
                             <thead>
                               <tr>
@@ -816,7 +862,7 @@
                                     <label>Username:</label>
                                     <input type="text" class="form-control" placeholder="Enter Username for university"
                                       name="MemberUsername" [ngModel]="RejectedMember.Username"
-                                      (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(updateRejectedMemberForm.value.MemberUsername)">
+                                      (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(updateRejectedMemberForm.value.MemberUsername, '')">
                                     <small class="form-text alert alert-danger"
                                       *ngIf="this.Errors.invalidUsername.status == true">
                                       {{this.Errors.invalidUsername.message}}

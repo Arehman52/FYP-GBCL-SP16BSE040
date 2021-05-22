@@ -63,6 +63,7 @@ export class UsersService {
         tempUsers.push(responseData.users[i]);
       }
     });
+    console.log('this.AllUsersRecieved FROM SERVICE===>',tempUsers);
     return tempUsers;
   }
 

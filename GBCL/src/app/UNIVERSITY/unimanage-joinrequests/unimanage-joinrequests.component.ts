@@ -14,15 +14,25 @@ export class UnimanageJoinrequestsComponent implements OnInit {
   ngOnInit(): void {
     this.setAllErrorsToFalse();
     this.AllUsersRecievedFromDB = this.usersService.RecieveAllUsersFromDB();
-    setTimeout(
-      () => {
-        this.extractJOINRequests();
-      }, 700);
+
+    this.UsernameObj = { Username: localStorage.getItem("UsersUsername") };
+    this.fetchedUni = this.usersService.FetchThisUser2(this.UsernameObj);
+    setTimeout(() => {
+      this.localStorageUsername = this.fetchedUni[0].Username;
+      this.UNIVERSITY_TITLE = this.fetchedUni[0].TitleOfUniversity;
+    }, 1000);
+    setTimeout(() => {
+      this.extractJOINRequests();
+    }, 1400);
   }
 
-  localStorageUsername = localStorage.getItem("UsersUsername");
-  localStorageUNIVERSITYtitle = localStorage.getItem("UniversityTitle");
+  // localStorageUsername = localStorage.getItem("UsersUsername");
+  // localStorageUNIVERSITYtitle = localStorage.getItem("UniversityTitle");
 
+  private fetchedUni: Usersmodel[] = [];
+  localStorageUsername: string;
+  UsernameObj: { Username: string } = { Username: localStorage.getItem("UsersUsername") };
+  UNIVERSITY_TITLE: string;
 
   AllUsersRecievedFromDB: Usersmodel[] = [];
   JOINRequestsStudents: Usersmodel[] = [];
@@ -36,12 +46,10 @@ export class UnimanageJoinrequestsComponent implements OnInit {
       // console.log('localStorage.setItem("UsersUsertype") ==> ',localStorage.getItem("UsersUsertype"));
       // console.log('this.localStorageUNIVERSITYtitle ==> ',this.localStorageUNIVERSITYtitle);
       // console.log('this.AllUsersRecievedFromDB[i].UniversityNameOfUser ',this.AllUsersRecievedFromDB[i].UniversityNameOfUser);
-      if (this.AllUsersRecievedFromDB[i].UniversityNameOfUser == this.localStorageUNIVERSITYtitle
+      if (this.AllUsersRecievedFromDB[i].UniversityNameOfUser == this.UNIVERSITY_TITLE
         && this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Pending') {
-        if (this.AllUsersRecievedFromDB[i].UserType == 'student')
-          {this.JOINRequestsStudents.push(this.AllUsersRecievedFromDB[i]);}
-        if (this.AllUsersRecievedFromDB[i].UserType == 'teacher')
-          {this.JOINRequestsTeachers.push(this.AllUsersRecievedFromDB[i]);}
+        if (this.AllUsersRecievedFromDB[i].UserType == 'student') { this.JOINRequestsStudents.push(this.AllUsersRecievedFromDB[i]); }
+        if (this.AllUsersRecievedFromDB[i].UserType == 'teacher') { this.JOINRequestsTeachers.push(this.AllUsersRecievedFromDB[i]); }
       }
     }
 
@@ -55,7 +63,7 @@ export class UnimanageJoinrequestsComponent implements OnInit {
       RejectedMember.UserzAccessStatus = 'Rejected';
       this.usersService.updateThisUser(RejectedMember, member._id);
       this.Errors.joinRequestRejected.status = true;
-      setTimeout(()=>{window.location.reload();},3500);
+      setTimeout(() => { window.location.reload(); }, 3500);
     } else {
       return;
     }
@@ -63,12 +71,12 @@ export class UnimanageJoinrequestsComponent implements OnInit {
   }
   onAcceptButtonClicked(member: Usersmodel) {
 
-    if (confirm('Are you sure you want to accept join request of  : ' + member.FirstNameOfUser+' '+ member.LastNameOfUser)) {
+    if (confirm('Are you sure you want to accept join request of  : ' + member.FirstNameOfUser + ' ' + member.LastNameOfUser)) {
       const Allowedmember: Usersmodel = { ...member };
       Allowedmember.UserzAccessStatus = 'Allowed';
       this.usersService.updateThisUser(Allowedmember, member._id);
       this.Errors.joinRequestAccepted.status = true;
-      setTimeout(()=>{window.location.reload();},2500);
+      setTimeout(() => { window.location.reload(); }, 2500);
     } else {
       return;
     }
