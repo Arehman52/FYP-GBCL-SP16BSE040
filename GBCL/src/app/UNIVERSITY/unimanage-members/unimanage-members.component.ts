@@ -79,6 +79,7 @@ export class UnimanageMembersComponent implements OnInit {
       this.Errors.profileCreated.status = true;
       const user: Usersmodel = {
         _id: '',
+        LabJoinCodesOfJoinedLabs: null,
         Username: createMemberForm.value.UNcreateProfile.toLowerCase(),
         Password: createMemberForm.value.PWcreateProfile,
         FirstNameOfUser: createMemberForm.value.FNcreateProfile,
@@ -247,6 +248,7 @@ export class UnimanageMembersComponent implements OnInit {
       FirstNameOfUser: UpdatedMemberFN,
       HECIDofUniversity: OriginalMemberDetails.HECIDofUniversity,
       LastNameOfUser: UpdatedMemberLN,
+      LabJoinCodesOfJoinedLabs: OriginalMemberDetails.LabJoinCodesOfJoinedLabs,
       Password: UpdatedMemberPW,
       RegistrationNumberOfUser: UpdatedMemberRegN,
       TitleOfUniversity: OriginalMemberDetails.TitleOfUniversity,
@@ -399,6 +401,7 @@ export class UnimanageMembersComponent implements OnInit {
     this.Errors.profileCreated.status = false;
     this.Errors.profileUpdated.status = false;
     this.Errors.userDeleted.status = false;
+    this.Errors.accessAllowed.status = false;
   }
 
   checkIfErrors(): boolean {
@@ -406,6 +409,7 @@ export class UnimanageMembersComponent implements OnInit {
       this.Errors.spacesAreNotAllowed.status ||
       this.Errors.emptyField.status ||
       this.Errors.profileCreated.status ||
+      this.Errors.accessAllowed.status ||
       this.Errors.profileUpdated.status ||
       this.Errors.userDeleted.status ||
       this.Errors.invalidFName.status ||

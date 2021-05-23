@@ -43,6 +43,16 @@ export class UsersService {
 
 
 
+    UpdateThisUserWithLABJOINCODES(UpdatedUser: Usersmodel, Id: string) {
+      this.http.put("http://localhost:3000/api/Users/UpdateThisUserWithLABJOINCODES/"+Id, UpdatedUser).subscribe(
+        response=>{
+          console.log(response);
+        }
+      );
+    }
+
+
+
     updateThisUser(UpdatedUser: Usersmodel, Id: string) {
       this.http.put("http://localhost:3000/api/Users/UpdateThisUser/"+Id, UpdatedUser).subscribe(
         response=>{
