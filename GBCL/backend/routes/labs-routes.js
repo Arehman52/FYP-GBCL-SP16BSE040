@@ -8,6 +8,37 @@ const router = express.Router();
 
 
 
+router.delete("/DeleteThisLab/:Id", (req, res, next) => {
+  Labs.deleteOne({ _id: req.params.Id }).then((result) => {
+    res.status(200).json({
+      message: "Lab Deleted!",
+      result: result,
+    });
+  });
+});
+
+
+
+router.put("/UpdateThisLab/:Id", (req, res, next) => {
+  const lab = new Labs({
+    _id: req.body._id,
+    LabTitle: req.body.LabTitle,
+    LabInstructor: req.body.LabInstructor,
+    LabProgram: req.body.LabProgram,
+    LabClass: req.body.LabClass,
+    UniversityNameOfLab: req.body.UniversityNameOfLab
+  });
+
+  Labs.updateOne({ _id: req.params.Id }, lab).then((result) => {
+    res.status(200).json({
+      message: "Lab Updated!",
+      result: result,
+    });
+  });
+  // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
+});
+
+
 
 // RecieveLabsFromDB
 router.get("/RecieveLabsFromDB", (req, res, next) => {

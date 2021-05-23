@@ -569,21 +569,21 @@ export class UnimanageMembersComponent implements OnInit {
 
 
 
-  FacultyData = [{
-    Id: 'fac1',
-    name: 'Hassan Mansoor',
-    UniTitle: 'COMSATS University Islamabad',
-    AccessStatuses: { allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted' },
-    AccessStatus: 'Pending'
-  },
-  {
-    Id: 'fac2',
-    name: 'Dr. Ishtiaq Ahmed',
-    UniTitle: 'IIUI University',
-    AccessStatuses: { allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted' },
-    AccessStatus: 'Pending'
-  }
-  ];
+  // FacultyData = [{
+  //   Id: 'fac1',
+  //   name: 'Hassan Mansoor',
+  //   UniTitle: 'COMSATS University Islamabad',
+  //   AccessStatuses: { allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted' },
+  //   AccessStatus: 'Pending'
+  // },
+  // {
+  //   Id: 'fac2',
+  //   name: 'Dr. Ishtiaq Ahmed',
+  //   UniTitle: 'IIUI University',
+  //   AccessStatuses: { allowed: 'Allowed', pending: 'Pending', paused: 'Paused', deleted: 'Deleted' },
+  //   AccessStatus: 'Pending'
+  // }
+  // ];
 
 
   // //////////////////////////////////////////\///

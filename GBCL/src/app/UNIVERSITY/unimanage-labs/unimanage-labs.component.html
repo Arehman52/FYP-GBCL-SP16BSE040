@@ -205,7 +205,7 @@
                             (keyup)="checkLabTitle(createLabForm.value.LabTitle)" ngModel>
                           <small class="form-text alert alert-danger"
                             *ngIf="this.Errors.invalidLabTitle.status == true">
-                            <span>--{{this.Errors.invalidLabTitle.message}}</span>
+                            <span>{{this.Errors.invalidLabTitle.message}}</span>
                           </small>
                         </div>
                       </div>
@@ -424,7 +424,7 @@
                                   [ngModel]="lab.LabClass">
                                 <small class="form-text alert alert-danger"
                                   *ngIf="this.Errors.invalidLabClassSection.status == true">
-                                  <span>--{{this.Errors.invalidLabClassSection.message}}</span>
+                                  <span>{{this.Errors.invalidLabClassSection.message}}</span>
                                 </small>
                               </div>
 
@@ -440,7 +440,7 @@
                                 <select class="custom-select" #InstructorsSelect aria-placeholder="Choose an Instructor"
                                   (change)="onInstructorsSelectChange(InstructorsSelect)">
                                   <!-- <option  disabled>{{LabInstructorzFN+' '+LabInstructorzLN}}</option> -->
-                                  <option selected disabled>Change Instructor</option>
+                                  <option selected disabled [value]="'Change Instructor'">Change Instructor</option>
                                   <option class="text-danger" [value]="'Not Listed!'"><b>Not Listed!</b></option>
                                   <option [value]="instructor.Username"
                                     *ngFor="let instructor of RegisteredFaculty"
@@ -473,7 +473,11 @@
 
                           <small class="form-text alert alert-success"
                             *ngIf="this.Errors.labUpdated.status == true">
-                            <span>--{{this.Errors.labUpdated.message}}</span>
+                            <span>{{this.Errors.labUpdated.message}}</span>
+                          </small>
+                          <small class="form-text alert alert-success"
+                            *ngIf="this.Errors.labDeleted.status == true">
+                            <span>{{this.Errors.labDeleted.message}}</span>
                           </small>
 
 

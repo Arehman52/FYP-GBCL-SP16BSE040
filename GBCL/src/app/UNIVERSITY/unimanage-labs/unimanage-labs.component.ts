@@ -73,15 +73,65 @@ export class UnimanageLabsComponent implements OnInit {
 
 
 
+
+
+
+
+
+  setAllErrorsToFalse() {
+    this.showInstructorChangingWarning = true;
+    this.Errors.InstructorNotListedforCreateLab.status = false;
+    this.Errors.InstructorNotListed.status = false;
+    this.Errors.emptyField.status = false;
+    this.Errors.LabCreated.status = false;
+    this.Errors.LabInstructorNotSelected.status = false;
+    // this.Errors.formHasErrors.status = false;
+    this.Errors.invalidDegreeProgram.status = false;
+    this.Errors.invalidLabClassSection.status = false;
+    this.Errors.invalidLabTitle.status = false;
+    this.Errors.labUpdated.status = false;
+    this.Errors.labDeleted.status = false;
+  }
+
+  checkIfErrors(): boolean {
+    return (
+      this.Errors.InstructorNotListedforCreateLab.status ||
+      this.Errors.InstructorNotListed.status ||
+      // this.showInstructorChangingWarning ||
+      this.Errors.emptyField.status ||
+      this.Errors.LabCreated.status ||
+      this.Errors.labDeleted.status ||
+      // this.Errors.formHasErrors.status ||
+      this.Errors.invalidDegreeProgram.status ||
+      this.Errors.invalidLabTitle.status ||
+      this.Errors.LabInstructorNotSelected.status ||
+      this.Errors.invalidLabClassSection.status ||
+      this.Errors.labUpdated.status
+    )
+
+  }
+
+
+
   onSubmit_UpdateButton(updateLabForm: NgForm, OriginalLabDetails: Labsmodel, onInstructorsSelectChange: HTMLSelectElement) {
 
-    if (OriginalLabDetails.LabInstructor == onInstructorsSelectChange.value) {
-      alert('You must ')
-    }
+    this.Errors.LabInstructorNotSelected.status = false;
 
+
+    // console.log("OriginalLabDetails.LabInstructor == >", OriginalLabDetails.LabInstructor);
+    // console.log("onInstructorsSelectChange.value == >", onInstructorsSelectChange.value);
+    // if (OriginalLabDetails.LabInstructor == onInstructorsSelectChange.value) {
+    //   alert('OriginalLabDetails.LabInstructor == onInstructorsSelectChange.value\n' +
+    //     'OriginalLabDetails.LabInstructor = ' + OriginalLabDetails.LabInstructor +
+    //     "\nonInstructorsSelectChange.value = " + onInstructorsSelectChange.value);
+    // }
+
+    // console.log("updateLabForm.value.LabTitle == >", updateLabForm.value.LabTitle);
+    // console.log("updateLabForm.value.LabClass == >", updateLabForm.value.LabClassSection);
+    //hopefully alert in this IF's Else will never be triggered....
     if (updateLabForm.value.LabTitle == ''
       && updateLabForm.value.DegreeProgram == ''
-      && updateLabForm.value.LabClass == ''
+      && updateLabForm.value.LabClassSection == ''
 
     ) {
       alert('You can\'t update empty fields');
@@ -89,123 +139,60 @@ export class UnimanageLabsComponent implements OnInit {
     }
 
 
-    // if (updateMemberForm.value.MemberUN == ''
-    //   || updateMemberForm.value.MemberFN == ''
-    //   || updateMemberForm.value.MemberLN == ''
-    //   || updateMemberForm.value.MemberPW == ''
-    //   || updateMemberForm.value.MemberRegN == ''
-    // ) {
-    // alert('You can\'t update empty fields');
-    // return;
-    // } else
-    //   if (updateMemberForm.value.MemberUN.toLowerCase() == OriginalMemberDetails.Username.toLowerCase()
-    //     && updateMemberForm.value.MemberFN == OriginalMemberDetails.FirstNameOfUser
-    //     && updateMemberForm.value.MemberLN == OriginalMemberDetails.LastNameOfUser
-    //     && updateMemberForm.value.MemberPW == OriginalMemberDetails.Password
-    //     && updateMemberForm.value.MemberRegN == OriginalMemberDetails.RegistrationNumberOfUser) {
-    //     alert('You haven\'t changed any field, same values cannot be updated');
-    //     return;
-    //   }
 
-    // var UpdatedMemberUN = '';
-    // var UpdatedMemberFN = '';
-    // var UpdatedMemberLN = '';
-    // var UpdatedMemberPW = '';
-    // var UpdatedMemberRegN = '';
+    // console.log("OriginalLabDetails.LabTitle == >", updateLabForm.value.LabTitle);
+    // console.log("OriginalLabDetails.LabProgram == >", OriginalLabDetails.LabProgram);
+    // console.log("OriginalLabDetails.LabClass == >", OriginalLabDetails.LabClass);
+    // console.log("OriginalLabDetails.LabInstructor == >", OriginalLabDetails.LabInstructor);
+    // console.log("onInstructorsSelectChange.value == >", onInstructorsSelectChange.value);
+    // console.log("OriginalLabDetails.LabInstructor == onInstructorsSelectChange.value == >", OriginalLabDetails.LabInstructor == onInstructorsSelectChange.value);
+    //===============================================
+    //===============================================
+    // console.log("updateLabForm.value.LabTitle == OriginalLabDetails.LabTitle == >", updateLabForm.value.LabTitle == OriginalLabDetails.LabTitle);
+    // console.log("updateLabForm.value.DegreeProgram == OriginalLabDetails.LabProgram == >", updateLabForm.value.DegreeProgram == OriginalLabDetails.LabProgram);
+    // console.log("updateLabForm.value.LabClass == OriginalLabDetails.LabClass == >", updateLabForm.value.LabClassSection == OriginalLabDetails.LabClass);
+    // console.log("(onInstructorsSelectChange.value == OriginalLabDetails.LabInstructor" +
+    // "|| onInstructorsSelectChange.value == 'Change Instructor') == >", (onInstructorsSelectChange.value == OriginalLabDetails.LabInstructor || onInstructorsSelectChange.value == 'Change Instructor'));
+    // console.log("onInstructorsSelectChange.value == >", onInstructorsSelectChange.value);
+    // console.log("OriginalLabDetails.LabInstructor == >", OriginalLabDetails.LabInstructor);
 
-    // if (updateMemberForm.value.MemberUN == '') {
-    //   UpdatedMemberUN = OriginalMemberDetails.Username;
-    // }
-    // else {
-    //   UpdatedMemberUN = updateMemberForm.value.MemberUN;
-    // }
+    if (updateLabForm.value.LabTitle == OriginalLabDetails.LabTitle
+      && updateLabForm.value.DegreeProgram == OriginalLabDetails.LabProgram
+      && updateLabForm.value.LabClassSection == OriginalLabDetails.LabClass
+      && (onInstructorsSelectChange.value == OriginalLabDetails.LabInstructor
+        || onInstructorsSelectChange.value == 'Change Instructor')
+    ) {
+
+      alert('You haven\'t changed any field, same values cannot be updated');
+      return;
+
+    }else{
+
+      const UpdatedLab: Labsmodel = {
+        _id: OriginalLabDetails._id,
+        LabClass: updateLabForm.value.LabClassSection,
+        LabInstructor: onInstructorsSelectChange.value,
+        LabProgram: updateLabForm.value.DegreeProgram,
+        LabTitle: updateLabForm.value.LabTitle,
+        UniversityNameOfLab: OriginalLabDetails.UniversityNameOfLab
+       }
+
+       if(UpdatedLab.LabInstructor == 'Change Instructor'){
+        UpdatedLab.LabInstructor = OriginalLabDetails.LabInstructor;
+       }
+       console.log('UpdatedMemberAsAUser ===> ', UpdatedLab);
 
 
-    // if (updateMemberForm.value.MemberFN == '') {
-    //   UpdatedMemberFN = OriginalMemberDetails.FirstNameOfUser;
-    // } else {
-    //   UpdatedMemberFN = updateMemberForm.value.MemberFN;
-    // }
+            setTimeout(() => {
+              this.labsService.updateThisLab(UpdatedLab);
+            }, 750);
+            this.Errors.labUpdated.status = true;
+            updateLabForm.resetForm();
+            setTimeout(() => {
+              window.location.reload();
+            }, 13500);
 
-    // if (updateMemberForm.value.MemberLN == '') {
-    //   UpdatedMemberLN = OriginalMemberDetails.LastNameOfUser;
-    // } else {
-    //   UpdatedMemberLN = updateMemberForm.value.MemberLN;
-    // }
-
-    // if (updateMemberForm.value.MemberPW == '') {
-    //   UpdatedMemberPW = OriginalMemberDetails.Password;
-    // } else {
-    //   UpdatedMemberPW = updateMemberForm.value.MemberPW;
-    // }
-
-    // if (updateMemberForm.value.MemberRegN == '') {
-    //   UpdatedMemberRegN = OriginalMemberDetails.RegistrationNumberOfUser;
-    // } else {
-    //   UpdatedMemberRegN = updateMemberForm.value.MemberRegN;
-    // }
-
-    // const UpdatedMemberAsAUser: Usersmodel = {
-    //   FirstNameOfUser: UpdatedMemberFN,
-    //   HECIDofUniversity: OriginalMemberDetails.HECIDofUniversity,
-    //   LastNameOfUser: UpdatedMemberLN,
-    //   Password: UpdatedMemberPW,
-    //   RegistrationNumberOfUser: UpdatedMemberRegN,
-    //   TitleOfUniversity: OriginalMemberDetails.TitleOfUniversity,
-    //   UniversityNameOfUser: OriginalMemberDetails.UniversityNameOfUser,
-    //   UserType: OriginalMemberDetails.UserType,
-    //   Username: UpdatedMemberUN,
-    //   UserzAccessStatus: OriginalMemberDetails.UserzAccessStatus,
-    //   _id: OriginalMemberDetails._id
-    // }
-
-    //  // console.log('UpdatedMemberAsAUser ===> ', UpdatedMemberAsAUser);
-
-    //    // console.log('UpdatedUniAsAUser\n', UpdatedUniAsAUser);
-    // if (this.checkIfErrors()) {
-    //   this.Errors.formHasErrors.status = true;
-    //   this.Errors.profileUpdated.status = false;
-    //   return;
-    // } else {
-    //   this.Errors.formHasErrors.status = false;
-    //   if (OriginalMemberDetails.UserzAccessStatus == 'Rejected') {
-    //     if (confirm('Are you sure you want to update these values?\nThis will only update the fields,\nIt ' +
-    //       'won\'t allow access to this member unless Allow Access Button clicked.')) {
-
-    //       // this.usersService.updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUniAsAUser, OriginalUniDetails);
-
-    //       setTimeout(() => {
-    //         this.usersService.updateThisUser(UpdatedMemberAsAUser, OriginalMemberDetails._id);
-    //       }, 750);
-    //       this.Errors.profileUpdated.status = true;
-    //       updateMemberForm.resetForm();
-    //       setTimeout(() => {
-    //         window.location.reload();
-    //       }, 3500);
-    //     } else {
-    //       return;
-    //     }
-    //   } else {
-    //     if (confirm('Are you sure you want to update these values?')) {
-    //       // console.log(OriginalUniDetails._id);
-    //       // console.log(OriginalUniDetails.Username);
-    //       // this.usersService.updateUsernameOfUserExverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUniAsAUser, OriginalUniDetails);
-
-    //       setTimeout(() => {
-    //         this.usersService.updateThisUser(UpdatedMemberAsAUser, OriginalMemberDetails._id);
-    //       }, 750);
-    //       this.Errors.profileUpdated.status = true;
-    //       updateMemberForm.resetForm();
-    //       setTimeout(() => {
-    //         window.location.reload();
-    //       }, 3500);
-    //     } else {
-    //       return;
-    //     }
-    //   }
-
-    // }
-
+    }
 
   }
 
@@ -237,7 +224,16 @@ export class UnimanageLabsComponent implements OnInit {
 
 
   DeleteThisLab(lab: Labsmodel) {
-    alert('functionality not implemented yet');
+    if (confirm("Are you sure you want to delete this lab :" + lab.LabTitle+'\n'
+    +'\nWARNING: IT WILL DELETE ALL ITS RECORDS FOR JOINED MEMBERS')) {
+      this.labsService.DeleteThisLab(lab._id);
+      this.Errors.labDeleted.status = true;
+      setTimeout(() => {
+        window.location.reload();
+      }, 123500);
+    } else {
+      return;
+    }
   }
 
 
@@ -257,8 +253,8 @@ export class UnimanageLabsComponent implements OnInit {
     this.LabInstructorzFN = '';
     this.LabInstructorzLN = '';
     for (var i = 0; i < this.AllUsersRecieved.length; i++) {
-      console.log("this.AllUsersRecieved[i].Username ===> ", this.AllUsersRecieved[i].Username);
-      console.log("UsernameOfLabInstructor ===> ", UsernameOfLabInstructor);
+      // console.log("this.AllUsersRecieved[i].Username ===> ", this.AllUsersRecieved[i].Username);
+      // console.log("UsernameOfLabInstructor ===> ", UsernameOfLabInstructor);
       if (this.AllUsersRecieved[i].Username == UsernameOfLabInstructor) {
         this.LabInstructorzFN = this.AllUsersRecieved[i].FirstNameOfUser;
         this.LabInstructorzLN = this.AllUsersRecieved[i].LastNameOfUser;
@@ -386,40 +382,6 @@ export class UnimanageLabsComponent implements OnInit {
   }
 
 
-
-  setAllErrorsToFalse() {
-    this.showInstructorChangingWarning = true;
-    this.Errors.InstructorNotListedforCreateLab.status = false;
-    this.Errors.InstructorNotListed.status = false;
-    this.Errors.emptyField.status = true;
-    this.Errors.LabCreated.status = false;
-    this.Errors.LabInstructorNotSelected.status = false;
-    // this.Errors.formHasErrors.status = false;
-    this.Errors.invalidDegreeProgram.status = false;
-    this.Errors.invalidLabClassSection.status = false;
-    this.Errors.invalidLabTitle.status = false;
-    this.Errors.labUpdated.status = false;
-    this.Errors.labDeleted.status = false;
-  }
-
-  checkIfErrors(): boolean {
-    return (
-      this.Errors.InstructorNotListedforCreateLab.status ||
-      this.Errors.InstructorNotListed.status ||
-      this.Errors.emptyField.status ||
-      this.Errors.LabCreated.status ||
-      this.Errors.labDeleted.status ||
-      // this.Errors.formHasErrors.status ||
-      this.Errors.invalidDegreeProgram.status ||
-      this.Errors.invalidLabTitle.status ||
-      this.Errors.LabInstructorNotSelected.status ||
-      this.Errors.invalidLabClassSection.status ||
-      this.Errors.labUpdated.status
-    )
-
-  }
-
-
   Errors = {
     InstructorNotListedforCreateLab: {
       status: true,
@@ -449,7 +411,7 @@ export class UnimanageLabsComponent implements OnInit {
     labDeleted: {
       status: true,
       message:
-        'Lab has been deleted successfully.',
+        'Lab and it\'s records have been deleted successfully.',
     },
     labUpdated: {
       status: true,
