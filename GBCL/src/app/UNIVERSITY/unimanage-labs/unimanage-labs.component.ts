@@ -166,7 +166,7 @@ export class UnimanageLabsComponent implements OnInit {
       alert('You haven\'t changed any field, same values cannot be updated');
       return;
 
-    }else{
+    } else {
 
       const UpdatedLab: Labsmodel = {
         _id: OriginalLabDetails._id,
@@ -175,22 +175,22 @@ export class UnimanageLabsComponent implements OnInit {
         LabProgram: updateLabForm.value.DegreeProgram,
         LabTitle: updateLabForm.value.LabTitle,
         UniversityNameOfLab: OriginalLabDetails.UniversityNameOfLab
-       }
+      }
 
-       if(UpdatedLab.LabInstructor == 'Change Instructor'){
+      if (UpdatedLab.LabInstructor == 'Change Instructor') {
         UpdatedLab.LabInstructor = OriginalLabDetails.LabInstructor;
-       }
-       console.log('UpdatedMemberAsAUser ===> ', UpdatedLab);
+      }
+      console.log('UpdatedMemberAsAUser ===> ', UpdatedLab);
 
 
-            setTimeout(() => {
-              this.labsService.updateThisLab(UpdatedLab);
-            }, 750);
-            this.Errors.labUpdated.status = true;
-            updateLabForm.resetForm();
-            setTimeout(() => {
-              window.location.reload();
-            }, 3500);
+      setTimeout(() => {
+        this.labsService.updateThisLab(UpdatedLab);
+      }, 750);
+      this.Errors.labUpdated.status = true;
+      updateLabForm.resetForm();
+      setTimeout(() => {
+        window.location.reload();
+      }, 3500);
 
     }
 
@@ -224,8 +224,8 @@ export class UnimanageLabsComponent implements OnInit {
 
 
   DeleteThisLab(lab: Labsmodel) {
-    if (confirm("Are you sure you want to delete this lab :" + lab.LabTitle+'\n'
-    +'\nWARNING: IT WILL DELETE ALL ITS RECORDS FOR JOINED MEMBERS')) {
+    if (confirm("Are you sure you want to delete this lab :" + lab.LabTitle + '\n'
+      + '\nWARNING: IT WILL DELETE ALL ITS RECORDS FOR JOINED MEMBERS')) {
       this.labsService.DeleteThisLab(lab._id);
       this.Errors.labDeleted.status = true;
       setTimeout(() => {
@@ -305,46 +305,52 @@ export class UnimanageLabsComponent implements OnInit {
     if (!this.checkIfErrors()) {
       this.Errors.LabCreated.status = true;
 
-      var createdLab: Labsmodel[] = [];
-      let LabInstructorAsAUser:Usersmodel[] = [];
-      const objInstructorUsername:{Username:string} = {Username:Lab.LabInstructor};
 
-      this.labsService.createLab(Lab);
+      var createdLab: Labsmodel[] = [];
+      let LabInstructorAsAUser: Usersmodel[] = [];
+      const objInstructorUsername: { Username: string } = { Username: Lab.LabInstructor };
+
+
+
+
+      createdLab = this.labsService.createLab(Lab);
       LabInstructorAsAUser = this.usersService.FetchThisUser(objInstructorUsername);
 
-      setTimeout(()=>{
-        createdLab = this.labsService.getCreatedLab();
-      },6500);
 
-      setTimeout(()=>{
-
-        console.log("createdLab[0]",createdLab[0]);
-      // let newLabJoinCodesOfJoinedLabs: string[] = [createdLab._id, "ABDURREHMAN"];
-      let newLabJoinCodesOfJoinedLabs: string[] = [];
-      if(LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs != null || undefined){
-
-        for(var i=0;i<LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.length;i++){
-          var labid:string = LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs[i].toString();
-          console.log("=====labid===",labid);
-        }
-        // newLabJoinCodesOfJoinedLabs.push(LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.toString());
-        // createdLab
-      }
-      newLabJoinCodesOfJoinedLabs.push(createdLab[0]._id);
-      console.log("<========= ==== ======> ");
-      console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
-      console.log("newLabJoinCodesOfJoinedLabs.toString() ==> ",newLabJoinCodesOfJoinedLabs.toString());
-      console.log("<========= ==== ======> ");
-      // console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
-      LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(newLabJoinCodesOfJoinedLabs.toString());
-      this.usersService.UpdateThisUserWithLABJOINCODES(LabInstructorAsAUser[0],LabInstructorAsAUser[0]._id);
-      console.log("LabInstructorAsAUser[0] ==> ",LabInstructorAsAUser[0]);
-      // this.labsService.setThisUserAsInstructorOfThisLab(Lab);
-
-      },8500);
+      setTimeout(() => {
+        // console.log("createdLab[0]",createdLab[0]);
+        // let newLabJoinCodesOfJoinedLabs: string[] = [createdLab._id, "ABDURREHMAN"];
+        // let newLabJoinCodesOfJoinedLabs: string[] = [];    <<<================
+        // if (LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs != null || undefined) {
+        //   for (var i = 0; i < LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.length; i++) {
+        //     // var labid: string = LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs[i].toString();
+        //     // console.log("=====labid===",labid);
+        //   }
+        //   // newLabJoinCodesOfJoinedLabs.push(LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.toString());
+        //   // createdLab
+        // }
+        // newLabJoinCodesOfJoinedLabs.push(createdLab[0]._id);  <<<================
+        // console.log("<========= ==== ======> ");
+        // console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
+        // console.log("newLabJoinCodesOfJoinedLabs.toString() ==> ",newLabJoinCodesOfJoinedLabs.toString());
+        // console.log("<========= ==== ======> ");
+        // console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
+        // LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(newLabJoinCodesOfJoinedLabs.toString()); <<<================
+        LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(createdLab[0]._id);
+        this.usersService.UpdateThisUserWithLABJOINCODES(LabInstructorAsAUser[0], LabInstructorAsAUser[0]._id);
+        // console.log("LabInstructorAsAUser[0] ==> ",LabInstructorAsAUser[0]);
+        // this.labsService.setThisUserAsInstructorOfThisLab(Lab);
+      }, 5500);
 
     }
   }
+
+
+
+
+
+
+
 
 
   onInstructorsSelectChange(onInstructorsSelectChange: HTMLSelectElement) {

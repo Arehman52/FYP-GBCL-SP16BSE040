@@ -43,11 +43,11 @@ export class LabsService {
 
 
 
-  CreatedLab: Labsmodel[] = [];
-  array: any[] = [];
-  createLab(Lab: Labsmodel) {
-    this.array = [];
-    this.CreatedLab = [];
+  createLab(Lab: Labsmodel): Labsmodel[]{
+    let array: any[] = [];
+    let CreatedLab: Labsmodel[] = [];
+    // array = [];
+    // this.CreatedLab = [];
     this.http
       .post('http://localhost:3000/api/Labs/CreateLab', Lab)
       .subscribe((responseData) => {
@@ -55,22 +55,23 @@ export class LabsService {
           // for (let i = 0; i < Object.keys(responseData.CreatedLab).length; i++) {
           //   this.CreatedLab.push(responseData.CreatedLab[i]);
           // }
-          console.log("api/Labs/CreateLab [[[responseData]]] => ", responseData);
-          console.log("Object.keys(responseData) => ", Object.keys(responseData));
-          console.log("Object.values(responseData) => ", Object.values(responseData));
-          this.array = Object.values(responseData);
-          this.CreatedLab.push(this.array[1]);
-          console.log("<====================> ");
-          console.log("this.CreatedLab.push(this.array[1]) => => this.CreatedLab", this.CreatedLab);
-          console.log("<====================> ");
+          // console.log("api/Labs/CreateLab [[[responseData]]] => ", responseData);
+          // console.log("Object.keys(responseData) => ", Object.keys(responseData));
+          // console.log("Object.values(responseData) => ", Object.values(responseData));
+          array = Object.values(responseData);
+          CreatedLab.push(array[1]);  //at 0: message, at 1:the crated Lab as a result.
+          // console.log("<====================> ");
+          // console.log("this.CreatedLab.push(this.array[1]) => => this.CreatedLab", this.CreatedLab);
+          // console.log("<====================> ");
 
 
         // },3500);
       });
+      return CreatedLab;
   }
-  getCreatedLab(): Labsmodel[] {
-    return this.CreatedLab;
-  }
+  // getCreatedLab(): Labsmodel[] {
+  //   return this.CreatedLab;
+  // }
 
 
 
