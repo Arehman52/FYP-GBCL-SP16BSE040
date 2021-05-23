@@ -70,30 +70,30 @@ router.put(
 
 
 
-router.put("/UpdateThisUserWithLABJOINCODES/:Id", (req, res, next) => {
-  const user = new Users({
-    _id: req.body._id,
-    UserType: req.body.UserType,
-    FirstNameOfUser: req.body.FirstNameOfUser,
-    LastNameOfUser: req.body.LastNameOfUser,
-    UniversityNameOfUser: req.body.UniversityNameOfUser,
-    LabJoinCodesOfJoinedLabs: req.body.LabJoinCodesOfJoinedLabs,
-    RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
-    TitleOfUniversity: req.body.TitleOfUniversity,
-    HECIDofUniversity: req.body.HECIDofUniversity,
-    UserzAccessStatus: req.body.UserzAccessStatus,
-    Username: req.body.Username,
-    Password: req.body.Password,
-  });
+// router.put("/UpdateThisUserWithLABJOINCODES/:Id", (req, res, next) => {
+//   const user = new Users({
+//     _id: req.body._id,
+//     UserType: req.body.UserType,
+//     FirstNameOfUser: req.body.FirstNameOfUser,
+//     LastNameOfUser: req.body.LastNameOfUser,
+//     UniversityNameOfUser: req.body.UniversityNameOfUser,
+//     LabJoinCodesOfJoinedLabs: req.body.LabJoinCodesOfJoinedLabs,
+//     RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
+//     TitleOfUniversity: req.body.TitleOfUniversity,
+//     HECIDofUniversity: req.body.HECIDofUniversity,
+//     UserzAccessStatus: req.body.UserzAccessStatus,
+//     Username: req.body.Username,
+//     Password: req.body.Password,
+//   });
 
-  Users.updateOne({ _id: req.params.Id }, user).then((result) => {
-    res.status(200).json({
-      message: "User Updated! with latest Joined Labs, /UpdateThisUserWithLABJOINCODES",
-      result: result,
-    });
-  });
-  // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
-});
+//   Users.updateOne({ _id: req.params.Id }, user).then((result) => {
+//     res.status(200).json({
+//       message: "User Updated! with latest Joined Labs, /UpdateThisUserWithLABJOINCODES",
+//       result: result,
+//     });
+//   });
+//   // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
+// });
 
 
 
@@ -109,6 +109,7 @@ router.put("/UpdateThisUser/:Id", (req, res, next) => {
     FirstNameOfUser: req.body.FirstNameOfUser,
     LastNameOfUser: req.body.LastNameOfUser,
     UniversityNameOfUser: req.body.UniversityNameOfUser,
+    LabJoinCodesOfJoinedLabs: req.body.LabJoinCodesOfJoinedLabs,
     RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
     TitleOfUniversity: req.body.TitleOfUniversity,
     HECIDofUniversity: req.body.HECIDofUniversity,
@@ -184,6 +185,33 @@ router.post("/FetchThisUniversityByItsTitle", (req, res, next) => {
       console.log(" 004 theeeen eeerrrororrorr\n", err);
     });
 });
+
+
+
+
+
+router.post("/FetchInstructorForThisLab", (req, res, next) => {
+  let theQueryConditions = {"LabJoinCodesOfJoinedLabs": req.body._id};
+  Users.findOne(theQueryConditions)
+    .then((instructor) => {
+      console.log("instructor::....", instructor);
+      res.status(200).json({
+        message: "Instructor matched and now downloaded.",
+        result: instructor
+      });
+
+      console.log("   ==> {/FetchInstructorForThisLab/:LabId} Instructor Downloaded. ");
+    })
+    .catch((err) => {
+      console.log("Instructor download error for this lab\n", err);
+    });
+});
+
+//following is working properly in signup page for fetching users.
+
+
+
+
 
 router.post("/FetchTHISUser", (req, res, next) => {
   Users.findOne({ Username: req.body.Username })

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
 
 
@@ -13,67 +13,68 @@ export class UsersService {
   //do not delete.
   universitiesListFromDB = [
     // { uniName: 'COMSATS University Islamabad' },
-      // { uniName: 'IIUI Islamabad' },
-      // { uniName: 'Islamic University Islamabad' },
-      // { uniName: 'IBA Karachi' },
-      // { uniName: 'UET Lahore' },
-      // { uniName: 'FAST NUCES Islamabad' },
-    ];
+    // { uniName: 'IIUI Islamabad' },
+    // { uniName: 'Islamic University Islamabad' },
+    // { uniName: 'IBA Karachi' },
+    // { uniName: 'UET Lahore' },
+    // { uniName: 'FAST NUCES Islamabad' },
+  ];
 
 
-    deleteThisUser(Id: string){
-      this.http.delete("http://localhost:3000/api/Users/DeleteThisUser/"+Id).subscribe(
-        response=>{
+  deleteThisUser(Id: string) {
+    this.http.delete("http://localhost:3000/api/Users/DeleteThisUser/" + Id).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+  }
+
+
+
+  //updateUniversityNameOfUserBecauseTitleOfUniversityHasBeenChanged
+  updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUser: Usersmodel, OldUser: Usersmodel) {
+    this.http.put("http://localhost:3000/api/Users/updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged/" + OldUser.TitleOfUniversity, UpdatedUser).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+
+  }
+
+
+
+  UpdateThisUserWithLABJOINCODES(UpdatedUser: Usersmodel, Id: string) {
+    this.http.put("http://localhost:3000/api/Users/UpdateThisUser/" + Id, UpdatedUser).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+  }
+
+
+
+  updateThisUser(UpdatedUser: Usersmodel, Id: string) {
+    this.http.put("http://localhost:3000/api/Users/UpdateThisUser/" + Id, UpdatedUser)
+      .subscribe(
+        response => {
           console.log(response);
         }
       );
-    }
+  }
 
 
-
-    //updateUniversityNameOfUserBecauseTitleOfUniversityHasBeenChanged
-    updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUser: Usersmodel, OldUser: Usersmodel){
-      this.http.put("http://localhost:3000/api/Users/updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged/"+OldUser.TitleOfUniversity, UpdatedUser).subscribe(
-        response=>{
-          console.log(response);
-        }
-      );
-
-    }
-
-
-
-    UpdateThisUserWithLABJOINCODES(UpdatedUser: Usersmodel, Id: string) {
-      this.http.put("http://localhost:3000/api/Users/UpdateThisUserWithLABJOINCODES/"+Id, UpdatedUser).subscribe(
-        response=>{
-          console.log(response);
-        }
-      );
-    }
-
-
-
-    updateThisUser(UpdatedUser: Usersmodel, Id: string) {
-      this.http.put("http://localhost:3000/api/Users/UpdateThisUser/"+Id, UpdatedUser).subscribe(
-        response=>{
-          console.log(response);
-        }
-      );
-    }
-
-
-    RecieveAllUsersFromDB() {
+  RecieveAllUsersFromDB() {
     var tempUsers: Usersmodel[] = [];
     this.http
-    .get<{ message: string; users: Usersmodel[] }>(
-      'http://localhost:3000/api/Users/RecieveUsersFromDB'
-    )
-    .subscribe((responseData) => {
-      for (let i = 0; i < Object.keys(responseData.users).length; i++) {
-        tempUsers.push(responseData.users[i]);
-      }
-    });
-    console.log('this.AllUsersRecieved FROM SERVICE===>',tempUsers);
+      .get<{ message: string; users: Usersmodel[] }>(
+        'http://localhost:3000/api/Users/RecieveUsersFromDB'
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.users).length; i++) {
+          tempUsers.push(responseData.users[i]);
+        }
+      });
+    console.log('this.AllUsersRecieved FROM SERVICE===>', tempUsers);
     return tempUsers;
   }
 
@@ -115,17 +116,17 @@ export class UsersService {
 
   FetchThisUniversityByItsTitle(UnizTitle: string): Usersmodel[] {
     this.arrFetchThisUniversityByItsTitle = [];
-    var objUnizTitle: {TitleOfUniversity:string} = {TitleOfUniversity : UnizTitle};
+    var objUnizTitle: { TitleOfUniversity: string } = { TitleOfUniversity: UnizTitle };
     this.http
       .post<{ message: string; user: Usersmodel }>(
         'http://localhost:3000/api/Users/FetchThisUniversityByItsTitle', objUnizTitle
       )
       .subscribe((responseData) => {
-          this.arrFetchThisUniversityByItsTitle.push(responseData.user);
-          console.log('??????',responseData.user);
+        this.arrFetchThisUniversityByItsTitle.push(responseData.user);
+        console.log('??????', responseData.user);
       });
-      console.log("this.arr", this.arrFetchThisUniversityByItsTitle);
-      return this.arrFetchThisUniversityByItsTitle;
+    console.log("this.arr", this.arrFetchThisUniversityByItsTitle);
+    return this.arrFetchThisUniversityByItsTitle;
   }
 
 
@@ -143,23 +144,47 @@ export class UsersService {
         // if(responseData.user != null){
 
 
-          this.arrFetchThisUser.push(responseData.user);
+        this.arrFetchThisUser.push(responseData.user);
 
-          console.log('??????',responseData.user);
+        console.log('??????', responseData.user);
 
         // }
 
       });
 
-      console.log("this.arr", this.arrFetchThisUser);
+    console.log("this.arr", this.arrFetchThisUser);
 
-      return this.arrFetchThisUser;
+    return this.arrFetchThisUser;
   }
 
 
 
-//this one among the 3 is being used everywhere now
-  FetchThisUser(usernameToBeSearched: {Username:string}): Usersmodel[] {
+
+  FetchedInstructor: Usersmodel[] = [];
+
+  FetchInstructorForThisLab(LabId: { _id: string }): Usersmodel[] {
+    let array: any[] = [];
+    this.http
+      .post(
+        'http://localhost:3000/api/Users/FetchInstructorForThisLab/', LabId
+      )
+      .subscribe((responseData) => {
+        console.log("responseData ==> ", responseData);
+        array = Object.values(responseData);
+        console.log("let array: any[] = [];==> ", array);
+        this.FetchedInstructor.push(array[1]);
+      });
+
+
+    // console.log("this.FetchedInstructor==> ", this.FetchedInstructor);
+    return this.FetchedInstructor;
+  }
+
+
+
+
+  //this one among the 3 is being used everywhere now
+  FetchThisUser(usernameToBeSearched: { Username: string }): Usersmodel[] {
     this.arrFetchThisUser = [];
 
     this.http
@@ -171,18 +196,22 @@ export class UsersService {
         // if(responseData.user != null){
 
 
-          this.arrFetchThisUser.push(responseData.user);
+        this.arrFetchThisUser.push(responseData.user);
 
-          console.log('??????',responseData.user);
+        // console.log('??????', responseData.user);
 
         // }
 
       });
 
-      console.log("this.arrrrrrrrrrrrrrrrr", this.arrFetchThisUser);
+    // console.log("this.arrrrrrrrrrrrrrrrr", this.arrFetchThisUser);
 
-      return this.arrFetchThisUser;
+    return this.arrFetchThisUser;
   }
+
+
+
+
 
   FetchThisUserbyUsername(username: string): Usersmodel[] {
     this.arrFetchThisUserbyUsername = [];
@@ -196,17 +225,17 @@ export class UsersService {
         // if(responseData.user != null){
 
 
-          this.arrFetchThisUserbyUsername.push(responseData.user);
+        this.arrFetchThisUserbyUsername.push(responseData.user);
 
-          console.log('??????',responseData.user);
+        console.log('??????', responseData.user);
 
         // }
 
       });
 
-      console.log("this.arr", this.arrFetchThisUserbyUsername);
+    console.log("this.arr", this.arrFetchThisUserbyUsername);
 
-      return this.arrFetchThisUserbyUsername;
+    return this.arrFetchThisUserbyUsername;
   }
 
 

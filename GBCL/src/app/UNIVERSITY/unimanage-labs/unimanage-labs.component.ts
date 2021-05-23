@@ -227,10 +227,38 @@ export class UnimanageLabsComponent implements OnInit {
     if (confirm("Are you sure you want to delete this lab :" + lab.LabTitle + '\n'
       + '\nWARNING: IT WILL DELETE ALL ITS RECORDS FOR JOINED MEMBERS')) {
       this.labsService.DeleteThisLab(lab._id);
-      this.Errors.labDeleted.status = true;
+      var objLabId: { _id: string } = { _id: lab._id };
+      var InstructorOfThisLab: Usersmodel[] = [];
+      InstructorOfThisLab = this.usersService.FetchInstructorForThisLab(objLabId);
+      setTimeout(() => {
+        let arrayOfLabJoinCodesOfDownloadedInstructor = [...InstructorOfThisLab[0].LabJoinCodesOfJoinedLabs];
+        console.log("arrayOfLabJoinCodesOfDownloadedInstructor ==> ", arrayOfLabJoinCodesOfDownloadedInstructor);
+
+
+        let newArr: string[] = [];
+        for (let i = 0; i < arrayOfLabJoinCodesOfDownloadedInstructor.length; i++) {
+          InstructorOfThisLab[0].LabJoinCodesOfJoinedLabs.pop();
+          // console.log("arrayOfLabJoinCodesOfDownloadedInstructor[i]",arrayOfLabJoinCodesOfDownloadedInstructor[i]);
+          // console.log("lab._id",lab._id);
+          if (arrayOfLabJoinCodesOfDownloadedInstructor[i].toString() === lab._id.toString()) {
+            // console.log('LabId found in userz LabJoinCodesOfJoinedLabs fiels, now deleting that id.');
+          } else {
+            newArr.push(arrayOfLabJoinCodesOfDownloadedInstructor[i]);
+          }
+        }
+        console.log("<=====newArr======>", newArr);
+        InstructorOfThisLab[0].LabJoinCodesOfJoinedLabs = newArr;
+        console.log("<=====InstructorOfThisLab[0].LabJoinCodesOfJoinedLabs======>", InstructorOfThisLab[0].LabJoinCodesOfJoinedLabs);
+
+        this.usersService.updateThisUser(InstructorOfThisLab[0], InstructorOfThisLab[0]._id);
+
+
+        this.Errors.labDeleted.status = true;
+      }, 3500);
+
       setTimeout(() => {
         window.location.reload();
-      }, 3500);
+      }, 40000);
     } else {
       return;
     }
@@ -337,7 +365,7 @@ export class UnimanageLabsComponent implements OnInit {
         // console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
         // LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(newLabJoinCodesOfJoinedLabs.toString()); <<<================
         LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(createdLab[0]._id);
-        this.usersService.UpdateThisUserWithLABJOINCODES(LabInstructorAsAUser[0], LabInstructorAsAUser[0]._id);
+        this.usersService.updateThisUser(LabInstructorAsAUser[0], LabInstructorAsAUser[0]._id);
         // console.log("LabInstructorAsAUser[0] ==> ",LabInstructorAsAUser[0]);
         // this.labsService.setThisUserAsInstructorOfThisLab(Lab);
       }, 5500);
