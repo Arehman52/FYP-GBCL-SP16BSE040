@@ -13,9 +13,9 @@ const userSchema = mongoose.Schema({
   TitleOfUniversity: String,
   HECIDofUniversity: String,
   // common attribs
-  UserType: String,
+  UserType: { type: String, lowercase: true},
   UserzAccessStatus: String,
-  Username: { type: String, required: true, unique: true },
+  Username: { type: String, required: true, unique: true, lowercase: true},
   Password: String,
 });
 

@@ -189,11 +189,12 @@
 
 
 
-              <div >
+              <div>
                 <div class="border rounded border-light my-2 mx-1 p-3">
 
 
-                  <form (submit)="on_CreateLabSubmitButton_Clicked(createLabForm, InstructorsSelect)" #createLabForm="ngForm">
+                  <form (submit)="on_CreateLabSubmitButton_Clicked(createLabForm, InstructorsSelect)"
+                    #createLabForm="ngForm">
 
                     <div class="row">
                       <div class="col-sm-6">
@@ -243,9 +244,9 @@
                         <select class="custom-select" #InstructorsSelect
                           (change)="onInstructorsSelectChangeforCreateLab(InstructorsSelect)">
                           <option selected disabled>Choose an Instructor</option>
-                          <option  [value]="'Not Listed!'"><b>Not Listed!</b></option>
-                          <option [value]="instructor.Username"
-                            *ngFor="let instructor of RegisteredFaculty"><b>{{instructor.FirstNameOfUser+' '+instructor.LastNameOfUser}}</b>
+                          <option [value]="'Not Listed!'"><b>Not Listed!</b></option>
+                          <option [value]="instructor.Username" *ngFor="let instructor of RegisteredFaculty">
+                            <b>{{instructor.FirstNameOfUser+' '+instructor.LastNameOfUser}}</b>
                           </option>
                         </select>
                         <small class="form-text alert alert-danger"
@@ -301,18 +302,18 @@
 
 
 
-    <div id="accordionOuterStds">
-      <div class="card  mt-2 mx-3">
-        <div class="card-header noUnderlineForChildren noUnderlineForChildren" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse" data-target="#collapseOneStd" aria-expanded="true"
-              aria-controls="collapseOneStd">
-              <h5><b>View Registered Labs <span class="text-info">**</span></b></h5>
-            </button>
-          </h5>
-        </div>
-        <div id="collapseOneStd" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterStds">
-          <div class="card-body">
+      <div id="accordionOuterStds">
+        <div class="card  mt-2 mx-3">
+          <div class="card-header noUnderlineForChildren noUnderlineForChildren" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
+                data-target="#collapseOneStd" aria-expanded="true" aria-controls="collapseOneStd">
+                <h5><b>View Registered Labs <span class="text-info">**</span></b></h5>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseOneStd" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterStds">
+            <div class="card-body">
 
 
 
@@ -321,214 +322,259 @@
 
 
 
-            <div class="mx-2 mt-3" *ngIf="this.RegisteredLabs.length==0">
-              <div class="alert alert-info p-4">
-                <h5>No Labs registered with your university.</h5>
-              </div>
-            </div>
-
-
-
-            <div id="accordionInnerFac">
-              <div class="card mb-1" *ngFor="let lab of RegisteredLabs">
-                <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
-
-                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                    [attr.data-target]="'#RegisteredFacultyCollapse' + lab._id" aria-expanded="true"
-                    [attr.aria-controls]="'collapse' + lab._id" (click)="extractLabInstructorzFNandLN(lab.LabInstructor)">
-                    {{lab.LabTitle}}
-                  </button>
-
+              <div class="mx-2 mt-3" *ngIf="this.RegisteredLabs.length==0">
+                <div class="alert alert-info p-4">
+                  <h5>No Labs registered with your university.</h5>
                 </div>
-
-                <div [id]="'RegisteredFacultyCollapse' + lab._id" class="collapse hide"
-                  [attr.aria-labelledby]="'RegisteredFacultyCard'" data-parent="#accordionInnerFac">
-                  <div class="card-body ">
-
-                    <div class="row">
-                      <div class="col-11 m-auto">
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th>Join Code</th>
-                              <th>Title</th>
-                              <th>Instructor</th>
-                              <th>Program</th>
-                              <th>Class</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-
-
-                              <td>{{lab._id}}</td>
-                              <td>{{lab.LabTitle}}</td>
-                              <td>{{this.LabInstructorzFN+' '+this.LabInstructorzLN}}</td>
-                              <td>{{lab.LabProgram}}</td>
-                              <td>{{lab.LabClass}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div class="d-flex justify-content-end mr-3">
-                          <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
-                            (click)="onLabEditToggle(LabEditForm)">{{this.EditLabButtonText}}</button>
-                          <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
-                            (click)="DeleteThisLab(lab)">Delete</button>
-                        </div>
-                        <small class="form-text alert alert-success" *ngIf="this.Errors.labDeleted.status == true">
-                          {{this.Errors.labDeleted.message}}
-                        </small>
+              </div>
 
 
 
-                        <div [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.LabEdit == true}"
-                          [ngClass]="{'d-none' : this.LabEdit == false}">
+              <div id="accordionInnerFac">
+                <div class="card mb-1" *ngFor="let lab of RegisteredLabs">
+                  <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
 
-                          <form (submit)="onSubmit_UpdateButton(LabEditForm,lab,InstructorsSelect)" #LabEditForm="ngForm">
+                    <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                      [attr.data-target]="'#RegisteredFacultyCollapse' + lab._id" aria-expanded="true"
+                      [attr.aria-controls]="'collapse' + lab._id"
+                      (click)="extractLabInstructorzFNandLN(lab.LabInstructor)">
+                      {{lab.LabTitle}}
+                    </button>
 
-                            <div class="row">
-                              <div class="col-sm-6">
+                  </div>
 
-                                <div class="form-group">
-                                  <label> Lab Title</label>
-                                  <input type="text" class="form-control" placeholder="Update Lab's Title"
-                                    (keyup)="checkLabTitle(LabEditForm.value.LabTitle)"
-                                    name="LabTitle" [ngModel]="lab.LabTitle">
-                                  <small class="form-text alert alert-danger"
-                                    *ngIf="this.Errors.invalidLabTitle.status == true">
-                                    <span>{{this.Errors.invalidLabTitle.message}}</span>
-                                  </small>
-                                </div>
-                              </div>
+                  <div [id]="'RegisteredFacultyCollapse' + lab._id" class="collapse hide"
+                    [attr.aria-labelledby]="'RegisteredFacultyCard'" data-parent="#accordionInnerFac">
+                    <div class="card-body ">
 
-                              <div class="col-sm-6">
-                                <div class="form-group ">
-                                  <label> Update Degree Program</label>
-                                  <input type="text" class="form-control " placeholder="Update Degree Program of this lab"
-                                    (keyup)="checkDegreeProgram(LabEditForm.value.DegreeProgram)" name="DegreeProgram"
-                                    [ngModel]="lab.LabProgram">
-                                  <small class="form-text alert alert-danger"
-                                    *ngIf="this.Errors.invalidDegreeProgram.status == true">
-                                    <span>{{this.Errors.invalidDegreeProgram.message}}</span>
-                                  </small>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div class="row">
-
-                              <div class="form-group col-sm-6">
-                                <label> Update Lab Class</label>
-                                <input type="text" class="form-control" placeholder="Update Lab's Class"
-                                  (keyup)="checkLabClassSection(LabEditForm.value.LabClassSection)" name="LabClassSection"
-                                  [ngModel]="lab.LabClass">
-                                <small class="form-text alert alert-danger"
-                                  *ngIf="this.Errors.invalidLabClassSection.status == true">
-                                  <span>{{this.Errors.invalidLabClassSection.message}}</span>
-                                </small>
-                              </div>
-
-                              <div class="form-group col-sm-6">
-                                <label> Update the Instructor</label>
+                      <div class="row">
+                        <div class="col-11 m-auto">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Join Code</th>
+                                <th>Title</th>
+                                <th>Instructor</th>
+                                <th>Program</th>
+                                <th>Class</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
 
 
-
-
-
-
-                                <label>Update the Instructor</label>
-                                <select class="custom-select" #InstructorsSelect aria-placeholder="Choose an Instructor"
-                                  (change)="onInstructorsSelectChange(InstructorsSelect)">
-                                  <!-- <option  disabled>{{LabInstructorzFN+' '+LabInstructorzLN}}</option> -->
-                                  <option selected disabled [value]="'Change Instructor'">Change Instructor</option>
-                                  <option class="text-danger" [value]="'Not Listed!'"><b>Not Listed!</b></option>
-                                  <option [value]="instructor.Username"
-                                    *ngFor="let instructor of RegisteredFaculty"
-                                    ><b>{{instructor.FirstNameOfUser+' '+instructor.LastNameOfUser}}</b>
-                                  </option>
-                                </select>
-                                <small class="text-muted" *ngIf="showInstructorChangingWarning"><span class="text-danger mr-2">Warning!</span>
-                                  <span style="text-decoration: underline;">DON'T change unless necessary.</span>
-                                  <br>
-                                  Changing instructor will discontinue access of lab to the old instructor.
-                                </small>
-                                <small class="form-text alert alert-danger"
-                                  *ngIf="this.Errors.LabInstructorNotSelected.status == true">
-                                  {{this.Errors.LabInstructorNotSelected.message}}
-                                </small>
-                                <small class="form-text alert alert-danger"
-                                  *ngIf="this.Errors.InstructorNotListed.status == true">
-                                  {{this.Errors.InstructorNotListed.message}}
-                                </small>
-                              </div>
-
-                            </div>
-
-                            <div class="text-center">
-                              <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
-                                type="submit">Update Lab Details</button>
-                            </div>
-
-                          </form>
-
-                          <small class="form-text alert alert-success"
-                            *ngIf="this.Errors.labUpdated.status == true">
-                            <span>{{this.Errors.labUpdated.message}}</span>
-                          </small>
-                          <small class="form-text alert alert-success"
-                            *ngIf="this.Errors.labDeleted.status == true">
-                            <span>{{this.Errors.labDeleted.message}}</span>
+                                <td>{{lab._id}}</td>
+                                <td>{{lab.LabTitle}}</td>
+                                <td>{{this.LabInstructorzFN+' '+this.LabInstructorzLN}}</td>
+                                <td>{{lab.LabProgram}}</td>
+                                <td>{{lab.LabClass}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="d-flex justify-content-end mr-3">
+                            <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+                              (click)="extract_ViewLabMembers_onViewLabMembersClicked(lab)">View Lab Members</button>
+                            <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+                              (click)="onLabEditToggle(LabEditForm)">{{this.EditLabButtonText}}</button>
+                            <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                              (click)="DeleteThisLab(lab)">Delete</button>
+                          </div>
+                          <small class="form-text alert alert-success" *ngIf="this.Errors.labDeleted.status == true">
+                            {{this.Errors.labDeleted.message}}
                           </small>
 
 
 
+                          <div [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.LabEdit == true}"
+                            [ngClass]="{'d-none' : this.LabEdit == false}">
+
+                            <form (submit)="onSubmit_UpdateButton(LabEditForm,lab,InstructorsSelect)"
+                              #LabEditForm="ngForm">
+
+                              <div class="row">
+                                <div class="col-sm-6">
+
+                                  <div class="form-group">
+                                    <label> Lab Title</label>
+                                    <input type="text" class="form-control" placeholder="Update Lab's Title"
+                                      (keyup)="checkLabTitle(LabEditForm.value.LabTitle)" name="LabTitle"
+                                      [ngModel]="lab.LabTitle">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidLabTitle.status == true">
+                                      <span>{{this.Errors.invalidLabTitle.message}}</span>
+                                    </small>
+                                  </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                  <div class="form-group ">
+                                    <label> Update Degree Program</label>
+                                    <input type="text" class="form-control "
+                                      placeholder="Update Degree Program of this lab"
+                                      (keyup)="checkDegreeProgram(LabEditForm.value.DegreeProgram)" name="DegreeProgram"
+                                      [ngModel]="lab.LabProgram">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidDegreeProgram.status == true">
+                                      <span>{{this.Errors.invalidDegreeProgram.message}}</span>
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="row">
+
+                                <div class="form-group col-sm-6">
+                                  <label> Update Lab Class</label>
+                                  <input type="text" class="form-control" placeholder="Update Lab's Class"
+                                    (keyup)="checkLabClassSection(LabEditForm.value.LabClassSection)"
+                                    name="LabClassSection" [ngModel]="lab.LabClass">
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidLabClassSection.status == true">
+                                    <span>{{this.Errors.invalidLabClassSection.message}}</span>
+                                  </small>
+                                </div>
+
+                                <div class="form-group col-sm-6">
+                                  <label> Update the Instructor</label>
+
+
+
+
+
+
+                                  <label>Update the Instructor</label>
+                                  <select class="custom-select" #InstructorsSelect
+                                    aria-placeholder="Choose an Instructor"
+                                    (change)="onInstructorsSelectChange(InstructorsSelect)">
+                                    <!-- <option  disabled>{{LabInstructorzFN+' '+LabInstructorzLN}}</option> -->
+                                    <option selected disabled [value]="'Change Instructor'">Change Instructor</option>
+                                    <option class="text-danger" [value]="'Not Listed!'"><b>Not Listed!</b></option>
+                                    <option [value]="instructor.Username" *ngFor="let instructor of RegisteredFaculty">
+                                      <b>{{instructor.FirstNameOfUser+' '+instructor.LastNameOfUser}}</b>
+                                    </option>
+                                  </select>
+                                  <small class="text-muted" *ngIf="showInstructorChangingWarning"><span
+                                      class="text-danger mr-2">Warning!</span>
+                                    <span style="text-decoration: underline;">DON'T change unless necessary.</span>
+                                    <br>
+                                    Changing instructor will discontinue access of lab to the old instructor.
+                                  </small>
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.LabInstructorNotSelected.status == true">
+                                    {{this.Errors.LabInstructorNotSelected.message}}
+                                  </small>
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.InstructorNotListed.status == true">
+                                    {{this.Errors.InstructorNotListed.message}}
+                                  </small>
+                                </div>
+
+                              </div>
+
+                              <div class="text-center">
+                                <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
+                                  type="submit">Update Lab Details</button>
+                              </div>
+
+                            </form>
+
+                            <small class="form-text alert alert-success" *ngIf="this.Errors.labUpdated.status == true">
+                              <span>{{this.Errors.labUpdated.message}}</span>
+                            </small>
+                            <small class="form-text alert alert-success" *ngIf="this.Errors.labDeleted.status == true">
+                              <span>{{this.Errors.labDeleted.message}}</span>
+                            </small>
+
+
+
+                          </div>
+
+
+
+
+
+                          <!-- //================================================================================================================// -->
+
+
+
+
+                          <div
+                            [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.viewLabMembersToggled == true}"
+                            [ngClass]="{'d-none' : this.viewLabMembersToggled == false}">
+
+                            <div class="text-center text-light mt-2">
+                              <h4 class="border border-info rounded bg-secondary p-3">List of members : {{lab.LabTitle}}</h4>
+                            </div>
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>User type</th>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th>Registration Number</th>
+                                  <!-- <th>Class</th> -->
+                                </tr>
+                              </thead>
+                              <!-- <div > -->
+                                <tbody *ngFor="let viewMember of Users_ViewLabMembers">
+                                  <tr *ngIf="viewMember.UserType == 'teacher' ">
+                                    <td class="text-info"><b>Instructor</b></td>
+                                    <td>{{viewMember.FirstNameOfUser}}</td>
+                                    <td>{{viewMember.LastNameOfUser}}</td>
+                                    <td>{{viewMember.RegistrationNumberOfUser}}</td>
+                                    <!-- <td>{{}}</td> -->
+                                  </tr>
+                                  <tr *ngIf="viewMember.UserType == 'student' ">
+                                    <td>{{viewMember.UserType}}</td>
+                                    <td>{{viewMember.FirstNameOfUser}}</td>
+                                    <td>{{viewMember.LastNameOfUser}}</td>
+                                    <td>{{viewMember.RegistrationNumberOfUser}}</td>
+                                    <!-- <td>{{}}</td> -->
+                                  </tr>
+                                </tbody>
+                              <!-- </div> -->
+                            </table>
+
+                          </div>
+
+
+                          <!-- //=================================================================================================== -->
+
+
+
+
                         </div>
-
-
-
-
-
-
-
-
-
-
-
                       </div>
+
+
                     </div>
-
-
                   </div>
                 </div>
               </div>
+
+
+
             </div>
-
-
-
           </div>
         </div>
+
       </div>
 
-    </div>
 
 
 
-
-    <div id="accordionOuter" *ngIf="this.MembersLabJoinRequests.length!=0">
-      <div class="card  mt-2 mx-3">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <h4><b> LAB JOIN REQUESTS</b></h4>
-            </button>
-          </h5>
-        </div>
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
-          <div class="card-body">
-
-
-
-
+      <div id="accordionOuter" *ngIf="this.MembersLabJoinRequests.length!=0">
+        <div class="card  mt-2 mx-3">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                <h4><b> LAB JOIN REQUESTS</b></h4>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
+            <div class="card-body">
 
 
 
@@ -549,78 +595,86 @@
 
 
 
-            <!-- Cards within card -->
-
-            <div id="accordionInner">
-              <div class="card mb-1" *ngFor="let MemberLabJoinRequest of MembersLabJoinRequests">
-                <div class="card-header"
-                  [attr.id]="'RegisterUniversityCard'">
-
-                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                    [attr.data-target]="'#RegisterUniversityCollapse' + MemberLabJoinRequest._Userzid" aria-expanded="true"
-                    [attr.aria-controls]="'collapse' + MemberLabJoinRequest._Userzid">
-                    {{MemberLabJoinRequest.UserFN+ ' '+MemberLabJoinRequest.UserLN}}
-                  </button>
-
-                </div>
-
-                <div [id]="'RegisterUniversityCollapse' + MemberLabJoinRequest._Userzid" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
-                  data-parent="#accordionInner">
-                  <div class="card-body ">
-
-                    <div class="row">
-                      <div class="col-11 m-auto"><!-- remove bg dark -->
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th>Registration#</th>
-                              <th>First Name</th>
-                              <th>Last Name</th>
-                              <th>Lab Title</th>
-                              <th>Member type</th>
-                              <th>Access Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
 
 
-                              <td>{{MemberLabJoinRequest.RegN}}</td>
-                              <td>{{MemberLabJoinRequest.UserFN}}</td>
-                              <td>{{MemberLabJoinRequest.UserLN}}</td>
-                              <td>{{MemberLabJoinRequest.LabTitle}}</td>
-                              <td>{{MemberLabJoinRequest.UserType}}</td>
-                              <td>{{MemberLabJoinRequest.LabAccessStatus}}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div class="d-flex justify-content-end mr-3">
-                        <button (click)="onAcceptLabJoinRequestButtonClicked(MemberLabJoinRequest)" class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept Join Request</button>
-                        <button (click)="onRejectLabJoinRequestButtonClicked(MemberLabJoinRequest)" class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Delete Join Request</button>
+
+
+              <!-- Cards within card -->
+
+              <div id="accordionInner">
+                <div class="card mb-1" *ngFor="let MemberLabJoinRequest of MembersLabJoinRequests">
+                  <div class="card-header" [attr.id]="'RegisterUniversityCard'">
+
+                    <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                      [attr.data-target]="'#RegisterUniversityCollapse' + MemberLabJoinRequest._Userzid"
+                      aria-expanded="true" [attr.aria-controls]="'collapse' + MemberLabJoinRequest._Userzid">
+                      {{MemberLabJoinRequest.UserFN+ ' '+MemberLabJoinRequest.UserLN}}
+                    </button>
+
+                  </div>
+
+                  <div [id]="'RegisterUniversityCollapse' + MemberLabJoinRequest._Userzid" class="collapse hide"
+                    [attr.aria-labelledby]="'RegisterUniversityCard'" data-parent="#accordionInner">
+                    <div class="card-body ">
+
+                      <div class="row">
+                        <div class="col-11 m-auto">
+                          <!-- remove bg dark -->
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Registration#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Lab Title</th>
+                                <th>Member type</th>
+                                <th>Access Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+
+
+                                <td>{{MemberLabJoinRequest.RegN}}</td>
+                                <td>{{MemberLabJoinRequest.UserFN}}</td>
+                                <td>{{MemberLabJoinRequest.UserLN}}</td>
+                                <td>{{MemberLabJoinRequest.LabTitle}}</td>
+                                <td>{{MemberLabJoinRequest.UserType}}</td>
+                                <td>{{MemberLabJoinRequest.LabAccessStatus}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="d-flex justify-content-end mr-3">
+                            <button (click)="onAcceptLabJoinRequestButtonClicked(MemberLabJoinRequest)"
+                              class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept Join Request</button>
+                            <button (click)="onDeleteLabJoinRequestButtonClicked(MemberLabJoinRequest)"
+                              class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Delete Join Request</button>
+                          </div>
+                          <small class="form-text alert alert-success"
+                            *ngIf="this.Errors.labJoinRequestAccepted.status==true">
+                            {{this.Errors.labJoinRequestAccepted.message}}
+                          </small>
+                          <small class="form-text alert alert-success"
+                            *ngIf="this.Errors.labJoinRequestDeleted.status==true">
+                            {{this.Errors.labJoinRequestDeleted.message}}
+                          </small>
                         </div>
-                        <small class="form-text alert alert-success" *ngIf="this.Errors.labJoinRequestAccepted.status==true">
-                          {{this.Errors.labJoinRequestAccepted.message}}
-                        </small>
-                        <small class="form-text alert alert-success" *ngIf="this.Errors.labJoinRequestDeleted.status==true">
-                          {{this.Errors.labJoinRequestDeleted.message}}
-                        </small>
                       </div>
+
+
                     </div>
-
-
                   </div>
                 </div>
               </div>
+
+              <!-- Cards within card -->
+
+
             </div>
-
-            <!-- Cards within card -->
-
-
           </div>
         </div>
-      </div>
 
-    </div>
+      </div>
 
 
 

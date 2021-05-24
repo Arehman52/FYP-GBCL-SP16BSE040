@@ -42,7 +42,7 @@ export class HomepageNavSearchComponent implements OnInit {
     } else {
       this.Errors.invalidUsername.status = false;
     }
-    this.Errors.notAUser.status = false;
+    // this.Errors.notAUser.status = false;
   }
 
   onKeyUpPasswordInput(PasswordInput: String) {
@@ -110,25 +110,12 @@ export class HomepageNavSearchComponent implements OnInit {
 
   loginUser(form: NgForm) {
     var LoginUserzUniversityAsUser: Usersmodel[] = [];
+    var TheMatchedUser: Usersmodel[];
 
     this.setAllErrorsToFalse();
 
     var usernameToBeSearched:{Username:string} = {Username: form.value.UsersEnteredUsername.toLowerCase()};
-    // var userToBeSearched: Usersmodel = {
-    //   FirstNameOfUser: null,
-    //   HECIDofUniversity: null,
-    //   LastNameOfUser: null,
-    //   Password: form.value.UsersEnteredPassword,
-    //   RegistrationNumberOfUser: null,
-    //   TitleOfUniversity: null,
-    //   UniversityNameOfUser: null,
-    //   UserType: '-1',
-    //   Username: form.value.UsersEnteredUsername.toLowerCase(),
-    //   UserzAccessStatus: null,
-    //   _id: null,
-    // };
 
-    var TheMatchedUser: Usersmodel[];
     var formValueUsername = form.value.UsersEnteredUsername.toLowerCase();
     var formValuePassword = form.value.UsersEnteredPassword;
     if (this.checkErrors(formValueUsername,formValuePassword)) {
@@ -145,7 +132,7 @@ export class HomepageNavSearchComponent implements OnInit {
       setTimeout(() => {
 
         // console.log('TheMatchedUser  :', TheMatchedUser);
-        if (TheMatchedUser.length == 0) {
+        if (TheMatchedUser[0] == null || undefined) {
           this.showSpinner = false;
           console.log('length is == zerooooooooooooooooo');
           this.Errors.notAUser.status = true;
@@ -167,7 +154,7 @@ export class HomepageNavSearchComponent implements OnInit {
               localStorage.setItem("UsersUsertype", TheMatchedUser[0].UserType);
               localStorage.setItem("UniversityTitle", TheMatchedUser[0].TitleOfUniversity);
               localStorage.setItem("UserzUniversityNameOfUser", TheMatchedUser[0].UniversityNameOfUser);
-              localStorage.setItem("UserzUniversityNameOfUser", TheMatchedUser[0].UniversityNameOfUser);
+              // localStorage.setItem("UserzUniversityNameOfUser", TheMatchedUser[0].UniversityNameOfUser);
               localStorage.setItem("UserzFirstNameOfUser", TheMatchedUser[0].FirstNameOfUser);
               localStorage.setItem("UserzLastNameOfUser", TheMatchedUser[0].LastNameOfUser);
               localStorage.setItem("UserzRegistrationNumberOfUser", TheMatchedUser[0].RegistrationNumberOfUser);
