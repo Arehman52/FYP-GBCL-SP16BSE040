@@ -110,6 +110,7 @@ router.put("/UpdateThisUser/:Id", (req, res, next) => {
     LastNameOfUser: req.body.LastNameOfUser,
     UniversityNameOfUser: req.body.UniversityNameOfUser,
     LabJoinCodesOfJoinedLabs: req.body.LabJoinCodesOfJoinedLabs,
+    LabJoinCodesOfAppliedLabs: req.body.LabJoinCodesOfAppliedLabs,
     RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
     TitleOfUniversity: req.body.TitleOfUniversity,
     HECIDofUniversity: req.body.HECIDofUniversity,

@@ -62,10 +62,20 @@ export class STUDENTComponent implements OnInit {
       return;
     }
 
+
+    let checkIf_enteredJoinCode_BelongsToAnAlreadyJoinedLab = false;
+    for (let k = 0; k < this.TheStudent[0].LabJoinCodesOfJoinedLabs.length; k++) {
+      if (this.TheStudent[0].LabJoinCodesOfJoinedLabs[k] == enteredJoinCode) {
+        checkIf_enteredJoinCode_BelongsToAnAlreadyJoinedLab = true;
+        console.log('00333  <==>');
+        // return;
+      }
+    }
+
     let checkIf_enteredJoinCode_MatchesWithAnyLab = false;
-    console.log('001  enteredJoinCode ==>',enteredJoinCode);
+    console.log('001  enteredJoinCode ==>', enteredJoinCode);
     for (let i = 0; i < this.AllLabsRecieved.length; i++) {
-      console.log('002 this.AllLabsRecieved[i]._id ==>',this.AllLabsRecieved[i]._id);
+      console.log('002 this.AllLabsRecieved[i]._id ==>', this.AllLabsRecieved[i]._id);
       if (this.AllLabsRecieved[i]._id == enteredJoinCode) {
         console.log('003 inside if (this.AllLabsRecieved[i]._id == enteredJoinCode) { ');
         checkIf_enteredJoinCode_MatchesWithAnyLab = true;
@@ -73,23 +83,41 @@ export class STUDENTComponent implements OnInit {
       }
     }
 
+
+
+
+
+
+
+
+
     let checkIf_enteredJoinCode_IsEnteredAgain = false;
     var arrayOf_LabJoinCodesOfAppliedLabs: string[] = [];
-    console.log('003.1 this.TheStudent[0].LabJoinCodesOfAppliedLabs.length ==>',this.TheStudent[0].LabJoinCodesOfAppliedLabs.length);
-    console.log('003.2 this.TheStudent[0].LabJoinCodesOfJoinedLabs.length ==>',this.TheStudent[0].LabJoinCodesOfJoinedLabs.length);
-    for(let p=0;p<this.TheStudent[0].LabJoinCodesOfAppliedLabs.length;p++){
-      console.log('<=================== '+p+1+' ====================>')
+    console.log('003.1 this.TheStudent[0].LabJoinCodesOfAppliedLabs.length ==>', this.TheStudent[0].LabJoinCodesOfAppliedLabs.length);
+    console.log('003.2 this.TheStudent[0].LabJoinCodesOfJoinedLabs.length ==>', this.TheStudent[0].LabJoinCodesOfJoinedLabs.length);
+    for (let p = 0; p < this.TheStudent[0].LabJoinCodesOfAppliedLabs.length; p++) {
+      console.log('<===================> ');
+      console.log(p + 1);
+      console.log('<===================> ');
       arrayOf_LabJoinCodesOfAppliedLabs.push(this.TheStudent[0].LabJoinCodesOfAppliedLabs[p]);
     }
+
+
+    if (checkIf_enteredJoinCode_BelongsToAnAlreadyJoinedLab) {
+      this.displayThisMessageInModal('You already have joined this lab.', modalButtonReferrence);
+      return;
+    }
+
+
     arrayOf_LabJoinCodesOfAppliedLabs = [...this.TheStudent[0].LabJoinCodesOfAppliedLabs];
-    console.log('004 this.TheStudent[0]',this.TheStudent[0]);
-    console.log('004.1 this.TheStudent[0].LabJoinCodesOfAppliedLabs',this.TheStudent[0].LabJoinCodesOfAppliedLabs);
-    console.log('005 enteredJoinCode ==>',enteredJoinCode);
-    console.log('005.1 arrayOf_LabJoinCodesOfAppliedLabs ==>',arrayOf_LabJoinCodesOfAppliedLabs);
-    console.log('005.1.1 arrayOf_LabJoinCodesOfAppliedLabs.length ==>',arrayOf_LabJoinCodesOfAppliedLabs.length);
-    for (let j=0; j<arrayOf_LabJoinCodesOfAppliedLabs.length; j++) {
+    console.log('004 this.TheStudent[0]', this.TheStudent[0]);
+    console.log('004.1 this.TheStudent[0].LabJoinCodesOfAppliedLabs', this.TheStudent[0].LabJoinCodesOfAppliedLabs);
+    console.log('005 enteredJoinCode ==>', enteredJoinCode);
+    console.log('005.1 arrayOf_LabJoinCodesOfAppliedLabs ==>', arrayOf_LabJoinCodesOfAppliedLabs);
+    console.log('005.1.1 arrayOf_LabJoinCodesOfAppliedLabs.length ==>', arrayOf_LabJoinCodesOfAppliedLabs.length);
+    for (let j = 0; j < arrayOf_LabJoinCodesOfAppliedLabs.length; j++) {
       console.log('005.2 <========== ========>');
-      console.log('006 arrayOf_LabJoinCodesOfAppliedLabs[j] ==>',arrayOf_LabJoinCodesOfAppliedLabs[j]);
+      console.log('006 arrayOf_LabJoinCodesOfAppliedLabs[j] ==>', arrayOf_LabJoinCodesOfAppliedLabs[j]);
       if (arrayOf_LabJoinCodesOfAppliedLabs[j] == enteredJoinCode) {
         checkIf_enteredJoinCode_IsEnteredAgain = true;
         console.log('007 arrayOf_LabJoinCodesOfAppliedLabs[i] == enteredJoinCode ==>  ==>  TRUE');
@@ -105,7 +133,7 @@ export class STUDENTComponent implements OnInit {
         this.displayThisMessageInModal('You already have applied to join for this lab.', modalButtonReferrence);
       } else {
         this.TheStudent[0].LabJoinCodesOfAppliedLabs.push(enteredJoinCode);
-        // console.log('this.TheStudent[0]',this.TheStudent[0]);
+        console.log('this.TheStudent[0] before updateing',this.TheStudent[0]);
         this.usersService.updateThisUser(this.TheStudent[0], this.TheStudent[0]._id);
         this.displayThisMessageInModal('Applied for access to the lab. You will be granted access once your request ges accepted.', modalButtonReferrence);
         // setTimeout(()=>{window.location.reload()},4000);
@@ -134,7 +162,6 @@ export class STUDENTComponent implements OnInit {
 
 
   //=================================================previous  code
-  labs = [{}];
 
   localStorageUsername = localStorage.getItem("UsersUsername");
 
