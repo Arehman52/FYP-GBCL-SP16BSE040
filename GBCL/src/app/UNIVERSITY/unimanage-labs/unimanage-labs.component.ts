@@ -54,12 +54,7 @@ export class UnimanageLabsComponent implements OnInit {
 
   MembersLabJoinRequests: LabJoinRequestsmodel[] =
     [
-      // {LabJoinCode: '254ax',LabAccessStatus: 'Applied',LabTitle: 'Introduction to Java', UserFN: 'Bilal', UserLN: 'Khursheed', UserType: 'student',RegN: '254ax',LabInstructor:'Farooq Iqbal'}
-      // { LabJoinCode RegN, LabTitle: 'Introduction to Java', LabAccessStatus: 'Applied',  },
-      // { _id: '268xwd', RegN: '268xwd', LabTitle: 'Introduction to Java', LabAccessStatus: 'Applied', UserFN: 'Abdurrehman', UserLN: 'Mehmood', UserType: 'teacher' },
-      // { _id: '4a66x', RegN: '4a66x', LabTitle: 'Programming Fundammentals', LabAccessStatus: 'Applied', UserFN: 'Hamza', UserLN: 'Khawaja', UserType: 'teacher' },
-      // { _id: '4daxdd', RegN: '4daxdd', LabTitle: 'Programming Fundammentals', LabAccessStatus: 'Applied', UserFN: 'Momin', UserLN: 'Mushtaq', UserType: 'student' },
-      // { _id: 'w2w54ax', RegN: 'w2w54ax', LabTitle: 'Python Basics', LabAccessStatus: 'Applied', UserFN: 'Usman', UserLN: 'Mustafa', UserType: 'student' },
+      // {LabJoinCode: '254ax',LabAccessStatus: 'Applied',LabTitle: 'Introduction to Java', UserFN: 'Bilal', UserLN: 'Khursheed', UserType: 'student',RegN: '254ax',LabInstructor:'Farooq Iqbal',_id:'cdsdddd'}
     ];
 
 
@@ -75,32 +70,32 @@ export class UnimanageLabsComponent implements OnInit {
         }
       }
     }
-      // Users_WhoAppliedFor_LabAccess filled with Users till here.
-      let AppliedJoinCodesOfCurrent_i_User: string[] = [];
+    // Users_WhoAppliedFor_LabAccess filled with Users till here.
+    let AppliedJoinCodesOfCurrent_i_User: string[] = [];
 
-      for (let i = 0; i < this.Users_WhoAppliedFor_LabAccess.length; i++) {
-        //all lab join codes of one user below  [string]
-        AppliedJoinCodesOfCurrent_i_User = this.Users_WhoAppliedFor_LabAccess[i].LabJoinCodesOfAppliedLabs
-        //AppliedJoinCodesOfCurrent_i_User ==> ['lab01' , 'lab02' , 'lab03' , 'lab04' ]
-        for(let j=0; j<this.AllLabsRecieved.length;j++){
-          for(let k=0; k<AppliedJoinCodesOfCurrent_i_User.length; k++){
-            if(AppliedJoinCodesOfCurrent_i_User[k] == this.AllLabsRecieved[j]._id){
-              //populate here.
-              let one_labjoinrequests:LabJoinRequestsmodel = {
-                LabAccessStatus:'Applied',LabInstructor:this.AllLabsRecieved[j].LabInstructor,RegN:this.Users_WhoAppliedFor_LabAccess[i].RegistrationNumberOfUser,UserFN:this.Users_WhoAppliedFor_LabAccess[i].FirstNameOfUser,UserLN:this.Users_WhoAppliedFor_LabAccess[i].LastNameOfUser,UserType:this.Users_WhoAppliedFor_LabAccess[i].UserType,LabJoinCode:this.AllLabsRecieved[j]._id,LabTitle:this.AllLabsRecieved[j].LabTitle,_id:this.Users_WhoAppliedFor_LabAccess[i]._id
-              }
-              this.MembersLabJoinRequests.push(one_labjoinrequests);
+    for (let i = 0; i < this.Users_WhoAppliedFor_LabAccess.length; i++) {
+      //all lab join codes of one user below  [string]
+      AppliedJoinCodesOfCurrent_i_User = this.Users_WhoAppliedFor_LabAccess[i].LabJoinCodesOfAppliedLabs
+      //AppliedJoinCodesOfCurrent_i_User ==> ['lab01' , 'lab02' , 'lab03' , 'lab04' ]
+      for (let j = 0; j < this.AllLabsRecieved.length; j++) {
+        for (let k = 0; k < AppliedJoinCodesOfCurrent_i_User.length; k++) {
+          if (AppliedJoinCodesOfCurrent_i_User[k] == this.AllLabsRecieved[j]._id) {
+            //populate here.
+            let one_labjoinrequests: LabJoinRequestsmodel = {
+              LabAccessStatus: 'Applied', LabInstructor: this.AllLabsRecieved[j].LabInstructor, RegN: this.Users_WhoAppliedFor_LabAccess[i].RegistrationNumberOfUser, UserFN: this.Users_WhoAppliedFor_LabAccess[i].FirstNameOfUser, UserLN: this.Users_WhoAppliedFor_LabAccess[i].LastNameOfUser, UserType: this.Users_WhoAppliedFor_LabAccess[i].UserType, LabJoinCode: this.AllLabsRecieved[j]._id, LabTitle: this.AllLabsRecieved[j].LabTitle, _Userzid: this.Users_WhoAppliedFor_LabAccess[i]._id, UserzUsername: this.Users_WhoAppliedFor_LabAccess[i].Username
             }
+            this.MembersLabJoinRequests.push(one_labjoinrequests);
           }
         }
-
-
-
-        // labjoinrequests this.AllLabsRecieved;
       }
 
 
 
+      // labjoinrequests this.AllLabsRecieved;
+    }
+
+
+
 
 
 
@@ -111,11 +106,52 @@ export class UnimanageLabsComponent implements OnInit {
   }
 
 
-  onAcceptLabJoinRequestButtonClicked(MemberLabJoinRequest: Object) {
+  onAcceptLabJoinRequestButtonClicked(MemberLabJoinRequest: LabJoinRequestsmodel) {
     // console.log()
+    let objUsername: { Username: string } = { Username: MemberLabJoinRequest.UserzUsername };
+    let Member: Usersmodel[] = [];
+    Member = this.usersService.FetchThisUser(objUsername);
+    setTimeout(() => {
+      let newLabJoinCodesOfAppliedLabs: string[] = [];
+      for (let i = 0; i < Member[0].LabJoinCodesOfAppliedLabs.length; i++) {
+        if (Member[0].LabJoinCodesOfAppliedLabs[i] == MemberLabJoinRequest.LabJoinCode) {
+          console.log('Member[0].LabJoinCodesOfAppliedLabs[i] ==>', Member[0].LabJoinCodesOfAppliedLabs[i]);
+          console.log('MemberLabJoinRequest.LabJoinCode ==>', MemberLabJoinRequest.LabJoinCode);
+        } else {
+          newLabJoinCodesOfAppliedLabs.push(Member[0].LabJoinCodesOfAppliedLabs[i]);
+        }
+      }
+
+
+      Member[0].LabJoinCodesOfAppliedLabs = [...newLabJoinCodesOfAppliedLabs];
+      Member[0].LabJoinCodesOfJoinedLabs.push(MemberLabJoinRequest.LabJoinCode);
+      this.usersService.updateThisUser(Member[0], Member[0]._id);
+    }, 3500);
   }
-  onRejectLabJoinRequestButtonClicked(MemberLabJoinRequest: Object) {
+
+
+
+  onRejectLabJoinRequestButtonClicked(MemberLabJoinRequest: LabJoinRequestsmodel) {
     // console.log()
+    let objUsername: { Username: string } = { Username: MemberLabJoinRequest.UserzUsername };
+    let Member: Usersmodel[] = [];
+    Member = this.usersService.FetchThisUser(objUsername);
+    setTimeout(() => {
+      let newLabJoinCodesOfJoinedLabs: string[] = [];
+      for (let i = 0; i < Member[0].LabJoinCodesOfJoinedLabs.length; i++) {
+        if (Member[0].LabJoinCodesOfJoinedLabs[i] == MemberLabJoinRequest.LabJoinCode) {
+          console.log('Member[0].LabJoinCodesOfJoinedLabs[i] ==>', Member[0].LabJoinCodesOfJoinedLabs[i]);
+          console.log('MemberLabJoinRequest.LabJoinCode ==>', MemberLabJoinRequest.LabJoinCode);
+        } else {
+          newLabJoinCodesOfJoinedLabs.push(Member[0].LabJoinCodesOfJoinedLabs[i]);
+        }
+      }
+
+
+      Member[0].LabJoinCodesOfJoinedLabs = [...newLabJoinCodesOfJoinedLabs];
+      this.usersService.updateThisUser(Member[0], Member[0]._id);
+    }, 3500);
+    // Member[0].LabJoinCodesOfJoinedLabs.push(MemberLabJoinRequest.LabJoinCode);
   }
 
   onLabEditToggle(LabEditForm: NgForm) {

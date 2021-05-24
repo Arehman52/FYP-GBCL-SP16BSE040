@@ -1,5 +1,6 @@
 export interface LabJoinRequestsmodel {
-  _id: string, //ye wali user ki _id hogi....kiun ke InnerAccordions ko unique id required thi
+  _Userzid: string, //ye wali user ki _id hogi....kiun ke InnerAccordions ko unique id required thi
+  UserzUsername: string,
   LabJoinCode: string,
   RegN: string,
   LabTitle: string,

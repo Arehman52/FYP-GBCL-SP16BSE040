@@ -557,14 +557,14 @@
                   [attr.id]="'RegisterUniversityCard'">
 
                   <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                    [attr.data-target]="'#RegisterUniversityCollapse' + MemberLabJoinRequest._id" aria-expanded="true"
-                    [attr.aria-controls]="'collapse' + MemberLabJoinRequest._id">
+                    [attr.data-target]="'#RegisterUniversityCollapse' + MemberLabJoinRequest._Userzid" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + MemberLabJoinRequest._Userzid">
                     {{MemberLabJoinRequest.UserFN+ ' '+MemberLabJoinRequest.UserLN}}
                   </button>
 
                 </div>
 
-                <div [id]="'RegisterUniversityCollapse' + MemberLabJoinRequest._id" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
+                <div [id]="'RegisterUniversityCollapse' + MemberLabJoinRequest._Userzid" class="collapse hide" [attr.aria-labelledby]="'RegisterUniversityCard'"
                   data-parent="#accordionInner">
                   <div class="card-body ">
 
