@@ -6,6 +6,7 @@ export interface Usersmodel {
   UniversityNameOfUser: string;
   RegistrationNumberOfUser: string;
   LabJoinCodesOfJoinedLabs: string[];
+  LabJoinCodesOfAppliedLabs: string[];
   // LabJoinCodesOfJoinedLabs: [{ type: string }];
   // attribs of UserType = University
   TitleOfUniversity: string;

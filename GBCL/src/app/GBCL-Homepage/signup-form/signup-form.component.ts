@@ -113,6 +113,7 @@ export class SignupFormComponent implements OnInit {
     UniversityNameOfUser: 'NotListedHere',
     RegistrationNumberOfUser: '',
     LabJoinCodesOfJoinedLabs: null,
+    LabJoinCodesOfAppliedLabs: null,
     // attribs of UserType = University
     TitleOfUniversity: '',
     HECIDofUniversity: '',

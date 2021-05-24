@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
-const { type } = require("node:os");
+// const { type } = require("node:os");
 
 //should store statistics + attemptedChallenges + attemptedLabTasks of student(s) for only one lab
 const StudentzLabDataSchema = mongoose.Schema({

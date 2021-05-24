@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Labsmodel } from 'src/app/MODELS/labsmodel.model';
+import { LabJoinRequestsmodel } from 'src/app/MODELS/labJoinRequestsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 import { LabsService } from 'src/app/Services/labs.service';
 import { UsersService } from 'src/app/Services/users.service';
@@ -30,6 +31,7 @@ export class UnimanageLabsComponent implements OnInit {
       console.log('this.AllUsersRecieved ===>', this.AllUsersRecieved);
       this.extractAffiliatedInstructors();
       this.extractRegisteredLabs();
+      this.populateMemberLabJoinRequests();
     }, 1500);
   }
 
@@ -39,6 +41,7 @@ export class UnimanageLabsComponent implements OnInit {
   private AllLabsRecieved: Labsmodel[] = [];
   public RegisteredFaculty: Usersmodel[] = [];
   public RegisteredLabs: Labsmodel[] = [];
+  Users_WhoAppliedFor_LabAccess: Usersmodel[] = [];
   localStorageUsername: string;
   UsernameObj: { Username: string } = { Username: localStorage.getItem("UsersUsername") };
   UNIVERSITY_TITLE: string;
@@ -49,6 +52,71 @@ export class UnimanageLabsComponent implements OnInit {
   LabInstructorzLN: string;
 
 
+  MembersLabJoinRequests: LabJoinRequestsmodel[] =
+    [
+      // {LabJoinCode: '254ax',LabAccessStatus: 'Applied',LabTitle: 'Introduction to Java', UserFN: 'Bilal', UserLN: 'Khursheed', UserType: 'student',RegN: '254ax',LabInstructor:'Farooq Iqbal'}
+      // { LabJoinCode RegN, LabTitle: 'Introduction to Java', LabAccessStatus: 'Applied',  },
+      // { _id: '268xwd', RegN: '268xwd', LabTitle: 'Introduction to Java', LabAccessStatus: 'Applied', UserFN: 'Abdurrehman', UserLN: 'Mehmood', UserType: 'teacher' },
+      // { _id: '4a66x', RegN: '4a66x', LabTitle: 'Programming Fundammentals', LabAccessStatus: 'Applied', UserFN: 'Hamza', UserLN: 'Khawaja', UserType: 'teacher' },
+      // { _id: '4daxdd', RegN: '4daxdd', LabTitle: 'Programming Fundammentals', LabAccessStatus: 'Applied', UserFN: 'Momin', UserLN: 'Mushtaq', UserType: 'student' },
+      // { _id: 'w2w54ax', RegN: 'w2w54ax', LabTitle: 'Python Basics', LabAccessStatus: 'Applied', UserFN: 'Usman', UserLN: 'Mustafa', UserType: 'student' },
+    ];
+
+
+
+
+  populateMemberLabJoinRequests() {
+    for (var i = 0; i < this.AllUsersRecieved.length; i++) {
+      if (this.AllUsersRecieved[i].UniversityNameOfUser == this.UNIVERSITY_TITLE) {
+        //show lab join request of user only if he is allowed
+        if (this.AllUsersRecieved[i].UserzAccessStatus == 'Allowed'
+          && this.AllUsersRecieved[i].UserType == 'teacher' || 'student') {
+          this.Users_WhoAppliedFor_LabAccess.push(this.AllUsersRecieved[i]);
+        }
+      }
+    }
+      // Users_WhoAppliedFor_LabAccess filled with Users till here.
+      let AppliedJoinCodesOfCurrent_i_User: string[] = [];
+
+      for (let i = 0; i < this.Users_WhoAppliedFor_LabAccess.length; i++) {
+        //all lab join codes of one user below  [string]
+        AppliedJoinCodesOfCurrent_i_User = this.Users_WhoAppliedFor_LabAccess[i].LabJoinCodesOfAppliedLabs
+        //AppliedJoinCodesOfCurrent_i_User ==> ['lab01' , 'lab02' , 'lab03' , 'lab04' ]
+        for(let j=0; j<this.AllLabsRecieved.length;j++){
+          for(let k=0; k<AppliedJoinCodesOfCurrent_i_User.length; k++){
+            if(AppliedJoinCodesOfCurrent_i_User[k] == this.AllLabsRecieved[j]._id){
+              //populate here.
+              let one_labjoinrequests:LabJoinRequestsmodel = {
+                LabAccessStatus:'Applied',LabInstructor:this.AllLabsRecieved[j].LabInstructor,RegN:this.Users_WhoAppliedFor_LabAccess[i].RegistrationNumberOfUser,UserFN:this.Users_WhoAppliedFor_LabAccess[i].FirstNameOfUser,UserLN:this.Users_WhoAppliedFor_LabAccess[i].LastNameOfUser,UserType:this.Users_WhoAppliedFor_LabAccess[i].UserType,LabJoinCode:this.AllLabsRecieved[j]._id,LabTitle:this.AllLabsRecieved[j].LabTitle,_id:this.Users_WhoAppliedFor_LabAccess[i]._id
+              }
+              this.MembersLabJoinRequests.push(one_labjoinrequests);
+            }
+          }
+        }
+
+
+
+        // labjoinrequests this.AllLabsRecieved;
+      }
+
+
+
+
+
+
+
+
+
+
+  }
+
+
+  onAcceptLabJoinRequestButtonClicked(MemberLabJoinRequest: Object) {
+    // console.log()
+  }
+  onRejectLabJoinRequestButtonClicked(MemberLabJoinRequest: Object) {
+    // console.log()
+  }
 
   onLabEditToggle(LabEditForm: NgForm) {
     this.setAllErrorsToFalse();
@@ -258,7 +326,7 @@ export class UnimanageLabsComponent implements OnInit {
 
       setTimeout(() => {
         window.location.reload();
-      }, 40000);
+      }, 4000);
     } else {
       return;
     }
@@ -291,25 +359,21 @@ export class UnimanageLabsComponent implements OnInit {
 
 
   }
+
   extractAffiliatedInstructors() {
-    // if (this.AffiliatedUniversitiesData.length == 0) {
+
     for (var i = 0; i < this.AllUsersRecieved.length; i++) {
-      if ((this.AllUsersRecieved[i].UserType != 'university' || 'admin')
-        && this.AllUsersRecieved[i].UniversityNameOfUser == this.UNIVERSITY_TITLE) {
+      if (this.AllUsersRecieved[i].UniversityNameOfUser == this.UNIVERSITY_TITLE) {
 
-        // if (this.AllUsersRecieved[i].UserzAccessStatus == 'Rejected') { this.RejectedMembers.push(this.AllUsersRecieved[i]); }
-
-
-        // if (this.AllUsersRecieved[i].UserzAccessStatus == 'Allowed'
-        //   && this.AllUsersRecieved[i].UserType == 'student') { this.RegisteredStudents.push(this.AllUsersRecieved[i]); }
 
         if (this.AllUsersRecieved[i].UserzAccessStatus == 'Allowed'
-          && this.AllUsersRecieved[i].UserType == 'teacher') { this.RegisteredFaculty.push(this.AllUsersRecieved[i]); }
+          && this.AllUsersRecieved[i].UserType == 'teacher') {
 
+          this.RegisteredFaculty.push(this.AllUsersRecieved[i]);
 
+        }
       }
     }
-    // }
 
   }
 
@@ -450,6 +514,14 @@ export class UnimanageLabsComponent implements OnInit {
 
 
   Errors = {
+    labJoinRequestAccepted: {
+      status: true,
+      message: 'Lab Join request of this member is Accepted.',
+    },
+    labJoinRequestDeleted: {
+      status: true,
+      message: 'Lab Join request of this member is Deleted.',
+    },
     InstructorNotListedforCreateLab: {
       status: true,
       message: 'Ask the instructor to register with GBCL first or create the profile for them.',

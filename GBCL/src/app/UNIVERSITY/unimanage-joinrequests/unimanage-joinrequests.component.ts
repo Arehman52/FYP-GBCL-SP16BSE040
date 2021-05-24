@@ -22,7 +22,7 @@ export class UnimanageJoinrequestsComponent implements OnInit {
       this.UNIVERSITY_TITLE = this.fetchedUni[0].TitleOfUniversity;
     }, 1000);
     setTimeout(() => {
-      this.extractJOINRequests();
+      this.extract_UniversityJOIN_Requests();
     }, 1400);
   }
 
@@ -41,16 +41,27 @@ export class UnimanageJoinrequestsComponent implements OnInit {
 
 
 
-  extractJOINRequests() {
+  extract_UniversityJOIN_Requests() {
     for (var i = 0; i < this.AllUsersRecievedFromDB.length; i++) {
       // console.log('localStorage.setItem("UsersUsertype") ==> ',localStorage.getItem("UsersUsertype"));
       // console.log('this.localStorageUNIVERSITYtitle ==> ',this.localStorageUNIVERSITYtitle);
       // console.log('this.AllUsersRecievedFromDB[i].UniversityNameOfUser ',this.AllUsersRecievedFromDB[i].UniversityNameOfUser);
-      if (this.AllUsersRecievedFromDB[i].UniversityNameOfUser == this.UNIVERSITY_TITLE
-        && this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Pending') {
-        if (this.AllUsersRecievedFromDB[i].UserType == 'student') { this.JOINRequestsStudents.push(this.AllUsersRecievedFromDB[i]); }
-        if (this.AllUsersRecievedFromDB[i].UserType == 'teacher') { this.JOINRequestsTeachers.push(this.AllUsersRecievedFromDB[i]); }
+
+      if (this.AllUsersRecievedFromDB[i].UniversityNameOfUser == this.UNIVERSITY_TITLE) {
+
+        // this extracts UNIVERSITY JOIN REQUESTS
+        if (this.AllUsersRecievedFromDB[i].UserzAccessStatus == 'Pending') {
+          if (this.AllUsersRecievedFromDB[i].UserType == 'student') { this.JOINRequestsStudents.push(this.AllUsersRecievedFromDB[i]); }
+          if (this.AllUsersRecievedFromDB[i].UserType == 'teacher') { this.JOINRequestsTeachers.push(this.AllUsersRecievedFromDB[i]); }
+        }
+
+
+
       }
+
+
+
+
     }
 
   }

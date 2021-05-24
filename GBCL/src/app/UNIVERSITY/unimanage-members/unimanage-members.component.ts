@@ -80,6 +80,7 @@ export class UnimanageMembersComponent implements OnInit {
       const user: Usersmodel = {
         _id: '',
         LabJoinCodesOfJoinedLabs: null,
+        LabJoinCodesOfAppliedLabs: null,
         Username: createMemberForm.value.UNcreateProfile.toLowerCase(),
         Password: createMemberForm.value.PWcreateProfile,
         FirstNameOfUser: createMemberForm.value.FNcreateProfile,
@@ -249,6 +250,7 @@ export class UnimanageMembersComponent implements OnInit {
       HECIDofUniversity: OriginalMemberDetails.HECIDofUniversity,
       LastNameOfUser: UpdatedMemberLN,
       LabJoinCodesOfJoinedLabs: OriginalMemberDetails.LabJoinCodesOfJoinedLabs,
+      LabJoinCodesOfAppliedLabs: OriginalMemberDetails.LabJoinCodesOfAppliedLabs,
       Password: UpdatedMemberPW,
       RegistrationNumberOfUser: UpdatedMemberRegN,
       TitleOfUniversity: OriginalMemberDetails.TitleOfUniversity,
