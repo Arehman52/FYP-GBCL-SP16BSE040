@@ -61,18 +61,23 @@
             <div class="col-12 btn-group">
               <!-- Example single danger button -->
 
-  <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{localStorageUsername}}
-  </button>
-  <div class="dropdown-menu bg-warning" >
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab'">Lab's Dashboard</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/'">Exit Lab</a>
-    <div class="dropdown-divider"></div>
-    <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+              <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{localStorageUsername}}
+              </button>
+              <div class="dropdown-menu bg-warning">
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/'">Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
+                <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit Lab</button>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onLogout()">Logout</button>
 
-  </div>
+
+
+              </div>
 
             </div>
 
@@ -147,7 +152,7 @@
                   {{task.taskContent}}
                   <div class="text-right">
                     <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a>
-                    <button class="btn btn-primary btn-sm mx-2" (click)="onAttemptClicked(task)" >Attempt</button>
+                    <button class="btn btn-primary btn-sm mx-2" (click)="onAttemptClicked(task)">Attempt</button>
                   </div>
                 </div>
               </div>
@@ -176,15 +181,16 @@
     <div class="col-12 col-lg-9" *ngIf="showEditorAndOthererWindows">
       <!--MAIN AREA WHERE EDITOR AND CONSOLE WILL BE-->
       <form class="text-right" (submit)="onSubmitLabTaskClicked(codeForm)" #codeForm="ngForm">
-      <div class="row">
-        <div class="col">
-          <h5 class="text-center text-warning"><b>PASTE CODE BELOW for Task : {{taskTitleOfTaskBeiingCurrentlyAttempted}}</b></h5>
+        <div class="row">
+          <div class="col">
+            <h5 class="text-center text-warning"><b>PASTE CODE BELOW for Task :
+                {{taskTitleOfTaskBeiingCurrentlyAttempted}}</b></h5>
             <div class="form-group p-0 m-0">
               <textarea class="form-control m-0" spellcheck="false" name="theCode" ngModel rows="8"></textarea>
             </div>
 
 
-            <button class="btn btn-primary EditorBtns" type="submit" >Submit Lab Task</button>
+            <button class="btn btn-primary EditorBtns" type="submit">Submit Lab Task</button>
           </div>
         </div>
         <div class="row p-1 ">

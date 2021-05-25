@@ -12,6 +12,17 @@ export class RivalsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  onExitLabClicked(){
+    localStorage.removeItem('LabID');
+    window.location.href="/STUDENT"
+  }
+
+  localStorageUsername = localStorage.getItem("UsersUsername");
+
+    onLogout(){
+      localStorage.clear();
+      window.location.href="/";
+    }
 
 
   rivalNotifications = [
@@ -23,10 +34,4 @@ export class RivalsComponent implements OnInit {
 
 
 
-localStorageUsername = localStorage.getItem("UsersUsername");
-
-  onLogout(){
-    localStorage.clear();
-    window.location.href="/";
-  }
 }

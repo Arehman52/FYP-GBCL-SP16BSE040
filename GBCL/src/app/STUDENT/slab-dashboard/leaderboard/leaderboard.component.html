@@ -69,12 +69,16 @@
     {{localStorageUsername}}
   </button>
   <div class="dropdown-menu bg-warning" >
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab'">Lab's Dashboard</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/'">Dashboard</a>
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/'">Exit Lab</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
+    <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit Lab</button>
     <div class="dropdown-divider"></div>
-    <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+    <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onLogout()">Logout</button>
+
+
 
   </div>
 

@@ -11,6 +11,19 @@ export class ChallengesComponent implements OnInit {
   ngOnInit(): void {
     this.startTimer();
   }
+  localStorageUsername = localStorage.getItem("UsersUsername");
+
+
+  onExitLabClicked(){
+    localStorage.removeItem('LabID');
+    window.location.href="/STUDENT"
+  }
+
+  onLogout(){
+    localStorage.clear();
+    window.location.href="/";
+  }
+  //==============================previous code================
   i = 0;
   challenges = [
     {
@@ -85,12 +98,7 @@ export class ChallengesComponent implements OnInit {
   }
 
 
-localStorageUsername = localStorage.getItem("UsersUsername");
 
-onLogout(){
-  localStorage.clear();
-  window.location.href="/";
-}
 
 
 

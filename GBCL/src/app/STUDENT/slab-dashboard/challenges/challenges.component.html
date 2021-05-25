@@ -66,12 +66,17 @@
                 {{localStorageUsername}}
               </button>
               <div class="dropdown-menu bg-warning">
-                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab'">Lab's Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/'">Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
                 <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
-                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">Code Practice Area</a>
-                <a class="dropdown-item" [routerLink]="'/STUDENT/'">Exit Lab</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
+                <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit
+                  Lab</button>
                 <div class="dropdown-divider"></div>
-                <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+                <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onLogout()">Logout</button>
+
+
 
               </div>
 
@@ -93,7 +98,7 @@
   <!-- TOP ROW ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
 
-  <div class="row" >
+  <div class="row">
     <div class="col-12">
       <!-- <button (click)='startTimer()'>Start Timer</button>
 <button (click)='pauseTimer()'>Pause</button> -->
@@ -114,10 +119,10 @@
 
           <div>{{this.challenges[this.i].Question}} </div>
           <div *ngIf="this.challenges[this.i].Qtype == 'mcq'">
-          a. {{this.challenges[this.i].options.a}} <br>
-          b. {{this.challenges[this.i].options.b}} <br>
-          c. {{this.challenges[this.i].options.c}} <br>
-          d. {{this.challenges[this.i].options.d}}</div>
+            a. {{this.challenges[this.i].options.a}} <br>
+            b. {{this.challenges[this.i].options.b}} <br>
+            c. {{this.challenges[this.i].options.c}} <br>
+            d. {{this.challenges[this.i].options.d}}</div>
         </div>
         <div class="col-sm-4">
 
@@ -142,7 +147,7 @@
       <div class="row">
         <div class="col-8 mt-1">
           <button class="btn btn-small px-4 float-right btn-outline-warning" (click)="nextQuestion()">next</button>
-          <button class="btn btn-small px-4 float-right btn-outline-warning mr-1" >take hint</button>
+          <button class="btn btn-small px-4 float-right btn-outline-warning mr-1">take hint</button>
         </div>
       </div>
 

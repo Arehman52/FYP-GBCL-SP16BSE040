@@ -12,6 +12,12 @@ export class LeaderboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onExitLabClicked(){
+    localStorage.removeItem('LabID');
+    window.location.href="/STUDENT"
+  }
+
+
   leaderboard = [
     {rank:'1',name:'Abdur Rehman',XPs:'987',CPPs:'265',level:'24',badge:'Honoury 5',color: 'fca311'},
     {rank:'2',name:'Abdul Lateef',XPs:'927',CPPs:'245',level:'22',badge:'Honoury 4',color: '2ec4b6'},

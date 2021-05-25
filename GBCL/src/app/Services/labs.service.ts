@@ -12,6 +12,23 @@ export class LabsService {
 
 
 
+  FetchThisLab(LabID: string): Labsmodel[] {
+  var objLabId:{_id:string}={_id:LabID};
+  var Lab:Labsmodel[] = [];
+  this.http
+    .post<{ message: string; lab: Labsmodel }>(
+      'http://localhost:3000/api/Labs/FetchTHISLab', objLabId
+    )
+    .subscribe((responseData) => {
+      Lab.push(responseData.lab);
+    });
+    return Lab;
+  }
+
+
+
+
+
   DeleteThisLab(Id: string) {
     this.http.delete("http://localhost:3000/api/Labs/DeleteThisLab/" + Id).subscribe(
       response => {

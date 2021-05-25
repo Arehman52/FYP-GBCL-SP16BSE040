@@ -14,6 +14,12 @@ export class CpaComponent {
 
 
 
+  onExitLabClicked(){
+    localStorage.removeItem('LabID');
+    window.location.href="/STUDENT"
+  }
+
+
   tasks = [
     {
       taskID: '1',

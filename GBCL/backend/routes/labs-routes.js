@@ -55,6 +55,22 @@ router.get("/RecieveLabsFromDB", (req, res, next) => {
 
 
 
+router.post("/FetchTHISLab", (req, res, next) => {
+  Labs.findOne({ _id: req.body._id })
+    .then((lab) => {
+      console.log("Lab....", lab);
+      res.status(200).json({
+        message: "Lab Fetched: "+lab.LabTitle,
+        lab: lab,
+      });
+
+      console.log("   ==> {/FetchTHISLab} _id == ", req.body._id);
+    })
+    .catch((err) => {
+      console.log(" 004 theeeen eeerrrororrorr\n", err);
+    });
+});
+
 
 
 
