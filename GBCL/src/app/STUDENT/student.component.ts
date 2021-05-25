@@ -67,8 +67,9 @@ export class STUDENTComponent implements OnInit {
     for (let k = 0; k < this.TheStudent[0].LabJoinCodesOfJoinedLabs.length; k++) {
       if (this.TheStudent[0].LabJoinCodesOfJoinedLabs[k] == enteredJoinCode) {
         checkIf_enteredJoinCode_BelongsToAnAlreadyJoinedLab = true;
+        this.displayThisMessageInModal('You have already joined this lab.',modalButtonReferrence);
         console.log('00333  <==>');
-        // return;
+        return;
       }
     }
 
@@ -103,10 +104,10 @@ export class STUDENTComponent implements OnInit {
     }
 
 
-    if (checkIf_enteredJoinCode_BelongsToAnAlreadyJoinedLab) {
-      this.displayThisMessageInModal('You already have joined this lab.', modalButtonReferrence);
-      return;
-    }
+    // if (checkIf_enteredJoinCode_BelongsToAnAlreadyJoinedLab) {
+    //   this.displayThisMessageInModal('You already have joined this lab.', modalButtonReferrence);
+    //   return;
+    // }
 
 
     arrayOf_LabJoinCodesOfAppliedLabs = [...this.TheStudent[0].LabJoinCodesOfAppliedLabs];

@@ -337,7 +337,7 @@
                     <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
                       [attr.data-target]="'#RegisteredFacultyCollapse' + lab._id" aria-expanded="true"
                       [attr.aria-controls]="'collapse' + lab._id"
-                      (click)="extractLabInstructorzFNandLN(lab.LabInstructor)">
+                      (click)="extract_ViewLabMembers_onViewLabMembersClicked(lab)">
                       {{lab.LabTitle}}
                     </button>
 
@@ -373,7 +373,7 @@
                           </table>
                           <div class="d-flex justify-content-end mr-3">
                             <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
-                              (click)="extract_ViewLabMembers_onViewLabMembersClicked(lab)">View Lab Members</button>
+                              (click)="viewLabMembersToggle()">View Lab Members</button>
                             <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
                               (click)="onLabEditToggle(LabEditForm)">{{this.EditLabButtonText}}</button>
                             <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"

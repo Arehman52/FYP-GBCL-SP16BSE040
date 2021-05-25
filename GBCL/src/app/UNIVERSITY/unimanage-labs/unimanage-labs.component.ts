@@ -61,32 +61,56 @@ export class UnimanageLabsComponent implements OnInit {
 
 
 
+  viewLabMembersToggle() {
+    if (this.viewLabMembersToggled == false) { // means button is clicked to view members
+      this.viewLabMembersToggled = true;
 
-    extract_ViewLabMembers_onViewLabMembersClicked(lab:Labsmodel){
-      this.Users_ViewLabMembers = [];
-      if(this.viewLabMembersToggled == false){ // means button is clicked to view members
-        this.viewLabMembersToggled = true;
-
-        let arrayAllUsersRecieved_i_LabJoinCodesOfJoinedLab:string[] = [];
-        // lab._id;
-        // this.Users_ViewLabMembers;
-        for(let i=0; i<this.AllUsersRecieved.length; i++){
-          arrayAllUsersRecieved_i_LabJoinCodesOfJoinedLab = this.AllUsersRecieved[i].LabJoinCodesOfJoinedLabs;
+    } else {
+      this.viewLabMembersToggled = false;
+    }
+  }
 
 
-          for(let j=0; j<arrayAllUsersRecieved_i_LabJoinCodesOfJoinedLab.length;j++){
-            if( arrayAllUsersRecieved_i_LabJoinCodesOfJoinedLab[j] == lab._id){
-              this.Users_ViewLabMembers.push(this.AllUsersRecieved[i]);
-            }
-          }
-        }
+  extract_ViewLabMembers_onViewLabMembersClicked(lab: Labsmodel) {
 
-        console.log(this.Users_ViewLabMembers);
 
-      }else{
-        this.viewLabMembersToggled = false;
+    this.LabInstructorzFN = '';
+    this.LabInstructorzLN = '';
+    for (var i = 0; i < this.AllUsersRecieved.length; i++) {
+      // console.log("this.AllUsersRecieved[i].Username ===> ", this.AllUsersRecieved[i].Username);
+      // console.log("UsernameOfLabInstructor ===> ", UsernameOfLabInstructor);
+      if (this.AllUsersRecieved[i].Username == lab.LabInstructor) {
+        this.LabInstructorzFN = this.AllUsersRecieved[i].FirstNameOfUser;
+        this.LabInstructorzLN = this.AllUsersRecieved[i].LastNameOfUser;
       }
     }
+
+
+
+
+
+
+    this.Users_ViewLabMembers = [];
+    // if(this.viewLabMembersToggled == false){ // means button is clicked to view members
+    //   this.viewLabMembersToggled = true;
+
+    let arrayAllUsersRecieved_i_LabJoinCodesOfJoinedLab: string[] = [];
+    // lab._id;
+    // this.Users_ViewLabMembers;
+    for (let i = 0; i < this.AllUsersRecieved.length; i++) {
+      arrayAllUsersRecieved_i_LabJoinCodesOfJoinedLab = this.AllUsersRecieved[i].LabJoinCodesOfJoinedLabs;
+
+
+      for (let j = 0; j < arrayAllUsersRecieved_i_LabJoinCodesOfJoinedLab.length; j++) {
+        if (arrayAllUsersRecieved_i_LabJoinCodesOfJoinedLab[j] == lab._id) {
+          this.Users_ViewLabMembers.push(this.AllUsersRecieved[i]);
+        }
+      }
+    }
+
+    console.log(this.Users_ViewLabMembers);
+
+  }
 
 
 
@@ -137,7 +161,7 @@ export class UnimanageLabsComponent implements OnInit {
 
 
   onAcceptLabJoinRequestButtonClicked(MemberLabJoinRequest: LabJoinRequestsmodel) {
-    if(confirm("Are you sure you want to accept lab request of \nthis user: "+MemberLabJoinRequest.UserFN+" "+ MemberLabJoinRequest.UserLN)){
+    if (confirm("Are you sure you want to accept lab request of \nthis user: " + MemberLabJoinRequest.UserFN + " " + MemberLabJoinRequest.UserLN)) {
       let objUsername: { Username: string } = { Username: MemberLabJoinRequest.UserzUsername };
       let Member: Usersmodel[] = [];
       Member = this.usersService.FetchThisUser(objUsername);
@@ -159,7 +183,7 @@ export class UnimanageLabsComponent implements OnInit {
       }, 3500);
 
       this.Errors.labJoinRequestAccepted.status = true;
-      setTimeout(()=>{window.location.reload()},4000);
+      setTimeout(() => { window.location.reload() }, 4000);
     }
 
   }
@@ -167,28 +191,31 @@ export class UnimanageLabsComponent implements OnInit {
 
 
   onDeleteLabJoinRequestButtonClicked(MemberLabJoinRequest: LabJoinRequestsmodel) {
-    if(confirm("Are you sure you want to accept lab request of \nthis user: "+MemberLabJoinRequest.UserFN+" "+ MemberLabJoinRequest.UserLN)){
+    if (confirm("Are you sure you want to DELETE lab request of \nthis user: " + MemberLabJoinRequest.UserFN + " " + MemberLabJoinRequest.UserLN)) {
       let objUsername: { Username: string } = { Username: MemberLabJoinRequest.UserzUsername };
       let Member: Usersmodel[] = [];
       Member = this.usersService.FetchThisUser(objUsername);
       setTimeout(() => {
-        let newLabJoinCodesOfJoinedLabs: string[] = [];
-        for (let i = 0; i < Member[0].LabJoinCodesOfJoinedLabs.length; i++) {
-          if (Member[0].LabJoinCodesOfJoinedLabs[i] == MemberLabJoinRequest.LabJoinCode) {
-            console.log('Member[0].LabJoinCodesOfJoinedLabs[i] ==>', Member[0].LabJoinCodesOfJoinedLabs[i]);
+        let newLabJoinCodesOfAppliedLabs: string[] = [];
+        for (let i = 0; i < Member[0].LabJoinCodesOfAppliedLabs.length; i++) {
+          if (Member[0].LabJoinCodesOfAppliedLabs[i] == MemberLabJoinRequest.LabJoinCode) {
+            console.log('Member[0].LabJoinCodesOfAppliedLabs[i] ==>', Member[0].LabJoinCodesOfAppliedLabs[i]);
             console.log('MemberLabJoinRequest.LabJoinCode ==>', MemberLabJoinRequest.LabJoinCode);
           } else {
-            newLabJoinCodesOfJoinedLabs.push(Member[0].LabJoinCodesOfJoinedLabs[i]);
+            newLabJoinCodesOfAppliedLabs.push(Member[0].LabJoinCodesOfJoinedLabs[i]);
           }
         }
 
 
-        Member[0].LabJoinCodesOfJoinedLabs = [...newLabJoinCodesOfJoinedLabs];
+        console.log('BEFORE Del=== Member[0].LabJoinCodesOfJoinedLabs', Member[0].LabJoinCodesOfAppliedLabs);
+        // Member[0].LabJoinCodesOfJoinedLabs = [];
+        Member[0].LabJoinCodesOfAppliedLabs = [...newLabJoinCodesOfAppliedLabs];
+        console.log('AFTER Del=== Member[0].LabJoinCodesOfJoinedLabs', Member[0].LabJoinCodesOfAppliedLabs);
         this.usersService.updateThisUser(Member[0], Member[0]._id);
       }, 3500);
 
       this.Errors.labJoinRequestDeleted.status = true;
-      setTimeout(()=>{window.location.reload()},4000);
+      setTimeout(() => { window.location.reload() }, 4000);
     }
   }
 
@@ -421,20 +448,20 @@ export class UnimanageLabsComponent implements OnInit {
   }
 
 
-  extractLabInstructorzFNandLN(UsernameOfLabInstructor: string) {
-    this.LabInstructorzFN = '';
-    this.LabInstructorzLN = '';
-    for (var i = 0; i < this.AllUsersRecieved.length; i++) {
-      // console.log("this.AllUsersRecieved[i].Username ===> ", this.AllUsersRecieved[i].Username);
-      // console.log("UsernameOfLabInstructor ===> ", UsernameOfLabInstructor);
-      if (this.AllUsersRecieved[i].Username == UsernameOfLabInstructor) {
-        this.LabInstructorzFN = this.AllUsersRecieved[i].FirstNameOfUser;
-        this.LabInstructorzLN = this.AllUsersRecieved[i].LastNameOfUser;
-      }
-    }
+  // extractLabInstructorzFNandLN(UsernameOfLabInstructor: string) {
+  // this.LabInstructorzFN = '';
+  // this.LabInstructorzLN = '';
+  // for (var i = 0; i < this.AllUsersRecieved.length; i++) {
+  //   // console.log("this.AllUsersRecieved[i].Username ===> ", this.AllUsersRecieved[i].Username);
+  //   // console.log("UsernameOfLabInstructor ===> ", UsernameOfLabInstructor);
+  //   if (this.AllUsersRecieved[i].Username == UsernameOfLabInstructor) {
+  //     this.LabInstructorzFN = this.AllUsersRecieved[i].FirstNameOfUser;
+  //     this.LabInstructorzLN = this.AllUsersRecieved[i].LastNameOfUser;
+  //   }
+  // }
 
 
-  }
+  // }
 
   extractAffiliatedInstructors() {
 
@@ -508,7 +535,7 @@ export class UnimanageLabsComponent implements OnInit {
         this.usersService.updateThisUser(LabInstructorAsAUser[0], LabInstructorAsAUser[0]._id);
         // console.log("LabInstructorAsAUser[0] ==> ",LabInstructorAsAUser[0]);
         // this.labsService.setThisUserAsInstructorOfThisLab(Lab);
-        setTimeout(()=>{window.location.reload()},300);
+        setTimeout(() => { window.location.reload() }, 300);
       }, 5500);
 
     }
