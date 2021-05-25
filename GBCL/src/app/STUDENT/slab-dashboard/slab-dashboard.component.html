@@ -153,11 +153,11 @@
         </div>
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body">
+          <div class="card-body" *ngFor="let lab of TheLabArray">
             <div class="row">
-              <div class="col-5 m-1">Lab Join Code: {{TheLab[0]._id}}</div>
-              <div class="col-5 m-1">Lab Title: {{TheLab[0].LabTitle}}</div>
-              <div class="col-5 m-1">Lab Insstructor: {{TheLab[0].LabInstructor}}</div>
+              <div class="col-5 m-1">Lab Join Code: {{lab._id}}</div>
+              <div class="col-5 m-1">Lab Title: {{lab.LabTitle}}</div>
+              <div class="col-5 m-1">Lab Insstructor: {{lab.LabInstructor}}</div>
               <div class="col-5 m-1">Lab Members: lab members ki aik collection bnao</div>
             </div>
           </div>
@@ -174,7 +174,7 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
           <div class="card-body">
             <div class="row">
-              <div class="col-6 text-center mb-1" *ngFor="let member of members">
+              <div class="col-6 text-center mb-1 " *ngFor="let member of members">
                 <span class="ml-2 p-1 text-small">Abdur Rehman</span>
                 <span class="text-right"><button class="btn btn-sm btn-outline-warning ml-3"><b>Set Rival</b></button></span>
                 <hr class="w-75 mx-auto">

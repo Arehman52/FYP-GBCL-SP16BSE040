@@ -11,11 +11,18 @@ export class SlabDashboardComponent implements OnInit {
 
   constructor(private labsService: LabsService) { }
   ngOnInit() {
-    this.TheLab = this.labsService.FetchThisLab(localStorage.getItem("LabID"));
+    this.TheLabArray = this.labsService.FetchThisLab(localStorage.getItem("LabID"));
   }
-  TheLab:Labsmodel[] = [];
+  TheLabArray:Labsmodel[] = [];
+
+
+
+
+
+
+
   members = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-  localStorageLabId;
+  localStorageLabId: string;
   localStorageUsername = localStorage.getItem("UsersUsername");
 
 
