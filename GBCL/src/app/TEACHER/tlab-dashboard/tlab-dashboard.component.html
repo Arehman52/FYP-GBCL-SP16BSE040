@@ -59,7 +59,9 @@
 
 
           <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span class="mx-2"><h3>Teachers Dashboard</h3></span></div>
+            <div class="col"><span class="mx-2">
+                <h3>Teachers Dashboard</h3>
+              </span></div>
           </div>
         </div>
         <!-- STATS COL END -->
@@ -75,22 +77,23 @@
             <div class="col-12 btn-group">
               <!-- Example single danger button -->
 
-  <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{localStorageUsername}}
-  </button>
-  <div class="dropdown-menu bg-warning" >
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a>
+              <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{localStorageUsername}}
+              </button>
+              <div class="dropdown-menu bg-warning">
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
+                <button type="button" class="btn btn-outline-danger w-100" (click)="onExitLabClicked()">Exit Lab</button>
 
-    <div class="dropdown-divider"></div>
-    <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+                <div class="dropdown-divider"></div>
+                <button type="button" class="btn btn-outline-danger w-100" (click)="onLogout()">Logout</button>
 
-  </div>
+              </div>
 
             </div>
 
@@ -103,7 +106,8 @@
 
     </div>
     <hr class="bg-warning p-0 m-0">
-  </div> <!--1st row ends-->
+  </div>
+  <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- TOP ROW ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
@@ -111,28 +115,29 @@
 
 
 
-<div class="row">  <!--2nd row starts-->
-  <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
-    <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
-      <li class="nav-item text-left">
-        <a class="nav-link active" [routerLink]="'/TEACHER/Lab'" >Lab Dashboard</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
-          </li>
-          <li class="nav-item text-left">
-            <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
-          </li>
-          <li class="nav-item text-left">
-            <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
-          </li>
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-      </li>
-      <!-- <li class="nav-item text-left">
+  <div class="row">
+    <!--2nd row starts-->
+    <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
+      <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
+        <li class="nav-item text-left">
+          <a class="nav-link active" [routerLink]="'/TEACHER/Lab'">Lab Dashboard</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
+        </li>
+        <!-- <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
       </li>
       <li class="nav-item text-left">
@@ -141,60 +146,93 @@
       <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Notifications</a>
       </li> -->
-    </ul>
-  </div>
-  <div class="col-12 col-sm-9 col-lg-10 p-1">
+      </ul>
+    </div>
+    <div class="col-12 col-sm-9 col-lg-10 p-1">
 
 
-    <div id="accordion">
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Lab Details
-            </button>
-          </h5>
-        </div>
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                Lab Details
+              </button>
+            </h5>
+          </div>
 
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-5 m-1">Lab Join Code: bf90D3</div>
-              <div class="col-5 m-1">Lab Title: Introduction to Computer Programming</div>
-              <div class="col-5 m-1">Class: BSE-1B</div>
-              <div class="col-5 m-1">Lab Members: 64</div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-6 m-1">Lab Join Code: <span class="text-info">{{this.LabInfo.JoinCode}}</span></div>
+                <div class="col-6 m-1">Lab Title: <span class="text-info">{{this.LabInfo.LabTitle}}</span></div>
+                <div class="col-6 m-1">Lab Program: <span class="text-info">{{this.LabInfo.LabProgram}}</span></div>
+                <div class="col-6 m-1">Lab Class: <span class="text-info">{{this.LabInfo.LabClass}}</span></div>
+                <div class="col-6 m-1">Lab Members: <span class="text-info"> {{this.LabInfo.LabMembersCount}}</span>
+                </div>
+              </div>
+              <div class="row text-right">
+                <div class="col-12 text-right">
+                  <button class="btn btn-info mb-2 text-right" (click)="showGamificationRules()">View Lab Gamification Rules for students</button>
+                </div>
+              </div>
+              <div class="row" *ngIf="showGamificationRulesToggled">
+                <div class="col-12">
+
+
+                  <div class="alert alert-info my-1 p-1">Rule01: Difference between every level is = 60 XP </div>
+                  <div class="alert alert-info m-0 p-1">Rule02: Badges for levels are <code>[Beginner I, II, III, IV], [Intermediate I, II, III, IV], [Master I, II, III, IV], [Pro I, II, III, IV], [Hotshot I, II, III, IV]</code> </div>
+                  <div class="alert alert-info my-1 p-1">Rule03: Attempting challenge/lab task increases XP</div>
+                  <div class="alert alert-info m-0 p-1">Rule04: Incorrect attempted Lab Tasks will deduct XPs until 0 XPs</div>
+                  <div class="alert alert-info my-1 p-1">Rule05: Surpassing the level's upper XP limit will increment the level</div>
+                  <div class="alert alert-info m-0 p-1">Rule06: Surpassing the level's lower XP limit will decrement the level</div>
+
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-header" id="headingTwo">
-          <h5 class="mb-0">
-            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Members
-            </button>
-          </h5>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-4 text-center mb-1" *ngFor="let member of members">
-
-                <div class="ml-2 p-1 text-small border border-warning p-2 mb-1">
-                  <span >Abdur Rehman</span>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="false" aria-controls="collapseTwo">
+                Members
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="bg-dark rounded text-light w-100 p-3 text-center" *ngIf="TheLabMembers.length==0">
+                  <h5 class="">Other members have not joined this lab yet. <br>Share the code of this lab with others.
+                  </h5>
+                  <code class="text-info text-center mt-4">Lab_Join_Code: {{LabInfo.JoinCode}}</code>
                 </div>
+                <div class="col-4 text-center mb-1" *ngFor="let member of TheLabMembers">
 
+                  <!-- <div class="ml-2 p-1 text-small border border-warning p-2 mb-1">
+                  <span class="ml-2 p-1 text-small">{{member.FirstNameOfUser+' '+member.LastNameOfUser}}</span>
+                </div> -->
+                  <div class="ml-2 p-1 text-small border p-2 mb-1"
+                    [ngClass]="{'border-secondary':member.UserType=='student', 'border-warning':member.UserType=='student'}">
+                    <span class="ml-2 p-1 text-small">{{member.FirstNameOfUser+' '+member.LastNameOfUser}}</span>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
+
   </div>
-
-
-
-</div> <!--2nd row ends-->
+  <!--2nd row ends-->
 
 
 

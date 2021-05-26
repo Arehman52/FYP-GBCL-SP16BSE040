@@ -77,10 +77,10 @@
     <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
     <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
     <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a>
+    <button type="button" class="btn btn-outline-danger w-100" (click)="onExitLabClicked()">Exit Lab</button >
 
     <div class="dropdown-divider"></div>
-    <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+    <button type="button" class="btn btn-outline-danger w-100" (click)="onLogout()">Logout</button >
 
   </div>
 
@@ -132,7 +132,219 @@
   <div class="col-12 col-sm-9 col-lg-10 p-0">
 
 
-    <!-- <h4 class="text-warning text-center p-3 m-1 mt-4 border rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4> -->
+
+
+
+
+
+
+
+
+    <div id="accordionOuter">
+      <div class="card  mt-2 mx-3">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              <h4><b> LAB JOIN REQUESTS <span class="text-info">**</span></b></h4>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
+          <div class="card-body">
+
+
+
+
+
+
+            <!-- Cards within card -->
+
+            <div id="accordionInner">
+              <div class="card mb-1" *ngFor="let StudentLabJoinRequest of StudentsLabJoinRequests">
+                <div class="card-header" [attr.id]="'RegisterUniversityCard'">
+
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisterUniversityCollapse' + StudentLabJoinRequest._id"
+                    aria-expanded="true" [attr.aria-controls]="'collapse' + StudentLabJoinRequest._id">
+                    {{StudentLabJoinRequest.FirstNameOfUser+ ' '+StudentLabJoinRequest.LastNameOfUser}}
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisterUniversityCollapse' + StudentLabJoinRequest._id" class="collapse hide"
+                  [attr.aria-labelledby]="'RegisterUniversityCard'" data-parent="#accordionInner">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto">
+                        <!-- remove bg dark -->
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Registration#</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Access Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+
+                              <td>{{StudentLabJoinRequest.RegistrationNumberOfUser}}</td>
+                              <td>{{StudentLabJoinRequest.FirstNameOfUser}}</td>
+                              <td>{{StudentLabJoinRequest.LastNameOfUser}}</td>
+                              <td>Applied</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                          <button (click)="onAcceptLabJoinRequestButtonClicked(StudentLabJoinRequest)"
+                            class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Accept Join Request</button>
+                          <button (click)="onDeleteLabJoinRequestButtonClicked(StudentLabJoinRequest)"
+                            class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Delete Join Request</button>
+                        </div>
+                        <small class="form-text alert alert-success"
+                          *ngIf="this.Errors.labJoinRequestAccepted.status==true">
+                          {{this.Errors.labJoinRequestAccepted.message}}
+                        </small>
+                        <small class="form-text alert alert-success"
+                          *ngIf="this.Errors.labJoinRequestDeleted.status==true">
+                          {{this.Errors.labJoinRequestDeleted.message}}
+                        </small>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cards within card -->
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="accordionOuter2">
+      <div class="card  mt-2 mx-3">
+        <div class="card-header" id="headingOne2">
+          <h5 class="mb-0">
+            <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne2"
+              aria-expanded="true" aria-controls="collapseOne2">
+              <h4><b> Lab Students <span class="text-info">**</span></b></h4>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOne2" class="collapse hide" aria-labelledby="headingOne2" data-parent="#accordionOuter2">
+          <div class="card-body">
+
+
+
+
+
+
+            <!-- Cards within card -->
+
+            <div id="accordionInner2">
+              <div class="card mb-1" *ngFor="let LabMemberStudent of LabMemberStudents">
+                <div class="card-header" [attr.id]="'RegisterUniversityCard2'">
+
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisterUniversityCollapse2' + LabMemberStudent._id"
+                    aria-expanded="true" [attr.aria-controls]="'collapse' + LabMemberStudent._id">
+                    {{LabMemberStudent.FirstNameOfUser+ ' '+LabMemberStudent.LastNameOfUser}}
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisterUniversityCollapse2' + LabMemberStudent._id" class="collapse hide"
+                  [attr.aria-labelledby]="'RegisterUniversityCard2'" data-parent="#accordionInner2">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto">
+                        <!-- remove bg dark -->
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Registration#</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Access Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+
+                              <td>{{LabMemberStudent.RegistrationNumberOfUser}}</td>
+                              <td>{{LabMemberStudent.FirstNameOfUser}}</td>
+                              <td>{{LabMemberStudent.LastNameOfUser}}</td>
+                              <td>Joined</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                          <button (click)="viewStatsButtonClicked()"
+                          class="btn btn-info w-25 maSmallerFonts my-2 mx-2">View Statistics</button>
+                          <button (click)="onWarnButtonClicked()"
+                          class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Warn</button>
+                          <button (click)="onExpelButtonClicked(LabMemberStudent)"
+                            class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Expel</button>
+                            <button (click)="onAppreciateButtonClicked(LabMemberStudent)"
+                            class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Appreciate</button>
+                        </div>
+                        <small class="form-text alert alert-success"
+                          *ngIf="this.Errors.labJoinRequestAccepted.status==true">
+                          {{this.Errors.labJoinRequestAccepted.message}}
+                        </small>
+                        <small class="form-text alert alert-success"
+                          *ngIf="this.Errors.labJoinRequestDeleted.status==true">
+                          {{this.Errors.labJoinRequestDeleted.message}}
+                        </small>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cards within card -->
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
 
 
 

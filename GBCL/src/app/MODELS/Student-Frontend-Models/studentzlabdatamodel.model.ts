@@ -1,8 +1,9 @@
-export interface Labsmodel {
+export interface StudentzLabDatamodel {
   _id: string;
 
   LabJoinCode: string, //as a foreign key
   StudentzUsername: string, //as a foreign key
+  RivalStudents: string[],
 
   Statistics: {
     currentXPs: number,

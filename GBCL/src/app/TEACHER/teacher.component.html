@@ -70,15 +70,16 @@
           <div class="col-12 btn-group">
             <!-- Example single danger button -->
 
-<button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  {{localStorageUsername}}
-</button>
-<div class="dropdown-menu bg-warning" >
-  <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Profile Settings</a>
-  <div class="dropdown-divider"></div>
-<button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+            <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              {{localStorageUsername}}
+            </button>
+            <div class="dropdown-menu bg-warning">
+              <a class="dropdown-item" [routerLink]="'/TEACHER/Settings'">Profile Settings</a>
+              <div class="dropdown-divider"></div>
+              <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button>
 
-</div>
+            </div>
 
           </div>
         </div>
@@ -129,22 +130,52 @@
         </div>
 
         <div class="col-12 col-sm-3 col-md-2 minHeight10vh pt-2 pb-2">
-          <form class="">
+          <form #LabJoinCodeForm="ngForm"
+            (submit)="onJoinLabButtonClicked(LabJoinCodeForm.value.EnteredLabJoinCode,modalButton)">
             <div class="formContainerJoinLab">
-              <input type="text" class="LabCodeTextInput" placeholder="ENTER LAB CODE" onfocus="this.placeholder = ''"
-                onblur="this.placeholder = 'ENTER LAB CODE'">
-              <a class="btn btn-outline-warning MaSmallsizeBtns">Join Lab</a>
+              <input type="text" class="LabCodeTextInput" #EnteredLabJoinCode placeholder="ENTER LAB CODE" ngModel
+                (focus)="EnteredLabJoinCode.placeholder = ''" name="EnteredLabJoinCode"
+                (blur)="EnteredLabJoinCode.placeholder = 'ENTER JOIN CODE'" minlength="10" required>
+              <button class="btn btn-outline-warning MaSmallsizeBtns w-75" type="submit">Join Lab</button>
             </div>
           </form>
         </div>
 
       </div>
 
+      <!-- LOADING MODEL -->
+      <div *ngIf="showSpinner">
+        <div id="opaque" class="d-block"></div>
+        <div id="spinner" class="loader"></div>
+      </div>
 
+
+
+      <!-- ERROR MODEL -->
+      <div class="modal" id="exampleModalLive" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content bg-dark errorMessageModal">
+            <div class="modal-header">
+              <h5 class="modal-title errorMessageModal font16">Message:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body font16">
+              <small>{{MessageForModal}}</small>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="d-none" #modalButton data-toggle="modal" data-target="#exampleModalLive">
+        .
+      </button>
     </div>
   </div>
-
-  <!-- -------------------------------------------------------------------------------------- -->
+ <!-- -------------------------------------------------------------------------------------- -->
   <!--LABS HEADER STUDENT ENDS]-->
   <!-- ----------------------------------------------------------------------------------------->
 
@@ -153,35 +184,36 @@
   <!--LABS ROW STUDENT STARTSS]-->
   <!-- ----------------------------------------------------------------------------------------->
 
+
   <div class="row ">
     <div class="col-12">
       <div class="container pt-3">
         <div class="row">
 
-          <div *ngIf="labs.length<=0">
-            <p>
-              You have not registered any labs yet.
-            </p>
+          <div class="col-12" *ngIf="LabsOfThisTeacher.length<=0">
+            <div class="alert alert-info">
+              <h5 class="p-3">You have not joined any labs.</h5>
+            </div>
           </div>
           <!-- A single Lab -->
-          <div class="col-12 col-md-6 col-lg-4 px-2 py-3" *ngFor="let lab of labs">
+          <div class="col-12 col-md-6 col-lg-4 px-2 py-3" *ngFor="let lab of LabsOfThisTeacher">
             <div class="card border-secondary  text-warning">
               <div class="card-header bg-warning text-dark  py-4 text-warning">
-                  <b>{{lab.title}}</b>
+                <b>{{lab.LabProgram}}-{{lab.LabClass}}/Lab</b>
               </div>
               <div class="card-body bg-dark">
-                  <h5 class="card-title">{{ lab.title }}</h5>
-                  <h6>Class: <span>{{ lab.Class }}</span></h6>
-                  <h6 class="mb-4">Members: <span>{{ lab.members }}</span></h6>
+                <h5 class="card-title">{{ lab.LabTitle }}</h5>
+                <h6>Program: <span>{{lab.LabProgram}}</span></h6>
+                <h6>Class: <span>{{ lab.LabClass }}</span></h6>
 
-                  <hr>
-                  <hr>
-                  <div class="container text-center">
+                <hr>
+                <hr>
+                <div class="container text-center">
 
-                      <a [routerLink]="'/TEACHER/Lab'"  class="btn btn-outline-warning w-75 mt-3 "><b>VISIT LAB</b></a>
+                  <button class="btn btn-outline-warning w-75 mt-3" (click)="onVisitLabButtonClicked(lab._id,modalButton)"><b>VISIT LAB</b></button>
 
 
-                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -153,12 +153,12 @@
         </div>
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body" *ngFor="let lab of TheLabArray">
+          <div class="card-body">
             <div class="row">
-              <div class="col-5 m-1">Lab Join Code: {{lab._id}}</div>
-              <div class="col-5 m-1">Lab Title: {{lab.LabTitle}}</div>
-              <div class="col-5 m-1">Lab Insstructor: {{lab.LabInstructor}}</div>
-              <div class="col-5 m-1">Lab Members: lab members ki aik collection bnao</div>
+              <div class="col-5 m-1">Lab Join Code: {{this.LabInfo.JoinCode}}</div>
+              <div class="col-5 m-1">Lab Title: {{this.LabInfo.LabTitle}}</div>
+              <div class="col-5 m-1">Lab Insstructor: {{this.LabInfo.LabInstructorFNLN}}</div>
+              <div class="col-5 m-1">Lab Members: {{this.LabInfo.LabMembersCount}}</div>
             </div>
           </div>
         </div>
@@ -174,9 +174,13 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
           <div class="card-body">
             <div class="row">
-              <div class="col-6 text-center mb-1 " *ngFor="let member of members">
-                <span class="ml-2 p-1 text-small">Abdur Rehman</span>
-                <span class="text-right"><button class="btn btn-sm btn-outline-warning ml-3"><b>Set Rival</b></button></span>
+              <div class="bg-dark rounded text-light w-100 p-3 text-center" *ngIf="TheLabMembers.length==0">
+                <h5 class="">Other members have not joined this lab yet. <br>Share the code of this lab with others.   </h5>
+                <code class="text-info text-center mt-4">Lab_Join_Code: {{LabInfo.JoinCode}}</code>
+              </div>
+              <div class="col-6 text-center mb-1 " *ngFor="let member of TheLabMembers">
+                <span class="ml-2 p-1 text-small">{{member.FirstNameOfUser+' '+member.LastNameOfUser}}</span>
+                <span class="text-right"><button class="btn btn-sm btn-outline-warning ml-3" (click)="setRival(member.Username)"><b>Set Rival</b></button></span>
                 <hr class="w-75 mx-auto">
               </div>
             </div>

@@ -8,7 +8,6 @@ const labChallengeSchema = mongoose.Schema({
   //DesiredOutput + MCQs + CodeCompletion
   ChallengeQuestionType: String,
   ChallengeQuestion: String,
-  ChallengeAnswer: String,
   ChallengeOptionA: String,
   ChallengeOptionB: String,
   ChallengeOptionC: String,

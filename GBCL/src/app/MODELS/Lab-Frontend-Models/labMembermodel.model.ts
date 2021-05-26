@@ -1,4 +1,4 @@
-export interface Usersmodel {
+export interface LabMembersmodel {
   _id: string;
   LabJoinCode: string, //     foreign key
   MemberUsername: string, //     foreign key

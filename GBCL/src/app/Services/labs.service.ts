@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Labsmodel } from '../MODELS/labsmodel.model';
+import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
+import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
+import { LabTasksmodel } from '../MODELS/Lab-Frontend-Models/labTasksmodel.model';
+import { LabChallengesmodel } from '../MODELS/Lab-Frontend-Models/labchallengesmodel.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +15,105 @@ export class LabsService {
 
 
 
+  createLabChallenge(labChallenge: LabChallengesmodel) {
+    this.http
+      .post('http://localhost:3000/api/Labs/CreateLabChallenge', labChallenge)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
+
+  }
+
+
+  createLabTask(labtask: LabTasksmodel) {
+
+    this.http
+      .post('http://localhost:3000/api/Labs/CreateLabTask', labtask)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
+  }
+
+  DeleteThisLabChallenge(ChallengeId: string) {
+    this.http.delete("http://localhost:3000/api/Labs/DeleteThisLabChallenge/" + ChallengeId).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+}
+  DeletThisLabTask(labTaskId: string) {
+    this.http.delete("http://localhost:3000/api/Labs/DeleteThisLabTask/" + labTaskId).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+
+  }
+
+
+  GetAllLabTasksFromDB(): LabTasksmodel[] {
+
+    let AllLabTasks: LabTasksmodel[] = [];
+    this.http
+      .get<{ message: string; labTasks: LabTasksmodel[] }>(
+        'http://localhost:3000/api/Labs/GetAllLabTasksFromDB'
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.labTasks).length; i++) {
+          AllLabTasks.push(responseData.labTasks[i]);
+        }
+      });
+
+
+    return AllLabTasks;
+
+  }
+
+  GetAllLabChallengesFromDB(): LabChallengesmodel[] {
+
+    let AllLabChallenges: LabChallengesmodel[] = [];
+    this.http
+      .get<{ message: string; labChallenges: LabChallengesmodel[] }>(
+        'http://localhost:3000/api/Labs/GetAllLabChallengesFromDB'
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.labChallenges).length; i++) {
+          AllLabChallenges.push(responseData.labChallenges[i]);
+        }
+      });
+
+
+    return AllLabChallenges;
+
+  }
+
+
+
+
+  FetchCompleteLabMembersCollection(): LabMembersmodel[] {
+    let completeLabMembersCollection: LabMembersmodel[] = [];
+    this.http
+      .get<{ message: string; CompleteLabMembers: LabMembersmodel[] }>(
+        'http://localhost:3000/api/Labs/FetchCompleteLabMembers'
+      )
+      .subscribe((responseData) => {
+        completeLabMembersCollection = responseData.CompleteLabMembers;
+      });
+    return completeLabMembersCollection;
+  }
+
+
 
   FetchThisLab(LabID: string): Labsmodel[] {
-  var objLabId:{_id:string}={_id:LabID};
-  var Lab:Labsmodel[] = [];
-  this.http
-    .post<{ message: string; lab: Labsmodel }>(
-      'http://localhost:3000/api/Labs/FetchTHISLab', objLabId
-    )
-    .subscribe((responseData) => {
-      Lab.push(responseData.lab);
-    });
+    var objLabId: { _id: string } = { _id: LabID };
+    var Lab: Labsmodel[] = [];
+    this.http
+      .post<{ message: string; lab: Labsmodel }>(
+        'http://localhost:3000/api/Labs/FetchTHISLab', objLabId
+      )
+      .subscribe((responseData) => {
+        Lab.push(responseData.lab);
+      });
     return Lab;
   }
 
@@ -60,7 +152,7 @@ export class LabsService {
 
 
 
-  createLab(Lab: Labsmodel): Labsmodel[]{
+  createLab(Lab: Labsmodel): Labsmodel[] {
     let array: any[] = [];
     let CreatedLab: Labsmodel[] = [];
     // array = [];
@@ -69,22 +161,22 @@ export class LabsService {
       .post('http://localhost:3000/api/Labs/CreateLab', Lab)
       .subscribe((responseData) => {
         // setTimeout(()=>{
-          // for (let i = 0; i < Object.keys(responseData.CreatedLab).length; i++) {
-          //   this.CreatedLab.push(responseData.CreatedLab[i]);
-          // }
-          // console.log("api/Labs/CreateLab [[[responseData]]] => ", responseData);
-          // console.log("Object.keys(responseData) => ", Object.keys(responseData));
-          // console.log("Object.values(responseData) => ", Object.values(responseData));
-          array = Object.values(responseData);
-          CreatedLab.push(array[1]);  //at 0: message, at 1:the crated Lab as a result.
-          // console.log("<====================> ");
-          // console.log("this.CreatedLab.push(this.array[1]) => => this.CreatedLab", this.CreatedLab);
-          // console.log("<====================> ");
+        // for (let i = 0; i < Object.keys(responseData.CreatedLab).length; i++) {
+        //   this.CreatedLab.push(responseData.CreatedLab[i]);
+        // }
+        // console.log("api/Labs/CreateLab [[[responseData]]] => ", responseData);
+        // console.log("Object.keys(responseData) => ", Object.keys(responseData));
+        // console.log("Object.values(responseData) => ", Object.values(responseData));
+        array = Object.values(responseData);
+        CreatedLab.push(array[1]);  //at 0: message, at 1:the crated Lab as a result.
+        // console.log("<====================> ");
+        // console.log("this.CreatedLab.push(this.array[1]) => => this.CreatedLab", this.CreatedLab);
+        // console.log("<====================> ");
 
 
         // },3500);
       });
-      return CreatedLab;
+    return CreatedLab;
   }
   // getCreatedLab(): Labsmodel[] {
   //   return this.CreatedLab;

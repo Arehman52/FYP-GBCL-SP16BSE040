@@ -130,26 +130,26 @@
       <div class="row bg-Outline py-1 px-2">
         <div class="col-12 p-0 overflow-auto minmaxHeight84vh">
           <!-- outline starts -->
-          <h4 class=" py-3 text-center text-warning" *ngIf="tasks.length<=0"><b>No tasks uploaded yet</b></h4>
+          <h4 class=" py-3 text-center text-warning" *ngIf="LabTasksOfThisLab.length<=0"><b>No tasks uploaded yet</b></h4>
 
           <div id="accordion">
-            <div class="card mb-1" *ngFor="let task of tasks">
+            <div class="card mb-1" *ngFor="let task of LabTasksOfThisLab">
               <div class="card-header secondaryColorOfChildrenOnHover childSpansHoverYellow"
-                [attr.id]="'heading'+task.taskID">
+                [attr.id]="'heading'+task._id">
 
                 <button class="btn OutlineTaskTitleBtns " data-toggle="collapse"
-                  [attr.data-target]="'#collapse' + task.taskID" aria-expanded="true"
-                  [attr.aria-controls]="'collapse'+task.taskID">
-                  {{task.taskTitle}} <span class="text-dark border rounded p-2 d-flex justify-content-end"><b
-                      class="text-dark  maSmallerFonts">{{task.XPsAllocated}} XP</b></span>
+                  [attr.data-target]="'#collapse' + task._id" aria-expanded="true"
+                  [attr.aria-controls]="'collapse'+task._id">
+                  {{task.labTaskTitle}} <span class="text-dark border rounded p-2 d-flex justify-content-end"><b
+                      class="text-dark  maSmallerFonts">{{task.labTaskXPs}} XP</b></span>
                 </button>
 
               </div>
 
-              <div [id]="'collapse'+task.taskID" class="collapse hide" [attr.aria-labelledby]="'heading'+task.taskID"
+              <div [id]="'collapse'+task._id" class="collapse hide" [attr.aria-labelledby]="'heading'+task._id"
                 data-parent="#accordion">
                 <div class="card-body ">
-                  {{task.taskContent}}
+                  {{task.labTaskQuestion}}
                   <div class="text-right">
                     <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a>
                     <button class="btn btn-primary btn-sm mx-2" (click)="onAttemptClicked(task)">Attempt</button>

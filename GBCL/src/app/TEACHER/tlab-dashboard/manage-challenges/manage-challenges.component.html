@@ -1,12 +1,5 @@
-
-
-
-
-
-
-
-
 <div class="container-fluid">
+
 
 
 
@@ -51,7 +44,9 @@
         <!-- Stats column -->
         <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover ">
           <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span class="mx-2"><h3>Manage Challenges</h3></span></div>
+            <div class="col"><span class="mx-2">
+                <h3>Manage Challenges</h3>
+              </span></div>
           </div>
         </div>
         <!-- STATS COL END -->
@@ -67,20 +62,24 @@
             <div class="col-12 btn-group">
               <!-- Example single danger button -->
 
-  <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{localStorageUsername}}
-  </button>
-  <div class="dropdown-menu bg-warning" >
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/'">Exit Lab</a>
-    <button type="button" class="btn btn-outline-danger w-75 ml-3" (click)="onLogout()">Logout</button >
+              <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{localStorageUsername}}
+              </button>
+              <div class="dropdown-menu bg-warning"> <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's
+                  Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
 
-  </div>
+                <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit
+                  Lab</button>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onLogout()">Logout</button>
+
+              </div>
 
             </div>
 
@@ -93,7 +92,8 @@
 
     </div>
     <hr class="bg-warning p-0 m-0">
-  </div> <!--1st row ends-->
+  </div>
+  <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- TOP ROW ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
@@ -101,48 +101,460 @@
 
 
 
-<div class="row">  <!--2nd row starts-->
-  <div class="col-12 col-sm-3 col-lg-2  p-1 maNav-bg-color minHeight838">
-    <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/TEACHER/Lab'" >Lab Dashboard</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
-      </li>
-      <li class="nav-item text-left">
+  <div class="row">
+    <!--2nd row starts-->
+    <div class="col-12 col-sm-3 col-lg-2  p-1 maNav-bg-color minHeight838">
+      <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/TEACHER/Lab'">Lab Dashboard</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+        </li>
+        <li class="nav-item text-left">
 
-        <a class="nav-link active" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
-          </li>
-          <li class="nav-item text-left">
-            <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
-          </li>
-          <li class="nav-item text-left">
-            <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
-          </li>
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-      </li>
+          <a class="nav-link active" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
+        </li>
 
-    </ul>
+      </ul>
+
+    </div>
+    <div class="col-12 col-sm-9 col-lg-10 p-0">
+
+
+
+
+
+
+
+
+
+
+      <div id="accordionOuter">
+        <div class="card  mt-2 mx-3">
+          <div class="card-header noUnderlineForChildren" id="headingOne">
+            <!-- <h5 class="mb-0"> -->
+            <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
+              data-target="#collapseOneFaculty" aria-expanded="true" aria-controls="collapseOneFaculty">
+              <h5><b>Create Lab Challenge <span class="text-success">**</span></b></h5>
+            </button>
+            <!-- </h5> -->
+          </div>
+          <div id="collapseOneFaculty" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
+            <div class="card-body" id="createTask">
+
+
+
+
+              <!-- here working! -->
+              <!-- <label class="mx-2" for="xyz123">Creating a profile for: </label>
+        <button id="xyz123" class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+          (click)="onMemberTypeButtonToggle()">{{this.MemberType}}</button> -->
+
+
+
+              <div>
+                <div class="border rounded border-light my-2 mx-1 p-3">
+
+                  <!-- ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================== -->
+
+
+                  <form #createLabChallengeForm="ngForm"
+                    (submit)="createLabChallenge(createLabChallengeForm,ChallengeTypeSelect,ChallengeXPsSelect)">
+
+                    <div class="row">
+                      <div class="col-sm-12">
+
+
+
+
+
+                        <div class="col-sm-6 m-auto">
+                          <div class="form-group">
+
+                            <label>Select Challenge Type</label>
+
+                            <!-- (change)="onInstructorsSelectChangeforCreateLab(InstructorsSelect)" -->
+                            <select class="custom-select" #ChallengeTypeSelect
+                              (change)="checkIfChallengeTypeNotSelected(ChallengeTypeSelect)">
+                              <option [value]="'Select Challenge Type...'" selected disabled>Select Challenge Type...
+                              </option>
+                              <option [value]="'MCQ'"><b>MCQ</b></option>
+                              <option [value]="'Code Completion'"><b>Code Completion</b></option>
+                              <option [value]="'Desired Output'"><b>Desired Output</b></option>
+                            </select>
+
+                            <small class="form-text alert alert-danger"
+                              *ngIf="this.Errors.ChallengeTypeNotSelected.status == true">
+                              {{this.Errors.ChallengeTypeNotSelected.message}}
+                            </small>
+                            <!--<small class="form-text alert alert-danger"
+                        *ngIf="this.Errors.InstructorNotListedforCreateLab.status == true">
+                        {{this.Errors.InstructorNotListedforCreateLab.message}}
+                      </small> -->
+                          </div>
+                        </div>
+
+                        <!-- //3rd Element: Enter Username -->
+                        <div class="form-group">
+                          <label>Challenge Question</label>
+                          <div class="form-group text-center">
+                            <textarea name="LabChallengeQuestion" class="p-2 m-auto" cols="90" rows="3"
+                              spellcheck="false" placeholder="Enter Question Statement"
+                              (keyup)="checkQuestionStatement(createLabChallengeForm.value.LabChallengeQuestion)"
+                              ngModel></textarea>
+                          </div>
+
+
+                          <small class="form-text alert alert-danger"
+                            *ngIf="this.Errors.invalidChallengeQuestion.status == true">
+                            <span>{{this.Errors.invalidChallengeQuestion.message}}</span>
+                          </small>
+                        </div>
+                      </div>
+
+                      <!-- <div class="col-sm-12">
+                      <label>Lab Task Solution: </label>
+                      <div class="form-group text-center">
+                        <textarea name="LabTaskAnswer" class="p-2" cols="100" rows="10" spellcheck="false"
+                          placeholder="(optional) You can leave this field empty."></textarea>
+                         <small class="form-text alert alert-danger"
+                        *ngIf="this.Errors.invalidDegreeProgram.status == true">
+                        {{this.Errors.invalidDegreeProgram.message}}
+                      </small>
+                      </div>
+                    </div>-->
+                    </div>
+                    <!--sdgsd  -->
+
+                    <div *ngIf="ChallengeTypeSelect.value == 'MCQ'">
+                      <div class="row">
+                        <div class="form-group col-6">
+                          <input class="form-control" type="text" name="optionA" ngModel placeholder="Enter Option A*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                        </div>
+                        <div class="form-group col-6">
+                          <input class="form-control" type="text" name="optionB" ngModel placeholder="Enter Option B*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-6">
+                          <input class="form-control" type="text" name="optionC" ngModel placeholder="Enter Option C*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                        </div>
+                        <div class="form-group col-6">
+                          <input class="form-control" type="text" name="optionD" ngModel placeholder="Enter Option D*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                        </div>
+                      </div>
+                      <small class="form-text alert alert-danger"
+                      *ngIf="this.Errors.AllOptionsNotFilled.status == true">
+                      <span>{{this.Errors.AllOptionsNotFilled.message}}</span>
+                    </small>
+
+                    </div>
+
+
+                    <div class="row">
+                      <div class="form-group col-6">
+                        <label>Allowed Time</label>
+                        <input class="form-control" type="number" name="TimeAllowed" ngModel placeholder="Enter Allowed Time in seconds" (keyup)="checkAllowedTime(createLabChallengeForm.value.TimeAllowed)">
+                        <small class="form-text alert alert-danger"
+                          *ngIf="this.Errors.AllowedTimeNotAssigned.status">
+                          <span>{{this.Errors.AllowedTimeNotAssigned.message}}</span>
+                        </small>
+                      </div>
+                      <div class="form-group col-6">
+                        <label>Select Challenge Type</label>
+
+                        <!-- (change)="onInstructorsSelectChangeforCreateLab(InstructorsSelect)" -->
+                        <select class="custom-select" #ChallengeXPsSelect
+                          (change)="checkIfChallengeXPsNotSelected(ChallengeXPsSelect)">
+                          <option [value]="'Assign XPs...'" selected disabled>Assign XPs...</option>
+                          <option [value]="'05'"><b>05</b></option>
+                          <option [value]="'10'"><b>10</b></option>
+                          <option [value]="'15'"><b>15</b></option>
+                          <option [value]="'20'"><b>20</b></option>
+                        </select>
+
+                        <small class="form-text alert alert-danger"
+                          *ngIf="this.Errors.ChallengeXpsNotSelected.status == true">
+                          {{this.Errors.ChallengeXpsNotSelected.message}}
+                        </small>
+
+                      </div>
+                    </div>
+
+                <div class="text-center mt-3 ">
+                  <button class="btn btn-primary w-50 m-auto" type="submit" [disabled]="checkIfErrors()">Create Lab Challenge</button>
+
+                  <small class="form-text alert alert-success mt-2"
+                    *ngIf="this.Errors.LabChallengeCreated.status == true">
+                    <span>{{this.Errors.LabChallengeCreated.message}}</span>
+                  </small>
+                </div>
+
+                <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.formHasErrors.status == true">
+                  {{this.Errors.formHasErrors.message}}
+                </small> -->
+
+                <!-- <small class="form-text alert alert-success" *ngIf="this.Errors.LabCreated.status == true">
+                  {{this.Errors.LabCreated.message}}
+                </small> -->
+                </form>
+
+              </div>
+            </div> <!-- ends student/tch division -->
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="accordionOuterStds">
+      <div class="card  mt-2 mx-3">
+        <div class="card-header noUnderlineForChildren noUnderlineForChildren" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
+              data-target="#collapseOneStd" aria-expanded="true" aria-controls="collapseOneStd">
+              <h5><b>View Lab Challenges <span class="text-info">**</span></b></h5>
+            </button>
+          </h5>
+        </div>
+        <div id="collapseOneStd" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterStds">
+          <div class="card-body">
+
+
+
+
+
+
+
+
+            <div class="mx-2 mt-3" *ngIf="LabMCQChallengesOfThisLab.length == 0 && LabOtherChallengesOfThisLab.length == 0">
+              <div class="alert alert-info p-4">
+                <h5>No Labs tasks created yet, create one first.</h5>
+              </div>
+            </div>
+
+
+
+            <div id="accordionInnerFac">
+              <div class="card mb-1" *ngFor="let task of LabMCQChallengesOfThisLab">
+                <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
+
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisteredFacultyCollapse' + task._id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + task._id">
+                    {{task.ChallengeQuestion.substring(0,19)+"..."}}
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisteredFacultyCollapse' + task._id" class="collapse hide"
+                  [attr.aria-labelledby]="'RegisteredFacultyCard'" data-parent="#accordionInnerFac">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>XPs</th>
+                              <th>Allowed Time</th>
+                              <th>Question</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>{{task.ChallengeXPs}}</td>
+                              <td>{{task.ChallengeAllowedTime}}</td>
+                              <td>{{task.ChallengeQuestion}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Option A</th>
+                              <th>Option B</th>
+                              <th>Option C</th>
+                              <th>Option D</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>{{task.ChallengeOptionA}}</td>
+                              <td>{{task.ChallengeOptionB}}</td>
+                              <td>{{task.ChallengeOptionC}}</td>
+                              <td>{{task.ChallengeOptionD}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                          <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                          [disabled]="this.Errors.LabChallengeDeleted.status"
+                          (click)="DeleteThisChallenge(task._id)">Delete</button>
+                          <!-- <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+                          (click)="onLabEditToggle(LabEditForm)">{{this.EditLabButtonText}}</button>
+                        <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                          (click)="DeleteThisLab(lab)">Delete</button> -->
+                        </div>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.LabChallengeDeleted.status">
+                        {{this.Errors.LabChallengeDeleted.message}}
+                      </small>
+
+
+
+                        <!-- //================================================================================================================// -->
+
+
+
+
+
+                        <!-- //=================================================================================================== -->
+
+
+
+
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-1" *ngFor="let task of LabOtherChallengesOfThisLab">
+                <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
+
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisteredFacultyCollapse' + task._id" aria-expanded="true"
+                    [attr.aria-controls]="'collapse' + task._id">
+                    {{task.ChallengeQuestion.substring(0,19)}}
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisteredFacultyCollapse' + task._id" class="collapse hide"
+                  [attr.aria-labelledby]="'RegisteredFacultyCard'" data-parent="#accordionInnerFac">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>XPs</th>
+                              <th>Allowed Time</th>
+                              <th>Question</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>{{task.ChallengeXPs}}</td>
+                              <td>{{task.ChallengeAllowedTime}}</td>
+                              <td>{{task.ChallengeQuestion}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                          <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                          (click)="DeleteThisChallenge(task._id)">Delete</button>
+                          <!-- <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+                          (click)="onLabEditToggle(LabEditForm)">{{this.EditLabButtonText}}</button>
+                        <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                          (click)="DeleteThisLab(lab)">Delete</button> -->
+                        </div>
+                        <small class="form-text alert alert-success" *ngIf="this.Errors.LabChallengeDeleted.status">
+                        {{this.Errors.LabChallengeDeleted.message}}
+                      </small>
+
+
+
+                        <!-- //================================================================================================================// -->
+
+
+
+
+
+                        <!-- //=================================================================================================== -->
+
+
+
+
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   </div>
-  <div class="col-12 col-sm-9 col-lg-10 p-0">
-
-
-    <!-- <h4 class="text-warning text-center p-3 m-1 mt-4 border rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4> -->
 
 
 
-  </div>
+</div>
+<!--2nd row ends-->
 
 
 
-</div> <!--2nd row ends-->
-
-
-
-  <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
 
 
@@ -150,9 +562,9 @@
 
 
 
-  <!-- -------------------------------------------------------------------------------------- -->
-  <!-- AREA UNDER TOP ROW OF STUDENT STARTS in [container-fluid]-->
-  <!-- ----------------------------------------------------------------------------------------->
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- AREA UNDER TOP ROW OF STUDENT STARTS in [container-fluid]-->
+<!-- ----------------------------------------------------------------------------------------->
 
 
 
@@ -163,14 +575,3 @@
 
 
 </div>
-
-<!-- -------------------------------------------------------------------------------------- -->
-<!--MAIN AREA OF STUDENT ENDS-->
-<!-- ----------------------------------------------------------------------------------------->
-
-
-
-
-<!-- -------------------------------------------------------------------------------------- -->
-<!-- AREA UNDER TOP ROW OF STUDENT ENDS-->
-<!-- ----------------------------------------------------------------------------------------->

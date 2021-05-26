@@ -6,6 +6,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 const StudentzLabDataSchema = mongoose.Schema({
   LabJoinCode: String, //as a foreign key
   StudentzUsername: String, //as a foreign key
+  RivalStudents: [String],
 
   Statistics: {
     currentXPs: Number,

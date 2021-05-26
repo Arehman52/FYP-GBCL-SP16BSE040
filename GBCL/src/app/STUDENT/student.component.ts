@@ -1,6 +1,8 @@
+import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Labsmodel } from '../MODELS/labsmodel.model';
+import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
+import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
 import { Usersmodel } from '../MODELS/usersmodel.model';
 import { LabsService } from '../Services/labs.service';
 import { UsersService } from '../Services/users.service';
@@ -17,26 +19,43 @@ export class STUDENTComponent implements OnInit {
   ngOnInit(): void {
     this.showSpinner = false;
     this.AllLabsRecieved = this.labsService.RecieveAllLabsFromDB();
+    // this.CompleteLabMembersCollection = this.labsService.FetchCompleteLabMembersCollection();
     let usernameObj: { Username: string } = { Username: this.localStorageUsername };
     this.TheStudent = this.usersService.FetchThisUser(usernameObj);
     setTimeout(() => {
       this.extractLabsOfThisStudent();
+      console.log("this.CompleteLabMembersCollection[[NgOnInit]] ==> ", this.CompleteLabMembersCollection)
     }, 2500);
   }
 
-  LabsOfThisStudent: Labsmodel[] = [];
   AllLabsRecieved: Labsmodel[] = [];
   TheStudent: Usersmodel[] = [];
+  CompleteLabMembersCollection: LabMembersmodel[] = [];
   MessageForModal: string;
   showSpinner: boolean = false;
+  LabsOfThisStudent: Labsmodel[] = [];
+
+
+
+
+
 
   extractLabsOfThisStudent() {
+
+    let objUsername: { Username: string };
     let arrayOf_LabJoinCodesOfJoinedLabs: string[] = this.TheStudent[0].LabJoinCodesOfJoinedLabs;
     if (arrayOf_LabJoinCodesOfJoinedLabs.length > 0) {
       for (let i = 0; i < this.AllLabsRecieved.length; i++) {
         for (let j = 0; j < arrayOf_LabJoinCodesOfJoinedLabs.length; j++) {
           if (this.AllLabsRecieved[i]._id == arrayOf_LabJoinCodesOfJoinedLabs[j]) {
             this.LabsOfThisStudent.push(this.AllLabsRecieved[i]);
+            // objUsername = { Username: this.AllLabsRecieved[i].LabInstructor };
+            // let LabInstructor: Usersmodel[] =[];
+            // LabInstructor = this.usersService.FetchThisUser(objUsername);
+            // while(LabInstructor.length == 0){
+            //   console.log("Waiting...");
+            // }
+            // this.InstructorszFNsAndLNs.push(LabInstructor[0].FirstNameOfUser+' '+ LabInstructor[0].LastNameOfUser);
           }
         }
       }
@@ -57,17 +76,19 @@ export class STUDENTComponent implements OnInit {
 
 
   onJoinLabButtonClicked(enteredJoinCode: string, modalButtonReferrence: HTMLButtonElement) {
+
     if (enteredJoinCode.length < 10) {
       this.displayThisMessageInModal('Code length must be greater than 10.', modalButtonReferrence);
       return;
     }
 
+    //do not change till here
 
     let checkIf_enteredJoinCode_BelongsToAnAlreadyJoinedLab = false;
     for (let k = 0; k < this.TheStudent[0].LabJoinCodesOfJoinedLabs.length; k++) {
       if (this.TheStudent[0].LabJoinCodesOfJoinedLabs[k] == enteredJoinCode) {
         checkIf_enteredJoinCode_BelongsToAnAlreadyJoinedLab = true;
-        this.displayThisMessageInModal('You have already joined this lab.',modalButtonReferrence);
+        this.displayThisMessageInModal('You have already joined this lab.', modalButtonReferrence);
         console.log('00333  <==>');
         return;
       }
@@ -134,7 +155,7 @@ export class STUDENTComponent implements OnInit {
         this.displayThisMessageInModal('You already have applied to join for this lab.', modalButtonReferrence);
       } else {
         this.TheStudent[0].LabJoinCodesOfAppliedLabs.push(enteredJoinCode);
-        console.log('this.TheStudent[0] before updateing',this.TheStudent[0]);
+        console.log('this.TheStudent[0] before updateing', this.TheStudent[0]);
         this.usersService.updateThisUser(this.TheStudent[0], this.TheStudent[0]._id);
         this.displayThisMessageInModal('Applied for access to the lab. You will be granted access once your request ges accepted.', modalButtonReferrence);
         // setTimeout(()=>{window.location.reload()},4000);

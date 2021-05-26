@@ -1,10 +1,9 @@
-export interface Usersmodel {
+export interface LabChallengesmodel {
   _id: string;
   LabId: string, //as a foreign key
   //DesiredOutput + MCQs + CodeCompletion
   ChallengeQuestionType: string,
   ChallengeQuestion: string,
-  ChallengeAnswer: string,
   ChallengeOptionA: string,
   ChallengeOptionB: string,
   ChallengeOptionC: string,

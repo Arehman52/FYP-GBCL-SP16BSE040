@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Labsmodel } from 'src/app/MODELS/labsmodel.model';
-import { LabJoinRequestsmodel } from 'src/app/MODELS/labJoinRequestsmodel.model';
+import { Labsmodel } from 'src/app/MODELS/Lab-Frontend-Models/labsmodel.model';
+import { LabJoinRequestsmodel } from 'src/app/MODELS/Lab-Frontend-Models/labJoinRequestsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
 import { LabsService } from 'src/app/Services/labs.service';
 import { UsersService } from 'src/app/Services/users.service';
@@ -108,7 +108,7 @@ export class UnimanageLabsComponent implements OnInit {
       }
     }
 
-    console.log(this.Users_ViewLabMembers);
+    // console.log(this.Users_ViewLabMembers);
 
   }
 
@@ -339,14 +339,38 @@ export class UnimanageLabsComponent implements OnInit {
 
     } else {
 
-      const UpdatedLab: Labsmodel = {
-        _id: OriginalLabDetails._id,
-        LabClass: updateLabForm.value.LabClassSection,
-        LabInstructor: onInstructorsSelectChange.value,
-        LabProgram: updateLabForm.value.DegreeProgram,
-        LabTitle: updateLabForm.value.LabTitle,
-        UniversityNameOfLab: OriginalLabDetails.UniversityNameOfLab
+      let UpdatedLab: Labsmodel;
+
+      if (onInstructorsSelectChange.value != OriginalLabDetails.LabInstructor) {
+        let labInstructor: Usersmodel[] = [];
+        let objUsername: { Username: string } = { Username: onInstructorsSelectChange.value };
+        labInstructor = this.usersService.FetchThisUser(objUsername);
+        setTimeout(() => {
+          UpdatedLab = {
+            _id: OriginalLabDetails._id,
+            LabClass: updateLabForm.value.LabClassSection,
+            LabInstructor: onInstructorsSelectChange.value,
+            LabInstructorFN: labInstructor[0].FirstNameOfUser,
+            LabInstructorLN: labInstructor[0].LastNameOfUser,
+            LabProgram: updateLabForm.value.DegreeProgram,
+            LabTitle: updateLabForm.value.LabTitle,
+            UniversityNameOfLab: OriginalLabDetails.UniversityNameOfLab
+          }
+
+        }, 1200);
+      } else {
+        UpdatedLab = {
+          _id: OriginalLabDetails._id,
+          LabClass: updateLabForm.value.LabClassSection,
+          LabInstructor: onInstructorsSelectChange.value,
+          LabInstructorFN: OriginalLabDetails.LabInstructorFN,
+          LabInstructorLN: OriginalLabDetails.LabInstructorLN,
+          LabProgram: updateLabForm.value.DegreeProgram,
+          LabTitle: updateLabForm.value.LabTitle,
+          UniversityNameOfLab: OriginalLabDetails.UniversityNameOfLab
+        }
       }
+
 
       if (UpdatedLab.LabInstructor == 'Change Instructor') {
         UpdatedLab.LabInstructor = OriginalLabDetails.LabInstructor;
@@ -480,65 +504,88 @@ export class UnimanageLabsComponent implements OnInit {
 
   }
 
-  async on_CreateLabSubmitButton_Clicked(createLabForm: NgForm, onInstructorsSelectChange: HTMLSelectElement) {
-    // this.Errors.LabInstructorNotSelected.status
+  on_CreateLabSubmitButton_Clicked(createLabForm: NgForm, onInstructorsSelectChange: HTMLSelectElement) {
 
 
-    const Lab: Labsmodel = {
-      LabClass: createLabForm.value.LabClassnSection,
-      LabProgram: createLabForm.value.DegreeProgram,
-      LabInstructor: onInstructorsSelectChange.value,
-      LabTitle: createLabForm.value.LabTitle,
-      UniversityNameOfLab: this.fetchedUni[0].TitleOfUniversity,
-      _id: null
-    };
-
-    this.checkDegreeProgram(Lab.LabProgram);
-    this.checkLabClassSection(Lab.LabClass);
-    this.checkLabTitle(Lab.LabTitle);
-    this.onInstructorsSelectChange(onInstructorsSelectChange);
-    if (!this.checkIfErrors()) {
-      this.Errors.LabCreated.status = true;
-
-
-      var createdLab: Labsmodel[] = [];
-      let LabInstructorAsAUser: Usersmodel[] = [];
-      const objInstructorUsername: { Username: string } = { Username: Lab.LabInstructor };
-
-
-
-
-      createdLab = this.labsService.createLab(Lab);
-      LabInstructorAsAUser = this.usersService.FetchThisUser(objInstructorUsername);
-
-
-      setTimeout(() => {
-        // console.log("createdLab[0]",createdLab[0]);
-        // let newLabJoinCodesOfJoinedLabs: string[] = [createdLab._id, "ABDURREHMAN"];
-        // let newLabJoinCodesOfJoinedLabs: string[] = [];    <<<================
-        // if (LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs != null || undefined) {
-        //   for (var i = 0; i < LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.length; i++) {
-        //     // var labid: string = LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs[i].toString();
-        //     // console.log("=====labid===",labid);
-        //   }
-        //   // newLabJoinCodesOfJoinedLabs.push(LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.toString());
-        //   // createdLab
-        // }
-        // newLabJoinCodesOfJoinedLabs.push(createdLab[0]._id);  <<<================
-        // console.log("<========= ==== ======> ");
-        // console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
-        // console.log("newLabJoinCodesOfJoinedLabs.toString() ==> ",newLabJoinCodesOfJoinedLabs.toString());
-        // console.log("<========= ==== ======> ");
-        // console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
-        // LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(newLabJoinCodesOfJoinedLabs.toString()); <<<================
-        LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(createdLab[0]._id);
-        this.usersService.updateThisUser(LabInstructorAsAUser[0], LabInstructorAsAUser[0]._id);
-        // console.log("LabInstructorAsAUser[0] ==> ",LabInstructorAsAUser[0]);
-        // this.labsService.setThisUserAsInstructorOfThisLab(Lab);
-        setTimeout(() => { window.location.reload() }, 300);
-      }, 5500);
-
+    let Lab: Labsmodel;
+    let labInstructorFName: string = '';
+    let labInstructorLName: string = '';
+    // let labInstructor: Usersmodel;
+    // let objUsername: { Username: string } = { Username: onInstructorsSelectChange.value };
+    console.log("this.AllUsersRecieved"+this.AllUsersRecieved);
+    for(let i=0; i<this.AllUsersRecieved.length;i++){
+      if(this.AllUsersRecieved[i].Username == onInstructorsSelectChange.value){
+        labInstructorFName = this.AllUsersRecieved[i].FirstNameOfUser;
+        // labInstructor.FirstNameOfUser = FN;
+        labInstructorLName = this.AllUsersRecieved[i].LastNameOfUser;
+        // labInstructor.LastNameOfUser = LN;
+        // return;
+      }
     }
+
+    // labInstructor = this.usersService.FetchThisUser(objUsername);
+    // setTimeout(() => {
+      Lab = {
+        LabClass: createLabForm.value.LabClassnSection,
+        LabProgram: createLabForm.value.DegreeProgram,
+        LabInstructor: onInstructorsSelectChange.value,
+        LabInstructorFN: labInstructorFName,
+        LabInstructorLN: labInstructorLName,
+        LabTitle: createLabForm.value.LabTitle,
+        UniversityNameOfLab: this.fetchedUni[0].TitleOfUniversity,
+        _id: null
+      };
+
+
+      this.checkDegreeProgram(Lab.LabProgram);
+      this.checkLabClassSection(Lab.LabClass);
+      this.checkLabTitle(Lab.LabTitle);
+      this.onInstructorsSelectChange(onInstructorsSelectChange);
+
+
+          if (!this.checkIfErrors()) {
+            this.Errors.LabCreated.status = true;
+
+
+            var createdLab: Labsmodel[] = [];
+            let LabInstructorAsAUser: Usersmodel[] = [];
+            const objInstructorUsername: { Username: string } = { Username: Lab.LabInstructor };
+
+
+
+
+            createdLab = this.labsService.createLab(Lab);
+            LabInstructorAsAUser = this.usersService.FetchThisUser(objInstructorUsername);
+
+
+            setTimeout(() => {
+              // console.log("createdLab[0]",createdLab[0]);
+              // let newLabJoinCodesOfJoinedLabs: string[] = [createdLab._id, "ABDURREHMAN"];
+              // let newLabJoinCodesOfJoinedLabs: string[] = [];    <<<================
+              // if (LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs != null || undefined) {
+              //   for (var i = 0; i < LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.length; i++) {
+              //     // var labid: string = LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs[i].toString();
+              //     // console.log("=====labid===",labid);
+              //   }
+              //   // newLabJoinCodesOfJoinedLabs.push(LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.toString());
+              //   // createdLab
+              // }
+              // newLabJoinCodesOfJoinedLabs.push(createdLab[0]._id);  <<<================
+              // console.log("<========= ==== ======> ");
+              // console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
+              // console.log("newLabJoinCodesOfJoinedLabs.toString() ==> ",newLabJoinCodesOfJoinedLabs.toString());
+              // console.log("<========= ==== ======> ");
+              // console.log("newLabJoinCodesOfJoinedLabs ==> ",newLabJoinCodesOfJoinedLabs);
+              // LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(newLabJoinCodesOfJoinedLabs.toString()); <<<================
+              LabInstructorAsAUser[0].LabJoinCodesOfJoinedLabs.push(createdLab[0]._id);
+              this.usersService.updateThisUser(LabInstructorAsAUser[0], LabInstructorAsAUser[0]._id);
+              // console.log("LabInstructorAsAUser[0] ==> ",LabInstructorAsAUser[0]);
+              // this.labsService.setThisUserAsInstructorOfThisLab(Lab);
+              setTimeout(() => { window.location.reload() }, 300);
+            }, 5500);
+
+          }
+    // }, 1200);
   }
 
 

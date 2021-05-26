@@ -1,16 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-
-import { CpasService } from '../../../Services/cpas.service';
+import { LabTasksmodel } from 'src/app/MODELS/Lab-Frontend-Models/labTasksmodel.model';
+import { LabUtilitiesService } from 'src/app/Services/lab-utilities.service';
 
 @Component({
   selector: 'app-cpa',
   templateUrl: './cpa.component.html',
   styleUrls: ['./cpa.component.css'],
 })
-export class CpaComponent {
+export class CpaComponent implements OnInit {
 
-  constructor(private cpasService: CpasService){}
+  constructor(private labUtils: LabUtilitiesService){}
+  ngOnInit(): void {
+    this.LabTasks = this.labUtils.getLabTasks();
+
+
+    setTimeout(()=>{
+      this.extractlabTasksOfThisLab();
+    },1000);
+  }
 
 
 
@@ -20,32 +28,47 @@ export class CpaComponent {
   }
 
 
-  tasks = [
-    {
-      taskID: '1',
-      taskTitle: 'Task 01',
-      XPsAllocated: '05',
-      taskContent: 'Create a String variable and store the text "Hello World!"',
-    },
-    {
-      taskID: '2',
-      taskTitle: 'Task 02',
-      XPsAllocated: '10',
-      taskContent: 'Create an array of fruits having five different fruits in it.',
-    },
-    {
-      taskID: '3',
-      taskTitle: 'Task 03',
-      XPsAllocated: '05',
-      taskContent: 'This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.',
-    },
-    {
-      taskID: '4',
-      taskTitle: 'Task 04',
-      XPsAllocated: '25',
-      taskContent: 'This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.',
-    },
-  ];
+
+  LabTasks: LabTasksmodel[] = [];
+  LabTasksOfThisLab: LabTasksmodel[] = [];
+  extractlabTasksOfThisLab(){
+    for(let i=0;i<this.LabTasks.length;i++){
+      if(this.LabTasks[i].LabID == localStorage.getItem('LabID')){
+        this.LabTasksOfThisLab.push(this.LabTasks[i]);
+      }
+    }
+  }
+
+
+
+
+
+  // tasks = [
+  //   {
+  //     taskID: '1',
+  //     taskTitle: 'Task 01',
+  //     XPsAllocated: '05',
+  //     taskContent: 'Create a String variable and store the text "Hello World!"',
+  //   },
+  //   {
+  //     taskID: '2',
+  //     taskTitle: 'Task 02',
+  //     XPsAllocated: '10',
+  //     taskContent: 'Create an array of fruits having five different fruits in it.',
+  //   },
+  //   {
+  //     taskID: '3',
+  //     taskTitle: 'Task 03',
+  //     XPsAllocated: '05',
+  //     taskContent: 'This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.This is the content of task 3.',
+  //   },
+  //   {
+  //     taskID: '4',
+  //     taskTitle: 'Task 04',
+  //     XPsAllocated: '25',
+  //     taskContent: 'This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.This is the content of task 4.',
+  //   },
+  // ];
 
 
 
@@ -79,14 +102,10 @@ export class CpaComponent {
 
 
   showEditorAndOthererWindows = false;
-  onAttemptClicked(task:{
-    taskID: string,
-    taskTitle: string,
-    XPsAllocated: string,
-    taskContent: string} ){
+  onAttemptClicked(task:LabTasksmodel){
 
     this.showEditorAndOthererWindows = true;
-    this.taskTitleOfTaskBeiingCurrentlyAttempted = task.taskTitle;
+    this.taskTitleOfTaskBeiingCurrentlyAttempted = task.labTaskTitle;
   }
 
 localStorageUsername = localStorage.getItem("UsersUsername");

@@ -13,4 +13,4 @@ const labMemberSchema = mongoose.Schema({
 
 labMemberSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model("Lab", labMemberSchema);
+module.exports = mongoose.model("LabMember", labMemberSchema);
