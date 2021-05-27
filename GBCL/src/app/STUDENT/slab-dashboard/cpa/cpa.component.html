@@ -130,10 +130,10 @@
       <div class="row bg-Outline py-1 px-2">
         <div class="col-12 p-0 overflow-auto minmaxHeight84vh">
           <!-- outline starts -->
-          <h4 class=" py-3 text-center text-warning" *ngIf="LabTasksOfThisLab.length<=0"><b>No tasks uploaded yet</b></h4>
+          <h4 class=" py-3 text-center text-warning" *ngIf="unAttemptedLabTasks.length<=0"><b>No tasks uploaded yet</b></h4>
 
           <div id="accordion">
-            <div class="card mb-1" *ngFor="let task of LabTasksOfThisLab">
+            <div class="card mb-1" *ngFor="let task of unAttemptedLabTasks">
               <div class="card-header secondaryColorOfChildrenOnHover childSpansHoverYellow"
                 [attr.id]="'heading'+task._id">
 

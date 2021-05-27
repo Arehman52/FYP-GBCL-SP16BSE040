@@ -7,20 +7,11 @@ const StudentAttemptedLabChallenge = require("../models/student-backend-models/S
 const StudentAttemptedLabTask = require("../models/student-backend-models/StudentAttemptedLabTask");
 const router = express.Router();
 
-
-
-
-
-
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////   StudentAttemptedLabTask routes below
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
-
 
 router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
   const studentAttemptedLabTask = new StudentAttemptedLabTask({
@@ -32,8 +23,8 @@ router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
     LabTaskAnswerOutput: req.body.LabTaskAnswerOutput,
     LabTaskAnswerInput: req.body.LabTaskAnswerInput,
     GainedXPs: req.body.GainedXPs,
-    LabTaskAttempted:req.body.LabTaskAttempted,
-    LabTaskChecked:req.body.LabTaskChecked
+    LabTaskAttempted: req.body.LabTaskAttempted,
+    LabTaskChecked: req.body.LabTaskChecked,
   });
 
   studentAttemptedLabTask
@@ -46,7 +37,7 @@ router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).json({
-        error: err
+        error: err,
       });
     });
 
@@ -58,33 +49,42 @@ router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
 
 
 
+router.post(
+  "/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab",
+  (req, res, next) => {
+    StudentAttemptedLabTask.find({
+      StudentzUsername: req.body.StudentzUsername,
+      LabJoinCode: req.body.LabJoinCode
+    })
+      .then((document) => {
+        console.log("document::....", document);
+        res.status(200).json({
+          message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
+          AllStudentAttemptedLabTasks: document,
+        });
+
+        console.log("   ==> {/FetchTHISUser} Username == ", req.body.Username);
+      })
+      .catch((err) => {
+        console.log(" 004 theeeen eeerrrororrorr\n", err);
+      });
+  }
+);
 
 
 
+router.get("/RecieveAllStudentAttemptedLabTasks", (req, res, next) => {
+  StudentAttemptedLabTask.find().then((documents) => {
+    res.status(200).json({
+      message: "RecieveAllStudentAttemptedLabTasks recieved from DB",
+      AllStudentAttemptedLabTasks: documents,
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    console.log(
+      "   ==> {/RecieveAllStudentAttemptedLabTasks} All Attempted Lab Tasks were downloaded."
+    );
+  });
+});
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
@@ -101,27 +101,29 @@ router.put(
       LabJoinCode: req.body.LabJoinCode, //foreign key
       AttemptedLabChallenge_id: req.body.AttemptedLabChallenge_id,
       StudentzUsername: req.body.StudentzUsername, //foreign key
-    LabChallengeQuestionType: req.body.LabChallengeQuestionType,
-    LabChallengeQuestion: req.body.LabChallengeQuestion,
-    LabChallengeAnswerOptionA: req.body.LabChallengeAnswerOptionA,
-    LabChallengeAnswerOptionB: req.body.LabChallengeAnswerOptionB,
-    LabChallengeAnswerOptionC: req.body.LabChallengeAnswerOptionC,
-    LabChallengeAnswerOptionD: req.body.LabChallengeAnswerOptionD,
-    GainedXPs: req.body.GainedXPs,
+      LabChallengeQuestionType: req.body.LabChallengeQuestionType,
+      LabChallengeQuestion: req.body.LabChallengeQuestion,
+      LabChallengeAnswerOptionA: req.body.LabChallengeAnswerOptionA,
+      LabChallengeAnswerOptionB: req.body.LabChallengeAnswerOptionB,
+      LabChallengeAnswerOptionC: req.body.LabChallengeAnswerOptionC,
+      LabChallengeAnswerOptionD: req.body.LabChallengeAnswerOptionD,
+      GainedXPs: req.body.GainedXPs,
 
-    ChallengeAttempted: req.body.ChallengeAttempted,
-    ChallengeChecked: req.body.ChallengeChecked,
-    ChallengeFailedDueToTimeShortage: req.body.ChallengeFailedDueToTimeShortage,
-    ChallengeCheated: req.body.ChallengeCheated
+      ChallengeAttempted: req.body.ChallengeAttempted,
+      ChallengeChecked: req.body.ChallengeChecked,
+      ChallengeFailedDueToTimeShortage:
+        req.body.ChallengeFailedDueToTimeShortage,
+      ChallengeCheated: req.body.ChallengeCheated,
     });
 
-    tudentAttemptedLabChallenge.updateOne(
-      {
-        StudentzUsername: req.body.StudentzUsername,
-        LabJoinCode: req.body.LabJoinCode,
-      },
-      updatedAttemptedLabChallenge
-    )
+    tudentAttemptedLabChallenge
+      .updateOne(
+        {
+          StudentzUsername: req.body.StudentzUsername,
+          LabJoinCode: req.body.LabJoinCode,
+        },
+        updatedAttemptedLabChallenge
+      )
       .then((result) => {
         res.status(200).json({
           message: "updated This Student Attempted Lab Challenge!",
@@ -154,7 +156,7 @@ router.post("/createThisStudentAttemptedLabChallenge", (req, res, next) => {
     ChallengeAttempted: req.body.ChallengeAttempted,
     ChallengeChecked: req.body.ChallengeChecked,
     ChallengeFailedDueToTimeShortage: req.body.ChallengeFailedDueToTimeShortage,
-    ChallengeCheated: req.body.ChallengeCheated
+    ChallengeCheated: req.body.ChallengeCheated,
   });
 
   studentAttemptedLabChallenge

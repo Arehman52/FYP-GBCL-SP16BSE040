@@ -31,6 +31,25 @@ export class StudentLabDataService {
 
 
 
+  RecieveAllStudentAttemptedLabTasks():StudentAttemptedLabTaskmodel[]{
+    var alltasks: StudentAttemptedLabTaskmodel[] = [];
+    this.http
+      .get<{ message: string; AllStudentAttemptedLabTasks: StudentAttemptedLabTaskmodel[] }>(
+        'http://localhost:3000/api/StudentLabData/RecieveAllStudentAttemptedLabTasks'
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.AllStudentAttemptedLabTasks).length; i++) {
+          alltasks.push(responseData.AllStudentAttemptedLabTasks[i]);
+        }
+      });
+    // console.log('this.AllUsersRecieved FROM SERVICE===>', alltasks);
+    return alltasks;
+
+  }
+
+
+
+
 
 
 
