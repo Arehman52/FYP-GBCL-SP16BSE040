@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsersService } from 'src/app/Services/users.service';
-import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
+import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 
 @Component({
   selector: 'app-manage-universities',

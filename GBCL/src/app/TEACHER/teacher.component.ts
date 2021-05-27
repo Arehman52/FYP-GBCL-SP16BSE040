@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
 import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
-import { Usersmodel } from '../MODELS/usersmodel.model';
+import { Usersmodel } from '../MODELS/Usersmodel.model';
 import { LabsService } from '../Services/labs.service';
 import { UsersService } from '../Services/users.service';
 

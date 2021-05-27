@@ -1,4 +1,4 @@
-import { Usersmodel } from '../MODELS/usersmodel.model';
+import { Usersmodel } from '../MODELS/Usersmodel.model';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';

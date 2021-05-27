@@ -302,9 +302,9 @@
                           </tbody>
                         </table>
                         <div class="d-flex justify-content-end mr-3">
-                          <button (click)="viewStatsButtonClicked()"
-                          class="btn btn-info w-25 maSmallerFonts my-2 mx-2">View Statistics</button>
-                          <button (click)="onWarnButtonClicked()"
+                          <button (click)="viewStatsButtonClicked(LabMemberStudent)"
+                          class="btn btn-info w-25 maSmallerFonts my-2 mx-2">{{ViewStatsButtonText}}</button>
+                          <button (click)="onWarnButtonClicked(LabMemberStudent)"
                           class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Warn</button>
                           <button (click)="onExpelButtonClicked(LabMemberStudent)"
                             class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Expel</button>
@@ -312,13 +312,24 @@
                             class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Appreciate</button>
                         </div>
                         <small class="form-text alert alert-success"
-                          *ngIf="this.Errors.labJoinRequestAccepted.status==true">
-                          {{this.Errors.labJoinRequestAccepted.message}}
+                          *ngIf="this.Errors.StudentAppreciated.status==true">
+                          {{this.Errors.StudentAppreciated.message}}
+                        </small>
+                        <small class="form-text alert alert-success"
+                          *ngIf="this.Errors.StudentExpelled.status==true">
+                          {{this.Errors.StudentExpelled.message}}
+                        </small>
+                        <small class="form-text alert alert-success"
+                          *ngIf="this.Errors.StudentWarned.status==true">
+                          {{this.Errors.StudentWarned.message}}
                         </small>
                         <small class="form-text alert alert-success"
                           *ngIf="this.Errors.labJoinRequestDeleted.status==true">
                           {{this.Errors.labJoinRequestDeleted.message}}
                         </small>
+                        <div *ngIf="ViewStats == true">
+                          Stats Viewed.
+                        </div>
                       </div>
                     </div>
 

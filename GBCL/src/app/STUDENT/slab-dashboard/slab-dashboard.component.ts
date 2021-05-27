@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Labsmodel } from 'src/app/MODELS/Lab-Frontend-Models/labsmodel.model';
-import { Usersmodel } from 'src/app/MODELS/usersmodel.model';
+import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 import { LabsService } from 'src/app/Services/labs.service';
 import { UsersService } from 'src/app/Services/users.service';
 
