@@ -1,7 +1,7 @@
 import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
+// import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
 import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
 import { Usersmodel } from '../MODELS/Usersmodel.model';
 import { LabsService } from '../Services/labs.service';
@@ -24,13 +24,13 @@ export class STUDENTComponent implements OnInit {
     this.TheStudent = this.usersService.FetchThisUser(usernameObj);
     setTimeout(() => {
       this.extractLabsOfThisStudent();
-      console.log("this.CompleteLabMembersCollection[[NgOnInit]] ==> ", this.CompleteLabMembersCollection)
+      // console.log("this.CompleteLabMembersCollection[[NgOnInit]] ==> ", this.CompleteLabMembersCollection)
     }, 2500);
   }
 
   AllLabsRecieved: Labsmodel[] = [];
   TheStudent: Usersmodel[] = [];
-  CompleteLabMembersCollection: LabMembersmodel[] = [];
+  // CompleteLabMembersCollection: LabMembersmodel[] = [];
   MessageForModal: string;
   showSpinner: boolean = false;
   LabsOfThisStudent: Labsmodel[] = [];

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 // const Users = require('./models/user');
 const UsersRoutes = require('./routes/users-routes');
+const StudentLabDataRoutes = require('./routes/student-lab-data-routes');
 const LabsRoutes = require('./routes/labs-routes');
 
 
@@ -197,11 +198,13 @@ app.get("/", (req, res, next) => {
 //   res.sendFile(path.join(__dirname+'/dist/gbcl/index.html'));
 // });
 
-
+let cors = require('cors')
+app.use(cors())
 
 //-->  /api/Homepage + [/CreateUser && /FetchTHISUser]
 app.use("/api/Users", UsersRoutes);
 app.use("/api/Labs", LabsRoutes);
+app.use("/api/StudentLabData", StudentLabDataRoutes);
 
 module.exports = app;
 

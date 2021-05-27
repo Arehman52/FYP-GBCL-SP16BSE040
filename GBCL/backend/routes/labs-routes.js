@@ -3,8 +3,9 @@ const express = require("express");
 const Labs = require("../models/lab-backend-models/lab");
 const LabChallenge = require("../models/lab-backend-models/labChallenge");
 const LabTask = require("../models/lab-backend-models/labTask");
-const LabMember = require("../models/lab-backend-models/labMember");
+// const LabMember = require("../models/junk/labMember");
 const router = express.Router();
+
 
 
 
@@ -56,17 +57,17 @@ router.put("/UpdateThisLab/:Id", (req, res, next) => {
   // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 });
 
-// Fetch complete lab Members collection
-router.get("/FetchCompleteLabMembers", (req, res, next) => {
-  LabMember.find().then((documents) => {
-    res.status(200).json({
-      message: "this is a list of labs recieved from DB",
-      CompleteLabMembers: documents,
-    });
+// // Fetch complete lab Members collection
+// router.get("/FetchCompleteLabMembers", (req, res, next) => {
+//   LabMember.find().then((documents) => {
+//     res.status(200).json({
+//       message: "this is a list of labs recieved from DB",
+//       CompleteLabMembers: documents,
+//     });
 
-    console.log("   ==> {/RecieveLabsFromDB} Labs were downloaded.");
-  });
-});
+//     console.log("   ==> {/RecieveLabsFromDB} Labs were downloaded.");
+//   });
+// });
 
 // RecieveLabsFromDB
 router.get("/RecieveLabsFromDB", (req, res, next) => {

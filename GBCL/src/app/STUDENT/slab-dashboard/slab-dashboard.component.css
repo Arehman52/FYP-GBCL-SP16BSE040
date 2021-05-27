@@ -27,6 +27,16 @@ body{
 }
 
 
+.font16{font-size: 16px;
+color: #FFC107;}
+.errorMessageModal{
+  padding: 20px;
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  min-width: 500px;
+  width: fit-content;
+}
 /* GBCL LOGO CSS STARTS */
 .logoText{
   font-size: 20px;

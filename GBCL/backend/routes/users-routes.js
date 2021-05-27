@@ -149,6 +149,7 @@ router.post("/CreateUser", (req, res, next) => {
     Username: req.body.Username,
     Password: req.body.Password,
   });
+
   user
     .save()
     .then((result) => {

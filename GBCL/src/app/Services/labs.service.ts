@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
-import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
 import { LabTasksmodel } from '../MODELS/Lab-Frontend-Models/labTasksmodel.model';
 import { LabChallengesmodel } from '../MODELS/Lab-Frontend-Models/labchallengesmodel.model';
 
@@ -85,21 +84,6 @@ export class LabsService {
 
     return AllLabChallenges;
 
-  }
-
-
-
-
-  FetchCompleteLabMembersCollection(): LabMembersmodel[] {
-    let completeLabMembersCollection: LabMembersmodel[] = [];
-    this.http
-      .get<{ message: string; CompleteLabMembers: LabMembersmodel[] }>(
-        'http://localhost:3000/api/Labs/FetchCompleteLabMembers'
-      )
-      .subscribe((responseData) => {
-        completeLabMembersCollection = responseData.CompleteLabMembers;
-      });
-    return completeLabMembersCollection;
   }
 
 

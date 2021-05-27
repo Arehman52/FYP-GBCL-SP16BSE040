@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { UsersService } from 'src/app/Services/users.service';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
+import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 
 @Component({
   selector: 'app-unimanage-members',
@@ -12,7 +13,7 @@ import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 })
 export class UnimanageMembersComponent implements OnInit {
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService, private studentLabDataService:StudentLabDataService) { }
   ngOnInit() {
     this.setALLErrorsToFalse();
     this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
@@ -119,6 +120,7 @@ export class UnimanageMembersComponent implements OnInit {
   DeleteThisUser(member: Usersmodel) {
     if (confirm("Are you sure you want to delete profile of :" + member.FirstNameOfUser + " " + member.LastNameOfUser)) {
       this.usersService.deleteThisUser(member._id);
+      this.studentLabDataService.deleteCurrentStatsOfThisStudent(member.Username);
       this.Errors.userDeleted.status = true;
       setTimeout(() => {
         window.location.reload();

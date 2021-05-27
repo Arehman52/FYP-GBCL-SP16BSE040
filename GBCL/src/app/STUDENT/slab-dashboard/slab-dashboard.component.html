@@ -55,20 +55,20 @@
         <!-- ----------- -->
         <!-- Stats column -->
 
-        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto  CurrentStatsHover">
+        <div  onload="InitiallizeModal(modalButton)" class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto  CurrentStatsHover">
 
 
           <div class="row childSpansHoverYellow">
             <div class="col-12 text-center text-underline pb-1 hoverYellow"><span><u>
                   <h5 class="">Own Statistics</h5>
                 </u></span></div>
-            <div class="col-6 col-lg-4 Text12px">Current XPs: <span>0 XP</span></div>
-            <div class="col-6 col-lg-4 Text12px">Current CPPs: <span>0 CPP</span></div>
-            <div class="col-6 col-lg-4 Text12px"><span>Level: 0</span></div>
-            <div class="col-6 col-lg-4 Text12px">Current Badge: <span>ABC</span></div>
-            <div class="col-6 col-lg-4 Text12px">Next Badge: <span>XYZ</span></div>
+            <div class="col-6 col-lg-4 Text12px">Current XPs: <span>{{CurrentStatsOfThisStudent[0]?.currentXPs}} XP</span></div>
+            <div class="col-6 col-lg-4 Text12px">Current CPPs: <span>{{CurrentStatsOfThisStudent[0]?.currentCPPs}} CPP</span></div>
+            <div class="col-6 col-lg-4 Text12px"><span>Level: {{CurrentStatsOfThisStudent[0]?.currentLevel}}</span></div>
+            <div class="col-6 col-lg-4 Text12px">Current Badge: <span>{{CURRENT_BADGE}}</span></div>
+            <div class="col-6 col-lg-4 Text12px">Next Badge: <span>{{NEXT_BADGE}}</span></div>
             <div class="col-6 col-lg-4 Text10pxItalicYellow text-right">--XPs Required for Promotion:
-              <span>120 XP</span></div>
+              <span>{{XP_FOR_PROMOTION}} XP</span></div>
           </div>
         </div>
         <!-- STATS COL END -->
@@ -217,6 +217,35 @@
 
 
 </div>
+
+
+
+
+
+
+
+
+      <div class="modal" id="demotionModallll" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content bg-dark errorMessageModal">
+            <div class="modal-header">
+              <h5 class="modal-title errorMessageModal font16">{{MODAL_HEADING}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body font16">
+              <small>{{MODAL_MESSAGE}}</small>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" id="LevelUpdatedModalButton" class="d-none" #modalButton data-toggle="modal"  data-target="#demotionModallll">
+
+      </button>
 
 <!-- -------------------------------------------------------------------------------------- -->
 <!--MAIN AREA OF STUDENT ENDS-->

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
+// import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
 import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
 import { Usersmodel } from '../MODELS/Usersmodel.model';
 import { LabsService } from '../Services/labs.service';
@@ -22,7 +22,7 @@ export class TEACHERComponent implements OnInit {
     this.TheTeacher = this.usersService.FetchThisUser(usernameObj);
     setTimeout(() => {
       this.extractLabsOfThisStudent();
-      console.log("this.CompleteLabMembersCollection[[NgOnInit]] ==> ", this.CompleteLabMembersCollection)
+      // console.log("this.CompleteLabMembersCollection[[NgOnInit]] ==> ", this.CompleteLabMembersCollection)
     }, 2500);
   }
 
@@ -32,7 +32,7 @@ export class TEACHERComponent implements OnInit {
 
   AllLabsRecieved: Labsmodel[] = [];
   TheTeacher: Usersmodel[] = [];
-  CompleteLabMembersCollection: LabMembersmodel[] = [];
+  // CompleteLabMembersCollection: LabMembersmodel[] = [];
   MessageForModal: string;
   showSpinner: boolean = false;
   LabsOfThisTeacher: Labsmodel[] = [];

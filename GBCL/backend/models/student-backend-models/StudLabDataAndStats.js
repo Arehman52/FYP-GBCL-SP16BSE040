@@ -7,6 +7,8 @@ const StudLabDataAndStatsSchema = mongoose.Schema({
   LabJoinCode: String, //as a foreign key
   StudentzUsername: String, //as a foreign key
   LevelUpdateViewed: Boolean, // if false, then show a level updated Modal and then update it to false.
+  Promoted: Boolean,
+  Demoted: Boolean,
   RivalStudents: [String],
   currentXPs: Number,
   currentLevel: Number,

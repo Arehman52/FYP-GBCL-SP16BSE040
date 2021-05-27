@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LabJoinRequestsmodel } from 'src/app/MODELS/Lab-Frontend-Models/labJoinRequestsmodel.model';
+import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
+import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 import { UsersService } from 'src/app/Services/users.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { UsersService } from 'src/app/Services/users.service';
 })
 export class ManageStudentsComponent implements OnInit {
 
-  constructor(private usersService: UsersService) { }
+  constructor(private studentLabDataService:StudentLabDataService ,private usersService: UsersService) { }
 
   ngOnInit(): void {
 
@@ -94,8 +96,14 @@ export class ManageStudentsComponent implements OnInit {
       }
       StudentzLabJoinRequest.LabJoinCodesOfAppliedLabs = [...newLabJoinCodesOfAppliedLabs];
       StudentzLabJoinRequest.LabJoinCodesOfJoinedLabs.push(this.LabID);
+      let studLabDataAndStatsFreshRecord: StudLabDataAndStatsmodel = {
+        _id: '', Appreciated: false, LabJoinCode: this.LabID, LevelUpdateViewed: true, RivalStudents: [],
+        StudentzLabAccessStatus: 'Allowed', StudentzUsername: StudentzLabJoinRequest.Username, Warned: false,Demoted:false,Promoted:true,
+        currentBadge: '', currentCPPs: 0, currentLevel: 0, currentXPs: 0
+      };
+
+      this.studentLabDataService.createFreshStudentLabDataRecord(studLabDataAndStatsFreshRecord);
       this.usersService.updateThisUser(StudentzLabJoinRequest, StudentzLabJoinRequest._id);
-      // }, 3500);
 
       this.Errors.labJoinRequestAccepted.status = true;
       setTimeout(() => { window.location.reload() }, 4000);

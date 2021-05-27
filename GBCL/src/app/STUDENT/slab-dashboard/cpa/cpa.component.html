@@ -186,23 +186,23 @@
             <h5 class="text-center text-warning"><b>PASTE CODE BELOW for Task :
                 {{taskTitleOfTaskBeiingCurrentlyAttempted}}</b></h5>
             <div class="form-group p-0 m-0">
-              <textarea class="form-control m-0" spellcheck="false" name="theCode" ngModel rows="8"></textarea>
+              <textarea class="form-control m-0" (keyup)="checkCode(codeForm)" spellcheck="false" name="theCode" ngModel placeholder="** Required **  Paste from IDE or write code for lab task here..." rows="8"></textarea>
             </div>
 
 
-            <button class="btn btn-primary EditorBtns" type="submit">Submit Lab Task</button>
+            <button class="btn btn-primary EditorBtns" [disabled]="checkIfErrors()" type="submit">Submit Lab Task</button>
           </div>
         </div>
         <div class="row p-1 ">
           <div class="col-12 col-lg-5 m-auto border rounded border-warning">
             <h6 class="text-center text-warning"><b>INPUT</b></h6>
-            <textarea class="form-control p-1 mb-2" rows="8" name="theInput" ngModel spellcheck="false"></textarea>
+            <textarea class="form-control p-1 mb-2" rows="8" name="theInput" ngModel spellcheck="false" placeholder="Enter input here if any..."></textarea>
 
             <!-- <button class="btn btn-primary EditorBtns">Clear</button> -->
           </div>
           <div class="col-12 col-lg-5 m-auto border rounded border-warning">
             <h6 class="text-center text-warning"><b>OUTPUT</b></h6>
-            <textarea class="form-control p-1 mb-2" rows="8" name="theOutput" ngModel spellcheck="false"></textarea>
+            <textarea class="form-control p-1 mb-2" (keyup)="checkOutput(codeForm)" rows="8" name="theOutput" ngModel spellcheck="false" placeholder="** Required **  Paste from IDE or write output for lab task here..."></textarea>
             <!-- <button class="btn btn-primary EditorBtns">Clear</button> -->
           </div>
 

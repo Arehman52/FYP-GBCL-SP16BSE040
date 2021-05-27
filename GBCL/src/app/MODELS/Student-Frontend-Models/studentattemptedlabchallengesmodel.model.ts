@@ -2,6 +2,7 @@ export interface StudentAttemptedLabChallengemodel {
   _id: string;
   LabJoinCode: string,         //foreign key
   StudentzUsername: string,    //foreign key
+  AttemptedLabChallenge_id: string,
   LabChallengeQuestionType: string,
   LabChallengeQuestion: string,
   LabChallengeAnswerOptionA: string,
@@ -9,6 +10,10 @@ export interface StudentAttemptedLabChallengemodel {
   LabChallengeAnswerOptionC: string,
   LabChallengeAnswerOptionD: string,
   GainedXPs: number,
-  LabChallengeStatus: string,  // Unattempted, Attempted, Checked, FailedDueToTimeShortage or Cheated.
+
+  ChallengeAttempted:boolean,
+  ChallengeChecked:boolean,
+  ChallengeFailedDueToTimeShortage:boolean,
+  ChallengeCheated:boolean
 }
 

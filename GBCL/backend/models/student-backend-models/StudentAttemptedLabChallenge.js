@@ -4,6 +4,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 const StudentAttemptedLabChallengeSchema = mongoose.Schema({
   LabJoinCode: String,         //foreign key
   StudentzUsername: String,    //foreign key
+  AttemptedLabChallenge_id: String,
   LabChallengeQuestionType: String,
   LabChallengeQuestion: String,
   LabChallengeAnswerOptionA: String,
@@ -11,7 +12,12 @@ const StudentAttemptedLabChallengeSchema = mongoose.Schema({
   LabChallengeAnswerOptionC: String,
   LabChallengeAnswerOptionD: String,
   GainedXPs: Number,
-  LabChallengeStatus: String,  // Unattempted, Attempted, Checked, FailedDueToTimeShortage or Cheated.
+
+
+  ChallengeAttempted:Boolean,
+  ChallengeChecked:Boolean,
+  ChallengeFailedDueToTimeShortage:Boolean,
+  ChallengeCheated:Boolean
 });
 
 StudentAttemptedLabChallengeSchema.plugin(uniqueValidator);

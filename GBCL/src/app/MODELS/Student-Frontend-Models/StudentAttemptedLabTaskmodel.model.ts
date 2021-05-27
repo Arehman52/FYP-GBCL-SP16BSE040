@@ -1,5 +1,6 @@
 export interface StudentAttemptedLabTaskmodel {
   _id: string;
+  AttemptedLabTask_id: string,
   LabJoinCode: string,
   StudentzUsername: string,
   LabTaskQuestion: string,
@@ -7,6 +8,8 @@ export interface StudentAttemptedLabTaskmodel {
   LabTaskAnswerOutput: string,
   LabTaskAnswerInput: string,
   GainedXPs: number,
-  LabTaskStatus: string,  // Unattempted, Attempted or Checked
+  // LabTaskStatus: string,  // Unattempted, Attempted or Checked
+  LabTaskAttempted:boolean,
+  LabTaskChecked:boolean
 }
 

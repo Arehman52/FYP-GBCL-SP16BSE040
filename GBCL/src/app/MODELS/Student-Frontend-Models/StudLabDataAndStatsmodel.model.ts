@@ -3,6 +3,8 @@ export interface StudLabDataAndStatsmodel {
   LabJoinCode: string, //as a foreign key
   StudentzUsername: string, //as a foreign key
   LevelUpdateViewed: boolean, // if false, then show a level updated Modal and then update it to false.
+  Promoted: boolean,
+  Demoted: boolean,
   RivalStudents: string[],
   currentXPs: number,
   currentLevel: number,
