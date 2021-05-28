@@ -25,6 +25,9 @@ router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
     GainedXPs: req.body.GainedXPs,
     LabTaskAttempted: req.body.LabTaskAttempted,
     LabTaskChecked: req.body.LabTaskChecked,
+    LabTaskTitle: req.body.LabTaskTitle,
+    LabTaskXPs: req.body.LabTaskXPs,
+    LabTaskAnswerByTeacher: req.body.LabTaskAnswerByTeacher,
   });
 
   studentAttemptedLabTask
@@ -47,48 +50,78 @@ router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
   );
 });
 
+router.post(
+  "/RecieveAllStudentAttemptedLabTasksOfThisLab",
+  (req, res, next) => {
+    StudentAttemptedLabTask.find({ LabJoinCode: req.body.LabJoinCode }).then(
+      (documents) => {
+        console.log(
+          "RecieveAllStudentAttemptedLabTasksOfThisLab =>@@@@@@" + documents
+        );
+        res.status(200).json({
+          message: "Recieved All Student Attempted Lab Tasks Of This Lab.",
+          AllStudentAttemptedLabTasksOfThisLab: documents,
+        });
+        console.log(
+          "   ==> {/RecieveAllStudentAttemptedLabTasksOfThisLab} Recieved All Student Attempted Lab Tasks Of This Lab."
+        );
+      }
+    );
+  }
+);
 
+router.post(
+  "/RecieveAllStudentAttemptedLabTasksOfThisStudent",
+  (req, res, next) => {
+    StudentAttemptedLabTask.find({
+      StudentzUsername: req.body.StudentzUsername,
+    }).then((documents) => {
+      console.log(
+        "RecieveAllStudentAttemptedLabTasksOfThisStudent =>@@@@@@" + documents
+      );
+      res.status(200).json({
+        message: "Recieved All Student Attempted Lab Tasks Of This Student.",
+        AllStudentAttemptedLabTasksOfThisStudent: documents,
+      });
 
-////////////////////////////////////////////////////////////////////////////////
-
-router.post("/RecieveAllStudentAttemptedLabTasksOfThisLab", (req, res, next) => {
-  StudentAttemptedLabTask.find({LabJoinCode:req.body.LabJoinCode}).then((documents) => {
-    console.log("RecieveAllStudentAttemptedLabTasksOfThisLab =>@@@@@@"+documents);
-    res.status(200).json({
-      message: "Recieved All Student Attempted Lab Tasks Of This Lab.",
-      AllStudentAttemptedLabTasksOfThisLab: documents,
+      console.log(
+        "   ==> {/RecieveAllStudentAttemptedLabTasksOfThisLab} Recieved All Student Attempted Lab Tasks Of This Student."
+      );
     });
+  }
+);
 
-    console.log("   ==> {/RecieveAllStudentAttemptedLabTasksOfThisLab} Recieved All Student Attempted Lab Tasks Of This Lab.");
-  });
-});
+router.post(
+  "/RecieveAllStudentAttemptedChallengesOfthisStudandThisLab/",
+  (req, res, next) => {
+    StudentAttemptedLabChallenge.find({
+      StudentzUsername: req.body.StudentzUsername,
+      LabJoinCode: req.body.LabJoinCode,
+    })
+      .then((document) => {
+        console.log("document::....", document);
+        res.status(200).json({
+          message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
+          AllStudentAttemptedChallengesOfthisStudandThisLab: document,
+        });
 
-
-
-
-
-router.post("/RecieveAllStudentAttemptedLabTasksOfThisStudent", (req, res, next) => {
-  StudentAttemptedLabTask.find({StudentzUsername:req.body.StudentzUsername}).then((documents) => {
-console.log("RecieveAllStudentAttemptedLabTasksOfThisStudent =>@@@@@@"+documents);
-    res.status(200).json({
-      message: "Recieved All Student Attempted Lab Tasks Of This Student.",
-      AllStudentAttemptedLabTasksOfThisStudent: documents,
-    });
-
-    console.log("   ==> {/RecieveAllStudentAttemptedLabTasksOfThisLab} Recieved All Student Attempted Lab Tasks Of This Student.");
-  });
-});
-
-
-
-
+        console.log(
+          "  {/RecieveAllStudentAttemptedChallengesOfthisStudandThisLab} ==> req.body.StudentzUsername =",
+          req.body.StudentzUsername
+        );
+      })
+      .catch((err) => {
+        console.log(" 004 theeeen eeerrrororrorr\n", err);
+      });
+  }
+);
 
 router.post(
   "/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab/",
   (req, res, next) => {
     StudentAttemptedLabTask.find({
       StudentzUsername: req.body.StudentzUsername,
-      LabJoinCode: req.body.LabJoinCode
+      LabJoinCode: req.body.LabJoinCode,
     })
       .then((document) => {
         console.log("document::....", document);
@@ -97,15 +130,16 @@ router.post(
           AllStudentAttemptedLabTasksOfthisStudandThisLab: document,
         });
 
-        console.log("  {/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab} ==> req.body.StudentzUsername =", req.body.StudentzUsername);
+        console.log(
+          "  {/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab} ==> req.body.StudentzUsername =",
+          req.body.StudentzUsername
+        );
       })
       .catch((err) => {
         console.log(" 004 theeeen eeerrrororrorr\n", err);
       });
   }
 );
-
-
 
 router.get("/RecieveAllStudentAttemptedLabTasks", (req, res, next) => {
   StudentAttemptedLabTask.find().then((documents) => {
@@ -142,7 +176,6 @@ router.put(
       LabChallengeAnswerOptionC: req.body.LabChallengeAnswerOptionC,
       LabChallengeAnswerOptionD: req.body.LabChallengeAnswerOptionD,
       GainedXPs: req.body.GainedXPs,
-
       ChallengeAttempted: req.body.ChallengeAttempted,
       ChallengeChecked: req.body.ChallengeChecked,
       ChallengeFailedDueToTimeShortage:
@@ -150,7 +183,7 @@ router.put(
       ChallengeCheated: req.body.ChallengeCheated,
     });
 
-    tudentAttemptedLabChallenge
+    StudentAttemptedLabChallenge
       .updateOne(
         {
           StudentzUsername: req.body.StudentzUsername,
@@ -173,6 +206,12 @@ router.put(
     // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
   }
 );
+
+
+
+
+
+
 
 router.post("/createThisStudentAttemptedLabChallenge", (req, res, next) => {
   const studentAttemptedLabChallenge = new StudentAttemptedLabChallenge({

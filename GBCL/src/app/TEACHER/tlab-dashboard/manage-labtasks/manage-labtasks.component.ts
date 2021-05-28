@@ -50,7 +50,7 @@ export class ManageLabtasksComponent implements OnInit {
   extractLabTasksOfThisLab(){
 
     for(let i=0; i<this.AllLabTasks.length;i++){
-      if(this.AllLabTasks[i].LabID == this.LabID){
+      if(this.AllLabTasks[i].LabJoinCode == this.LabID){
         this.LabTasksOfThisLab.push(this.AllLabTasks[i]);
       }
     }
@@ -68,7 +68,7 @@ export class ManageLabtasksComponent implements OnInit {
     taskTitle += '...';
 
     let labtask: LabTasksmodel = {
-      LabID: this.LabID, _id: '', labTaskAnswer: createLabTaskForm.value.LabTaskAnswer, labTaskQuestion: createLabTaskForm.value.LabTaskQuestion, labTaskTitle: taskTitle, labTaskXPs: parseInt(XPsSelect.value)
+      LabJoinCode: this.LabID, _id: '', AttemptedByStudents: [], LabTaskAnswer: createLabTaskForm.value.LabTaskAnswer, LabTaskQuestion: createLabTaskForm.value.LabTaskQuestion, LabTaskTitle: taskTitle, LabTaskXPs: parseInt(XPsSelect.value)
     };
 
     // this.utils.creatNewTask(labtask);

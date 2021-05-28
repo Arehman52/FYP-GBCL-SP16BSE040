@@ -1,6 +1,6 @@
 export interface LabChallengesmodel {
   _id: string;
-  LabId: string, //as a foreign key
+  LabJoinCode: string, //as a foreign key
   //DesiredOutput + MCQs + CodeCompletion
   ChallengeQuestionType: string,
   ChallengeQuestion: string,
@@ -9,7 +9,8 @@ export interface LabChallengesmodel {
   ChallengeOptionC: string,
   ChallengeOptionD: string,
   ChallengeXPs: number,
-  ChallengeAllowedTime: number
+  ChallengeAllowedTime: number,
+  AttemptedByStudents: string[]
 
 
 

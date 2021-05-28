@@ -104,7 +104,7 @@ export class ManageChallengesComponent implements OnInit {
 
   createLabChallenge(createLabChallengeForm: NgForm, ChallengeTypeSelect: HTMLSelectElement, ChallengeXPsSelect: HTMLSelectElement) {
 
-    let labChallenge: LabChallengesmodel = { _id: '', ChallengeAllowedTime: createLabChallengeForm.value.TimeAllowed, ChallengeQuestionType: ChallengeTypeSelect.value, ChallengeOptionA: createLabChallengeForm.value.optionA, ChallengeOptionB: createLabChallengeForm.value.optionB, ChallengeOptionC: createLabChallengeForm.value.optionC, ChallengeOptionD: createLabChallengeForm.value.optionD, ChallengeQuestion: createLabChallengeForm.value.LabChallengeQuestion, ChallengeXPs: parseInt(ChallengeXPsSelect.value), LabId: this.LabID };
+    let labChallenge: LabChallengesmodel = { _id: '',AttemptedByStudents:[], ChallengeAllowedTime: createLabChallengeForm.value.TimeAllowed, ChallengeQuestionType: ChallengeTypeSelect.value, ChallengeOptionA: createLabChallengeForm.value.optionA, ChallengeOptionB: createLabChallengeForm.value.optionB, ChallengeOptionC: createLabChallengeForm.value.optionC, ChallengeOptionD: createLabChallengeForm.value.optionD, ChallengeQuestion: createLabChallengeForm.value.LabChallengeQuestion, ChallengeXPs: parseInt(ChallengeXPsSelect.value), LabJoinCode: this.LabID };
 
     if (labChallenge.ChallengeQuestionType != 'MCQ') {
       labChallenge.ChallengeOptionA = '';
@@ -131,7 +131,7 @@ export class ManageChallengesComponent implements OnInit {
 
   extractLabChallengesOfThisLab() {
     for (let i = 0; i < this.AllLabChallenges.length; i++) {
-      if (this.AllLabChallenges[i].LabId == this.LabID) {
+      if (this.AllLabChallenges[i].LabJoinCode == this.LabID) {
 
 
         if (this.AllLabChallenges[i].ChallengeQuestionType == 'MCQ') {

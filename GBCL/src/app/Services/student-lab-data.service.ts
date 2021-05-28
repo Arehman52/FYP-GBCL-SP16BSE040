@@ -13,6 +13,24 @@ export class StudentLabDataService {
 
 
 
+  RecieveAllStudentAttemptedChallengesOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabChallengemodel[] {
+    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabChallengemodel = {  AttemptedLabChallenge_id: '',
+    ChallengeAttempted:true, GainedXPs: 0, LabJoinCode: LabJoinCode, StudentzUsername: StudentzUsername, _id: '',
+  ChallengeCheated:false,ChallengeChecked:false,ChallengeFailedDueToTimeShortage:false,LabChallengeAnswerOptionA:'',LabChallengeAnswerOptionB:'', LabChallengeAnswerOptionC:'',LabChallengeAnswerOptionD: '', LabChallengeQuestion:'' ,LabChallengeQuestionType:'' };
+
+    var allStudentAttemptedChallengesOfthisStudandThisLab: StudentAttemptedLabChallengemodel[] = [];
+    this.http
+      .post<{ message: string, AllStudentAttemptedChallengesOfthisStudandThisLab: StudentAttemptedLabChallengemodel[] }>(
+        'http://localhost:3000/api/StudentLabData/RecieveAllStudentAttemptedChallengesOfthisStudandThisLab/',
+        objStudentzUsernameAndLabJoinCode
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.AllStudentAttemptedChallengesOfthisStudandThisLab).length; i++) {
+          allStudentAttemptedChallengesOfthisStudandThisLab.push(responseData.AllStudentAttemptedChallengesOfthisStudandThisLab[i]);
+        }
+      });
+    return allStudentAttemptedChallengesOfthisStudandThisLab;
+}
 
 
 
@@ -74,7 +92,8 @@ export class StudentLabDataService {
 
 
   RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabTaskmodel[] {
-    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabTaskmodel = { AttemptedLabTask_id: '', GainedXPs: 0, LabJoinCode: LabJoinCode, LabTaskAnswerCode: '', LabTaskAnswerInput: '', LabTaskAnswerOutput: '', LabTaskAttempted: false, LabTaskChecked: false, LabTaskQuestion: '', StudentzUsername: StudentzUsername, _id: '' };
+    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabTaskmodel = { AttemptedLabTask_id: '',LabTaskAnswerByTeacher:'',LabTaskTitle:'',
+    LabTaskXPs:0, GainedXPs: 0, LabJoinCode: LabJoinCode, LabTaskAnswerCode: '', LabTaskAnswerInput: '', LabTaskAnswerOutput: '', LabTaskAttempted: false, LabTaskChecked: false, LabTaskQuestion: '', StudentzUsername: StudentzUsername, _id: '' };
 
     var allStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] = [];
     this.http

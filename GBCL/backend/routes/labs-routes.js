@@ -57,17 +57,39 @@ router.put("/UpdateThisLab/:Id", (req, res, next) => {
   // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 });
 
-// // Fetch complete lab Members collection
-// router.get("/FetchCompleteLabMembers", (req, res, next) => {
-//   LabMember.find().then((documents) => {
-//     res.status(200).json({
-//       message: "this is a list of labs recieved from DB",
-//       CompleteLabMembers: documents,
-//     });
 
-//     console.log("   ==> {/RecieveLabsFromDB} Labs were downloaded.");
-//   });
-// });
+
+
+
+router.put("/UpdateThisLabTask/:Id", (req, res, next) => {
+  const lab = new LabTask({
+    _id: req.body._id,
+    LabJoinCode: req.body.LabJoinCode,
+    labTaskTitle: req.body.labTaskTitle,
+    labTaskQuestion: req.body.labTaskQuestion,
+    labTaskAnswer: req.body.labTaskAnswer,
+    labTaskXPs: req.body.labTaskXPs,
+    AttemptedByStudents: req.body.AttemptedByStudents
+  });
+
+  LabTask.updateOne({ _id: req.params.Id }, lab).then((result) => {
+    res.status(200).json({
+      message: "Lab Task Updated!",
+      result: result,
+    });
+  });
+  console.log('   ==> {/UpdateThisLabTask/:Id} LabTask updated == ',req.body.labTaskTitle);
+});
+
+
+
+
+
+
+
+
+
+
 
 // RecieveLabsFromDB
 router.get("/RecieveLabsFromDB", (req, res, next) => {
@@ -98,8 +120,8 @@ router.get("/GetAllLabTasksFromDB", (req, res, next) => {
 
 
 // AllLabTasksOfThisLabFromDB
-router.post("/AllLabTasksOfThisLabFromDB", (req, res, next) => {
-  LabTask.find({LabID:req.body.LabID}).then((documents) => {
+router.post("/getAllLabTasksOfThisLabFromDB", (req, res, next) => {
+  LabTask.find({LabJoinCode:req.body.LabJoinCode}).then((documents) => {
     res.status(200).json({
       message: "All Lab Tasks Of This Lab From DB Downloaded.",
       AllLabTasksOfThisLabFromDB: documents,
@@ -111,19 +133,34 @@ router.post("/AllLabTasksOfThisLabFromDB", (req, res, next) => {
 
 
 
+router.post("/getAllChallengesOfThisLabFromDB", (req, res, next) => {
+  LabChallenge.find({LabJoinCode :req.body.LabJoinCode}).then((documents) => {
+    console.log("getAllChallengesOfThisLabFromDB == documents> ",documents);
+    res.status(200).json({
+      message: "All Lab Challenges Of This Lab From DB Downloaded.",
+      AllChallengesOfThisLabFromDB: documents,
+    });
+
+    console.log("   ==> {/getAllChallengesOfThisLabFromDB} All Lab Challenges of this lab were downloaded."+req.body.LabJoinCode);
+  });
+});
+
+
+
+
 
 
 // GetAllLabChallengesFromDB
-router.get("/GetAllLabChallengesFromDB", (req, res, next) => {
-  LabChallenge.find().then((documents) => {
-    res.status(200).json({
-      message: "All Lab Challenges Downloaded.",
-      labChallenges: documents,
-    });
+// router.get("/GetAllLabChallengesFromDB", (req, res, next) => {
+//   LabChallenge.find().then((documents) => {
+//     res.status(200).json({
+//       message: "All Lab Challenges Downloaded.",
+//       labChallenges: documents,
+//     });
 
-    console.log("   ==> {/GetAllLabChallengesFromDB} All Lab Challenges were downloaded.");
-  });
-});
+//     console.log("   ==> {/GetAllLabChallengesFromDB} All Lab Challenges were downloaded.");
+//   });
+// });
 
 
 
@@ -178,11 +215,12 @@ router.post("/CreateLab", (req, res, next) => {
 //=======================================================================YE WALI
 router.post("/CreateLabTask", (req, res, next) => {
   const labTask = new LabTask({
-    LabID: req.body.LabID,
+    LabJoinCode: req.body.LabJoinCode,
     labTaskTitle: req.body.labTaskTitle,
     labTaskQuestion: req.body.labTaskQuestion,
     labTaskAnswer: req.body.labTaskAnswer,
-    labTaskXPs: req.body.labTaskXPs
+    labTaskXPs: req.body.labTaskXPs,
+    AttemptedByStudents: req.body.AttemptedByStudents
   });
   labTask
     .save()
@@ -206,7 +244,7 @@ router.post("/CreateLabTask", (req, res, next) => {
 
 router.post("/CreateLabChallenge", (req, res, next) => {
   const labChallenge = new LabChallenge({
-    LabId: req.body.LabId,
+    LabJoinCode: req.body.LabJoinCode,
     ChallengeQuestionType: req.body.ChallengeQuestionType,
     ChallengeQuestion: req.body.ChallengeQuestion,
     ChallengeOptionA: req.body.ChallengeOptionA,
@@ -214,7 +252,8 @@ router.post("/CreateLabChallenge", (req, res, next) => {
     ChallengeOptionC: req.body.ChallengeOptionC,
     ChallengeOptionD: req.body.ChallengeOptionD,
     ChallengeXPs: req.body.ChallengeXPs,
-    ChallengeAllowedTime: req.body.ChallengeAllowedTime
+    ChallengeAllowedTime: req.body.ChallengeAllowedTime,
+    AttemptedByStudents: req.body.AttemptedByStudents
   });
   labChallenge
     .save()

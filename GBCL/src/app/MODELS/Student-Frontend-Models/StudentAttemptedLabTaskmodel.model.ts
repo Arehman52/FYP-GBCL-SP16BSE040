@@ -10,6 +10,10 @@ export interface StudentAttemptedLabTaskmodel {
   GainedXPs: number,
   // LabTaskStatus: string,  // Unattempted, Attempted or Checked
   LabTaskAttempted:boolean,
-  LabTaskChecked:boolean
+  LabTaskChecked:boolean,
+
+  LabTaskTitle: string,
+  LabTaskXPs: number,
+  LabTaskAnswerByTeacher: string,
 }
 

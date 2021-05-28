@@ -46,7 +46,9 @@
         </div>
         <!-- Stats column -->
         <div class="col-12 col-sm-2 col-md-3 border rounded text-left h-100 m-auto p-2 text-center">
-          <h5 class="text-warning">Unchanged Stats</h5>
+          <h5 class="text-warning" *ngIf="UNCHANGED_STATS == 0">Unchanged Stats</h5>
+          <h5 class="text-warning" *ngIf="UNCHANGED_STATS > 0">{{CHANGED_XP+' XPs ++'}}</h5>
+          <h5 class="text-warning" *ngIf="UNCHANGED_STATS < 0">{{CHANGED_XP+' XPs --'}}</h5>
         </div>
         <!-- STATS COL END -->
         <!-- ------------- -->
@@ -104,39 +106,53 @@
 <button (click)='pauseTimer()'>Pause</button> -->
 
 
-      <div class="row text-center text-warning bg-dark">
+      <div class="row text-center text-warning bg-dark" *ngIf="!SHOW_CHALLENGE_RELATED_DIVS">
         <div class="col-sm-8 p-2">
-          <h2>{{getTitle()}}</h2>
+          <h2>No Challenges!</h2>
+          <!-- <h2>{{unAttemptedChallenges[0].ChallengeQuestion}}</h2> -->
 
         </div>
-        <div class="col-sm-4 my-auto"> <span>{{timeLeft}} Seconds Left</span></div>
+      </div>
+      <div class="row text-center text-warning bg-dark">
+        <div class="col-sm-8 p-2">
+          <h2 *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestionType}}</h2>
+          <!-- <h2>{{unAttemptedChallenges[0].ChallengeQuestion}}</h2> -->
+
+        </div>
+        <div class="col-sm-4 my-auto"> <span *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{timeLeft}} Seconds Left</span></div>
       </div>
 
       <div class="row">
-        <div class="col-sm-8 p-2 bg-light rounded pt-4 pl-5 minHeight40vh">
-          <h4>Question {{this.challenges[this.i].Qnumber}} of {{this.challenges.length}}:</h4>
+
+        <div class="col-sm-8 bg-light rounded pt-4 pl-5 minHeight40vh">
+          <h5  *ngIf="!SHOW_CHALLENGE_RELATED_DIVS">Either you have completed all challenges or no challenges are yet assigned to this lab</h5>
+
+          <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">
+            <h4>Question {{this.unAttemptedChallenges?.length - this.unAttemptedChallenges?.length +1}} of {{this.unAttemptedChallenges?.length}}:</h4>
 
 
-          <div>{{this.challenges[this.i].Question}} </div>
-          <div *ngIf="this.challenges[this.i].Qtype == 'mcq'">
-            a. {{this.challenges[this.i].options.a}} <br>
-            b. {{this.challenges[this.i].options.b}} <br>
-            c. {{this.challenges[this.i].options.c}} <br>
-            d. {{this.challenges[this.i].options.d}}</div>
+            <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestion}} </div>
+            <div *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType == 'MCQ'">
+              a. {{unAttemptedChallenges[this.i]?.ChallengeOptionA}} <br>
+              b. {{unAttemptedChallenges[this.i]?.ChallengeOptionB}} <br>
+              c. {{unAttemptedChallenges[this.i]?.ChallengeOptionC}} <br>
+              d. {{unAttemptedChallenges[this.i]?.ChallengeOptionD}} <br>
+          </div>
+          </div>
         </div>
         <div class="col-sm-4">
 
           <div class="container border border-warning rounded mt-1 text-light">
-            <h5 class="text-center pt-1">current stats</h5>
+            <h5 class="text-center">Current Stats</h5>
           </div>
           <div class="container border border-warning rounded text-light">
 
-            <p class="mt-1">Current XPs: <span>168 XP</span></p>
+            <p class="mt-1">Current XPs: <span>{{CURRENT_XPs}}</span></p>
 
-            <p class="mct-1">Current Level: <span>3</span></p>
-            <p class="mct-1">XPs required for promotion: <span>168</span> </p>
-            <p class="mct-1">Current Badge: <span>Master 1</span> </p>
-            <p class="mct-1">Next Badge: <span>Master 2</span> </p>
+            <p class="mct-1">Current Level: <span>{{CURRENT_LEVEL}}</span></p>
+            <p class="mct-1">XPs required for promotion: <span>{{XPs_FOR_PROMOTION}}</span> </p>
+            <p class="mct-1">Current Badge: <span>{{CURRENT_BADGE}}</span> </p>
+            <p class="mct-1">Next Badge: <span>{{NEXT_BADGE}}</span> </p>
 
 
 
@@ -147,7 +163,7 @@
       <div class="row">
         <div class="col-8 mt-1">
           <button class="btn btn-small px-4 float-right btn-outline-warning" (click)="nextQuestion()">next</button>
-          <button class="btn btn-small px-4 float-right btn-outline-warning mr-1">take hint</button>
+          <!-- <button class="btn btn-small px-4 float-right btn-outline-warning mr-1" (click)="takeHint()">take hint</button> -->
         </div>
       </div>
 

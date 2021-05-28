@@ -140,8 +140,8 @@
                 <button class="btn OutlineTaskTitleBtns " data-toggle="collapse"
                   [attr.data-target]="'#collapse' + task._id" aria-expanded="true"
                   [attr.aria-controls]="'collapse'+task._id">
-                  {{task.labTaskTitle}} <span class="text-dark border rounded p-2 d-flex justify-content-end"><b
-                      class="text-dark  maSmallerFonts">{{task.labTaskXPs}} XP</b></span>
+                  {{task.LabTaskTitle}} <span class="text-dark border rounded p-2 d-flex justify-content-end"><b
+                      class="text-dark  maSmallerFonts">{{task.LabTaskXPs}} XP</b></span>
                 </button>
 
               </div>
@@ -149,7 +149,7 @@
               <div [id]="'collapse'+task._id" class="collapse hide" [attr.aria-labelledby]="'heading'+task._id"
                 data-parent="#accordion">
                 <div class="card-body ">
-                  {{task.labTaskQuestion}}
+                  {{task.LabTaskQuestion}}
                   <div class="text-right">
                     <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a>
                     <button class="btn btn-primary btn-sm mx-2" (click)="onAttemptClicked(task)">Attempt</button>
