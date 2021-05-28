@@ -97,6 +97,20 @@ router.get("/GetAllLabTasksFromDB", (req, res, next) => {
 
 
 
+// AllLabTasksOfThisLabFromDB
+router.post("/AllLabTasksOfThisLabFromDB", (req, res, next) => {
+  LabTask.find({LabID:req.body.LabID}).then((documents) => {
+    res.status(200).json({
+      message: "All Lab Tasks Of This Lab From DB Downloaded.",
+      AllLabTasksOfThisLabFromDB: documents,
+    });
+
+    console.log("   ==> {/AllLabTasksOfThisLabFromDB} All Lab Tasks of this lab were downloaded.");
+  });
+});
+
+
+
 
 
 // GetAllLabChallengesFromDB

@@ -49,8 +49,42 @@ router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
 
 
 
+////////////////////////////////////////////////////////////////////////////////
+
+router.post("/RecieveAllStudentAttemptedLabTasksOfThisLab", (req, res, next) => {
+  StudentAttemptedLabTask.find({LabJoinCode:req.body.LabJoinCode}).then((documents) => {
+    console.log("RecieveAllStudentAttemptedLabTasksOfThisLab =>@@@@@@"+documents);
+    res.status(200).json({
+      message: "Recieved All Student Attempted Lab Tasks Of This Lab.",
+      AllStudentAttemptedLabTasksOfThisLab: documents,
+    });
+
+    console.log("   ==> {/RecieveAllStudentAttemptedLabTasksOfThisLab} Recieved All Student Attempted Lab Tasks Of This Lab.");
+  });
+});
+
+
+
+
+
+router.post("/RecieveAllStudentAttemptedLabTasksOfThisStudent", (req, res, next) => {
+  StudentAttemptedLabTask.find({StudentzUsername:req.body.StudentzUsername}).then((documents) => {
+console.log("RecieveAllStudentAttemptedLabTasksOfThisStudent =>@@@@@@"+documents);
+    res.status(200).json({
+      message: "Recieved All Student Attempted Lab Tasks Of This Student.",
+      AllStudentAttemptedLabTasksOfThisStudent: documents,
+    });
+
+    console.log("   ==> {/RecieveAllStudentAttemptedLabTasksOfThisLab} Recieved All Student Attempted Lab Tasks Of This Student.");
+  });
+});
+
+
+
+
+
 router.post(
-  "/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab",
+  "/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab/",
   (req, res, next) => {
     StudentAttemptedLabTask.find({
       StudentzUsername: req.body.StudentzUsername,
@@ -60,10 +94,10 @@ router.post(
         console.log("document::....", document);
         res.status(200).json({
           message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
-          AllStudentAttemptedLabTasks: document,
+          AllStudentAttemptedLabTasksOfthisStudandThisLab: document,
         });
 
-        console.log("   ==> {/FetchTHISUser} Username == ", req.body.Username);
+        console.log("  {/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab} ==> req.body.StudentzUsername =", req.body.StudentzUsername);
       })
       .catch((err) => {
         console.log(" 004 theeeen eeerrrororrorr\n", err);

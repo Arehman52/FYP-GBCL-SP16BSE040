@@ -16,59 +16,96 @@ export class CpaComponent implements OnInit {
   constructor(private studentLabDataService: StudentLabDataService, private labsService: LabsService) { }
 
   ngOnInit(): void {
-    this.allAttemptedLabTasks = this.studentLabDataService.RecieveAllStudentAttemptedLabTasks();
-    this.AllLabTasksFromDB = this.labsService.GetAllLabTasksFromDB();
+    let objLabJoinCode:{LabID:string} = {LabID:this.LabID};
+    this.AllLabTasksOfThisLabFromDB = this.labsService.getAllLabTasksOfThisLabFromDB(objLabJoinCode);
+    this.AllStudentAttemptedLabTasksOfthisStudandThisLab = this.studentLabDataService.RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab(this.LabID, this.localStorageUsername);
+
     setTimeout(() => {
       this.extractUnAttemptedLabTasks();
+      console.log("this.AllLabTasksOfThisLabFromDB ::: ",this.AllLabTasksOfThisLabFromDB);
+      // console.log("this.allAttemptedLabTasks ::: ",this.allAttemptedLabTasks);
+      console.log("this.AllStudentAttemptedLabTasksOfthisStudandThisLab***********",this.AllStudentAttemptedLabTasksOfthisStudandThisLab);
+
+      // console.log("this.AllAttemptedLabTasksOfThisStudent ::: ",this.AllAttemptedLabTasksOfThisStudent);
+      // console.log("this.AllAttemptedLabTasksOfThisLab ::: ",this.AllAttemptedLabTasksOfThisLab);
     }, 1200);
   }
 
 
-  AllLabTasksFromDB: LabTasksmodel[] = [];
-  allAttemptedLabTasks: StudentAttemptedLabTaskmodel[] = [];
+
   showEditorAndOthererWindows = false;
   taskTitleOfTaskBeiingCurrentlyAttempted = '';
   TaskQuestion: string = '';
-  CurrentTaskID = '';
+  CURRRENT_TASK_ID = '';
   localStorageUsername = localStorage.getItem("UsersUsername");
   LabID = localStorage.getItem("LabID");
 
-  totalLabTasksOfThisLab:LabTasksmodel[] = [];
 
 
+  AllLabTasksOfThisLabFromDB: LabTasksmodel[] = [];
+  AllStudentAttemptedLabTasksOfthisStudandThisLab:StudentAttemptedLabTaskmodel[]=[];
 
-
+  // allAttemptedLabTasks: StudentAttemptedLabTaskmodel[] = [];
   attemptedLabTasks:LabTasksmodel[] = [];
   unAttemptedLabTasks:LabTasksmodel[] = [];
+
+  // unattempted = alltasks - attempted
   extractUnAttemptedLabTasks(){
-    for(let i=0;i<this.AllLabTasksFromDB.length;i++){
-      for(let j=0;j<this.allAttemptedLabTasks.length;j++){
-        if(this.AllLabTasksFromDB[i]._id == this.allAttemptedLabTasks[j].AttemptedLabTask_id){
-          this.attemptedLabTasks.push(this.AllLabTasksFromDB[i]);
+    this.unAttemptedLabTasks = [];
+    this.attemptedLabTasks = [];
+    for(let i=0;i<this.AllLabTasksOfThisLabFromDB.length;i++){
+      for(let j=0;j<this.AllStudentAttemptedLabTasksOfthisStudandThisLab.length;j++){
+        if(this.AllLabTasksOfThisLabFromDB[i]._id == this.AllStudentAttemptedLabTasksOfthisStudandThisLab[j].AttemptedLabTask_id){
+          this.attemptedLabTasks.push(this.AllLabTasksOfThisLabFromDB[i]);
         }else{
-          this.unAttemptedLabTasks.push(this.AllLabTasksFromDB[i]);
+          this.unAttemptedLabTasks.push(this.AllLabTasksOfThisLabFromDB[i]);
         }
       }
     }
 
 
-    console.log('this.attemptedLabTasks ',this.attemptedLabTasks);
-    console.log('this.unAttemptedLabTasks ',this.unAttemptedLabTasks);
+
+
+    // REMOVING DUPLICACY OF UNATTEMPETED TASKS
+
+    let distinctUnAtttemptedLabTasks:LabTasksmodel[] = [];
+    for(let i=0; i<this.unAttemptedLabTasks.length;i++){
+      let matched = false;
+      for(let j=0;j<distinctUnAtttemptedLabTasks.length;j++){
+        if(distinctUnAtttemptedLabTasks[j]._id == this.unAttemptedLabTasks[i]._id){
+          matched = true;
+        }
+      }
+      if(!matched){
+        distinctUnAtttemptedLabTasks.push(this.unAttemptedLabTasks[i]);
+      }
+    }
+
+
+    this.attemptedLabTasks = distinctUnAtttemptedLabTasks;
+    console.log("distinctUnAtttemptedLabTasks ----- ",distinctUnAtttemptedLabTasks);
+
+
+
+    console.log("this.attemptedLabTasks", this.attemptedLabTasks);
+    console.log("this.unAttemptedLabTasks", this.unAttemptedLabTasks);
+
   }
+
 
 
 
 
 
   extractlabTasksOfThisLabForThisStudent() {
-    for (let i = 0; i < this.allAttemptedLabTasks.length; i++) {
-      if (this.allAttemptedLabTasks[i].StudentzUsername == this.localStorageUsername
-        && this.allAttemptedLabTasks[i].LabJoinCode == this.LabID
-      ) {
+    // for (let i = 0; i < this.AllAttemptedLabTasks.length; i++) {
+    //   if (this.allAttemptedLabTasks[i].StudentzUsername == this.localStorageUsername
+    //     && this.allAttemptedLabTasks[i].LabJoinCode == this.LabID
+    //   ) {
 
-        // this.UnattemptedLabTasksOfThisLab_ForThisStudent[0].
-      }
-    }
+    //     // this.UnattemptedLabTasksOfThisLab_ForThisStudent[0].
+    //   }
+    // }
   }
 
 
@@ -99,14 +136,14 @@ export class CpaComponent implements OnInit {
   }
   onSubmitLabTaskClicked(codeForm: NgForm) {
 
-    const data = {
-      theCode: codeForm.value.theCode,
-      theInput: codeForm.value.theInput,
-      theOutput: codeForm.value.theOutput,
-      LabtaskId: this.CurrentTaskID
-    };
+    // const data = {
+    //   theCode: codeForm.value.theCode,
+    //   theInput: codeForm.value.theInput,
+    //   theOutput: codeForm.value.theOutput,
+    //   LabtaskId: this.CURRRENT_TASK_ID
+    // };
 
-    let labTask: StudentAttemptedLabTaskmodel = { LabJoinCode: this.LabID, GainedXPs: 0, LabTaskAnswerCode: codeForm.value.theCode, LabTaskAnswerInput: codeForm.value.theInput, LabTaskAnswerOutput: codeForm.value.theOutput, LabTaskQuestion: this.TaskQuestion, LabTaskAttempted: true, LabTaskChecked: false, StudentzUsername: this.localStorageUsername, _id: 'dwdwdwdw', AttemptedLabTask_id: 'strinmdkwad;mawdg' };
+    let labTask: StudentAttemptedLabTaskmodel = { LabJoinCode: this.LabID, GainedXPs: 0, LabTaskAnswerCode: codeForm.value.theCode, LabTaskAnswerInput: codeForm.value.theInput, LabTaskAnswerOutput: codeForm.value.theOutput, LabTaskQuestion: this.TaskQuestion, LabTaskAttempted: true, LabTaskChecked: false, StudentzUsername: this.localStorageUsername, _id: '', AttemptedLabTask_id: this.CURRRENT_TASK_ID };
 
 
     //create Attempted Lab Task.
@@ -119,13 +156,13 @@ export class CpaComponent implements OnInit {
 
 
     // console.log(results);
-    console.log(data);
+    // console.log(data);
   }
 
 
 
   setID(Taskid: string) {
-    this.CurrentTaskID = Taskid;
+    this.CURRRENT_TASK_ID = Taskid;
   }
 
 
@@ -160,7 +197,7 @@ export class CpaComponent implements OnInit {
 
 
   onAttemptClicked(task: LabTasksmodel) {
-    this.CurrentTaskID = task._id;
+    this.CURRRENT_TASK_ID = task._id;
     this.TaskQuestion = task.labTaskQuestion;
     this.showEditorAndOthererWindows = true;
     this.taskTitleOfTaskBeiingCurrentlyAttempted = task.labTaskTitle;

@@ -76,6 +76,7 @@ export class ManageLabtasksComponent implements OnInit {
 
     this.Errors.emptyField.status = true;
     this.Errors.LabTaskCreated.status = true;
+    setTimeout(()=>{window.location.reload()},3000);
 
     console.log(result);
     console.log(labtask);

@@ -14,6 +14,7 @@ export class LabsService {
 
 
 
+
   createLabChallenge(labChallenge: LabChallengesmodel) {
     this.http
       .post('http://localhost:3000/api/Labs/CreateLabChallenge', labChallenge)
@@ -49,6 +50,23 @@ export class LabsService {
 
   }
 
+
+  getAllLabTasksOfThisLabFromDB(objLabID: { LabID: string; }): LabTasksmodel[] {
+    let allLabtasksOfthislabFromDB: LabTasksmodel[] = [];
+    this.http
+      .post<{ message: string; AllLabTasksOfThisLabFromDB: LabTasksmodel[] }>(
+        'http://localhost:3000/api/Labs/AllLabTasksOfThisLabFromDB', objLabID
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.AllLabTasksOfThisLabFromDB).length; i++) {
+          allLabtasksOfthislabFromDB.push(responseData.AllLabTasksOfThisLabFromDB[i]);
+        }
+      });
+
+
+    return allLabtasksOfthislabFromDB;
+
+  }
 
   GetAllLabTasksFromDB(): LabTasksmodel[] {
 
