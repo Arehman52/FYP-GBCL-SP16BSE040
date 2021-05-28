@@ -10,9 +10,9 @@ const StudentAttemptedLabTaskSchema = mongoose.Schema({
   LabTaskAnswerOutput: String,
   LabTaskAnswerInput: String,
   GainedXPs: Number,
-
-  LabTaskAttempted:Boolean,
-  LabTaskChecked:Boolean
+  LabTaskAttempted:Boolean, 
+  LabTaskChecked:Boolean,
+  
 });
 
 StudentAttemptedLabTaskSchema.plugin(uniqueValidator);
