@@ -22,6 +22,7 @@ export class CpaComponent implements OnInit {
 
     setTimeout(() => {
       this.extractUnAttemptedLabTasks();
+      console.log(this.unAttemptedLabTasks);
     }, 1200);
   }
 

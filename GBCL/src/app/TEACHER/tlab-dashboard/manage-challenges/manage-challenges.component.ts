@@ -28,6 +28,7 @@ export class ManageChallengesComponent implements OnInit {
 
   localStorageUsername = localStorage.getItem("UsersUsername");
   LabID: string = '';
+  CORRECT_OPTION_VALUE:string = '';
   LabMCQChallengesOfThisLab: LabChallengesmodel[] = [];
   LabOtherChallengesOfThisLab: LabChallengesmodel[] = [];
   AllLabChallenges: LabChallengesmodel[] = [];
@@ -104,20 +105,51 @@ export class ManageChallengesComponent implements OnInit {
 
   createLabChallenge(createLabChallengeForm: NgForm, ChallengeTypeSelect: HTMLSelectElement, ChallengeXPsSelect: HTMLSelectElement) {
 
-    let labChallenge: LabChallengesmodel = { _id: '',AttemptedByStudents:[], ChallengeAllowedTime: createLabChallengeForm.value.TimeAllowed, ChallengeQuestionType: ChallengeTypeSelect.value, ChallengeOptionA: createLabChallengeForm.value.optionA, ChallengeOptionB: createLabChallengeForm.value.optionB, ChallengeOptionC: createLabChallengeForm.value.optionC, ChallengeOptionD: createLabChallengeForm.value.optionD, ChallengeQuestion: createLabChallengeForm.value.LabChallengeQuestion, ChallengeXPs: parseInt(ChallengeXPsSelect.value), LabJoinCode: this.LabID };
 
-    if (labChallenge.ChallengeQuestionType != 'MCQ') {
-      labChallenge.ChallengeOptionA = '';
-      labChallenge.ChallengeOptionB = '';
-      labChallenge.ChallengeOptionC = '';
-      labChallenge.ChallengeOptionD = '';
+    // console.log(radio);
+    console.log(createLabChallengeForm.value.optradio);
+    console.dir(createLabChallengeForm.value.optradio);
+    // alert("radio.checked : "+radio.checked);
+
+
+        let labChallenge: LabChallengesmodel = { _id: '',AttemptedByStudents:[], ChallengeAllowedTime: createLabChallengeForm.value.TimeAllowed,ChallengeCorrectOption: this.CORRECT_OPTION_VALUE, ChallengeQuestionType: ChallengeTypeSelect.value, ChallengeOptionA: createLabChallengeForm.value.optionA, ChallengeOptionB: createLabChallengeForm.value.optionB, ChallengeOptionC: createLabChallengeForm.value.optionC, ChallengeOptionD: createLabChallengeForm.value.optionD, ChallengeQuestion: createLabChallengeForm.value.LabChallengeQuestion, ChallengeXPs: parseInt(ChallengeXPsSelect.value), LabJoinCode: this.LabID };
+
+        if (labChallenge.ChallengeQuestionType != 'MCQ') {
+          labChallenge.ChallengeOptionA = '';
+          labChallenge.ChallengeOptionB = '';
+          labChallenge.ChallengeOptionC = '';
+          labChallenge.ChallengeOptionD = '';
+        }else{
+
+
+        if(
+          this.CORRECT_OPTION_VALUE == createLabChallengeForm.value.optionA ||
+          this.CORRECT_OPTION_VALUE == createLabChallengeForm.value.optionB ||
+          this.CORRECT_OPTION_VALUE == createLabChallengeForm.value.optionC ||
+          this.CORRECT_OPTION_VALUE == createLabChallengeForm.value.optionD
+          ){
+            alert("this.CORRECT_OPTION_VALUE : "+this.CORRECT_OPTION_VALUE);
+
+
+
+    }else{
+      alert("You need to select a correct option also");
+      return;
     }
+        }
 
-    this.labsService.createLabChallenge(labChallenge);
-    createLabChallengeForm.reset();
-    this.Errors.LabChallengeCreated.status = true;
+
+        this.labsService.createLabChallenge(labChallenge);
+        createLabChallengeForm.reset();
+        this.Errors.LabChallengeCreated.status = true;
+
+
+}
+
+  radioChangedHandler(event:any){
+    console.log(event.target.value);
+    this.CORRECT_OPTION_VALUE = event.target.value;
   }
-
 
 
 

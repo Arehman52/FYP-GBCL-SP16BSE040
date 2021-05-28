@@ -134,7 +134,7 @@ router.post("/getAllLabTasksOfThisLabFromDB", (req, res, next) => {
 
 
 router.post("/getAllChallengesOfThisLabFromDB", (req, res, next) => {
-  LabChallenge.find({LabJoinCode :req.body.LabJoinCode}).then((documents) => {
+  LabChallenge.find({LabJoinCode: req.body.LabJoinCode}).then((documents) => {
     console.log("getAllChallengesOfThisLabFromDB == documents> ",documents);
     res.status(200).json({
       message: "All Lab Challenges Of This Lab From DB Downloaded.",
@@ -151,16 +151,16 @@ router.post("/getAllChallengesOfThisLabFromDB", (req, res, next) => {
 
 
 // GetAllLabChallengesFromDB
-// router.get("/GetAllLabChallengesFromDB", (req, res, next) => {
-//   LabChallenge.find().then((documents) => {
-//     res.status(200).json({
-//       message: "All Lab Challenges Downloaded.",
-//       labChallenges: documents,
-//     });
+router.get("/GetAllLabChallengesFromDB", (req, res, next) => {
+  LabChallenge.find().then((documents) => {
+    res.status(200).json({
+      message: "All Lab Challenges Downloaded.",
+      labChallenges: documents,
+    });
 
-//     console.log("   ==> {/GetAllLabChallengesFromDB} All Lab Challenges were downloaded.");
-//   });
-// });
+    console.log("   ==> {/GetAllLabChallengesFromDB} All Lab Challenges were downloaded.");
+  });
+});
 
 
 

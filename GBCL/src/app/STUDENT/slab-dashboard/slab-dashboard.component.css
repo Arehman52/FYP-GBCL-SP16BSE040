@@ -41,7 +41,7 @@ color: #FFC107;}
 .logoText{
   font-size: 20px;
   color: #333F4F;
-  font-weight: bolder;
+  /* font-weight: bolder; */
   margin: 2% 0%;
 }
 #logoImg{
@@ -60,12 +60,12 @@ color: #FFC107;}
 .hoverYellow :hover{
   color: #FFC107;
   text-decoration: none;
-  font-weight: bolder;
+  /* font-weight: bolder; */
 }
 .childSpansHoverYellow span:hover{
   color: #FFC107;
   text-decoration: none;
-  font-weight: bold;
+  /* font-weight: bold; */
   cursor: pointer;
 }
 
@@ -75,7 +75,7 @@ font-size: 12px;
 
 .Text10pxItalicYellow:hover{
   color: white;
-  font-weight: bolder;
+  /* font-weight: bolder; */
 }
 .Text10pxItalicYellow{
 font-size: 10px;
@@ -98,7 +98,7 @@ font-style: italic;
   height: 32px;
   margin-bottom: 7px;
   font-size: 14px;
-  font-weight: bold;
+  /* font-weight: bold; */
   text-align: center;
 
 }
@@ -126,7 +126,7 @@ hr{
   color:whitesmoke;
   font-size: 2em;
   background-color:  rgba(3, 2, 53, 0.85);
-  font-weight: bolder;
+  /* font-weight: bolder; */
   text-transform: uppercase;
   border-radius: 2px;
   padding-left: 8%;

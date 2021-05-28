@@ -68,8 +68,8 @@ export class LabsService {
   }
 
 
-  getAllChallengesOfThisLabFromDB(objLabID: { LabId: string; }): LabChallengesmodel[] {
-    console.log('objLabID.LabId',objLabID.LabId);
+  getAllChallengesOfThisLabFromDB(objLabID: { LabJoinCode: string }): LabChallengesmodel[] {
+    console.log('objLabID.LabId',objLabID.LabJoinCode);
     let allChallengesOfThisLabFromDB: LabChallengesmodel[] = [];
     this.http
       .post<{ message: string; AllChallengesOfThisLabFromDB: LabChallengesmodel[] }>(

@@ -96,7 +96,7 @@ router.post(
   (req, res, next) => {
     StudentAttemptedLabChallenge.find({
       StudentzUsername: req.body.StudentzUsername,
-      LabJoinCode: req.body.LabJoinCode,
+      LabJoinCode: req.body.LabJoinCode
     })
       .then((document) => {
         console.log("document::....", document);

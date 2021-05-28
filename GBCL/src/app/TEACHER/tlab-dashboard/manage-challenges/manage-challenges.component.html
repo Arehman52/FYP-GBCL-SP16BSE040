@@ -236,21 +236,92 @@
                     </div>
                     <!--sdgsd  -->
 
+
+
+
+
+
+
+
+<!--
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio"
+                        [value]="unAttemptedChallenges[this.i]?.ChallengeOptionA"
+                        (change)="radioChangedHandler($event)">
+                        {{unAttemptedChallenges[this.i]?.ChallengeOptionA}}
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio"
+                        [value]="unAttemptedChallenges[this.i]?.ChallengeOptionB"
+                        (change)="radioChangedHandler($event)">
+                        {{unAttemptedChallenges[this.i]?.ChallengeOptionB}}
+                      </label>
+                    </div>
+                    <div class="form-check disabled">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio"
+                        [value]="unAttemptedChallenges[this.i]?.ChallengeOptionC"
+                        (change)="radioChangedHandler($event)">
+                        {{unAttemptedChallenges[this.i]?.ChallengeOptionC}}
+                      </label>
+                    </div>
+                    <div class="form-check disabled">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio"
+                        [value]="unAttemptedChallenges[this.i]?.ChallengeOptionD"
+                        (change)="radioChangedHandler($event)">
+                        {{unAttemptedChallenges[this.i]?.ChallengeOptionD}}
+                      </label>
+                    </div> -->
+
+
+
+
+
+
+
+
+
+
                     <div *ngIf="ChallengeTypeSelect.value == 'MCQ'">
                       <div class="row">
                         <div class="form-group col-6">
-                          <input class="form-control" type="text" name="optionA" ngModel placeholder="Enter Option A*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio"
+                            [value]="createLabChallengeForm.value.optionA"
+                            (change)="radioChangedHandler($event)">
+                            <input class="form-control" type="text" name="optionA" ngModel placeholder="Enter Option A*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                          </label>
                         </div>
                         <div class="form-group col-6">
-                          <input class="form-control" type="text" name="optionB" ngModel placeholder="Enter Option B*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio"
+                            [value]="createLabChallengeForm.value.optionB"
+                            (change)="radioChangedHandler($event)">
+                            <input class="form-control" type="text" name="optionB" ngModel placeholder="Enter Option B*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                          </label>
+
                         </div>
                       </div>
                       <div class="row">
                         <div class="form-group col-6">
-                          <input class="form-control" type="text" name="optionC" ngModel placeholder="Enter Option C*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio"
+                            [value]="createLabChallengeForm.value.optionC"
+                            (change)="radioChangedHandler($event)">
+                            <input class="form-control" type="text" name="optionC" ngModel placeholder="Enter Option C*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                          </label>
                         </div>
                         <div class="form-group col-6">
-                          <input class="form-control" type="text" name="optionD" ngModel placeholder="Enter Option D*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                          <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio"
+                            [value]="createLabChallengeForm.value.optionD"
+                            (change)="radioChangedHandler($event)">
+                            <input class="form-control" type="text" name="optionD" ngModel placeholder="Enter Option D*" (keyup)="checkAllOptionsNotFilled(createLabChallengeForm)">
+                          </label>
                         </div>
                       </div>
                       <small class="form-text alert alert-danger"

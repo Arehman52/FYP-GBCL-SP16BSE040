@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { NumericTypes } from 'mongoose';
 import { LabChallengesmodel } from 'src/app/MODELS/Lab-Frontend-Models/labchallengesmodel.model';
 import { StudentAttemptedLabChallengemodel } from 'src/app/MODELS/Student-Frontend-Models/StudentAttemptedLabChallengesmodel.model';
@@ -26,7 +27,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     this.LabID = localStorage.getItem("LabID");
 
 
-    let objLabJoinCode: { LabId: string } = { LabId: this.LabID };
+    let objLabJoinCode: { LabJoinCode: string } = { LabJoinCode: this.LabID };
     // getAllChallengesOfThisLabFromDB
     this.AllLabChallengesOfThisLabFromDB = this.labsService.getAllChallengesOfThisLabFromDB(objLabJoinCode);
     this.AllStudentAttemptedChallengesOfthisStudandThisLab = this.studentLabDataService.RecieveAllStudentAttemptedChallengesOfthisStudandThisLab(this.LabID, this.localStorageUsername);
@@ -181,13 +182,26 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     clearInterval(this.interval);
   }
   // timer code ---->
-  nextQuestion() {
+
+
+
+
+  radioChangedHandler(event:any){
+    console.log(event.target.value);
+  }
+
+
+  onSubmitChallenge(ChallengesForm: NgForm) {
+
+
+
+
     this.i++;
     // window.alert(this.challenges.length + 1);
-    this.timeLeft = this.challenges[this.i].time;
-    console.log(this.i);
-    console.log(this.challenges.length);
-    if (this.i == this.LENGTH_unAttemptedChallenges) {
+    this.timeLeft = this.unAttemptedChallenges[this.i].ChallengeAllowedTime;
+    // console.log(this.i);
+    // console.log(this.challenges.length);
+    if (this.i == this.LENGTH_unAttemptedChallenges - 1) {
       this.i = 0;
     }
   }

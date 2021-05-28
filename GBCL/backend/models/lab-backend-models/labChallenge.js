@@ -12,6 +12,7 @@ const labChallengeSchema = mongoose.Schema({
   ChallengeOptionB: String,
   ChallengeOptionC: String,
   ChallengeOptionD: String,
+  ChallengeCorrectOption: String,
   ChallengeXPs: Number,
   ChallengeAllowedTime: Number,
   AttemptedByStudents: [String]

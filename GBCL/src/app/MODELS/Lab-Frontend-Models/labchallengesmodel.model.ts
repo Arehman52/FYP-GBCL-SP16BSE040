@@ -8,6 +8,7 @@ export interface LabChallengesmodel {
   ChallengeOptionB: string,
   ChallengeOptionC: string,
   ChallengeOptionD: string,
+  ChallengeCorrectOption: string,
   ChallengeXPs: number,
   ChallengeAllowedTime: number,
   AttemptedByStudents: string[]

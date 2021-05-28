@@ -14,9 +14,9 @@ export class StudentLabDataService {
 
 
   RecieveAllStudentAttemptedChallengesOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabChallengemodel[] {
-    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabChallengemodel = {  AttemptedLabChallenge_id: '',
-    ChallengeAttempted:true, GainedXPs: 0, LabJoinCode: LabJoinCode, StudentzUsername: StudentzUsername, _id: '',
-  ChallengeCheated:false,ChallengeChecked:false,ChallengeFailedDueToTimeShortage:false,LabChallengeAnswerOptionA:'',LabChallengeAnswerOptionB:'', LabChallengeAnswerOptionC:'',LabChallengeAnswerOptionD: '', LabChallengeQuestion:'' ,LabChallengeQuestionType:'' };
+    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabChallengemodel = {  AttemptedLabChallenge_id: null,
+    ChallengeAttempted:null, GainedXPs: null, LabJoinCode: LabJoinCode, StudentzUsername: StudentzUsername, _id: null,
+  ChallengeCheated:null,ChallengeChecked:null,ChallengeFailedDueToTimeShortage:null,LabChallengeAnswerOptionA:null,LabChallengeAnswerOptionB:null, LabChallengeAnswerOptionC:null,LabChallengeAnswerOptionD: null, LabChallengeQuestion:null ,LabChallengeQuestionType:null };
 
     var allStudentAttemptedChallengesOfthisStudandThisLab: StudentAttemptedLabChallengemodel[] = [];
     this.http

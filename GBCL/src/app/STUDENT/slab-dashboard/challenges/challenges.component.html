@@ -121,51 +121,91 @@
         </div>
         <div class="col-sm-4 my-auto"> <span *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{timeLeft}} Seconds Left</span></div>
       </div>
+      <form (submit)="onSubmitChallenge(ChallengesForm)" name="challengesForm" #ChallengesForm="ngForm">
+        <div class="row">
 
-      <div class="row">
+          <div class="col-sm-8 bg-light rounded pt-4 pl-5 minHeight40vh">
+            <h5 *ngIf="!SHOW_CHALLENGE_RELATED_DIVS">Either you have completed all challenges or no challenges are yet
+              assigned to this lab</h5>
 
-        <div class="col-sm-8 bg-light rounded pt-4 pl-5 minHeight40vh">
-          <h5  *ngIf="!SHOW_CHALLENGE_RELATED_DIVS">Either you have completed all challenges or no challenges are yet assigned to this lab</h5>
-
-          <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">
-            <h4>Question {{this.unAttemptedChallenges?.length - this.unAttemptedChallenges?.length +1}} of {{this.unAttemptedChallenges?.length}}:</h4>
+            <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">
+              <h4>Question {{this.i+1}} of {{this.unAttemptedChallenges?.length}}:</h4>
 
 
-            <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestion}} </div>
-            <div *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType == 'MCQ'">
-              a. {{unAttemptedChallenges[this.i]?.ChallengeOptionA}} <br>
+              <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestion}} </div>
+              <div *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType == 'MCQ'">
+
+
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio"
+                    [value]="unAttemptedChallenges[this.i]?.ChallengeOptionA"
+                    (change)="radioChangedHandler($event)">
+                    {{unAttemptedChallenges[this.i]?.ChallengeOptionA}}
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio"
+                    [value]="unAttemptedChallenges[this.i]?.ChallengeOptionB"
+                    (change)="radioChangedHandler($event)">
+                    {{unAttemptedChallenges[this.i]?.ChallengeOptionB}}
+                  </label>
+                </div>
+                <div class="form-check disabled">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio"
+                    [value]="unAttemptedChallenges[this.i]?.ChallengeOptionC"
+                    (change)="radioChangedHandler($event)">
+                    {{unAttemptedChallenges[this.i]?.ChallengeOptionC}}
+                  </label>
+                </div>
+                <div class="form-check disabled">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio"
+                    [value]="unAttemptedChallenges[this.i]?.ChallengeOptionD"
+                    (change)="radioChangedHandler($event)">
+                    {{unAttemptedChallenges[this.i]?.ChallengeOptionD}}
+                  </label>
+                </div>
+                <!-- <input class="form-check-input" type="radio" value="dog"
+                 name="gob" value="i" [checked]="true"
+                (change)="onItemChange($event.target.value)"/> -->
+
+                <!-- a. {{unAttemptedChallenges[this.i]?.ChallengeOptionA}} <br>
               b. {{unAttemptedChallenges[this.i]?.ChallengeOptionB}} <br>
               c. {{unAttemptedChallenges[this.i]?.ChallengeOptionC}} <br>
-              d. {{unAttemptedChallenges[this.i]?.ChallengeOptionD}} <br>
+              d. {{unAttemptedChallenges[this.i]?.ChallengeOptionD}} <br> -->
+              </div>
+            </div>
           </div>
+          <div class="col-sm-4">
+
+            <div class="container border border-warning rounded mt-1 text-light">
+              <h5 class="text-center">Current Stats</h5>
+            </div>
+            <div class="container border border-warning rounded text-light">
+
+              <p class="mt-1">Current XPs: <span>{{CURRENT_XPs}}</span></p>
+
+              <p class="mct-1">Current Level: <span>{{CURRENT_LEVEL}}</span></p>
+              <p class="mct-1">XPs required for promotion: <span>{{XPs_FOR_PROMOTION}}</span> </p>
+              <p class="mct-1">Current Badge: <span>{{CURRENT_BADGE}}</span> </p>
+              <p class="mct-1">Next Badge: <span>{{NEXT_BADGE}}</span> </p>
+
+
+
+            </div>
           </div>
         </div>
-        <div class="col-sm-4">
 
-          <div class="container border border-warning rounded mt-1 text-light">
-            <h5 class="text-center">Current Stats</h5>
-          </div>
-          <div class="container border border-warning rounded text-light">
-
-            <p class="mt-1">Current XPs: <span>{{CURRENT_XPs}}</span></p>
-
-            <p class="mct-1">Current Level: <span>{{CURRENT_LEVEL}}</span></p>
-            <p class="mct-1">XPs required for promotion: <span>{{XPs_FOR_PROMOTION}}</span> </p>
-            <p class="mct-1">Current Badge: <span>{{CURRENT_BADGE}}</span> </p>
-            <p class="mct-1">Next Badge: <span>{{NEXT_BADGE}}</span> </p>
-
-
-
+        <div class="row">
+          <div class="col-8 mt-1">
+            <button type="submit" class="btn btn-small px-4 float-right btn-outline-warning" >Submit
+              Challenge</button>
+            <!-- <button class="btn btn-small px-4 float-right btn-outline-warning mr-1" (click)="takeHint()">take hint</button> -->
           </div>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-8 mt-1">
-          <button class="btn btn-small px-4 float-right btn-outline-warning" (click)="nextQuestion()">next</button>
-          <!-- <button class="btn btn-small px-4 float-right btn-outline-warning mr-1" (click)="takeHint()">take hint</button> -->
-        </div>
-      </div>
-
+      </form>
     </div>
   </div>
