@@ -27,8 +27,9 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn w-100  border border-warning" [routerLink]="'/STUDENT/Lab'" title="Gamification Based Coding Labs"><img
-              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+          <a class="btn w-100  border border-warning" [routerLink]="'/STUDENT/Lab'"
+            title="Gamification Based Coding Labs"><img src="../../assets/images/logo.png" alt="logo"
+              id="logoImg"><b>GBCL</b></a>
         </div>
 
         <!-- GBCL LOGO COLUMN-END -->
@@ -129,7 +130,8 @@
               assigned to this lab</h5>
 
             <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">
-              <h4 *ngIf="this.i<=this.unAttemptedChallenges?.length" >Question {{this.i+1}} of {{this.unAttemptedChallenges?.length}}:</h4>
+              <h4 *ngIf="this.i<this.unAttemptedChallenges?.length">Question {{this.i+1}} of
+                {{this.unAttemptedChallenges?.length}}:</h4>
 
 
               <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestion}} </div>
@@ -173,11 +175,13 @@
               c. {{unAttemptedChallenges[this.i]?.ChallengeOptionC}} <br>
               d. {{unAttemptedChallenges[this.i]?.ChallengeOptionD}} <br> -->
               </div>
+              <div *ngIf="this.i<this.unAttemptedChallenges?.length">
+                <div class="form-group p-0 m-0" *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType != 'MCQ'">
+                  <textarea class="form-control m-0" name="theAnswer" ngModel
+                    (keyup)="checkNonMCQAnswer(ChallengesForm.value.theAnswer)" spellcheck="false"
+                    placeholder="** Required **  Write your answer here..." rows="4" cols="60"></textarea>
+                </div>
 
-              <div class="form-group p-0 m-0" *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType != 'MCQ'">
-                <textarea class="form-control m-0" name="theAnswer" ngModel
-                (keyup)="checkNonMCQAnswer(ChallengesForm.value.theAnswer)" spellcheck="false" placeholder="** Required **  Write your answer here..."
-                  rows="4" cols="60"></textarea>
               </div>
 
             </div>
@@ -204,7 +208,8 @@
 
         <div class="row">
           <div class="col-8 mt-1">
-            <button type="submit" [disabled]="this.unAttemptedChallenges.length==0 || this.Errors.emptyField.status" class="btn btn-small px-4 float-right btn-outline-warning">Submit
+            <button type="submit" [disabled]="this.unAttemptedChallenges.length==0 || this.Errors.emptyField.status"
+              class="btn btn-small px-4 float-right btn-outline-warning">Submit
               Challenge</button>
             <!-- <button class="btn btn-small px-4 float-right btn-outline-warning mr-1" (click)="takeHint()">take hint</button> -->
           </div>
@@ -227,3 +232,26 @@
       </form>
     </div>
   </div>
+
+  <div class="modal" id="demotionModallll" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark errorMessageModal">
+        <div class="modal-header">
+          <h5 class="modal-title errorMessageModal font16">{{MODAL_HEADING}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body font16">
+          <small>{{MODAL_MESSAGE}}</small>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" id="LevelUpdatedModalButton" class="d-none" #modalButton data-toggle="modal"
+    data-target="#demotionModallll">
+
+  </button>

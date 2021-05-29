@@ -225,7 +225,7 @@ export class ManageChallengesComponent implements OnInit {
     },
     AllowedTimeNotAssigned: {
       status: true,
-      message: 'Allowed time must be more than 15 seconds.',
+      message: 'Allowed time must be at least 15 seconds.',
     },
     ChallengeXpsNotSelected: {
       status: true,
