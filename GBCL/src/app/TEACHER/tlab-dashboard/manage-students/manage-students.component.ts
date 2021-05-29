@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LabJoinRequestsmodel } from 'src/app/MODELS/Lab-Frontend-Models/labJoinRequestsmodel.model';
+import { StudentActivityHistorymodel } from 'src/app/MODELS/Student-Frontend-Models/StudentActivityHistorymodel.model';
+import { StudentzUsernameAndLabJoinCodemodel } from 'src/app/MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
@@ -12,10 +14,9 @@ import { UsersService } from 'src/app/Services/users.service';
 })
 export class ManageStudentsComponent implements OnInit {
 
-  constructor(private studentLabDataService:StudentLabDataService ,private usersService: UsersService) { }
+  constructor(private studentLabDataService: StudentLabDataService, private usersService: UsersService) { }
 
   ngOnInit(): void {
-
     this.setAllErrorsToFalse();
 
     this.LabID = localStorage.getItem("LabID");
@@ -54,13 +55,72 @@ export class ManageStudentsComponent implements OnInit {
 
 
   onWarnButtonClicked(LabMemberStudent: Usersmodel) {
-    alert("In studentsData, set Warned=true on click of this button.\nDecrement 40XPs in student's XPs. and update student activityHistory.");
+    if(confirm(("By Warning this student, you are deducting their 50XPs."))){
+      let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: LabMemberStudent.Username };
+      let STUDz_FETCHED_STATS_FROM_Db:StudLabDataAndStatsmodel[] = [];
+      STUDz_FETCHED_STATS_FROM_Db = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
+
+      setTimeout(() => {
+
+
+        if(STUDz_FETCHED_STATS_FROM_Db[0].Warned){
+          alert("You already have warned this student once, you cannot warn this student again.");
+        }else{
+
+        STUDz_FETCHED_STATS_FROM_Db[0].Warned = true;
+        STUDz_FETCHED_STATS_FROM_Db[0].currentXPs -= 50;
+        this.studentLabDataService.updateCurrentStatsOfThisStudent(STUDz_FETCHED_STATS_FROM_Db[0]
+          , StudentzUsernameAndLabID);
+
+        let studhistory: StudentActivityHistorymodel = {
+          GainedOrLoosedXPsCount: 50, LabChallengeQuestion: '',
+          LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: this.localStorageUsername, _id: '', wasAppreciated: false, wasDemoted: false, wasPromoted: false, wasWarned: true
+        };
+
+
+        this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+        }
+
+      }, 1500);
+
+
+    }
 
   }
 
 
   onAppreciateButtonClicked(LabMemberStudent: Usersmodel) {
-    alert("In studentsData, set Appreciated=true on click of this button.\nIncrement 40XPs in student's XPs. and update student activityHistory.");
+    if(confirm(("By appreciating this student, you are awarding 50XPs to them."))){
+      let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: LabMemberStudent.Username };
+      let STUDz_FETCHED_STATS_FROM_Db:StudLabDataAndStatsmodel[] = [];
+      STUDz_FETCHED_STATS_FROM_Db = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
+
+      setTimeout(() => {
+
+
+        if(STUDz_FETCHED_STATS_FROM_Db[0].Appreciated){
+          alert("You already have appreciated this student once, you cannot appreciate this student again.");
+        }else{
+
+        STUDz_FETCHED_STATS_FROM_Db[0].Appreciated = true;
+        STUDz_FETCHED_STATS_FROM_Db[0].currentXPs += 50;
+        this.studentLabDataService.updateCurrentStatsOfThisStudent(STUDz_FETCHED_STATS_FROM_Db[0]
+          , StudentzUsernameAndLabID);
+
+        let studhistory: StudentActivityHistorymodel = {
+          GainedOrLoosedXPsCount: 50, LabChallengeQuestion: '',
+          LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: this.localStorageUsername, _id: '', wasAppreciated: true, wasDemoted: false, wasPromoted: false, wasWarned: false
+        };
+
+
+        this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+        }
+
+      }, 1500);
+
+
+    }
+
 
   }
   onExpelButtonClicked(LabMemberStudent: Usersmodel) {
@@ -69,10 +129,9 @@ export class ManageStudentsComponent implements OnInit {
   }
 
 
+  viewingStatsOfThisStudent: StudLabDataAndStatsmodel[] = [];
 
   viewStatsButtonClicked(LabMemberStudent: Usersmodel) {
-    alert("Fetch stats of the student passed in parameter on click of this button");
-
     if (this.ViewStats == false) {
       this.ViewStats = true;
       this.ViewStatsButtonText = "Hide Statistics";
@@ -80,6 +139,13 @@ export class ManageStudentsComponent implements OnInit {
       this.ViewStatsButtonText = "View Statistics";
       this.ViewStats = false;
     }
+    let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: LabMemberStudent.Username };
+    // let STUDz_FETCHED_STATS_FROM_Db:StudLabDataAndStatsmodel[] = [];
+    this.viewingStatsOfThisStudent = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
+
+    setTimeout(() => {
+
+    },700);
   }
 
   onAcceptLabJoinRequestButtonClicked(StudentzLabJoinRequest: Usersmodel) {
@@ -98,7 +164,7 @@ export class ManageStudentsComponent implements OnInit {
       StudentzLabJoinRequest.LabJoinCodesOfJoinedLabs.push(this.LabID);
       let studLabDataAndStatsFreshRecord: StudLabDataAndStatsmodel = {
         _id: '', Appreciated: false, LabJoinCode: this.LabID, LevelUpdateViewed: false, RivalStudents: [],
-        StudentzLabAccessStatus: 'Allowed', StudentzUsername: StudentzLabJoinRequest.Username, Warned: false,Demoted:false,Promoted:true,
+        StudentzLabAccessStatus: 'Allowed', StudentzUsername: StudentzLabJoinRequest.Username, Warned: false, Demoted: false, Promoted: true,
         currentBadge: 'Beginner I', currentCPPs: 0, currentLevel: 0, currentXPs: 0
       };
 

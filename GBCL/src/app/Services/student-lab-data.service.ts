@@ -4,6 +4,7 @@ import { StudLabDataAndStatsmodel } from '../MODELS/Student-Frontend-Models/Stud
 import { StudentAttemptedLabChallengemodel } from '../MODELS/Student-Frontend-Models/StudentAttemptedLabChallengesmodel.model';
 import { StudentAttemptedLabTaskmodel } from '../MODELS/Student-Frontend-Models/StudentAttemptedLabTaskmodel.model';
 import { StudentzUsernameAndLabJoinCodemodel } from '../MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
+import { StudentActivityHistorymodel } from '../MODELS/Student-Frontend-Models/StudentActivityHistorymodel.model';
 
 @Injectable({
   providedIn: 'root'
@@ -181,6 +182,19 @@ export class StudentLabDataService {
   createFreshStudentLabDataRecord(studLabDataAndStatsFreshRecord: StudLabDataAndStatsmodel) {
 
     this.http.post('http://localhost:3000/api/StudentLabData/createFreshStudentLabDataRecord', studLabDataAndStatsFreshRecord)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
+
+
+  }
+
+
+
+
+  createAStudentActivityHistoryDocument(objStudentActivityHistorymodel: StudentActivityHistorymodel) {
+
+    this.http.post('http://localhost:3000/api/StudentLabData/createAStudentActivityHistoryDocument', objStudentActivityHistorymodel)
       .subscribe((responseData) => {
         console.log(responseData);
       });

@@ -5,6 +5,7 @@ const express = require("express");
 const StudLabDataAndStats = require("../models/student-backend-models/StudLabDataAndStats");
 const StudentAttemptedLabChallenge = require("../models/student-backend-models/StudentAttemptedLabChallenge");
 const StudentAttemptedLabTask = require("../models/student-backend-models/StudentAttemptedLabTask");
+const StudentActivityHistory = require("../models/student-backend-models/StudentActivityHistory");
 const router = express.Router();
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -272,6 +273,55 @@ router.delete(
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
+router.post("/createAStudentActivityHistoryDocument", (req, res, next) => {
+  const studentActivityHistory = new StudentActivityHistory({
+  LabJoinCode: req.body.LabJoinCode,         //foreign key
+  StudentzUsername: req.body.StudentzUsername,    //foreign key
+  wasPromoted: req.body.wasPromoted,
+  wasDemoted: req.body.wasDemoted,
+  wasWarned: req.body.wasWarned,
+  wasAppreciated: req.body.wasAppreciated,
+
+  LabTaskQuestion: req.body.LabTaskQuestion,
+  LabChallengeQuestionType: req.body.LabChallengeQuestionType,
+  LabChallengeQuestion: req.body.LabChallengeQuestion,
+  GainedOrLoosedXPsCount: req.body.GainedOrLoosedXPsCount,
+
+  LabTaskOrChallengeAttempted: req.body.LabTaskOrChallengeAttempted,
+  LabTaskOrChallengeChecked: req.body.LabTaskOrChallengeChecked,
+  LabTaskOrChallengeFailedDueToTimeout: req.body.LabTaskOrChallengeFailedDueToTimeout
+  });
+
+  studentActivityHistory
+    .save()
+    .then((result) => {
+      res.status(201).json({
+        message: "create A Student Activity History Document",
+        result: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
+
+  console.log(
+    "   ==> {/createAStudentActivityHistoryDocument } req.body.StudentzUsername == ",
+    studentActivityHistory
+  );
+});
+
+
+
+
+
+
+
+
+
+
+
 router.post("/createFreshStudentLabDataRecord", (req, res, next) => {
   const studLabDataAndStats = new StudLabDataAndStats({
     LabJoinCode: req.body.LabJoinCode, //as a foreign key
@@ -308,6 +358,16 @@ router.post("/createFreshStudentLabDataRecord", (req, res, next) => {
     studLabDataAndStats
   );
 });
+
+
+
+
+
+
+
+
+
+
 
 router.delete(
   "/deleteCurrentStatsOfThisStudent/:StudentzUsername",
