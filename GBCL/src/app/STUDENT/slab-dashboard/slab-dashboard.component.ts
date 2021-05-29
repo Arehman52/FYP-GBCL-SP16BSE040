@@ -45,12 +45,12 @@ export class SlabDashboardComponent implements OnInit {
           this.displayThisMessageInModal("Hurrah!! You were Promoted.","YOUR NEW BADGE IS : "+this.CURRENT_BADGE);
         }
 
-        if(this.CurrentStatsOfThisStudent[0].Warned && this.CurrentStatsOfThisStudent[0].WarnedStatusViewed==false){
+        if(this.CurrentStatsOfThisStudent[0].Warned){
           this.displayThisMessageInModal("WARNING!!...","You were warned by the teacher, 50 XPs are deducted");
         }
 
 
-        if(this.CurrentStatsOfThisStudent[0].Appreciated && this.CurrentStatsOfThisStudent[0].AppreciatedStatusViewed == false){
+        if(this.CurrentStatsOfThisStudent[0].Appreciated){
           this.displayThisMessageInModal("GOOD NEWS!!...","You were Appreciated by the teacher, 50 XPs are given as a bonus.");
         }
 

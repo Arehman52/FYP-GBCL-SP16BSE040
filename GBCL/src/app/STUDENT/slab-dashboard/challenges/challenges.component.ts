@@ -49,6 +49,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     this.startTimer();
     setTimeout(() => {
       this.CURRENT_XPs = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs;
+      this.COPY_CURRENT_XPs = this.CURRENT_XPs;
       this.CURRENT_BADGE = this.gamificationService.getCurrentBadge(this.CURRENT_XPs);
       this.NEXT_BADGE = this.gamificationService.getNextBadge(this.CURRENT_XPs);
       this.XPs_FOR_PROMOTION = this.gamificationService.getXPsForPromotion(this.CURRENT_XPs);
@@ -77,6 +78,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   XPs_FOR_PROMOTION: number = 0;
   CURRENT_LEVEL: number = 0;
   CURRENT_XPs: number = 0;
+  COPY_CURRENT_XPs: number = 0;
   CHANGED_XP: number = 10;
   UNCHANGED_STATS: number = 1;
   SHOW_CHALLENGE_RELATED_DIVS: boolean = false;
@@ -302,25 +304,6 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     }
 
 
-    // let updatedStatsOfThisStudent: StudLabDataAndStatsmodel = {
-    //   LabJoinCode: this.STUDz_FETCHED_STATS_FROM_Db[0].LabJoinCode,
-    //   _id: this.STUDz_FETCHED_STATS_FROM_Db[0]._id,
-    //   StudentzUsername: this.STUDz_FETCHED_STATS_FROM_Db[0].StudentzUsername,
-    //   Appreciated: this.STUDz_FETCHED_STATS_FROM_Db[0].Appreciated,
-    //   Demoted: this.STUDz_FETCHED_STATS_FROM_Db[0].Demoted,
-    //   Promoted: this.STUDz_FETCHED_STATS_FROM_Db[0].Promoted,
-    //   RivalStudents: this.STUDz_FETCHED_STATS_FROM_Db[0].RivalStudents,
-    //   StudentzLabAccessStatus: this.STUDz_FETCHED_STATS_FROM_Db[0].StudentzLabAccessStatus,
-    //   Warned: this.STUDz_FETCHED_STATS_FROM_Db[0].Warned,
-
-    //   //following fields might change here
-    //   currentBadge: this.STUDz_FETCHED_STATS_FROM_Db[0].currentBadge,
-    //   currentCPPs: this.STUDz_FETCHED_STATS_FROM_Db[0].currentCPPs,
-    //   LevelUpdateViewed: this.STUDz_FETCHED_STATS_FROM_Db[0].LevelUpdateViewed,
-    //   currentLevel: this.STUDz_FETCHED_STATS_FROM_Db[0].currentLevel,
-    //   currentXPs: this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs
-    // }
-
 
 
 
@@ -419,6 +402,9 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     ///////////////// below code of onSubmitLabchallenge is for next challenge... do not change
 
     let opt;
+    let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername };
+    this.STUDz_FETCHED_STATS_FROM_Db = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
+    setTimeout(()=>{this.CURRENT_XPs = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs},500);
     setTimeout(() => {
       if (opt = confirm("Ready for next challenge.")) {
         ChallengesForm.reset();
@@ -431,7 +417,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
           this.startTimer();
           // console.log(this.i);
           // console.log(this.challenges.length);
-          if (this.i == this.LENGTH_unAttemptedChallenges) {
+          if (this.i == this.LENGTH_unAttemptedChallenges - 1)  {
             // this.i = 0;
             alert("You have completed all challenges for now, come back soon for more challenges");
             window.location.href = "/STUDENT/Lab";
