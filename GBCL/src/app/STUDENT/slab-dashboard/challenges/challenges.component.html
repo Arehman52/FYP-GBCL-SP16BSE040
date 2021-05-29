@@ -27,7 +27,7 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn w-100  border border-warning" [routerLink]="'/'" title="Gamification Based Coding Labs"><img
+          <a class="btn w-100  border border-warning" [routerLink]="'/STUDENT/Lab'" title="Gamification Based Coding Labs"><img
               src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
         </div>
 
@@ -139,32 +139,28 @@
                 <div class="form-check">
                   <label class="form-check-label">
                     <input type="radio" class="form-check-input" name="optradio"
-                    [value]="unAttemptedChallenges[this.i]?.ChallengeOptionA"
-                    (change)="radioChangedHandler($event)">
+                      [value]="unAttemptedChallenges[this.i]?.ChallengeOptionA" (change)="radioChangedHandler($event)">
                     {{unAttemptedChallenges[this.i]?.ChallengeOptionA}}
                   </label>
                 </div>
                 <div class="form-check">
                   <label class="form-check-label">
                     <input type="radio" class="form-check-input" name="optradio"
-                    [value]="unAttemptedChallenges[this.i]?.ChallengeOptionB"
-                    (change)="radioChangedHandler($event)">
+                      [value]="unAttemptedChallenges[this.i]?.ChallengeOptionB" (change)="radioChangedHandler($event)">
                     {{unAttemptedChallenges[this.i]?.ChallengeOptionB}}
                   </label>
                 </div>
                 <div class="form-check disabled">
                   <label class="form-check-label">
                     <input type="radio" class="form-check-input" name="optradio"
-                    [value]="unAttemptedChallenges[this.i]?.ChallengeOptionC"
-                    (change)="radioChangedHandler($event)">
+                      [value]="unAttemptedChallenges[this.i]?.ChallengeOptionC" (change)="radioChangedHandler($event)">
                     {{unAttemptedChallenges[this.i]?.ChallengeOptionC}}
                   </label>
                 </div>
                 <div class="form-check disabled">
                   <label class="form-check-label">
                     <input type="radio" class="form-check-input" name="optradio"
-                    [value]="unAttemptedChallenges[this.i]?.ChallengeOptionD"
-                    (change)="radioChangedHandler($event)">
+                      [value]="unAttemptedChallenges[this.i]?.ChallengeOptionD" (change)="radioChangedHandler($event)">
                     {{unAttemptedChallenges[this.i]?.ChallengeOptionD}}
                   </label>
                 </div>
@@ -177,6 +173,13 @@
               c. {{unAttemptedChallenges[this.i]?.ChallengeOptionC}} <br>
               d. {{unAttemptedChallenges[this.i]?.ChallengeOptionD}} <br> -->
               </div>
+
+              <div class="form-group p-0 m-0" *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType != 'MCQ'">
+                <textarea class="form-control m-0" name="theAnswer" ngModel
+                (keyup)="checkNonMCQAnswer(ChallengesForm.value.theAnswer)" spellcheck="false" placeholder="** Required **  Write your answer here..."
+                  rows="4" cols="60"></textarea>
+              </div>
+
             </div>
           </div>
           <div class="col-sm-4">
@@ -201,9 +204,24 @@
 
         <div class="row">
           <div class="col-8 mt-1">
-            <button type="submit" class="btn btn-small px-4 float-right btn-outline-warning" >Submit
+            <button type="submit" [disabled]="this.unAttemptedChallenges.length==0 || this.Errors.emptyField.status" class="btn btn-small px-4 float-right btn-outline-warning">Submit
               Challenge</button>
             <!-- <button class="btn btn-small px-4 float-right btn-outline-warning mr-1" (click)="takeHint()">take hint</button> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <small class="form-text alert alert-success" *ngIf="this.Errors.ChallengePassed.status">
+              {{this.Errors.ChallengePassed.message}}
+            </small>
+            <small class="form-text alert alert-danger" *ngIf="this.Errors.ChallengeFailed.status">
+              {{this.Errors.ChallengeFailed.message}}
+            </small>
+            <small class="form-text alert alert-success" *ngIf="this.Errors.ChallengeSubmitted.status">
+              {{this.Errors.ChallengeSubmitted.message}}
+            </small>
+
+
           </div>
         </div>
       </form>

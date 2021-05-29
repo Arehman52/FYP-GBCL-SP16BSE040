@@ -61,6 +61,40 @@ router.put("/UpdateThisLab/:Id", (req, res, next) => {
 
 
 
+router.put("/UpdateThisLabChallenge/:Id", (req, res, next) => {
+  const labChallenge = new LabChallenge({
+    _id: req.body._id,
+    LabJoinCode: req.body.LabJoinCode,
+    ChallengeQuestionType: req.body.ChallengeQuestionType,
+    ChallengeQuestion: req.body.ChallengeQuestion,
+    ChallengeOptionA: req.body.ChallengeOptionA,
+    ChallengeOptionB: req.body.ChallengeOptionB,
+    ChallengeOptionC: req.body.ChallengeOptionC,
+    ChallengeOptionD: req.body.ChallengeOptionD,
+    ChallengeCorrectOption: req.body.ChallengeCorrectOption,
+    ChallengeXPs: req.body.ChallengeXPs,
+    ChallengeAllowedTime: req.body.ChallengeAllowedTime,
+    AttemptedByStudents: req.body.AttemptedByStudents
+  });
+
+  LabChallenge.updateOne({ _id: req.params.Id }, labChallenge).then((result) => {
+    res.status(200).json({
+      message: "Lab Challenge of type: "+req.body.ChallengeQuestionType+" Updated!",
+      result: result,
+    });
+  });
+  console.log('   ==> {/UpdateThisLabChallenge/:Id} LabChallenge updated of type == ',req.body.ChallengeQuestionType);
+});
+
+
+
+
+
+
+
+
+
+
 router.put("/UpdateThisLabTask/:Id", (req, res, next) => {
   const lab = new LabTask({
     _id: req.body._id,
@@ -251,6 +285,7 @@ router.post("/CreateLabChallenge", (req, res, next) => {
     ChallengeOptionB: req.body.ChallengeOptionB,
     ChallengeOptionC: req.body.ChallengeOptionC,
     ChallengeOptionD: req.body.ChallengeOptionD,
+    ChallengeCorrectOption: req.body.ChallengeCorrectOption,
     ChallengeXPs: req.body.ChallengeXPs,
     ChallengeAllowedTime: req.body.ChallengeAllowedTime,
     AttemptedByStudents: req.body.AttemptedByStudents

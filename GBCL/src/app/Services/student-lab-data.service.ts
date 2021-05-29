@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { StudLabDataAndStatsmodel } from '../MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { StudentAttemptedLabChallengemodel } from '../MODELS/Student-Frontend-Models/StudentAttemptedLabChallengesmodel.model';
 import { StudentAttemptedLabTaskmodel } from '../MODELS/Student-Frontend-Models/StudentAttemptedLabTaskmodel.model';
+import { StudentzUsernameAndLabJoinCodemodel } from '../MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 
 @Injectable({
   providedIn: 'root'
@@ -152,7 +153,7 @@ export class StudentLabDataService {
   }
 
 
-  updateCurrentStatsOfThisStudent(updatedStats: StudLabDataAndStatsmodel, StudentzUsernameAndLabID: { StudentzUsername: string, LabJoinCode: string }) {
+  updateCurrentStatsOfThisStudent(updatedStats: StudLabDataAndStatsmodel, StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel) {
 
     this.http.put("http://localhost:3000/api/StudentLabData/updateCurrentStatsOfThisStudent/" + StudentzUsernameAndLabID, updatedStats)
       .subscribe(
@@ -162,7 +163,7 @@ export class StudentLabDataService {
       );
 
   }
-  getCurrentStatsOfThisStudent(StudentzUsernameAndLabID: { StudentzUsername: string, LabJoinCode: string }): StudLabDataAndStatsmodel[] {
+  getCurrentStatsOfThisStudent(StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel): StudLabDataAndStatsmodel[] {
     let CurrentStats: StudLabDataAndStatsmodel[] = [];
 
     this.http

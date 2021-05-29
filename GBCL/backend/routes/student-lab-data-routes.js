@@ -323,7 +323,7 @@ router.delete(
   }
 );
 
-router.put("/updateCurrentStatsOfThisStudent/:Username", (req, res, next) => {
+router.put("/updateCurrentStatsOfThisStudent/:StudentzUsernameAndLabID", (req, res, next) => {
   const updatedStats = new StudLabDataAndStats({
     _id: req.body._id,
     LabJoinCode: req.body.LabJoinCode, //as a foreign key
