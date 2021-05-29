@@ -129,7 +129,7 @@
               assigned to this lab</h5>
 
             <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">
-              <h4>Question {{this.i+1}} of {{this.unAttemptedChallenges?.length}}:</h4>
+              <h4 *ngIf="this.i<=this.unAttemptedChallenges?.length" >Question {{this.i+1}} of {{this.unAttemptedChallenges?.length}}:</h4>
 
 
               <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestion}} </div>

@@ -27,20 +27,34 @@ export class SlabDashboardComponent implements OnInit {
 
 
     setTimeout(() => {
+      console.log("this.CurrentStatsOfThisStudent : ", this.CurrentStatsOfThisStudent);
       this.setNextAndCurrentBadgeAndXPsForPromotion(this.CurrentStatsOfThisStudent[0].currentXPs);
       if (this.CurrentStatsOfThisStudent[0].LevelUpdateViewed == false) {
 
 
 
-        if(this.CurrentStatsOfThisStudent[0].currentXPs == 0){
+        if(this.CurrentStatsOfThisStudent[0].currentXPs == 0 && this.CurrentStatsOfThisStudent[0].Demoted == false){
           this.displayThisMessageInModal("Welcome!! to the lab","Your current badge is : "+this.CURRENT_BADGE);
+        }
+        if(this.CurrentStatsOfThisStudent[0].currentXPs < 60 && this.CurrentStatsOfThisStudent[0].Demoted){
+          this.displayThisMessageInModal("Demoted to very first level","Your current badge is : "+this.CURRENT_BADGE);
         }
 
 
         if(this.CurrentStatsOfThisStudent[0].Promoted){
           this.displayThisMessageInModal("Hurrah!! You were Promoted.","YOUR NEW BADGE IS : "+this.CURRENT_BADGE);
         }
-        if(this.CurrentStatsOfThisStudent[0].Demoted){
+
+        if(this.CurrentStatsOfThisStudent[0].Warned && this.CurrentStatsOfThisStudent[0].WarnedStatusViewed==false){
+          this.displayThisMessageInModal("WARNING!!...","You were warned by the teacher, 50 XPs are deducted");
+        }
+
+
+        if(this.CurrentStatsOfThisStudent[0].Appreciated && this.CurrentStatsOfThisStudent[0].AppreciatedStatusViewed == false){
+          this.displayThisMessageInModal("GOOD NEWS!!...","You were Appreciated by the teacher, 50 XPs are given as a bonus.");
+        }
+
+        if(this.CurrentStatsOfThisStudent[0].currentXPs >= 60 && this.CurrentStatsOfThisStudent[0].Demoted){
           this.displayThisMessageInModal("You were Demoted, Alas!","Better Luck next time, Badge Assigned = "+this.CURRENT_BADGE);
         }
 
@@ -55,7 +69,7 @@ export class SlabDashboardComponent implements OnInit {
 
       }
       this.extractLabInfoANDLabMembers();
-    }, 2000);
+    }, 1200);
 
 
 
@@ -132,10 +146,10 @@ export class SlabDashboardComponent implements OnInit {
     for (let i = 0; i < this.AllUsersDownloaded.length; i++) {
       if (this.AllUsersDownloaded[i].LabJoinCodesOfJoinedLabs.includes(this.TheLabArray[0]._id)) {
         membersCount++;
-        if (this.AllUsersDownloaded[i].Username != this.localStorageUsername && this.AllUsersDownloaded[i].UserType == 'student') {
+        // if (this.AllUsersDownloaded[i].Username != this.localStorageUsername && this.AllUsersDownloaded[i].UserType == 'student') {
           this.TheLabMembers.push(this.AllUsersDownloaded[i]);
-        }
-        console.log('membersCount++ ==>', membersCount);
+        // }
+        // console.log('membersCount++ ==>', membersCount);
       }
     }
 

@@ -63,11 +63,11 @@
                   <h5 class="">Own Statistics</h5>
                 </u></span></div>
             <div class="col-6 col-lg-4 Text12px">Current XPs: <span>{{CurrentStatsOfThisStudent[0]?.currentXPs}} XP</span></div>
-            <div class="col-6 col-lg-4 Text12px">Current CPPs: <span>{{CurrentStatsOfThisStudent[0]?.currentCPPs}} CPP</span></div>
-            <div class="col-6 col-lg-4 Text12px"><span>Level: {{CurrentStatsOfThisStudent[0]?.currentLevel}}</span></div>
-            <div class="col-6 col-lg-4 Text12px">Current Badge: <span>{{CURRENT_BADGE}}</span></div>
-            <div class="col-6 col-lg-4 Text12px">Next Badge: <span>{{NEXT_BADGE}}</span></div>
-            <div class="col-6 col-lg-4 Text10pxItalicYellow text-right">--XPs Required for Promotion:
+            <!-- <div class="col-6 col-lg-4 Text12px">Current CPPs: <span>{{CurrentStatsOfThisStudent[0]?.currentCPPs}} CPP</span></div> -->
+            <div class="col-6 col-lg-4 Text14px"><span>Current Level: {{CurrentStatsOfThisStudent[0]?.currentLevel}}</span></div>
+            <div class="col-6 col-lg-4 Text14px">Current Badge: <span>{{CURRENT_BADGE}}</span></div>
+            <div class="col-6 m-auto Text12pxItalicYellow text-center">Next Badge: <span>{{NEXT_BADGE}}</span></div>
+            <div class="col-6 m-auto Text12pxItalicYellow text-center">--XPs Required for Promotion:
               <span>{{XP_FOR_PROMOTION}} XP</span></div>
           </div>
         </div>
@@ -202,9 +202,15 @@
                 <h5 class="">Other members have not joined this lab yet. <br>Share the code of this lab with others.   </h5>
                 <code class="text-info text-center mt-4">Lab_Join_Code: {{LabInfo.JoinCode}}</code>
               </div>
-              <div class="col-6 text-center mb-1 " *ngFor="let member of TheLabMembers">
-                <span class="ml-2 p-1 text-small">{{member.FirstNameOfUser+' '+member.LastNameOfUser}}</span>
-                <span class="text-right"><button class="btn btn-sm btn-outline-warning ml-3" (click)="setRival(member.Username)"><b>Set Rival</b></button></span>
+              <div class="col-4 text-center my-1 " *ngFor="let member of TheLabMembers">
+                <span class="ml-2 px-1 text-small">
+                  <b *ngIf="member.UserType=='teacher'" class="text-secondary">Instructor :  </b>
+
+                  {{member.FirstNameOfUser+' '+member.LastNameOfUser}}
+
+                </span>
+                <span class="text-right">
+                  <button class="btn btn-sm btn-outline-warning ml-3"  *ngIf="member.UserType=='student'" (click)="setRival(member.Username)"><b>Set Rival</b></button></span>
                 <hr class="w-75 mx-auto">
               </div>
             </div>

@@ -108,7 +108,7 @@ export class ManageChallengesComponent implements OnInit {
 
     // console.log(radio);
     console.log(createLabChallengeForm.value.optradio);
-    console.dir(createLabChallengeForm.value.optradio);
+    // console.dir(createLabChallengeForm.value.optradio);
     // alert("radio.checked : "+radio.checked);
 
 
@@ -128,7 +128,7 @@ export class ManageChallengesComponent implements OnInit {
           this.CORRECT_OPTION_VALUE == createLabChallengeForm.value.optionC ||
           this.CORRECT_OPTION_VALUE == createLabChallengeForm.value.optionD
           ){
-            alert("this.CORRECT_OPTION_VALUE : "+this.CORRECT_OPTION_VALUE);
+            // alert("this.CORRECT_OPTION_VALUE : "+this.CORRECT_OPTION_VALUE);
 
 
 
@@ -142,6 +142,7 @@ export class ManageChallengesComponent implements OnInit {
         this.labsService.createLabChallenge(labChallenge);
         createLabChallengeForm.reset();
         this.Errors.LabChallengeCreated.status = true;
+        setTimeout(()=>{window.location.reload()},3000);
 
 
 }

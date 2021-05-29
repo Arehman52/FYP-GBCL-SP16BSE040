@@ -98,9 +98,11 @@ export class GamificationService {
     if (levelCaulatedOf_sumOfNewXPs > currentLevel) {
       levelChangedStatus = "promoted";
       StudentzStats.currentXPs += newlyGAINED_XPs;
+      StudentzStats.LevelUpdateViewed = false;
       StudentzStats.Promoted = true;
     }
     if (levelCaulatedOf_sumOfNewXPs < currentLevel) {
+      StudentzStats.LevelUpdateViewed = false;
       levelChangedStatus = "demoted";
       StudentzStats.Demoted = true;
     }

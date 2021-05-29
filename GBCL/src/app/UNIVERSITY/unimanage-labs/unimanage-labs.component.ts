@@ -183,7 +183,7 @@ export class UnimanageLabsComponent implements OnInit {
         let studLabDataAndStatsFreshRecord: StudLabDataAndStatsmodel = {
           _id: '', Appreciated: false, LabJoinCode: MemberLabJoinRequest.LabJoinCode, LevelUpdateViewed: false,Promoted:false, Demoted:false, RivalStudents: [],
           StudentzLabAccessStatus: 'Allowed', StudentzUsername: Member[0].Username, Warned: false,
-          currentBadge: '', currentCPPs: 0, currentLevel: 0, currentXPs: 0
+          currentBadge: 'Beginner I', currentCPPs: 0, currentLevel: 0, currentXPs: 0
         };
 
         this.studentLabDataService.createFreshStudentLabDataRecord(studLabDataAndStatsFreshRecord);

@@ -69,16 +69,16 @@ color: #FFC107;}
   cursor: pointer;
 }
 
-.Text12px{
-font-size: 12px;
+.Text14px{
+font-size: 14px;
 }
 
-.Text10pxItalicYellow:hover{
+.Text12pxItalicYellow:hover{
   color: white;
   /* font-weight: bolder; */
 }
-.Text10pxItalicYellow{
-font-size: 10px;
+.Text12pxItalicYellow{
+font-size: 12px;
 color: #FFC107;
 font-style: italic;
 }

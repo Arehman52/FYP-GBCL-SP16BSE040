@@ -19,6 +19,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(): void {
+    this.pauseTimer();
     alert("You were in middle of attempting the challenge, It is cosidered as Cheated if open other pages. 0 XPs assigned for this challenge marked as cheated.");
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -95,7 +96,8 @@ export class ChallengesComponent implements OnInit, OnDestroy {
       }
     }
 
-    if (this.unAttemptedChallenges.length > 0) { this.SHOW_CHALLENGE_RELATED_DIVS = true; }
+    // if (this.unAttemptedChallenges.length > 0) { this.SHOW_CHALLENGE_RELATED_DIVS = true; }
+    if (this.i<this.unAttemptedChallenges?.length) { this.SHOW_CHALLENGE_RELATED_DIVS = true; }
     else { this.SHOW_CHALLENGE_RELATED_DIVS = false; }
     this.LENGTH_unAttemptedChallenges = this.unAttemptedChallenges.length;
     console.log("unAttemptedChallenges ========#####", this.unAttemptedChallenges);
@@ -235,6 +237,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
             if (confirm("you Failed because timed out, do you want to continue further?")) {
+              this.pauseTimer();
               this.setAllErrorsToFalse();
               // console.log(this.i);
               // console.log(this.challenges.length);
@@ -292,7 +295,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
   onSubmitChallenge(ChallengesForm: NgForm) {
-
+    this.pauseTimer();
     this.Errors.emptyField.status=true;
     let attemptedLabChallenge: StudentAttemptedLabChallengemodel = {
       AttemptedLabChallenge_id: this.unAttemptedChallenges[this.i]._id, ChallengeAttempted: true, ChallengeCheated: false, ChallengeChecked: false, ChallengeFailedDueToTimeShortage: false, GainedXPs: 0, LabChallengeAnswerOptionA: '', LabChallengeAnswerOptionB: '', LabChallengeAnswerOptionC: '', LabChallengeAnswerOptionD: '', LabChallengeQuestion: this.unAttemptedChallenges[this.i].ChallengeQuestion, LabChallengeQuestionType: this.unAttemptedChallenges[this.i].ChallengeQuestionType, LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername, _id: ''
@@ -425,6 +428,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
           this.i++;
           // window.alert(this.challenges.length + 1);
           this.timeLeft = this.unAttemptedChallenges[this.i].ChallengeAllowedTime;
+          this.startTimer();
           // console.log(this.i);
           // console.log(this.challenges.length);
           if (this.i == this.LENGTH_unAttemptedChallenges) {
@@ -436,10 +440,11 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
         }
 
+
       } else {
         window.location.href = "/STUDENT/Lab";
       }
-    }, 500);
+    }, 2000);
 
   }
 
