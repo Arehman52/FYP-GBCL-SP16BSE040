@@ -12,10 +12,15 @@ export class EvaluateStudentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
-
   localStorageUsername = localStorage.getItem("UsersUsername");
+  LabID = localStorage.getItem("LabID");
+
+  MCQ_ChallengesToEvaluate = [{_id:'12aa25',title:'title A'}, {_id:'12aadww25',title:'title B'}];
+  nonMCQ_ChallengesToEvaluate = [{_id:'12aa25',title:'title A'}, {_id:'12aadww25',title:'title B'}];
+
+
+
+
 
   onLogout(){
     localStorage.clear();

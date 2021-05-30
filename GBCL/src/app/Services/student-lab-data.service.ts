@@ -14,7 +14,6 @@ export class StudentLabDataService {
 
 
 
-
   RecieveAllStudentAttemptedChallengesOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabChallengemodel[] {
     let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabChallengemodel = {  AttemptedLabChallenge_id: null,
     ChallengeAttempted:null, GainedXPs: null, LabJoinCode: LabJoinCode, StudentzUsername: StudentzUsername, _id: null,
@@ -32,8 +31,24 @@ export class StudentLabDataService {
         }
       });
     return allStudentAttemptedChallengesOfthisStudandThisLab;
-}
+  }
 
+
+  Fetch7HighAchieversOfThisLab(objStudentzUsernameAndLabJoinCode: StudentzUsernameAndLabJoinCodemodel): StudLabDataAndStatsmodel[] {
+  let fetched7HighAchievers:StudLabDataAndStatsmodel[] = [];
+  this.http
+      .post<{ message: string; Fetched7HighAchievers: StudLabDataAndStatsmodel[] }>(
+        'http://localhost:3000/api/StudentLabData/Fetch7HighAchieversOfThisLab', objStudentzUsernameAndLabJoinCode
+      )
+      .subscribe((responseData) => {
+        // console.log(responseData.Fetched7HighAchievers);@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        for (let i = 0; i < Object.keys(responseData.Fetched7HighAchievers).length; i++) {
+          fetched7HighAchievers.push(responseData.Fetched7HighAchievers[i]);
+        }
+      });
+
+  return fetched7HighAchievers;
+  }
 
 
   //////////////////////////////////////////
