@@ -11,6 +11,9 @@ import { StudentAttemptedLabChallengemodel } from '../MODELS/Student-Frontend-Mo
   providedIn: 'root'
 })
 export class LabsService {
+  getAllLabsOfThisUniversity(): Labsmodel[] {
+    throw new Error('Method not implemented.');
+  }
   constructor(private http: HttpClient) { }
 
 

@@ -392,45 +392,6 @@
                             <form (submit)="onSubmit_UpdateButton(FacultyEditForm,faculty)" #FacultyEditForm="ngForm">
 
                               <div class="row">
-                                <div class="col-sm-6">
-
-                                  <!-- //3rd Element: Enter Username -->
-                                  <div class="form-group">
-                                    <label> Faculty's Username</label>
-                                    <input type="text" class="form-control" placeholder="Update Faculty's Username"
-                                      (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(FacultyEditForm.value.MemberUN,faculty.Username)"
-                                      name="MemberUN" [ngModel]="faculty.Username">
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.spacesAreNotAllowed.status == true">
-                                      <span>{{this.Errors.spacesAreNotAllowed.message}}</span>
-                                    </small>
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.invalidUsername.status == true">
-                                      <span>{{this.Errors.invalidUsername.message}}</span>
-                                    </small>
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.usernameNotUnique.status == true">
-                                      <span>{{this.Errors.usernameNotUnique.message}}</span>
-                                    </small>
-                                  </div>
-                                </div>
-
-                                <div class="col-sm-6">
-                                  <div class="form-group ">
-                                    <label> Faculty's Password</label>
-                                    <input type="text" class="form-control " placeholder="Update Faculty's Password"
-                                      (keyup)="checkPasswordOfMember(FacultyEditForm.value.MemberPW)" name="MemberPW"
-                                      [ngModel]="faculty.Password">
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.invalidPassword.status == true">
-                                      <span>{{this.Errors.invalidPassword.message}}</span>
-                                    </small>
-                                  </div>
-                                </div>
-                              </div>
-                              <!--sdgsd  -->
-
-                              <div class="row">
 
                                 <div class="form-group col-sm-6">
                                   <label> Faculty's First Name</label>
@@ -454,10 +415,53 @@
                                   </small>
                                 </div>
 
-                              </div>
+                                <!-- <div class="col-sm-6 d-none">
+                                  <div class="form-group">
+                                    <label> Faculty's Username</label>
+                                    <input type="text" class="form-control" placeholder="Update Faculty's Username"
+                                      (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(FacultyEditForm.value.MemberUN,faculty.Username)"
+                                      name="MemberUN" [ngModel]="faculty.Username">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.spacesAreNotAllowed.status == true">
+                                      <span>{{this.Errors.spacesAreNotAllowed.message}}</span>
+                                    </small>
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidUsername.status == true">
+                                      <span>{{this.Errors.invalidUsername.message}}</span>
+                                    </small>
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.usernameNotUnique.status == true">
+                                      <span>{{this.Errors.usernameNotUnique.message}}</span>
+                                    </small>
+                                  </div>
+                                </div> -->
 
-                              <div class="row">
-                                <div class="form-group col-sm-12">
+
+
+                                <!-- <div class="row">
+
+
+
+                              </div> -->
+
+                                <!-- <div class="row"> -->
+
+
+                                <div class="col-sm-6 form-group">
+                                  <!-- <div class=" "> -->
+                                  <label> Faculty's Password</label>
+                                  <input type="text" class="form-control " placeholder="Update Faculty's Password"
+                                    (keyup)="checkPasswordOfMember(FacultyEditForm.value.MemberPW)" name="MemberPW"
+                                    [ngModel]="faculty.Password">
+                                  <small class="form-text alert alert-danger"
+                                    *ngIf="this.Errors.invalidPassword.status == true">
+                                    <span>{{this.Errors.invalidPassword.message}}</span>
+                                  </small>
+                                </div>
+                                <!-- </div> -->
+                                <!-- </div> -->
+
+                                <div class="form-group col-sm-6">
                                   <label> Faculty's Registration Number</label>
                                   <input type="text" class="form-control"
                                     placeholder="Update Faculty's Registration Number"
@@ -615,9 +619,7 @@
                             <form (submit)="onSubmit_UpdateButton(StudentEditForm,student)" #StudentEditForm="ngForm">
 
                               <div class="row">
-                                <div class="col-sm-6">
-
-                                  <!-- //3rd Element: Enter Username -->
+                                <!-- <div class="col-sm-6">
                                   <div class="form-group">
                                     <label> Student's Username</label>
                                     <input type="text" class="form-control" placeholder="Update Student's Username"
@@ -636,24 +638,10 @@
                                       <span>{{this.Errors.usernameNotUnique.message}}</span>
                                     </small>
                                   </div>
-                                </div>
+                                </div> -->
 
-                                <div class="col-sm-6">
-                                  <div class="form-group ">
-                                    <label> Student's Password</label>
-                                    <input type="text" class="form-control " placeholder="Update Student's Password"
-                                      (keyup)="checkPasswordOfMember(StudentEditForm.value.MemberPW)" name="MemberPW"
-                                      [ngModel]="student.Password">
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.invalidPassword.status == true">
-                                      <span>{{this.Errors.invalidPassword.message}}</span>
-                                    </small>
-                                  </div>
-                                </div>
-                              </div>
-                              <!--sdgsd  -->
 
-                              <div class="row">
+
 
                                 <div class="form-group col-sm-6">
                                   <label> Student's First Name</label>
@@ -677,10 +665,30 @@
                                   </small>
                                 </div>
 
-                              </div>
 
-                              <div class="row">
-                                <div class="form-group col-sm-12">
+
+
+                                <div class="col-sm-6">
+                                  <div class="form-group ">
+                                    <label> Student's Password</label>
+                                    <input type="text" class="form-control " placeholder="Update Student's Password"
+                                      (keyup)="checkPasswordOfMember(StudentEditForm.value.MemberPW)" name="MemberPW"
+                                      [ngModel]="student.Password">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidPassword.status == true">
+                                      <span>{{this.Errors.invalidPassword.message}}</span>
+                                    </small>
+                                  </div>
+                                </div>
+                                <!--sdgsd  -->
+                                <!-- </div> -->
+
+                                <!-- <div class="row"> -->
+
+                                <!-- </div> -->
+
+                                <!-- <div class="row"> @@@@@@@ -->
+                                <div class="form-group col-sm-6">
                                   <label> Student's Registration Number</label>
                                   <input type="text" class="form-control"
                                     placeholder="Update Student's Registration Number"
@@ -862,7 +870,7 @@
 
                               <div class="row">
 
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
 
                                   <div class="form-group">
                                     <label>Username:</label>
@@ -882,26 +890,9 @@
                                       {{this.Errors.usernameNotUnique.message}}
                                     </small>
                                   </div>
-                                </div>
+                                </div> -->
 
 
-
-                                <div class="col-sm-6">
-                                  <div class="form-group">
-                                    <label>Password:</label>
-                                    <input type="text" class="form-control" placeholder="Enter Password for university"
-                                      name="MemberPW" [ngModel]="RejectedMember.Password"
-                                      (keyup)="checkPasswordOfMember(updateRejectedMemberForm.value.MemberPW)">
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.invalidPassword.status == true">
-                                      {{this.Errors.invalidPassword.message}}
-                                    </small>
-                                  </div>
-                                </div>
-
-                              </div><!--  -->
-
-                              <div class="row">
 
                                 <div class="col-sm-6">
                                   <div class="form-group">
@@ -928,15 +919,32 @@
                                   </div>
                                 </div>
 
+                                <div class="col-sm-6">
+                                  <div class="form-group">
+                                    <label>Password:</label>
+                                    <input type="text" class="form-control" placeholder="Enter Password for university"
+                                      name="MemberPW" [ngModel]="RejectedMember.Password"
+                                      (keyup)="checkPasswordOfMember(updateRejectedMemberForm.value.MemberPW)">
+                                    <small class="form-text alert alert-danger"
+                                      *ngIf="this.Errors.invalidPassword.status == true">
+                                      {{this.Errors.invalidPassword.message}}
+                                    </small>
+                                  </div>
+                                </div>
 
-                              </div>
+                                <!-- </div>
+
+                              <div class="row"> -->
+
+
+                                <!-- </div>
 
 
 
 
 
-                              <div class="row">
-                                <div class="form-group col-sm-12">
+                              <div class="row"> -->
+                                <div class="form-group col-sm-6">
                                   <label> Registration Number</label>
                                   <input type="text" class="form-control" placeholder="Update Registration Number"
                                     (keyup)="checkRegNOfMember(updateRejectedMemberForm.value.MemberRegN)"

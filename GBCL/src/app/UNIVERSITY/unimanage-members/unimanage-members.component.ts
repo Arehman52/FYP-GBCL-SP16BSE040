@@ -174,14 +174,10 @@ export class UnimanageMembersComponent implements OnInit {
 
   onSubmit_UpdateButton(updateMemberForm: NgForm, OriginalMemberDetails: Usersmodel) {
 
-    // const str: String = updateUniForm.value.UniUsername;
-    // if (str != str.replace(/ /g, '')) {
-    //   this.Errors.spacesAreNotAllowedInUsername.status = true;
-    //   return;
-    // }
 
-    if (updateMemberForm.value.MemberUN == ''
-      && updateMemberForm.value.MemberFN == ''
+    if (
+      // updateMemberForm.value.MemberUN == '' &&
+      updateMemberForm.value.MemberFN == ''
       && updateMemberForm.value.MemberLN == ''
       && updateMemberForm.value.MemberPW == ''
       && updateMemberForm.value.MemberRegN == ''
@@ -191,8 +187,9 @@ export class UnimanageMembersComponent implements OnInit {
     }
 
 
-    if (updateMemberForm.value.MemberUN == ''
-      || updateMemberForm.value.MemberFN == ''
+    if (
+      // updateMemberForm.value.MemberUN == ''||
+      updateMemberForm.value.MemberFN == ''
       || updateMemberForm.value.MemberLN == ''
       || updateMemberForm.value.MemberPW == ''
       || updateMemberForm.value.MemberRegN == ''
@@ -200,8 +197,9 @@ export class UnimanageMembersComponent implements OnInit {
       // alert('You can\'t update empty fields');
       // return;
     } else
-      if (updateMemberForm.value.MemberUN.toLowerCase() == OriginalMemberDetails.Username.toLowerCase()
-        && updateMemberForm.value.MemberFN == OriginalMemberDetails.FirstNameOfUser
+      if (
+        // updateMemberForm.value.MemberUN.toLowerCase() == OriginalMemberDetails.Username.toLowerCase() &&
+        updateMemberForm.value.MemberFN == OriginalMemberDetails.FirstNameOfUser
         && updateMemberForm.value.MemberLN == OriginalMemberDetails.LastNameOfUser
         && updateMemberForm.value.MemberPW == OriginalMemberDetails.Password
         && updateMemberForm.value.MemberRegN == OriginalMemberDetails.RegistrationNumberOfUser) {
@@ -209,18 +207,18 @@ export class UnimanageMembersComponent implements OnInit {
         return;
       }
 
-    var UpdatedMemberUN = '';
+    // var UpdatedMemberUN = '';
     var UpdatedMemberFN = '';
     var UpdatedMemberLN = '';
     var UpdatedMemberPW = '';
     var UpdatedMemberRegN = '';
 
-    if (updateMemberForm.value.MemberUN == '') {
-      UpdatedMemberUN = OriginalMemberDetails.Username;
-    }
-    else {
-      UpdatedMemberUN = updateMemberForm.value.MemberUN;
-    }
+    // if (updateMemberForm.value.MemberUN == '') {
+    //   UpdatedMemberUN = OriginalMemberDetails.Username;
+    // }
+    // else {
+    //   UpdatedMemberUN = updateMemberForm.value.MemberUN;
+    // }
 
 
     if (updateMemberForm.value.MemberFN == '') {
@@ -258,7 +256,8 @@ export class UnimanageMembersComponent implements OnInit {
       TitleOfUniversity: OriginalMemberDetails.TitleOfUniversity,
       UniversityNameOfUser: OriginalMemberDetails.UniversityNameOfUser,
       UserType: OriginalMemberDetails.UserType,
-      Username: UpdatedMemberUN,
+      // Username: UpdatedMemberUN,
+      Username: OriginalMemberDetails.Username,
       UserzAccessStatus: OriginalMemberDetails.UserzAccessStatus,
       _id: OriginalMemberDetails._id
     }
@@ -447,7 +446,7 @@ export class UnimanageMembersComponent implements OnInit {
       this.checkLNameOfMember(FacultyEditForm.value.MemberLN);
       this.checkPasswordOfMember(FacultyEditForm.value.MemberPW);
       this.checkRegNOfMember(FacultyEditForm.value.MemberRegN);
-      this.checkUsernameOfMemberIfVALIDandUNIQUE(FacultyEditForm.value.MemberUN,OldUN);
+      // this.checkUsernameOfMemberIfVALIDandUNIQUE(FacultyEditForm.value.MemberUN,OldUN);
     } else {
       this.EditFacultyButtonText = "Edit";
       this.FacultyEdit = false;
@@ -465,7 +464,7 @@ export class UnimanageMembersComponent implements OnInit {
       this.checkLNameOfMember(StudentEditForm.value.MemberLN);
       this.checkPasswordOfMember(StudentEditForm.value.MemberPW);
       this.checkRegNOfMember(StudentEditForm.value.MemberRegN);
-      this.checkUsernameOfMemberIfVALIDandUNIQUE(StudentEditForm.value.MemberUN, OldUN);
+      // this.checkUsernameOfMemberIfVALIDandUNIQUE(StudentEditForm.value.MemberUN, OldUN);
     } else {
       this.EditStudentButtonText = "Edit";
       this.StudentEdit = false;

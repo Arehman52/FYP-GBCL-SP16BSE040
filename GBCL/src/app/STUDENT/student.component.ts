@@ -26,8 +26,10 @@ export class STUDENTComponent implements OnInit {
       this.extractLabsOfThisStudent();
       // console.log("this.CompleteLabMembersCollection[[NgOnInit]] ==> ", this.CompleteLabMembersCollection)
     }, 2500);
+    this.AllLabsOfThisStudetzUniversity = this.labsService.getAllLabsOfThisUniversity();
   }
 
+  AllLabsOfThisStudetzUniversity: Labsmodel[] = [];
   AllLabsRecieved: Labsmodel[] = [];
   TheStudent: Usersmodel[] = [];
   // CompleteLabMembersCollection: LabMembersmodel[] = [];
@@ -44,8 +46,9 @@ export class STUDENTComponent implements OnInit {
 
     let objUsername: { Username: string };
     let arrayOf_LabJoinCodesOfJoinedLabs: string[] = this.TheStudent[0].LabJoinCodesOfJoinedLabs;
-    if (arrayOf_LabJoinCodesOfJoinedLabs.length > 0) {
-      for (let i = 0; i < this.AllLabsRecieved.length; i++) {
+    if (arrayOf_LabJoinCodesOfJoinedLabs.length != 0) {
+      for (let i = 0; i < this.AllLabsRecieved.length; i++) {    ////not all labs, but just labs of this stud
+        //student's university's labs only
         for (let j = 0; j < arrayOf_LabJoinCodesOfJoinedLabs.length; j++) {
           if (this.AllLabsRecieved[i]._id == arrayOf_LabJoinCodesOfJoinedLabs[j]) {
             this.LabsOfThisStudent.push(this.AllLabsRecieved[i]);
