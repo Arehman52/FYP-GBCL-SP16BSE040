@@ -6,6 +6,7 @@ export interface StudentActivityHistorymodel {
   wasDemoted: boolean,
   wasWarned: boolean,
   wasAppreciated: boolean,
+  wasExpelled: boolean,
   LabTaskQuestion: string,
   LabChallengeQuestionType: string,
   LabChallengeQuestion: string,

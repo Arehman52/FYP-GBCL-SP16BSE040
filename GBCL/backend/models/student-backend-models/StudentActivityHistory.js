@@ -8,7 +8,7 @@ const StudentActivityHistorySchema = mongoose.Schema({
   wasDemoted: Boolean,
   wasWarned: Boolean,
   wasAppreciated: Boolean,
-
+  wasExpelled: Boolean,
   LabTaskQuestion: String,
   LabChallengeQuestionType: String,
   LabChallengeQuestion: String,

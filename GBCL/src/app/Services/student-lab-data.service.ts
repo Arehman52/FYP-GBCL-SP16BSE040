@@ -156,6 +156,7 @@ export class StudentLabDataService {
 
   updateCurrentStatsOfThisStudent(updatedStats: StudLabDataAndStatsmodel, StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel) {
 
+    console.log("printing updatedStats from service :@@@@  ", updatedStats);
     this.http.put("http://localhost:3000/api/StudentLabData/updateCurrentStatsOfThisStudent/" + StudentzUsernameAndLabID, updatedStats)
       .subscribe(
         response => {

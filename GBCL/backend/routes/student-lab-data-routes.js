@@ -281,6 +281,7 @@ router.post("/createAStudentActivityHistoryDocument", (req, res, next) => {
   wasDemoted: req.body.wasDemoted,
   wasWarned: req.body.wasWarned,
   wasAppreciated: req.body.wasAppreciated,
+  wasExpelled: req.body.wasExpelled,
 
   LabTaskQuestion: req.body.LabTaskQuestion,
   LabChallengeQuestionType: req.body.LabChallengeQuestionType,
@@ -422,6 +423,9 @@ router.put("/updateCurrentStatsOfThisStudent/:StudentzUsernameAndLabID", (req, r
     });
   // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 });
+
+
+
 
 router.post("/getCurrentStatsOfThisStudent", (req, res, next) => {
   StudLabDataAndStats.findOne({

@@ -266,7 +266,7 @@
 
                     <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
                       [attr.data-target]="'#RegisterUniversityCollapse2' + LabMemberStudent._id" aria-expanded="true"
-                      [attr.aria-controls]="'collapse' + LabMemberStudent._id">
+                      [attr.aria-controls]="'collapse' + LabMemberStudent._id" (click)="onStudentNameCardClicked(LabMemberStudent)">
                       {{LabMemberStudent.FirstNameOfUser+ ' '+LabMemberStudent.LastNameOfUser}}
                     </button>
 
@@ -302,11 +302,12 @@
                           <div class="d-flex justify-content-end mr-3">
                             <button (click)="viewStatsButtonClicked(LabMemberStudent)"
                               class="btn btn-info w-25 maSmallerFonts my-2 mx-2">{{ViewStatsButtonText}}</button>
-                            <button (click)="onWarnButtonClicked(LabMemberStudent)"
+                            <button (click)="onWarnButtonClicked(LabMemberStudent)" [disabled]="this.viewingStatsOfThisStudent[0]?.Warned"
                               class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Warn</button>
                             <button (click)="onExpelButtonClicked(LabMemberStudent)"
-                              class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Expel</button>
-                            <button (click)="onAppreciateButtonClicked(LabMemberStudent)"
+                            [ngClass]="{'btn-danger': this.viewingStatsOfThisStudent[0]?.StudentzLabAccessStatus== 'Allowed', 'btn-success': this.viewingStatsOfThisStudent[0]?.StudentzLabAccessStatus== 'Expelled'}"
+                              class="btn w-25 maSmallerFonts my-2 mx-2">{{ExpellButtonText}}</button>
+                            <button (click)="onAppreciateButtonClicked(LabMemberStudent)"  [disabled]="this.viewingStatsOfThisStudent[0]?.Appreciated"
                               class="btn btn-success w-25 maSmallerFonts my-2 mx-2">Appreciate</button>
                           </div>
                           <small class="form-text alert alert-success"
@@ -315,6 +316,9 @@
                           </small>
                           <small class="form-text alert alert-success" *ngIf="this.Errors.StudentExpelled.status==true">
                             {{this.Errors.StudentExpelled.message}}
+                          </small>
+                          <small class="form-text alert alert-success" *ngIf="this.Errors.StudentAllowed.status==true">
+                            {{this.Errors.StudentAllowed.message}}
                           </small>
                           <small class="form-text alert alert-success" *ngIf="this.Errors.StudentWarned.status==true">
                             {{this.Errors.StudentWarned.message}}
