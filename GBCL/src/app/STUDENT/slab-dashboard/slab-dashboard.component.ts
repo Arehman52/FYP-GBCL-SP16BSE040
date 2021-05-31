@@ -152,7 +152,7 @@ export class SlabDashboardComponent implements OnInit {
       let matched: boolean = false;
       // let acllOK: boolean=true;
 
-      if (fetchedStatsOfStudentForSettingRivals[0].RivalStudents.length < 6) {
+      if (fetchedStatsOfStudentForSettingRivals[0].RivalStudents.length < 5) {
         // allOK = true;
         for (let i = 0; i < fetchedStatsOfStudentForSettingRivals[0].RivalStudents.length; i++) {
           if (fetchedStatsOfStudentForSettingRivals[0].RivalStudents.includes(member.Username)) {
@@ -184,7 +184,6 @@ export class SlabDashboardComponent implements OnInit {
 
     }, 2500);
   }
-
 
 
 

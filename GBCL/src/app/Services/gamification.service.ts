@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { StudentActivityHistorymodel } from '../MODELS/Student-Frontend-Models/StudentActivityHistorymodel.model';
 import { StudentzUsernameAndLabJoinCodemodel } from '../MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 import { StudLabDataAndStatsmodel } from '../MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { StudentLabDataService } from './student-lab-data.service';
@@ -290,6 +291,222 @@ export class GamificationService {
 
 
   }
+
+
+
+
+
+
+  createHistory_wasAllowed(FullName:string,objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:'',GainedOrLoosedXPsCount: 0, Activity: 'Allowed access again',Failed:false,
+      Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+  createHistory_wasExpelled(FullName:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:'',GainedOrLoosedXPsCount: 0, Activity: 'Expelled',Failed:false,
+      Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+
+
+
+  createHistory_wasWarned(FullName:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername, _id: '',
+      GainedOrLoosedXPsCount: 50, Activity: 'Warned by Instructor',Failed:false, Passed: false,
+      TimeAndDate:new Date().toString().substring(0,21), AttemptedQuestion: '', wasPromotedOrDemotedToLevel: ''
+    };
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+  createHistory_wasAppreciated(FullName:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername, _id: '',
+      GainedOrLoosedXPsCount: 50, Activity: 'was Appreciated by Instructor',Failed:false, Passed: false,
+      TimeAndDate:new Date().toString().substring(0,21), AttemptedQuestion: '', wasPromotedOrDemotedToLevel: ''
+    };
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+  createHistory_wasDemoted(FullName:string, wasDemotedToLevel:string,objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername, _id: '',
+      GainedOrLoosedXPsCount: 0, Activity: 'was Demoted',Failed:false, Passed: false,
+      TimeAndDate:new Date().toString().substring(0,21), AttemptedQuestion:'', wasPromotedOrDemotedToLevel: wasDemotedToLevel
+    };
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+  createHistory_wasPromoted(FullName:string, wasPromotedToLevel:string,objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:'',GainedOrLoosedXPsCount: 0, Activity: 'was Promoted',Failed:false,
+      Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: wasPromotedToLevel
+    };
+
+
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  createHistory_justAttemptedLabTask(FullName:string, LabTaskQuestion:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:LabTaskQuestion,GainedOrLoosedXPsCount: 0, Activity: 'Attempted Lab Task',Failed:false, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+
+
+  createHistory_justAttemptedNonMCQChallenge(FullName:string, QType:string,LabChallengeQuestion:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: 0, Activity: 'Attempted '+QType+' Challenge',Failed:false, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  createHistory_AttemptedMCQChallenge_Passed(FullName:string, LabChallengeQuestion:string, GainedXPs:number, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: GainedXPs, Activity: 'Passed MCQ Challenge',Failed:false, Passed: true, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+  createHistory_AttemptedMCQChallenge_Failed(FullName:string, LabChallengeQuestion:string, LosedXPs:number,objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: LosedXPs, Activity: 'Failed MCQ Challenge',Failed:true, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+
+
+
+  createHistory_LabChallengeFailedDueToTimeout(FullName:string, QType:string,objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername, _id: '',
+      GainedOrLoosedXPsCount: 50, Activity: 'Failed '+QType+' Challenge due to timeout',Failed:true, Passed: false,
+      TimeAndDate:new Date().toString().substring(0,21), AttemptedQuestion: '', wasPromotedOrDemotedToLevel: ''
+    };
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+
+
+  createHistory_StudentFailedLabChallenge(FullName:string, QType:string, LabChallengeQuestion:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: 0, Activity: 'Failed '+QType+' Challenge',Failed:true, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+
+
+  // createHistory_StudentFailed_MCQChallenge(LabChallengeQuestion:string, LosedXPs:number, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+  //   let studhistory: StudentActivityHistorymodel = {
+  //     LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+  //     _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: LosedXPs, Activity: 'Failed MCQ Challenge',Failed:true, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+  //   };
+
+  //   this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  // }
+
+
+
+
+
+
 
 
 

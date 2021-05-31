@@ -4,6 +4,7 @@ import { StudentActivityHistorymodel } from 'src/app/MODELS/Student-Frontend-Mod
 import { StudentzUsernameAndLabJoinCodemodel } from 'src/app/MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
+import { GamificationService } from 'src/app/Services/gamification.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 import { UsersService } from 'src/app/Services/users.service';
 
@@ -14,7 +15,7 @@ import { UsersService } from 'src/app/Services/users.service';
 })
 export class ManageStudentsComponent implements OnInit {
 
-  constructor(private studentLabDataService: StudentLabDataService, private usersService: UsersService) { }
+  constructor(private gamificationSercive: GamificationService, private studentLabDataService: StudentLabDataService, private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.setAllErrorsToFalse();
@@ -77,13 +78,12 @@ export class ManageStudentsComponent implements OnInit {
           this.studentLabDataService.updateCurrentStatsOfThisStudent(STUDz_FETCHED_STATS_FROM_Db[0]
             , StudentzUsernameAndLabID);
 
-          let studhistory: StudentActivityHistorymodel = {
-            GainedOrLoosedXPsCount: 50, LabChallengeQuestion: '', wasExpelled: false,
-            LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: LabMemberStudent.Username, _id: '', wasAppreciated: false, wasDemoted: false, wasPromoted: false, wasWarned: true
-          };
+
+          this.gamificationSercive.createHistory_wasWarned(STUDz_FETCHED_STATS_FROM_Db[0].StudentzFN+ ' '+ STUDz_FETCHED_STATS_FROM_Db[0].StudentzLN,StudentzUsernameAndLabID);
 
 
-          this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+
+
         }
 
       }, 1500);
@@ -91,7 +91,7 @@ export class ManageStudentsComponent implements OnInit {
 
     }
 
-    setTimeout(()=>{window.location.reload()},3000);
+    setTimeout(() => { window.location.reload() }, 3000);
   }
 
 
@@ -113,14 +113,8 @@ export class ManageStudentsComponent implements OnInit {
           STUDz_FETCHED_STATS_FROM_Db[0].currentXPs += 50;
           this.studentLabDataService.updateCurrentStatsOfThisStudent(STUDz_FETCHED_STATS_FROM_Db[0]
             , StudentzUsernameAndLabID);
+          this.gamificationSercive.createHistory_wasAppreciated(STUDz_FETCHED_STATS_FROM_Db[0].StudentzFN+ ' '+ STUDz_FETCHED_STATS_FROM_Db[0].StudentzLN,StudentzUsernameAndLabID);
 
-          let studhistory: StudentActivityHistorymodel = {
-            GainedOrLoosedXPsCount: 50, LabChallengeQuestion: '', wasExpelled: false,
-            LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: LabMemberStudent.Username, _id: '', wasAppreciated: true, wasDemoted: false, wasPromoted: false, wasWarned: false
-          };
-
-
-          this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
         }
 
       }, 1500);
@@ -129,7 +123,7 @@ export class ManageStudentsComponent implements OnInit {
     }
 
 
-    setTimeout(()=>{window.location.reload()},3000);
+    setTimeout(() => { window.location.reload() }, 3000);
   }
 
 
@@ -144,34 +138,36 @@ export class ManageStudentsComponent implements OnInit {
 
       setTimeout(() => {
 
-        let studhistory: StudentActivityHistorymodel = {
-          GainedOrLoosedXPsCount: 0, LabChallengeQuestion: '', wasExpelled: false,
-          LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: LabMemberStudent.Username, _id: '', wasAppreciated: false, wasDemoted: false, wasPromoted: false, wasWarned: false
-        };
+        // let studhistory: StudentActivityHistorymodel = {
+        //   GainedOrLoosedXPsCount: 0, LabChallengeQuestion: '', wasExpelled: false,
+        //   LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: LabMemberStudent.Username, _id: '', wasAppreciated: false, wasDemoted: false, wasPromoted: false, wasWarned: false
+        // };
 
         if (STUDz_FETCHED_STATS_FROM_Db[0]?.StudentzLabAccessStatus == "Expelled") {
           // this.ExpellButtonText = "Allow";
-          studhistory.wasExpelled = false;
+          // studhistory.wasExpelled = false;
           this.Errors.StudentAllowed.status = true;
+          this.gamificationSercive.createHistory_wasAllowed(STUDz_FETCHED_STATS_FROM_Db[0].StudentzFN+ ' '+ STUDz_FETCHED_STATS_FROM_Db[0].StudentzLN,StudentzUsernameAndLabID);
           STUDz_FETCHED_STATS_FROM_Db[0].StudentzLabAccessStatus = "Allowed";
-        }else
+        } else
 
-        if (STUDz_FETCHED_STATS_FROM_Db[0]?.StudentzLabAccessStatus == "Allowed") {
-          // this.ExpellButtonText = "Expell";
-          studhistory.wasExpelled = true;
-          this.Errors.StudentExpelled.status = true;
-          STUDz_FETCHED_STATS_FROM_Db[0].StudentzLabAccessStatus = "Expelled";
-          // STUDz_FETCHED_STATS_FROM_Db[0].Warned = true;
-          // STUDz_FETCHED_STATS_FROM_Db[0].currentXPs -= 50;
-          // if(STUDz_FETCHED_STATS_FROM_Db[0].currentXPs < 0){
-          //   STUDz_FETCHED_STATS_FROM_Db[0].currentXPs = 0;
-        }
+          if (STUDz_FETCHED_STATS_FROM_Db[0]?.StudentzLabAccessStatus == "Allowed") {
+            // this.ExpellButtonText = "Expell";
+            // studhistory.wasExpelled = true;
+            this.Errors.StudentExpelled.status = true;
+            this.gamificationSercive.createHistory_wasExpelled(STUDz_FETCHED_STATS_FROM_Db[0].StudentzFN+ ' '+ STUDz_FETCHED_STATS_FROM_Db[0].StudentzLN, StudentzUsernameAndLabID);
+            STUDz_FETCHED_STATS_FROM_Db[0].StudentzLabAccessStatus = "Expelled";
+            // STUDz_FETCHED_STATS_FROM_Db[0].Warned = true;
+            // STUDz_FETCHED_STATS_FROM_Db[0].currentXPs -= 50;
+            // if(STUDz_FETCHED_STATS_FROM_Db[0].currentXPs < 0){
+            //   STUDz_FETCHED_STATS_FROM_Db[0].currentXPs = 0;
+          }
         this.studentLabDataService.updateCurrentStatsOfThisStudent(STUDz_FETCHED_STATS_FROM_Db[0]
           , StudentzUsernameAndLabID);
 
 
 
-        this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+        // this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
         // }
 
       }, 1500);
@@ -179,7 +175,7 @@ export class ManageStudentsComponent implements OnInit {
 
     }
 
-    setTimeout(()=>{window.location.reload()},3000);
+    setTimeout(() => { window.location.reload() }, 3000);
   }
 
 

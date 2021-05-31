@@ -231,6 +231,35 @@ router.post("/FetchTHISUser", (req, res, next) => {
     });
 });
 
+
+
+// FetchTHeseUserzzz
+router.post("/FetchTHeseUserzzz/", (req, res, next) => {
+
+  // let  arr:String[] = [];
+  // array.forEach(element => {
+
+  // });
+  console.log("*************@@@@@: ",req.params.arrayUNs);
+  console.log("*************@@@@@: ",req.body.arrayUNs);
+  console.log("*************@@@@@: ",['comsats','bilalkhursheed','furqan']);
+  // Users.find({ Username: { $in: ['comsats','bilalkhursheed','furqan']}})
+  Users.find({ Username: { $in: req.body.Username}})
+    .then((document) => {
+      console.log("USERZZZ::....", document);
+      res.status(200).json({
+        message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
+        userzzz: document,
+      });
+
+
+      console.log("   ==> req.body.arrayUNs == ", req.body.arrayUNs);
+    })
+    .catch((err) => {
+      // console.log(" 004 theeeen eeerrrororrorr\n", err);
+    });
+});
+
 //following is working properly in signup page for fetching users.
 router.get("/getUniversitiesList", (req, res, next) => {
   Users.distinct("TitleOfUniversity").then((list) => {

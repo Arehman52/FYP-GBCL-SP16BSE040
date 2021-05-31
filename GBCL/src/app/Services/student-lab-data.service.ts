@@ -10,6 +10,7 @@ import { StudentActivityHistorymodel } from '../MODELS/Student-Frontend-Models/S
   providedIn: 'root'
 })
 export class StudentLabDataService {
+
   constructor(private http: HttpClient) { }
 
 
@@ -207,6 +208,21 @@ export class StudentLabDataService {
 
 
 
+  fetchThisRivalzActivitiesHistory(objStudentzUsernameAndLabJoinCode: StudentzUsernameAndLabJoinCodemodel): StudentActivityHistorymodel[] {
+
+    var fetchedThisRivalzActivitiesHistory: StudentActivityHistorymodel[] = [];
+    this.http
+      .post<{ message: string, FetchedThisRivalzActivitiesHistory: StudentActivityHistorymodel[] }>(
+        'http://localhost:3000/api/StudentLabData/fetchThisRivalzActivitiesHistory/',
+        objStudentzUsernameAndLabJoinCode
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.FetchedThisRivalzActivitiesHistory).length; i++) {
+          fetchedThisRivalzActivitiesHistory.push(responseData.FetchedThisRivalzActivitiesHistory[i]);
+        }
+      });
+    return fetchedThisRivalzActivitiesHistory;
+  }
 
   createAStudentActivityHistoryDocument(objStudentActivityHistorymodel: StudentActivityHistorymodel) {
 

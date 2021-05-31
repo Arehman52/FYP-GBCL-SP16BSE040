@@ -212,6 +212,33 @@ export class UsersService {
 
 
 
+  //this one among the 3 is being used everywhere now
+  // test(): Usersmodel[] {
+  //   let arrFetchThisUser: Usersmodel[] = [];
+
+  //   let Username:string[] = [];
+  //   Username.push('bilalkhursheed');
+  //   Username.push('furqan');
+  //   // { Usrename: { $in: req.body.arrayUNs}}
+  //   this.http
+  //     .post<{ message: string; userzzz: Usersmodel[] }>(
+  //       'http://localhost:3000/api/Users/FetchTHeseUserzzz', Username
+  //     )
+  //     .subscribe((responseData) => {
+  //       // console.log("responseData:::!@@@",responseData);
+  //       for (let i = 0; i < Object.keys(responseData.userzzz).length; i++) {
+  //         arrFetchThisUser.push(responseData.userzzz[i]);
+  //       }
+  //     });
+
+  //     console.log("============this.arrFetchThisUser=========:",arrFetchThisUser);
+
+  //   return arrFetchThisUser;
+  // }
+
+
+
+
 
   FetchThisUserbyUsername(username: string): Usersmodel[] {
     this.arrFetchThisUserbyUsername = [];
