@@ -55,20 +55,24 @@
         <!-- ----------- -->
         <!-- Stats column -->
 
-        <div  onload="InitiallizeModal(modalButton)" class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto  CurrentStatsHover">
+        <div onload="InitiallizeModal(modalButton)"
+          class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto  CurrentStatsHover">
 
 
           <div class="row childSpansHoverYellow">
             <div class="col-12 text-center text-underline pb-1 hoverYellow"><span><u>
                   <h5 class="">Own Statistics</h5>
                 </u></span></div>
-            <div class="col-6 col-lg-4 Text12px">Current XPs: <span>{{CurrentStatsOfThisStudent[0]?.currentXPs}} XP</span></div>
+            <div class="col-6 col-lg-4 Text12px">Current XPs: <span>{{CurrentStatsOfThisStudent[0]?.currentXPs}}
+                XP</span></div>
             <!-- <div class="col-6 col-lg-4 Text12px">Current CPPs: <span>{{CurrentStatsOfThisStudent[0]?.currentCPPs}} CPP</span></div> -->
-            <div class="col-6 col-lg-4 Text14px"><span>Current Level: {{CurrentStatsOfThisStudent[0]?.currentLevel}}</span></div>
+            <div class="col-6 col-lg-4 Text14px"><span>Current Level:
+                {{CurrentStatsOfThisStudent[0]?.currentLevel}}</span></div>
             <div class="col-6 col-lg-4 Text14px">Current Badge: <span>{{CURRENT_BADGE}}</span></div>
             <div class="col-6 m-auto Text12pxItalicYellow text-center">Next Badge: <span>{{NEXT_BADGE}}</span></div>
             <div class="col-6 m-auto Text12pxItalicYellow text-center">--XPs Required for Promotion:
-              <span>{{XP_FOR_PROMOTION}} XP</span></div>
+              <span>{{XP_FOR_PROMOTION}} XP</span>
+            </div>
           </div>
         </div>
         <!-- STATS COL END -->
@@ -84,21 +88,23 @@
             <div class="col-12 btn-group">
               <!-- Example single danger button -->
 
-  <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{localStorageUsername}}
-  </button>
-  <div class="dropdown-menu bg-warning" >
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/'">Dashboard</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
-    <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit Lab</button>
-    <div class="dropdown-divider"></div>
-    <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onLogout()">Logout</button>
+              <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{localStorageUsername}}
+              </button>
+              <div class="dropdown-menu bg-warning">
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/'">Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
+                <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit
+                  Lab</button>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onLogout()">Logout</button>
 
 
-  </div>
+              </div>
 
             </div>
 
@@ -111,7 +117,8 @@
 
     </div>
     <hr class="bg-warning p-0 m-0">
-  </div> <!--1st row ends-->
+  </div>
+  <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- TOP ROW ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
@@ -119,110 +126,127 @@
 
 
 
-<div class="row">  <!--2nd row starts-->
-  <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
-    <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
-      <li class="nav-item text-left">
-        <a class="nav-link active" [routerLink]="'/STUDENT/Lab'" >Lab Dashboard</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Recent Activities</a>
-      </li>
-    </ul>
-  </div>
-  <div class="col-12 col-sm-9 col-lg-10 p-1">
+  <div class="row">
+    <!--2nd row starts-->
+    <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
+      <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
+        <li class="nav-item text-left">
+          <a class="nav-link active" [routerLink]="'/STUDENT/Lab'">Lab Dashboard</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Recent Activities</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-12 col-sm-9 col-lg-10 p-1">
 
 
-    <div id="accordion">
-      <div class="card">
-        <div class="card-header" id="headingOne">
-          <h5 class="mb-0">
-            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Lab Details
-            </button>
-          </h5>
-        </div>
-
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-5 m-1">Lab Join Code: {{this.LabInfo.JoinCode}}</div>
-              <div class="col-5 m-1">Lab Title: {{this.LabInfo.LabTitle}}</div>
-              <div class="col-5 m-1">Lab Insstructor: {{this.LabInfo.LabInstructorFNLN}}</div>
-              <div class="col-5 m-1">Lab Members: {{this.LabInfo.LabMembersCount}}</div>
-            </div>
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                aria-controls="collapseOne">
+                Lab Details
+              </button>
+            </h5>
           </div>
 
-
-
-
-          <div class="row text-right">
-            <div class="col-12 text-right">
-              <button class="btn btn-info mb-2 mr-3 text-right" (click)="showGamificationRules()">Gamification Rules</button>
-            </div>
-          </div>
-          <div class="row" *ngIf="showGamificationRulesToggled">
-            <div class="col-12">
-
-
-              <div class="alert alert-info my-1 p-1">Rule01: Difference between every level is = 60 XP </div>
-              <div class="alert alert-info m-0 p-1">Rule02: Badges for levels are <code>[Beginner I, II, III, IV], [Intermediate I, II, III, IV], [Master I, II, III, IV], [Pro I, II, III, IV], [Hotshot I, II, III, IV], [Honoury I, II, III, IV] and last stage is: ULTIMATE CODER.</code> </div>
-              <div class="alert alert-info my-1 p-1">Rule03: Attempting challenge/lab task increases XP</div>
-              <div class="alert alert-info m-0 p-1">Rule04: Incorrect attempted Lab Tasks will deduct XPs until 0 XPs</div>
-              <div class="alert alert-info my-1 p-1">Rule05: Surpassing the level's upper XP limit will increment the level</div>
-              <div class="alert alert-info m-0 p-1">Rule06: Surpassing the level's lower XP limit will decrement the level</div>
-
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header" id="headingTwo">
-          <h5 class="mb-0">
-            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Members
-            </button>
-          </h5>
-        </div>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-          <div class="card-body">
-            <div class="row">
-              <div class="bg-dark rounded text-light w-100 p-3 text-center" *ngIf="TheLabMembers.length==0">
-                <h5 class="">Other members have not joined this lab yet. <br>Share the code of this lab with others.   </h5>
-                <code class="text-info text-center mt-4">Lab_Join_Code: {{LabInfo.JoinCode}}</code>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5 m-1">Lab Join Code: {{this.LabInfo.JoinCode}}</div>
+                <div class="col-5 m-1">Lab Title: {{this.LabInfo.LabTitle}}</div>
+                <div class="col-5 m-1">Lab Insstructor: {{this.LabInfo.LabInstructorFNLN}}</div>
+                <div class="col-5 m-1">Lab Members: {{this.LabInfo.LabMembersCount}}</div>
               </div>
-              <div class="col-4 text-center my-1 " *ngFor="let member of TheLabMembers">
-                <span class="ml-2 px-1 text-small">
-                  <b *ngIf="member.UserType=='teacher'" class="text-secondary">Instructor :  </b>
+            </div>
 
-                  {{member.FirstNameOfUser+' '+member.LastNameOfUser}}
 
-                </span>
-                <span class="text-right">
-                  <button class="btn btn-sm btn-outline-warning ml-3"  *ngIf="member.UserType=='student'" (click)="setRival(member.Username)"><b>Set Rival</b></button></span>
-                <hr class="w-75 mx-auto">
+
+
+            <div class="row text-right">
+              <div class="col-12 text-right">
+                <button class="btn btn-info mb-2 mr-3 text-right" (click)="showGamificationRules()">Gamification
+                  Rules</button>
+              </div>
+            </div>
+            <div class="row" *ngIf="showGamificationRulesToggled">
+              <div class="col-12">
+
+
+                <div class="alert alert-info my-1 p-1">Rule01: Difference between every level is = 60 XP </div>
+                <div class="alert alert-info m-0 p-1">Rule02: Badges for levels are
+                  <code>[Beginner I, II, III, IV], [Intermediate I, II, III, IV], [Master I, II, III, IV], [Pro I, II, III, IV], [Hotshot I, II, III, IV], [Honoury I, II, III, IV] and last stage is: ULTIMATE CODER.</code>
+                </div>
+                <div class="alert alert-info my-1 p-1">Rule03: Attempting challenge/lab task increases XP</div>
+                <div class="alert alert-info m-0 p-1">Rule04: Incorrect attempted Lab Tasks will deduct XPs until 0 XPs
+                </div>
+                <div class="alert alert-info my-1 p-1">Rule05: Surpassing the level's upper XP limit will increment the
+                  level</div>
+                <div class="alert alert-info m-0 p-1">Rule06: Surpassing the level's lower XP limit will decrement the
+                  level</div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="false" aria-controls="collapseTwo">
+                Members
+              </button>
+            </h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="bg-dark rounded text-light w-100 p-3 text-center" *ngIf="TheLabMembers.length==0">
+                  <h5 class="">Other members have not joined this lab yet. <br>Share the code of this lab with others.
+                  </h5>
+                  <code class="text-info text-center mt-4">Lab_Join_Code: {{LabInfo.JoinCode}}</code>
+                </div>
+                <div class="col-4 text-center my-1 " *ngFor="let member of TheLabMembers">
+                  <span class="ml-2 px-1 text-small"
+                  [ngClass]="{'pt-1 mt-1' : member.Username != localStorageUsername}"
+                  >
+                    <b *ngIf="member.UserType=='teacher'"
+                     class="text-secondary">Instructor : </b>
+
+                    {{member.FirstNameOfUser+' '+member.LastNameOfUser}}
+
+                  </span>
+                  <span class="text-right">
+                    <button class="btn btn-sm btn-outline-warning ml-3"
+                    *ngIf="member.UserType=='student' &&
+                    member.Username != localStorageUsername"
+                      (click)="setRival(member)"><b>Set Rival</b></button></span>
+                  <hr class="w-75 mx-auto">
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
+
   </div>
-
-
-
-</div> <!--2nd row ends-->
+  <!--2nd row ends-->
 
 
 
@@ -255,35 +279,37 @@
 
 
 
-      <div class="modal" id="demotionModallll" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content bg-dark errorMessageModal">
-            <div class="modal-header">
-              <h5 class="modal-title errorMessageModal font16">{{MODAL_HEADING}}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body font16">
-              <small>{{MODAL_MESSAGE}}</small>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
+<div class="modal" id="demotionModallll" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bg-dark errorMessageModal">
+      <div class="modal-header">
+        <h5 class="modal-title errorMessageModal font16">{{MODAL_HEADING}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <button type="button" id="LevelUpdatedModalButton" class="d-none" #modalButton data-toggle="modal"  data-target="#demotionModallll">
+      <div class="modal-body font16">
+        <small>{{MODAL_MESSAGE}}</small>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<button type="button" id="LevelUpdatedModalButton" class="d-none" #modalButton data-toggle="modal"
+  data-target="#demotionModallll">
 
-      </button>
-
-<!-- -------------------------------------------------------------------------------------- -->
-<!--MAIN AREA OF STUDENT ENDS-->
-<!-- ----------------------------------------------------------------------------------------->
+</button>
 
 
 
 
-<!-- -------------------------------------------------------------------------------------- -->
-<!-- AREA UNDER TOP ROW OF STUDENT ENDS-->
-<!-- ----------------------------------------------------------------------------------------->
+
+
+
+<!-- LOADING MODEL -->
+<div *ngIf="showSpinner">
+  <div id="opaque" class="d-block"></div>
+  <div id="spinner" class="loader"></div>
+</div>

@@ -14,10 +14,11 @@ import { UsersService } from 'src/app/Services/users.service';
 })
 export class SlabDashboardComponent implements OnInit {
 
-  constructor(private studentLabDataService: StudentLabDataService, private labsService: LabsService, private usersService: UsersService, private gamificationService:GamificationService) { }
+  constructor(private studentLabDataService: StudentLabDataService, private labsService: LabsService, private usersService: UsersService, private gamificationService: GamificationService) { }
 
 
   ngOnInit() {
+    this.showSpinner = false;
     this.AllUsersDownloaded = this.usersService.RecieveAllUsersFromDB();
     this.TheLabArray = this.labsService.FetchThisLab(this.LabID);
     let StudentzUsernameAndLabID: { StudentzUsername: string, LabJoinCode: string } = { LabJoinCode: this.LabID, StudentzUsername: this.StudentzUsername };
@@ -33,29 +34,29 @@ export class SlabDashboardComponent implements OnInit {
 
 
 
-        if(this.CurrentStatsOfThisStudent[0].currentXPs == 0 && this.CurrentStatsOfThisStudent[0].Demoted == false){
-          this.displayThisMessageInModal("Welcome!! to the lab","Your current badge is : "+this.CURRENT_BADGE);
+        if (this.CurrentStatsOfThisStudent[0].currentXPs == 0 && this.CurrentStatsOfThisStudent[0].Demoted == false) {
+          this.displayThisMessageInModal("Welcome!! to the lab", "Your current badge is : " + this.CURRENT_BADGE);
         }
-        if(this.CurrentStatsOfThisStudent[0].currentXPs < 60 && this.CurrentStatsOfThisStudent[0].Demoted){
-          this.displayThisMessageInModal("Demoted to very first level","Your current badge is : "+this.CURRENT_BADGE);
-        }
-
-
-        if(this.CurrentStatsOfThisStudent[0].Promoted){
-          this.displayThisMessageInModal("Hurrah!! You were Promoted.","YOUR NEW BADGE IS : "+this.CURRENT_BADGE);
-        }
-
-        if(this.CurrentStatsOfThisStudent[0].Warned){
-          this.displayThisMessageInModal("WARNING!!...","You were warned by the teacher, 50 XPs are deducted");
+        if (this.CurrentStatsOfThisStudent[0].currentXPs < 60 && this.CurrentStatsOfThisStudent[0].Demoted) {
+          this.displayThisMessageInModal("Demoted to very first level", "Your current badge is : " + this.CURRENT_BADGE);
         }
 
 
-        if(this.CurrentStatsOfThisStudent[0].Appreciated){
-          this.displayThisMessageInModal("GOOD NEWS!!...","You were Appreciated by the teacher, 50 XPs are given as a bonus.");
+        if (this.CurrentStatsOfThisStudent[0].Promoted) {
+          this.displayThisMessageInModal("Hurrah!! You were Promoted.", "YOUR NEW BADGE IS : " + this.CURRENT_BADGE);
         }
 
-        if(this.CurrentStatsOfThisStudent[0].currentXPs >= 60 && this.CurrentStatsOfThisStudent[0].Demoted){
-          this.displayThisMessageInModal("You were Demoted, Alas!","Better Luck next time, Badge Assigned = "+this.CURRENT_BADGE);
+        if (this.CurrentStatsOfThisStudent[0].Warned) {
+          this.displayThisMessageInModal("WARNING!!...", "You were warned by the teacher, 50 XPs are deducted");
+        }
+
+
+        if (this.CurrentStatsOfThisStudent[0].Appreciated) {
+          this.displayThisMessageInModal("GOOD NEWS!!...", "You were Appreciated by the teacher, 50 XPs are given as a bonus.");
+        }
+
+        if (this.CurrentStatsOfThisStudent[0].currentXPs >= 60 && this.CurrentStatsOfThisStudent[0].Demoted) {
+          this.displayThisMessageInModal("You were Demoted, Alas!", "Better Luck next time, Badge Assigned = " + this.CURRENT_BADGE);
         }
 
         // if()///////////////////////////////////////////////////////////
@@ -85,8 +86,9 @@ export class SlabDashboardComponent implements OnInit {
 
   }
 
-  MODAL_HEADING:string = '';
-  MODAL_MESSAGE:string = '';
+  showSpinner: boolean;
+  MODAL_HEADING: string = '';
+  MODAL_MESSAGE: string = '';
   StudentzUsernameAndLabID: { StudentzUsername: string, LabJoinCode: string };
   XP_FOR_PROMOTION: number = 0;
   NEXT_BADGE: string = '';
@@ -102,14 +104,14 @@ export class SlabDashboardComponent implements OnInit {
 
 
   showGamificationRulesToggled = false;
-  showGamificationRules(){
+  showGamificationRules() {
     if (this.showGamificationRulesToggled) { this.showGamificationRulesToggled = false; }
     else { this.showGamificationRulesToggled = true; }
   }
 
 
 
-  displayThisMessageInModal(MODAL_HEADING:string, MODAL_MESSAGE:string){
+  displayThisMessageInModal(MODAL_HEADING: string, MODAL_MESSAGE: string) {
     this.MODAL_HEADING = MODAL_HEADING;
     this.MODAL_MESSAGE = MODAL_MESSAGE;
     document.getElementById("LevelUpdatedModalButton").click();
@@ -134,9 +136,61 @@ export class SlabDashboardComponent implements OnInit {
 
 
 
-  setRival(Username: string) {
-    alert(Username);
+  setRival(member: Usersmodel) {
+    // fetch that collect
+    this.showSpinner = true;
+    let fetchedStatsOfStudentForSettingRivals: StudLabDataAndStatsmodel[] = [];
+    fetchedStatsOfStudentForSettingRivals = this.studentLabDataService.getCurrentStatsOfThisStudent({
+      LabJoinCode: this.LabID,
+      StudentzUsername: this.localStorageUsername
+    });
+
+    // setTimeout(()=>{// fetch in this
+    // },1500);
+    setTimeout(() => { // set
+
+      let matched: boolean = false;
+      // let acllOK: boolean=true;
+
+      if (fetchedStatsOfStudentForSettingRivals[0].RivalStudents.length < 6) {
+        // allOK = true;
+        for (let i = 0; i < fetchedStatsOfStudentForSettingRivals[0].RivalStudents.length; i++) {
+          if (fetchedStatsOfStudentForSettingRivals[0].RivalStudents.includes(member.Username)) {
+            matched = true;
+            // allOK = false;
+            // return;
+          }
+        }
+
+        if (matched == true) {
+          this.displayThisMessageInModal("Already a Rival!", "This student is already your Rival");
+
+        } else {
+
+          //set Rival here
+          fetchedStatsOfStudentForSettingRivals[0].RivalStudents.push(member.Username);
+          this.studentLabDataService.updateCurrentStatsOfThisStudent(fetchedStatsOfStudentForSettingRivals[0],
+            {StudentzUsername: this.localStorageUsername, LabJoinCode:this.LabID});
+            this.displayThisMessageInModal("Rival Set!", "This student is set as Rival.\n"
+              + "You can view the recent activities of this student now. ");
+        }
+
+      }else{
+        this.displayThisMessageInModal("Setting Rivals Limit Exceeded!", "You cannot set more than 5 students as Rivals");
+      }
+
+
+      this.showSpinner = false;
+
+    }, 2500);
   }
+
+
+
+
+
+
+
 
   extractLabInfoANDLabMembers() {
     let membersCount = 0;
@@ -147,7 +201,7 @@ export class SlabDashboardComponent implements OnInit {
       if (this.AllUsersDownloaded[i].LabJoinCodesOfJoinedLabs.includes(this.TheLabArray[0]._id)) {
         membersCount++;
         // if (this.AllUsersDownloaded[i].Username != this.localStorageUsername && this.AllUsersDownloaded[i].UserType == 'student') {
-          this.TheLabMembers.push(this.AllUsersDownloaded[i]);
+        this.TheLabMembers.push(this.AllUsersDownloaded[i]);
         // }
         // console.log('membersCount++ ==>', membersCount);
       }

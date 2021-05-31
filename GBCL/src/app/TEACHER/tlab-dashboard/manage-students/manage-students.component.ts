@@ -79,7 +79,7 @@ export class ManageStudentsComponent implements OnInit {
 
           let studhistory: StudentActivityHistorymodel = {
             GainedOrLoosedXPsCount: 50, LabChallengeQuestion: '', wasExpelled: false,
-            LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: this.localStorageUsername, _id: '', wasAppreciated: false, wasDemoted: false, wasPromoted: false, wasWarned: true
+            LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: LabMemberStudent.Username, _id: '', wasAppreciated: false, wasDemoted: false, wasPromoted: false, wasWarned: true
           };
 
 
@@ -116,7 +116,7 @@ export class ManageStudentsComponent implements OnInit {
 
           let studhistory: StudentActivityHistorymodel = {
             GainedOrLoosedXPsCount: 50, LabChallengeQuestion: '', wasExpelled: false,
-            LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: this.localStorageUsername, _id: '', wasAppreciated: true, wasDemoted: false, wasPromoted: false, wasWarned: false
+            LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: LabMemberStudent.Username, _id: '', wasAppreciated: true, wasDemoted: false, wasPromoted: false, wasWarned: false
           };
 
 
@@ -146,7 +146,7 @@ export class ManageStudentsComponent implements OnInit {
 
         let studhistory: StudentActivityHistorymodel = {
           GainedOrLoosedXPsCount: 0, LabChallengeQuestion: '', wasExpelled: false,
-          LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: this.localStorageUsername, _id: '', wasAppreciated: false, wasDemoted: false, wasPromoted: false, wasWarned: false
+          LabChallengeQuestionType: '', LabTaskQuestion: '', LabJoinCode: this.LabID, LabTaskOrChallengeAttempted: false, LabTaskOrChallengeChecked: false, LabTaskOrChallengeFailedDueToTimeout: false, StudentzUsername: LabMemberStudent.Username, _id: '', wasAppreciated: false, wasDemoted: false, wasPromoted: false, wasWarned: false
         };
 
         if (STUDz_FETCHED_STATS_FROM_Db[0]?.StudentzLabAccessStatus == "Expelled") {

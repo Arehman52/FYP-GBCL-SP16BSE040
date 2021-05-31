@@ -11,7 +11,7 @@ created from signup
 
 dummyunicreatedviasignup zz
   labs==> 60b45132279450165caf4234 ,
-  stu ==> dummyunicreatedviasignupzstud
+  stu ==> dummyunicreatedviasignupzstud, dummyunicreatedviasignupzstud2
   tch ==> dummyunicreatedviasignupztchr
 
 
