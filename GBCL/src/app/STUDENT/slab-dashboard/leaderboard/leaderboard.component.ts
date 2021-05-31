@@ -10,6 +10,31 @@ export class LeaderboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.handleVisibilityChange();
+
+  }
+  handleVisibilityChange() {
+    document.addEventListener("visibilitychange", ()=>{
+      if(document.hidden){
+        if(confirm("CLOSING?")){
+          let d = new Date();
+          alert(d.toString().substring(0,21));
+        }
+        // else{
+
+        // if(confirm("CLOSING  22?")){
+        //   alert(document.hidden);
+        // }
+        //   alert(document.hidden);
+        //   // window.location.href = "/STUDENT/Lab";
+        // }
+      }
+    });
+    // document.addEventListener("visibilitychange", ()=>{
+    //   if(!confirm("You tried to open a new tab or minimized this window. This is cheating, you get 0XP, Continue?")){
+    //   window.location.href = "/STUDENT/Lab";
+    //   }
+    // });
   }
 
   onExitLabClicked(){

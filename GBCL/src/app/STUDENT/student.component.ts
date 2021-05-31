@@ -17,20 +17,24 @@ export class STUDENTComponent implements OnInit {
   constructor(private labsService: LabsService, private usersService: UsersService) { }
 
   ngOnInit(): void {
+    this.LabID = localStorage.getItem("LabID");
     this.showSpinner = false;
-    this.AllLabsRecieved = this.labsService.RecieveAllLabsFromDB();
-    // this.CompleteLabMembersCollection = this.labsService.FetchCompleteLabMembersCollection();
+    // this.AllLabsRecieved = this.labsService.RecieveAllLabsFromDB();
     let usernameObj: { Username: string } = { Username: this.localStorageUsername };
     this.TheStudent = this.usersService.FetchThisUser(usernameObj);
     setTimeout(() => {
+      let obj:{UniversityNameOfLab:string} = {UniversityNameOfLab:this.TheStudent[0].UniversityNameOfUser};
+      this.AllLabsOfThisStudetzUniversity = this.labsService.getAllLabsOfThisUniversity(obj);
+      console.log("All Labs Of This Studetz University @@@ ",this.AllLabsOfThisStudetzUniversity);
+    }, 1500);
+    setTimeout(() => {
       this.extractLabsOfThisStudent();
-      // console.log("this.CompleteLabMembersCollection[[NgOnInit]] ==> ", this.CompleteLabMembersCollection)
-    }, 2500);
-    this.AllLabsOfThisStudetzUniversity = this.labsService.getAllLabsOfThisUniversity();
+    }, 2000);
   }
 
+  LabID:string = '';
   AllLabsOfThisStudetzUniversity: Labsmodel[] = [];
-  AllLabsRecieved: Labsmodel[] = [];
+  // AllLabsRecieved: Labsmodel[] = [];
   TheStudent: Usersmodel[] = [];
   // CompleteLabMembersCollection: LabMembersmodel[] = [];
   MessageForModal: string;
@@ -47,11 +51,11 @@ export class STUDENTComponent implements OnInit {
     let objUsername: { Username: string };
     let arrayOf_LabJoinCodesOfJoinedLabs: string[] = this.TheStudent[0].LabJoinCodesOfJoinedLabs;
     if (arrayOf_LabJoinCodesOfJoinedLabs.length != 0) {
-      for (let i = 0; i < this.AllLabsRecieved.length; i++) {    ////not all labs, but just labs of this stud
+      for (let i = 0; i < this.AllLabsOfThisStudetzUniversity.length; i++) {    ////not all labs, but just labs of this stud
         //student's university's labs only
         for (let j = 0; j < arrayOf_LabJoinCodesOfJoinedLabs.length; j++) {
-          if (this.AllLabsRecieved[i]._id == arrayOf_LabJoinCodesOfJoinedLabs[j]) {
-            this.LabsOfThisStudent.push(this.AllLabsRecieved[i]);
+          if (this.AllLabsOfThisStudetzUniversity[i]._id == arrayOf_LabJoinCodesOfJoinedLabs[j]) {
+            this.LabsOfThisStudent.push(this.AllLabsOfThisStudetzUniversity[i]);
             // objUsername = { Username: this.AllLabsRecieved[i].LabInstructor };
             // let LabInstructor: Usersmodel[] =[];
             // LabInstructor = this.usersService.FetchThisUser(objUsername);
@@ -99,9 +103,9 @@ export class STUDENTComponent implements OnInit {
 
     let checkIf_enteredJoinCode_MatchesWithAnyLab = false;
     console.log('001  enteredJoinCode ==>', enteredJoinCode);
-    for (let i = 0; i < this.AllLabsRecieved.length; i++) {
-      console.log('002 this.AllLabsRecieved[i]._id ==>', this.AllLabsRecieved[i]._id);
-      if (this.AllLabsRecieved[i]._id == enteredJoinCode) {
+    for (let i = 0; i < this.AllLabsOfThisStudetzUniversity.length; i++) {
+      console.log('002 this.AllLabsRecieved[i]._id ==>', this.AllLabsOfThisStudetzUniversity[i]._id);
+      if (this.AllLabsOfThisStudetzUniversity[i]._id == enteredJoinCode) {
         console.log('003 inside if (this.AllLabsRecieved[i]._id == enteredJoinCode) { ');
         checkIf_enteredJoinCode_MatchesWithAnyLab = true;
         // return;

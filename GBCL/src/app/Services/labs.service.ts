@@ -11,13 +11,20 @@ import { StudentAttemptedLabChallengemodel } from '../MODELS/Student-Frontend-Mo
   providedIn: 'root'
 })
 export class LabsService {
-  getAllLabsOfThisUniversity(): Labsmodel[] {
-    throw new Error('Method not implemented.');
-  }
   constructor(private http: HttpClient) { }
 
 
 
+  getAllLabsOfThisUniversity(obj:{UniversityNameOfLab:string}): Labsmodel[] {
+  let allLabsOfThisUniversity: Labsmodel[] = [];
+  this.http.post<{ message: string; allLabsOfThisUniversity: Labsmodel[] }>('http://localhost:3000/api/Labs/getAllLabsOfThisUniversity', obj)
+  .subscribe((responseData)=>{
+    for (let i = 0; i < Object.keys(responseData.allLabsOfThisUniversity).length; i++) {
+      allLabsOfThisUniversity.push(responseData.allLabsOfThisUniversity[i]);
+    }
+  });
+  return allLabsOfThisUniversity;
+  }
 
 
   createLabChallenge(labChallenge: LabChallengesmodel) {

@@ -153,6 +153,20 @@ router.get("/GetAllLabTasksFromDB", (req, res, next) => {
 
 
 
+// getAllLabsOfThisUniversity
+router.post("/getAllLabsOfThisUniversity", (req, res, next) => {
+  Labs.find({UniversityNameOfLab: req.body.UniversityNameOfLab}).then((documents) => {
+    res.status(200).json({
+      message: "These are all labs of this university only : == "+req.body.UniversityNameOfLab,
+      allLabsOfThisUniversity: documents
+    });
+    console.log("These are all labs of this university :",documents)
+  });
+});
+
+
+
+
 // AllLabTasksOfThisLabFromDB
 router.post("/getAllLabTasksOfThisLabFromDB", (req, res, next) => {
   LabTask.find({LabJoinCode:req.body.LabJoinCode}).then((documents) => {

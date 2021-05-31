@@ -84,7 +84,7 @@ export class ManageChallengesComponent implements OnInit {
     this.Errors.LabChallengeDeleted.status = false;
     this.Errors.LabChallengeCreated.status = false;
     this.Errors.invalidChallengeQuestion.status = false;
-    this.Errors.AllowedTimeNotAssigned.status = false;
+    // this.Errors.AllowedTimeNotAssigned.status = false;
     this.Errors.AllOptionsNotFilled.status = false;
 
   }
