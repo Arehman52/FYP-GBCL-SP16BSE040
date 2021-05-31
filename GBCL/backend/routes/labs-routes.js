@@ -99,10 +99,10 @@ router.put("/UpdateThisLabTask/:Id", (req, res, next) => {
   const lab = new LabTask({
     _id: req.body._id,
     LabJoinCode: req.body.LabJoinCode,
-    labTaskTitle: req.body.labTaskTitle,
-    labTaskQuestion: req.body.labTaskQuestion,
-    labTaskAnswer: req.body.labTaskAnswer,
-    labTaskXPs: req.body.labTaskXPs,
+    LabTaskTitle: req.body.LabTaskTitle,
+    LabTaskQuestion: req.body.LabTaskQuestion,
+    LabTaskAnswer: req.body.LabTaskAnswer,
+    LabTaskXPs: req.body.LabTaskXPs,
     AttemptedByStudents: req.body.AttemptedByStudents
   });
 
@@ -264,12 +264,14 @@ router.post("/CreateLab", (req, res, next) => {
 router.post("/CreateLabTask", (req, res, next) => {
   const labTask = new LabTask({
     LabJoinCode: req.body.LabJoinCode,
-    labTaskTitle: req.body.labTaskTitle,
-    labTaskQuestion: req.body.labTaskQuestion,
-    labTaskAnswer: req.body.labTaskAnswer,
-    labTaskXPs: req.body.labTaskXPs,
+    LabTaskTitle: req.body.LabTaskTitle,
+    LabTaskQuestion: req.body.LabTaskQuestion,
+    LabTaskAnswer: req.body.LabTaskAnswer,
+    LabTaskXPs: req.body.LabTaskXPs,
     AttemptedByStudents: req.body.AttemptedByStudents
   });
+
+  console.log("labTask : ", labTask);
   labTask
     .save()
     .then((result) => {
@@ -284,7 +286,7 @@ router.post("/CreateLabTask", (req, res, next) => {
       });
     });
 
-  console.log("   ==> {/CreateLabTask} LabTastTitle == ", labTask.labTaskTitle);
+  // console.log("   ==> {/CreateLabTask} LabTastTitle == ", labTask.labTaskTitle);
 });
 
 

@@ -73,6 +73,9 @@ export class CpaComponent implements OnInit {
 
     this.studentLabDataService.createThisStudentAttemptedLabTask(labTask);
     this.labsService.updateThisLabTask(this.CURRRENT_TASK_BEING_ATTEMPTED);
+    codeForm.reset();
+    this.Errors.emptyCodeFields.status = true;
+    setTimeout(()=>{window.location.reload()},2700);
     //////////////////////////////////////////////////////////////////////////////
     ////////////////////////// NEXT STEPS/////////////////////////////////////////
     //   Still I need to update STUDENT ACTIVITY HISTORY here.

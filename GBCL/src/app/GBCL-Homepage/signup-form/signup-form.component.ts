@@ -73,13 +73,17 @@ export class SignupFormComponent implements OnInit {
       //following variable enables/disables Error div below the Signup Button
       this.Errors.formHasErrors.status = true;
       //following variable enables/disables Success div below the Signup Button
-      this.Errors.formSubmittedSuccessfuly.status = false;
+      // this.Errors.formSubmittedSuccessfuly.status = false;
+      this.Errors.StuTchformSubmittedSuccessfuly.status = false;
+      this.Errors.UniformSubmittedSuccessfuly.status = false;
       return;
     } else {
       this.usersService.createUser(this.user); //<--- this method should update user to DB
 
       this.Errors.formHasErrors.status = false;
-      this.Errors.formSubmittedSuccessfuly.status = true;
+      this.Errors.StuTchformSubmittedSuccessfuly.status = true;
+      this.Errors.UniformSubmittedSuccessfuly.status = true;
+      // this.Errors.formSubmittedSuccessfuly.status = true;
       setTimeout(() => { form.resetForm() }, 200);
     }
   }
@@ -146,10 +150,15 @@ export class SignupFormComponent implements OnInit {
       status: true,
       message: 'Form not submitted due to errors, kindly resolve them first.',
     },
-    formSubmittedSuccessfuly: {
+    StuTchformSubmittedSuccessfuly: {
       status: true,
       message:
-        'Form submitted to your University successfuly.\nYou can Login now.',
+        'Form submitted to your University successfuly.\nOnce your request approved, you will be able to Login.',
+    },
+    UniformSubmittedSuccessfuly: {
+      status: true,
+      message:
+        'Form submitted to Admin successfuly.\nOnce your request approved, you will be able to Login.',
     },
     //below are for fields of non UNIVERSITY users.
     invalidFName: {
@@ -221,13 +230,20 @@ export class SignupFormComponent implements OnInit {
     }
   }
 
+  NotListed:boolean = false;
   onUniversitiesSelectChange(optUni: HTMLSelectElement) {
     // Not Listed!
     // console.log('optUni.value : ' + optUni.value);
     if (optUni.value === 'Not Listed!' || optUni.value === 'Selectone') {
       this.anyUniversitySelected = false;
-      // console.log(optUni.value);
-      // this.user.UniversityNameOfUser = optUni.value;
+
+      if(optUni.value === 'Not Listed!'){
+        this.NotListed = true;
+      }else{
+        this.NotListed = false;
+
+      }
+
     } else {
       this.anyUniversitySelected = true;
       //  console.log(optUni.value);
@@ -399,7 +415,8 @@ export class SignupFormComponent implements OnInit {
 
   setAllErrorsToFalse(){
     this.Errors.formHasErrors.status = false;
-    this.Errors.formSubmittedSuccessfuly.status = false;
+    this.Errors.StuTchformSubmittedSuccessfuly.status = false;
+    this.Errors.UniformSubmittedSuccessfuly.status = false;
     this.Errors.invalidFName.status = false;
     this.Errors.invalidHECID.status = false;
     this.Errors.invalidLName.status = false;
@@ -512,7 +529,9 @@ export class SignupFormComponent implements OnInit {
     this.Errors.usernameNotUnique.status = false;
     this.Errors.invalidNameOfTheUNIVERSITY.status = false;
     this.Errors.formHasErrors.status = false;
-    this.Errors.formSubmittedSuccessfuly.status = false;
+    // this.Errors.formSubmittedSuccessfuly.status = false;
+    this.Errors.StuTchformSubmittedSuccessfuly.status = false;
+    this.Errors.UniformSubmittedSuccessfuly.status = false;
     // this.Errors.UniversityNotSelected.status = false;
   }
 }

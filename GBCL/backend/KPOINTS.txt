@@ -6,9 +6,13 @@
 for now dummy data:
 
 created from signup
-  uni ==>
-  stu ==>
-  tch ==>
+  uni ==> dummyunicreatedviasignup, dummyunicreatedviasignup01
+
+
+dummyunicreatedviasignup zz
+  labs==> 60b45132279450165caf4234 ,
+  stu ==> dummyunicreatedviasignupzstud
+  tch ==> dummyunicreatedviasignupztchr
 
 
 

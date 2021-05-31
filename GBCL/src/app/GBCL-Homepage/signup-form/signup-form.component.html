@@ -63,8 +63,8 @@
                 </select>
               </div>
               <small class="form-text p-2 mt-4 formSubmissionErrorsText"
-            *ngIf="signupForm.value.UniversitiesSelection == 'Not Listed!'">
-              <span>--{{"In order for you to register, Your University should be registered with GBCL first."}}</span>
+              *ngIf="!anyUniversitySelected && NotListed && this.user.UserType!='university'">
+              <span>{{"In order for you to register, Your University should be registered with GBCL first."}}</span>
             </small>
 
             </div>
@@ -98,10 +98,10 @@
                   (keyup)="checkUsernameOfUser()"
                   >
                   <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
-                    <span>--{{this.Errors.invalidUsername.message}}</span>
+                    <span>{{this.Errors.invalidUsername.message}}</span>
                   </small>
                   <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
-                    <span>--{{this.Errors.usernameNotUnique.message}}</span>
+                    <span>{{this.Errors.usernameNotUnique.message}}</span>
                   </small>
                 </div>
               </div>
@@ -114,7 +114,7 @@
                   ngModel
                   (keyup)="checkPasswordOfUser()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
-                    <span>--{{this.Errors.invalidPassword.message}}</span>
+                    <span>{{this.Errors.invalidPassword.message}}</span>
                   </small>
                 </div>
               </div>
@@ -130,7 +130,7 @@
                 ngModel
                 (keyup)="checkFirstNameOfUser()" >
                 <small class="form-text errorText" *ngIf="this.Errors.invalidFName.status == true">
-                  <span>--{{this.Errors.invalidFName.message}}</span>
+                  <span>{{this.Errors.invalidFName.message}}</span>
                 </small>
               </div>
 
@@ -139,7 +139,7 @@
                 <input type="text" placeholder="Enter your Last Name" class="form-control" name="UsersEnteredLName" ngModel
                 (keyup)="checkLastNameOfUser()">
                 <small class="form-text errorText" *ngIf="this.Errors.invalidLName.status == true">
-                  <span>--{{this.Errors.invalidLName.message}}</span>
+                  <span>{{this.Errors.invalidLName.message}}</span>
                 </small>
               </div>
 
@@ -155,7 +155,7 @@
                   Your registration ID through which your university can identify you in their records.
                 </small>
                 <small class="form-text errorText" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
-                  <span>--{{this.Errors.invalidRegistrationNumber.message}}</span>
+                  <span>{{this.Errors.invalidRegistrationNumber.message}}</span>
                 </small>
               </div>
             </div>
@@ -166,12 +166,12 @@
             </div>
 
             <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
-              <span>--{{this.Errors.formHasErrors.message}}</span>
+              <span>{{this.Errors.formHasErrors.message}}</span>
             </small>
 
             <small class="form-text p-2 mt-4 formSubmissionSuccessText"
-            *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
-              <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
+            *ngIf="this.Errors.StuTchformSubmittedSuccessfuly.status == true">
+              <span>{{this.Errors.StuTchformSubmittedSuccessfuly.message}}</span>
             </small>
 
 
@@ -199,10 +199,10 @@
                   ngModel
                   (keyup)="checkUsernameOfUniversity()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
-                    <span>--{{this.Errors.invalidUsername.message}}</span>
+                    <span>{{this.Errors.invalidUsername.message}}</span>
                   </small>
                   <small class="form-text errorText" *ngIf="this.Errors.usernameNotUnique.status == true">
-                    <span>--{{this.Errors.usernameNotUnique.message}}</span>
+                    <span>{{this.Errors.usernameNotUnique.message}}</span>
                   </small>
                 </div>
               </div>
@@ -214,7 +214,7 @@
                   ngModel
                   (keyup)="checkPasswordOfUniversity()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
-                    <span>--{{this.Errors.invalidPassword.message}}</span>
+                    <span>{{this.Errors.invalidPassword.message}}</span>
                   </small>
                 </div>
               </div>
@@ -230,7 +230,7 @@
                   ngModel
                   (keyup)="checkHECIDOfUniversity()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidHECID.status == true">
-                    <span>--{{this.Errors.invalidHECID.message}}</span>
+                    <span>{{this.Errors.invalidHECID.message}}</span>
                   </small>
                 </div>
               </div>
@@ -243,10 +243,10 @@
                   ngModel
                   (keyup)="checkUniversitysEnteredName()">
                   <small class="form-text errorText" *ngIf="this.Errors.invalidNameOfTheUNIVERSITY.status == true">
-                    <span>--{{this.Errors.invalidNameOfTheUNIVERSITY.message}}</span>
+                    <span>{{this.Errors.invalidNameOfTheUNIVERSITY.message}}</span>
                   </small>
                   <small class="form-text errorText" *ngIf="this.Errors.uniTitleNotUnique.status == true">
-                    <span>--{{this.Errors.uniTitleNotUnique.message}}</span>
+                    <span>{{this.Errors.uniTitleNotUnique.message}}</span>
                   </small>
                 </div>
               </div>
@@ -259,12 +259,12 @@
             </div>
 
             <small class="form-text p-2 mt-4 formSubmissionErrorsText" *ngIf="this.Errors.formHasErrors.status == true">
-              <span>--{{this.Errors.formHasErrors.message}}</span>
+              <span>{{this.Errors.formHasErrors.message}}</span>
             </small>
 
             <small class="form-text p-2 mt-4 formSubmissionSuccessText"
-            *ngIf="this.Errors.formSubmittedSuccessfuly.status == true">
-              <span>--{{this.Errors.formSubmittedSuccessfuly.message}}</span>
+            *ngIf="this.Errors.UniformSubmittedSuccessfuly.status == true">
+              <span>{{this.Errors.UniformSubmittedSuccessfuly.message}}</span>
             </small>
 
           </div>
@@ -275,7 +275,7 @@
           <div class="row p-0 m-0">
             <div class="col-12 col-md-6 form-text p-0 m-0" style="color: rgb(255,255,0);" *ngFor="let error of Errors">
               <small class="mt-1 mr-1" *ngIf="error.status == 'true'">
-                <span>--{{error.message}}</span>
+                <span>{{error.message}}</span>
               </small>
             </div>
           </div> -->

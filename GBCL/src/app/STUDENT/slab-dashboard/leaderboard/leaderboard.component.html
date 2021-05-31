@@ -129,16 +129,14 @@
     <h4 class="text-warning text-center p-3 m-1 mt-4 border rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4>
 
     <!-- below div represents : 1 student only. -->
-  <div class="border rounded p-3 m-3 bg-dark font-weight-bold" *ngFor="let lead of leaderboard"
-[style]="'color:#'+lead.color">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Rank: {{lead.rank}}</span>
-      =>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{lead.name}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>XPs: {{lead.XPs}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>CPPs: {{lead.CPPs}}</span>
-
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Level: {{lead.level}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Badge: {{lead.badge}}</span>
-    </div>
+    <div class="border rounded p-3 m-3 bg-dark font-weight-bold" *ngFor="let lead of leaderboard"
+    [style]="'color:#'+lead?.color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Rank: {{lead?.rank}}</span>
+          =>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{lead?.name}}</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>XPs: {{lead?.XPs}}</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Level: {{lead?.level}}</span>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Badge: {{lead?.badge}}</span>
+        </div>
 
   </div>
 

@@ -38,11 +38,12 @@ export class LabsService {
 
 
   createLabTask(labtask: LabTasksmodel) {
+    console.log("labtask: LabTasksmodel from service : ", labtask);
 
     this.http
     .post('http://localhost:3000/api/Labs/CreateLabTask', labtask)
     .subscribe((responseData) => {
-        console.log(responseData);
+        console.log("responseData from service : ", responseData);
       });
   }
 

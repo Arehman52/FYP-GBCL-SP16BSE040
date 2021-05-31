@@ -54,6 +54,7 @@ export class ManageLabtasksComponent implements OnInit {
         this.LabTasksOfThisLab.push(this.AllLabTasks[i]);
       }
     }
+    console.log("this.LabTasksOfThisLab : ", this.LabTasksOfThisLab);
   }
 
 
@@ -71,16 +72,18 @@ export class ManageLabtasksComponent implements OnInit {
       LabJoinCode: this.LabID, _id: '', AttemptedByStudents: [], LabTaskAnswer: createLabTaskForm.value.LabTaskAnswer, LabTaskQuestion: createLabTaskForm.value.LabTaskQuestion, LabTaskTitle: taskTitle, LabTaskXPs: parseInt(XPsSelect.value)
     };
 
-    // this.utils.creatNewTask(labtask);
-    let result = this.labsService.createLabTask(labtask);
+
+    console.log(labtask);
+    this.labsService.createLabTask(labtask);
 
     this.Errors.emptyField.status = true;
     this.Errors.LabTaskCreated.status = true;
-    setTimeout(()=>{window.location.reload()},3000);
+    setTimeout(()=>{
+      window.location.reload()
 
-    console.log(result);
-    console.log(labtask);
-  }
+
+    },3000);
+}
 
   displayThisMessageInModal(Message: string, modalButtonReferrence: HTMLButtonElement) {
     this.MessageForModal = Message;
