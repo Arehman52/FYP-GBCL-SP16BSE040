@@ -59,9 +59,9 @@
 
 
           <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span>
+            <div class="col"><span class="mx-2">
                 <h4>Manage Labs</h4>
-                <h6>{{this.UNIVERSITY_TITLE}}</h6>
+                <h6 >{{this.UNIVERSITY_TITLE}}</h6>
               </span></div>
           </div>
         </div>
@@ -308,7 +308,7 @@
             <h5 class="mb-0">
               <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
                 data-target="#collapseOneStd" aria-expanded="true" aria-controls="collapseOneStd">
-                <h5><b>View Registered Labs <span class="text-info">**</span></b></h5>
+                <h5><b>View Registered Labs <span class="text-info">**<span class="ml-3 text-muted" style="font-size: 16px;">( {{this.RegisteredLabs.length}} )</span> </span></b></h5>
               </button>
             </h5>
           </div>
@@ -334,18 +334,18 @@
                 <div class="card mb-1" *ngFor="let lab of RegisteredLabs">
                   <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
 
-                    <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    <button class="btn" style="font-weight: 600;" data-toggle="collapse"
                       [attr.data-target]="'#RegisteredFacultyCollapse' + lab._id" aria-expanded="true"
                       [attr.aria-controls]="'collapse' + lab._id"
                       (click)="extract_ViewLabMembers_onViewLabMembersClicked(lab)">
-                      {{lab.LabTitle}}
+                      {{lab.LabTitle}} <span style="font-style: italic; font-weight: 200;" class="text-muted ml-2">: by {{lab.LabInstructorFN+' '+ lab.LabInstructorLN}}</span>
                     </button>
 
                   </div>
 
                   <div [id]="'RegisteredFacultyCollapse' + lab._id" class="collapse hide"
                     [attr.aria-labelledby]="'RegisteredFacultyCard'" data-parent="#accordionInnerFac">
-                    <div class="card-body ">
+                    <div class="card-body border rounded border-info">
 
                       <div class="row">
                         <div class="col-11 m-auto">
@@ -434,7 +434,7 @@
                                   </small>
                                 </div>
 
-                                <div class="form-group col-sm-6">
+                                <!-- <div class="form-group col-sm-6">
                                   <label> Update the Instructor</label>
 
 
@@ -446,7 +446,7 @@
                                   <select class="custom-select" #InstructorsSelect
                                     aria-placeholder="Choose an Instructor"
                                     (change)="onInstructorsSelectChange(InstructorsSelect)">
-                                    <!-- <option  disabled>{{LabInstructorzFN+' '+LabInstructorzLN}}</option> -->
+                                    <!-- <option  disabled>{{LabInstructorzFN+' '+LabInstructorzLN}}</option> --
                                     <option selected disabled [value]="'Change Instructor'">Change Instructor</option>
                                     <option class="text-danger" [value]="'Not Listed!'"><b>Not Listed!</b></option>
                                     <option [value]="instructor.Username" *ngFor="let instructor of RegisteredFaculty">
@@ -467,13 +467,14 @@
                                     *ngIf="this.Errors.InstructorNotListed.status == true">
                                     {{this.Errors.InstructorNotListed.message}}
                                   </small>
-                                </div>
+                                </div> -->
 
                               </div>
 
-                              <div class="text-center">
+                              <div class="text-center mb-3">
                                 <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
                                   type="submit">Update Lab Details</button>
+                                  <hr class="bg-info my-3">
                               </div>
 
                             </form>
@@ -595,7 +596,7 @@
             <h5 class="mb-0">
               <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne"
                 aria-expanded="true" aria-controls="collapseOne">
-                <h4><b> LAB JOIN REQUESTS</b></h4>
+                <h4><b> LAB JOIN REQUESTS <span class="text-info">**<span class="ml-3 text-muted" style="font-size: 16px;">( {{this.MembersLabJoinRequests.length}} )</span> </span></b></h4>
               </button>
             </h5>
           </div>

@@ -146,16 +146,29 @@ export class ManageUniversitiesComponent implements OnInit {
 
 
 
+
+
+
   DeleteThisUser(uni: Usersmodel) {
-    if (confirm("Are you sure you want to delete " + uni.TitleOfUniversity + " University")) {
-      this.usersService.deleteThisUser(uni._id);
-      this.Errors.userDeleted.status = true;
-      setTimeout(() => {
-        window.location.reload();
-      }, 2500);
-    } else {
-      return;
-    }
+    let temp = this.Errors.userDeleted.message;
+    this.Errors.UniversityDeleteWarning.status = true;
+    setTimeout(() => {
+
+      if (confirm("Are you sure you want to delete " + uni.TitleOfUniversity + " University")) {
+        this.Errors.UniversityDeleteWarning.status = false;
+        this.Errors.userDeleted.status = true;
+        uni.UserzAccessStatus = 'Deleted';
+        this.usersService.deleteThisUniversity(uni,uni._id);
+        // this.Errors.userDeleted.status = true;
+        setTimeout(() => {
+          window.location.reload();
+        }, 2500);
+      } else {
+        this.Errors.UniversityDeleteWarning.status = false;
+        this.Errors.userDeleted.status = false;
+        return;
+      }
+    }, 300);
   }
 
 
@@ -493,8 +506,7 @@ export class ManageUniversitiesComponent implements OnInit {
       // EnteredUniTitle =
       if (this.AllUsersRecievedFromDB != null) {
         for (var i = 0; i < Object.keys(this.AllUsersRecievedFromDB).length; i++) {
-          if(this.AllUsersRecievedFromDB[i].UserType == 'university')
-          {    // var quotedEnteredUniTitle = '"' + EnteredUniTitle + '"';
+          if (this.AllUsersRecievedFromDB[i].UserType == 'university') {    // var quotedEnteredUniTitle = '"' + EnteredUniTitle + '"';
             var IteratedTITLEinForLoop: string = this.AllUsersRecievedFromDB[i].TitleOfUniversity.toLowerCase();
             // console.log("IteratedUNinForLoop.toLowerCase() ", IteratedUNinForLoop.toLowerCase());
             // console.log("quotedUserEnteredUN.toLowerCase() ", quotedUserEnteredUN.toLowerCase());
@@ -520,6 +532,7 @@ export class ManageUniversitiesComponent implements OnInit {
     this.Errors.accessTerminated.status = false;
     this.Errors.accessAllowed.status = false;
     this.Errors.userDeleted.status = false;
+    this.Errors.UniversityDeleteWarning.status = false;
     this.Errors.invalidPassword.status = false;
     this.Errors.invalidUsername.status = false;
     this.Errors.usernameNotUnique.status = false;
@@ -592,6 +605,10 @@ export class ManageUniversitiesComponent implements OnInit {
     accessTerminated: {
       status: true,
       message: 'Access status of this university has been terminated',
+    },
+    UniversityDeleteWarning: {
+      status: true,
+      message: 'Deleteing this University Deletes ALL records of its Students, Teachers and Labs as well.',
     },
     userDeleted: {
       status: true,

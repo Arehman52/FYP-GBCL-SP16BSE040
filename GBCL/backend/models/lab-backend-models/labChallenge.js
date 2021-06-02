@@ -4,8 +4,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 const labChallengeSchema = mongoose.Schema({
   // ChallengeID: {type:String, required : true, unique:true},
   // ChallengeID is replaced with _id now
-  LabJoinCode: String, //as a foreign key
   //DesiredOutput + MCQs + CodeCompletion
+  LabJoinCode: String, //as a foreign key
   ChallengeQuestionType: String,
   ChallengeQuestion: String,
   ChallengeOptionA: String,

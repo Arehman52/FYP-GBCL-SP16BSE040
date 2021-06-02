@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../Services/users.service';
 import { Usersmodel } from '../MODELS/Usersmodel.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -9,15 +10,15 @@ import { Usersmodel } from '../MODELS/Usersmodel.model';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.setAllErrorsToFalse();
     this.AllUsersRecievedFromDB = this.usersService.RecieveAllUsersFromDB();
     setTimeout(
       () => {
-      this.extractJOINRequestsFromUniversitiesData();
-    }, 700);
+        this.extractJOINRequestsFromUniversitiesData();
+      }, 400);
   }
 
   AllUsersRecievedFromDB: Usersmodel[] = [];
@@ -40,7 +41,7 @@ export class AdminComponent implements OnInit {
 
 
 
-  setAllErrorsToFalse(){
+  setAllErrorsToFalse() {
     this.Errors.joinRequestAccepted.status = false;
     this.Errors.joinRequestRejected.status = false;
   }
@@ -52,7 +53,7 @@ export class AdminComponent implements OnInit {
       RejectedUni.UserzAccessStatus = 'Rejected';
       this.usersService.updateThisUser(RejectedUni, Uni._id);
       this.Errors.joinRequestRejected.status = true;
-      setTimeout(()=>{window.location.reload();},2500);
+      setTimeout(() => { window.location.reload(); }, 800);
     } else {
       return;
     }
@@ -65,7 +66,8 @@ export class AdminComponent implements OnInit {
       AllowedUni.UserzAccessStatus = 'Allowed';
       this.usersService.updateThisUser(AllowedUni, Uni._id);
       this.Errors.joinRequestAccepted.status = true;
-      setTimeout(()=>{window.location.reload();},2500);
+      window.location.reload();
+      setTimeout(() => { window.location.reload(); }, 800);
     } else {
       return;
     }
@@ -91,6 +93,41 @@ export class AdminComponent implements OnInit {
   onLogout() {
     localStorage.clear();
     window.location.href = "/";
+  }
+
+
+
+
+
+  //   deleteThisUniversity(uniUpdatedUser: Usersmodel, Id: string) {
+  //     this.http.put("http://localhost:3000/api/Users/UpdateThisUser/"+Id, uniUpdatedUser)
+  //       .subscribe(
+  //         response => {
+  //           console.log(response);
+  //         }
+  //       );
+  //  }
+
+
+
+  ResetEntrireDatabase() {
+    this.http.get("http://localhost:3000/api/Users/ResetEntrireDatabase/")
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      );
+    this.http.get("http://localhost:3000/api/StudentLabData/ResetEntrireDatabase/").subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+    this.http.get("http://localhost:3000/api/Labs/ResetEntrireDatabase/")
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      );
   }
 
 }

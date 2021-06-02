@@ -66,14 +66,39 @@ export class SignupFormComponent implements OnInit {
 
   onSignUpClicked(form: NgForm) {
     //assigns remaining inputs to user
+
+
+
+    if(this.user.UserType == 'university'){
+
+      if (
+        form.value.UniversitysEnteredName == '' ||
+        form.value.UsernameOfUniversity == '' ||
+        form.value.PasswordOfUniversity == '' ||
+        form.value.HECIDOfUniversity == ''
+      ){alert("Youniversity need to fill all the fields first!!!");
+      return;}else{this.Errors.emptyField.status = false};
+    }else{
+
+
+      if (
+        form.value.UsersEnteredFName == '' ||
+        form.value.UsersEnteredLName == '' ||
+        form.value.UsersEnteredPassword == '' ||
+        form.value.UsersEnteredRegistrationNumber == '' ||
+        form.value.UsersEnteredUsername == ''
+      ){alert("Student ot Teacher need to fill all the fields first!!!");
+      return;}else{this.Errors.emptyField.status = false};
+    }
+
+
+
+
     this.assignRemainingInputs(form, this.user.UserType);
 
     //returns true if errors found.
     if (this.checknErrors(form, this.user.UserType)) {
-      //following variable enables/disables Error div below the Signup Button
       this.Errors.formHasErrors.status = true;
-      //following variable enables/disables Success div below the Signup Button
-      // this.Errors.formSubmittedSuccessfuly.status = false;
       this.Errors.StuTchformSubmittedSuccessfuly.status = false;
       this.Errors.UniformSubmittedSuccessfuly.status = false;
       return;
@@ -83,7 +108,6 @@ export class SignupFormComponent implements OnInit {
       this.Errors.formHasErrors.status = false;
       this.Errors.StuTchformSubmittedSuccessfuly.status = true;
       this.Errors.UniformSubmittedSuccessfuly.status = true;
-      // this.Errors.formSubmittedSuccessfuly.status = true;
       setTimeout(() => { form.resetForm() }, 200);
     }
   }
@@ -129,6 +153,10 @@ export class SignupFormComponent implements OnInit {
   };
 
   Errors = {
+    emptyField: {
+      status: true,
+      message: 'This title is taken, Type a different one.',
+    },
     uniTitleNotUnique: {
       status: true,
       message: 'This title is taken, Type a different one.',
@@ -477,6 +505,7 @@ export class SignupFormComponent implements OnInit {
       }
 
       if (
+        this.Errors.emptyField.status ||
         this.Errors.invalidFName.status ||
         this.Errors.invalidLName.status ||
         this.Errors.invalidPassword.status ||
@@ -488,18 +517,6 @@ export class SignupFormComponent implements OnInit {
         return true;
       else return false;
     } else if (user == 'university') {
-      // this.user.HECIDofUniversity.length < 3
-      //   ? (this.Errors.invalidHECID.status = true)
-      //   : (this.Errors.invalidHECID.status = false);
-      // this.user.TitleOfUniversity.length < 2
-      //   ? (this.Errors.invalidNameOfTheUNIVERSITY.status = true)
-      //   : (this.Errors.invalidNameOfTheUNIVERSITY.status = false);
-      // this.user.Password.length < 8
-      //   ? (this.Errors.invalidPassword.status = true)
-      //   : (this.Errors.invalidPassword.status = false);
-      // this.user.Username.length < 5
-      //   ? (this.Errors.invalidUsername.status = true)
-      //   : (this.Errors.invalidUsername.status = false);
 
       if (
         this.Errors.invalidHECID.status ||

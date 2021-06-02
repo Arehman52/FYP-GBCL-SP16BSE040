@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
+
   constructor(private http: HttpClient) { }
 
 
@@ -20,6 +21,27 @@ export class UsersService {
     // { uniName: 'FAST NUCES Islamabad' },
   ];
 
+
+  // DeleteThisUniversityALLrecords(uni: Usersmodel) {
+  //   //deletes uni as a usr
+  //   this.http.delete("http://localhost:3000/api/Users/DeleteThisUser/" + uni).subscribe(
+  //     response => {
+  //       console.log(response);
+  //     }
+  //   );
+
+  //   // this.http.delete("http://localhost:3000/api/Users/DeleteLabChallengesWhereLabJoinCode/" + uni).subscribe(
+  //   //   response => {
+  //   //     console.log(response);
+  //   //   }
+  //   // );
+
+  //   // this.http.delete("http://localhost:3000/api/Users/DeleteThisUniversityzLabs/" + uni).subscribe(
+  //   //   response => {
+  //   //     console.log(response);
+  //   //   }
+  //   // );
+  // }
 
   deleteThisUser(Id: string) {
     this.http.delete("http://localhost:3000/api/Users/DeleteThisUser/" + Id).subscribe(
@@ -52,6 +74,14 @@ export class UsersService {
   }
 
 
+  deleteThisUniversity(uniUpdatedUser: Usersmodel, Id: string) {
+    this.http.put("http://localhost:3000/api/Users/UpdateThisUser/"+Id, uniUpdatedUser)
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      );
+ }
 
   updateThisUser(UpdatedUser: Usersmodel, Id: string) {
     this.http.put("http://localhost:3000/api/Users/UpdateThisUser/" + Id, UpdatedUser)

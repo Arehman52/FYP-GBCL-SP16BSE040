@@ -4,11 +4,11 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 //should store statistics + attemptedChallenges + attemptedLabTasks of student(s) for only one lab
 const StudLabDataAndStatsSchema = mongoose.Schema({
-  LabJoinCode: String, //as a foreign key
-  StudentzUsername: String, //as a foreign key
+  LabJoinCode: String,
+  StudentzUsername: String,
   StudentzFN: String,
   StudentzLN: String,
-  LevelUpdateViewed: Boolean, // if false, then show a level updated Modal and then update it to false.
+  LevelUpdateViewed: Boolean,
   Promoted: Boolean,
   Demoted: Boolean,
   RivalStudents: [String],
@@ -18,7 +18,7 @@ const StudLabDataAndStatsSchema = mongoose.Schema({
   currentCPPs: Number,
   Warned: Boolean,
   Appreciated:Boolean,
-  StudentzLabAccessStatus: String,  // Expelled or Allowed
+  StudentzLabAccessStatus: String  // Expelled or Allowed
 });
 
 StudLabDataAndStatsSchema.plugin(uniqueValidator);

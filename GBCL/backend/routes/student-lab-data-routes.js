@@ -270,8 +270,7 @@ router.post("/createAStudentActivityHistoryDocument", (req, res, next) => {
   const studentActivityHistory = new StudentActivityHistory({
     LabJoinCode: req.body.LabJoinCode, //foreign key
     StudentzUsername: req.body.StudentzUsername, //foreign key
-    StudentzFullName:req.body.StudentzFullName,
-
+    StudentzFullName: req.body.StudentzFullName,
 
     Activity: req.body.Activity,
     GainedOrLoosedXPsCount: req.body.GainedOrLoosedXPsCount,
@@ -279,10 +278,7 @@ router.post("/createAStudentActivityHistoryDocument", (req, res, next) => {
     Passed: req.body.Passed,
     Failed: req.body.Failed,
     TimeAndDate: req.body.TimeAndDate,
-    wasPromotedOrDemotedToLevel: req.body.wasPromotedOrDemotedToLevel
-
-
-
+    wasPromotedOrDemotedToLevel: req.body.wasPromotedOrDemotedToLevel,
 
     // LabJoinCode: req.body.LabJoinCode, //foreign key
     // StudentzUsername: req.body.StudentzUsername, //foreign key
@@ -452,7 +448,6 @@ router.post("/getCurrentStatsOfThisStudent", (req, res, next) => {
     });
 });
 
-
 router.post("/Fetch7HighAchieversOfThisLab", (req, res, next) => {
   StudLabDataAndStats.find({
     LabJoinCode: req.body.LabJoinCode,
@@ -478,16 +473,21 @@ router.post("/Fetch7HighAchieversOfThisLab", (req, res, next) => {
     });
 });
 
-
 router.post("/fetchThisRivalzActivitiesHistory", (req, res, next) => {
   StudentActivityHistory.find({
     LabJoinCode: req.body.LabJoinCode,
-    StudentzUsername: req.body.StudentzUsername
+    StudentzUsername: req.body.StudentzUsername,
   })
     .then((document) => {
-      console.log("req.body.StudentzUsername ::....", req.body.StudentzUsername);
+      console.log(
+        "req.body.StudentzUsername ::....",
+        req.body.StudentzUsername
+      );
       console.log("High 7 Achievers below ::....", document);
-      console.log("LabJoinCode: req.body.LabJoinCode ::....", req.body.LabJoinCode);
+      console.log(
+        "LabJoinCode: req.body.LabJoinCode ::....",
+        req.body.LabJoinCode
+      );
       res.status(200).json({
         message: "Rivals Activities Downloaded.",
         FetchedThisRivalzActivitiesHistory: document,
@@ -503,6 +503,46 @@ router.post("/fetchThisRivalzActivitiesHistory", (req, res, next) => {
       });
       // console.log(" 004 theeeen eeerrrororrorr\n", err);
     });
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////  RESETTING DATABASE
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+router.get("/ResetEntrireDatabase/", (req, res, next) => {
+  StudLabDataAndStats.deleteMany().then((result) => {
+    // res.status(200).json({
+    //   message: "Entire Lab Challenge DELETED ResetEntrireDatabase!",
+    //   result: result,
+    // });
+  });
+  StudentActivityHistory.deleteMany().then((result) => {
+    // res.status(200).json({
+    //   message: "Entire Lab Challenge DELETED ResetEntrireDatabase!",
+    //   result: result,
+    // });
+  });
+  StudentAttemptedLabChallenge.deleteMany().then((result) => {
+    // res.status(200).json({
+    //   message: "Entire Lab Challenge DELETED ResetEntrireDatabase!",
+    //   result: result,
+    // });
+  });
+  StudentAttemptedLabTask.deleteMany().then((result) => {
+    res.status(200).json({
+      message: "Entire Databse Ressetted For Studentz all collections!",
+      result: result,
+    });
+  });
 });
 
 module.exports = router;

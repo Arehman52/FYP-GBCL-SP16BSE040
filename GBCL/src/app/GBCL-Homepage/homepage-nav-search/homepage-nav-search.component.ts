@@ -148,6 +148,11 @@ export class HomepageNavSearchComponent implements OnInit {
               window.location.href = '/ADMIN';
 
 
+            if (TheMatchedUser[0].UserzAccessStatus == 'Deleted') {
+              this.Errors.userTerminatedLoginAccessBecauseUniTerminated.message = 'Your Profile is deleted';
+              this.Errors.userTerminatedLoginAccessBecauseUniTerminated.status = true;
+              return;
+            }
             if (TheMatchedUser[0].UserzAccessStatus == 'Allowed') {
 
               localStorage.setItem("UsersUsername", TheMatchedUser[0].Username);
@@ -172,7 +177,19 @@ export class HomepageNavSearchComponent implements OnInit {
                 console.log('LoginUserzUniversityAsUser : ', LoginUserzUniversityAsUser);
 
                 setTimeout(() => {
+                  // console.log("BEEEEEEEEFORE");
+                  // if(LoginUserzUniversityAsUser == null){
+                  //   console.log("AAAAAAAAAfter");
+                  //   return;
+                  // }
 
+                  if (LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Deleted') {
+                    console.log('LoginUserzUniversityAsUser[0].UserzAccessStatus == "Deleted"');
+                    //display YOUR University is Terminated Error
+                    this.Errors.userTerminatedLoginAccessBecauseUniTerminated.message = 'Your University is deleted';
+                    this.Errors.userTerminatedLoginAccessBecauseUniTerminated.status = true;
+                    return;
+                  }
                   if (LoginUserzUniversityAsUser[0].UserzAccessStatus == 'Terminated') {
                     console.log('LoginUserzUniversityAsUser[0].UserzAccessStatus == "Terminated"');
                     //display YOUR University is Terminated Error
@@ -194,6 +211,10 @@ export class HomepageNavSearchComponent implements OnInit {
                 console.log("TheMatchedUser[0].UserType == 'university' && TheMatchedUser[0].UserzAccessStatus == 'Allowed'");
                 window.location.href = '/UNIVERSITY';
               }
+
+
+
+
             }
 
 

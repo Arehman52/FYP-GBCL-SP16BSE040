@@ -96,7 +96,8 @@ export class UnimanageMembersComponent implements OnInit {
       // user.Username = user.Username.toLowerCase();
 
       this.usersService.createUser(user); //<--- this method should update user to DB
-      setTimeout(() => { createMemberForm.resetForm }, 1500);
+      createMemberForm.resetForm;
+      setTimeout(() => { window.location.reload() }, 2500);
 
 
       console.log('THE MEMBER: \n', user);

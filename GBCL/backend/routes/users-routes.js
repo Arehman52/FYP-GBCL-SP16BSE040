@@ -65,11 +65,6 @@ router.put(
   }
 );
 
-
-
-
-
-
 // router.put("/UpdateThisUserWithLABJOINCODES/:Id", (req, res, next) => {
 //   const user = new Users({
 //     _id: req.body._id,
@@ -94,13 +89,6 @@ router.put(
 //   });
 //   // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 // });
-
-
-
-
-
-
-
 
 router.put("/UpdateThisUser/:Id", (req, res, next) => {
   const user = new Users({
@@ -127,13 +115,6 @@ router.put("/UpdateThisUser/:Id", (req, res, next) => {
   });
   // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 });
-
-
-
-
-
-
-
 
 //following is a POST request to create User.
 router.post("/CreateUser", (req, res, next) => {
@@ -188,21 +169,19 @@ router.post("/FetchThisUniversityByItsTitle", (req, res, next) => {
     });
 });
 
-
-
-
-
 router.post("/FetchInstructorForThisLab", (req, res, next) => {
-  let theQueryConditions = {"LabJoinCodesOfJoinedLabs": req.body._id};
+  let theQueryConditions = { LabJoinCodesOfJoinedLabs: req.body._id };
   Users.findOne(theQueryConditions)
     .then((instructor) => {
       console.log("instructor::....", instructor);
       res.status(200).json({
         message: "Instructor matched and now downloaded.",
-        result: instructor
+        result: instructor,
       });
 
-      console.log("   ==> {/FetchInstructorForThisLab/:LabId} Instructor Downloaded. ");
+      console.log(
+        "   ==> {/FetchInstructorForThisLab/:LabId} Instructor Downloaded. "
+      );
     })
     .catch((err) => {
       console.log("Instructor download error for this lab\n", err);
@@ -210,10 +189,6 @@ router.post("/FetchInstructorForThisLab", (req, res, next) => {
 });
 
 //following is working properly in signup page for fetching users.
-
-
-
-
 
 router.post("/FetchTHISUser", (req, res, next) => {
   Users.findOne({ Username: req.body.Username })
@@ -231,27 +206,23 @@ router.post("/FetchTHISUser", (req, res, next) => {
     });
 });
 
-
-
 // FetchTHeseUserzzz
 router.post("/FetchTHeseUserzzz/", (req, res, next) => {
-
   // let  arr:String[] = [];
   // array.forEach(element => {
 
   // });
-  console.log("*************@@@@@: ",req.params.arrayUNs);
-  console.log("*************@@@@@: ",req.body.arrayUNs);
-  console.log("*************@@@@@: ",['comsats','bilalkhursheed','furqan']);
+  console.log("*************@@@@@: ", req.params.arrayUNs);
+  console.log("*************@@@@@: ", req.body.arrayUNs);
+  console.log("*************@@@@@: ", ["comsats", "bilalkhursheed", "furqan"]);
   // Users.find({ Username: { $in: ['comsats','bilalkhursheed','furqan']}})
-  Users.find({ Username: { $in: req.body.Username}})
+  Users.find({ Username: { $in: req.body.Username } })
     .then((document) => {
       console.log("USERZZZ::....", document);
       res.status(200).json({
         message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
         userzzz: document,
       });
-
 
       console.log("   ==> req.body.arrayUNs == ", req.body.arrayUNs);
     })
@@ -283,6 +254,21 @@ router.get("/RecieveUsersFromDB", (req, res, next) => {
     });
 
     console.log("   ==> {/RecieveUsersFromDB} Users were downloaded.");
+  });
+});
+
+router.get("/ResetEntrireDatabase/", (req, res, next) => {
+  Users.deleteMany({
+    $or: [
+      { UserType: "student" },
+      { UserType: "teacher" },
+      { UserType: "university" },
+    ],
+  }).then((result) => {
+    res.status(200).json({
+      message: "Entire Users Collection Resetted!",
+      result: result,
+    });
   });
 });
 

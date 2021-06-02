@@ -204,6 +204,16 @@
                               class="btn btn-outline-danger w-25 maSmallerFonts my-2 mx-2">Delete</button>
                           </div>
                           <div class="col-12">
+                           <div *ngIf="this.Errors.UniversityDeleteWarning.status == true">
+                            <small class="font13 form-text alert alert-warning">
+                              <small class="font13 text-muted"><span
+                                class="font13 text-danger mr-2">Warning!</span>
+                              <span class="font13" style="text-decoration: underline; font-weight: bold;">DON'T Delete without knowing consequences.</span>
+                              <br>
+                              {{this.Errors.UniversityDeleteWarning.message}}
+                            </small>
+                            </small>
+                           </div>
                             <small class="form-text alert alert-success" *ngIf="this.Errors.userDeleted.status == true">
                               {{this.Errors.userDeleted.message}}
                             </small>

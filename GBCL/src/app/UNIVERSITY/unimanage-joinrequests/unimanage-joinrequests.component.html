@@ -44,8 +44,8 @@
         <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover ">
           <div class="row text-center  childSpansHoverYellow">
             <div class="col"><span class="mx-2">
-                <h4>Manage Join Requests</h4>
-                <h6>{{this.UNIVERSITY_TITLE}}</h6>
+                <h4>Manage GBCL Join Requests</h4>
+                <h6 class="mt-1">{{this.UNIVERSITY_TITLE}}</h6>
               </span></div>
           </div>
         </div>
@@ -155,7 +155,7 @@
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
             <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              <h4><b> TEACHERS' GBCL JOIN REQUESTS</b></h4>
+              <h4><b> TEACHERS' GBCL JOIN REQUESTS <span class="text-info">**</span> <span class="ml-3 text-muted" style="font-size: 16px;">( {{this.JOINRequestsTeachers.length}} ) </span> </b></h4>
             </button>
           </h5>
         </div>
@@ -269,7 +269,7 @@
         <div class="card-header" id="headingOnestud">
           <h5 class="mb-0">
             <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOnestud" aria-expanded="true" aria-controls="collapseOnestud">
-              <h4><b> STUDENTS' GBCL JOIN REQUESTS</b></h4>
+              <h4><b> STUDENTS' GBCL JOIN REQUESTS</b> <span class="text-info">**</span> <span class="ml-3 text-muted" style="font-size: 16px;">( {{this.JOINRequestsStudents.length}} ) </span></h4>
             </button>
           </h5>
         </div>

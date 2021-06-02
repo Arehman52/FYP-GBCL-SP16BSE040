@@ -132,12 +132,12 @@
         <div class="col-12 col-sm-3 col-md-2 minHeight10vh pt-2 pb-2">
           <form #LabJoinCodeForm="ngForm"
             (submit)="onJoinLabButtonClicked(LabJoinCodeForm.value.EnteredLabJoinCode,modalButton)">
-            <div class="formContainerJoinLab">
+            <!-- <div class="formContainerJoinLab">
               <input type="text" class="LabCodeTextInput" #EnteredLabJoinCode placeholder="ENTER LAB CODE" ngModel
                 (focus)="EnteredLabJoinCode.placeholder = ''" name="EnteredLabJoinCode"
                 (blur)="EnteredLabJoinCode.placeholder = 'ENTER JOIN CODE'" minlength="10" required>
               <button class="btn btn-outline-warning MaSmallsizeBtns w-75" type="submit">Join Lab</button>
-            </div>
+            </div> -->
           </form>
         </div>
 

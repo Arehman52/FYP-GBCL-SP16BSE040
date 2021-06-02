@@ -155,9 +155,7 @@ export class GamificationService {
 
   getCurrentLevel(currentXPs: number): number {
     let dump = '';
-    // let xpsForPromotion = 0;
     let currentLevel = 0;
-
     currentXPs < 60 ? currentLevel = 1 : dump = 'no-badge';
     currentXPs >= 60 && currentXPs <= 119 ? currentLevel = 2 : dump = 'no-badge';
     currentXPs >= 120 && currentXPs <= 179 ? currentLevel = 3 : dump = 'no-badge';
@@ -183,7 +181,6 @@ export class GamificationService {
     currentXPs >= 1320 && currentXPs <= 1379 ? currentLevel = 23 : dump = 'no-badge';
     currentXPs >= 1380 && currentXPs <= 1439 ? currentLevel = 24 : dump = 'no-badge';
     currentXPs >= 1440 ? currentLevel = 25 : dump = 'no-badge';
-
     return currentLevel;
   }
 
@@ -257,39 +254,35 @@ export class GamificationService {
     return currentBadge;
 
   }
-  getNextBadge(currentXPs: number): string {
 
+  getNextBadge(currentXPs: number): string {
     let nextBadge: string = '';
     let dump = '';
     currentXPs < 60 ? nextBadge = 'Beginner II' : dump = 'no-badge';
-    currentXPs >= 60 && currentXPs < 120 ? nextBadge = 'Beginner III' : dump = 'no-badge';
-    currentXPs >= 120 && currentXPs < 180 ? nextBadge = 'Beginner IV' : dump = 'no-badge';
-    currentXPs >= 180 && currentXPs < 240 ? nextBadge = 'Intermediate I' : dump = 'no-badge';
-    currentXPs >= 240 && currentXPs < 300 ? nextBadge = 'Intermediate II' : dump = 'no-badge';
-    currentXPs >= 300 && currentXPs < 360 ? nextBadge = 'Intermediate III' : dump = 'no-badge';
-    currentXPs >= 360 && currentXPs < 420 ? nextBadge = 'Intermediate IV' : dump = 'no-badge';
-    currentXPs >= 420 && currentXPs < 480 ? nextBadge = 'Master I' : dump = 'no-badge';
-    currentXPs >= 480 && currentXPs < 540 ? nextBadge = 'Master II' : dump = 'no-badge';
-    currentXPs >= 540 && currentXPs < 600 ? nextBadge = 'Master III' : dump = 'no-badge';
-    currentXPs >= 600 && currentXPs < 660 ? nextBadge = 'Master IV' : dump = 'no-badge';
-    currentXPs >= 660 && currentXPs < 720 ? nextBadge = 'Pro I' : dump = 'no-badge';
-    currentXPs >= 720 && currentXPs < 780 ? nextBadge = 'Pro II' : dump = 'no-badge';
-    currentXPs >= 780 && currentXPs < 840 ? nextBadge = 'Pro III' : dump = 'no-badge';
-    currentXPs >= 840 && currentXPs < 900 ? nextBadge = 'Pro IV' : dump = 'no-badge';
-    currentXPs >= 900 && currentXPs < 960 ? nextBadge = 'Hotshot I' : dump = 'no-badge';
-    currentXPs >= 960 && currentXPs < 1020 ? nextBadge = 'Hotshot II' : dump = 'no-badge';
-    currentXPs >= 1020 && currentXPs < 1080 ? nextBadge = 'Hotshot III' : dump = 'no-badge';
-    currentXPs >= 1080 && currentXPs < 1140 ? nextBadge = 'Hotshot IV' : dump = 'no-badge';
-    currentXPs >= 1140 && currentXPs < 1200 ? nextBadge = 'Honoury I' : dump = 'no-badge';
-    currentXPs >= 1200 && currentXPs < 1260 ? nextBadge = 'Honoury II' : dump = 'no-badge';
-    currentXPs >= 1260 && currentXPs < 1320 ? nextBadge = 'Honoury III' : dump = 'no-badge';
-    currentXPs >= 1320 && currentXPs < 1380 ? nextBadge = 'Honoury IV' : dump = 'no-badge';
-    currentXPs >= 1380 && currentXPs < 1440 ? nextBadge = 'ULTIMATE CODER' : dump = 'no-badge';
-
-
+    currentXPs >= 60 && currentXPs < 120 ? nextBadge = 'Beginner III'                     : dump = 'no-badge';
+    currentXPs >= 120 && currentXPs < 180 ? nextBadge = 'Beginner IV'                      : dump = 'no-badge';
+    currentXPs >= 180 && currentXPs < 240 ? nextBadge = 'Intermediate I'                       : dump = 'no-badge';
+    currentXPs >= 240 && currentXPs < 300 ? nextBadge = 'Intermediate II'                       : dump = 'no-badge';
+    currentXPs >= 300 && currentXPs < 360 ? nextBadge = 'Intermediate III'                       : dump = 'no-badge';
+    currentXPs >= 360 && currentXPs < 420 ? nextBadge = 'Intermediate IV'                       : dump = 'no-badge';
+    currentXPs >= 420 && currentXPs < 480 ? nextBadge = 'Master I'                       : dump = 'no-badge';
+    currentXPs >= 480 && currentXPs < 540 ? nextBadge = 'Master II'                       : dump = 'no-badge';
+    currentXPs >= 540 && currentXPs < 600 ? nextBadge = 'Master III'                       : dump = 'no-badge';
+    currentXPs >= 600 && currentXPs < 660 ? nextBadge = 'Master IV'                       : dump = 'no-badge';
+    currentXPs >= 660 && currentXPs < 720 ? nextBadge = 'Pro I'                       : dump = 'no-badge';
+    currentXPs >= 720 && currentXPs < 780 ? nextBadge = 'Pro II'                       : dump = 'no-badge';
+    currentXPs >= 780 && currentXPs < 840 ? nextBadge = 'Pro III'                       : dump = 'no-badge';
+    currentXPs >= 840 && currentXPs < 900 ? nextBadge = 'Pro IV'                       : dump = 'no-badge';
+    currentXPs >= 900 && currentXPs < 960 ? nextBadge = 'Hotshot I'                       : dump = 'no-badge';
+    currentXPs >= 960 && currentXPs < 1020 ? nextBadge = 'Hotshot II'                       : dump = 'no-badge';
+    currentXPs >= 1020 && currentXPs < 1080 ? nextBadge = 'Hotshot III'                       : dump = 'no-badge';
+    currentXPs >= 1080 && currentXPs < 1140 ? nextBadge = 'Hotshot IV'                       : dump = 'no-badge';
+    currentXPs >= 1140 && currentXPs < 1200 ? nextBadge = 'Honoury I'                       : dump = 'no-badge';
+    currentXPs >= 1200 && currentXPs < 1260 ? nextBadge = 'Honoury II'                       : dump = 'no-badge';
+    currentXPs >= 1260 && currentXPs < 1320 ? nextBadge = 'Honoury III'                       : dump = 'no-badge';
+    currentXPs >= 1320 && currentXPs < 1380 ? nextBadge = 'Honoury IV'                       : dump = 'no-badge';
+    currentXPs >= 1380 && currentXPs < 1440 ? nextBadge = 'ULTIMATE CODER'                       : dump = 'no-badge';
     return nextBadge;
-
-
   }
 
 

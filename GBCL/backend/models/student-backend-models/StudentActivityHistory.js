@@ -2,11 +2,9 @@ const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const StudentActivityHistorySchema = mongoose.Schema({
-  LabJoinCode: String, //foreign key
-  StudentzUsername: String, //foreign key
+  LabJoinCode: String,
+  StudentzUsername: String,
   StudentzFullName:String,
-
-
   Activity: String,
   GainedOrLoosedXPsCount: Number,
   AttemptedQuestion: String,
