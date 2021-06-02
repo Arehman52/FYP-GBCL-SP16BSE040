@@ -271,6 +271,39 @@
     </div>
   </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class="modal" id="demotionModallll" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content bg-dark errorMessageModal">
@@ -293,3 +326,9 @@
     data-target="#demotionModallll">
 
   </button>
+
+      <!-- LOADING MODEL -->
+      <div *ngIf="showSpinner">
+        <div id="opaque" class="d-block"></div>
+        <div id="spinner" class="loader"></div>
+      </div>

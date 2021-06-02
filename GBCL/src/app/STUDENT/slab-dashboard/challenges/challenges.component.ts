@@ -28,12 +28,14 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     /////////////////////////////////////////////////////////////////
   }
 
-
   ngOnInit(): void {
+    // this.showSpinner = true;
     this.setAllErrorsToFalse();
     if (confirm("Are you ready to attempt the challenges?")) {
       alert("We will begin when you click OK.");
-      setTimeout(() => { this.timeLeft = this.unAttemptedChallenges[this.i].ChallengeAllowedTime }, 1000);
+      setTimeout(() => {
+        // this.showSpinner = false;
+        this.timeLeft = this.unAttemptedChallenges[this.i].ChallengeAllowedTime }, 1000);
     } else {
       window.history.back();
     }
@@ -49,7 +51,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
     this.startTimer();
     setTimeout(() => {
-      this.reInitiallizeCurrentStats();
+      this.InitiallizeCurrentStats();
       this.extractUnAttemptedLabChallenges();
       console.log("this.STUDz_FETCHED_STATS_FROM_Db : ", this.STUDz_FETCHED_STATS_FROM_Db);
       console.log("this.attemptedChallenges : ", this.attemptedChallenges);
@@ -58,7 +60,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
       console.log("this.AllStudentAttemptedChallengesOfthisStudandThisLab == > ", this.AllStudentAttemptedChallengesOfthisStudandThisLab);
     }, 800);
   } //ngOnInt closes here
-  reInitiallizeCurrentStats() {
+  InitiallizeCurrentStats() {
 
     this.CURRENT_XPs = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs;
     // this.COPY_CURRENT_XPs = this.CURRENT_XPs;
@@ -68,6 +70,18 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     this.CURRENT_LEVEL = this.gamificationService.getCurrentLevel(this.CURRENT_XPs);
   }
 
+  ReInitiallizeCurrentStats(latestXPs:number) {
+
+    // this.CURRENT_XPs = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs;
+    // this.COPY_CURRENT_XPs = this.CURRENT_XPs;
+    this.CURRENT_BADGE = this.gamificationService.getCurrentBadge(latestXPs);
+    this.NEXT_BADGE = this.gamificationService.getNextBadge(latestXPs);
+    this.XPs_FOR_PROMOTION = this.gamificationService.getXPsForPromotion(latestXPs);
+    this.CURRENT_LEVEL = this.gamificationService.getCurrentLevel(latestXPs);
+  }
+
+
+
   AllLabChallengesOfThisLabFromDB: LabChallengesmodel[] = [];
   AllStudentAttemptedChallengesOfthisStudandThisLab: StudentAttemptedLabChallengemodel[] = [];
   attemptedChallenges: LabChallengesmodel[] = [];
@@ -76,7 +90,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   STUDz_FETCHED_STATS_FROM_Db: StudLabDataAndStatsmodel[] = [];
   MODAL_HEADING: string;
   MODAL_MESSAGE: string;
-
+  showSpinner:boolean = false;
 
   LabID: string;
   localStorageUsername = localStorage.getItem("UsersUsername");
@@ -176,7 +190,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     },
     ChallengeSubmitted: {
       status: true,
-      message: 'Your answer to this challenge is submitted to the teacher to be evaluated.',
+      message: 'Your answer to this challenge is submitted.',
     },
     ChallengeFailed: {
       status: true,
@@ -274,10 +288,28 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   XPplusplusOrminusminus: string = 'Unchanged XPs';
 
   onSubmitChallenge(ChallengesForm: NgForm) {
     this.pauseTimer();
+    // this.showSpinner = true;
     this.Errors.emptyField.status = true;
     let attemptedLabChallenge: StudentAttemptedLabChallengemodel = {
       AttemptedLabChallenge_id: this.unAttemptedChallenges[this.i]._id, ChallengeAttempted: true, ChallengeCheated: false, ChallengeChecked: false, ChallengeFailedDueToTimeShortage: false, GainedXPs: 0, LabChallengeAnswerOptionA: '', LabChallengeAnswerOptionB: '', LabChallengeAnswerOptionC: '', LabChallengeAnswerOptionD: '', LabChallengeQuestion: this.unAttemptedChallenges[this.i].ChallengeQuestion, LabChallengeQuestionType: this.unAttemptedChallenges[this.i].ChallengeQuestionType, LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername, _id: ''
@@ -289,13 +321,20 @@ export class ChallengesComponent implements OnInit, OnDestroy {
         this.Errors.ChallengePassed.status = true;
         this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs + " XPs++"
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], this.unAttemptedChallenges[this.i].ChallengeXPs);
+        let latestXPs:number = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs + this.unAttemptedChallenges[this.i].ChallengeXPs;
+        this.ReInitiallizeCurrentStats(latestXPs);
         attemptedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
       }
       else {
         // alert("YOU CHOSE inCORRECT OPTION");
         this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs + " XPs--"
         this.Errors.ChallengeFailed.status = true;
-        this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], 0);
+        let negativeXPs:number = this.unAttemptedChallenges[this.i].ChallengeXPs * -1;
+        negativeXPs<0 ? negativeXPs = 0 : console.log("XPs are more than 0");
+        console.log("negativeXPs::::::::::::::::=== ",negativeXPs);
+        let latestXPs:number = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs + negativeXPs;
+        this.ReInitiallizeCurrentStats(latestXPs);
+        this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], negativeXPs);
       }
     }
 
@@ -341,7 +380,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername };
     this.STUDz_FETCHED_STATS_FROM_Db = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
     setTimeout(() => {
-      this.reInitiallizeCurrentStats();
+      // this.reInitiallizeCurrentStats();
       if (this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs >= 60 && this.STUDz_FETCHED_STATS_FROM_Db[0].Demoted) {
         this.displayThisMessageInModal("You were Demoted, Alas!", "Better Luck next time, Badge Assigned = " + this.CURRENT_BADGE);
       }
@@ -350,7 +389,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
         this.displayThisMessageInModal("Hurrah!! You were Promoted.", "YOUR NEW BADGE IS : " + this.CURRENT_BADGE);
       }
 
-    }, 500);
+    }, 1500);
     setTimeout(() => {
 
       if (this.STUDz_FETCHED_STATS_FROM_Db[0].LevelUpdateViewed == false) {
@@ -363,8 +402,10 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
       if (opt = confirm("Ready for next challenge.")) {
-        ChallengesForm.reset();
+        // this.ReInitiallizeCurrentStats();
         if (opt == true) {
+          ChallengesForm.reset();
+          // this.showSpinner = false;
           this.XPplusplusOrminusminus = " ------- ";
           this.setAllErrorsToFalse();
           console.log("this.LENGTH_unAttemptedChallenges :::::: ", this.LENGTH_unAttemptedChallenges);
@@ -414,11 +455,31 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   displayThisMessageInModal(MODAL_HEADING: string, MODAL_MESSAGE: string) {
     this.MODAL_HEADING = MODAL_HEADING;
     this.MODAL_MESSAGE = MODAL_MESSAGE;
     document.getElementById("LevelUpdatedModalButton").click();
   }
 
-
+  reload(){
+    window.location.reload()
+  }
 }
