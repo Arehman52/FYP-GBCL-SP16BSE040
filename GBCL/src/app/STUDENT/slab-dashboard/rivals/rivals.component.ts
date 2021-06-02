@@ -45,11 +45,11 @@ export class RivalsComponent implements OnInit {
         FetchedOneRivalzHistory = this.studentLabDataService.fetchThisRivalzActivitiesHistory({LabJoinCode: this.LabID,
           StudentzUsername: this.FetchedThisStudentzStats[0].RivalStudents[i]});
           // let Username:string[] = this.FetchedThisStudentzStats[0].RivalStudents;
-          i==0? this.FetchedRivalOneHistory =  FetchedOneRivalzHistory : console.log('dump');
-          i==1? this.FetchedRivalTwoHistory =  FetchedOneRivalzHistory : console.log('dump');
-          i==2? this.FetchedRivalThreeHistory =  FetchedOneRivalzHistory : console.log('dump');
-          i==3? this.FetchedRivalFourHistory =  FetchedOneRivalzHistory : console.log('dump');
-          i==4? this.FetchedRivalFiveHistory =  FetchedOneRivalzHistory : console.log('dump');
+          i==0? this.FetchedRivalOneHistory =  FetchedOneRivalzHistory : console.log('dump0');
+          i==1? this.FetchedRivalTwoHistory =  FetchedOneRivalzHistory : console.log('dump1');
+          i==2? this.FetchedRivalThreeHistory =  FetchedOneRivalzHistory : console.log('dump2');
+          i==3? this.FetchedRivalFourHistory =  FetchedOneRivalzHistory : console.log('dump3');
+          i==4? this.FetchedRivalFiveHistory =  FetchedOneRivalzHistory : console.log('dump4');
           // console.log('Username ', Username);
           // console.log("FetchedOneRivalzHistory ..$$$..",FetchedOneRivalzHistory);
 

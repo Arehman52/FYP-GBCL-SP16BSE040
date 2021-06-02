@@ -11,15 +11,83 @@ import { StudentActivityHistorymodel } from '../MODELS/Student-Frontend-Models/S
 })
 export class StudentLabDataService {
 
+
+
+  RecieveAllStudentAttemptedMCQLabChallengesOfthisStudandThisLab(LabID: string, Username: string): StudentAttemptedLabChallengemodel[] {
+    let objStudentzUsernameAndLabJoinCode: StudentzUsernameAndLabJoinCodemodel =
+    {
+      LabJoinCode: LabID,
+      StudentzUsername: Username
+    };
+
+    var allStudentAttemptedMCQLabChallengesOfthisStudandThisLab: StudentAttemptedLabChallengemodel[] = [];
+    this.http
+      .post<{ message: string; AllStudentAttemptedMCQLabChallengesOfthisStudandThisLab: StudentAttemptedLabChallengemodel[] }>(
+        'http://localhost:3000/api/StudentLabData/RecieveAllStudentAttemptedMCQLabChallengesOfthisStudandThisLab/',
+        objStudentzUsernameAndLabJoinCode
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.AllStudentAttemptedMCQLabChallengesOfthisStudandThisLab).length; i++) {
+          allStudentAttemptedMCQLabChallengesOfthisStudandThisLab.push(responseData.AllStudentAttemptedMCQLabChallengesOfthisStudandThisLab[i]);
+        }
+      });
+    return allStudentAttemptedMCQLabChallengesOfthisStudandThisLab;
+
+
+  }
+
+  RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabTaskmodel[] {
+    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabTaskmodel = {
+      AttemptedLabTask_id: '',
+      // LabTaskAnswerByTeacher: '',
+      LabTaskTitle: '', LabTaskSolutionByTeacher: '', LabTaskMatchPercentage: 0,
+      LabTaskXPs: 0, GainedXPs: 0, LabJoinCode: LabJoinCode, LabTaskAnswerCode: '', LabTaskAnswerInput: '', LabTaskAnswerOutput: '', LabTaskAttempted: false, LabTaskChecked: false, LabTaskQuestion: '', StudentzUsername: StudentzUsername, _id: ''
+    };
+
+    var allStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] = [];
+    this.http
+      .post<{ message: string; AllStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] }>(
+        'http://localhost:3000/api/StudentLabData/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab/',
+        objStudentzUsernameAndLabJoinCode
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.AllStudentAttemptedLabTasksOfthisStudandThisLab).length; i++) {
+          allStudentAttemptedLabTasksOfthisStudandThisLab.push(responseData.AllStudentAttemptedLabTasksOfthisStudandThisLab[i]);
+        }
+      });
+    return allStudentAttemptedLabTasksOfthisStudandThisLab;
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   constructor(private http: HttpClient) { }
 
 
 
   RecieveAllStudentAttemptedChallengesOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabChallengemodel[] {
-    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabChallengemodel = {
-      AttemptedLabChallenge_id: null,
-      ChallengeAttempted: null, GainedXPs: null, LabJoinCode: LabJoinCode, StudentzUsername: StudentzUsername, _id: null,
-      ChallengeCheated: null, ChallengeChecked: null, ChallengeFailedDueToTimeShortage: null, LabChallengeAnswerOptionA: null, LabChallengeAnswerOptionB: null, LabChallengeAnswerOptionC: null, LabChallengeAnswerOptionD: null, LabChallengeQuestion: null, LabChallengeQuestionType: null
+    let objStudentzUsernameAndLabJoinCode: StudentzUsernameAndLabJoinCodemodel = {
+      LabJoinCode:LabJoinCode,
+      StudentzUsername:StudentzUsername
     };
 
     var allStudentAttemptedChallengesOfthisStudandThisLab: StudentAttemptedLabChallengemodel[] = [];
@@ -110,29 +178,6 @@ export class StudentLabDataService {
 
 
 
-
-
-
-  RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabTaskmodel[] {
-    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabTaskmodel = {
-      AttemptedLabTask_id: '', LabTaskAnswerByTeacher: '', LabTaskTitle: '', LabTaskSolutionByTeacher: '', LabTaskMatchPercentage: 0,
-      LabTaskXPs: 0, GainedXPs: 0, LabJoinCode: LabJoinCode, LabTaskAnswerCode: '', LabTaskAnswerInput: '', LabTaskAnswerOutput: '', LabTaskAttempted: false, LabTaskChecked: false, LabTaskQuestion: '', StudentzUsername: StudentzUsername, _id: ''
-    };
-
-    var allStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] = [];
-    this.http
-      .post<{ message: string; AllStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] }>(
-        'http://localhost:3000/api/StudentLabData/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab/',
-        objStudentzUsernameAndLabJoinCode
-      )
-      .subscribe((responseData) => {
-        for (let i = 0; i < Object.keys(responseData.AllStudentAttemptedLabTasksOfthisStudandThisLab).length; i++) {
-          allStudentAttemptedLabTasksOfthisStudandThisLab.push(responseData.AllStudentAttemptedLabTasksOfthisStudandThisLab[i]);
-        }
-      });
-    return allStudentAttemptedLabTasksOfthisStudandThisLab;
-
-  }
 
 
 

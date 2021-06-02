@@ -420,8 +420,16 @@ export class GamificationService {
 
 
     let studhistory: StudentActivityHistorymodel = {
-      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
-      _id: '', AttemptedQuestion:LabTaskQuestion,GainedOrLoosedXPsCount: GainedXPs, Activity: 'Attempted Lab Task',Failed:false, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+      StudentzFullName:FullName,
+      LabJoinCode: objUNandLabJC.LabJoinCode,
+      StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '',
+      AttemptedQuestion:LabTaskQuestion,
+      GainedOrLoosedXPsCount: GainedXPs,
+      Activity: 'Attempted Lab Task',
+      Failed:false, Passed: false,
+      TimeAndDate:new Date().toString().substring(0,21),
+      wasPromotedOrDemotedToLevel: ''
     };
 
 
@@ -524,11 +532,6 @@ export class GamificationService {
 
   //   this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
   // }
-
-
-
-
-
 
 
 

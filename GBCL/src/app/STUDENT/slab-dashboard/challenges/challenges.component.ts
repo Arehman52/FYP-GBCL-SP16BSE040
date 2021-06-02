@@ -312,29 +312,66 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     // this.showSpinner = true;
     this.Errors.emptyField.status = true;
     let attemptedLabChallenge: StudentAttemptedLabChallengemodel = {
-      AttemptedLabChallenge_id: this.unAttemptedChallenges[this.i]._id, ChallengeAttempted: true, ChallengeCheated: false, ChallengeChecked: false, ChallengeFailedDueToTimeShortage: false, GainedXPs: 0, LabChallengeAnswerOptionA: '', LabChallengeAnswerOptionB: '', LabChallengeAnswerOptionC: '', LabChallengeAnswerOptionD: '', LabChallengeQuestion: this.unAttemptedChallenges[this.i].ChallengeQuestion, LabChallengeQuestionType: this.unAttemptedChallenges[this.i].ChallengeQuestionType, LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername, _id: ''
+
+      ChallengeXPs:0,
+      ChallengeSolutionByTeacher:'',
+      ChallengeMatchPercentage:0,
+      AttemptedLabChallenge_id: this.unAttemptedChallenges[this.i]._id,
+      ChallengeAttempted: true,
+      ChallengeCheated: false,
+      ChallengeChecked: false,
+      ChallengeFailedDueToTimeShortage: false,
+      GainedXPs: 0,
+      LabChallengeAnswerOptionA: '',
+      LabChallengeAnswerOptionB: '',
+      LabChallengeAnswerOptionC: '',
+      LabChallengeAnswerOptionD: '',
+      LabChallengeQuestion: this.unAttemptedChallenges[this.i].ChallengeQuestion, LabChallengeQuestionType: this.unAttemptedChallenges[this.i].ChallengeQuestionType,
+      LabJoinCode: this.LabID,
+      StudentzUsername: this.localStorageUsername,
+      _id: ''
     }
 
 
     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType == 'MCQ') {
+      console.log("this.SELECTED_RADIO_VALUE @@@@" ,this.SELECTED_RADIO_VALUE);
+      console.log("this.unAttemptedChallenges[this.i].ChallengeCorrectOption" ,this.unAttemptedChallenges[this.i].ChallengeCorrectOption);
       if (this.SELECTED_RADIO_VALUE == this.unAttemptedChallenges[this.i].ChallengeCorrectOption) {
+
+        // alert("YOU CHOSE CORRECT OPTION");
         this.Errors.ChallengePassed.status = true;
-        this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs + " XPs++"
-        this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], this.unAttemptedChallenges[this.i].ChallengeXPs);
+        this.XPplusplusOrminusminus = "XPs++"
         let latestXPs:number = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs + this.unAttemptedChallenges[this.i].ChallengeXPs;
         this.ReInitiallizeCurrentStats(latestXPs);
+        this.CURRENT_XPs = latestXPs;
         attemptedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
+        this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], this.unAttemptedChallenges[this.i].ChallengeXPs);
+        this.studentLabDataService.updateThisStudentAttemptedLabChallenge(attemptedLabChallenge,{
+          LabJoinCode:this.LabID, StudentzUsername:this.localStorageUsername
+        });
+        this.gamificationService.createHistory_AttemptedMCQChallenge_Passed(localStorage.getItem("UserzFirstNameOfUser")+' '+localStorage.getItem("UserzLastNameOfUser"),attemptedLabChallenge.LabChallengeQuestion,this.unAttemptedChallenges[this.i].ChallengeXPs,{
+          LabJoinCode:this.LabID, StudentzUsername:this.localStorageUsername
+        });
       }
       else {
         // alert("YOU CHOSE inCORRECT OPTION");
-        this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs + " XPs--"
+        this.XPplusplusOrminusminus = " XPs--"
         this.Errors.ChallengeFailed.status = true;
         let negativeXPs:number = this.unAttemptedChallenges[this.i].ChallengeXPs * -1;
         negativeXPs<0 ? negativeXPs = 0 : console.log("XPs are more than 0");
         console.log("negativeXPs::::::::::::::::=== ",negativeXPs);
         let latestXPs:number = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs + negativeXPs;
         this.ReInitiallizeCurrentStats(latestXPs);
+        this.CURRENT_XPs = latestXPs;
+        attemptedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], negativeXPs);
+        this.studentLabDataService.updateThisStudentAttemptedLabChallenge(attemptedLabChallenge,{
+          LabJoinCode:this.LabID, StudentzUsername:this.localStorageUsername
+        });
+        this.gamificationService.createHistory_AttemptedMCQChallenge_Failed(localStorage.getItem("UserzFirstNameOfUser")+' '+localStorage.getItem("UserzLastNameOfUser"),attemptedLabChallenge.LabChallengeQuestion,this.unAttemptedChallenges[this.i].ChallengeXPs,{
+          LabJoinCode:this.LabID, StudentzUsername:this.localStorageUsername
+        });
+
       }
     }
 

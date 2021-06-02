@@ -27,8 +27,9 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn  border-warning w-100 logoText"   routerLink="/TEACHER/Lab" title="Gamification Based Coding Labs"><img
-              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+          <a class="btn  border-warning w-100 logoText" routerLink="/TEACHER/Lab"
+            title="Gamification Based Coding Labs"><img src="../../assets/images/logo.png" alt="logo"
+              id="logoImg"><b>GBCL</b></a>
         </div>
 
         <!-- GBCL LOGO COLUMN-END -->
@@ -172,7 +173,8 @@
                       <div class="col-sm-12">
 
                         <div class="text-right">
-                          <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a></div>
+                          <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a>
+                        </div>
 
                         <div class="form-group">
                           <label>Task Question: </label>
@@ -195,11 +197,10 @@
                         <label>Lab Task Solution: </label>
                         <div class="form-group text-center">
                           <textarea name="LabTaskAnswer" ngModel class="p-2" cols="100" rows="10" spellcheck="false"
-                          (keyup)="checkAnswerStatement(createLabTaskForm.value.LabTaskAnswer)"
+                            (keyup)="checkAnswerStatement(createLabTaskForm.value.LabTaskAnswer)"
                             placeholder="*** Required Field ***   Student's Answer will be marked on the basis of simillarity percentage of your provided Answer."></textarea>
 
-                            <small class="form-text alert alert-danger"
-                            *ngIf="this.Errors.invalidAnswer.status == true">
+                          <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidAnswer.status == true">
                             <span>{{this.Errors.invalidAnswer.message}}</span>
                           </small>
                         </div>
@@ -243,7 +244,8 @@
                       <button class="btn btn-primary w-50 m-auto" type="submit" [disabled]="checkIfErrors()">Create Lab
                         Task</button>
 
-                      <small class="form-text alert alert-success mt-2" *ngIf="this.Errors.LabTaskCreated.status == true">
+                      <small class="form-text alert alert-success mt-2"
+                        *ngIf="this.Errors.LabTaskCreated.status == true">
                         <span>{{this.Errors.LabTaskCreated.message}}</span>
                       </small>
                     </div>
@@ -316,6 +318,7 @@
                   <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
 
                     <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                      (click)="SetViewViewSolutionToggledFalse()"
                       [attr.data-target]="'#RegisteredFacultyCollapse' + task._id" aria-expanded="true"
                       [attr.aria-controls]="'collapse' + task._id">
                       {{task.LabTaskTitle}}
@@ -346,26 +349,16 @@
                             </tbody>
                           </table>
                           <div class="d-flex justify-content-end mr-3">
+                            <button class="   d-none       btn btn-info w-25 maSmallerFonts my-2 mx-2"
+                              (click)="ViewSolutionsByAllStudents(task)">{{ViewSolutionToggleButtonText}}</button>
                             <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
-                            (click)="DeleteThisTask(task._id)">Delete</button>
-                            <!-- <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
-                            (click)="onLabEditToggle(LabEditForm)">{{this.EditLabButtonText}}</button>
-                          <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
-                            (click)="DeleteThisLab(lab)">Delete</button> -->
+                              (click)="DeleteThisTask(task._id)">Delete</button>
                           </div>
                           <small class="form-text alert alert-success" *ngIf="this.Errors.LabTaskDeleted.status">
-                          {{this.Errors.LabTaskDeleted.message}}
-                        </small>
+                            {{this.Errors.LabTaskDeleted.message}}
+                          </small>
 
 
-
-                          <!-- //================================================================================================================// -->
-
-
-
-
-
-                          <!-- //=================================================================================================== -->
 
 
 
@@ -373,7 +366,51 @@
                         </div>
                       </div>
 
+                      <div *ngIf="this.ViewSolutionsToggled == true">
+                        <!-- wdkwdkmd -->
+                        <div class="row">
+                          <div class="col-11 m-auto">
+                            <div class="text-center" *ngIf="SolutionsByAllStudents.length == 0">
+                              <div class="form-text my-2 alert alert-info">No student yet submitted this task's Answer</div>
+                            </div>
 
+                            <table class="table table-striped" *ngIf="SolutionsByAllStudents.length>0">
+                              <thead>
+                                <tr>
+                                  <th>Student</th>
+                                  <th>Gained XPs</th>
+                                  <th>View/Hide Solution</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let solution of SolutionsByAllStudents">
+
+
+                                  <td>{{solution?.StudentzUsername}}</td>
+                                  <td>{{solution?.GainedXPs}}</td>
+                                  <td><button (click)="ViewThisStudentzSolution(solution)" class="btn btn-outline-info btn-small" >View this Student's Solution</button></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div class="col-11 m-auto" *ngIf="ViewThisStudentSolutionToggled">
+
+                              <label style="text-decoration: underline; font-weight: bold;">Student's Code Answer :</label>
+                              <pre>{{iskaSolution.LabTaskAnswerCode}}</pre>
+                            </div>
+                            <div class="col-11 m-auto" *ngIf="ViewThisStudentSolutionToggled">
+
+                            <label style="text-decoration: underline; font-weight: bold;">Student's Output Answer :</label>
+                              <pre>{{iskaSolution.LabTaskAnswerOutput}}</pre>
+                            </div>
+                            <div class="col-11 m-auto" *ngIf="ViewThisStudentSolutionToggled">
+
+                            <label style="text-decoration: underline; font-weight: bold;">Student's Input Answer :</label>
+                              <pre>{{iskaSolution.LabTaskAnswerInput}}</pre>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

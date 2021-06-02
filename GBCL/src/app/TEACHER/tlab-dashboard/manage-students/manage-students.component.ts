@@ -223,9 +223,8 @@ export class ManageStudentsComponent implements OnInit {
       StudentzLabJoinRequest.LabJoinCodesOfAppliedLabs = [...newLabJoinCodesOfAppliedLabs];
       StudentzLabJoinRequest.LabJoinCodesOfJoinedLabs.push(this.LabID);
       let studLabDataAndStatsFreshRecord: StudLabDataAndStatsmodel = {
-        _id: '', Appreciated: false, LabJoinCode: this.LabID, LevelUpdateViewed: false, RivalStudents: [],
-        StudentzLabAccessStatus: 'Allowed', StudentzUsername: StudentzLabJoinRequest.Username, StudentzFN: StudentzLabJoinRequest.FirstNameOfUser, StudentzLN: StudentzLabJoinRequest.LastNameOfUser, Warned: false, Demoted: false, Promoted: true,
-        currentBadge: 'Beginner I', currentCPPs: 0, currentLevel: 0, currentXPs: 0
+        _id: '', Appreciated: false, LabJoinCode: this.LabID, LevelUpdateViewed: false, RivalStudents: [],StudentzLabAccessStatus: 'Allowed', StudentzUsername: StudentzLabJoinRequest.Username, StudentzFN: StudentzLabJoinRequest.FirstNameOfUser, StudentzLN: StudentzLabJoinRequest.LastNameOfUser, Warned: false, Demoted: false, Promoted: true,
+        currentBadge: 'Beginner I', currentCPPs: 0, currentLevel: 1, currentXPs: 0
       };
 
       this.studentLabDataService.createFreshStudentLabDataRecord(studLabDataAndStatsFreshRecord);

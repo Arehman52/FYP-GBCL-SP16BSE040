@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LabTasksmodel } from 'src/app/MODELS/Lab-Frontend-Models/labTasksmodel.model';
+import { StudentAttemptedLabTaskmodel } from 'src/app/MODELS/Student-Frontend-Models/StudentAttemptedLabTaskmodel.model';
 import { LabsService } from 'src/app/Services/labs.service';
+import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 
 @Component({
   selector: 'app-manage-labtasks',
@@ -10,7 +12,7 @@ import { LabsService } from 'src/app/Services/labs.service';
 })
 export class ManageLabtasksComponent implements OnInit {
 
-  constructor(private labsService:LabsService) { }
+  constructor(private labsService: LabsService,private studentLabDataService: StudentLabDataService) { }
 
   ngOnInit(): void {
     this.LabID = localStorage.getItem('LabID');
@@ -18,20 +20,77 @@ export class ManageLabtasksComponent implements OnInit {
     this.AllLabTasks = this.labsService.GetAllLabTasksFromDB();
 
 
-    setTimeout(()=>{
+    setTimeout(() => {
       this.extractLabTasksOfThisLab();
-    },2500);
+    }, 2500);
   }
 
 
 
 
+  ViewThisStudentSolutionToggled: boolean = false;
+  ViewSolutionsToggled: boolean = false;
+  ViewSolutionToggleButtonText = 'View Students Solutions';
+  CURRENTLY_VIEWING_SOLUTIONS: StudentAttemptedLabTaskmodel[] = [];
+
+  SetViewViewSolutionToggledFalse(){
+    if (this.ViewSolutionsToggled) {
+      this.ViewSolutionsToggled = false;
+      this.ViewSolutionToggleButtonText = 'View Students Solutions';
+    }
+  }
+
+  iskaSolution:StudentAttemptedLabTaskmodel;
+  ViewThisStudentzSolution(solution:StudentAttemptedLabTaskmodel){
+    if(this.ViewThisStudentSolutionToggled == true){
+      this.ViewThisStudentSolutionToggled = false;
+      this.iskaSolution = {...solution};
+    }else{
+      this.ViewThisStudentSolutionToggled = true;
+    }
+  }
 
 
-  DeleteThisTask(taskId:string){
+  SolutionsByAllStudents:StudentAttemptedLabTaskmodel[]=[];
+
+
+  ViewSolutionsByAllStudents(task: LabTasksmodel) {
+    this.CURRENTLY_VIEWING_SOLUTIONS = [];
+    if (this.ViewSolutionsToggled) {
+      this.ViewSolutionsToggled = false;
+      this.ViewSolutionToggleButtonText = 'Hide Students Solutions';
+      //fetch  Attempted tasks  of all the students in array AttemptedBy
+      let CompleteStudentAttemptedLabTaskCollection:StudentAttemptedLabTaskmodel[]=[];
+      CompleteStudentAttemptedLabTaskCollection = this.studentLabDataService.RecieveAllStudentAttemptedLabTasks();
+      let AttemptedByStudents:string[] = task.AttemptedByStudents;
+      // SolutionsByAllStudents
+      setTimeout(()=>{
+        console.log("CompleteStudentAttemptedLabTaskCollection == ",CompleteStudentAttemptedLabTaskCollection);
+        for(let i=0; i<CompleteStudentAttemptedLabTaskCollection.length;i++){
+          for(let j=0; j<AttemptedByStudents.length; i++){
+            if(CompleteStudentAttemptedLabTaskCollection[i].AttemptedLabTask_id==AttemptedByStudents[j]){
+              this.SolutionsByAllStudents.push(CompleteStudentAttemptedLabTaskCollection[i]);
+            }
+          }
+        }
+      },1000);
+
+
+
+
+
+    } else {
+
+      this.ViewSolutionToggleButtonText = 'View Students Solutions';
+      this.ViewSolutionsToggled = true;
+    }
+    // task.
+  }
+
+  DeleteThisTask(taskId: string) {
     this.labsService.DeletThisLabTask(taskId);
     this.Errors.LabTaskDeleted.status = true;
-    setTimeout(()=>{window.location.reload()},3600);
+    setTimeout(() => { window.location.reload() }, 3600);
   }
 
 
@@ -39,18 +98,18 @@ export class ManageLabtasksComponent implements OnInit {
 
 
 
-  AllLabTasks:LabTasksmodel[] = [];
-  LabTasksOfThisLab:LabTasksmodel[] = [];
+  AllLabTasks: LabTasksmodel[] = [];
+  LabTasksOfThisLab: LabTasksmodel[] = [];
   // RegisteredLabs = [{ _id: 'wddwd', LabTitle: ' titlell' }];
   LabID: string = '';
   MessageForModal: string;
   showSpinner: false;
 
 
-  extractLabTasksOfThisLab(){
+  extractLabTasksOfThisLab() {
 
-    for(let i=0; i<this.AllLabTasks.length;i++){
-      if(this.AllLabTasks[i].LabJoinCode == this.LabID){
+    for (let i = 0; i < this.AllLabTasks.length; i++) {
+      if (this.AllLabTasks[i].LabJoinCode == this.LabID) {
         this.LabTasksOfThisLab.push(this.AllLabTasks[i]);
       }
     }
@@ -65,7 +124,7 @@ export class ManageLabtasksComponent implements OnInit {
       createLabTaskForm.value.LabTaskAnswer = '';
     }
 
-    var taskTitle = createLabTaskForm.value.LabTaskQuestion.substring(0,27);
+    var taskTitle = createLabTaskForm.value.LabTaskQuestion.substring(0, 27);
     taskTitle += '...';
 
     let labtask: LabTasksmodel = {
@@ -78,12 +137,12 @@ export class ManageLabtasksComponent implements OnInit {
 
     this.Errors.emptyField.status = true;
     this.Errors.LabTaskCreated.status = true;
-    setTimeout(()=>{
+    setTimeout(() => {
       window.location.reload()
 
 
-    },3000);
-}
+    }, 3000);
+  }
 
   displayThisMessageInModal(Message: string, modalButtonReferrence: HTMLButtonElement) {
     this.MessageForModal = Message;

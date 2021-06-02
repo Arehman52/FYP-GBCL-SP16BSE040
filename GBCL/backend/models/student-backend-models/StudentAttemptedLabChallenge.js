@@ -15,7 +15,14 @@ const StudentAttemptedLabChallengeSchema = mongoose.Schema({
   ChallengeAttempted:Boolean,
   ChallengeChecked:Boolean,
   ChallengeFailedDueToTimeShortage:Boolean,
-  ChallengeCheated:Boolean
+  ChallengeCheated:Boolean,
+
+
+  ChallengeXPs: Number,
+  ChallengeSolutionByTeacher: String,
+  ChallengeMatchPercentage: Number
+
+
 });
 
 StudentAttemptedLabChallengeSchema.plugin(uniqueValidator);

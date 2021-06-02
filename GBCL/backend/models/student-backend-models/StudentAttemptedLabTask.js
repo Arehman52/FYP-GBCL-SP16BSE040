@@ -15,8 +15,7 @@ const StudentAttemptedLabTaskSchema = mongoose.Schema({
   LabTaskAttempted:Boolean,
   LabTaskChecked:Boolean,
   LabTaskTitle: String,
-  LabTaskXPs: Number,
-  LabTaskAnswerByTeacher: String,
+  LabTaskXPs: Number
 
 });
 

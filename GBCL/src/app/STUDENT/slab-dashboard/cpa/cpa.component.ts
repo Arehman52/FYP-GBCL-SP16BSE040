@@ -180,7 +180,11 @@ export class CpaComponent implements OnInit {
 
     let labTask: StudentAttemptedLabTaskmodel = {
       LabJoinCode: this.LabID, LabTaskSolutionByTeacher: this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskAnswer,LabTaskMatchPercentage:0, LabTaskXPs: this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskXPs,
-      LabTaskTitle: this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskQuestion.substring(0,28)+"...", LabTaskAnswerByTeacher: this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskAnswer, GainedXPs: 0, LabTaskAnswerCode: codeForm.value.theCode, LabTaskAnswerInput: codeForm.value.theInput, LabTaskAnswerOutput: codeForm.value.theOutput, LabTaskQuestion: this.TaskQuestion, LabTaskAttempted: true, LabTaskChecked: false, StudentzUsername: this.localStorageUsername, _id: '', AttemptedLabTask_id: this.CURRRENT_TASK_BEING_ATTEMPTED._id
+      LabTaskTitle: this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskQuestion.substring(0,28)+"...",
+
+      // LabTaskAnswerByTeacher: this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskAnswer,
+
+      GainedXPs: 0, LabTaskAnswerCode: codeForm.value.theCode, LabTaskAnswerInput: codeForm.value.theInput, LabTaskAnswerOutput: codeForm.value.theOutput, LabTaskQuestion: this.TaskQuestion, LabTaskAttempted: true, LabTaskChecked: false, StudentzUsername: this.localStorageUsername, _id: '', AttemptedLabTask_id: this.CURRRENT_TASK_BEING_ATTEMPTED._id
     };
 
     this.CURRRENT_TASK_BEING_ATTEMPTED.AttemptedByStudents.push(this.localStorageUsername);
@@ -197,8 +201,12 @@ export class CpaComponent implements OnInit {
       let labtaskXPs:number = this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskXPs;
       let gainedXps:number = parseInt(labtaskXPs * result[0].LabTaskMatchPercentage+'',10);
       this.displayThisMessageInModal("Task attempted","You gained "+gainedXps+" XPs for this lab task.");
+
+
       this.gamificiationService.createHistory_AttemptedLabTask(this.localStorageFullName,this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskQuestion,gainedXps,{LabJoinCode:this.LabID,
       StudentzUsername:this.localStorageUsername});
+
+
     },1500);
 
   }

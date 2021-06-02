@@ -10,10 +10,14 @@ export interface StudentAttemptedLabChallengemodel {
   LabChallengeAnswerOptionC: string,
   LabChallengeAnswerOptionD: string,
   GainedXPs: number,
-
   ChallengeAttempted:boolean,
   ChallengeChecked:boolean,
   ChallengeFailedDueToTimeShortage:boolean,
-  ChallengeCheated:boolean
+  ChallengeCheated:boolean,
+
+  ChallengeXPs:number,
+  ChallengeSolutionByTeacher:string,
+  ChallengeMatchPercentage:number
+
 }
 

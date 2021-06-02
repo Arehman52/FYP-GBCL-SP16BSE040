@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { UsersService } from 'src/app/Services/users.service';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
+import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 
 @Component({
   selector: 'app-unimanage-members',
@@ -96,7 +97,12 @@ export class UnimanageMembersComponent implements OnInit {
       // user.Username = user.Username.toLowerCase();
 
       this.usersService.createUser(user); //<--- this method should update user to DB
+
+
+
+
       createMemberForm.resetForm;
+
       setTimeout(() => { window.location.reload() }, 2500);
 
 
