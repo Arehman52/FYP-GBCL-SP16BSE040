@@ -279,7 +279,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
 
-
+XPplusplusOrminusminus:string = 'Unchanged XPs';
 
   onSubmitChallenge(ChallengesForm: NgForm) {
     this.pauseTimer();
@@ -292,11 +292,13 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType == 'MCQ') {
       if (this.SELECTED_RADIO_VALUE == this.unAttemptedChallenges[this.i].ChallengeCorrectOption) {
         this.Errors.ChallengePassed.status = true;
+        this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs+" XPs++"
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], this.unAttemptedChallenges[this.i].ChallengeXPs);
         attemptedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
       }
       else {
         // alert("YOU CHOSE inCORRECT OPTION");
+        this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs+" XPs--"
         this.Errors.ChallengeFailed.status = true;
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], 0);
       }
@@ -304,6 +306,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType != 'MCQ') {
+      this.XPplusplusOrminusminus = " ------- ";
       //check if answer is valid at least 1 character long, i
       if (ChallengesForm.value.theAnswer.length < 1) {
         alert("You must fill the answer text area!");
@@ -394,21 +397,22 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
 
-  // getTitle() {
-  //   setTimeout(() => {
-  //     this.timeLeft = this.unAttemptedChallenges[this.i].ChallengeAllowedTime;
-  //     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType == 'MCQ') {
-  //       this.Errors.emptyField.status = false;
-  //       return 'MCQs Challenge';
-  //     } else {
-  //       this.Errors.emptyField.status = true;
-  //     }
 
-  //     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType == 'Desired Output') return 'Desired Output Challenge';
-  //     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType == 'Code Completion') return 'Code Completion Challenge';
 
-  //   }, 100);
-  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -47,9 +47,10 @@
         </div>
         <!-- Stats column -->
         <div class="col-12 col-sm-2 col-md-3 border rounded text-left h-100 m-auto p-2 text-center">
-          <h5 class="text-warning" *ngIf="UNCHANGED_STATS == 0">Unchanged Stats</h5>
+          <h5 class="text-warning">{{XPplusplusOrminusminus}}</h5>
+          <!-- <h5 class="text-warning" *ngIf="UNCHANGED_STATS == 0">Unchanged Stats</h5>
           <h5 class="text-warning" *ngIf="UNCHANGED_STATS > 0">{{CHANGED_XP+' XPs ++'}}</h5>
-          <h5 class="text-warning" *ngIf="UNCHANGED_STATS < 0">{{CHANGED_XP+' XPs --'}}</h5>
+          <h5 class="text-warning" *ngIf="UNCHANGED_STATS < 0">{{CHANGED_XP+' XPs --'}}</h5> -->
         </div>
         <!-- STATS COL END -->
         <!-- ------------- -->
@@ -134,7 +135,42 @@
                 {{this.unAttemptedChallenges?.length}}:</h4>
 
 
-              <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestion}} </div>
+
+
+
+
+
+
+
+
+
+                <div *ngIf="this.i<this.unAttemptedChallenges?.length">
+                  <div class="form-group p-0 m-0" *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType != 'MCQ'">
+                    <textarea class="form-control m-0" name="theAnswer" ngModel
+                      spellcheck="false" disabled rows="4" cols="60"  [(ngModel)]="this.unAttemptedChallenges[this.i].ChallengeQuestion" ></textarea>
+                  </div>
+                  <div class="form-group p-0 m-0" *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType == 'MCQ'">
+                    <div *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestion}} </div>
+
+
+                  </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
               <div *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType == 'MCQ'">
 
 
