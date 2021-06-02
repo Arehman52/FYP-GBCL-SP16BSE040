@@ -42,7 +42,7 @@ export class SlabDashboardComponent implements OnInit {
         }
 
 
-        if (this.CurrentStatsOfThisStudent[0].Promoted) {
+        if (this.CurrentStatsOfThisStudent[0].Promoted && this.CurrentStatsOfThisStudent[0].LevelUpdateViewed == false) {
           this.displayThisMessageInModal("Hurrah!! You were Promoted.", "YOUR NEW BADGE IS : " + this.CURRENT_BADGE);
         }
 

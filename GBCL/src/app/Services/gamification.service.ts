@@ -87,37 +87,58 @@ export class GamificationService {
 
   promote_demote_or_justupdate_Stats(StudentzStats: StudLabDataAndStatsmodel, newlyGAINED_XPs: number): string {
     // detect if level changed???
+    let objStudentzUsernamAndLabJoinCode: StudentzUsernameAndLabJoinCodemodel = {
+      LabJoinCode: StudentzStats.LabJoinCode,
+      StudentzUsername: StudentzStats.StudentzUsername
+    };
     let levelChangedStatus = '';
+
+    setTimeout(()=>{
+
+
     let currentLevel = (StudentzStats.currentXPs / 60) + 1;
-    let sumOfNewXPs = StudentzStats.currentXPs + newlyGAINED_XPs;
+    currentLevel = parseInt(currentLevel.toString(),10);
+    let sumOfNewXPs:number = StudentzStats.currentXPs + newlyGAINED_XPs;
+    sumOfNewXPs = parseInt(sumOfNewXPs.toString(), 10);
     let levelCaulatedOf_sumOfNewXPs = (sumOfNewXPs / 60) + 1;
+    levelCaulatedOf_sumOfNewXPs  = parseInt(levelCaulatedOf_sumOfNewXPs.toString(), 10);
+    console.log("currentLevel@@@@ : ",currentLevel);
+    console.log("levelCaulatedOf_sumOfNewXPs@@@@ : ",levelCaulatedOf_sumOfNewXPs);
+    console.log("newlyGAINED_XPs : ",newlyGAINED_XPs);
+    console.log("sumOfNewXPs : ",sumOfNewXPs);
+
     console.log("currentLevel : ", currentLevel);
     if (levelCaulatedOf_sumOfNewXPs == currentLevel) {
       levelChangedStatus = "unchanged";
       StudentzStats.currentXPs += newlyGAINED_XPs;
+      StudentzStats.Promoted = false;
+      StudentzStats.Demoted = false;
+      StudentzStats.LevelUpdateViewed = true;
+      console.log(levelChangedStatus);
     }
     if (levelCaulatedOf_sumOfNewXPs > currentLevel) {
       levelChangedStatus = "promoted";
       StudentzStats.currentXPs += newlyGAINED_XPs;
       StudentzStats.LevelUpdateViewed = false;
       StudentzStats.Promoted = true;
+      StudentzStats.Demoted = false;
+      console.log(levelChangedStatus);
     }
     if (levelCaulatedOf_sumOfNewXPs < currentLevel) {
       StudentzStats.LevelUpdateViewed = false;
       levelChangedStatus = "demoted";
       StudentzStats.Demoted = true;
+      StudentzStats.Promoted = false;
+      console.log(levelChangedStatus);
     }
 
 
-    let objStudentzUsernamAndLabJoinCode: StudentzUsernameAndLabJoinCodemodel = {
-      LabJoinCode: StudentzStats.LabJoinCode,
-      StudentzUsername: StudentzStats.StudentzUsername
-    };
     this.studentLabDataService.updateCurrentStatsOfThisStudent(StudentzStats
       , objStudentzUsernamAndLabJoinCode);
 
-      return levelChangedStatus;
+    },700);
 
+    return levelChangedStatus;
   }
 
 

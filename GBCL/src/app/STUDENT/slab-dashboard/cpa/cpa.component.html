@@ -27,7 +27,7 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn w-100 border border-warning" [routerLink]="'/'" title="Gamification Based Coding Labs"><img
+          <a class="btn w-100 border border-warning"  routerLink="/STUDENT/Lab" title="Gamification Based Coding Labs"><img
               src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
         </div>
 
@@ -41,8 +41,9 @@
 
         <!-- ----------- -->
         <!-- Stats column -->
-        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto p-2 text-center">
+        <div class="col-12 col-sm-6 col-md-8 border rounded text-left h-100 m-auto px-2 text-center">
           <h5><b>Code Practice Area</b></h5>
+          <h6 class="pt-1">{{this.localStorageFullName}}</h6>
         </div>
         <!-- Stats column -->
         <!-- <div class="col-12 col-sm-2 col-md-3 border rounded text-left h-100 m-auto p-2 text-center">
@@ -183,8 +184,8 @@
       <form class="text-right" (submit)="onSubmitLabTaskClicked(codeForm)" #codeForm="ngForm">
         <div class="row">
           <div class="col">
-            <h5 class="text-center text-warning"><b>PASTE CODE BELOW for Task :
-                {{taskTitleOfTaskBeiingCurrentlyAttempted}}</b></h5>
+            <h6 class="text-center text-warning pt-1"><b>&lt; CODE &gt; <span class="text-info">Task Attempting</span> : <span class="font-italic text-info">(
+              {{taskTitleOfTaskBeiingCurrentlyAttempted}} )</span></b></h6>
             <div class="form-group p-0 m-0">
               <textarea class="form-control m-0" (keyup)="checkCode(codeForm)" spellcheck="false" name="theCode" ngModel placeholder="** Required **  Paste from IDE or write code for lab task here..." rows="8"></textarea>
             </div>
@@ -195,13 +196,13 @@
         </div>
         <div class="row p-1 ">
           <div class="col-12 col-lg-5 m-auto border rounded border-warning">
-            <h6 class="text-center text-warning"><b>INPUT</b></h6>
+            <h6 class="text-center text-warning pt-1"><b>&lt; INPUT &gt;</b></h6>
             <textarea class="form-control p-1 mb-2" rows="8" name="theInput" ngModel spellcheck="false" placeholder="Enter input here if any..."></textarea>
 
             <!-- <button class="btn btn-primary EditorBtns">Clear</button> -->
           </div>
           <div class="col-12 col-lg-5 m-auto border rounded border-warning">
-            <h6 class="text-center text-warning"><b>OUTPUT</b></h6>
+            <h6 class="text-center text-warning pt-1"><b>&lt; OUTPUT &gt;</b></h6>
             <textarea class="form-control p-1 mb-2" (keyup)="checkOutput(codeForm)" rows="8" name="theOutput" ngModel spellcheck="false" placeholder="** Required **  Paste from IDE or write output for lab task here..."></textarea>
             <!-- <button class="btn btn-primary EditorBtns">Clear</button> -->
           </div>

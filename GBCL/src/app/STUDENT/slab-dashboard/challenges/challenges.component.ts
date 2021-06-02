@@ -266,66 +266,40 @@ export class ChallengesComponent implements OnInit, OnDestroy {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   onSubmitChallenge(ChallengesForm: NgForm) {
     this.pauseTimer();
     this.Errors.emptyField.status = true;
     let attemptedLabChallenge: StudentAttemptedLabChallengemodel = {
-      AttemptedLabChallenge_id: this.unAttemptedChallenges[this.i]._id,  ChallengeAttempted: true, ChallengeCheated: false, ChallengeChecked: false, ChallengeFailedDueToTimeShortage: false, GainedXPs: 0, LabChallengeAnswerOptionA: '', LabChallengeAnswerOptionB: '', LabChallengeAnswerOptionC: '', LabChallengeAnswerOptionD: '', LabChallengeQuestion: this.unAttemptedChallenges[this.i].ChallengeQuestion, LabChallengeQuestionType: this.unAttemptedChallenges[this.i].ChallengeQuestionType, LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername, _id: ''
+      AttemptedLabChallenge_id: this.unAttemptedChallenges[this.i]._id, ChallengeAttempted: true, ChallengeCheated: false, ChallengeChecked: false, ChallengeFailedDueToTimeShortage: false, GainedXPs: 0, LabChallengeAnswerOptionA: '', LabChallengeAnswerOptionB: '', LabChallengeAnswerOptionC: '', LabChallengeAnswerOptionD: '', LabChallengeQuestion: this.unAttemptedChallenges[this.i].ChallengeQuestion, LabChallengeQuestionType: this.unAttemptedChallenges[this.i].ChallengeQuestionType, LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername, _id: ''
     }
 
 
-
-
-
-
-
-    // setTimeout(() => {
-    // this.timeLeft = this.unAttemptedChallenges[this.i].ChallengeAllowedTime;
     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType == 'MCQ') {
-      // this.Errors.emptyField.status=false;
-
       if (this.SELECTED_RADIO_VALUE == this.unAttemptedChallenges[this.i].ChallengeCorrectOption) {
-        // alert("YOU CHOSE CORRECT OPTION");
-        //update XPs and update to the database
         this.Errors.ChallengePassed.status = true;
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], this.unAttemptedChallenges[this.i].ChallengeXPs);
-        // let status = this.gamificationService.detectIfLevelChanged(this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs ,this.unAttemptedChallenges[this.i].ChallengeXPs);
-        // if(status == "promoted"){
-        //   updatedStatsOfThisStudent.currentXPs += this.unAttemptedChallenges[this.i].ChallengeXPs;
-        //   this.gamificationService.justPROMOTE_thisStudent(updatedStatsOfThisStudent);
-        // }
-
         attemptedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
-      } else {
+      }
+      else {
         // alert("YOU CHOSE inCORRECT OPTION");
         this.Errors.ChallengeFailed.status = true;
-        // attemptedLabChallenge.GainedXPs = 0;
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], 0);
       }
-
-
-
-      // this.Errors.emptyField.status = false;
-
-
-      //   let updatedStatsOfThisStudent:StudLabDataAndStatsmodel = {
-      //     LabJoinCode:this.STUDz_FETCHED_STATS_FROM_Db[0].LabJoinCode,
-      //     _id:this.STUDz_FETCHED_STATS_FROM_Db[0]._id,
-      //     StudentzUsername: this.STUDz_FETCHED_STATS_FROM_Db[0].StudentzUsername,
-      //     Appreciated: this.STUDz_FETCHED_STATS_FROM_Db[0].Appreciated,
-      //     Demoted:this.STUDz_FETCHED_STATS_FROM_Db[0].Demoted,
-      //     LevelUpdateViewed:this.STUDz_FETCHED_STATS_FROM_Db[0].LevelUpdateViewed,
-      //     Promoted: this.STUDz_FETCHED_STATS_FROM_Db[0].Promoted,
-      //     RivalStudents: this.STUDz_FETCHED_STATS_FROM_Db[0].RivalStudents,
-      //     StudentzLabAccessStatus: this.STUDz_FETCHED_STATS_FROM_Db[0].StudentzLabAccessStatus,
-      //     Warned: this.STUDz_FETCHED_STATS_FROM_Db[0].Warned,
-      //     currentBadge: this.STUDz_FETCHED_STATS_FROM_Db[0].currentBadge,
-      //     currentCPPs: this.STUDz_FETCHED_STATS_FROM_Db[0].currentCPPs,
-      //     currentLevel: this.STUDz_FETCHED_STATS_FROM_Db[0].currentLevel,
-      //     currentXPs: this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs
-      // }
-      // this.studentLabDataService.updateCurrentStatsOfThisStudent();
-
     }
 
 
@@ -337,14 +311,10 @@ export class ChallengesComponent implements OnInit, OnDestroy {
       } else {
         this.Errors.ChallengeSubmitted.status = true;
         attemptedLabChallenge.LabChallengeAnswerOptionA = ChallengesForm.value.theAnswer;
-        // attemptedLabChallenge.GainedXPs = 0;
-        // attemptedLabChallenge.ChallengeAttempted = true;
-
       }
     }
 
     //now update
-    // attemptedLabChallenge.ChallengeAttempted = true;
     this.unAttemptedChallenges[this.i].AttemptedByStudents.push(this.localStorageUsername);
     // 1. update  this.unAttemptedChallenges because its AttemptedByStudents field changed.
     // 2. store newly created attemptedLabChallenge to StudentAttemptedChallenges.
@@ -359,19 +329,17 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
 
-    // }, 100);
-
-
     console.log("attemptedLabChallenge: ", attemptedLabChallenge);
 
 
 
 
 
-
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////// below code of onSubmitLabchallenge is for next challenge... do not change
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    let opt;
+    let opt: boolean;
     let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername };
     this.STUDz_FETCHED_STATS_FROM_Db = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
     setTimeout(() => {
@@ -400,19 +368,13 @@ export class ChallengesComponent implements OnInit, OnDestroy {
         ChallengesForm.reset();
         if (opt == true) {
           this.setAllErrorsToFalse();
-          console.log("this.LENGTH_unAttemptedChallenges :::::: ",this.LENGTH_unAttemptedChallenges);
-          console.log("this.i :::::: ",this.i);
+          console.log("this.LENGTH_unAttemptedChallenges :::::: ", this.LENGTH_unAttemptedChallenges);
+          console.log("this.i :::::: ", this.i);
           this.i++;
           if (this.i < this.LENGTH_unAttemptedChallenges) {
-
-          // window.alert(this.challenges.length + 1);
-          this.timeLeft = this.unAttemptedChallenges[this.i].ChallengeAllowedTime;
-          this.startTimer();
-          // console.log(this.i);
-          // console.log(this.challenges.length);
-            // this.i = 0;
-
-          }else{
+            this.timeLeft = this.unAttemptedChallenges[this.i].ChallengeAllowedTime;
+            this.startTimer();
+          } else {
 
             alert("You have completed all challenges for now, come back soon for more challenges");
             window.location.href = "/STUDENT/Lab";

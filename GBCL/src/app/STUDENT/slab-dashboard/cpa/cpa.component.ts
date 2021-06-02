@@ -37,6 +37,7 @@ export class CpaComponent implements OnInit {
   TaskQuestion: string = '';
   CURRRENT_TASK_BEING_ATTEMPTED:LabTasksmodel = null;
   localStorageUsername = localStorage.getItem("UsersUsername");
+  localStorageFullName = localStorage.getItem("UserzFirstNameOfUser")+' '+ localStorage.getItem("UserzLastNameOfUser") ;
   LabID = localStorage.getItem("LabID");
 
 
