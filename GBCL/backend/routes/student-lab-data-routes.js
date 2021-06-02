@@ -15,15 +15,28 @@ const router = express.Router();
 ////////////////////////////////////////////////////////////////////////////////////
 
 router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
+
+
+
+var stringSimilarity = require("string-similarity");
+
+var similarity = stringSimilarity.compareTwoStrings(req.body.LabTaskAnswerCode, req.body.LabTaskSolutionByTeacher);
+
+var Gainedxps = parseInt(similarity * req.body.LabTaskXPs+'',10) ;
+
+
+
   const studentAttemptedLabTask = new StudentAttemptedLabTask({
     LabJoinCode: req.body.LabJoinCode, //foreign key
     StudentzUsername: req.body.StudentzUsername, //foreign key
     AttemptedLabTask_id: req.body.AttemptedLabTask_id,
     LabTaskQuestion: req.body.LabTaskQuestion,
+    LabTaskSolutionByTeacher: req.body.LabTaskSolutionByTeacher,
+    LabTaskMatchPercentage: similarity,
     LabTaskAnswerCode: req.body.LabTaskAnswerCode,
     LabTaskAnswerOutput: req.body.LabTaskAnswerOutput,
     LabTaskAnswerInput: req.body.LabTaskAnswerInput,
-    GainedXPs: req.body.GainedXPs,
+    GainedXPs: Gainedxps,
     LabTaskAttempted: req.body.LabTaskAttempted,
     LabTaskChecked: req.body.LabTaskChecked,
     LabTaskTitle: req.body.LabTaskTitle,

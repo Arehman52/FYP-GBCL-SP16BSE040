@@ -4,6 +4,8 @@ export interface StudentAttemptedLabTaskmodel {
   LabJoinCode: string,
   StudentzUsername: string,
   LabTaskQuestion: string,
+  LabTaskSolutionByTeacher: string,
+  LabTaskMatchPercentage: number,
   LabTaskAnswerCode: string,
   LabTaskAnswerOutput: string,
   LabTaskAnswerInput: string,

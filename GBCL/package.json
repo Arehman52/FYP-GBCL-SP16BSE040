@@ -31,6 +31,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.3",
+    "string-similarity": "^4.0.4",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

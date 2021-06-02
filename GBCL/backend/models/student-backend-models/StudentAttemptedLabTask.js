@@ -7,6 +7,8 @@ const StudentAttemptedLabTaskSchema = mongoose.Schema({
   StudentzUsername: String,
   LabTaskQuestion: String,
   LabTaskAnswerCode: String,
+  LabTaskSolutionByTeacher: String,
+  LabTaskMatchPercentage: Number,
   LabTaskAnswerOutput: String,
   LabTaskAnswerInput: String,
   GainedXPs: Number,
@@ -21,3 +23,7 @@ const StudentAttemptedLabTaskSchema = mongoose.Schema({
 StudentAttemptedLabTaskSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("StudentAttemptedLabTask",StudentAttemptedLabTaskSchema);
+
+
+
+

@@ -16,9 +16,11 @@ export class StudentLabDataService {
 
 
   RecieveAllStudentAttemptedChallengesOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabChallengemodel[] {
-    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabChallengemodel = {  AttemptedLabChallenge_id: null,
-    ChallengeAttempted:null, GainedXPs: null, LabJoinCode: LabJoinCode, StudentzUsername: StudentzUsername, _id: null,
-  ChallengeCheated:null,ChallengeChecked:null,ChallengeFailedDueToTimeShortage:null,LabChallengeAnswerOptionA:null,LabChallengeAnswerOptionB:null, LabChallengeAnswerOptionC:null,LabChallengeAnswerOptionD: null, LabChallengeQuestion:null ,LabChallengeQuestionType:null };
+    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabChallengemodel = {
+      AttemptedLabChallenge_id: null,
+      ChallengeAttempted: null, GainedXPs: null, LabJoinCode: LabJoinCode, StudentzUsername: StudentzUsername, _id: null,
+      ChallengeCheated: null, ChallengeChecked: null, ChallengeFailedDueToTimeShortage: null, LabChallengeAnswerOptionA: null, LabChallengeAnswerOptionB: null, LabChallengeAnswerOptionC: null, LabChallengeAnswerOptionD: null, LabChallengeQuestion: null, LabChallengeQuestionType: null
+    };
 
     var allStudentAttemptedChallengesOfthisStudandThisLab: StudentAttemptedLabChallengemodel[] = [];
     this.http
@@ -36,8 +38,8 @@ export class StudentLabDataService {
 
 
   Fetch7HighAchieversOfThisLab(objStudentzUsernameAndLabJoinCode: StudentzUsernameAndLabJoinCodemodel): StudLabDataAndStatsmodel[] {
-  let fetched7HighAchievers:StudLabDataAndStatsmodel[] = [];
-  this.http
+    let fetched7HighAchievers: StudLabDataAndStatsmodel[] = [];
+    this.http
       .post<{ message: string; Fetched7HighAchievers: StudLabDataAndStatsmodel[] }>(
         'http://localhost:3000/api/StudentLabData/Fetch7HighAchieversOfThisLab', objStudentzUsernameAndLabJoinCode
       )
@@ -48,19 +50,21 @@ export class StudentLabDataService {
         }
       });
 
-  return fetched7HighAchievers;
+    return fetched7HighAchievers;
   }
 
 
   //////////////////////////////////////////
   //////////////////////////////////////////////////////StudentAttemptedLabTaskmodel methods below
   //////////////////////////////////////////
-  createThisStudentAttemptedLabTask(labTask: StudentAttemptedLabTaskmodel) {
-    this.http.post('http://localhost:3000/api/StudentLabData/createThisStudentAttemptedLabTask', labTask)
+  createThisStudentAttemptedLabTask(labTask: StudentAttemptedLabTaskmodel): StudentAttemptedLabTaskmodel[] {
+    let arrResult: StudentAttemptedLabTaskmodel[] = [];
+    this.http.post<{ message: string, result: StudentAttemptedLabTaskmodel }>('http://localhost:3000/api/StudentLabData/createThisStudentAttemptedLabTask', labTask)
       .subscribe((responseData) => {
         console.log(responseData);
+        arrResult.push(responseData.result);
       });
-
+    return arrResult;
 
   }
 
@@ -110,8 +114,10 @@ export class StudentLabDataService {
 
 
   RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab(LabJoinCode: string, StudentzUsername: string): StudentAttemptedLabTaskmodel[] {
-    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabTaskmodel = { AttemptedLabTask_id: '',LabTaskAnswerByTeacher:'',LabTaskTitle:'',
-    LabTaskXPs:0, GainedXPs: 0, LabJoinCode: LabJoinCode, LabTaskAnswerCode: '', LabTaskAnswerInput: '', LabTaskAnswerOutput: '', LabTaskAttempted: false, LabTaskChecked: false, LabTaskQuestion: '', StudentzUsername: StudentzUsername, _id: '' };
+    let objStudentzUsernameAndLabJoinCode: StudentAttemptedLabTaskmodel = {
+      AttemptedLabTask_id: '', LabTaskAnswerByTeacher: '', LabTaskTitle: '', LabTaskSolutionByTeacher: '', LabTaskMatchPercentage: 0,
+      LabTaskXPs: 0, GainedXPs: 0, LabJoinCode: LabJoinCode, LabTaskAnswerCode: '', LabTaskAnswerInput: '', LabTaskAnswerOutput: '', LabTaskAttempted: false, LabTaskChecked: false, LabTaskQuestion: '', StudentzUsername: StudentzUsername, _id: ''
+    };
 
     var allStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] = [];
     this.http

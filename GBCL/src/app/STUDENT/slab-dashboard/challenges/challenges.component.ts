@@ -1,3 +1,4 @@
+import { HtmlTagDefinition } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NumericTypes } from 'mongoose';
@@ -273,13 +274,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
 
-
-
-
-
-
-
-XPplusplusOrminusminus:string = 'Unchanged XPs';
+  XPplusplusOrminusminus: string = 'Unchanged XPs';
 
   onSubmitChallenge(ChallengesForm: NgForm) {
     this.pauseTimer();
@@ -292,13 +287,13 @@ XPplusplusOrminusminus:string = 'Unchanged XPs';
     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType == 'MCQ') {
       if (this.SELECTED_RADIO_VALUE == this.unAttemptedChallenges[this.i].ChallengeCorrectOption) {
         this.Errors.ChallengePassed.status = true;
-        this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs+" XPs++"
+        this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs + " XPs++"
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], this.unAttemptedChallenges[this.i].ChallengeXPs);
         attemptedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
       }
       else {
         // alert("YOU CHOSE inCORRECT OPTION");
-        this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs+" XPs--"
+        this.XPplusplusOrminusminus = this.unAttemptedChallenges[this.i].ChallengeXPs + " XPs--"
         this.Errors.ChallengeFailed.status = true;
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], 0);
       }
@@ -370,6 +365,7 @@ XPplusplusOrminusminus:string = 'Unchanged XPs';
       if (opt = confirm("Ready for next challenge.")) {
         ChallengesForm.reset();
         if (opt == true) {
+          this.XPplusplusOrminusminus = " ------- ";
           this.setAllErrorsToFalse();
           console.log("this.LENGTH_unAttemptedChallenges :::::: ", this.LENGTH_unAttemptedChallenges);
           console.log("this.i :::::: ", this.i);

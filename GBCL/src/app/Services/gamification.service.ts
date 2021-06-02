@@ -117,9 +117,11 @@ export class GamificationService {
       console.log(levelChangedStatus);
     }
     if (levelCaulatedOf_sumOfNewXPs > currentLevel) {
+      StudentzStats.LevelUpdateViewed = false;
       levelChangedStatus = "promoted";
       StudentzStats.currentXPs += newlyGAINED_XPs;
-      StudentzStats.LevelUpdateViewed = false;
+      StudentzStats.currentBadge = this.getNextBadge(StudentzStats.currentXPs);
+      StudentzStats.currentLevel = levelCaulatedOf_sumOfNewXPs;
       StudentzStats.Promoted = true;
       StudentzStats.Demoted = false;
       console.log(levelChangedStatus);
@@ -127,6 +129,9 @@ export class GamificationService {
     if (levelCaulatedOf_sumOfNewXPs < currentLevel) {
       StudentzStats.LevelUpdateViewed = false;
       levelChangedStatus = "demoted";
+      StudentzStats.currentXPs += newlyGAINED_XPs;
+      StudentzStats.currentBadge = this.getNextBadge(StudentzStats.currentXPs);
+      StudentzStats.currentLevel = levelCaulatedOf_sumOfNewXPs;
       StudentzStats.Demoted = true;
       StudentzStats.Promoted = false;
       console.log(levelChangedStatus);
@@ -276,6 +281,8 @@ export class GamificationService {
 
   }
 
+
+
   getNextBadge(currentXPs: number): string {
     let nextBadge: string = '';
     let dump = '';
@@ -399,6 +406,9 @@ export class GamificationService {
 
 
 
+// createHistory_isPromoted(FullName:string, LabTaskQuestion:string, GainedXPs:number, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+
+// }
 
 
 
@@ -406,13 +416,12 @@ export class GamificationService {
 
 
 
-
-  createHistory_justAttemptedLabTask(FullName:string, LabTaskQuestion:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+  createHistory_AttemptedLabTask(FullName:string, LabTaskQuestion:string, GainedXPs:number, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
 
 
     let studhistory: StudentActivityHistorymodel = {
       StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
-      _id: '', AttemptedQuestion:LabTaskQuestion,GainedOrLoosedXPsCount: 0, Activity: 'Attempted Lab Task',Failed:false, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+      _id: '', AttemptedQuestion:LabTaskQuestion,GainedOrLoosedXPsCount: GainedXPs, Activity: 'Attempted Lab Task',Failed:false, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
     };
 
 
@@ -424,12 +433,12 @@ export class GamificationService {
 
 
 
-  createHistory_justAttemptedNonMCQChallenge(FullName:string, QType:string,LabChallengeQuestion:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
+  createHistory_Attempted_NonMCQ_LabChallenge(FullName:string, QType:string, GainedXPs:number, LabChallengeQuestion:string, objUNandLabJC:StudentzUsernameAndLabJoinCodemodel){
 
 
     let studhistory: StudentActivityHistorymodel = {
       StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
-      _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: 0, Activity: 'Attempted '+QType+' Challenge',Failed:false, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+      _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: GainedXPs, Activity: 'Attempted '+QType+' Challenge',Failed:false, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
     };
 
     this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);

@@ -93,6 +93,15 @@ export class ManageLabtasksComponent implements OnInit {
 
 
 
+  checkAnswerStatement(Answer: string) {
+    if (Answer.length == 0) { this.Errors.emptyField.status = true }
+    else { this.Errors.emptyField.status = false }
+
+    if (Answer.length < 28) { this.Errors.invalidAnswer.status = true }
+    else { this.Errors.invalidAnswer.status = false }
+  }
+
+
   checkQuestionStatement(Question: string) {
     if (Question.length == 0) { this.Errors.emptyField.status = true }
     else { this.Errors.emptyField.status = false }
@@ -109,6 +118,7 @@ export class ManageLabtasksComponent implements OnInit {
     return (
       this.Errors.XPsNotSelected.status
       || this.Errors.invalidQuestion.status
+      || this.Errors.invalidAnswer.status
       || this.Errors.emptyField.status
       || this.Errors.LabTaskCreated.status
       || this.Errors.LabTaskDeleted.status);
@@ -118,6 +128,7 @@ export class ManageLabtasksComponent implements OnInit {
 
   setAllErrorsToFalse() {
     this.Errors.invalidQuestion.status = false;
+    this.Errors.invalidAnswer.status = false;
     this.Errors.emptyField.status = true;
     // this.Errors.XPsNotSelected.status = false;
     this.Errors.LabTaskCreated.status = false;
@@ -147,6 +158,10 @@ export class ManageLabtasksComponent implements OnInit {
     invalidQuestion: {
       status: true,
       message: 'This doesn\'t seem to be a question, add more characters.',
+    },
+    invalidAnswer: {
+      status: true,
+      message: 'This doesn\'t seem to be an Answer, add more characters.',
     }
   };
   localStorageUsername = localStorage.getItem("UsersUsername");

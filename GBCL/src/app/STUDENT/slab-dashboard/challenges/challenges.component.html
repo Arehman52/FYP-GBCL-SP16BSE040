@@ -137,13 +137,15 @@
 
 
 
+                <pre *ngIf="SHOW_CHALLENGE_RELATED_DIVS">{{unAttemptedChallenges[this.i]?.ChallengeQuestion}} </pre>
 
 
 
+                <!-- display_txt.replace(/\n/g, "<br />"); -->
 
 
 
-
+<!--
                 <div *ngIf="this.i<this.unAttemptedChallenges?.length">
                   <div class="form-group p-0 m-0" *ngIf="unAttemptedChallenges[this.i]?.ChallengeQuestionType != 'MCQ'">
                     <textarea class="form-control m-0" name="theAnswer" ngModel
@@ -155,7 +157,7 @@
 
                   </div>
 
-                </div>
+                </div> -->
 
 
 
