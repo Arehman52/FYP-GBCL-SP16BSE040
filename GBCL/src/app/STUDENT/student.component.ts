@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 // import { LabMembersmodel } from '../MODELS/Lab-Frontend-Models/labMembermodel.model';
 import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
+import { StudLabDataAndStatsmodel } from '../MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { Usersmodel } from '../MODELS/Usersmodel.model';
 import { LabsService } from '../Services/labs.service';
+import { StudentLabDataService } from '../Services/student-lab-data.service';
 import { UsersService } from '../Services/users.service';
 
 @Component({
@@ -14,7 +16,7 @@ import { UsersService } from '../Services/users.service';
 })
 export class STUDENTComponent implements OnInit {
 
-  constructor(private labsService: LabsService, private usersService: UsersService) { }
+  constructor(private labsService: LabsService,private studentLabDataService:StudentLabDataService,  private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.LabID = localStorage.getItem("LabID");
@@ -70,9 +72,24 @@ export class STUDENTComponent implements OnInit {
   }
 
   onVisitLabButtonClicked(labId: string, modalButtonReferrence: HTMLButtonElement) {
-    localStorage.setItem("LabID", labId);
-    window.location.href = "/STUDENT/Lab";
     this.showSpinner = true;
+    let StudentLabDataAndStatistics: StudLabDataAndStatsmodel[] = [];
+    StudentLabDataAndStatistics = this.studentLabDataService
+    .getCurrentStatsOfThisStudent({StudentzUsername:this.localStorageUsername, LabJoinCode:labId});
+    setTimeout(()=>{
+      this.showSpinner = false;
+      if(StudentLabDataAndStatistics[0].StudentzLabAccessStatus == "Expelled"){
+        this.displayThisMessageInModal("You Were Expelled from this lab!",modalButtonReferrence);
+      }else{
+
+        localStorage.setItem("LabID", labId);
+        window.location.href = "/STUDENT/Lab";
+
+      }
+
+    },2500);
+
+
   }
 
 

@@ -97,6 +97,9 @@
                   ngModel
                   (keyup)="checkUsernameOfUser()"
                   >
+                  <small class="form-text errorText" *ngIf="this.Errors.spacesNotAllowed.status == true">
+                    <span>{{this.Errors.spacesNotAllowed.message}}</span>
+                  </small>
                   <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
                     <span>{{this.Errors.invalidUsername.message}}</span>
                   </small>
@@ -198,6 +201,9 @@
                   name="UsernameOfUniversity"
                   ngModel
                   (keyup)="checkUsernameOfUniversity()">
+                  <small class="form-text errorText" *ngIf="this.Errors.spacesNotAllowed.status == true">
+                    <span>{{this.Errors.spacesNotAllowed.message}}</span>
+                  </small>
                   <small class="form-text errorText" *ngIf="this.Errors.invalidUsername.status == true">
                     <span>{{this.Errors.invalidUsername.message}}</span>
                   </small>

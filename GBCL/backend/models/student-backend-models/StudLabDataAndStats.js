@@ -9,6 +9,8 @@ const StudLabDataAndStatsSchema = mongoose.Schema({
   StudentzFN: String,
   StudentzLN: String,
   LevelUpdateViewed: Boolean,
+  AppreciateUpdateViewed: Boolean,
+  WarnUpdateViewed: Boolean,
   Promoted: Boolean,
   Demoted: Boolean,
   RivalStudents: [String],

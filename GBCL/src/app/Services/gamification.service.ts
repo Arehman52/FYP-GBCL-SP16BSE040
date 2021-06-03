@@ -99,7 +99,7 @@ export class GamificationService {
     let currentLevel = (StudentzStats.currentXPs / 60) + 1;
     currentLevel = parseInt(currentLevel.toString(),10);
     let sumOfNewXPs:number = StudentzStats.currentXPs + newlyGAINED_XPs;
-    sumOfNewXPs = parseInt(sumOfNewXPs.toString(), 10);
+    // sumOfNewXPs = parseInt(sumOfNewXPs.toString(), 10);
     let levelCaulatedOf_sumOfNewXPs = (sumOfNewXPs / 60) + 1;
     levelCaulatedOf_sumOfNewXPs  = parseInt(levelCaulatedOf_sumOfNewXPs.toString(), 10);
     console.log("currentLevel@@@@ : ",currentLevel);
@@ -138,10 +138,13 @@ export class GamificationService {
     }
 
 
+
+
+
     this.studentLabDataService.updateCurrentStatsOfThisStudent(StudentzStats
       , objStudentzUsernamAndLabJoinCode);
 
-    },700);
+    },50);
 
     return levelChangedStatus;
   }
@@ -487,6 +490,31 @@ export class GamificationService {
     this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
   }
 
+  createHistory_AttemptedChallenge_Cheated(FullName: string, LabChallengeQuestion: string, LosedXPs: number, objUNandLabJC: { LabJoinCode: string; StudentzUsername: string; }) {
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: LosedXPs, Activity: 'Cheated in MCQ Challenge',Failed:true, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
+
+
+
+
+
+
+
+  createHistory_AttemptedChallenge_TimedoutFailed(FullName: string, LabChallengeQuestion: string, LosedXPs: number, objUNandLabJC: { LabJoinCode: string; StudentzUsername: string; }) {
+    let studhistory: StudentActivityHistorymodel = {
+      StudentzFullName:FullName, LabJoinCode: objUNandLabJC.LabJoinCode, StudentzUsername: objUNandLabJC.StudentzUsername,
+      _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: LosedXPs, Activity: 'Failed MCQ Challenge due to Timeout',Failed:true, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
+    };
+
+
+    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+  }
 
 
 

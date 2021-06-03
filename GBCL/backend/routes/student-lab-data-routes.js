@@ -15,16 +15,14 @@ const router = express.Router();
 ////////////////////////////////////////////////////////////////////////////////////
 
 router.post("/createThisStudentAttemptedLabTask", (req, res, next) => {
+  var stringSimilarity = require("string-similarity");
 
+  var similarity = stringSimilarity.compareTwoStrings(
+    req.body.LabTaskAnswerCode,
+    req.body.LabTaskSolutionByTeacher
+  );
 
-
-var stringSimilarity = require("string-similarity");
-
-var similarity = stringSimilarity.compareTwoStrings(req.body.LabTaskAnswerCode, req.body.LabTaskSolutionByTeacher);
-
-var Gainedxps = parseInt(similarity * req.body.LabTaskXPs+'',10) ;
-
-
+  var Gainedxps = parseInt(similarity * req.body.LabTaskXPs + "", 10);
 
   const studentAttemptedLabTask = new StudentAttemptedLabTask({
     LabJoinCode: req.body.LabJoinCode, //foreign key
@@ -40,7 +38,7 @@ var Gainedxps = parseInt(similarity * req.body.LabTaskXPs+'',10) ;
     LabTaskAttempted: req.body.LabTaskAttempted,
     LabTaskChecked: req.body.LabTaskChecked,
     LabTaskTitle: req.body.LabTaskTitle,
-    LabTaskXPs: req.body.LabTaskXPs
+    LabTaskXPs: req.body.LabTaskXPs,
   });
 
   studentAttemptedLabTask
@@ -129,51 +127,22 @@ router.post(
   }
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.post(
   "/RecieveAllStudentAttemptedMCQLabChallengesOfthisStudandThisLab/",
   (req, res, next) => {
     StudentAttemptedLabChallenge.find({
       StudentzUsername: req.body.StudentzUsername,
       LabJoinCode: req.body.LabJoinCode,
-      LabChallengeQuestionType: 'MCQ'
-    })
-      .then((document) => {
-        console.log("999999999docz", document);
-        res.status(200).json({
-          message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
-          AllStudentAttemptedMCQLabChallengesOfthisStudandThisLab: document,
-        });
-      })
-
+      LabChallengeQuestionType: "MCQ",
+    }).then((document) => {
+      console.log("999999999docz", document);
+      res.status(200).json({
+        message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
+        AllStudentAttemptedMCQLabChallengesOfthisStudandThisLab: document,
+      });
+    });
   }
 );
-
-
-
-
-
-
 
 router.post(
   "/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab/",
@@ -181,15 +150,13 @@ router.post(
     StudentAttemptedLabTask.find({
       StudentzUsername: req.body.StudentzUsername,
       LabJoinCode: req.body.LabJoinCode,
-    })
-      .then((document) => {
-        console.log("999999999docz", document);
-        res.status(200).json({
-          message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
-          AllStudentAttemptedLabTasksOfthisStudandThisLab: document,
-        });
-      })
-
+    }).then((document) => {
+      console.log("999999999docz", document);
+      res.status(200).json({
+        message: " 001 USER HAS BEEN, RETRIEVED FOR SIGNIN",
+        AllStudentAttemptedLabTasksOfthisStudandThisLab: document,
+      });
+    });
   }
 );
 
@@ -230,13 +197,13 @@ router.put(
       GainedXPs: req.body.GainedXPs,
       ChallengeAttempted: req.body.ChallengeAttempted,
       ChallengeChecked: req.body.ChallengeChecked,
-      ChallengeFailedDueToTimeShortage: req.body.ChallengeFailedDueToTimeShortage,
+      ChallengeFailedDueToTimeShortage:
+        req.body.ChallengeFailedDueToTimeShortage,
       ChallengeCheated: req.body.ChallengeCheated,
 
       ChallengeXPs: req.body.ChallengeXPs,
       ChallengeSolutionByTeacher: req.body.ChallengeSolutionByTeacher,
-      ChallengeMatchPercentage: req.body.ChallengeMatchPercentage
-
+      ChallengeMatchPercentage: req.body.ChallengeMatchPercentage,
     });
 
     StudentAttemptedLabChallenge.updateOne(
@@ -264,25 +231,25 @@ router.put(
 
 router.post("/createThisStudentAttemptedLabChallenge", (req, res, next) => {
   const studentAttemptedLabChallenge = new StudentAttemptedLabChallenge({
-      LabJoinCode: req.body.LabJoinCode, //foreign key
-      AttemptedLabChallenge_id: req.body.AttemptedLabChallenge_id,
-      StudentzUsername: req.body.StudentzUsername, //foreign key
-      LabChallengeQuestionType: req.body.LabChallengeQuestionType,
-      LabChallengeQuestion: req.body.LabChallengeQuestion,
-      LabChallengeAnswerOptionA: req.body.LabChallengeAnswerOptionA,
-      LabChallengeAnswerOptionB: req.body.LabChallengeAnswerOptionB,
-      LabChallengeAnswerOptionC: req.body.LabChallengeAnswerOptionC,
-      LabChallengeAnswerOptionD: req.body.LabChallengeAnswerOptionD,
-      GainedXPs: req.body.GainedXPs,
-      ChallengeAttempted: req.body.ChallengeAttempted,
-      ChallengeChecked: req.body.ChallengeChecked,
-      ChallengeFailedDueToTimeShortage: req.body.ChallengeFailedDueToTimeShortage,
-      ChallengeCheated: req.body.ChallengeCheated,
+    LabJoinCode: req.body.LabJoinCode, //foreign key
+    AttemptedLabChallenge_id: req.body.AttemptedLabChallenge_id,
+    StudentzUsername: req.body.StudentzUsername, //foreign key
+    LabChallengeQuestionType: req.body.LabChallengeQuestionType,
+    LabChallengeQuestion: req.body.LabChallengeQuestion,
+    LabChallengeAnswerOptionA: req.body.LabChallengeAnswerOptionA,
+    LabChallengeAnswerOptionB: req.body.LabChallengeAnswerOptionB,
+    LabChallengeAnswerOptionC: req.body.LabChallengeAnswerOptionC,
+    LabChallengeAnswerOptionD: req.body.LabChallengeAnswerOptionD,
+    GainedXPs: req.body.GainedXPs,
+    ChallengeAttempted: req.body.ChallengeAttempted,
+    ChallengeChecked: req.body.ChallengeChecked,
+    ChallengeFailedDueToTimeShortage: req.body.ChallengeFailedDueToTimeShortage,
+    ChallengeCheated: req.body.ChallengeCheated,
 
-      ChallengeXPs: req.body.ChallengeXPs,
-      ChallengeSolutionByTeacher: req.body.ChallengeSolutionByTeacher,
-      ChallengeMatchPercentage: req.body.ChallengeMatchPercentage
-    });
+    ChallengeXPs: req.body.ChallengeXPs,
+    ChallengeSolutionByTeacher: req.body.ChallengeSolutionByTeacher,
+    ChallengeMatchPercentage: req.body.ChallengeMatchPercentage,
+  });
 
   studentAttemptedLabChallenge
     .save()
@@ -384,6 +351,9 @@ router.post("/createFreshStudentLabDataRecord", (req, res, next) => {
     StudentzFN: req.body.StudentzFN,
     StudentzLN: req.body.StudentzLN,
     LevelUpdateViewed: req.body.LevelUpdateViewed, // if false, then show a level updated Modal and then update it to false.
+
+    AppreciateUpdateViewed: req.body.AppreciateUpdateViewed,
+    WarnUpdateViewed: req.body.WarnUpdateViewed,
     Promoted: req.body.Promoted,
     Demoted: req.body.Demoted,
     RivalStudents: req.body.RivalStudents,
@@ -440,6 +410,8 @@ router.put(
       StudentzFN: req.body.StudentzFN,
       StudentzLN: req.body.StudentzLN,
       LevelUpdateViewed: req.body.LevelUpdateViewed, // if false, then show a level updated Modal and then update it to false.
+      WarnUpdateViewed: req.body.WarnUpdateViewed,
+      AppreciateUpdateViewed: req.body.AppreciateUpdateViewed,
       Demoted: req.body.Demoted, // if false, then show a level updated Modal and then update it to false.
       Promoted: req.body.Promoted,
       RivalStudents: req.body.RivalStudents,
@@ -576,12 +548,6 @@ router.post("/fetchThisRivalzActivitiesHistory", (req, res, next) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
 // router.get("/ResetCompleteStudentAttemptedLabChallengesCollection/", (req, res, next) => {
 //   StudentAttemptedLabChallenge.deleteMany().then((result) => {
 //     res.status(200).json({
@@ -590,10 +556,6 @@ router.post("/fetchThisRivalzActivitiesHistory", (req, res, next) => {
 //     });
 //   });
 // });
-
-
-
-
 
 router.get("/ResetEntrireDatabase/", (req, res, next) => {
   StudLabDataAndStats.deleteMany().then((result) => {

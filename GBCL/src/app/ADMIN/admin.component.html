@@ -138,6 +138,89 @@
     <div class="col-12 col-sm-9 col-lg-10 p-1">
 
 
+      <div id="accordionOuter3">
+        <div class="card  mt-2 mx-3">
+          <div class="card-header" id="headingOne3">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" data-target="#collapseOne3"
+                aria-expanded="true" aria-controls="collapseOne3">
+                <h4><b>OVERALL DATA</b></h4>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseOne3" class="collapse show" aria-labelledby="headingOne3" data-parent="#accordionOuter3">
+            <div class="card-body m-auto">
+
+
+
+              <div class="row m-auto">
+                <div class="col-12 ">
+                  <h5 class="text-center text-dark alert alert-info w-100">These are the overall statistics of GBCL</h5>
+
+
+
+
+                </div>
+
+              </div>
+
+              <div class="row m-auto">
+                <div class="col-6 m-auto">
+                 <pre> Total Universities Count:  {{OVERALL_STATS.UniversitiesCount}} </pre>
+                </div>
+                <div class="col-6 m-auto">
+                  <pre>Faculty Count:  {{OVERALL_STATS.FacultyCount}}</pre>
+                </div>
+                <div class="col-6 m-auto">
+                  <pre>  Students Count:  {{OVERALL_STATS.StudentsCount}}</pre>
+                </div>
+                <div class="col-6 m-auto">
+                  <pre>  Labs Count:  {{OVERALL_STATS.Labsount}}</pre>
+                </div>
+                <div class="col-6 m-auto">
+                 <pre> Allowed Universities Count:  {{OVERALL_STATS.AllowedUniversitiesCount}} </pre>
+                </div>
+                <div class="col-6 m-auto">
+                 <pre> Rejected Universities Count:  {{OVERALL_STATS.RejectedUniversitiesCount}} </pre>
+                </div>
+                <div class="col-6 m-auto">
+                 <pre> Terminated Universities Count:  {{OVERALL_STATS.TerminatedUniversitiesCount}} </pre>
+                </div>
+                <div class="col-6 m-auto">
+                 <pre> Pending Universities Count:  {{OVERALL_STATS.PendingUniversitiesCount}} </pre>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div id="accordionOuter">
         <div class="card  mt-2 mx-3">
           <div class="card-header" id="headingOne">
@@ -148,7 +231,7 @@
               </button>
             </h5>
           </div>
-          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOuter">
+          <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
             <div class="card-body">
 
 

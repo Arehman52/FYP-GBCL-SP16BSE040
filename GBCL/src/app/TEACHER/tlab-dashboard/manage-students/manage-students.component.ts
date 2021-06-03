@@ -69,6 +69,7 @@ export class ManageStudentsComponent implements OnInit {
         } else {
 
           STUDz_FETCHED_STATS_FROM_Db[0].Warned = true;
+          STUDz_FETCHED_STATS_FROM_Db[0].WarnUpdateViewed = false;
           STUDz_FETCHED_STATS_FROM_Db[0].currentXPs -= 50;
           if (STUDz_FETCHED_STATS_FROM_Db[0].currentXPs < 0) {
             STUDz_FETCHED_STATS_FROM_Db[0].currentXPs = 0;
@@ -110,6 +111,7 @@ export class ManageStudentsComponent implements OnInit {
 
           this.Errors.StudentAppreciated.status = true;
           STUDz_FETCHED_STATS_FROM_Db[0].Appreciated = true;
+          STUDz_FETCHED_STATS_FROM_Db[0].AppreciateUpdateViewed = false;
           STUDz_FETCHED_STATS_FROM_Db[0].currentXPs += 50;
           this.studentLabDataService.updateCurrentStatsOfThisStudent(STUDz_FETCHED_STATS_FROM_Db[0]
             , StudentzUsernameAndLabID);
@@ -223,6 +225,7 @@ export class ManageStudentsComponent implements OnInit {
       StudentzLabJoinRequest.LabJoinCodesOfAppliedLabs = [...newLabJoinCodesOfAppliedLabs];
       StudentzLabJoinRequest.LabJoinCodesOfJoinedLabs.push(this.LabID);
       let studLabDataAndStatsFreshRecord: StudLabDataAndStatsmodel = {
+        AppreciateUpdateViewed:true, WarnUpdateViewed:true,
         _id: '', Appreciated: false, LabJoinCode: this.LabID, LevelUpdateViewed: false, RivalStudents: [],StudentzLabAccessStatus: 'Allowed', StudentzUsername: StudentzLabJoinRequest.Username, StudentzFN: StudentzLabJoinRequest.FirstNameOfUser, StudentzLN: StudentzLabJoinRequest.LastNameOfUser, Warned: false, Demoted: false, Promoted: true,
         currentBadge: 'Beginner I', currentCPPs: 0, currentLevel: 1, currentXPs: 0
       };

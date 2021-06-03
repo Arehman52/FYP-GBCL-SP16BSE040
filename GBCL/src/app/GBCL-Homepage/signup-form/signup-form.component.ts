@@ -69,16 +69,18 @@ export class SignupFormComponent implements OnInit {
 
 
 
-    if(this.user.UserType == 'university'){
+    if (this.user.UserType == 'university') {
 
       if (
         form.value.UniversitysEnteredName == '' ||
         form.value.UsernameOfUniversity == '' ||
         form.value.PasswordOfUniversity == '' ||
         form.value.HECIDOfUniversity == ''
-      ){alert("Youniversity need to fill all the fields first!!!");
-      return;}else{this.Errors.emptyField.status = false};
-    }else{
+      ) {
+        alert("Youniversity need to fill all the fields first!!!");
+        return;
+      } else { this.Errors.emptyField.status = false };
+    } else {
 
 
       if (
@@ -87,8 +89,10 @@ export class SignupFormComponent implements OnInit {
         form.value.UsersEnteredPassword == '' ||
         form.value.UsersEnteredRegistrationNumber == '' ||
         form.value.UsersEnteredUsername == ''
-      ){alert("Student ot Teacher need to fill all the fields first!!!");
-      return;}else{this.Errors.emptyField.status = false};
+      ) {
+        alert("Student ot Teacher need to fill all the fields first!!!");
+        return;
+      } else { this.Errors.emptyField.status = false };
     }
 
 
@@ -108,7 +112,9 @@ export class SignupFormComponent implements OnInit {
       this.Errors.formHasErrors.status = false;
       this.Errors.StuTchformSubmittedSuccessfuly.status = true;
       this.Errors.UniformSubmittedSuccessfuly.status = true;
-      setTimeout(() => { form.resetForm() }, 200);
+      setTimeout(() => {
+        window.location.reload();
+        form.resetForm() }, 1200);
     }
   }
 
@@ -153,6 +159,10 @@ export class SignupFormComponent implements OnInit {
   };
 
   Errors = {
+    spacesNotAllowed: {
+      status: true,
+      message: 'Spaces are not allowed in Username.',
+    },
     emptyField: {
       status: true,
       message: 'This title is taken, Type a different one.',
@@ -258,16 +268,16 @@ export class SignupFormComponent implements OnInit {
     }
   }
 
-  NotListed:boolean = false;
+  NotListed: boolean = false;
   onUniversitiesSelectChange(optUni: HTMLSelectElement) {
     // Not Listed!
     // console.log('optUni.value : ' + optUni.value);
     if (optUni.value === 'Not Listed!' || optUni.value === 'Selectone') {
       this.anyUniversitySelected = false;
 
-      if(optUni.value === 'Not Listed!'){
+      if (optUni.value === 'Not Listed!') {
         this.NotListed = true;
-      }else{
+      } else {
         this.NotListed = false;
 
       }
@@ -342,6 +352,12 @@ export class SignupFormComponent implements OnInit {
       : (this.Errors.invalidPassword.status = false);
   }
   checkUsernameOfUniversity() {
+    // UN != UN.replace(/ /g, '')
+    let UN = this.SignupForm.value.UsernameOfUniversity;
+    UN != UN.replace(/ /g, '')
+      ? (this.Errors.spacesNotAllowed.status = true)
+      : (this.Errors.spacesNotAllowed.status = false);
+    // checks uniqienes
     this.SignupForm.value.UsernameOfUniversity.length < 5
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
@@ -394,7 +410,12 @@ export class SignupFormComponent implements OnInit {
       : (this.Errors.invalidPassword.status = false);
   }
   checkUsernameOfUser() {
-    //
+
+    let UN = this.SignupForm.value.UsersEnteredUsername;
+    UN != UN.replace(/ /g, '')
+      ? (this.Errors.spacesNotAllowed.status = true)
+      : (this.Errors.spacesNotAllowed.status = false);
+
     this.SignupForm.value.UsersEnteredUsername.length < 5
       ? (this.Errors.invalidUsername.status = true)
       : (this.Errors.invalidUsername.status = false);
@@ -441,7 +462,7 @@ export class SignupFormComponent implements OnInit {
     // console.log(this.user);
   }
 
-  setAllErrorsToFalse(){
+  setAllErrorsToFalse() {
     this.Errors.formHasErrors.status = false;
     this.Errors.StuTchformSubmittedSuccessfuly.status = false;
     this.Errors.UniformSubmittedSuccessfuly.status = false;
@@ -454,7 +475,7 @@ export class SignupFormComponent implements OnInit {
     this.Errors.invalidUsername.status = false;
     this.Errors.uniTitleNotUnique.status = false;
     this.Errors.usernameNotUnique.status = false;
-    }
+  }
 
 
   setAsllErrorsToTrueForUser(user: string) {
@@ -506,6 +527,7 @@ export class SignupFormComponent implements OnInit {
 
       if (
         this.Errors.emptyField.status ||
+        this.Errors.spacesNotAllowed.status ||
         this.Errors.invalidFName.status ||
         this.Errors.invalidLName.status ||
         this.Errors.invalidPassword.status ||
@@ -522,6 +544,7 @@ export class SignupFormComponent implements OnInit {
         this.Errors.invalidHECID.status ||
         this.Errors.invalidNameOfTheUNIVERSITY.status ||
         this.Errors.invalidPassword.status ||
+        this.Errors.spacesNotAllowed.status ||
         this.Errors.invalidUsername.status ||
         this.Errors.usernameNotUnique.status
       )
@@ -541,6 +564,7 @@ export class SignupFormComponent implements OnInit {
     this.Errors.invalidLName.status = false;
     this.Errors.invalidPassword.status = false;
     this.Errors.invalidUsername.status = false;
+    this.Errors.spacesNotAllowed.status = false;
     this.Errors.invalidRegistrationNumber.status = false;
     this.Errors.invalidHECID.status = false;
     this.Errors.usernameNotUnique.status = false;

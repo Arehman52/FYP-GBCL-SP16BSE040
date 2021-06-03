@@ -13,6 +13,16 @@ import { StudentAttemptedLabChallengemodel } from '../MODELS/Student-Frontend-Mo
 export class LabsService {
   constructor(private http: HttpClient) { }
 
+  getAllLabs(): Labsmodel[] {
+    let allLabs: Labsmodel[] = [];
+    this.http.get<{ message: string; allLabs: Labsmodel[] }>('http://localhost:3000/api/Labs/getAllLabs')
+    .subscribe((responseData)=>{
+      for (let i = 0; i < Object.keys(responseData.allLabs).length; i++) {
+        allLabs.push(responseData.allLabs[i]);
+      }
+    });
+    return allLabs;
+    }
 
 
   getAllLabsOfThisUniversity(obj:{UniversityNameOfLab:string}): Labsmodel[] {

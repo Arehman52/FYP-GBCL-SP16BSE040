@@ -35,6 +35,7 @@ export class SlabDashboardComponent implements OnInit {
 
 
         if (this.CurrentStatsOfThisStudent[0].currentXPs == 0 && this.CurrentStatsOfThisStudent[0].Demoted == false) {
+          this.playHurrahAudio();
           this.displayThisMessageInModal("Welcome!! to the lab", "Your current badge is : " + this.CURRENT_BADGE);
         }
         if (this.CurrentStatsOfThisStudent[0].currentXPs < 60 && this.CurrentStatsOfThisStudent[0].Demoted) {
@@ -43,6 +44,7 @@ export class SlabDashboardComponent implements OnInit {
 
 
         if (this.CurrentStatsOfThisStudent[0].Promoted && this.CurrentStatsOfThisStudent[0].LevelUpdateViewed == false) {
+          this.playHurrahAudio();
           this.displayThisMessageInModal("Hurrah!! You were Promoted.", "YOUR NEW BADGE IS : " + this.CURRENT_BADGE);
         }
 
@@ -52,6 +54,7 @@ export class SlabDashboardComponent implements OnInit {
 
 
         if (this.CurrentStatsOfThisStudent[0].Appreciated) {
+          this.playHurrahAudio();
           this.displayThisMessageInModal("GOOD NEWS!!...", "You were Appreciated by the teacher, 50 XPs are given as a bonus.");
         }
 
@@ -110,6 +113,12 @@ export class SlabDashboardComponent implements OnInit {
   }
 
 
+  playHurrahAudio(){
+    let audio = new Audio();
+    audio.src = "../assets/sounds/hurrah.wav";
+    audio.load();
+    audio.play();
+  }
 
   displayThisMessageInModal(MODAL_HEADING: string, MODAL_MESSAGE: string) {
     this.MODAL_HEADING = MODAL_HEADING;

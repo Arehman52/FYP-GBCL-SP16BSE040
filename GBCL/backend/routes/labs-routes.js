@@ -166,6 +166,18 @@ router.get("/GetAllLabTasksFromDB", (req, res, next) => {
 
 
 // getAllLabsOfThisUniversity
+router.get("/getAllLabs", (req, res, next) => {
+  Labs.find().then((documents) => {
+    res.status(200).json({
+      message: "These are all labs.",
+      allLabs: documents
+    });
+  });
+});
+
+
+
+// getAllLabsOfThisUniversity
 router.post("/getAllLabsOfThisUniversity", (req, res, next) => {
   Labs.find({UniversityNameOfLab: req.body.UniversityNameOfLab}).then((documents) => {
     res.status(200).json({

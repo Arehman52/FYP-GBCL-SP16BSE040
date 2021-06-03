@@ -5,6 +5,8 @@ export interface StudLabDataAndStatsmodel {
   StudentzFN: string,
   StudentzLN: string,
   LevelUpdateViewed: boolean,
+  AppreciateUpdateViewed: boolean,
+  WarnUpdateViewed: boolean,
   // if false, then show a level updated Modal and then update it to false.
   Promoted: boolean,
   Demoted: boolean,

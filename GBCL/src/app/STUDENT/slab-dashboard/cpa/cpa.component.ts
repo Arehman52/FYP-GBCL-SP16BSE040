@@ -7,6 +7,8 @@ import { stringSimilarity } from 'node_modules/string-similarity';
 import { LabsService } from 'src/app/Services/labs.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 import { GamificationService } from 'src/app/Services/gamification.service';
+import { StudentzUsernameAndLabJoinCodemodel } from 'src/app/MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
+import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 
 @Component({
   selector: 'app-cpa',
@@ -31,8 +33,12 @@ export class CpaComponent implements OnInit {
   AllStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] = [];
   attemptedLabTasks: LabTasksmodel[] = [];
   unAttemptedLabTasks: LabTasksmodel[] = [];
-
+  STUDz_FETCHED_STATS_FROM_Db: StudLabDataAndStatsmodel[];
   ngOnInit(): void {
+
+    let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername };
+    this.STUDz_FETCHED_STATS_FROM_Db = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
+
     this.showSpinner = true;
     let objLabJoinCode: { LabJoinCode: string } = { LabJoinCode: this.LabID };
     this.AllLabTasksOfThisLabFromDB = this.labsService.getAllLabTasksOfThisLabFromDB(objLabJoinCode);
@@ -204,6 +210,10 @@ export class CpaComponent implements OnInit {
 
 
       this.gamificiationService.createHistory_AttemptedLabTask(this.localStorageFullName,this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskQuestion,gainedXps,{LabJoinCode:this.LabID,
+      StudentzUsername:this.localStorageUsername});
+
+      this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs+=gainedXps;
+      this.studentLabDataService.updateCurrentStatsOfThisStudent(this.STUDz_FETCHED_STATS_FROM_Db[0],{LabJoinCode:this.LabID,
       StudentzUsername:this.localStorageUsername});
 
 
