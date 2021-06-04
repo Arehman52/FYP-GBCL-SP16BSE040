@@ -165,7 +165,7 @@ export class EvaluateStudentsComponent implements OnInit {
         student.Username);
 
     setTimeout(() => {
-      console.log('this.FetchedAllAttemptedMCQsLabChallengesByStud ', this.FetchedAllAttemptedMCQsLabChallengesByStud);
+      console.log('this.FetchedAllAttemptedMCQsLabChallengesByStud ', this.FetchedAllAttemptedMCQsLabChallengesByStud[0]);
     }, 1500);
 
 

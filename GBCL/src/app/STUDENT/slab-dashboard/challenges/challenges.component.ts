@@ -452,6 +452,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     if (this.unAttemptedChallenges[this.i].ChallengeQuestionType == 'MCQ') {
       if (this.SELECTED_RADIO_VALUE == this.unAttemptedChallenges[this.i].ChallengeCorrectOption) {
 
+        this.playHurrahAudio();
         // alert("YOU CHOSE CORRECT OPTION");
         this.Errors.ChallengePassed.status = true;
         this.XPplusplusOrminusminus = "XPs++"
@@ -472,6 +473,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
       }
       else {
+        this.playGroansAudio();
         // alert("YOU CHOSE inCORRECT OPTION");
         this.XPplusplusOrminusminus = " XPs--"
         this.Errors.ChallengeFailed.status = true;
@@ -537,6 +539,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       // this.reInitiallizeCurrentStats();
       if (this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs >= 60 && this.STUDz_FETCHED_STATS_FROM_Db[0].Demoted) {
+        this.playGroansAudio();
         this.displayThisMessageInModal("You were Demoted, Alas!", "Better Luck next time, Badge Assigned = " + this.CURRENT_BADGE);
       }
 
@@ -625,6 +628,15 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
 
 
+
+
+
+  playGroansAudio(){
+    let audiog = new Audio();
+    audiog.src = "../assets/sounds/g.wav";
+    audiog.load();
+    audiog.play();
+  }
 
 
 

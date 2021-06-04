@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LabTasksmodel } from 'src/app/MODELS/Lab-Frontend-Models/labTasksmodel.model';
 import { StudentAttemptedLabTaskmodel } from 'src/app/MODELS/Student-Frontend-Models/StudentAttemptedLabTaskmodel.model';
-import { stringSimilarity } from 'node_modules/string-similarity';
-// import { LabUtilitiesService } from 'src/app/Services/lab-utilities.service';
 import { LabsService } from 'src/app/Services/labs.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 import { GamificationService } from 'src/app/Services/gamification.service';
@@ -53,6 +51,22 @@ export class CpaComponent implements OnInit {
       console.log("this.AllLabTasksOfThisLabFromDB : ",this.AllLabTasksOfThisLabFromDB);
       console.log("this.AllStudentAttemptedLabTasksOfthisStudandThisLab : ",this.AllStudentAttemptedLabTasksOfthisStudandThisLab);
     }, 1200);
+  }
+
+
+
+
+  playHurrahAudio(){
+    let audio = new Audio();
+    audio.src = "../assets/sounds/hurrah.wav";
+    audio.load();
+    audio.play();
+  }
+  playGroansAudio(){
+    let audio = new Audio();
+    audio.src = "../assets/sounds/g.wav";
+    audio.load();
+    audio.play();
   }
 
 
@@ -206,7 +220,12 @@ export class CpaComponent implements OnInit {
       this.showSpinner = false;
       let labtaskXPs:number = this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskXPs;
       let gainedXps:number = parseInt(labtaskXPs * result[0].LabTaskMatchPercentage+'',10);
-      this.displayThisMessageInModal("Task attempted","You gained "+gainedXps+" XPs for this lab task.");
+      if(gainedXps/labtaskXPs >0.5){
+        this.playHurrahAudio();
+      }else{
+        this.playGroansAudio();
+      }
+      this.displayThisMessageInModal("Task attempted","You gained "+gainedXps+" out of "+labtaskXPs+" XPs for this lab task.");
 
 
       this.gamificiationService.createHistory_AttemptedLabTask(this.localStorageFullName,this.CURRRENT_TASK_BEING_ATTEMPTED.LabTaskQuestion,gainedXps,{LabJoinCode:this.LabID,

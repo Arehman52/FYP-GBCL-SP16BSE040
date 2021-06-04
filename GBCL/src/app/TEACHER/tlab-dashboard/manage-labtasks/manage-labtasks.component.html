@@ -71,7 +71,7 @@
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
-                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
 
                 <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit
@@ -119,7 +119,7 @@
           <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Evaluate Students</a>
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
         </li>
         <li class="nav-item text-left">
           <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
@@ -291,7 +291,7 @@
             <h5 class="mb-0">
               <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
                 data-target="#collapseOneStd" aria-expanded="true" aria-controls="collapseOneStd">
-                <h5><b>View Tasks for this Lab <span class="text-info">**</span></b></h5>
+                <h5><b>View Tasks for this Lab <span class="text-info">** <span class="ml-3 text-muted" style="font-size: 16px;">( {{LabTasksOfThisLab.length}} )</span> </span></b></h5>
               </button>
             </h5>
           </div>
@@ -351,8 +351,8 @@
                           <div class="d-flex justify-content-end mr-3">
                             <button class="   d-none       btn btn-info w-25 maSmallerFonts my-2 mx-2"
                               (click)="ViewSolutionsByAllStudents(task)">{{ViewSolutionToggleButtonText}}</button>
-                            <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
-                              (click)="DeleteThisTask(task._id)">Delete</button>
+                            <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                              (click)="DeleteThisTask(task._id)">Delete</button> -->
                           </div>
                           <small class="form-text alert alert-success" *ngIf="this.Errors.LabTaskDeleted.status">
                             {{this.Errors.LabTaskDeleted.message}}
