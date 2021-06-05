@@ -252,6 +252,74 @@ export class CpaComponent implements OnInit {
 
 
 
+compareTwoStrings(first:string, second:string) {
+  console.log('first BEFORE:', first);
+  console.log('second BEFORE:', second);
+
+	first = first.replace(/\s+/g, '')
+	second = second.replace(/\s+/g, '')
+
+  console.log('first AFTER:', first);
+  console.log('second AFTER:', second);
+	if (first === second) return 1; // identical or empty
+  //fool
+	if (first.length < 2 || second.length < 2) return 0; // if either is a 0-letter or 1-letter string
+
+	let firstBigrams = new Map();
+	for (let i = 0; i < first.length - 1; i++) {
+    console.log("firstBigrams : ",firstBigrams);
+		const bigram = first.substring(i, i + 2);
+		const count = firstBigrams.has(bigram)
+			? firstBigrams.get(bigram) + 1
+			: 1;
+
+		firstBigrams.set(bigram, count);
+	};
+
+	let intersectionSize = 0;
+	for (let i = 0; i < second.length - 1; i++) {
+		const bigram = second.substring(i, i + 2);
+		const count = firstBigrams.has(bigram)
+			? firstBigrams.get(bigram)
+			: 0;
+
+		if (count > 0) {
+			firstBigrams.set(bigram, count - 1);
+			intersectionSize++;
+		}
+	}
+
+	return (2.0 * intersectionSize) / (first.length + second.length - 2);
+}
+
+// findBestMatch(mainString, targetStrings) {
+// 	if (!this.areArgsValid(mainString, targetStrings)) throw new Error('Bad arguments: First argument should be a string, second should be an array of strings');
+
+// 	const ratings = [];
+// 	let bestMatchIndex = 0;
+
+// 	for (let i = 0; i < targetStrings.length; i++) {
+// 		const currentTargetString = targetStrings[i];
+// 		const currentRating = this.compareTwoStrings(mainString, currentTargetString)
+// 		ratings.push({target: currentTargetString, rating: currentRating})
+// 		if (currentRating > ratings[bestMatchIndex].rating) {
+// 			bestMatchIndex = i
+// 		}
+// 	}
+
+
+// 	const bestMatch = ratings[bestMatchIndex]
+
+// 	return { ratings: ratings, bestMatch: bestMatch, bestMatchIndex: bestMatchIndex };
+// }
+
+// areArgsValid(mainString: any, targetStrings: any[]) {
+// 	if (typeof mainString !== 'string') return false;
+// 	if (!Array.isArray(targetStrings)) return false;
+// 	if (!targetStrings.length) return false;
+// 	if (targetStrings.find( function (s) { return typeof s !== 'string'})) return false;
+// 	return true;
+// }
 
 
 
@@ -327,6 +395,12 @@ export class CpaComponent implements OnInit {
     this.TaskQuestion = task.LabTaskQuestion;
     this.showEditorAndOthererWindows = true;
     this.taskTitleOfTaskBeiingCurrentlyAttempted = task.LabTaskTitle;
+
+    // let per:number = this.compareTwoStrings('for let i=0; i<length; i++','for(let i=0; i<length; i++)');
+    // alert(per);
+
+
+
   }
 
 

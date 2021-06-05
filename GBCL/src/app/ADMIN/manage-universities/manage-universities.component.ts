@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsersService } from 'src/app/Services/users.service';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-manage-universities',
@@ -10,7 +11,7 @@ import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 })
 export class ManageUniversitiesComponent implements OnInit {
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService, private http:HttpClient) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -145,7 +146,12 @@ export class ManageUniversitiesComponent implements OnInit {
   }
 
 
-
+  getHECRecognisedUnis(){
+    this.http.get("https://www.hec.gov.pk/_catalogs/masterpage/display%20templates/content%20web%20parts/hec-university/item_universities_sortable.js?ctag=4109$$15.0.5023.1000",)
+    .subscribe((ResponseData)=>{
+      console.log(ResponseData);
+    })
+  }
 
 
 

@@ -303,6 +303,14 @@ export class StudentLabDataService {
   //////////////////////////////////////////////////////StudentAttemptedLabChallenges methods below
   //////////////////////////////////////////
 
+  deleteALLStudentAttemptedLabChallengesOfThisStudent(StudentzUsernameAndLabID:StudentzUsernameAndLabJoinCodemodel) {
+    this.http.delete("http://localhost:3000/api/StudentLabData/deleteALLStudentAttemptedLabChallengesOfThisStudent/"+StudentzUsernameAndLabID ).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
+  }
+
   deleteThisStudentAttemptedLabChallenge(Id_AttemptedChallenge: string) {
     this.http.delete("http://localhost:3000/api/StudentLabData/deleteThisStudentAttemptedLabChallenge/" + Id_AttemptedChallenge).subscribe(
       response => {

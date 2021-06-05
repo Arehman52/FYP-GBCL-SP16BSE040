@@ -39,16 +39,19 @@ export class SlabDashboardComponent implements OnInit {
           this.displayThisMessageInModal("Welcome!! to the lab", "Your current badge is : " + this.CURRENT_BADGE);
         }
         if (this.CurrentStatsOfThisStudent[0].currentXPs < 60 && this.CurrentStatsOfThisStudent[0].Demoted) {
-          this.displayThisMessageInModal("Demoted to very first level", "Your current badge is : " + this.CURRENT_BADGE);
+          this.displayThisMessageInModal("Demoted to very first level", "Your current badge is : " + this.
+          CURRENT_BADGE);
+          this.playGroansAudio();
         }
 
 
-        if (this.CurrentStatsOfThisStudent[0].Promoted && this.CurrentStatsOfThisStudent[0].LevelUpdateViewed == false) {
+        if (this.CurrentStatsOfThisStudent[0].Promoted) {
           this.playHurrahAudio();
           this.displayThisMessageInModal("Hurrah!! You were Promoted.", "YOUR NEW BADGE IS : " + this.CURRENT_BADGE);
         }
 
         if (this.CurrentStatsOfThisStudent[0].Warned) {
+          this.playGroansAudio();
           this.displayThisMessageInModal("WARNING!!...", "You were warned by the teacher, 50 XPs are deducted");
         }
 
@@ -60,6 +63,7 @@ export class SlabDashboardComponent implements OnInit {
 
         if (this.CurrentStatsOfThisStudent[0].currentXPs >= 60 && this.CurrentStatsOfThisStudent[0].Demoted) {
           this.displayThisMessageInModal("You were Demoted, Alas!", "Better Luck next time, Badge Assigned = " + this.CURRENT_BADGE);
+          this.playGroansAudio();
         }
 
         // if()///////////////////////////////////////////////////////////
@@ -111,6 +115,21 @@ export class SlabDashboardComponent implements OnInit {
     if (this.showGamificationRulesToggled) { this.showGamificationRulesToggled = false; }
     else { this.showGamificationRulesToggled = true; }
   }
+
+
+
+
+
+
+
+
+  playGroansAudio() {
+    let audiog = new Audio();
+    audiog.src = "../assets/sounds/g.wav";
+    audiog.load();
+    audiog.play();
+  }
+
 
 
   playHurrahAudio(){
@@ -217,7 +236,7 @@ export class SlabDashboardComponent implements OnInit {
 
     setTimeout(() => {
       this.LabInfo = { JoinCode: this.TheLabArray[0]._id, LabTitle: this.TheLabArray[0].LabTitle, LabMembersCount: membersCount, LabInstructorFNLN: Instructor[0].FirstNameOfUser + " " + Instructor[0].LastNameOfUser };
-    }, 500);
+    }, 800);
 
 
   }

@@ -64,6 +64,6 @@ export class ViewLeaderboardComponent implements OnInit {
 
   onExitLabClicked(){
     localStorage.removeItem('LabID');
-    window.location.href="/STUDENT"
+    window.location.href="/TEACHER"
   }
 }

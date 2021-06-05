@@ -284,6 +284,23 @@ router.delete(
     );
   }
 );
+router.delete(
+  "/deleteALLStudentAttemptedLabChallengesOfThisStudent/:Id",
+  (req, res, next) => {
+    StudentAttemptedLabChallenge.delete(
+      {
+        StudentzUsername:req.body.StudentzUsername,
+        LabJoinCode: req.body.LabJoinCode
+      }).then(
+      (result) => {
+        res.status(200).json({
+          message: "deleteALLStudentAttemptedLabChallengesOfThisStudent for ::"+req.body.StudentzUsername,
+          result: result,
+        });
+      }
+    );
+  }
+);
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////

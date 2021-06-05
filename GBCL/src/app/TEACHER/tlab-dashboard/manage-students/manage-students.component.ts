@@ -159,10 +159,18 @@ export class ManageStudentsComponent implements OnInit {
             this.Errors.StudentExpelled.status = true;
             this.gamificationSercive.createHistory_wasExpelled(STUDz_FETCHED_STATS_FROM_Db[0].StudentzFN+ ' '+ STUDz_FETCHED_STATS_FROM_Db[0].StudentzLN, StudentzUsernameAndLabID);
             STUDz_FETCHED_STATS_FROM_Db[0].StudentzLabAccessStatus = "Expelled";
+            STUDz_FETCHED_STATS_FROM_Db[0].currentLevel = 1;
+            STUDz_FETCHED_STATS_FROM_Db[0].currentXPs = 0;
+            STUDz_FETCHED_STATS_FROM_Db[0].currentBadge = 'Beginner I';
+            STUDz_FETCHED_STATS_FROM_Db[0].currentCPPs = 0;
+            // STUDz_FETCHED_STATS_FROM_Db[0]. = 0;
             // STUDz_FETCHED_STATS_FROM_Db[0].Warned = true;
             // STUDz_FETCHED_STATS_FROM_Db[0].currentXPs -= 50;
             // if(STUDz_FETCHED_STATS_FROM_Db[0].currentXPs < 0){
             //   STUDz_FETCHED_STATS_FROM_Db[0].currentXPs = 0;
+            //////////////////////////////////////
+            this.studentLabDataService.deleteALLStudentAttemptedLabChallengesOfThisStudent(StudentzUsernameAndLabID);
+            //////////////////////////////////////
           }
         this.studentLabDataService.updateCurrentStatsOfThisStudent(STUDz_FETCHED_STATS_FROM_Db[0]
           , StudentzUsernameAndLabID);
@@ -177,7 +185,7 @@ export class ManageStudentsComponent implements OnInit {
 
     }
 
-    setTimeout(() => { window.location.reload() }, 3000);
+    // setTimeout(() => { window.location.reload() }, 3000);
   }
 
 
@@ -226,7 +234,7 @@ export class ManageStudentsComponent implements OnInit {
       StudentzLabJoinRequest.LabJoinCodesOfJoinedLabs.push(this.LabID);
       let studLabDataAndStatsFreshRecord: StudLabDataAndStatsmodel = {
         AppreciateUpdateViewed:true, WarnUpdateViewed:true,
-        _id: '', Appreciated: false, LabJoinCode: this.LabID, LevelUpdateViewed: false, RivalStudents: [],StudentzLabAccessStatus: 'Allowed', StudentzUsername: StudentzLabJoinRequest.Username, StudentzFN: StudentzLabJoinRequest.FirstNameOfUser, StudentzLN: StudentzLabJoinRequest.LastNameOfUser, Warned: false, Demoted: false, Promoted: true,
+        _id: '', Appreciated: false, LabJoinCode: this.LabID, LevelUpdateViewed: false, RivalStudents: [],StudentzLabAccessStatus: 'Allowed', StudentzUsername: StudentzLabJoinRequest.Username, StudentzFN: StudentzLabJoinRequest.FirstNameOfUser, StudentzLN: StudentzLabJoinRequest.LastNameOfUser, Warned: false, Demoted: false, Promoted: false,
         currentBadge: 'Beginner I', currentCPPs: 0, currentLevel: 1, currentXPs: 0
       };
 
@@ -308,6 +316,6 @@ export class ManageStudentsComponent implements OnInit {
   }
   onExitLabClicked() {
     localStorage.removeItem('LabID');
-    window.location.href = "/STUDENT"
+    window.location.href = "/TEACHER"
   }
 }

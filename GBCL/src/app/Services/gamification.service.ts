@@ -100,6 +100,7 @@ export class GamificationService {
     currentLevel = parseInt(currentLevel.toString(),10);
     let sumOfNewXPs:number = StudentzStats.currentXPs + newlyGAINED_XPs;
     // sumOfNewXPs = parseInt(sumOfNewXPs.toString(), 10);
+    if(newlyGAINED_XPs == 0) sumOfNewXPs = 0;
     let levelCaulatedOf_sumOfNewXPs = (sumOfNewXPs / 60) + 1;
     levelCaulatedOf_sumOfNewXPs  = parseInt(levelCaulatedOf_sumOfNewXPs.toString(), 10);
     console.log("currentLevel@@@@ : ",currentLevel);
@@ -111,6 +112,9 @@ export class GamificationService {
     if (levelCaulatedOf_sumOfNewXPs == currentLevel) {
       levelChangedStatus = "unchanged";
       StudentzStats.currentXPs += newlyGAINED_XPs;
+      if(newlyGAINED_XPs == 0){
+        StudentzStats.currentXPs = 0;
+      }
       StudentzStats.Promoted = false;
       StudentzStats.Demoted = false;
       StudentzStats.LevelUpdateViewed = true;
@@ -118,8 +122,14 @@ export class GamificationService {
     }
     if (levelCaulatedOf_sumOfNewXPs > currentLevel) {
       StudentzStats.LevelUpdateViewed = false;
+      StudentzStats.Promoted = true;
+      StudentzStats.Demoted = false;
+
       levelChangedStatus = "promoted";
       StudentzStats.currentXPs += newlyGAINED_XPs;
+      if(newlyGAINED_XPs == 0){
+        StudentzStats.currentXPs = 0;
+      }
       StudentzStats.currentBadge = this.getNextBadge(StudentzStats.currentXPs);
       StudentzStats.currentLevel = levelCaulatedOf_sumOfNewXPs;
       StudentzStats.Promoted = true;
