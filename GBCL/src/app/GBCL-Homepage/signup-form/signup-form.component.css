@@ -11,7 +11,13 @@
   font-size: 26px;
   font-weight: bolder;
 }
-
+/* body{
+  padding:100px 0;
+  background-color:#efefef
+} */
+a, a:hover{
+  color:#333
+}
 .errorText {
   padding: 3px 13px 3px 5px;
   border: red;

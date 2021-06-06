@@ -23,25 +23,65 @@
           <!-- //1st Element : UserType here! -->
 
 
-          <div class="row ">
-            <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-12  border rounded border-warning p-2 mb-3">
+<!--
+              <div class="form-group">
+                <span class="form-control">
+                  <input type="radio" name="userTypeRadioSelection" id="UserTypeRadioSelection">
+                  Student
+                </span>
+                <span class="form-control">
+                  <input type="radio" name="userTypeRadioSelection" id="UserTypeRadioSelection">
+                  Student
+                </span>
+                <span class="form-control">
+                  <input type="radio" name="userTypeRadioSelection" id="UserTypeRadioSelection">
+                  Student
+                </span>
 
-              <!-- //1st Element : UserType here! -->
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <label class="input-group-text">Sign up as</label>
+              </div> -->
+
+              <div class="input-group ml-2">
+                <div class="" >
+                  <label class="bg-secondary  p-2 rounded" style="width: 160px;">Sign up as a  :</label>
+
+
+
                 </div>
-                <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect>
-                  <option selected disabled>Select user type</option>
-                  <option value="student"><b>Student</b></option>
-                  <option value="teacher"><b>Teacher</b>
-                  </option>
-                  <option value="university"><b>University</b></option>
-                </select>
-              </div>
 
+        <div class="form-check-inline m-auto">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" ngModel value="student" name="userTypeRadioSelection"
+            (change)="onUsersSelectChange(UserTypeSelectS)" #UserTypeSelectS>Student
+          </label>
+        </div>
+        <div class="form-check-inline m-auto">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" ngModel value="teacher" name="userTypeRadioSelection"
+            (change)="onUsersSelectChange(UserTypeSelectT)" #UserTypeSelectT>Teacher
+          </label>
+        </div>
+        <div class="form-check-inline m-auto">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" ngModel value="university" name="userTypeRadioSelection"
+            (change)="onUsersSelectChange(UserTypeSelectU)" #UserTypeSelectU>University
+          </label>
+        </div>
+
+
+
+              <!-- <select class="custom-select"  (change)="onUsersSelectChange(UserTypeSelect)" #UserTypeSelect>
+                <option selected disabled>Select user type</option>
+                <option value="student"><b>Student</b></option>
+                <option value="teacher"><b>Teacher</b>
+                </option>
+                <option value="university"><b>University</b></option>
+              </select> -->
             </div>
+
           </div>
+        </div>
 
 
 
@@ -112,10 +152,16 @@
               <div class="col-sm-6">
                 <div class="form-group ">
                   <label>Password</label>
-                  <input type="text" placeholder="Enter a Password" class="form-control "
+                  <div class="input-group" id="show_hide_password">
+                    <input class="form-control" id="show_hide_password_input" type="password">
+                    <div class="input-group-addon">
+                      <button (click)="onEyeClick($event)" id="show_hide_password_a"><i class="py-2 rounded fa fa-eye-slash" id="show_hide_password_i" [attr.aria-hidden]="'true'"></i></button>
+                    </div>
+                  </div>
+                  <!-- <input type="text" placeholder="Enter a Password" class="form-control "
                   name="UsersEnteredPassword"
                   ngModel
-                  (keyup)="checkPasswordOfUser()">
+                  (keyup)="checkPasswordOfUser()"> -->
                   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>{{this.Errors.invalidPassword.message}}</span>
                   </small>

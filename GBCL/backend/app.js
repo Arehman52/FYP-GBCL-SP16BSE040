@@ -26,8 +26,8 @@ useUnifiedTopology: true })
 
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -50,10 +50,21 @@ app.use((req, res, next) => {
 // Db.collection.distinct
 
 
+// https://www.hec.gov.pk/_catalogs/masterpage/display%20templates/content%20web%20parts/hec-university/item_universities_sortable.js?ctag=4109$$15.0.5023.1000
+
+
+app.get("https://www.hec.gov.pk/_catalogs/masterpage/display%20templates/content%20web%20parts/hec-university/item_universities_sortable.js?ctag=4109$$15.0.5023.1000", (req, res, next) => {
+  // Labs.find().then((documents) => {
+
+  (result)=>{
+    res.status(200).json({
+        result: result
+      });
+  }
 
 
 
-
+});
 
 
 

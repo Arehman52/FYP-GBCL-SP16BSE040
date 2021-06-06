@@ -107,18 +107,55 @@ export class SignupFormComponent implements OnInit {
       this.Errors.UniformSubmittedSuccessfuly.status = false;
       return;
     } else {
+      // console.log(this.user);
       this.usersService.createUser(this.user); //<--- this method should update user to DB
 
       this.Errors.formHasErrors.status = false;
       this.Errors.StuTchformSubmittedSuccessfuly.status = true;
       this.Errors.UniformSubmittedSuccessfuly.status = true;
+      form.resetForm()
       setTimeout(() => {
         window.location.reload();
-        form.resetForm() }, 1200);
+         }, 3000);
     }
   }
 
 
+  onEyeClick(event: Event){
+
+  //   $(document).ready(function() {
+  //     $("#show_hide_password a").on('click', function(event) {
+  //         event.preventDefault();
+  //         if($('#show_hide_password input').attr("type") == "text"){
+  //             $('#show_hide_password input').attr('type', 'password');
+  //             $('#show_hide_password i').addClass( "fa-eye-slash" );
+  //             $('#show_hide_password i').removeClass( "fa-eye" );
+  //         }else if($('#show_hide_password input').attr("type") == "password"){
+  //             $('#show_hide_password input').attr('type', 'text');
+  //             $('#show_hide_password i').removeClass( "fa-eye-slash" );
+  //             $('#show_hide_password i').addClass( "fa-eye" );
+  //         }
+  //     });
+  // });////////////////////////////////////////////////////////////////////////
+      // let eyeBtna = document.getElementById('show_hide_password_a');
+      let eyeBtninp:HTMLElement = document.getElementById('show_hide_password_input');
+      let eyeBtni:HTMLElement = document.getElementById('show_hide_password_i');
+      // $("#show_hide_password a").on('click',
+      // function(event) {
+          event.preventDefault();
+          if(eyeBtninp.getAttribute("type") == "text"){
+            eyeBtninp.setAttribute('type', 'password');
+              eyeBtni.className =  "py-2 rounded fa fa-eye-slash";
+              // eyeBtni.class removeClass( "fa-eye" );
+          }else if(eyeBtninp.getAttribute("type") == "password"){
+            eyeBtninp.setAttribute('type', 'text');
+              // $('#show_hide_password i').removeClass( "fa-eye-slash" );
+              eyeBtni.className = "py-2 roundede fa fa-eye";
+          }
+      // });
+  // });
+
+  }
 
 
 
@@ -240,7 +277,8 @@ export class SignupFormComponent implements OnInit {
   //==================
 
   //following method is called when usertype selection is changed,
-  onUsersSelectChange(opt: HTMLSelectElement) {
+  onUsersSelectChange(opt: HTMLInputElement) {
+    console.log(opt.value);
     this.setALLErrorsToFalse();
     if (opt.value == 'teacher') {
       this.user.UserType = 'teacher';
@@ -267,6 +305,33 @@ export class SignupFormComponent implements OnInit {
       alert('something fishy');
     }
   }
+  // onUsersSelectChange(opt: HTMLSelectElement) {
+  //   this.setALLErrorsToFalse();
+  //   if (opt.value == 'teacher') {
+  //     this.user.UserType = 'teacher';
+  //     this.setAllFieldsToNull();
+  //     // this.setAllErrorsToTrueForUser('non-uni');
+  //     // console.log(this.user.UserType);
+  //     // console.log(this.user);
+  //     // console.log(this.user);
+  //   } else if (opt.value == 'student') {
+  //     this.user.UserType = 'student';
+  //     this.setAllFieldsToNull();
+  //     // this.setAllErrorsToTrueForUser('non-uni');
+  //     // console.log(this.user.UserType);
+  //     // console.log(this.user);
+  //     // console.log(this.user);
+  //   } else if (opt.value == 'university') {
+  //     this.user.UserType = 'university';
+  //     this.setAllFieldsToNull();
+  //     // this.setAllErrorsToTrueForUser('uni');
+  //     // console.log(this.user.UserType);
+  //     // console.log(this.user);
+  //     // console.log(this.user);
+  //   } else {
+  //     alert('something fishy');
+  //   }
+  // }
 
   NotListed: boolean = false;
   onUniversitiesSelectChange(optUni: HTMLSelectElement) {
