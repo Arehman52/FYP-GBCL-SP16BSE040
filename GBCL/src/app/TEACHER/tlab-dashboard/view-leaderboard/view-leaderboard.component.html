@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 <div class="container-fluid">
 
 
@@ -35,8 +27,9 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn  border-warning w-100 logoText"   routerLink="/TEACHER/Lab" title="Gamification Based Coding Labs"><img
-              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+          <a class="btn  border-warning w-100 logoText" routerLink="/TEACHER/Lab"
+            title="Gamification Based Coding Labs"><img src="../../assets/images/logo.png" alt="logo"
+              id="logoImg"><b>GBCL</b></a>
         </div>
 
         <!-- GBCL LOGO COLUMN-END -->
@@ -51,7 +44,9 @@
         <!-- Stats column -->
         <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover ">
           <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span class="mx-2"><h3>Leaderboard</h3></span></div>
+            <div class="col"><span class="mx-2">
+                <h3>Leaderboard</h3>
+              </span></div>
           </div>
         </div>
         <!-- STATS COL END -->
@@ -67,22 +62,25 @@
             <div class="col-12 btn-group">
               <!-- Example single danger button -->
 
-  <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{localStorageUsername}}
-  </button>
-  <div class="dropdown-menu bg-warning" >
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
-    <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-    <button type="button" class="btn btn-outline-danger w-100" (click)="onExitLabClicked()">Exit Lab</button>
+              <button type="button" class="btn btn-warning mt-4 maSmallerFonts dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                {{localStorageUsername}}
+              </button>
+              <div class="dropdown-menu bg-warning">
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/AllLabs'">Lab Course</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Create Lab Tasks</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
+                <button type="button" class="btn btn-outline-danger w-100" (click)="onExitLabClicked()">Exit
+                  Lab</button>
 
-    <div class="dropdown-divider"></div>
-    <button type="button" class="btn btn-outline-danger w-100" (click)="onLogout()">Logout</button>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="btn btn-outline-danger w-100" (click)="onLogout()">Logout</button>
 
-  </div>
+              </div>
 
             </div>
 
@@ -95,7 +93,8 @@
 
     </div>
     <hr class="bg-warning p-0 m-0">
-  </div> <!--1st row ends-->
+  </div>
+  <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
   <!-- TOP ROW ENDS-->
   <!-- ----------------------------------------------------------------------------------------->
@@ -103,51 +102,57 @@
 
 
 
-<div class="row">  <!--2nd row starts-->
-  <div class="col-12 col-sm-3 col-lg-2  p-1 maNav-bg-color minHeight838">
-    <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/TEACHER/Lab'" >Lab Dashboard</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link active" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-      </li>
+  <div class="row">
+    <!--2nd row starts-->
+    <div class="col-12 col-sm-3 col-lg-2  p-1 maNav-bg-color minHeight838">
+      <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/TEACHER/Lab'" >Lab Dashboard</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/AllLabs'">View Course Labs</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Labtasks'">Create Lab Tasks</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link active" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
+        </li>
 
-    </ul>
+      </ul>
 
-  </div>
-  <div class="col-12 col-sm-9 col-lg-10 p-0">
+    </div>
+    <div class="col-12 col-sm-9 col-lg-10 p-0">
 
 
-    <h4 class="text-warning text-center p-3 m-1 mt-4 border rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4>
-  <!-- below div represents : 1 student only. -->
-  <div class="border rounded p-3 m-3 bg-dark font-weight-bold" *ngFor="let lead of leaderboard"
-[style]="'color:#'+lead?.color">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Rank: {{lead?.rank}}</span>
-      =>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{lead?.name}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>XPs: {{lead?.XPs}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Level: {{lead?.level}}</span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Badge: {{lead?.badge}}</span>
+      <h4 class="text-warning text-center p-3 m-1 mt-4 border rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4>
+      <!-- below div represents : 1 student only. -->
+      <div class="border rounded p-3 m-3 bg-dark font-weight-bold" *ngFor="let lead of leaderboard"
+        [style]="'color:#'+lead?.color">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Rank: {{lead?.rank}}</span>
+        =>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{lead?.name}}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>XPs: {{lead?.XPs}}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Level: {{lead?.level}}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Badge: {{lead?.badge}}</span>
+      </div>
+
+
     </div>
 
 
+
   </div>
-
-
-
-</div> <!--2nd row ends-->
+  <!--2nd row ends-->
 
 
 

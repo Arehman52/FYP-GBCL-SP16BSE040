@@ -5,6 +5,7 @@ import { StudentzUsernameAndLabJoinCodemodel } from 'src/app/MODELS/Student-Fron
 import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 import { GamificationService } from 'src/app/Services/gamification.service';
+import { LabsService } from 'src/app/Services/labs.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 import { UsersService } from 'src/app/Services/users.service';
 
@@ -15,7 +16,7 @@ import { UsersService } from 'src/app/Services/users.service';
 })
 export class ManageStudentsComponent implements OnInit {
 
-  constructor(private gamificationSercive: GamificationService, private studentLabDataService: StudentLabDataService, private usersService: UsersService) { }
+  constructor(private gamificationSercive: GamificationService, private studentLabDataService: StudentLabDataService, private usersService: UsersService, private labsService:LabsService) { }
 
   ngOnInit(): void {
     this.setAllErrorsToFalse();
@@ -187,6 +188,25 @@ export class ManageStudentsComponent implements OnInit {
 
     // setTimeout(() => { window.location.reload() }, 3000);
   }
+
+  ResetAllChallenegezAttemptedByArraysOfALLLstudzOfThisLab(){
+    let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: null };
+    this.labsService.ResetAllChallenegezAttemptedByArraysOfALLLstudzOfThisLab(StudentzUsernameAndLabID);
+  }
+  ResetAllLabTaskzAttemptedByArraysOfALLLstudzOfThisLab(){
+    let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: null };
+    this.labsService.ResetAllLabTaskzAttemptedByArraysOfALLLstudzOfThisLab(StudentzUsernameAndLabID);
+  }
+  ResetStatsOfALLLstudzOfThisLab(){
+    let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: null };
+    this.studentLabDataService.RESET_CurrentStatsOfThisLabzALLStudents(StudentzUsernameAndLabID);
+  }
+  RESET_DeleteEntireStudentActivityHistory(){
+    this.studentLabDataService.RESET_DeleteEntireStudentActivityHistory();
+  }
+
+
+
 
 
   viewingStatsOfThisStudent: StudLabDataAndStatsmodel[] = [];

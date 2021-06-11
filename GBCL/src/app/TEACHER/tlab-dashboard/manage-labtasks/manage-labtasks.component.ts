@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { LabNumbersModel } from 'src/app/MODELS/Lab-Frontend-Models/LabNumbersmodel.model';
 import { LabTasksmodel } from 'src/app/MODELS/Lab-Frontend-Models/labTasksmodel.model';
 import { StudentAttemptedLabTaskmodel } from 'src/app/MODELS/Student-Frontend-Models/StudentAttemptedLabTaskmodel.model';
 import { LabsService } from 'src/app/Services/labs.service';
@@ -12,109 +13,104 @@ import { StudentLabDataService } from 'src/app/Services/student-lab-data.service
 })
 export class ManageLabtasksComponent implements OnInit {
 
-  constructor(private labsService: LabsService,private studentLabDataService: StudentLabDataService) { }
+  constructor(private labsService: LabsService, private studentLabDataService: StudentLabDataService) { }
 
   ngOnInit(): void {
+
     this.LabID = localStorage.getItem('LabID');
     this.setAllErrorsToFalse();
-    this.AllLabTasks = this.labsService.GetAllLabTasksFromDB();
+    this.TheLabNumbers = this.labsService.fetchLabNumbersOfThisLab(this.LabID);
 
-
-    setTimeout(() => {
-      this.extractLabTasksOfThisLab();
-    }, 2500);
   }
 
 
 
 
-  ViewThisStudentSolutionToggled: boolean = false;
-  ViewSolutionsToggled: boolean = false;
-  ViewSolutionToggleButtonText = 'View Students Solutions';
-  CURRENTLY_VIEWING_SOLUTIONS: StudentAttemptedLabTaskmodel[] = [];
+  TheLabNumbers: LabNumbersModel[] = [];
+  // ViewThisStudentSolutionToggled: boolean = false;
+  // ViewSolutionsToggled: boolean = false;
+  // ViewSolutionToggleButtonText = 'View Students Solutions';
+  // CURRENTLY_VIEWING_SOLUTIONS: StudentAttemptedLabTaskmodel[] = [];
 
-  SetViewViewSolutionToggledFalse(){
-    if (this.ViewSolutionsToggled) {
-      this.ViewSolutionsToggled = false;
-      this.ViewSolutionToggleButtonText = 'View Students Solutions';
-    }
-  }
+  // SetViewViewSolutionToggledFalse() {
+  //   if (this.ViewSolutionsToggled) {
+  //     this.ViewSolutionsToggled = false;
+  //     this.ViewSolutionToggleButtonText = 'View Students Solutions';
+  //   }
+  // }
 
-  iskaSolution:StudentAttemptedLabTaskmodel;
-  ViewThisStudentzSolution(solution:StudentAttemptedLabTaskmodel){
-    if(this.ViewThisStudentSolutionToggled == true){
-      this.ViewThisStudentSolutionToggled = false;
-      this.iskaSolution = {...solution};
-    }else{
-      this.ViewThisStudentSolutionToggled = true;
-    }
-  }
-
-
-  SolutionsByAllStudents:StudentAttemptedLabTaskmodel[]=[];
+  // iskaSolution: StudentAttemptedLabTaskmodel;
+  // ViewThisStudentzSolution(solution: StudentAttemptedLabTaskmodel) {
+  //   if (this.ViewThisStudentSolutionToggled == true) {
+  //     this.ViewThisStudentSolutionToggled = false;
+  //     this.iskaSolution = { ...solution };
+  //   } else {
+  //     this.ViewThisStudentSolutionToggled = true;
+  //   }
+  // }
 
 
-  ViewSolutionsByAllStudents(task: LabTasksmodel) {
-    this.CURRENTLY_VIEWING_SOLUTIONS = [];
-    if (this.ViewSolutionsToggled) {
-      this.ViewSolutionsToggled = false;
-      this.ViewSolutionToggleButtonText = 'Hide Students Solutions';
-      //fetch  Attempted tasks  of all the students in array AttemptedBy
-      let CompleteStudentAttemptedLabTaskCollection:StudentAttemptedLabTaskmodel[]=[];
-      CompleteStudentAttemptedLabTaskCollection = this.studentLabDataService.RecieveAllStudentAttemptedLabTasks();
-      let AttemptedByStudents:string[] = task.AttemptedByStudents;
-      // SolutionsByAllStudents
-      setTimeout(()=>{
-        console.log("CompleteStudentAttemptedLabTaskCollection == ",CompleteStudentAttemptedLabTaskCollection);
-        for(let i=0; i<CompleteStudentAttemptedLabTaskCollection.length;i++){
-          for(let j=0; j<AttemptedByStudents.length; i++){
-            if(CompleteStudentAttemptedLabTaskCollection[i].AttemptedLabTask_id==AttemptedByStudents[j]){
-              this.SolutionsByAllStudents.push(CompleteStudentAttemptedLabTaskCollection[i]);
-            }
-          }
-        }
-      },1000);
+  // SolutionsByAllStudents: StudentAttemptedLabTaskmodel[] = [];
 
 
-
-
-
-    } else {
-
-      this.ViewSolutionToggleButtonText = 'View Students Solutions';
-      this.ViewSolutionsToggled = true;
-    }
-    // task.
-  }
-
-  DeleteThisTask(taskId: string) {
-    this.labsService.DeletThisLabTask(taskId);
-    this.Errors.LabTaskDeleted.status = true;
-    setTimeout(() => { window.location.reload() }, 3600);
-  }
+  // ViewSolutionsByAllStudents(task: LabTasksmodel) {
+  //   this.CURRENTLY_VIEWING_SOLUTIONS = [];
+  //   if (this.ViewSolutionsToggled) {
+  //     this.ViewSolutionsToggled = false;
+  //     this.ViewSolutionToggleButtonText = 'Hide Students Solutions';
+  //     //fetch  Attempted tasks  of all the students in array AttemptedBy
+  //     let CompleteStudentAttemptedLabTaskCollection: StudentAttemptedLabTaskmodel[] = [];
+  //     CompleteStudentAttemptedLabTaskCollection = this.studentLabDataService.RecieveAllStudentAttemptedLabTasks();
+  //     let AttemptedByStudents: string[] = task.AttemptedByStudents;
+  //     // SolutionsByAllStudents
+  //     setTimeout(() => {
+  //       console.log("CompleteStudentAttemptedLabTaskCollection == ", CompleteStudentAttemptedLabTaskCollection);
+  //       for (let i = 0; i < CompleteStudentAttemptedLabTaskCollection.length; i++) {
+  //         for (let j = 0; j < AttemptedByStudents.length; i++) {
+  //           if (CompleteStudentAttemptedLabTaskCollection[i].AttemptedLabTask_id == AttemptedByStudents[j]) {
+  //             this.SolutionsByAllStudents.push(CompleteStudentAttemptedLabTaskCollection[i]);
+  //           }
+  //         }
+  //       }
+  //     }, 1000);
 
 
 
 
 
+  //   } else {
 
-  AllLabTasks: LabTasksmodel[] = [];
-  LabTasksOfThisLab: LabTasksmodel[] = [];
+  //     this.ViewSolutionToggleButtonText = 'View Students Solutions';
+  //     this.ViewSolutionsToggled = true;
+  //   }
+  //   // task.
+  // }
+
+  // DeleteThisTask(taskId: string) {
+  //   this.labsService.DeletThisLabTask(taskId);
+  //   this.Errors.LabTaskDeleted.status = true;
+  //   setTimeout(() => { window.location.reload() }, 3600);
+  // }
+
+
+
+
+
+
+  // AllLabTasks: LabTasksmodel[] = [];
+  // LabTasksOfThisLab: LabTasksmodel[] = [];
   // RegisteredLabs = [{ _id: 'wddwd', LabTitle: ' titlell' }];
-  LabID: string = '';
-  MessageForModal: string;
-  showSpinner: false;
 
 
-  extractLabTasksOfThisLab() {
+  // extractLabTasksOfThisLab() {
 
-    for (let i = 0; i < this.AllLabTasks.length; i++) {
-      if (this.AllLabTasks[i].LabJoinCode == this.LabID) {
-        this.LabTasksOfThisLab.push(this.AllLabTasks[i]);
-      }
-    }
-    console.log("this.LabTasksOfThisLab : ", this.LabTasksOfThisLab);
-  }
+  //   for (let i = 0; i < this.AllLabTasks.length; i++) {
+  //     if (this.AllLabTasks[i].LabJoinCode == this.LabID) {
+  //       this.LabTasksOfThisLab.push(this.AllLabTasks[i]);
+  //     }
+  //   }
+  //   console.log("this.LabTasksOfThisLab : ", this.LabTasksOfThisLab);
+  // }
 
 
 
@@ -133,15 +129,32 @@ export class ManageLabtasksComponent implements OnInit {
 
 
     console.log(labtask);
-    this.labsService.createLabTask(labtask);
+    let res: LabTasksmodel[] = [];
+    res = this.labsService.createLabTask(labtask);
 
     this.Errors.emptyField.status = true;
     this.Errors.LabTaskCreated.status = true;
     setTimeout(() => {
-      window.location.reload()
 
+      console.log("res[0] == ",res[0]);
 
-    }, 3000);
+      let index:number = -1;
+      for(let i=0; i<this.TheLabNumbers.length;i++){
+        if(this.TheLabNumbers[i].LabNumber == this.SELECTED_LAB_NUMBER){
+          this.TheLabNumbers[i].LabTaskIds.push(res[0]._id);
+          index = i;
+          console.log('pushed : ',res[0]);
+        }
+      }
+
+      if(index != -1){
+        this.labsService.updateThisLabNumberOfThisLab(this.TheLabNumbers[index]);
+      }else{
+        alert("something fishy nearby @150");
+      }
+
+    }, 1500);
+    setTimeout(() => { window.location.reload(); }, 3000);
   }
 
   displayThisMessageInModal(Message: string, modalButtonReferrence: HTMLButtonElement) {
@@ -169,6 +182,30 @@ export class ManageLabtasksComponent implements OnInit {
     else { this.Errors.invalidQuestion.status = false }
   }
 
+  LabID: string = '';
+  MessageForModal: string;
+  showSpinner: false;
+  SELECTED_LAB_NUMBER: number = 0;
+  checkIfLabNumberNotSelected(LabNumberSelect: HTMLSelectElement) {
+    if (LabNumberSelect.value == 'Choose...') { this.Errors.LabNumberNotSelected.status = true; }
+    else { this.Errors.LabNumberNotSelected.status = false; }
+
+    if (LabNumberSelect.value == 'Create new') {
+      if (confirm("Do you want to create Lab Number : xxxxx")) {
+        // create a new labNumber in db, and reload
+        this.labsService.createNewLabNumber(this.LabID, 10000);
+        setTimeout(() => { window.location.reload() }, 3000);
+      }
+    }
+    else { this.Errors.LabNumberNotSelected.status = false; }
+
+    if (LabNumberSelect.value != 'Create new' && LabNumberSelect.value != 'Choose...') {
+      this.SELECTED_LAB_NUMBER = parseInt(LabNumberSelect.value, 10);
+    }
+
+  }
+
+
   checkIfXPsNotSelected(XPsSelect: HTMLSelectElement) {
     if (XPsSelect.value == 'Choose...') { this.Errors.XPsNotSelected.status = true; }
     else { this.Errors.XPsNotSelected.status = false; }
@@ -177,6 +214,7 @@ export class ManageLabtasksComponent implements OnInit {
     return (
       this.Errors.XPsNotSelected.status
       || this.Errors.invalidQuestion.status
+      || this.Errors.LabNumberNotSelected.status
       || this.Errors.invalidAnswer.status
       || this.Errors.emptyField.status
       || this.Errors.LabTaskCreated.status
@@ -209,6 +247,10 @@ export class ManageLabtasksComponent implements OnInit {
     LabTaskDeleted: {
       status: true,
       message: 'Lab Task is Deleted.',
+    },
+    LabNumberNotSelected: {
+      status: true,
+      message: 'Lab Number Not Selected.',
     },
     XPsNotSelected: {
       status: true,

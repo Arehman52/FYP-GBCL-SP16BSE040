@@ -16,8 +16,7 @@
         <!-- THE FORM -->
 
         <form class="px-3  m-auto" (submit)="onSignUpClicked(signupForm)"
-        (change)="myFn(signupForm)"
-        #signupForm="ngForm">
+        (change)="myFn(signupForm)" #signupForm="ngForm">
 
 
           <!-- //1st Element : UserType here! -->
@@ -153,15 +152,12 @@
                 <div class="form-group ">
                   <label>Password</label>
                   <div class="input-group" id="show_hide_password">
-                    <input class="form-control" id="show_hide_password_input" type="password">
+                    <input class="form-control" placeholder="Enter a Password" name="UsersEnteredPassword" ngModel (keyup)="checkPasswordOfUser()" id="show_hide_password_input" type="text">
                     <div class="input-group-addon">
                       <button (click)="onEyeClick($event)" id="show_hide_password_a"><i class="py-2 rounded fa fa-eye-slash" id="show_hide_password_i" [attr.aria-hidden]="'true'"></i></button>
                     </div>
                   </div>
-                  <!-- <input type="text" placeholder="Enter a Password" class="form-control "
-                  name="UsersEnteredPassword"
-                  ngModel
-                  (keyup)="checkPasswordOfUser()"> -->
+                  <!-- <input type="text" placeholder="Enter a Password" name="UsersEnteredPassword" ngModel (keyup)="checkPasswordOfUser()"> -->
                   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>{{this.Errors.invalidPassword.message}}</span>
                   </small>
@@ -261,14 +257,21 @@
 
               <div class="col-sm-6">
                 <div class="form-group ">
-                  <label >Password</label>
-                  <input type="text" placeholder="Enter a Password" class="form-control " name="PasswordOfUniversity"
-                  ngModel
-                  (keyup)="checkPasswordOfUniversity()">
+                  <label>Password</label>
+                  <div class="input-group" id="show_hide_password">
+                    <input class="form-control" placeholder="Enter a Password" name="PasswordOfUniversity"
+                    ngModel
+                    (keyup)="checkPasswordOfUniversity()" id="show_hide_password_input_uni" type="text">
+                    <div class="input-group-addon">
+                      <button (click)="onEyeClickuni($event)" id="show_hide_password_a_uni"><i class="py-2 rounded fa fa-eye-slash" id="show_hide_password_i_uni" [attr.aria-hidden]="'true'"></i></button>
+                    </div>
+                  </div>
+                  <!-- <input type="text" placeholder="Enter a Password" name="UsersEnteredPassword" ngModel (keyup)="checkPasswordOfUser()"> -->
                   <small class="form-text errorText" *ngIf="this.Errors.invalidPassword.status == true">
                     <span>{{this.Errors.invalidPassword.message}}</span>
                   </small>
                 </div>
+
               </div>
             </div>
 

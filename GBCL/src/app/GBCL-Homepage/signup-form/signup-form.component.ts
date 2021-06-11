@@ -116,48 +116,37 @@ export class SignupFormComponent implements OnInit {
       form.resetForm()
       setTimeout(() => {
         window.location.reload();
-         }, 3000);
+      }, 3000);
     }
   }
 
 
-  onEyeClick(event: Event){
-
-  //   $(document).ready(function() {
-  //     $("#show_hide_password a").on('click', function(event) {
-  //         event.preventDefault();
-  //         if($('#show_hide_password input').attr("type") == "text"){
-  //             $('#show_hide_password input').attr('type', 'password');
-  //             $('#show_hide_password i').addClass( "fa-eye-slash" );
-  //             $('#show_hide_password i').removeClass( "fa-eye" );
-  //         }else if($('#show_hide_password input').attr("type") == "password"){
-  //             $('#show_hide_password input').attr('type', 'text');
-  //             $('#show_hide_password i').removeClass( "fa-eye-slash" );
-  //             $('#show_hide_password i').addClass( "fa-eye" );
-  //         }
-  //     });
-  // });////////////////////////////////////////////////////////////////////////
-      // let eyeBtna = document.getElementById('show_hide_password_a');
-      let eyeBtninp:HTMLElement = document.getElementById('show_hide_password_input');
-      let eyeBtni:HTMLElement = document.getElementById('show_hide_password_i');
-      // $("#show_hide_password a").on('click',
-      // function(event) {
-          event.preventDefault();
-          if(eyeBtninp.getAttribute("type") == "text"){
-            eyeBtninp.setAttribute('type', 'password');
-              eyeBtni.className =  "py-2 rounded fa fa-eye-slash";
-              // eyeBtni.class removeClass( "fa-eye" );
-          }else if(eyeBtninp.getAttribute("type") == "password"){
-            eyeBtninp.setAttribute('type', 'text');
-              // $('#show_hide_password i').removeClass( "fa-eye-slash" );
-              eyeBtni.className = "py-2 roundede fa fa-eye";
-          }
-      // });
-  // });
+  onEyeClickuni(event: Event) {
+    let eyeBtninp: HTMLElement = document.getElementById('show_hide_password_input_uni');
+    let eyeBtni: HTMLElement = document.getElementById('show_hide_password_i_uni');
+    event.preventDefault();
+    if (eyeBtninp.getAttribute("type") == "text") {
+      eyeBtninp.setAttribute('type', 'password');
+      eyeBtni.className = "py-2 rounded fa fa-eye-slash";
+    } else if (eyeBtninp.getAttribute("type") == "password") {
+      eyeBtninp.setAttribute('type', 'text');
+      eyeBtni.className = "py-2 roundede fa fa-eye";
+    }
 
   }
+  onEyeClick(event: Event) {
+    let eyeBtninp: HTMLElement = document.getElementById('show_hide_password_input');
+    let eyeBtni: HTMLElement = document.getElementById('show_hide_password_i');
+    event.preventDefault();
+    if (eyeBtninp.getAttribute("type") == "text") {
+      eyeBtninp.setAttribute('type', 'password');
+      eyeBtni.className = "py-2 rounded fa fa-eye-slash";
+    } else if (eyeBtninp.getAttribute("type") == "password") {
+      eyeBtninp.setAttribute('type', 'text');
+      eyeBtni.className = "py-2 roundede fa fa-eye";
+    }
 
-
+  }
 
 
 
@@ -412,6 +401,10 @@ export class SignupFormComponent implements OnInit {
   }
 
   checkPasswordOfUniversity() {
+    let eyeBtninp: HTMLElement = document.getElementById('show_hide_password_input_uni');
+    if (eyeBtninp.getAttribute("type") == "text") {
+      eyeBtninp.setAttribute('type', 'password');
+    }
     this.SignupForm.value.PasswordOfUniversity.length < 8
       ? (this.Errors.invalidPassword.status = true)
       : (this.Errors.invalidPassword.status = false);
@@ -470,6 +463,10 @@ export class SignupFormComponent implements OnInit {
   }
 
   checkPasswordOfUser() {
+    let eyeBtninp:HTMLElement = document.getElementById('show_hide_password_input');
+        if(eyeBtninp.getAttribute("type") == "text"){
+          eyeBtninp.setAttribute('type', 'password');
+        }
     this.SignupForm.value.UsersEnteredPassword.length < 8
       ? (this.Errors.invalidPassword.status = true)
       : (this.Errors.invalidPassword.status = false);

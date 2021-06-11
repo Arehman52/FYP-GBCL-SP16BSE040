@@ -417,6 +417,74 @@ router.delete(
   }
 );
 
+
+
+
+
+
+
+
+
+
+
+
+
+router.put(
+  "/RESET_CurrentStatsOfThisLabzALLStudents/",
+  (req, res, next) => {
+    // const updatedStats = new StudLabDataAndStats({
+    //   _id: req.body._id,
+    //   LabJoinCode: req.body.LabJoinCode, //as a foreign key
+    //   StudentzUsername: req.body.StudentzUsername, //as a foreign key
+    //   StudentzFN: req.body.StudentzFN,
+    //   StudentzLN: req.body.StudentzLN,
+    //   LevelUpdateViewed: req.body.LevelUpdateViewed, // if false, then show a level updated Modal and then update it to false.
+    //   WarnUpdateViewed: req.body.WarnUpdateViewed,
+    //   AppreciateUpdateViewed: req.body.AppreciateUpdateViewed,
+    //   Demoted: req.body.Demoted, // if false, then show a level updated Modal and then update it to false.
+    //   Promoted: req.body.Promoted,
+    //   RivalStudents: req.body.RivalStudents,
+    //   currentXPs: req.body.currentXPs,
+    //   currentLevel: req.body.currentLevel,
+    //   currentBadge: req.body.currentBadge,
+    //   currentCPPs: req.body.currentCPPs,
+    //   Warned: req.body.Warned,
+    //   Appreciated: req.body.Appreciated,
+    //   StudentzLabAccessStatus: req.body.StudentzLabAccessStatus,
+    // });
+
+    StudLabDataAndStats.updateMany(
+      {
+        LabJoinCode: req.body.LabJoinCode,
+      },
+      {LevelUpdateViewed:false, WarnUpdateViewed:false,AppreciateUpdateViewed:false, Demoted:false, Promoted:false, RivalStudents:[], currentBadge:'Beginner I', currentLevel:1, currentXPs:0, Warned:false, Appreciated:false, StudentzLabAccessStatus:'Allowed' }
+    )
+      .then((result) => {
+        res.status(200).json({
+          message: "RESET_CurrentStatsOfThisLabzALLStudents!",
+          result: result,
+        });
+      })
+   }
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.put(
   "/updateCurrentStatsOfThisStudent/:StudentzUsernameAndLabID",
   (req, res, next) => {
@@ -574,20 +642,25 @@ router.post("/fetchThisRivalzActivitiesHistory", (req, res, next) => {
 //   });
 // });
 
+router.get("/DeleteEntireStudentActivityHistory/", (req, res, next) => {
+  StudentActivityHistory.deleteMany().then((result) => {
+     res.status(200).json({
+       message: "DeleteEntireStudentActivityHistory!",
+       result: result,
+     });
+    });
+});
+
 router.get("/ResetEntrireDatabase/", (req, res, next) => {
   StudLabDataAndStats.deleteMany().then((result) => {
-    // res.status(200).json({
-    //   message: "Entire Lab Challenge DELETED ResetEntrireDatabase!",
-    //   result: result,
-    // });
-  });
+   });
+   StudentAttemptedLabChallenge.deleteMany().then((result) => {
+     // res.status(200).json({
+     //   message: "Entire Lab Challenge DELETED ResetEntrireDatabase!",
+     //   result: result,
+     // });
+   });
   StudentActivityHistory.deleteMany().then((result) => {
-    // res.status(200).json({
-    //   message: "Entire Lab Challenge DELETED ResetEntrireDatabase!",
-    //   result: result,
-    // });
-  });
-  StudentAttemptedLabChallenge.deleteMany().then((result) => {
     // res.status(200).json({
     //   message: "Entire Lab Challenge DELETED ResetEntrireDatabase!",
     //   result: result,
@@ -600,5 +673,10 @@ router.get("/ResetEntrireDatabase/", (req, res, next) => {
     });
   });
 });
+
+
+router.ge
+
+
 
 module.exports = router;

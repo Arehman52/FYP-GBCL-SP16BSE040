@@ -83,7 +83,8 @@
               </button>
               <div class="dropdown-menu bg-warning">
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
-                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/AllLabs'">Lab Course</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Create Lab Tasks</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
@@ -120,10 +121,13 @@
     <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
       <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
         <li class="nav-item text-left">
-          <a class="nav-link active" [routerLink]="'/TEACHER/Lab'">Lab Dashboard</a>
+          <a class="nav-link active" [routerLink]="'/TEACHER/Lab'" >Lab Dashboard</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/AllLabs'">View Course Labs</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Labtasks'">Create Lab Tasks</a>
         </li>
         <li class="nav-item text-left">
           <a class="nav-link" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
@@ -135,17 +139,8 @@
           <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
         </li>
-        <!-- <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Notifications</a>
-      </li> -->
       </ul>
     </div>
     <div class="col-12 col-sm-9 col-lg-10 p-1">

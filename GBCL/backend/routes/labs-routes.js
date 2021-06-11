@@ -1,14 +1,11 @@
 const express = require("express");
 
 const Labs = require("../models/lab-backend-models/lab");
+const LabNumbers = require("../models/lab-backend-models/LabNumbers");
 const LabChallenge = require("../models/lab-backend-models/labChallenge");
 const LabTask = require("../models/lab-backend-models/labTask");
 // const LabMember = require("../models/junk/labMember");
 const router = express.Router();
-
-
-
-
 
 // router.delete("/DeleteLabChallengesWhereLabJoinCode/:_id", (req, res, next) => {
 //   LabChallenge.delete({ LabJoinCode: req.params._id }).then((result) => {
@@ -18,9 +15,6 @@ const router = express.Router();
 //     });
 //   });
 // });
-
-
-
 
 router.delete("/DeleteThisLabChallenge/:Id", (req, res, next) => {
   LabChallenge.deleteOne({ _id: req.params.Id }).then((result) => {
@@ -69,10 +63,6 @@ router.put("/UpdateThisLab/:Id", (req, res, next) => {
   // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 });
 
-
-
-
-
 router.put("/UpdateThisLabChallenge/:Id", (req, res, next) => {
   const labChallenge = new LabChallenge({
     _id: req.body._id,
@@ -86,26 +76,25 @@ router.put("/UpdateThisLabChallenge/:Id", (req, res, next) => {
     ChallengeCorrectOption: req.body.ChallengeCorrectOption,
     ChallengeXPs: req.body.ChallengeXPs,
     ChallengeAllowedTime: req.body.ChallengeAllowedTime,
-    AttemptedByStudents: req.body.AttemptedByStudents
+    AttemptedByStudents: req.body.AttemptedByStudents,
   });
 
-  LabChallenge.updateOne({ _id: req.params.Id }, labChallenge).then((result) => {
-    res.status(200).json({
-      message: "Lab Challenge of type: "+req.body.ChallengeQuestionType+" Updated!",
-      result: result,
-    });
-  });
-  console.log('   ==> {/UpdateThisLabChallenge/:Id} LabChallenge updated of type == ',req.body.ChallengeQuestionType);
+  LabChallenge.updateOne({ _id: req.params.Id }, labChallenge).then(
+    (result) => {
+      res.status(200).json({
+        message:
+          "Lab Challenge of type: " +
+          req.body.ChallengeQuestionType +
+          " Updated!",
+        result: result,
+      });
+    }
+  );
+  console.log(
+    "   ==> {/UpdateThisLabChallenge/:Id} LabChallenge updated of type == ",
+    req.body.ChallengeQuestionType
+  );
 });
-
-
-
-
-
-
-
-
-
 
 router.put("/UpdateThisLabTask/:Id", (req, res, next) => {
   const lab = new LabTask({
@@ -115,7 +104,7 @@ router.put("/UpdateThisLabTask/:Id", (req, res, next) => {
     LabTaskQuestion: req.body.LabTaskQuestion,
     LabTaskAnswer: req.body.LabTaskAnswer,
     LabTaskXPs: req.body.LabTaskXPs,
-    AttemptedByStudents: req.body.AttemptedByStudents
+    AttemptedByStudents: req.body.AttemptedByStudents,
   });
 
   LabTask.updateOne({ _id: req.params.Id }, lab).then((result) => {
@@ -124,18 +113,11 @@ router.put("/UpdateThisLabTask/:Id", (req, res, next) => {
       result: result,
     });
   });
-  console.log('   ==> {/UpdateThisLabTask/:Id} LabTask updated == ',req.body.labTaskTitle);
+  console.log(
+    "   ==> {/UpdateThisLabTask/:Id} LabTask updated == ",
+    req.body.labTaskTitle
+  );
 });
-
-
-
-
-
-
-
-
-
-
 
 // RecieveLabsFromDB
 router.get("/RecieveLabsFromDB", (req, res, next) => {
@@ -149,8 +131,6 @@ router.get("/RecieveLabsFromDB", (req, res, next) => {
   });
 });
 
-
-
 // GetAllLabTasksFromDB
 router.get("/GetAllLabTasksFromDB", (req, res, next) => {
   LabTask.find().then((documents) => {
@@ -159,68 +139,77 @@ router.get("/GetAllLabTasksFromDB", (req, res, next) => {
       labTasks: documents,
     });
 
-    console.log("   ==> {/GetAllLabTasksFromDB} All Lab Tasks were downloaded.");
+    console.log(
+      "   ==> {/GetAllLabTasksFromDB} All Lab Tasks were downloaded."
+    );
   });
 });
-
-
 
 // getAllLabsOfThisUniversity
 router.get("/getAllLabs", (req, res, next) => {
   Labs.find().then((documents) => {
     res.status(200).json({
       message: "These are all labs.",
-      allLabs: documents
+      allLabs: documents,
     });
   });
 });
 
-
+// getAllLabsOfThisUniversity
+router.post("/fetchLabNumbersOfThisLab", (req, res, next) => {
+  LabNumbers.find({ LabJoinCode: req.body.LabJoinCode }).then((documents) => {
+    res.status(200).json({
+      message: "These are all fetched Lab Numbers Of This Lab ",
+      FetchedLabNumbers: documents,
+    });
+    console.log("/fetchLabNumbersOfThisLab : ", documents);
+    console.log("req.body.LabJoinCode : ", req.body.LabJoinCode);
+  });
+});
 
 // getAllLabsOfThisUniversity
 router.post("/getAllLabsOfThisUniversity", (req, res, next) => {
-  Labs.find({UniversityNameOfLab: req.body.UniversityNameOfLab}).then((documents) => {
-    res.status(200).json({
-      message: "These are all labs of this university only : == "+req.body.UniversityNameOfLab,
-      allLabsOfThisUniversity: documents
-    });
-    console.log("These are all labs of this university :",documents)
-  });
+  Labs.find({ UniversityNameOfLab: req.body.UniversityNameOfLab }).then(
+    (documents) => {
+      res.status(200).json({
+        message:
+          "These are all labs of this university only : == " +
+          req.body.UniversityNameOfLab,
+        allLabsOfThisUniversity: documents,
+      });
+      console.log("These are all labs of this university :", documents);
+    }
+  );
 });
-
-
-
 
 // AllLabTasksOfThisLabFromDB
 router.post("/getAllLabTasksOfThisLabFromDB", (req, res, next) => {
-  LabTask.find({LabJoinCode:req.body.LabJoinCode}).then((documents) => {
+  LabTask.find({ LabJoinCode: req.body.LabJoinCode }).then((documents) => {
     res.status(200).json({
       message: "All Lab Tasks Of This Lab From DB Downloaded.",
       AllLabTasksOfThisLabFromDB: documents,
     });
 
-    console.log("   ==> {/AllLabTasksOfThisLabFromDB} All Lab Tasks of this lab were downloaded.");
+    console.log(
+      "   ==> {/AllLabTasksOfThisLabFromDB} All Lab Tasks of this lab were downloaded."
+    );
   });
 });
 
-
-
 router.post("/getAllChallengesOfThisLabFromDB", (req, res, next) => {
-  LabChallenge.find({LabJoinCode: req.body.LabJoinCode}).then((documents) => {
-    console.log("getAllChallengesOfThisLabFromDB == documents> ",documents);
+  LabChallenge.find({ LabJoinCode: req.body.LabJoinCode }).then((documents) => {
+    console.log("getAllChallengesOfThisLabFromDB == documents> ", documents);
     res.status(200).json({
       message: "All Lab Challenges Of This Lab From DB Downloaded.",
       AllChallengesOfThisLabFromDB: documents,
     });
 
-    console.log("   ==> {/getAllChallengesOfThisLabFromDB} All Lab Challenges of this lab were downloaded."+req.body.LabJoinCode);
+    console.log(
+      "   ==> {/getAllChallengesOfThisLabFromDB} All Lab Challenges of this lab were downloaded." +
+        req.body.LabJoinCode
+    );
   });
 });
-
-
-
-
-
 
 // GetAllLabChallengesFromDB
 router.get("/GetAllLabChallengesFromDB", (req, res, next) => {
@@ -230,13 +219,11 @@ router.get("/GetAllLabChallengesFromDB", (req, res, next) => {
       labChallenges: documents,
     });
 
-    console.log("   ==> {/GetAllLabChallengesFromDB} All Lab Challenges were downloaded.");
+    console.log(
+      "   ==> {/GetAllLabChallengesFromDB} All Lab Challenges were downloaded."
+    );
   });
 });
-
-
-
-
 
 router.post("/FetchTHISLab", (req, res, next) => {
   Labs.findOne({ _id: req.body._id })
@@ -252,6 +239,30 @@ router.post("/FetchTHISLab", (req, res, next) => {
     .catch((err) => {
       console.log(" 004 theeeen eeerrrororrorr\n", err);
     });
+});
+
+router.post("/createNewLabNumber", (req, res, next) => {
+  const labNumber = new LabNumbers({
+    LabJoinCode: req.body.LabJoinCode,
+    LabNumber: req.body.LabNumber,
+    LabTaskIds: req.body.LabTaskIds,
+  });
+  labNumber
+    .save()
+    .then((result) => {
+      res.status(201).json({
+        message:
+          "Lab NUMBER: " + req.body.LabNumber + " has been created succefully!",
+        result: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
+
+  console.log("   ==> {/createNewLabNumber} ");
 });
 
 router.post("/CreateLab", (req, res, next) => {
@@ -281,9 +292,6 @@ router.post("/CreateLab", (req, res, next) => {
   console.log("   ==> {/CreateLab} LabTitle == ", lab.LabTitle);
 });
 
-
-
-
 //=======================================================================YE WALI
 router.post("/CreateLabTask", (req, res, next) => {
   const labTask = new LabTask({
@@ -292,7 +300,7 @@ router.post("/CreateLabTask", (req, res, next) => {
     LabTaskQuestion: req.body.LabTaskQuestion,
     LabTaskAnswer: req.body.LabTaskAnswer,
     LabTaskXPs: req.body.LabTaskXPs,
-    AttemptedByStudents: req.body.AttemptedByStudents
+    AttemptedByStudents: req.body.AttemptedByStudents,
   });
 
   console.log("labTask : ", labTask);
@@ -301,7 +309,7 @@ router.post("/CreateLabTask", (req, res, next) => {
     .then((result) => {
       res.status(201).json({
         message: "Lab Task created succefully!",
-        result: result,
+        JustCreatedLabTask: result,
       });
     })
     .catch((err) => {
@@ -312,9 +320,6 @@ router.post("/CreateLabTask", (req, res, next) => {
 
   // console.log("   ==> {/CreateLabTask} LabTastTitle == ", labTask.labTaskTitle);
 });
-
-
-
 
 router.post("/CreateLabChallenge", (req, res, next) => {
   const labChallenge = new LabChallenge({
@@ -328,7 +333,7 @@ router.post("/CreateLabChallenge", (req, res, next) => {
     ChallengeCorrectOption: req.body.ChallengeCorrectOption,
     ChallengeXPs: req.body.ChallengeXPs,
     ChallengeAllowedTime: req.body.ChallengeAllowedTime,
-    AttemptedByStudents: req.body.AttemptedByStudents
+    AttemptedByStudents: req.body.AttemptedByStudents,
   });
   labChallenge
     .save()
@@ -344,7 +349,10 @@ router.post("/CreateLabChallenge", (req, res, next) => {
       });
     });
 
-  console.log("   ==> {/CreateLabChallenge} ChallengeQuestionType == ", labChallenge.ChallengeQuestionType);
+  console.log(
+    "   ==> {/CreateLabChallenge} ChallengeQuestionType == ",
+    labChallenge.ChallengeQuestionType
+  );
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -359,11 +367,6 @@ router.post("/CreateLabChallenge", (req, res, next) => {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 router.get("/ResetEntrireDatabase/", (req, res, next) => {
   LabChallenge.deleteMany().then((result) => {
@@ -380,16 +383,12 @@ router.get("/ResetEntrireDatabase/", (req, res, next) => {
   });
   LabTask.deleteMany().then((result) => {
     res.status(200).json({
-      message: "Entire Databse Ressetted For Labs, Lab Tasks and Lab Challenges!",
+      message:
+        "Entire Databse Ressetted For Labs, Lab Tasks and Lab Challenges!",
       result: result,
     });
   });
 });
-
-
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -408,17 +407,59 @@ router.get("/ResetEntrireDatabase/", (req, res, next) => {
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
+//ResetAllChallenegesAttemptedByArraysOfThisStudentForThisLab
 
-router.get("/ResetChallengesAttemptedByArrays/", (req, res, next) => {
-  LabChallenge.updateMany({},{AttemptedByStudents: []}).then((result) => {
+router.put("/updateThisLabNumberOfThisLab/", (req, res, next) => {
+  LabNumbers.updateOne(
+    {
+      LabJoinCode: req.body.LabJoinCode,
+      LabNumber: req.body.LabNumber,
+    },
+    { LabTaskIds: req.body.LabTaskIds }
+  ).then((result) => {
     res.status(200).json({
-      message: "Reset Complete ResetChallengesAttemptedByArrays/!",
-      result: result
+      message: "/updated This Lab Number Of This Lab !!",
+      result: result,
     });
   });
 });
 
+router.put(
+  "/ResetAllChallenegezAttemptedByArraysOfALLLstudzOfThisLab/",
+  (req, res, next) => {
+    LabChallenge.updateMany(
+      { LabJoinCode: req.body.LabJoinCode },
+      { AttemptedByStudents: [] }
+    ).then((result) => {
+      res.status(200).json({
+        message: "ResetAllChallenegezAttemptedByArraysOfALLLstudzOfThisLab !!",
+        result: result,
+      });
+    });
+  }
+);
+router.put(
+  "/ResetAllLabTaskzAttemptedByArraysOfALLLstudzOfThisLab/",
+  (req, res, next) => {
+    LabTask.updateMany(
+      { LabJoinCode: req.body.LabJoinCode },
+      { AttemptedByStudents: [] }
+    ).then((result) => {
+      res.status(200).json({
+        message: "ResetAllLabTaskzAttemptedByArraysOfALLLstudzOfThisLab !!",
+        result: result,
+      });
+    });
+  }
+);
 
-
+// router.get("/ResetChallengesAttemptedByArrays/", (req, res, next) => {
+//   LabChallenge.updateMany({},{AttemptedByStudents: []}).then((result) => {
+//     res.status(200).json({
+//       message: "Reset Complete ResetChallengesAttemptedByArrays/!",
+//       result: result
+//     });
+//   });
+// });
 
 module.exports = router;

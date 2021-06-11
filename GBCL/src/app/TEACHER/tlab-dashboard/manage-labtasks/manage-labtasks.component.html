@@ -42,10 +42,10 @@
 
         <!-- ----------- -->
         <!-- Stats column -->
-        <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover ">
+        <div class="col-12 col-sm-6 col-md-8 border border-dark rounded CurrentStatsHover ">
           <div class="row text-center  childSpansHoverYellow">
             <div class="col"><span class="mx-2">
-                <h3>Manage Lab Tasks</h3>
+                <h3>Create Lab Tasks</h3>
               </span></div>
           </div>
         </div>
@@ -68,12 +68,12 @@
               </button>
               <div class="dropdown-menu bg-warning">
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
-                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/AllLabs'">Lab Course</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Create Lab Tasks</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-
                 <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit
                   Lab</button>
                 <div class="dropdown-divider"></div>
@@ -109,10 +109,12 @@
           <a class="nav-link " [routerLink]="'/TEACHER/Lab'">Lab Dashboard</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link active" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/AllLabs'">View Course Labs</a>
         </li>
         <li class="nav-item text-left">
-
+          <a class="nav-link active" [routerLink]="'/TEACHER/Lab/Labtasks'">Create Lab Tasks</a>
+        </li>
+        <li class="nav-item text-left">
           <a class="nav-link" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
         </li>
         <li class="nav-item text-left">
@@ -122,7 +124,7 @@
           <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
         </li>
 
       </ul>
@@ -137,44 +139,47 @@
 
 
 
+      <div class="card  mt-2 mx-3">
+        <div class="card-body" id="createTask">
 
-      <div id="accordionOuter">
-        <div class="card  mt-2 mx-3">
-          <div class="card-header noUnderlineForChildren" id="headingOne">
-            <!-- <h5 class="mb-0"> -->
-            <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
-              data-target="#collapseOneFaculty" aria-expanded="true" aria-controls="collapseOneFaculty">
-              <h5><b>Create Lab Task <span class="text-success">**</span></b></h5>
-            </button>
-            <!-- </h5> -->
+          <div class="text-right">
+            <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a>
           </div>
-          <div id="collapseOneFaculty" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuter">
-            <div class="card-body" id="createTask">
 
 
 
+          <div class="col-sm-8 m-auto">
+            <div class="form-group">
 
-              <!-- here working! -->
-              <!-- <label class="mx-2" for="xyz123">Creating a profile for: </label>
-          <button id="xyz123" class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
-            (click)="onMemberTypeButtonToggle()">{{this.MemberType}}</button> -->
+              <label>Select Lab Number :</label>
+
+              <select class="custom-select" #LabNumberSelect (change)="checkIfLabNumberNotSelected(LabNumberSelect)">
+                <option [value]="'Choose...'" selected disabled>Choose...</option>
+                <option [value]="'Create new'"><b>Create new Lab Number</b></option>
+                <option [value]="labNum.LabNumber"
+                *ngFor="let labNum of TheLabNumbers"><b>{{labNum.LabNumber}}</b></option>
+                <!-- <option [value]="'0111'"><b>0111</b></option> -->
+                <!-- <option [value]="'10'"><b>10</b></option>
+                    <option [value]="'15'"><b>15</b></option>
+                    <option [value]="'20'"><b>20</b></option> -->
+              </select>
+
+            </div>
+          </div>
 
 
 
-              <div>
-                <div class="border rounded border-light my-2 mx-1 p-3">
-
-                  <!-- ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================== -->
-
-
+              <div class="col-sm-8 m-auto p-3" *ngIf="LabNumberSelect.value == 'Create new'">
+                new Lab Created : 01, next refresh
+              </div>
+              <div class="col-12" *ngIf="LabNumberSelect.value != 'Create new'
+              && LabNumberSelect.value != 'Choose...'">
+                <div class="mx-1 p-1">
                   <form #createLabTaskForm="ngForm" (submit)="createLabTask(createLabTaskForm,XPsSelect)">
 
                     <div class="row">
                       <div class="col-sm-12">
 
-                        <div class="text-right">
-                          <a href="https://ide.geeksforgeeks.org/" target="_blank">Open Compiler</a>
-                        </div>
 
                         <div class="form-group">
                           <label>Task Question: </label>
@@ -215,25 +220,13 @@
 
                           <label>Assign XPs</label>
 
-                          <!-- (change)="onInstructorsSelectChangeforCreateLab(InstructorsSelect)" -->
                           <select class="custom-select" #XPsSelect (change)="checkIfXPsNotSelected(XPsSelect)">
                             <option [value]="'Choose...'" selected disabled>Choose...</option>
                             <option [value]="'5'"><b>05</b></option>
                             <option [value]="'10'"><b>10</b></option>
                             <option [value]="'15'"><b>15</b></option>
                             <option [value]="'20'"><b>20</b></option>
-                            <!-- <option [value]="instructor.Username" *ngFor="let instructor of RegisteredFaculty">
-                            <b>{{instructor.FirstNameOfUser+' '+instructor.LastNameOfUser}}</b>
-                          </option> -->
                           </select>
-                          <!-- <small class="form-text alert alert-danger"
-                          *ngIf="this.Errors.LabInstructorNotSelected.status == true">
-                          {{this.Errors.LabInstructorNotSelected.message}}
-                        </small>
-                        <small class="form-text alert alert-danger"
-                          *ngIf="this.Errors.InstructorNotListedforCreateLab.status == true">
-                          {{this.Errors.InstructorNotListedforCreateLab.message}}
-                        </small> -->
                         </div>
                       </div>
 
@@ -250,186 +243,25 @@
                       </small>
                     </div>
 
-                    <!-- <small class="form-text alert alert-danger" *ngIf="this.Errors.formHasErrors.status == true">
-                    {{this.Errors.formHasErrors.message}}
-                  </small> -->
 
-                    <!-- <small class="form-text alert alert-success" *ngIf="this.Errors.LabCreated.status == true">
-                    {{this.Errors.LabCreated.message}}
-                  </small> -->
                   </form>
-
-                </div>
-              </div> <!-- ends student/tch division -->
-
-
-
-
-
-
-
-
-
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-
-
-
-
-      <!-- STUDNETS JOIN REQUESTS -->
-
-
-
-
-      <div id="accordionOuterStds">
-        <div class="card  mt-2 mx-3">
-          <div class="card-header noUnderlineForChildren noUnderlineForChildren" id="headingOne">
-            <h5 class="mb-0">
-              <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
-                data-target="#collapseOneStd" aria-expanded="true" aria-controls="collapseOneStd">
-                <h5><b>View Tasks for this Lab <span class="text-info">** <span class="ml-3 text-muted" style="font-size: 16px;">( {{LabTasksOfThisLab.length}} )</span> </span></b></h5>
-              </button>
-            </h5>
-          </div>
-          <div id="collapseOneStd" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOuterStds">
-            <div class="card-body">
-
-
-
-
-
-
-
-
-              <div class="mx-2 mt-3" *ngIf="LabTasksOfThisLab.length == 0">
-                <div class="alert alert-info p-4">
-                  <h5>No Labs tasks created yet, create one first.</h5>
                 </div>
               </div>
 
 
 
-              <div id="accordionInnerFac">
-                <div class="card mb-1" *ngFor="let task of LabTasksOfThisLab">
-                  <div class="card-header noUnderlineForChildren" [attr.id]="'RegisteredFacultyCard'">
-
-                    <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                      (click)="SetViewViewSolutionToggledFalse()"
-                      [attr.data-target]="'#RegisteredFacultyCollapse' + task._id" aria-expanded="true"
-                      [attr.aria-controls]="'collapse' + task._id">
-                      {{task.LabTaskTitle}}
-                    </button>
-
-                  </div>
-
-                  <div [id]="'RegisteredFacultyCollapse' + task._id" class="collapse hide"
-                    [attr.aria-labelledby]="'RegisteredFacultyCard'" data-parent="#accordionInnerFac">
-                    <div class="card-body ">
-
-                      <div class="row">
-                        <div class="col-11 m-auto">
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>XPs</th>
-                                <th>Question</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-
-
-                                <td>{{task.LabTaskXPs}}</td>
-                                <td>{{task.LabTaskQuestion}}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <div class="d-flex justify-content-end mr-3">
-                            <button class="   d-none       btn btn-info w-25 maSmallerFonts my-2 mx-2"
-                              (click)="ViewSolutionsByAllStudents(task)">{{ViewSolutionToggleButtonText}}</button>
-                            <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
-                              (click)="DeleteThisTask(task._id)">Delete</button> -->
-                          </div>
-                          <small class="form-text alert alert-success" *ngIf="this.Errors.LabTaskDeleted.status">
-                            {{this.Errors.LabTaskDeleted.message}}
-                          </small>
 
 
 
 
 
 
-                        </div>
-                      </div>
-
-                      <div *ngIf="this.ViewSolutionsToggled == true">
-                        <!-- wdkwdkmd -->
-                        <div class="row">
-                          <div class="col-11 m-auto">
-                            <div class="text-center" *ngIf="SolutionsByAllStudents.length == 0">
-                              <div class="form-text my-2 alert alert-info">No student yet submitted this task's Answer</div>
-                            </div>
-
-                            <table class="table table-striped" *ngIf="SolutionsByAllStudents.length>0">
-                              <thead>
-                                <tr>
-                                  <th>Student</th>
-                                  <th>Gained XPs</th>
-                                  <th>View/Hide Solution</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let solution of SolutionsByAllStudents">
-
-
-                                  <td>{{solution?.StudentzUsername}}</td>
-                                  <td>{{solution?.GainedXPs}}</td>
-                                  <td><button (click)="ViewThisStudentzSolution(solution)" class="btn btn-outline-info btn-small" >View this Student's Solution</button></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <div class="col-11 m-auto" *ngIf="ViewThisStudentSolutionToggled">
-
-                              <label style="text-decoration: underline; font-weight: bold;">Student's Code Answer :</label>
-                              <pre>{{iskaSolution.LabTaskAnswerCode}}</pre>
-                            </div>
-                            <div class="col-11 m-auto" *ngIf="ViewThisStudentSolutionToggled">
-
-                            <label style="text-decoration: underline; font-weight: bold;">Student's Output Answer :</label>
-                              <pre>{{iskaSolution.LabTaskAnswerOutput}}</pre>
-                            </div>
-                            <div class="col-11 m-auto" *ngIf="ViewThisStudentSolutionToggled">
-
-                            <label style="text-decoration: underline; font-weight: bold;">Student's Input Answer :</label>
-                              <pre>{{iskaSolution.LabTaskAnswerInput}}</pre>
-                            </div>
-
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
 
 
-            </div>
-          </div>
+
         </div>
-
       </div>
-
-
-
-
-
-
-      <!-- ======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================== -->
 
 
     </div>

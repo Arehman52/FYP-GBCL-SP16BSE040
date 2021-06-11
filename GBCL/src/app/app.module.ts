@@ -54,6 +54,8 @@ import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-stu
 // Misc imports
 import { Error404Component } from './MISC/error404/error404.component';
 import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
+import { ViewalllabsComponent } from './student/slab-dashboard/viewalllabs/viewalllabs.component';
+import { TviewalllabsComponent } from './teacher/tlab-dashboard/tviewalllabs/tviewalllabs.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { UnimanageJoinrequestsComponent } from './university/unimanage-joinreque
     //delete following components
     GithubcodeforformvalidationComponent,
     TestConceptsComponent,
-    UnimanageJoinrequestsComponent
+    UnimanageJoinrequestsComponent,
+    ViewalllabsComponent,
+    TviewalllabsComponent
   ],
   imports: [
     BrowserModule,

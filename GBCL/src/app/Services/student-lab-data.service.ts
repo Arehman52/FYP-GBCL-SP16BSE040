@@ -10,6 +10,28 @@ import { StudentActivityHistorymodel } from '../MODELS/Student-Frontend-Models/S
   providedIn: 'root'
 })
 export class StudentLabDataService {
+  RESET_CurrentStatsOfThisLabzALLStudents(StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel) {
+
+    // console.log("printing updatedStats from service :@@@@  ", updatedStats);
+    this.http.put("http://localhost:3000/api/StudentLabData/RESET_CurrentStatsOfThisLabzALLStudents/" ,StudentzUsernameAndLabID)
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      );
+  }
+
+
+  RESET_DeleteEntireStudentActivityHistory() {
+    // console.log("printing updatedStats from service :@@@@  ", updatedStats);
+    this.http.get("http://localhost:3000/api/StudentLabData/DeleteEntireStudentActivityHistory/")
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      );
+  }
+
 
 
 

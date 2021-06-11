@@ -66,14 +66,14 @@
                 aria-haspopup="true" aria-expanded="false">
                 {{localStorageUsername}}
               </button>
-              <div class="dropdown-menu bg-warning"> <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's
-                  Dashboard</a>
-                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+              <div class="dropdown-menu bg-warning">
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab'">Lab's Dashboard</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/AllLabs'">Lab Course</a>
+                <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Labtasks'">Create Lab Tasks</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/ManageStudents'">Manage Students</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
                 <a class="dropdown-item" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
-
                 <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit
                   Lab</button>
                 <div class="dropdown-divider"></div>
@@ -106,13 +106,15 @@
     <div class="col-12 col-sm-3 col-lg-2  p-1 maNav-bg-color minHeight838">
       <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
         <li class="nav-item text-left">
-          <a class="nav-link " [routerLink]="'/TEACHER/Lab'">Lab Dashboard</a>
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab'" >Lab Dashboard</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link " [routerLink]="'/TEACHER/Lab/Labtasks'">Manage Lab Tasks</a>
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/AllLabs'">View Course Labs</a>
         </li>
         <li class="nav-item text-left">
-
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Labtasks'">Create Lab Tasks</a>
+        </li>
+        <li class="nav-item text-left">
           <a class="nav-link active" [routerLink]="'/TEACHER/Lab/Challenges'">Manage Challenges</a>
         </li>
         <li class="nav-item text-left">
@@ -122,9 +124,8 @@
           <a class="nav-link" [routerLink]="'/TEACHER/Lab/EvaluateStudents'">Review Students</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link " [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
+          <a class="nav-link" [routerLink]="'/TEACHER/Lab/Leaderboard'">View Leaderboard</a>
         </li>
-
       </ul>
 
     </div>

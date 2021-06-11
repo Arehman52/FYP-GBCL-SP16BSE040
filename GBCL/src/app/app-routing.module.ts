@@ -28,6 +28,8 @@ import { UnimanageLabsComponent } from './university/unimanage-labs/unimanage-la
 import { UnimanageMembersComponent } from './university/unimanage-members/unimanage-members.component';
 import { ManageStudentsComponent } from './teacher/tlab-dashboard/manage-students/manage-students.component';
 import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-students/evaluate-students.component';
+import { ViewalllabsComponent } from './student/slab-dashboard/viewalllabs/viewalllabs.component';
+import { TviewalllabsComponent } from './teacher/tlab-dashboard/tviewalllabs/tviewalllabs.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 // import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
 // import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
@@ -42,6 +44,7 @@ const routes: Routes = [
   { path: 'STUDENT', component: STUDENTComponent}, // dashboard
   { path: 'STUDENT/Lab', component: SlabDashboardComponent}, // lab dashboard for student
   { path: 'STUDENT/Lab/Challenges', component: ChallengesComponent},
+  { path: 'STUDENT/Lab/AllLabs', component: ViewalllabsComponent},
   { path: 'STUDENT/Lab/CPA', component: CpaComponent},
   { path: 'STUDENT/Lab/Leaderboard', component: LeaderboardComponent},
   { path: 'STUDENT/Lab/Rivals', component: RivalsComponent},
@@ -52,6 +55,7 @@ const routes: Routes = [
   { path: 'TEACHER/Lab/Leaderboard', component: ViewLeaderboardComponent},
   { path: 'TEACHER/Lab/Labtasks', component: ManageLabtasksComponent},
   { path: 'TEACHER/Lab/Challenges', component: ManageChallengesComponent},
+  { path: 'TEACHER/Lab/AllLabs', component: TviewalllabsComponent},
   { path: 'TEACHER/Lab/ManageStudents', component: ManageStudentsComponent},
   { path: 'TEACHER/Lab/EvaluateStudents', component: EvaluateStudentsComponent},
   { path: 'TEACHER/Settings', component: TeachersettingsComponent},

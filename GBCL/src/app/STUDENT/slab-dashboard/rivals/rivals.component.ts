@@ -66,34 +66,28 @@ export class RivalsComponent implements OnInit {
   FetchedThisStudentzStats: StudLabDataAndStatsmodel[] = [];
   // FetchedOneRivalzHistory: StudentActivityHistorymodel[] = [];
   LabID: string = '';
-  localStorageUsername: string = '';
   FetchedRivalsActivities: StudentActivityHistorymodel[] = [];
 
 
 
+  localStorageUsername: string = '';
   onExitLabClicked() {
     localStorage.removeItem('LabID');
     window.location.href = "/STUDENT";
   }
 
-
-  // execFn(){
-  //   let userzzz:Usersmodel[] = [];
-  //   userzzz =  this.usersService.test();
-  //   console.log("userzzzzz",userzzz);
-  // }
-  onLogout() {
+onLogout() {
     localStorage.clear();
     window.location.href = "/";
   }
 
 
-  rivalNotifications = [
-    { rivalID: 'id123', rivalName: 'Asmir', Activity: 'Joined Lab', Date: 'Wed, 26th May 2021 16:40' },
-    { rivalID: 'id124', rivalName: 'AAmir', Activity: 'Expelled', Date: 'Wed, 26th May 2021 16:40' },
-    { rivalID: 'id125', rivalName: 'AAmir', Activity: 'Appreciated', Date: 'Wed, 26th May 2021 16:40' },
-    { rivalID: 'id126', rivalName: 'AAmir', Activity: 'Promoted', Date: 'Wed, 26th May 2021 16:40' }
-  ];
+  // rivalNotifications = [
+  //   { rivalID: 'id123', rivalName: 'Asmir', Activity: 'Joined Lab', Date: 'Wed, 26th May 2021 16:40' },
+  //   { rivalID: 'id124', rivalName: 'AAmir', Activity: 'Expelled', Date: 'Wed, 26th May 2021 16:40' },
+  //   { rivalID: 'id125', rivalName: 'AAmir', Activity: 'Appreciated', Date: 'Wed, 26th May 2021 16:40' },
+  //   { rivalID: 'id126', rivalName: 'AAmir', Activity: 'Promoted', Date: 'Wed, 26th May 2021 16:40' }
+  // ];
 
 
 
