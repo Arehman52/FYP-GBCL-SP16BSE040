@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LabChallengesmodel } from 'src/app/MODELS/Lab-Frontend-Models/labchallengesmodel.model';
+import { LabChallengesService } from 'src/app/Services/lab-challenges.service';
 import { LabsService } from 'src/app/Services/labs.service';
 
 @Component({
@@ -10,12 +11,15 @@ import { LabsService } from 'src/app/Services/labs.service';
 })
 export class ManageChallengesComponent implements OnInit {
 
-  constructor(private labsService: LabsService) { }
+  constructor(
+    private labsService: LabsService,
+    private labChallengesService: LabChallengesService
+    ) { }
 
   ngOnInit(): void {
     this.LabID = localStorage.getItem("LabID");
     this.setAllErrorsToFalse();
-    this.AllLabChallenges = this.labsService.GetAllLabChallengesFromDB();
+    this.AllLabChallenges = this.labChallengesService.GetAllLabChallengesFromDB();
     setTimeout(() => {
       this.extractLabChallengesOfThisLab();
     }, 2500);
@@ -139,7 +143,7 @@ export class ManageChallengesComponent implements OnInit {
         }
 
 
-        this.labsService.createLabChallenge(labChallenge);
+        this.labChallengesService.createLabChallenge(labChallenge);
         createLabChallengeForm.reset();
         this.Errors.LabChallengeCreated.status = true;
         setTimeout(()=>{window.location.reload()},3000);
@@ -181,7 +185,7 @@ export class ManageChallengesComponent implements OnInit {
 
   DeleteThisChallenge(ChallengeId: string) {
     if (confirm("Are you sure you want to delete this lab challenge?")) {
-      this.labsService.DeleteThisLabChallenge(ChallengeId);
+      this.labChallengesService.DeleteThisLabChallenge(ChallengeId);
       this.Errors.LabChallengeDeleted.status = true;
       setTimeout(()=>{window.location.reload()},3500);
     }

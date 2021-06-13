@@ -191,17 +191,33 @@
             </div>
 
             <div class="row">
-              <div class="form-group col-sm-12">
+              <div class="form-group col-sm-6">
                 <label >Your ID in University</label>
                 <input type="text" placeholder="Enter your Registration Number" class="form-control" name="UsersEnteredRegistrationNumber" ngModel
                   required
                   (keyup)="checkRegistrationNumberOfUser()">
                 <small class="form-text text-muted">
-                  Your registration ID through which your university can identify you in their records.
+                  Your registration ID provided by your university.
                 </small>
                 <small class="form-text errorText" *ngIf="this.Errors.invalidRegistrationNumber.status == true">
                   <span>{{this.Errors.invalidRegistrationNumber.message}}</span>
                 </small>
+              </div>
+              <div class="form-group col-sm-6">
+                <label >Department</label>
+                <select class="custom-select" name="UsersSelectedDepartment"
+                #DepartmentsList
+                (change)="onDepartmentSelectChange(DepartmentsList)">
+                  <option value="Selectone" selected disabled><b>Select one</b></option>
+                  <option value="CS"><b>CS</b></option>
+                  <option value="EE"><b>EE</b></option>
+                  <option value="BS"><b>BS</b></option>
+                </select>
+
+                <small class="form-text errorText" *ngIf="this.Errors.departmentNotSelected.status == true">
+                  <span>{{this.Errors.departmentNotSelected.message}}</span>
+                </small>
+                <!-- <button (click)="updaall()">update all userssss</button> -->
               </div>
             </div>
 

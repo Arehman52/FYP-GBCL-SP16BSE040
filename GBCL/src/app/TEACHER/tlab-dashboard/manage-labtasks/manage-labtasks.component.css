@@ -26,6 +26,15 @@ body{
 
 }
 
+.modalPosnWidth{
+  position: fixed;
+  top:3%;
+  left: 15%;
+  width: 1000px;
+  min-width: 1000px;
+  height: 75vh;
+}
+
 
 /* GBCL LOGO CSS STARTS */
 .logoText{

@@ -42,7 +42,7 @@
 
         <!-- ----------- -->
         <!-- Stats column -->
-        <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover ">
+        <div class="col-12 col-sm-6 col-md-8 border border-dark rounded CurrentStatsHover ">
           <div class="row text-center  childSpansHoverYellow">
             <div class="col"><span class="mx-2">
                 <h3>Leaderboard</h3>
@@ -92,7 +92,7 @@
       </div>
 
     </div>
-    <hr class="bg-warning p-0 m-0">
+    <!-- <hr class="bg-warning p-0 m-0"> -->
   </div>
   <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
@@ -134,9 +134,9 @@
     <div class="col-12 col-sm-9 col-lg-10 p-0">
 
 
-      <h4 class="text-warning text-center p-3 m-1 mt-4 border rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4>
+      <h4 class="text-warning text-center p-3 m-1 mt-4 rounded"><b>TOP 7 STUDENTS - HIGH ACHIEVERS</b></h4>
       <!-- below div represents : 1 student only. -->
-      <div class="border rounded p-3 m-3 bg-dark font-weight-bold" *ngFor="let lead of leaderboard"
+      <div class="border border-secondary rounded p-3 m-3 bg-dark font-weight-bold" *ngFor="let lead of leaderboard"
         [style]="'color:#'+lead?.color">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Rank: {{lead?.rank}}</span>
         =>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{lead?.name}}</span>

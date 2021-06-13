@@ -55,7 +55,7 @@
         <!-- ----------- -->
         <!-- Stats column -->
 
-        <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover">
+        <div class="col-12 col-sm-6 col-md-8 border border-dark rounded CurrentStatsHover">
 
 
           <div class="row text-center  childSpansHoverYellow">
@@ -106,7 +106,7 @@
       </div>
 
     </div>
-    <hr class="bg-warning p-0 m-0">
+    <!-- <hr class="bg-warning p-0 m-0"> -->
   </div>
   <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
@@ -160,7 +160,15 @@
           <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
               <div class="row">
-                <div class="col-6 m-1">Lab Join Code: <span class="text-info">{{this.LabInfo.JoinCode}}</span></div>
+                <div class="col-12 m-1">Lab Join Code:
+                  <input class="text-info" readonly id="LJC" class="px-2 py-1 border border-dark rounded ml-2" value="{{this.LabInfo.JoinCode}}">
+                  <span><button class="btn btn-sm btn-outline-secondary px-4 py-2" (click)="CopyLJC()">Copy</button></span>
+
+
+                  <span style="width: 150px; display: inline-block;" class="alert alert-info ml-3 py-2 text-center" [ngClass]="{'alert alert-info ml-5': COPIED, 'd-none':!COPIED}"
+
+                  >Copied!</span>
+                </div>
                 <div class="col-6 m-1">Lab Title: <span class="text-info">{{this.LabInfo.LabTitle}}</span></div>
                 <div class="col-6 m-1">Lab Program: <span class="text-info">{{this.LabInfo.LabProgram}}</span></div>
                 <div class="col-6 m-1">Lab Class: <span class="text-info">{{this.LabInfo.LabClass}}</span></div>

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { LabJoinRequestsmodel } from 'src/app/MODELS/Lab-Frontend-Models/labJoinRequestsmodel.model';
-import { StudentActivityHistorymodel } from 'src/app/MODELS/Student-Frontend-Models/StudentActivityHistorymodel.model';
 import { StudentzUsernameAndLabJoinCodemodel } from 'src/app/MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 import { GamificationService } from 'src/app/Services/gamification.service';
 import { LabsService } from 'src/app/Services/labs.service';
+import { StudentAttemptedLabChallengesService } from 'src/app/Services/student-attempted-lab-challenges.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 import { UsersService } from 'src/app/Services/users.service';
 
@@ -16,7 +15,10 @@ import { UsersService } from 'src/app/Services/users.service';
 })
 export class ManageStudentsComponent implements OnInit {
 
-  constructor(private gamificationSercive: GamificationService, private studentLabDataService: StudentLabDataService, private usersService: UsersService, private labsService:LabsService) { }
+  constructor(private gamificationSercive: GamificationService, private studentLabDataService: StudentLabDataService,
+    private usersService: UsersService,
+    private studentAttemptedLabChallengesService: StudentAttemptedLabChallengesService,
+    private labsService:LabsService) { }
 
   ngOnInit(): void {
     this.setAllErrorsToFalse();
@@ -170,7 +172,7 @@ export class ManageStudentsComponent implements OnInit {
             // if(STUDz_FETCHED_STATS_FROM_Db[0].currentXPs < 0){
             //   STUDz_FETCHED_STATS_FROM_Db[0].currentXPs = 0;
             //////////////////////////////////////
-            this.studentLabDataService.deleteALLStudentAttemptedLabChallengesOfThisStudent(StudentzUsernameAndLabID);
+            this.studentAttemptedLabChallengesService.deleteALLStudentAttemptedLabChallengesOfThisStudent(StudentzUsernameAndLabID);
             //////////////////////////////////////
           }
         this.studentLabDataService.updateCurrentStatsOfThisStudent(STUDz_FETCHED_STATS_FROM_Db[0]

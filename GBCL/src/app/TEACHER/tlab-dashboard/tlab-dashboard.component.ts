@@ -91,5 +91,16 @@ export class TlabDashboardComponent implements OnInit {
     window.location.href = "/";
   }
 
+  COPIED:boolean = false;
+  CopyLJC() {
+    this.COPIED = true;
+    setTimeout(()=>{this.COPIED = false},1200);
+    let  copyText = <HTMLInputElement>document.getElementById("LJC");
+    copyText.focus();
+    copyText.select();
+    document.body.removeChild(copyText);
+    document.execCommand("copy");
+  }
+
 
 }

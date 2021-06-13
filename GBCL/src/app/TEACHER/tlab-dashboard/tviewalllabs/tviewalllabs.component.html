@@ -42,7 +42,7 @@
 
         <!-- ----------- -->
         <!-- Stats column -->
-        <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover ">
+        <div class="col-12 col-sm-6 col-md-8 border border-dark rounded CurrentStatsHover ">
           <div class="row text-center  childSpansHoverYellow">
             <div class="col"><span class="mx-2">
                 <h3>Course Labs</h3>
@@ -92,7 +92,7 @@
       </div>
 
     </div>
-    <hr class="bg-warning p-0 m-0">
+    <!-- <hr class="bg-warning p-0 m-0"> -->
   </div>
   <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
@@ -151,7 +151,7 @@
             <h5 class="mb-0">
               <!-- data-target="#collapseOne2" (click)="setViewStatsFalse()" -->
               <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" [attr.data-target]="'#collapseOne2'+LabNumber._id"
-                aria-expanded="true" aria-controls="collapseOne2">
+                aria-expanded="true" aria-controls="collapseOne2" (click)="extractLabTasksOfThisLabNumber(LabNumber)">
                 <h4><b> {{'Lab Number : '+LabNumber.LabNumber}} <span class="text-info"></span></b></h4>
               </button>
             </h5>
@@ -161,13 +161,16 @@
 
 
 
+              <div class="alert alert-info" *ngIf="CURRENT_LABNUMBERZ_TASKS.length ==0">
+                No tasks created for this lab yet.
+              </div>
 
 
 
               <!-- Cards within card -->
 
               <div id="accordionInner2">
-                <div class="card mb-1" *ngFor="let task of LabTaskzz">
+                <div class="card mb-1" *ngFor="let task of CURRENT_LABNUMBERZ_TASKS">
                   <div class="card-header" [attr.id]="'RegisterUniversityCard2'">
                     <!-- (click)="setViewStatsFalse()" -->
                     <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
@@ -193,7 +196,6 @@
                                 <th>Task Question</th>
                                 <th>Task Solution</th>
                                 <th>XPs</th>
-                                <th>Attempted By</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -201,17 +203,11 @@
 
 
                                 <td>{{task.LabTaskQuestion}}</td>
-                                <td>{{task.LabTaskAnswer}}</td>
+                                <td><pre>{{task.LabTaskAnswer}}</pre></td>
                                 <td>{{task.LabTaskXPs}}</td>
-                                <td>{{task.AttemptedByStudents}}</td>
                               </tr>
                             </tbody>
                           </table>
-                          <div class="d-flex justify-content-end mr-3">
-                            <!-- <button (click)="viewStatsButtonClicked(LabMemberStudent)" -->
-                            <button
-                              class="btn btn-info w-25 maSmallerFonts my-2 mx-2">{{'ViewStatsButtonText'}}</button>
-                          </div>
 
 
 

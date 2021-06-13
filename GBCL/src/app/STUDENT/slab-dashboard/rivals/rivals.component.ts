@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentActivityHistorymodel } from 'src/app/MODELS/Student-Frontend-Models/StudentActivityHistorymodel.model';
 import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
+import { StudentActivityHistoryService } from 'src/app/Services/student-activity-history.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 import { UsersService } from 'src/app/Services/users.service';
 
@@ -13,7 +14,10 @@ import { UsersService } from 'src/app/Services/users.service';
 export class RivalsComponent implements OnInit {
 
 
-  constructor(private studentLabDataService: StudentLabDataService,private usersService: UsersService) { }
+  constructor(
+    private studentLabDataService: StudentLabDataService,
+    private studentActivityHistoryService: StudentActivityHistoryService,
+    private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.LabID = localStorage.getItem("LabID");
@@ -42,7 +46,7 @@ export class RivalsComponent implements OnInit {
     for (let i = 0; i < this.FetchedThisStudentzStats[0].RivalStudents.length; i++) {
       setTimeout(() => {
         let FetchedOneRivalzHistory: StudentActivityHistorymodel[] = [];
-        FetchedOneRivalzHistory = this.studentLabDataService.fetchThisRivalzActivitiesHistory({LabJoinCode: this.LabID,
+        FetchedOneRivalzHistory = this.studentActivityHistoryService.fetchThisRivalzActivitiesHistory({LabJoinCode: this.LabID,
           StudentzUsername: this.FetchedThisStudentzStats[0].RivalStudents[i]});
           // let Username:string[] = this.FetchedThisStudentzStats[0].RivalStudents;
           i==0? this.FetchedRivalOneHistory =  FetchedOneRivalzHistory : console.log('dump0');
@@ -80,14 +84,6 @@ onLogout() {
     localStorage.clear();
     window.location.href = "/";
   }
-
-
-  // rivalNotifications = [
-  //   { rivalID: 'id123', rivalName: 'Asmir', Activity: 'Joined Lab', Date: 'Wed, 26th May 2021 16:40' },
-  //   { rivalID: 'id124', rivalName: 'AAmir', Activity: 'Expelled', Date: 'Wed, 26th May 2021 16:40' },
-  //   { rivalID: 'id125', rivalName: 'AAmir', Activity: 'Appreciated', Date: 'Wed, 26th May 2021 16:40' },
-  //   { rivalID: 'id126', rivalName: 'AAmir', Activity: 'Promoted', Date: 'Wed, 26th May 2021 16:40' }
-  // ];
 
 
 

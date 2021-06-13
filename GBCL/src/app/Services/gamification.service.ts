@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { StudentActivityHistorymodel } from '../MODELS/Student-Frontend-Models/StudentActivityHistorymodel.model';
 import { StudentzUsernameAndLabJoinCodemodel } from '../MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 import { StudLabDataAndStatsmodel } from '../MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
+import { StudentActivityHistoryService } from './student-activity-history.service';
 import { StudentLabDataService } from './student-lab-data.service';
 
 @Injectable({
@@ -9,7 +10,10 @@ import { StudentLabDataService } from './student-lab-data.service';
 })
 export class GamificationService {
 
-  constructor(private studentLabDataService: StudentLabDataService) { }
+  constructor(
+    private studentLabDataService: StudentLabDataService,
+    private studentActivityHistoryService: StudentActivityHistoryService
+    ) { }
 
 
 
@@ -340,7 +344,7 @@ export class GamificationService {
     };
 
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -355,7 +359,7 @@ export class GamificationService {
     };
 
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -371,7 +375,7 @@ export class GamificationService {
       GainedOrLoosedXPsCount: 50, Activity: 'Warned by Instructor',Failed:false, Passed: false,
       TimeAndDate:new Date().toString().substring(0,21), AttemptedQuestion: '', wasPromotedOrDemotedToLevel: ''
     };
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -384,7 +388,7 @@ export class GamificationService {
       GainedOrLoosedXPsCount: 50, Activity: 'was Appreciated by Instructor',Failed:false, Passed: false,
       TimeAndDate:new Date().toString().substring(0,21), AttemptedQuestion: '', wasPromotedOrDemotedToLevel: ''
     };
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -396,7 +400,7 @@ export class GamificationService {
       TimeAndDate:new Date().toString().substring(0,21), AttemptedQuestion:'', wasPromotedOrDemotedToLevel: wasDemotedToLevel
     };
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -412,7 +416,7 @@ export class GamificationService {
 
 
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -446,7 +450,7 @@ export class GamificationService {
     };
 
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -462,7 +466,7 @@ export class GamificationService {
       _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: GainedXPs, Activity: 'Attempted '+QType+' Challenge',Failed:false, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
     };
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -485,7 +489,7 @@ export class GamificationService {
     };
 
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -497,7 +501,7 @@ export class GamificationService {
     };
 
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
   createHistory_AttemptedChallenge_Cheated(FullName: string, LabChallengeQuestion: string, LosedXPs: number, objUNandLabJC: { LabJoinCode: string; StudentzUsername: string; }) {
@@ -507,7 +511,7 @@ export class GamificationService {
     };
 
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -523,7 +527,7 @@ export class GamificationService {
     };
 
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -538,7 +542,7 @@ export class GamificationService {
       GainedOrLoosedXPsCount: 50, Activity: 'Failed '+QType+' Challenge due to timeout',Failed:true, Passed: false,
       TimeAndDate:new Date().toString().substring(0,21), AttemptedQuestion: '', wasPromotedOrDemotedToLevel: ''
     };
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 
@@ -553,7 +557,7 @@ export class GamificationService {
       _id: '', AttemptedQuestion:LabChallengeQuestion ,GainedOrLoosedXPsCount: 0, Activity: 'Failed '+QType+' Challenge',Failed:true, Passed: false, TimeAndDate:new Date().toString().substring(0,21), wasPromotedOrDemotedToLevel: ''
     };
 
-    this.studentLabDataService.createAStudentActivityHistoryDocument(studhistory);
+    this.studentActivityHistoryService.createAStudentActivityHistoryDocument(studhistory);
   }
 
 

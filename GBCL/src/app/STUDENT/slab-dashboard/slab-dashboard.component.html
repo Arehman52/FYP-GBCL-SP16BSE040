@@ -94,10 +94,10 @@
               </button>
               <div class="dropdown-menu bg-warning">
                 <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/'">Dashboard</a>
-                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
-                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/AllLabs'">Attempt Lab Tasks</a>
                 <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
                 <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
+                <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
                 <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit
                   Lab</button>
                 <div class="dropdown-divider"></div>
@@ -131,22 +131,19 @@
     <div class="col-12 col-sm-3 col-lg-2 maNav-bg-color minHeight838 p-1">
       <ul class="nav nav-fill nav-pills flex-column w-100 secondaryColorOfChildrenOnHover">
         <li class="nav-item text-left">
-          <a class="nav-link active" [routerLink]="'/STUDENT/Lab'">Lab Dashboard</a>
+          <a class="nav-link active" [routerLink]="'/STUDENT/Lab'" >Lab Dashboard</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link" [routerLink]="'/STUDENT/Lab/AllLabs'">View All Labs</a>
-        </li>
-        <li class="nav-item text-left">
-          <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
-        </li>
-        <li class="nav-item text-left">
-          <a class="nav-link" [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
+          <a class="nav-link " [routerLink]="'/STUDENT/Lab/AllLabs'">Attempt Lab Tasks</a>
         </li>
         <li class="nav-item text-left">
           <a class="nav-link" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
         </li>
         <li class="nav-item text-left">
-          <a class="nav-link" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Recent Activities</a>
+          <a class="nav-link " [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
+        </li>
+        <li class="nav-item text-left">
+          <a class="nav-link " [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
         </li>
       </ul>
     </div>
@@ -179,7 +176,7 @@
 
             <div class="row text-right">
               <div class="col-12 text-right">
-               <button class="btn btn-info mb-2 mr-3 text-right" (click)="showGamificationRules()">Gamification
+                <button class="btn btn-info mb-2 mr-3 text-right" (click)="showGamificationRules()">Gamification
                   Rules</button>
               </div>
             </div>
@@ -192,7 +189,8 @@
                   <code>[Beginner I, II, III, IV], [Intermediate I, II, III, IV], [Master I, II, III, IV], [Pro I, II, III, IV], [Hotshot I, II, III, IV], [Honoury I, II, III, IV] and last stage is: ULTIMATE CODER.</code>
                 </div>
                 <div class="alert alert-info my-1 p-1">Rule03: Attempting challenge/lab task increases XP</div>
-                <div class="alert alert-info m-0 p-1">Rule04: Incorrect attempted MCQs Challenges will deduct XPs until 0 XPs
+                <div class="alert alert-info m-0 p-1">Rule04: Incorrect attempted MCQs Challenges will deduct XPs until
+                  0 XPs
                 </div>
                 <div class="alert alert-info my-1 p-1">Rule05: Surpassing the level's upper XP limit will increment the
                   level</div>
@@ -224,19 +222,16 @@
                 </div>
                 <div class="col-4 text-center my-1 " *ngFor="let member of TheLabMembers">
                   <span class="ml-2 px-1 text-small"
-                  [ngClass]="{'pt-1 mt-1' : member.Username != localStorageUsername}"
-                  >
-                    <b *ngIf="member.UserType=='teacher'"
-                     class="text-secondary">Instructor : </b>
+                    [ngClass]="{'pt-1 mt-1' : member.Username != localStorageUsername}">
+                    <b *ngIf="member.UserType=='teacher'" class="text-secondary">Instructor : </b>
 
                     {{member.FirstNameOfUser+' '+member.LastNameOfUser}}
 
                   </span>
                   <span class="text-right">
-                    <button class="btn btn-sm btn-outline-warning ml-3"
-                    *ngIf="member.UserType=='student' &&
-                    member.Username != localStorageUsername"
-                      (click)="setRival(member)"><b>Set Rival</b></button></span>
+                    <button class="btn btn-sm btn-outline-warning ml-3" *ngIf="member.UserType=='student' &&
+                    member.Username != localStorageUsername" (click)="setRival(member)"><b>Set
+                        Rival</b></button></span>
                   <hr class="w-75 mx-auto">
                 </div>
               </div>

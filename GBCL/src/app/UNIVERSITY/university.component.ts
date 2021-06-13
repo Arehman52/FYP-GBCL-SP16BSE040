@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usersmodel } from '../MODELS/Usersmodel.model';
+import { LabsService } from '../Services/labs.service';
 import { UsersService } from '../Services/users.service';
 
 @Component({
@@ -9,7 +10,10 @@ import { UsersService } from '../Services/users.service';
 })
 export class UNIVERSITYComponent implements OnInit {
 
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private usersService: UsersService,
+    private labsService: LabsService
+    ) { }
 
   ngOnInit(): void {
     this.setAllErrorsToFalse();
@@ -55,6 +59,7 @@ export class UNIVERSITYComponent implements OnInit {
     this.usersService.updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(updatedUser, OldUser);
 
     setTimeout(() => {
+      this.labsService.ChangeUniversityNameOfLabOfThisUnizLabs(this.UNIVERSITY_TITLE,newTitle);
       this.usersService.updateThisUser(updatedUser, this.fetchedUni[0]._id);
     }, 750);
     this.Errors.titleUpdated.status = true;

@@ -100,6 +100,7 @@ router.put("/UpdateThisUser/:Id", (req, res, next) => {
     LabJoinCodesOfJoinedLabs: req.body.LabJoinCodesOfJoinedLabs,
     LabJoinCodesOfAppliedLabs: req.body.LabJoinCodesOfAppliedLabs,
     RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
+    DepartmentOfUser: req.body.DepartmentOfUser,
     TitleOfUniversity: req.body.TitleOfUniversity,
     HECIDofUniversity: req.body.HECIDofUniversity,
     UserzAccessStatus: req.body.UserzAccessStatus,
@@ -124,6 +125,7 @@ router.post("/CreateUser", (req, res, next) => {
     LastNameOfUser: req.body.LastNameOfUser,
     UniversityNameOfUser: req.body.UniversityNameOfUser,
     RegistrationNumberOfUser: req.body.RegistrationNumberOfUser,
+    DepartmentOfUser: req.body.DepartmentOfUser,
     TitleOfUniversity: req.body.TitleOfUniversity,
     HECIDofUniversity: req.body.HECIDofUniversity,
     UserzAccessStatus: req.body.UserzAccessStatus,
@@ -257,7 +259,21 @@ router.get("/RecieveUsersFromDB", (req, res, next) => {
   });
 });
 
-router.get("/ResetEntrireDatabase/", (req, res, next) => {
+// router.get("/updaaaall/", (req, res, next) => {
+//   Users.updateMany(
+//     {
+//       UserType: "university",
+//     },
+//     { DepartmentOfUser: "" }
+//   ).then((result) => {
+//     res.status(200).json({
+//       message: "/updaaaall/updaaaall",
+//       result: result,
+//     });
+//   });
+// });
+
+router.get("/ResetEntrireDatabase", (req, res, next) => {
   Users.deleteMany({
     $or: [
       { UserType: "student" },

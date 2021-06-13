@@ -1,13 +1,12 @@
-import { HtmlTagDefinition } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NumericTypes } from 'mongoose';
 import { LabChallengesmodel } from 'src/app/MODELS/Lab-Frontend-Models/labchallengesmodel.model';
 import { StudentAttemptedLabChallengemodel } from 'src/app/MODELS/Student-Frontend-Models/StudentAttemptedLabChallengesmodel.model';
 import { StudentzUsernameAndLabJoinCodemodel } from 'src/app/MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { GamificationService } from 'src/app/Services/gamification.service';
-import { LabsService } from 'src/app/Services/labs.service';
+import { LabChallengesService } from 'src/app/Services/lab-challenges.service';
+import { StudentAttemptedLabChallengesService } from 'src/app/Services/student-attempted-lab-challenges.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 
 @Component({
@@ -16,7 +15,7 @@ import { StudentLabDataService } from 'src/app/Services/student-lab-data.service
   styleUrls: ['./challenges.component.css'],
 })
 export class ChallengesComponent implements OnInit, OnDestroy {
-  constructor(private gamificationService: GamificationService, private labsService: LabsService, private studentLabDataService: StudentLabDataService) { }
+  constructor(private gamificationService: GamificationService, private studentAttemptedLabChallengesService: StudentAttemptedLabChallengesService, private studentLabDataService: StudentLabDataService, private labChallengesService: LabChallengesService) { }
 
   CHeatedLabChallenge: StudentAttemptedLabChallengemodel = {
     AttemptedLabChallenge_id: '', ChallengeAttempted: true, ChallengeCheated: true, ChallengeChecked: false, ChallengeMatchPercentage: 0, ChallengeFailedDueToTimeShortage: false, ChallengeSolutionByTeacher: '', ChallengeXPs: 0, GainedXPs: 0, LabChallengeAnswerOptionA: '',
@@ -50,7 +49,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     this.CURRENT_XPs = latestXPs;
     this.CHeatedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
     this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], negativeXPs);
-    this.studentLabDataService.updateThisStudentAttemptedLabChallenge(this.CHeatedLabChallenge, {
+    this.studentAttemptedLabChallengesService.updateThisStudentAttemptedLabChallenge(this.CHeatedLabChallenge, {
       LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername
     });
     this.gamificationService.createHistory_AttemptedChallenge_Cheated(localStorage.getItem("UserzFirstNameOfUser") + ' ' + localStorage.getItem("UserzLastNameOfUser"), this.CHeatedLabChallenge.LabChallengeQuestion, this.unAttemptedChallenges[this.i].ChallengeXPs, {
@@ -61,9 +60,9 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
     this.unAttemptedChallenges[this.i].AttemptedByStudents.push(this.localStorageUsername);
 
-    this.labsService.updateThisLabChallenge(this.unAttemptedChallenges[this.i]);
+    this.labChallengesService.updateThisLabChallenge(this.unAttemptedChallenges[this.i]);
     // done 2 below.
-    this.studentLabDataService.createThisStudentAttemptedLabChallenge(this.CHeatedLabChallenge);
+    this.studentAttemptedLabChallengesService.createThisStudentAttemptedLabChallenge(this.CHeatedLabChallenge);
     /////////////////////////////////////////////////////////////////
   }
 
@@ -89,8 +88,8 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
     let objLabJoinCode: { LabJoinCode: string } = { LabJoinCode: this.LabID };
     // getAllChallengesOfThisLabFromDB
-    this.AllLabChallengesOfThisLabFromDB = this.labsService.getAllChallengesOfThisLabFromDB(objLabJoinCode);
-    this.AllStudentAttemptedChallengesOfthisStudandThisLab = this.studentLabDataService.RecieveAllStudentAttemptedChallengesOfthisStudandThisLab(this.LabID, this.localStorageUsername);
+    this.AllLabChallengesOfThisLabFromDB = this.labChallengesService.getAllChallengesOfThisLabFromDB(objLabJoinCode);
+    this.AllStudentAttemptedChallengesOfthisStudandThisLab = this.studentAttemptedLabChallengesService.RecieveAllStudentAttemptedChallengesOfthisStudandThisLab(this.LabID, this.localStorageUsername);
     let StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername };
     this.STUDz_FETCHED_STATS_FROM_Db = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
 
@@ -213,7 +212,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     this.CURRENT_XPs = latestXPs;
     unAttemptedChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
     this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], negativeXPs);
-    this.studentLabDataService.updateThisStudentAttemptedLabChallenge(unAttemptedChallenge, {
+    this.studentAttemptedLabChallengesService.updateThisStudentAttemptedLabChallenge(unAttemptedChallenge, {
       LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername
     });
     this.gamificationService.createHistory_AttemptedChallenge_TimedoutFailed(localStorage.getItem("UserzFirstNameOfUser") + ' ' + localStorage.getItem("UserzLastNameOfUser"), unAttemptedChallenge.LabChallengeQuestion, this.unAttemptedChallenges[this.i].ChallengeXPs, {
@@ -224,9 +223,9 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
     this.unAttemptedChallenges[this.i].AttemptedByStudents.push(this.localStorageUsername);
 
-    this.labsService.updateThisLabChallenge(this.unAttemptedChallenges[this.i]);
+    this.labChallengesService.updateThisLabChallenge(this.unAttemptedChallenges[this.i]);
     // done 2 below.
-    this.studentLabDataService.createThisStudentAttemptedLabChallenge(unAttemptedChallenge);
+    this.studentAttemptedLabChallengesService.createThisStudentAttemptedLabChallenge(unAttemptedChallenge);
     /////////////////////////////////////////////////////////////////
   }
 
@@ -459,7 +458,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
 
         attemptedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], this.unAttemptedChallenges[this.i].ChallengeXPs);
-        this.studentLabDataService.updateThisStudentAttemptedLabChallenge(attemptedLabChallenge, {
+        this.studentAttemptedLabChallengesService.updateThisStudentAttemptedLabChallenge(attemptedLabChallenge, {
           LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername
         });
 
@@ -487,7 +486,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
         // this.CURRENT_XPs = FinallyCountedNegativeXPs;   <@@@@@@@@@@@@@@@@@@@@@
         attemptedLabChallenge.GainedXPs = this.unAttemptedChallenges[this.i].ChallengeXPs;
         this.gamificationService.promote_demote_or_justupdate_Stats(this.STUDz_FETCHED_STATS_FROM_Db[0], negativeXPs);
-        this.studentLabDataService.updateThisStudentAttemptedLabChallenge(attemptedLabChallenge, {
+        this.studentAttemptedLabChallengesService.updateThisStudentAttemptedLabChallenge(attemptedLabChallenge, {
           LabJoinCode: this.LabID, StudentzUsername: this.localStorageUsername
         });
         this.gamificationService.createHistory_AttemptedMCQChallenge_Failed(localStorage.getItem("UserzFirstNameOfUser") + ' ' + localStorage.getItem("UserzLastNameOfUser"), attemptedLabChallenge.LabChallengeQuestion, this.unAttemptedChallenges[this.i].ChallengeXPs, {
@@ -519,9 +518,9 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     //   by changing and updating STUDz_FETCHED_STATS_FROM_Db[0] to the db.
     // 4. Update or create StudentActivityHirstory Collection as well.
     // done 1 below.
-    this.labsService.updateThisLabChallenge(this.unAttemptedChallenges[this.i]);
+    this.labChallengesService.updateThisLabChallenge(this.unAttemptedChallenges[this.i]);
     // done 2 below.
-    this.studentLabDataService.createThisStudentAttemptedLabChallenge(attemptedLabChallenge);
+    this.studentAttemptedLabChallengesService.createThisStudentAttemptedLabChallenge(attemptedLabChallenge);
     // done 3 below.
 
 

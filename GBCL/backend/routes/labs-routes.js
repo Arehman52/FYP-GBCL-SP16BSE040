@@ -15,24 +15,6 @@ const router = express.Router();
 //     });
 //   });
 // });
-
-router.delete("/DeleteThisLabChallenge/:Id", (req, res, next) => {
-  LabChallenge.deleteOne({ _id: req.params.Id }).then((result) => {
-    res.status(200).json({
-      message: "Lab Challenge Deleted!",
-      result: result,
-    });
-  });
-});
-
-router.delete("/DeleteThisLabTask/:Id", (req, res, next) => {
-  LabTask.deleteOne({ _id: req.params.Id }).then((result) => {
-    res.status(200).json({
-      message: "Lab Task Deleted!",
-      result: result,
-    });
-  });
-});
 router.delete("/DeleteThisLab/:Id", (req, res, next) => {
   Labs.deleteOne({ _id: req.params.Id }).then((result) => {
     res.status(200).json({
@@ -63,61 +45,19 @@ router.put("/UpdateThisLab/:Id", (req, res, next) => {
   // console.log('   ==> {/UpdateThisUser/:Id} Username == ',user.Username);
 });
 
-router.put("/UpdateThisLabChallenge/:Id", (req, res, next) => {
-  const labChallenge = new LabChallenge({
-    _id: req.body._id,
-    LabJoinCode: req.body.LabJoinCode,
-    ChallengeQuestionType: req.body.ChallengeQuestionType,
-    ChallengeQuestion: req.body.ChallengeQuestion,
-    ChallengeOptionA: req.body.ChallengeOptionA,
-    ChallengeOptionB: req.body.ChallengeOptionB,
-    ChallengeOptionC: req.body.ChallengeOptionC,
-    ChallengeOptionD: req.body.ChallengeOptionD,
-    ChallengeCorrectOption: req.body.ChallengeCorrectOption,
-    ChallengeXPs: req.body.ChallengeXPs,
-    ChallengeAllowedTime: req.body.ChallengeAllowedTime,
-    AttemptedByStudents: req.body.AttemptedByStudents,
-  });
 
-  LabChallenge.updateOne({ _id: req.params.Id }, labChallenge).then(
-    (result) => {
-      res.status(200).json({
-        message:
-          "Lab Challenge of type: " +
-          req.body.ChallengeQuestionType +
-          " Updated!",
-        result: result,
-      });
-    }
-  );
-  console.log(
-    "   ==> {/UpdateThisLabChallenge/:Id} LabChallenge updated of type == ",
-    req.body.ChallengeQuestionType
-  );
-});
 
-router.put("/UpdateThisLabTask/:Id", (req, res, next) => {
-  const lab = new LabTask({
-    _id: req.body._id,
-    LabJoinCode: req.body.LabJoinCode,
-    LabTaskTitle: req.body.LabTaskTitle,
-    LabTaskQuestion: req.body.LabTaskQuestion,
-    LabTaskAnswer: req.body.LabTaskAnswer,
-    LabTaskXPs: req.body.LabTaskXPs,
-    AttemptedByStudents: req.body.AttemptedByStudents,
-  });
+router.put("/ChangeUniversityNameOfLabOfThisUnizLabs/:oldUniversityNameOfLab", (req, res, next) => {
 
-  LabTask.updateOne({ _id: req.params.Id }, lab).then((result) => {
+  Labs.updateMany({ UniversityNameOfLab:req.params.oldUniversityNameOfLab  }, {UniversityNameOfLab: req.body.UniversityNameOfLab}).then((result) => {
     res.status(200).json({
-      message: "Lab Task Updated!",
+      message: "University Name Of Lab Updated to : "+req.body.UniversityNameOfLab+"!",
       result: result,
     });
   });
-  console.log(
-    "   ==> {/UpdateThisLabTask/:Id} LabTask updated == ",
-    req.body.labTaskTitle
-  );
 });
+
+
 
 // RecieveLabsFromDB
 router.get("/RecieveLabsFromDB", (req, res, next) => {
@@ -128,20 +68,6 @@ router.get("/RecieveLabsFromDB", (req, res, next) => {
     });
 
     console.log("   ==> {/RecieveLabsFromDB} Labs were downloaded.");
-  });
-});
-
-// GetAllLabTasksFromDB
-router.get("/GetAllLabTasksFromDB", (req, res, next) => {
-  LabTask.find().then((documents) => {
-    res.status(200).json({
-      message: "All Lab Tasks Downloaded.",
-      labTasks: documents,
-    });
-
-    console.log(
-      "   ==> {/GetAllLabTasksFromDB} All Lab Tasks were downloaded."
-    );
   });
 });
 
@@ -180,49 +106,6 @@ router.post("/getAllLabsOfThisUniversity", (req, res, next) => {
       console.log("These are all labs of this university :", documents);
     }
   );
-});
-
-// AllLabTasksOfThisLabFromDB
-router.post("/getAllLabTasksOfThisLabFromDB", (req, res, next) => {
-  LabTask.find({ LabJoinCode: req.body.LabJoinCode }).then((documents) => {
-    res.status(200).json({
-      message: "All Lab Tasks Of This Lab From DB Downloaded.",
-      AllLabTasksOfThisLabFromDB: documents,
-    });
-
-    console.log(
-      "   ==> {/AllLabTasksOfThisLabFromDB} All Lab Tasks of this lab were downloaded."
-    );
-  });
-});
-
-router.post("/getAllChallengesOfThisLabFromDB", (req, res, next) => {
-  LabChallenge.find({ LabJoinCode: req.body.LabJoinCode }).then((documents) => {
-    console.log("getAllChallengesOfThisLabFromDB == documents> ", documents);
-    res.status(200).json({
-      message: "All Lab Challenges Of This Lab From DB Downloaded.",
-      AllChallengesOfThisLabFromDB: documents,
-    });
-
-    console.log(
-      "   ==> {/getAllChallengesOfThisLabFromDB} All Lab Challenges of this lab were downloaded." +
-        req.body.LabJoinCode
-    );
-  });
-});
-
-// GetAllLabChallengesFromDB
-router.get("/GetAllLabChallengesFromDB", (req, res, next) => {
-  LabChallenge.find().then((documents) => {
-    res.status(200).json({
-      message: "All Lab Challenges Downloaded.",
-      labChallenges: documents,
-    });
-
-    console.log(
-      "   ==> {/GetAllLabChallengesFromDB} All Lab Challenges were downloaded."
-    );
-  });
 });
 
 router.post("/FetchTHISLab", (req, res, next) => {
@@ -292,68 +175,9 @@ router.post("/CreateLab", (req, res, next) => {
   console.log("   ==> {/CreateLab} LabTitle == ", lab.LabTitle);
 });
 
-//=======================================================================YE WALI
-router.post("/CreateLabTask", (req, res, next) => {
-  const labTask = new LabTask({
-    LabJoinCode: req.body.LabJoinCode,
-    LabTaskTitle: req.body.LabTaskTitle,
-    LabTaskQuestion: req.body.LabTaskQuestion,
-    LabTaskAnswer: req.body.LabTaskAnswer,
-    LabTaskXPs: req.body.LabTaskXPs,
-    AttemptedByStudents: req.body.AttemptedByStudents,
-  });
 
-  console.log("labTask : ", labTask);
-  labTask
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Lab Task created succefully!",
-        JustCreatedLabTask: result,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
 
-  // console.log("   ==> {/CreateLabTask} LabTastTitle == ", labTask.labTaskTitle);
-});
 
-router.post("/CreateLabChallenge", (req, res, next) => {
-  const labChallenge = new LabChallenge({
-    LabJoinCode: req.body.LabJoinCode,
-    ChallengeQuestionType: req.body.ChallengeQuestionType,
-    ChallengeQuestion: req.body.ChallengeQuestion,
-    ChallengeOptionA: req.body.ChallengeOptionA,
-    ChallengeOptionB: req.body.ChallengeOptionB,
-    ChallengeOptionC: req.body.ChallengeOptionC,
-    ChallengeOptionD: req.body.ChallengeOptionD,
-    ChallengeCorrectOption: req.body.ChallengeCorrectOption,
-    ChallengeXPs: req.body.ChallengeXPs,
-    ChallengeAllowedTime: req.body.ChallengeAllowedTime,
-    AttemptedByStudents: req.body.AttemptedByStudents,
-  });
-  labChallenge
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Lab Challenge created succefully!",
-        result: result,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
-
-  console.log(
-    "   ==> {/CreateLabChallenge} ChallengeQuestionType == ",
-    labChallenge.ChallengeQuestionType
-  );
-});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////

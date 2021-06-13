@@ -6,6 +6,8 @@ import { StudentzUsernameAndLabJoinCodemodel } from 'src/app/MODELS/Student-Fron
 import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models/StudLabDataAndStatsmodel.model';
 import { Usersmodel } from 'src/app/MODELS/Usersmodel.model';
 import { GamificationService } from 'src/app/Services/gamification.service';
+import { StudentAttemptedLabChallengesService } from 'src/app/Services/student-attempted-lab-challenges.service';
+import { StudentAttemptedLabTasksService } from 'src/app/Services/student-attempted-lab-tasks.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 import { UsersService } from 'src/app/Services/users.service';
 
@@ -17,7 +19,10 @@ import { UsersService } from 'src/app/Services/users.service';
 export class EvaluateStudentsComponent implements OnInit {
 
 
-  constructor(private gamificationSercive: GamificationService, private studentLabDataService: StudentLabDataService, private usersService: UsersService, private http: HttpClient) { }
+  constructor(
+    private studentAttemptedLabChallengesService: StudentAttemptedLabChallengesService,
+    private studentAttemptedLabTasksService: StudentAttemptedLabTasksService,
+    private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.setAllErrorsToFalse();
@@ -93,7 +98,7 @@ export class EvaluateStudentsComponent implements OnInit {
 
   FetchedAllAttemptedLabTasksByStud: StudentAttemptedLabTaskmodel[] = [];
   fetchAllAttemptedLabTasksOfThisStudentForThisLab(student: Usersmodel) {
-    this.FetchedAllAttemptedLabTasksByStud = this.studentLabDataService.
+    this.FetchedAllAttemptedLabTasksByStud = this.studentAttemptedLabTasksService.
       RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab(this.LabID,
         student.Username);
 
@@ -160,7 +165,7 @@ export class EvaluateStudentsComponent implements OnInit {
 
   FetchedAllAttemptedMCQsLabChallengesByStud: StudentAttemptedLabChallengemodel[] = [];
   fetchAllAttemptedMCQsLabChallengesOfThisStudentForThisLab(student: Usersmodel) {
-    this.FetchedAllAttemptedMCQsLabChallengesByStud = this.studentLabDataService.
+    this.FetchedAllAttemptedMCQsLabChallengesByStud = this.studentAttemptedLabChallengesService.
       RecieveAllStudentAttemptedMCQLabChallengesOfthisStudandThisLab(this.LabID,
         student.Username);
 

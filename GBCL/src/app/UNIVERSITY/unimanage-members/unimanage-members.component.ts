@@ -14,7 +14,7 @@ import { StudLabDataAndStatsmodel } from 'src/app/MODELS/Student-Frontend-Models
 })
 export class UnimanageMembersComponent implements OnInit {
 
-  constructor(private usersService: UsersService, private studentLabDataService:StudentLabDataService) { }
+  constructor(private usersService: UsersService, private studentLabDataService: StudentLabDataService) { }
   ngOnInit() {
     this.setALLErrorsToFalse();
     this.AllUsersRecieved = this.usersService.RecieveAllUsersFromDB();
@@ -22,12 +22,12 @@ export class UnimanageMembersComponent implements OnInit {
     this.UsernameObj = { Username: localStorage.getItem("UsersUsername") };
     this.fetchedUni = this.usersService.FetchThisUser(this.UsernameObj);
     setTimeout(() => {
-      console.log('this.AllUsersRecieved ===>',this.AllUsersRecieved);
+      console.log('this.AllUsersRecieved ===>', this.AllUsersRecieved);
       this.localStorageUsername = this.fetchedUni[0].Username;
       this.UNIVERSITY_TITLE = this.fetchedUni[0].TitleOfUniversity;
     }, 1000);
     setTimeout(() => {
-      console.log('this.AllUsersRecieved ===>',this.AllUsersRecieved);
+      console.log('this.AllUsersRecieved ===>', this.AllUsersRecieved);
       this.extractAffiliatedAndRejectedMembers();
     }, 1500);
   }
@@ -53,6 +53,9 @@ export class UnimanageMembersComponent implements OnInit {
   RejectedMembersEditButtonText = "Edit";
   RegisteredFaculty: Usersmodel[] = [];
   RegisteredStudents: Usersmodel[] = [];
+  CS_Students: Usersmodel[] = [];
+  BS_Students: Usersmodel[] = [];
+  EE_Students: Usersmodel[] = [];
   RejectedMembers: Usersmodel[] = [];
   // //////////////////////////////////////////\///
   // //////////////////////////////////////////\///  VARIABLE DECLARATIONS ABOVE
@@ -70,8 +73,53 @@ export class UnimanageMembersComponent implements OnInit {
     }
   }
 
+  onEyeClick(event: Event) {
+    let eyeBtninp: HTMLElement = document.getElementById('show_hide_password_input');
+    let eyeBtni: HTMLElement = document.getElementById('show_hide_password_i');
+    event.preventDefault();
+    if (eyeBtninp.getAttribute("type") == "text") {
+      eyeBtninp.setAttribute('type', 'password');
+      eyeBtni.className = "py-2 rounded fa fa-eye-slash";
+    } else if (eyeBtninp.getAttribute("type") == "password") {
+      eyeBtninp.setAttribute('type', 'text');
+      eyeBtni.className = "py-2 roundede fa fa-eye";
+    }
 
-  on_CreateMemberProfileSubmitButton_Clicked(createMemberForm: NgForm) {
+  }
+
+
+  extractStudentsDepartmentWise(){
+    this.CS_Students = [];
+    this.BS_Students = [];
+    this.EE_Students = [];
+    for(let i=0; i<this.RegisteredStudents.length; i++){
+      if(this.RegisteredStudents[i].DepartmentOfUser=="CS"){
+        this.CS_Students.push(this.RegisteredStudents[i]);
+      }
+      if(this.RegisteredStudents[i].DepartmentOfUser=="BS"){
+        this.BS_Students.push(this.RegisteredStudents[i]);
+      }
+      if(this.RegisteredStudents[i].DepartmentOfUser=="EE"){
+        this.EE_Students.push(this.RegisteredStudents[i]);
+      }
+    }
+  }
+
+
+
+
+
+
+  on_CreateMemberProfileSubmitButton_Clicked(createMemberForm: NgForm, DepartmentsList: HTMLSelectElement) {
+    if (DepartmentsList.value == 'Selectone') {
+      alert("Select a department also please.");
+      return;
+    }
+    this.checkFNameOfMember(createMemberForm.value.FNcreateProfile);
+    this.checkLNameOfMember(createMemberForm.value.LNcreateProfile);
+    this.checkRegNOfMember(createMemberForm.value.RegNcreateProfile);
+    this.checkPasswordOfMember(createMemberForm.value.PWcreateProfile);
+
     if (this.checkIfErrors()) {
       this.Errors.formHasErrors.status = true;
       this.Errors.profileCreated.status = false;
@@ -88,6 +136,7 @@ export class UnimanageMembersComponent implements OnInit {
         FirstNameOfUser: createMemberForm.value.FNcreateProfile,
         LastNameOfUser: createMemberForm.value.LNcreateProfile,
         RegistrationNumberOfUser: createMemberForm.value.RegNcreateProfile,
+        DepartmentOfUser: DepartmentsList.value,
         UniversityNameOfUser: this.UNIVERSITY_TITLE,
         UserType: this.MemberType.toLowerCase(),
         HECIDofUniversity: null,
@@ -101,7 +150,7 @@ export class UnimanageMembersComponent implements OnInit {
 
 
 
-      createMemberForm.resetForm;
+      createMemberForm.resetForm();
 
       setTimeout(() => { window.location.reload() }, 2500);
 
@@ -122,6 +171,13 @@ export class UnimanageMembersComponent implements OnInit {
     }
   }
 
+  onDepartmentSelectChange(DepartmentsList: HTMLSelectElement) {
+    if (DepartmentsList.value === "Selectone") {
+      this.Errors.departmentNotSelected.status = true;
+    } else {
+      this.Errors.departmentNotSelected.status = false;
+    }
+  }
 
 
   DeleteThisUser(member: Usersmodel) {
@@ -260,6 +316,7 @@ export class UnimanageMembersComponent implements OnInit {
       LabJoinCodesOfAppliedLabs: OriginalMemberDetails.LabJoinCodesOfAppliedLabs,
       Password: UpdatedMemberPW,
       RegistrationNumberOfUser: UpdatedMemberRegN,
+      DepartmentOfUser: OriginalMemberDetails.DepartmentOfUser,
       TitleOfUniversity: OriginalMemberDetails.TitleOfUniversity,
       UniversityNameOfUser: OriginalMemberDetails.UniversityNameOfUser,
       UserType: OriginalMemberDetails.UserType,
@@ -365,6 +422,8 @@ export class UnimanageMembersComponent implements OnInit {
   }
 
   checkPasswordOfMember(PW: string) {
+    let pwHidden = document.getElementById("show_hide_password_input");
+    pwHidden.setAttribute("type","password");
     PW.length == 0
       ? (this.Errors.emptyField.status = true)
       : (this.Errors.emptyField.status = false);
@@ -411,6 +470,7 @@ export class UnimanageMembersComponent implements OnInit {
     this.Errors.profileCreated.status = false;
     this.Errors.profileUpdated.status = false;
     this.Errors.userDeleted.status = false;
+    this.Errors.departmentNotSelected.status = true;
     this.Errors.accessAllowed.status = false;
   }
 
@@ -421,6 +481,7 @@ export class UnimanageMembersComponent implements OnInit {
       this.Errors.profileCreated.status ||
       this.Errors.accessAllowed.status ||
       this.Errors.profileUpdated.status ||
+      this.Errors.departmentNotSelected.status ||
       this.Errors.userDeleted.status ||
       this.Errors.invalidFName.status ||
       this.Errors.invalidLName.status ||
@@ -444,7 +505,7 @@ export class UnimanageMembersComponent implements OnInit {
   }
 
 
-  onFacultyEditToggle(FacultyEditForm: NgForm,OldUN: string) {
+  onFacultyEditToggle(FacultyEditForm: NgForm, OldUN: string) {
     this.setALLErrorsToFalse();
     if (this.FacultyEdit == false) {
       this.FacultyEdit = true;
@@ -462,7 +523,7 @@ export class UnimanageMembersComponent implements OnInit {
   }
 
 
-  onStudentEditToggle(StudentEditForm: NgForm,OldUN: string) {
+  onStudentEditToggle(StudentEditForm: NgForm, OldUN: string) {
     this.setALLErrorsToFalse();
     if (this.StudentEdit == false) {
       this.StudentEdit = true;
@@ -500,6 +561,10 @@ export class UnimanageMembersComponent implements OnInit {
     emptyField: {
       status: true,
       message: 'One or more fields are empty.',
+    },
+    departmentNotSelected: {
+      status: true,
+      message: 'Department Not Selected.',
     },
     userDeleted: {
       status: true,

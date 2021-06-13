@@ -52,10 +52,10 @@
   </button>
   <div class="dropdown-menu bg-warning" >
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/'">Dashboard</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/CPA'">CPA</a>
-    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/AllLabs'">Attempt Lab Tasks</a>
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
     <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
+    <a class="dropdown-item" [routerLink]="'/STUDENT/Lab/Leaderboard'">Leaderboard</a>
     <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onExitLabClicked()">Exit Lab</button>
     <div class="dropdown-divider"></div>
     <button type="button" class="btn btn-outline-danger w-100 ml-0" (click)="onLogout()">Logout</button>
@@ -89,18 +89,17 @@
         <a class="nav-link " [routerLink]="'/STUDENT/Lab'" >Lab Dashboard</a>
       </li>
       <li class="nav-item text-left">
-        <a class="nav-link" [routerLink]="'/STUDENT/Lab/CPA'">Visit CPA</a>
-      </li>
-      <li class="nav-item text-left">
-        <a class="nav-link " [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
+        <a class="nav-link active" [routerLink]="'/STUDENT/Lab/AllLabs'">Attempt Lab Tasks</a>
       </li>
       <li class="nav-item text-left">
         <a class="nav-link" [routerLink]="'/STUDENT/Lab/Challenges'">Attempt Challenges</a>
       </li>
       <li class="nav-item text-left">
-        <a class="nav-link active" [routerLink]="'/STUDENT/Lab/Rivals'">Rivals' Recent Activities</a>
+        <a class="nav-link " [routerLink]="'/STUDENT/Lab/Rivals'">Rivals</a>
       </li>
-
+      <li class="nav-item text-left">
+        <a class="nav-link " [routerLink]="'/STUDENT/Lab/Leaderboard'">View Leaderboard</a>
+      </li>
     </ul>
 
   </div>
@@ -108,276 +107,167 @@
 
 
 
-    <!-- <div class="border rounded border-dark border-2 minHeight64 m-1">
-      <h4 class="text-center p-2 mx-5 my-3 text-light" *ngIf="FetchedRivalOneHistory.length==0">No rival Activities yet</h4>
 
-      <div class="border rounded border-warning border-2 m-1">
 
-        <div id="accordion" *ngIf="FetchedRivalOneHistory.length!=0">
-          <div class="card m-3"  multiple="true">
-            <div class="card-header childSpansHoverYellow"
-              [attr.id]="'heading1'">
 
-              <button class="btn OutlineTaskTitleBtns " data-toggle="collapse"
-                [attr.data-target]="'#collapse1'" aria-expanded="true"
-                [attr.aria-controls]="'collapse1'">
-                {{FetchedRivalOneHistory[0]?.StudentzFullName}}
-              </button>
 
+
+
+
+
+    <div id="accordionOuter2">
+      <div class="card  mt-2 mx-3"  *ngFor="let LabNumber of LabNumbers;let i=index">
+        <div class="card-header" [attr.id]="'headingOne2'+LabNumber._id">
+          <h5 class="mb-0">
+            <!-- data-target="#collapseOne2" (click)="setViewStatsFalse()" -->
+            <button class="btn btn-link text-secondary py-2 px-1" data-toggle="collapse" [attr.data-target]="'#collapseOne2'+LabNumber._id"
+              aria-expanded="true" aria-controls="collapseOne2" (click)="extractLabTasksOfThisLabNumber(LabNumber)">
+              <h4><b> {{'Lab Number : '+LabNumber.LabNumber}} <span class="text-info"></span></b></h4>
+            </button>
+          </h5>
+        </div>
+        <div [attr.id]="'collapseOne2'+LabNumber._id" class="collapse hide" [attr.aria-labelledby]="'headingOne2'+LabNumber._id" data-parent="#accordionOuter2">
+          <div class="card-body">
+
+
+
+            <div class="alert alert-info" *ngIf="CURRENT_LABNUMBERZ_TASKS.length ==0">
+              No Lab Tasks uploaded for this lab yet.
             </div>
 
-            <div [id]="'collapse1'" class="collapse hide" [attr.aria-labelledby]="'heading1'"
-              data-parent="#accordion">
-              <div class="card-body ">
-
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Changed XPs</th>
-                      <th>Activity</th>
-                      <th>Date/Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let rival of FetchedRivalOneHistory">
 
 
-                      <td>{{rival.GainedOrLoosedXPsCount}}</td>
-                      <td>{{rival.Activity}}</td>
-                      <td>{{rival.TimeAndDate}}</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <!-- Cards within card -->
 
+            <div id="accordionInner2">
+              <div class="card mb-1" *ngFor="let task of CURRENT_LABNUMBERZ_TASKS">
+                <div class="card-header" [attr.id]="'RegisterUniversityCard2'">
+                  <!-- (click)="setViewStatsFalse()" -->
+                  <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
+                    [attr.data-target]="'#RegisterUniversityCollapse2' + task._id" aria-expanded="true"
+
+                    [attr.aria-controls]="'collapse' + task._id">
+                    {{task.LabTaskTitle}}
+
+                  </button>
+
+                </div>
+
+                <div [id]="'RegisterUniversityCollapse2' + task._id" class="collapse hide"
+                  [attr.aria-labelledby]="'RegisterUniversityCard2'" data-parent="#accordionInner2">
+                  <div class="card-body ">
+
+                    <div class="row">
+                      <div class="col-11 m-auto">
+                        <!-- remove bg dark -->
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Task Question</th>
+                              <!-- <th>Task Solution</th> -->
+                              <th>XPs</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+
+
+                              <td>{{task.LabTaskQuestion}}</td>
+                              <!-- <td><pre>{{task.LabTaskAnswer}}</pre></td> -->
+                              <td>{{task.LabTaskXPs}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="d-flex justify-content-end mr-3">
+                          <!-- <button (click)="viewStatsButtonClicked(LabMemberStudent)" -->
+                          <button
+                            class="btn btn-info w-25 maSmallerFonts my-2 mx-2"
+                            (click)="onAttemptClicked(task)">Attempt</button>
+                        </div>
+
+
+
+
+                        <!-- <div *ngIf="ViewStats == true">
+
+                          <div class="row">
+                            <div class="col-11 m-auto">
+
+                              <div  class="alert alert-info my-2" *ngIf="FetchedAllAttemptedLabTasksByStud.length==0">
+                                No Lab Tasks Yet done by {{LabMemberStudent.FirstNameOfUser+' '+LabMemberStudent.LastNameOfUser}}
+
+                              </div>
+                              <div class="YahanFOrLoopLaganaHai" *ngFor="let fetchedSol of FetchedAllAttemptedLabTasksByStud">
+
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>Task XPs</th>
+                                      <th>Lab Task</th>
+                                      <th>Gained XPs</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+
+
+                                      <td>{{fetchedSol.LabTaskXPs}}</td>
+                                      <td>{{fetchedSol.LabTaskQuestion}}</td>
+                                      <td>{{fetchedSol.GainedXPs}}</td>
+
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <div>
+                                  <label style="text-decoration: underline;">Code By Student</label>
+                                  <pre>{{fetchedSol.LabTaskAnswerCode}}</pre>
+                                  <label style="text-decoration: underline;">Output By Student</label>
+                                  <pre>{{fetchedSol.LabTaskAnswerOutput}}</pre>
+
+                                  <label style="text-decoration: underline;">Input By Student</label>
+                                  <pre>{{fetchedSol.LabTaskAnswerInput}}</pre>
+
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                        </div> -->
+
+
+
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
               </div>
             </div>
+
+            <!-- Cards within card -->
+
+
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-        <div id="accordion2" *ngIf="FetchedRivalTwoHistory.length!=0">
-          <div class="card m-3" multiple="true">
-            <div class="card-header childSpansHoverYellow"
-              [attr.id]="'heading2'">
-
-              <button class="btn OutlineTaskTitleBtns " data-toggle="collapse"
-                [attr.data-target]="'#collapse2'" aria-expanded="true"
-                [attr.aria-controls]="'collapse2'">
-                {{FetchedRivalTwoHistory[0]?.StudentzFullName}}
-              </button>
-
-            </div>
-
-            <div [id]="'collapse2'" class="collapse hide" [attr.aria-labelledby]="'heading2'"
-              data-parent="#accordion">
-              <div class="card-body ">
-
-
-
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Changed XPs</th>
-                      <th>Activity</th>
-                      <th>Date/Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let rival of FetchedRivalTwoHistory">
-
-
-                      <td>{{rival.GainedOrLoosedXPsCount}}</td>
-                      <td>{{rival.Activity}}</td>
-                      <td>{{rival.TimeAndDate}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-        <div id="accordion3" *ngIf="FetchedRivalThreeHistory.length!=0">
-          <div class="card m-3" multiple="true">
-            <div class="card-header childSpansHoverYellow"
-              [attr.id]="'heading3'">
-
-              <button class="btn OutlineTaskTitleBtns " data-toggle="collapse"
-                [attr.data-target]="'#collapse3'" aria-expanded="true"
-                [attr.aria-controls]="'collapse3'">
-                {{FetchedRivalThreeHistory[0]?.StudentzFullName}}
-              </button>
-
-            </div>
-
-            <div [id]="'collapse3'" class="collapse hide" [attr.aria-labelledby]="'heading3'"
-              data-parent="#accordion3">
-              <div class="card-body ">
-
-
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Changed XPs</th>
-                      <th>Activity</th>
-                      <th>Date/Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let rival of FetchedRivalThreeHistory">
-
-
-                      <td>{{rival.GainedOrLoosedXPsCount}}</td>
-                      <td>{{rival.Activity}}</td>
-                      <td>{{rival.TimeAndDate}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-        <div id="accordion4" *ngIf="FetchedRivalFourHistory.length!=0">
-          <div class="card m-3" multiple="true">
-            <div class="card-header childSpansHoverYellow"
-              [attr.id]="'heading4'">
-
-              <button class="btn OutlineTaskTitleBtns " data-toggle="collapse"
-                [attr.data-target]="'#collapse4'" aria-expanded="true"
-                [attr.aria-controls]="'collapse4'">
-                {{FetchedRivalFourHistory[0]?.StudentzFullName}}
-              </button>
-
-            </div>
-
-            <div [id]="'collapse4'" class="collapse hide" [attr.aria-labelledby]="'heading4'"
-              data-parent="#accordion4">
-              <div class="card-body ">
-
-
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Changed XPs</th>
-                      <th>Activity</th>
-                      <th>Date/Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let rival of FetchedRivalFourHistory">
-
-
-                      <td>{{rival.GainedOrLoosedXPsCount}}</td>
-                      <td>{{rival.Activity}}</td>
-                      <td>{{rival.TimeAndDate}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-        <div id="accordion" *ngIf="FetchedRivalFiveHistory.length!=0">
-          <div class="card m-3"  multiple="true">
-            <div class="card-header childSpansHoverYellow"
-              [attr.id]="'headingFive'">
-
-              <button class="btn OutlineTaskTitleBtns " data-toggle="collapse"
-                [attr.data-target]="'#collapseFive'" aria-expanded="true"
-                [attr.aria-controls]="'collapseFive'">
-                {{FetchedRivalFiveHistory[0]?.StudentzFullName}}
-              </button>
-
-            </div>
-
-            <div [id]="'collapseFive'" class="collapse hide" [attr.aria-labelledby]="'headingFive'"
-              data-parent="#accordion">
-              <div class="card-body ">
-
-
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Changed XPs</th>
-                      <th>Activity</th>
-                      <th>Date/Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let rival of FetchedRivalFiveHistory">
-
-
-                      <td>{{rival.GainedOrLoosedXPsCount}}</td>
-                      <td>{{rival.Activity}}</td>
-                      <td>{{rival.TimeAndDate}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </div>
 
     </div>
- -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   </div>
@@ -420,3 +310,10 @@
 <!-- -------------------------------------------------------------------------------------- -->
 <!-- AREA UNDER TOP ROW OF STUDENT ENDS-->
 <!-- ----------------------------------------------------------------------------------------->
+
+<!-- LOADING MODEL -->
+<div *ngIf="showSpinner">
+  <div id="opaque" class="d-block"></div>
+  <div id="spinner" class="loader"></div>
+</div>
+

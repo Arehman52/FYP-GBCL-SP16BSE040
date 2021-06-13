@@ -6,6 +6,7 @@ export interface LabTasksmodel {
   LabTaskTitle: string;
   LabTaskQuestion: string;
   LabTaskAnswer: string;
+  TaskBeingAttempted:boolean;
   LabTaskXPs: number;
   AttemptedByStudents: string[];
 }

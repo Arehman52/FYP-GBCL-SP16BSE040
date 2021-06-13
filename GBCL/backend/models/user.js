@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
   LastNameOfUser: String,
   UniversityNameOfUser: String,
   RegistrationNumberOfUser: String,
+  DepartmentOfUser: String,
   LabJoinCodesOfJoinedLabs: [ String ],
   LabJoinCodesOfAppliedLabs: [ String ],
   // attribs of UserType = University

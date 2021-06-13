@@ -6,6 +6,7 @@ const labTaskSchema = mongoose.Schema({
   LabTaskTitle: String,
   LabTaskQuestion: String,
   LabTaskAnswer: String,
+  TaskBeingAttempted:Boolean,
   LabTaskXPs: Number,
   AttemptedByStudents: [ String ]
   });

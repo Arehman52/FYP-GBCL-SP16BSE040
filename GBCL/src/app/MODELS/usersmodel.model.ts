@@ -5,6 +5,7 @@ export interface Usersmodel {
   LastNameOfUser: string;
   UniversityNameOfUser: string;
   RegistrationNumberOfUser: string;
+  DepartmentOfUser: string;
   LabJoinCodesOfJoinedLabs: string[];
   LabJoinCodesOfAppliedLabs: string[];
   // LabJoinCodesOfJoinedLabs: [{ type: string }];

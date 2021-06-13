@@ -40,8 +40,9 @@
         <!-- GBCL LOGO COLUMN -->
 
         <div class="col-12 col-sm-3 col-md-2 bgYellowOnHover">
-          <a class="btn  border-warning w-100 logoText"  routerLink="/UNIVERSITY" title="Gamification Based Coding Labs"><img
-              src="../../assets/images/logo.png" alt="logo" id="logoImg"><b>GBCL</b></a>
+          <a class="btn  border-warning w-100 logoText" routerLink="/UNIVERSITY"
+            title="Gamification Based Coding Labs"><img src="../../assets/images/logo.png" alt="logo"
+              id="logoImg"><b>GBCL</b></a>
         </div>
 
         <!-- GBCL LOGO COLUMN-END -->
@@ -55,14 +56,15 @@
         <!-- ----------- -->
         <!-- Stats column -->
 
-        <div class="col-12 col-sm-6 col-md-8 border rounded CurrentStatsHover">
+        <div class="col-12 col-sm-6 col-md-8 border border-dark rounded CurrentStatsHover">
 
 
           <div class="row text-center  childSpansHoverYellow">
-            <div class="col"><span class="mx-2">
-                <h4>Manage Members</h4>
-                <h6>{{this.UNIVERSITY_TITLE}}</h6>
-              </span></div>
+            <div class="col">
+              <span>
+                <h4 class="p-2">Manage Members</h4>
+                <h6 class="pb-2">{{this.UNIVERSITY_TITLE}}</h6></span>
+              </div>
           </div>
         </div>
         <!-- STATS COL END -->
@@ -113,7 +115,7 @@
       </div>
 
     </div>
-    <hr class="bg-warning p-0 m-0">
+    <!-- <hr class="bg-warning p-0 m-0"> -->
   </div>
   <!--1st row ends-->
   <!-- -------------------------------------------------------------------------------------- -->
@@ -184,7 +186,7 @@
                   <!-- Start of std divis -->
 
                   <!-- -->
-                  <form (submit)="on_CreateMemberProfileSubmitButton_Clicked(createMemberForm)"
+                  <form (submit)="on_CreateMemberProfileSubmitButton_Clicked(createMemberForm,DepartmentsList)"
                     #createMemberForm="ngForm">
 
                     <div class="row">
@@ -193,7 +195,7 @@
                         <!-- //3rd Element: Enter Username -->
                         <div class="form-group">
                           <label> {{this.MemberType}}'s Username</label>
-                          <input type="text" class="form-control" name="UNcreateProfile"
+                          <input type="text" class="form-control" name="UNcreateProfile" placeholder="Enrer a Username"
                             (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(createMemberForm.value.UNcreateProfile, '')"
                             ngModel>
                           <small class="form-text alert alert-danger"
@@ -210,16 +212,24 @@
                         </div>
                       </div>
 
-                      <div class="col-sm-6">
-                        <div class="form-group ">
-                          <label> {{this.MemberType}}'s Password</label>
-                          <input type="text" class="form-control " name="PWcreateProfile"
-                            (keyup)="checkPasswordOfMember(createMemberForm.value.PWcreateProfile)" ngModel>
-                          <small class="form-text alert alert-danger"
-                            *ngIf="this.Errors.invalidPassword.status == true">
-                            {{this.Errors.invalidPassword.message}}
-                          </small>
+                      <div class="col-sm-6 form-group ">
+
+                        <label> {{this.MemberType}}'s Password</label>
+                        <div class="input-group" id="show_hide_password">
+                          <input class="form-control" placeholder="Enter a Password" name="PWcreateProfile" ngModel
+                            (keyup)="checkPasswordOfMember(createMemberForm.value.PWcreateProfile)"
+                            id="show_hide_password_input" type="text">
+                          <div class="input-group-addon">
+                            <button (click)="onEyeClick($event)" id="show_hide_password_a"><i
+                                class="py-2 rounded fa fa-eye-slash" id="show_hide_password_i"
+                                [attr.aria-hidden]="'true'"></i></button>
+                          </div>
                         </div>
+
+                        <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidPassword.status == true">
+                          {{this.Errors.invalidPassword.message}}
+                        </small>
+
                       </div>
                     </div>
                     <!--sdgsd  -->
@@ -228,7 +238,7 @@
 
                       <div class="form-group col-sm-6">
                         <label> {{this.MemberType}}'s First Name</label>
-                        <input type="text" class="form-control" name="FNcreateProfile"
+                        <input type="text" class="form-control" name="FNcreateProfile" placeholder="Enrer First Name"
                           (keyup)="checkFNameOfMember(createMemberForm.value.FNcreateProfile)" ngModel>
                         <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidFName.status == true">
                           {{this.Errors.invalidFName.message}}
@@ -237,7 +247,7 @@
 
                       <div class="form-group col-sm-6">
                         <label> {{this.MemberType}}'s Last Name</label>
-                        <input type="text" class="form-control" name="LNcreateProfile"
+                        <input type="text" class="form-control" name="LNcreateProfile" placeholder="Enrer Last Name"
                           (keyup)="checkLNameOfMember(createMemberForm.value.LNcreateProfile)" ngModel>
                         <small class="form-text alert alert-danger" *ngIf="this.Errors.invalidLName.status == true">
                           {{this.Errors.invalidLName.message}}
@@ -247,14 +257,28 @@
                     </div>
 
                     <div class="row">
-                      <div class="form-group col-sm-12">
+                      <div class="form-group col-sm-6">
                         <label> {{this.MemberType}}'s Registration Number</label>
                         <input type="text" class="form-control" name="RegNcreateProfile"
+                          placeholder="Enrer Member's Registration#"
                           (keyup)="checkRegNOfMember(createMemberForm.value.RegNcreateProfile)" ngModel>
                         <small class="form-text alert alert-danger"
                           *ngIf="this.Errors.invalidRegistrationNumber.status == true">
                           {{this.Errors.invalidRegistrationNumber.message}}
                         </small>
+                      </div>
+                      <div class="form-group col-sm-6">
+                        <label>Department</label>
+                        <select class="custom-select" #DepartmentsList
+                          (change)="onDepartmentSelectChange(DepartmentsList)">
+                          <option value="Selectone" name="UsersSelectedDepartment" selected disabled><b>Select one</b>
+                          </option>
+                          <option value="CS" name="UsersSelectedDepartment"><b>CS</b></option>
+                          <option value="EE" name="UsersSelectedDepartment"><b>EE</b></option>
+                          <option value="BS" name="UsersSelectedDepartment"><b>BS</b></option>
+                        </select>
+
+                        <!-- <button (click)="updaall()">update all userssss</button> -->
                       </div>
                     </div>
 
@@ -305,7 +329,8 @@
             <h5 class="mb-0">
               <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
                 data-target="#collapseOneStd" aria-expanded="true" aria-controls="collapseOneStd">
-                <h5><b>View Registered Faculty <span class="text-info">**</span> <span class="ml-3 text-muted" style="font-size: 16px;">( {{this.RegisteredFaculty.length}} )</span> </b></h5>
+                <h5><b>View Registered Faculty <span class="text-info">**</span> <span class="ml-3 text-muted"
+                      style="font-size: 16px;">( {{this.RegisteredFaculty.length}} )</span> </b></h5>
               </button>
             </h5>
           </div>
@@ -354,6 +379,7 @@
                               <tr>
                                 <th>Registration Number</th>
                                 <th>Username</th>
+                                <th>Dept.</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Access Status</th>
@@ -366,6 +392,7 @@
 
                                 <td>{{faculty.RegistrationNumberOfUser}}</td>
                                 <td>{{faculty.Username}}</td>
+                                <td>{{faculty.DepartmentOfUser}}</td>
                                 <td>{{faculty.FirstNameOfUser}}</td>
                                 <td>{{faculty.LastNameOfUser}}</td>
                                 <td>{{faculty.UserzAccessStatus}}</td>
@@ -494,221 +521,759 @@
 
 
 
-
       <div id="accordionOuterViewStuds">
         <div class="card  mt-2 mx-3">
           <div class="card-header noUnderlineForChildren" id="headingOne">
             <h5 class="mb-0">
               <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
-                data-target="#collapseOneViewStd" aria-expanded="true" aria-controls="collapseOneViewStd">
-                <h5><b>View Registered Students <span class="text-info">**<span class="ml-3 text-muted" style="font-size: 16px;">( {{this.RegisteredStudents.length}} )</span> </span></b></h5>
+                data-target="#collapseOneViewStd" aria-expanded="true" aria-controls="collapseOneViewStd"
+                (click)="extractStudentsDepartmentWise()">
+                <h5><b>View Registered Students <span class="text-info">**<span class="ml-3 text-muted"
+                        style="font-size: 16px;">( {{this.RegisteredStudents.length}} )</span> </span></b></h5>
               </button>
             </h5>
           </div>
           <div id="collapseOneViewStd" class="collapse hide" aria-labelledby="headingOne"
             data-parent="#accordionOuterViewStuds">
             <div class="card-body">
-
-
-
               <div class="mx-2 mt-3" *ngIf="this.RegisteredStudents.length==0">
                 <div class="alert alert-info p-4">
                   <h5>No Students registered with your university.</h5>
                 </div>
               </div>
 
+              <!--  -->
+              <!--  -->
+              <!--  -->
 
 
-
-              <!-- Cards within card -->
-
-              <div id="accordionInnerStds">
-                <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
-                <div class="card mb-1" *ngFor="let student of RegisteredStudents">
-                  <div class="card-header noUnderlineForChildren" [attr.id]="'RegisterUniversityCard'">
-
-                    <button class="btn" style="text-transform:uppercase; font-weight: 600;" data-toggle="collapse"
-                      [attr.data-target]="'#RegisterUniversityCollapse' + student._id" aria-expanded="true"
-                      [attr.aria-controls]="'collapse' + student._id">
-                      {{student.FirstNameOfUser+' '+student.LastNameOfUser}}
-                    </button>
-
+              <div id="accordionOuterViewStuds22" *ngIf="CS_Students.length > 0">
+                <div class="card  mt-2 mx-3">
+                  <div class="card-header noUnderlineForChildren" id="headingOne22">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
+                        data-target="#collapseOneViewStd22" aria-expanded="true" aria-controls="collapseOneViewStd22"
+                        (click)="extractStudentsDepartmentWise()">
+                        <h5><b class="text-warning">CS Department <span class="text-info">**<span class="ml-3 text-muted"
+                                style="font-size: 16px;">( {{this.CS_Students.length}} )</span> </span></b></h5>
+                      </button>
+                    </h5>
                   </div>
+                  <div id="collapseOneViewStd22" class="collapse hide" aria-labelledby="headingOne22"
+                    data-parent="#accordionOuterViewStuds22">
+                    <div class="card-body">
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
 
-                  <div [id]="'RegisterUniversityCollapse' + student._id" class="collapse hide"
-                    [attr.aria-labelledby]="'RegisterUniversityCard'" data-parent="#accordionInnerStds">
-                    <div class="card-body ">
+                      <div id="accordionInnerStds22">
+                        <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
+                        <div class="card mb-1" *ngFor="let student of CS_Students">
+                          <div class="card-header noUnderlineForChildren" [attr.id]="'RegisterUniversityCard22'">
 
-                      <div class="row">
-                        <div class="col-11 m-auto">
-                          <!-- delete bg dark -->
-                          <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>Registration Number</th>
-                                <th>Username</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Access Status</th>
-                                <th>University</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
+                            <button class="btn" style="text-transform:uppercase; font-weight: 600;"
+                              data-toggle="collapse" [attr.data-target]="'#RegisterUniversityCollapse22' + student._id"
+                              aria-expanded="true" [attr.aria-controls]="'collapse' + student._id">
+                              {{student.FirstNameOfUser+' '+student.LastNameOfUser}}
+                            </button>
 
-
-                                <td>{{student.RegistrationNumberOfUser}}</td>
-                                <td>{{student.Username}}</td>
-                                <td>{{student.FirstNameOfUser}}</td>
-                                <td>{{student.LastNameOfUser}}</td>
-                                <td>{{student.UserzAccessStatus}}</td>
-                                <td>{{student.UniversityNameOfUser}}</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <div class="d-flex justify-content-end mr-3">
-                            <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
-                              (click)="onStudentEditToggle(StudentEditForm,student.Username)">{{this.EditStudentButtonText}}</button>
-                            <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
-                              (click)="DeleteThisUser(student)">Delete</button>
-                            <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
                           </div>
 
-
-
-
-                          <div [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.StudentEdit == true}"
-                            [ngClass]="{'d-none' : this.StudentEdit == false}">
-                            <!-- Start of std divis EditFacultyProfile-->
-
-
-                            <form (submit)="onSubmit_UpdateButton(StudentEditForm,student)" #StudentEditForm="ngForm">
+                          <div [id]="'RegisterUniversityCollapse22' + student._id" class="collapse hide"
+                            [attr.aria-labelledby]="'RegisterUniversityCard22'" data-parent="#accordionInnerStds22">
+                            <div class="card-body ">
 
                               <div class="row">
-                                <!-- <div class="col-sm-6">
-                                  <div class="form-group">
-                                    <label> Student's Username</label>
-                                    <input type="text" class="form-control" placeholder="Update Student's Username"
-                                      (keyup)="checkUsernameOfMemberIfVALIDandUNIQUE(StudentEditForm.value.MemberUN,student.Username)"
-                                      name="MemberUN" [ngModel]="student.Username">
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.spacesAreNotAllowed.status == true">
-                                      <span>{{this.Errors.spacesAreNotAllowed.message}}</span>
-                                    </small>
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.invalidUsername.status == true">
-                                      <span>{{this.Errors.invalidUsername.message}}</span>
-                                    </small>
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.usernameNotUnique.status == true">
-                                      <span>{{this.Errors.usernameNotUnique.message}}</span>
-                                    </small>
+                                <div class="col-11 m-auto">
+                                  <!-- delete bg dark -->
+                                  <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
+                                  <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>Registration Number</th>
+                                        <th>Username</th>
+                                        <th>Dept.</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Access Status</th>
+                                        <th>University</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+
+
+                                        <td>{{student.RegistrationNumberOfUser}}</td>
+                                        <td>{{student.Username}}</td>
+                                        <td>{{student.DepartmentOfUser}}</td>
+                                        <td>{{student.FirstNameOfUser}}</td>
+                                        <td>{{student.LastNameOfUser}}</td>
+                                        <td>{{student.UserzAccessStatus}}</td>
+                                        <td>{{student.UniversityNameOfUser}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div class="d-flex justify-content-end mr-3">
+                                    <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+                                      (click)="onStudentEditToggle(StudentEditForm,student.Username)">{{this.EditStudentButtonText}}</button>
+                                    <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                                      (click)="DeleteThisUser(student)">Delete</button>
+                                    <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
                                   </div>
-                                </div> -->
 
 
 
 
-                                <div class="form-group col-sm-6">
-                                  <label> Student's First Name</label>
-                                  <input type="text" class="form-control" placeholder="Update Student's First Name"
-                                    (keyup)="checkFNameOfMember(StudentEditForm.value.MemberFN)" name="MemberFN"
-                                    [ngModel]="student.FirstNameOfUser">
-                                  <small class="form-text alert alert-danger"
-                                    *ngIf="this.Errors.invalidFName.status == true">
-                                    <span>--{{this.Errors.invalidFName.message}}</span>
-                                  </small>
-                                </div>
+                                  <div
+                                    [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.StudentEdit == true}"
+                                    [ngClass]="{'d-none' : this.StudentEdit == false}">
+                                    <!-- Start of std divis EditFacultyProfile-->
 
-                                <div class="form-group col-sm-6">
-                                  <label> Student's Last Name</label>
-                                  <input type="text" class="form-control" placeholder="Update Student's Last Name"
-                                    (keyup)="checkLNameOfMember(StudentEditForm.value.MemberLN)" name="MemberLN"
-                                    [ngModel]="student.LastNameOfUser">
-                                  <small class="form-text alert alert-danger"
-                                    *ngIf="this.Errors.invalidLName.status == true">
-                                    <span>--{{this.Errors.invalidLName.message}}</span>
-                                  </small>
-                                </div>
+
+                                    <form (submit)="onSubmit_UpdateButton(StudentEditForm,student)"
+                                      #StudentEditForm="ngForm">
+
+                                      <div class="row">
 
 
 
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's First Name</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's First Name"
+                                            (keyup)="checkFNameOfMember(StudentEditForm.value.MemberFN)" name="MemberFN"
+                                            [ngModel]="student.FirstNameOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidFName.status == true">
+                                            <span>--{{this.Errors.invalidFName.message}}</span>
+                                          </small>
+                                        </div>
 
-                                <div class="col-sm-6">
-                                  <div class="form-group ">
-                                    <label> Student's Password</label>
-                                    <input type="text" class="form-control " placeholder="Update Student's Password"
-                                      (keyup)="checkPasswordOfMember(StudentEditForm.value.MemberPW)" name="MemberPW"
-                                      [ngModel]="student.Password">
-                                    <small class="form-text alert alert-danger"
-                                      *ngIf="this.Errors.invalidPassword.status == true">
-                                      <span>{{this.Errors.invalidPassword.message}}</span>
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's Last Name</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's Last Name"
+                                            (keyup)="checkLNameOfMember(StudentEditForm.value.MemberLN)" name="MemberLN"
+                                            [ngModel]="student.LastNameOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidLName.status == true">
+                                            <span>--{{this.Errors.invalidLName.message}}</span>
+                                          </small>
+                                        </div>
+
+
+
+
+                                        <div class="col-sm-6">
+                                          <div class="form-group ">
+                                            <label> Student's Password</label>
+                                            <input type="text" class="form-control "
+                                              placeholder="Update Student's Password"
+                                              (keyup)="checkPasswordOfMember(StudentEditForm.value.MemberPW)"
+                                              name="MemberPW" [ngModel]="student.Password">
+                                            <small class="form-text alert alert-danger"
+                                              *ngIf="this.Errors.invalidPassword.status == true">
+                                              <span>{{this.Errors.invalidPassword.message}}</span>
+                                            </small>
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's Registration Number</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's Registration Number"
+                                            (keyup)="checkRegNOfMember(StudentEditForm.value.MemberRegN)"
+                                            name="MemberRegN" [ngModel]="student.RegistrationNumberOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                                            <span>{{this.Errors.invalidRegistrationNumber.message}}</span>
+                                          </small>
+                                        </div>
+                                      </div>
+
+                                      <!-- SIGNUP BUTTON BELOW -->
+                                      <div class="text-center">
+                                        <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
+                                          type="submit">Update Profile</button>
+                                      </div>
+
+                                    </form>
+                                    <small class="form-text alert alert-success"
+                                      *ngIf="this.Errors.formHasErrors.status == true">
+                                      <span>--{{this.Errors.formHasErrors.message}}</span>
                                     </small>
+
+                                    <small class="form-text alert alert-success"
+                                      *ngIf="this.Errors.profileUpdated.status == true">
+                                      <span>--{{this.Errors.profileUpdated.message}}</span>
+                                    </small>
+
                                   </div>
-                                </div>
-                                <!--sdgsd  -->
-                                <!-- </div> -->
 
-                                <!-- <div class="row"> -->
 
-                                <!-- </div> -->
 
-                                <!-- <div class="row"> @@@@@@@ -->
-                                <div class="form-group col-sm-6">
-                                  <label> Student's Registration Number</label>
-                                  <input type="text" class="form-control"
-                                    placeholder="Update Student's Registration Number"
-                                    (keyup)="checkRegNOfMember(StudentEditForm.value.MemberRegN)" name="MemberRegN"
-                                    [ngModel]="student.RegistrationNumberOfUser">
-                                  <small class="form-text alert alert-danger"
-                                    *ngIf="this.Errors.invalidRegistrationNumber.status == true">
-                                    <span>{{this.Errors.invalidRegistrationNumber.message}}</span>
-                                  </small>
+
+
+
+
+
+
+
+
                                 </div>
                               </div>
 
-                              <!-- SIGNUP BUTTON BELOW -->
-                              <div class="text-center">
-                                <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
-                                  type="submit">Update Profile</button>
-                              </div>
 
-                            </form>
-                            <small class="form-text alert alert-success"
-                              *ngIf="this.Errors.formHasErrors.status == true">
-                              <span>--{{this.Errors.formHasErrors.message}}</span>
-                            </small>
-
-                            <small class="form-text alert alert-success"
-                              *ngIf="this.Errors.profileUpdated.status == true">
-                              <span>--{{this.Errors.profileUpdated.message}}</span>
-                            </small>
-
+                            </div>
                           </div>
-
-
-
-
-
-
-
-
-
-
-
                         </div>
                       </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
                     </div>
                   </div>
                 </div>
+
               </div>
 
-              <!-- Cards within card -->
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <div id="accordionOuterViewStuds33" *ngIf="EE_Students.length > 0">
+                <div class="card  mt-2 mx-3">
+                  <div class="card-header noUnderlineForChildren" id="headingOne33">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
+                        data-target="#collapseOneViewStd33" aria-expanded="true" aria-controls="collapseOneViewStd33"
+                        (click)="extractStudentsDepartmentWise()">
+                        <h5><b class="text-warning">EE Department <span class="text-info">**<span class="ml-3 text-muted"
+                                style="font-size: 16px;">( {{this.EE_Students.length}} )</span> </span></b></h5>
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseOneViewStd33" class="collapse hide" aria-labelledby="headingOne33"
+                    data-parent="#accordionOuterViewStuds33">
+                    <div class="card-body">
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+
+                      <div id="accordionInnerStds22">
+                        <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
+                        <div class="card mb-1" *ngFor="let student of EE_Students">
+                          <div class="card-header noUnderlineForChildren" [attr.id]="'RegisterUniversityCard22'">
+
+                            <button class="btn" style="text-transform:uppercase; font-weight: 600;"
+                              data-toggle="collapse" [attr.data-target]="'#RegisterUniversityCollapse22' + student._id"
+                              aria-expanded="true" [attr.aria-controls]="'collapse' + student._id">
+                              {{student.FirstNameOfUser+' '+student.LastNameOfUser}}
+                            </button>
+
+                          </div>
+
+                          <div [id]="'RegisterUniversityCollapse22' + student._id" class="collapse hide"
+                            [attr.aria-labelledby]="'RegisterUniversityCard22'" data-parent="#accordionInnerStds22">
+                            <div class="card-body ">
+
+                              <div class="row">
+                                <div class="col-11 m-auto">
+                                  <!-- delete bg dark -->
+                                  <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
+                                  <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>Registration Number</th>
+                                        <th>Username</th>
+                                        <th>Dept.</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Access Status</th>
+                                        <th>University</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+
+
+                                        <td>{{student.RegistrationNumberOfUser}}</td>
+                                        <td>{{student.Username}}</td>
+                                        <td>{{student.DepartmentOfUser}}</td>
+                                        <td>{{student.FirstNameOfUser}}</td>
+                                        <td>{{student.LastNameOfUser}}</td>
+                                        <td>{{student.UserzAccessStatus}}</td>
+                                        <td>{{student.UniversityNameOfUser}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div class="d-flex justify-content-end mr-3">
+                                    <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+                                      (click)="onStudentEditToggle(StudentEditForm,student.Username)">{{this.EditStudentButtonText}}</button>
+                                    <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                                      (click)="DeleteThisUser(student)">Delete</button>
+                                    <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
+                                  </div>
+
+
+
+
+                                  <div
+                                    [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.StudentEdit == true}"
+                                    [ngClass]="{'d-none' : this.StudentEdit == false}">
+                                    <!-- Start of std divis EditFacultyProfile-->
+
+
+                                    <form (submit)="onSubmit_UpdateButton(StudentEditForm,student)"
+                                      #StudentEditForm="ngForm">
+
+                                      <div class="row">
+
+
+
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's First Name</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's First Name"
+                                            (keyup)="checkFNameOfMember(StudentEditForm.value.MemberFN)" name="MemberFN"
+                                            [ngModel]="student.FirstNameOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidFName.status == true">
+                                            <span>--{{this.Errors.invalidFName.message}}</span>
+                                          </small>
+                                        </div>
+
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's Last Name</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's Last Name"
+                                            (keyup)="checkLNameOfMember(StudentEditForm.value.MemberLN)" name="MemberLN"
+                                            [ngModel]="student.LastNameOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidLName.status == true">
+                                            <span>--{{this.Errors.invalidLName.message}}</span>
+                                          </small>
+                                        </div>
+
+
+
+
+                                        <div class="col-sm-6">
+                                          <div class="form-group ">
+                                            <label> Student's Password</label>
+                                            <input type="text" class="form-control "
+                                              placeholder="Update Student's Password"
+                                              (keyup)="checkPasswordOfMember(StudentEditForm.value.MemberPW)"
+                                              name="MemberPW" [ngModel]="student.Password">
+                                            <small class="form-text alert alert-danger"
+                                              *ngIf="this.Errors.invalidPassword.status == true">
+                                              <span>{{this.Errors.invalidPassword.message}}</span>
+                                            </small>
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's Registration Number</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's Registration Number"
+                                            (keyup)="checkRegNOfMember(StudentEditForm.value.MemberRegN)"
+                                            name="MemberRegN" [ngModel]="student.RegistrationNumberOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                                            <span>{{this.Errors.invalidRegistrationNumber.message}}</span>
+                                          </small>
+                                        </div>
+                                      </div>
+
+                                      <!-- SIGNUP BUTTON BELOW -->
+                                      <div class="text-center">
+                                        <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
+                                          type="submit">Update Profile</button>
+                                      </div>
+
+                                    </form>
+                                    <small class="form-text alert alert-success"
+                                      *ngIf="this.Errors.formHasErrors.status == true">
+                                      <span>--{{this.Errors.formHasErrors.message}}</span>
+                                    </small>
+
+                                    <small class="form-text alert alert-success"
+                                      *ngIf="this.Errors.profileUpdated.status == true">
+                                      <span>--{{this.Errors.profileUpdated.message}}</span>
+                                    </small>
+
+                                  </div>
+
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        <!-- Cards within card -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <div id="accordionOuterViewStuds44" *ngIf="BS_Students.length > 0">
+                <div class="card  mt-2 mx-3">
+                  <div class="card-header noUnderlineForChildren" id="headingOne44">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
+                        data-target="#collapseOneViewStd44" aria-expanded="true" aria-controls="collapseOneViewStd44"
+                        (click)="extractStudentsDepartmentWise()">
+                        <h5><b class="text-warning">BS Department <span class="text-info">**<span class="ml-3 text-muted"
+                                style="font-size: 16px;">( {{this.BS_Students.length}} )</span> </span></b></h5>
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="collapseOneViewStd44" class="collapse hide" aria-labelledby="headingOne44"
+                    data-parent="#accordionOuterViewStuds44">
+                    <div class="card-body">
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+
+                      <div id="accordionInnerStds44">
+                        <!-- <div class="card mb-1" *ngFor="let uni of UniversitiesData"> -->
+                        <div class="card mb-1" *ngFor="let student of BS_Students">
+                          <div class="card-header noUnderlineForChildren" [attr.id]="'RegisterUniversityCard44'">
+
+                            <button class="btn" style="text-transform:uppercase; font-weight: 600;"
+                              data-toggle="collapse" [attr.data-target]="'#RegisterUniversityCollapse44' + student._id"
+                              aria-expanded="true" [attr.aria-controls]="'collapse' + student._id">
+                              {{student.FirstNameOfUser+' '+student.LastNameOfUser}}
+                            </button>
+
+                          </div>
+
+                          <div [id]="'RegisterUniversityCollapse44' + student._id" class="collapse hide"
+                            [attr.aria-labelledby]="'RegisterUniversityCard44'" data-parent="#accordionInnerStds44">
+                            <div class="card-body ">
+
+                              <div class="row">
+                                <div class="col-11 m-auto">
+                                  <!-- delete bg dark -->
+                                  <!-- <h6 class="text-secondary">* sign represents the elements that are expected and not actual value.</h6> -->
+                                  <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>Registration Number</th>
+                                        <th>Username</th>
+                                        <th>Dept.</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Access Status</th>
+                                        <th>University</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+
+
+                                        <td>{{student.RegistrationNumberOfUser}}</td>
+                                        <td>{{student.Username}}</td>
+                                        <td>{{student.DepartmentOfUser}}</td>
+                                        <td>{{student.FirstNameOfUser}}</td>
+                                        <td>{{student.LastNameOfUser}}</td>
+                                        <td>{{student.UserzAccessStatus}}</td>
+                                        <td>{{student.UniversityNameOfUser}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div class="d-flex justify-content-end mr-3">
+                                    <button class="btn btn-success w-25 maSmallerFonts my-2 mx-2"
+                                      (click)="onStudentEditToggle(StudentEditForm,student.Username)">{{this.EditStudentButtonText}}</button>
+                                    <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2"
+                                      (click)="DeleteThisUser(student)">Delete</button>
+                                    <!-- <button class="btn btn-danger w-25 maSmallerFonts my-2 mx-2">Reject</button> -->
+                                  </div>
+
+
+
+
+                                  <div
+                                    [ngClass]="{'border rounded border-light my-2 mx-1 p-3' : this.StudentEdit == true}"
+                                    [ngClass]="{'d-none' : this.StudentEdit == false}">
+                                    <!-- Start of std divis EditFacultyProfile-->
+
+
+                                    <form (submit)="onSubmit_UpdateButton(StudentEditForm,student)"
+                                      #StudentEditForm="ngForm">
+
+                                      <div class="row">
+
+
+
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's First Name</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's First Name"
+                                            (keyup)="checkFNameOfMember(StudentEditForm.value.MemberFN)" name="MemberFN"
+                                            [ngModel]="student.FirstNameOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidFName.status == true">
+                                            <span>--{{this.Errors.invalidFName.message}}</span>
+                                          </small>
+                                        </div>
+
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's Last Name</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's Last Name"
+                                            (keyup)="checkLNameOfMember(StudentEditForm.value.MemberLN)" name="MemberLN"
+                                            [ngModel]="student.LastNameOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidLName.status == true">
+                                            <span>--{{this.Errors.invalidLName.message}}</span>
+                                          </small>
+                                        </div>
+
+
+
+
+                                        <div class="col-sm-6">
+                                          <div class="form-group ">
+                                            <label> Student's Password</label>
+                                            <input type="text" class="form-control "
+                                              placeholder="Update Student's Password"
+                                              (keyup)="checkPasswordOfMember(StudentEditForm.value.MemberPW)"
+                                              name="MemberPW" [ngModel]="student.Password">
+                                            <small class="form-text alert alert-danger"
+                                              *ngIf="this.Errors.invalidPassword.status == true">
+                                              <span>{{this.Errors.invalidPassword.message}}</span>
+                                            </small>
+                                          </div>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                          <label> Student's Registration Number</label>
+                                          <input type="text" class="form-control"
+                                            placeholder="Update Student's Registration Number"
+                                            (keyup)="checkRegNOfMember(StudentEditForm.value.MemberRegN)"
+                                            name="MemberRegN" [ngModel]="student.RegistrationNumberOfUser">
+                                          <small class="form-text alert alert-danger"
+                                            *ngIf="this.Errors.invalidRegistrationNumber.status == true">
+                                            <span>{{this.Errors.invalidRegistrationNumber.message}}</span>
+                                          </small>
+                                        </div>
+                                      </div>
+
+                                      <!-- SIGNUP BUTTON BELOW -->
+                                      <div class="text-center">
+                                        <button class="btn btn-primary w-50 m-auto" [disabled]="checkIfErrors()"
+                                          type="submit">Update Profile</button>
+                                      </div>
+
+                                    </form>
+                                    <small class="form-text alert alert-success"
+                                      *ngIf="this.Errors.formHasErrors.status == true">
+                                      <span>--{{this.Errors.formHasErrors.message}}</span>
+                                    </small>
+
+                                    <small class="form-text alert alert-success"
+                                      *ngIf="this.Errors.profileUpdated.status == true">
+                                      <span>--{{this.Errors.profileUpdated.message}}</span>
+                                    </small>
+
+                                  </div>
+
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        <!-- Cards within card -->
+                      <!-- Cards within card -->
+                      <!-- Cards within card -->
+
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                      <!--  -->
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <!--  -->
+              <!--  -->
+              <!--  -->
             </div>
           </div>
         </div>
@@ -732,7 +1297,8 @@
               <button class="btn btn-link text-secondary w-100 text-left py-2 px-1" data-toggle="collapse"
                 data-target="#collapseOneRejectedMembers" aria-expanded="true"
                 aria-controls="collapseOneRejectedMembers">
-                <h5><b>Rejected Members <span class="text-danger">** <span class="ml-3 text-muted" style="font-size: 16px;">( {{this.RejectedMembers.length}} )</span>  </span></b></h5>
+                <h5><b>Rejected Members <span class="text-danger">** <span class="ml-3 text-muted"
+                        style="font-size: 16px;">( {{this.RejectedMembers.length}} )</span> </span></b></h5>
               </button>
             </h5>
           </div>

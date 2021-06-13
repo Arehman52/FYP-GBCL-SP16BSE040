@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { LabNumbersModel } from 'src/app/MODELS/Lab-Frontend-Models/LabNumbersmodel.model';
 import { LabTasksmodel } from 'src/app/MODELS/Lab-Frontend-Models/labTasksmodel.model';
 import { StudentAttemptedLabTaskmodel } from 'src/app/MODELS/Student-Frontend-Models/StudentAttemptedLabTaskmodel.model';
+import { LabTasksService } from 'src/app/Services/lab-tasks.service';
 import { LabsService } from 'src/app/Services/labs.service';
 import { StudentLabDataService } from 'src/app/Services/student-lab-data.service';
 
@@ -13,7 +14,10 @@ import { StudentLabDataService } from 'src/app/Services/student-lab-data.service
 })
 export class ManageLabtasksComponent implements OnInit {
 
-  constructor(private labsService: LabsService, private studentLabDataService: StudentLabDataService) { }
+  constructor(private labsService: LabsService,
+    private studentLabDataService: StudentLabDataService,
+    private labTasksService: LabTasksService
+  ) { }
 
   ngOnInit(): void {
 
@@ -124,39 +128,43 @@ export class ManageLabtasksComponent implements OnInit {
     taskTitle += '...';
 
     let labtask: LabTasksmodel = {
-      LabJoinCode: this.LabID, _id: '', AttemptedByStudents: [], LabTaskAnswer: createLabTaskForm.value.LabTaskAnswer, LabTaskQuestion: createLabTaskForm.value.LabTaskQuestion, LabTaskTitle: taskTitle, LabTaskXPs: parseInt(XPsSelect.value)
+      LabJoinCode: this.LabID, _id: '',TaskBeingAttempted:false, AttemptedByStudents: [], LabTaskAnswer: createLabTaskForm.value.LabTaskAnswer, LabTaskQuestion: createLabTaskForm.value.LabTaskQuestion, LabTaskTitle: taskTitle, LabTaskXPs: parseInt(XPsSelect.value)
     };
 
 
-    console.log(labtask);
+    // console.log(labtask);
     let res: LabTasksmodel[] = [];
-    res = this.labsService.createLabTask(labtask);
+    res = this.labTasksService.createLabTask(labtask);
 
     this.Errors.emptyField.status = true;
     this.Errors.LabTaskCreated.status = true;
     setTimeout(() => {
 
-      console.log("res[0] == ",res[0]);
+      console.log("res[0] == ", res[0]);
 
-      let index:number = -1;
-      for(let i=0; i<this.TheLabNumbers.length;i++){
-        if(this.TheLabNumbers[i].LabNumber == this.SELECTED_LAB_NUMBER){
+      let index: number = -1;
+      for (let i = 0; i < this.TheLabNumbers.length; i++) {
+        if (this.TheLabNumbers[i].LabNumber == this.SELECTED_LAB_NUMBER) {
           this.TheLabNumbers[i].LabTaskIds.push(res[0]._id);
           index = i;
-          console.log('pushed : ',res[0]);
+          console.log('pushed : ', res[0]);
         }
       }
 
-      if(index != -1){
+      if (index != -1) {
         this.labsService.updateThisLabNumberOfThisLab(this.TheLabNumbers[index]);
-      }else{
+      } else {
         alert("something fishy nearby @150");
       }
+
 
     }, 1500);
     setTimeout(() => { window.location.reload(); }, 3000);
   }
 
+  review(modalButton_proofread:HTMLButtonElement){
+    modalButton_proofread.click();
+  }
   displayThisMessageInModal(Message: string, modalButtonReferrence: HTMLButtonElement) {
     this.MessageForModal = Message;
     modalButtonReferrence.click();
@@ -169,7 +177,7 @@ export class ManageLabtasksComponent implements OnInit {
     if (Answer.length == 0) { this.Errors.emptyField.status = true }
     else { this.Errors.emptyField.status = false }
 
-    if (Answer.length < 28) { this.Errors.invalidAnswer.status = true }
+    if (Answer.length < 2) { this.Errors.invalidAnswer.status = true }
     else { this.Errors.invalidAnswer.status = false }
   }
 
@@ -187,13 +195,20 @@ export class ManageLabtasksComponent implements OnInit {
   showSpinner: false;
   SELECTED_LAB_NUMBER: number = 0;
   checkIfLabNumberNotSelected(LabNumberSelect: HTMLSelectElement) {
+    let highest = 0;
     if (LabNumberSelect.value == 'Choose...') { this.Errors.LabNumberNotSelected.status = true; }
     else { this.Errors.LabNumberNotSelected.status = false; }
 
     if (LabNumberSelect.value == 'Create new') {
-      if (confirm("Do you want to create Lab Number : xxxxx")) {
+      for (let i = 0; i < this.TheLabNumbers.length; i++) {
+        if (this.TheLabNumbers[i].LabNumber > highest) {
+          highest = this.TheLabNumbers[i].LabNumber;
+        }
+      }
+      if (confirm("Do you want to create Lab Number : "+(highest+1))) {
         // create a new labNumber in db, and reload
-        this.labsService.createNewLabNumber(this.LabID, 10000);
+        // console.log("highest , ", highest);
+        this.labsService.createNewLabNumber(this.LabID, (highest+1));
         setTimeout(() => { window.location.reload() }, 3000);
       }
     }

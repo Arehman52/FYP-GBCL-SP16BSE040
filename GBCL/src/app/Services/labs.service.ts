@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
-import { LabTasksmodel } from '../MODELS/Lab-Frontend-Models/labTasksmodel.model';
-import { LabChallengesmodel } from '../MODELS/Lab-Frontend-Models/labchallengesmodel.model';
-import { StudentAttemptedLabTaskmodel } from '../MODELS/Student-Frontend-Models/StudentAttemptedLabTaskmodel.model';
-import { StudentAttemptedLabChallengemodel } from '../MODELS/Student-Frontend-Models/StudentAttemptedLabChallengesmodel.model';
+
 import { StudentzUsernameAndLabJoinCodemodel } from '../MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 import { LabNumbersModel } from '../MODELS/Lab-Frontend-Models/LabNumbersmodel.model';
 
@@ -21,17 +18,17 @@ export class LabsService {
 
 
   updateThisLabNumberOfThisLab(LabNumberToUpdate: LabNumbersModel) {
-    this.http.put("http://localhost:3000/api/Labs/updateThisLabNumberOfThisLab",LabNumberToUpdate)
-    .subscribe(ResposeData =>{
-      console.log(ResposeData);
-    });
+    this.http.put("http://localhost:3000/api/Labs/updateThisLabNumberOfThisLab", LabNumberToUpdate)
+      .subscribe(ResposeData => {
+        console.log(ResposeData);
+      });
   }
 
 
 
 
   fetchLabNumbersOfThisLab(LabID: string): LabNumbersModel[] {
-    const obj: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: LabID, StudentzUsername:null};
+    const obj: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: LabID, StudentzUsername: null };
     let fetchedLabNumbers: LabNumbersModel[] = [];
     this.http.post<{ message: string, FetchedLabNumbers: LabNumbersModel[] }>("http://localhost:3000/api/Labs/fetchLabNumbersOfThisLab", obj)
       .subscribe(responseData => {
@@ -95,14 +92,7 @@ export class LabsService {
   }
 
 
-  createLabChallenge(labChallenge: LabChallengesmodel) {
-    this.http
-      .post('http://localhost:3000/api/Labs/CreateLabChallenge', labChallenge)
-      .subscribe((responseData) => {
-        console.log(responseData);
-      });
 
-  }
 
 
 
@@ -129,18 +119,7 @@ export class LabsService {
 
 
 
-  createLabTask(labtask: LabTasksmodel):LabTasksmodel[] {
-    console.log("labtask: LabTasksmodel from service : ", labtask);
 
-    let labTask:LabTasksmodel[] = [];
-    this.http
-      .post<{ message: string; JustCreatedLabTask: LabTasksmodel }>('http://localhost:3000/api/Labs/CreateLabTask', labtask)
-      .subscribe((responseData) => {
-        labTask.push(responseData.JustCreatedLabTask);
-        console.log("responseData from service : ", responseData);
-      });
-  return labTask;
-  }
 
 
 
@@ -162,114 +141,6 @@ export class LabsService {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  DeleteThisLabChallenge(ChallengeId: string) {
-    this.http.delete("http://localhost:3000/api/Labs/DeleteThisLabChallenge/" + ChallengeId).subscribe(
-      response => {
-        console.log(response);
-      }
-    );
-  }
-  DeletThisLabTask(labTaskId: string) {
-    this.http.delete("http://localhost:3000/api/Labs/DeleteThisLabTask/" + labTaskId).subscribe(
-      response => {
-        console.log(response);
-      }
-    );
-
-  }
-
-
-  getAllLabTasksOfThisLabFromDB(objLabID: { LabJoinCode: string }): LabTasksmodel[] {
-    let allLabtasksOfthislabFromDB: LabTasksmodel[] = [];
-    this.http
-      .post<{ message: string; AllLabTasksOfThisLabFromDB: LabTasksmodel[] }>(
-        'http://localhost:3000/api/Labs/getAllLabTasksOfThisLabFromDB', objLabID
-      )
-      .subscribe((responseData) => {
-        for (let i = 0; i < Object.keys(responseData.AllLabTasksOfThisLabFromDB).length; i++) {
-          allLabtasksOfthislabFromDB.push(responseData.AllLabTasksOfThisLabFromDB[i]);
-        }
-      });
-    return allLabtasksOfthislabFromDB;
-
-  }
-
-
-  getAllChallengesOfThisLabFromDB(objLabID: { LabJoinCode: string }): LabChallengesmodel[] {
-    console.log('objLabID.LabId', objLabID.LabJoinCode);
-    let allChallengesOfThisLabFromDB: LabChallengesmodel[] = [];
-    this.http
-      .post<{ message: string; AllChallengesOfThisLabFromDB: LabChallengesmodel[] }>(
-        'http://localhost:3000/api/Labs/getAllChallengesOfThisLabFromDB', objLabID
-      )
-      .subscribe((responseData) => {
-        for (let i = 0; i < Object.keys(responseData.AllChallengesOfThisLabFromDB).length; i++) {
-          allChallengesOfThisLabFromDB.push(responseData.AllChallengesOfThisLabFromDB[i]);
-        }
-      });
-
-
-    return allChallengesOfThisLabFromDB;
-
-  }
-
-
-
-
-
-  GetAllLabTasksFromDB(): LabTasksmodel[] {
-
-    let AllLabTasks: LabTasksmodel[] = [];
-    this.http
-      .get<{ message: string; labTasks: LabTasksmodel[] }>(
-        'http://localhost:3000/api/Labs/GetAllLabTasksFromDB'
-      )
-      .subscribe((responseData) => {
-        for (let i = 0; i < Object.keys(responseData.labTasks).length; i++) {
-          AllLabTasks.push(responseData.labTasks[i]);
-        }
-      });
-
-
-    return AllLabTasks;
-
-  }
-
-  GetAllLabChallengesFromDB(): LabChallengesmodel[] {
-
-    let AllLabChallenges: LabChallengesmodel[] = [];
-    this.http
-      .get<{ message: string; labChallenges: LabChallengesmodel[] }>(
-        'http://localhost:3000/api/Labs/GetAllLabChallengesFromDB'
-      )
-      .subscribe((responseData) => {
-        for (let i = 0; i < Object.keys(responseData.labChallenges).length; i++) {
-          AllLabChallenges.push(responseData.labChallenges[i]);
-        }
-      });
-
-
-    return AllLabChallenges;
-
-  }
 
 
 
@@ -317,20 +188,16 @@ export class LabsService {
     );
   }
 
-  updateThisLabChallenge(UpdatedLabChallenge: LabChallengesmodel) {
-    this.http.put("http://localhost:3000/api/Labs/UpdateThisLabChallenge/" + UpdatedLabChallenge._id, UpdatedLabChallenge).subscribe(
+
+  ChangeUniversityNameOfLabOfThisUnizLabs(oldUniversityNameOfLab:string,newUniversityNameOfLab: string) {
+    let UpdatedLab: Labsmodel = { LabClass: '', LabInstructor: '', LabInstructorFN: '', LabInstructorLN: '', LabProgram: '', LabTitle: '', UniversityNameOfLab: newUniversityNameOfLab, _id: '' };
+
+    this.http.put("http://localhost:3000/api/Labs/ChangeUniversityNameOfLabOfThisUnizLabs/"+oldUniversityNameOfLab, UpdatedLab).subscribe(
       response => {
         console.log(response);
-      });
+      }
+    );
   }
-
-  updateThisLabTask(UpdatedLabTask: LabTasksmodel) {
-    this.http.put("http://localhost:3000/api/Labs/UpdateThisLabTask/" + UpdatedLabTask._id, UpdatedLabTask).subscribe(
-      response => {
-        console.log(response);
-      });
-  }
-
 
 
   createLab(Lab: Labsmodel): Labsmodel[] {

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
@@ -12,7 +13,7 @@ import { UsersService } from '../../Services/users.service';
 
 
 export class SignupFormComponent implements OnInit {
-  constructor(public usersService: UsersService) { }
+  constructor(public usersService: UsersService, private http:HttpClient) { }
 
   ngOnInit() {
     // this.setALLErrorsToFalse();
@@ -107,16 +108,14 @@ export class SignupFormComponent implements OnInit {
       this.Errors.UniformSubmittedSuccessfuly.status = false;
       return;
     } else {
-      // console.log(this.user);
+      console.log(this.user);
       this.usersService.createUser(this.user); //<--- this method should update user to DB
 
       this.Errors.formHasErrors.status = false;
       this.Errors.StuTchformSubmittedSuccessfuly.status = true;
       this.Errors.UniformSubmittedSuccessfuly.status = true;
       form.resetForm()
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      setTimeout(() => {window.location.reload();}, 3000);
     }
   }
 
@@ -172,6 +171,7 @@ export class SignupFormComponent implements OnInit {
     LastNameOfUser: '',
     UniversityNameOfUser: 'NotListedHere',
     RegistrationNumberOfUser: '',
+    DepartmentOfUser: '',
     LabJoinCodesOfJoinedLabs: null,
     LabJoinCodesOfAppliedLabs: null,
     // attribs of UserType = University
@@ -184,7 +184,18 @@ export class SignupFormComponent implements OnInit {
     Password: '',
   };
 
+
+  // updaall(){
+  //   this.http.get("http://localhost:3000/api/Users/updaaaall")
+  //   .subscribe(ResponseData=>{console.log(ResponseData);});
+  // }
+
+
   Errors = {
+    departmentNotSelected: {
+      status: true,
+      message: 'Select a department please.',
+    },
     spacesNotAllowed: {
       status: true,
       message: 'Spaces are not allowed in Username.',
@@ -322,6 +333,14 @@ export class SignupFormComponent implements OnInit {
   //   }
   // }
 
+  onDepartmentSelectChange(DepartmentsList: HTMLSelectElement){
+    if(DepartmentsList.value==="Selectone"){
+      this.Errors.departmentNotSelected.status = true;
+    }else{
+      this.Errors.departmentNotSelected.status = false;
+      this.user.DepartmentOfUser = DepartmentsList.value;
+    }
+  }
   NotListed: boolean = false;
   onUniversitiesSelectChange(optUni: HTMLSelectElement) {
     // Not Listed!
@@ -589,6 +608,7 @@ export class SignupFormComponent implements OnInit {
 
       if (
         this.Errors.emptyField.status ||
+        this.Errors.departmentNotSelected.status ||
         this.Errors.spacesNotAllowed.status ||
         this.Errors.invalidFName.status ||
         this.Errors.invalidLName.status ||
