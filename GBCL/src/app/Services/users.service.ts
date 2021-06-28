@@ -93,6 +93,25 @@ export class UsersService {
   }
 
 
+
+
+  RecieveAllUniversitiesFromDB() {
+    var tempRecieveAllUniversitiesFromDB: Usersmodel[] = [];
+    this.http
+      .get<{ message: string; users: Usersmodel[] }>(
+        'http://localhost:3000/api/Users/RecieveAllUniversitiesFromDB'
+      )
+      .subscribe((responseData) => {
+        for (let i = 0; i < Object.keys(responseData.users).length; i++) {
+          tempRecieveAllUniversitiesFromDB.push(responseData.users[i]);
+        }
+      });
+    console.log('this.RecieveAllUniversitiesFromDB FROM SERVICE tempUsers===>', tempRecieveAllUniversitiesFromDB);
+    return tempRecieveAllUniversitiesFromDB;
+  }
+
+
+
   RecieveAllUsersFromDB() {
     var tempUsers: Usersmodel[] = [];
     this.http
@@ -104,7 +123,7 @@ export class UsersService {
           tempUsers.push(responseData.users[i]);
         }
       });
-    console.log('this.AllUsersRecieved FROM SERVICE===>', tempUsers);
+    console.log('this.AllUsersRecieved FROM SERVICE tempUsers===>', tempUsers);
     return tempUsers;
   }
 

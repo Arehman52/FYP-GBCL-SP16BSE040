@@ -19,29 +19,31 @@ export class SignupFormComponent implements OnInit {
     // this.setALLErrorsToFalse();
     this.setAllErrorsToFalse();
     this.user.UniversityNameOfUser = 'NotListedHere';
-    this.UniversitiesListFromDB = this.usersService.getUniversitiesListFromDB();
+    // this.UniversitiesListFromDB = this.usersService.getUniversitiesListFromDB();
     this.UsersRecievedFromDBForSignup = this.usersService.RecieveAllUsersFromDB();
+    this.UniversitiesRecievedFromDBForSignup = this.usersService.RecieveAllUniversitiesFromDB();
     // this.usersInfoListFromDB = this.usersService.RecieveUsersFromDBForSignup();
-    console.log("this.UsersRecievedFromDBForSignup FROM ngOnInit()");
-    console.log(this.UsersRecievedFromDBForSignup);
+    console.log("@@@@this.UniversitiesRecievedFromDBForSignup FROM ngOnInit()",this.UniversitiesRecievedFromDBForSignup);
+    // console.log(this.UniversitiesListFromDB);
     setTimeout(() => {
       this.loadUnisListFromDatabase();
-    }, 2000);
+    }, 3500);
   }
 
 
-  /**universitiesListFromDB = [
-      { uniName: 'COMSATS University Islamabad' },
-      { uniName: 'IIUI Islamabad' },
-      { uniName: 'Islamic University Islamabad' },
-      { uniName: 'IBA Karachi' },
-      { uniName: 'UET Lahore' },
-      { uniName: 'FAST NUCES Islamabad' },
-    ]; */
+  // universitiesListFromDB = [
+  //     { uniName: 'COMSATS University Islamabad' },
+  //     { uniName: 'IIUI Islamabad' },
+  //     { uniName: 'Islamic University Islamabad' },
+  //     { uniName: 'IBA Karachi' },
+  //     { uniName: 'UET Lahore' },
+  //     { uniName: 'FAST NUCES Islamabad' },
+  //   ];
 
   private UsersRecievedFromDBForSignup: Usersmodel[] = [];
+  UniversitiesRecievedFromDBForSignup: Usersmodel[] = [];
   // private listOfUniversities: {uniName: String}[] = []
-  UniversitiesListFromDB = [];
+  UniversitiesListFromDB: { uniName: String }[] = [];
 
   // FOLLOWING FN UPDATES Uni LIST FROM DB
   // fnUpdListUnis(){
@@ -49,17 +51,21 @@ export class SignupFormComponent implements OnInit {
 
     for (var i = 0; i < this.UsersRecievedFromDBForSignup.length; i++) {
 
+      console.log("THISS");
 
       if (
-        this.UsersRecievedFromDBForSignup[i].TitleOfUniversity != null &&
+        // this.UsersRecievedFromDBForSignup[i].TitleOfUniversity != null &&
         this.UsersRecievedFromDBForSignup[i].UserType == 'university' &&
         this.UsersRecievedFromDBForSignup[i].UserzAccessStatus == 'Allowed'
       ) {
 
-        const arr: { uniName: String } = { uniName: this.UsersRecievedFromDBForSignup[i].TitleOfUniversity };
+        var arr: { uniName: String } = { uniName: this.UsersRecievedFromDBForSignup[i].TitleOfUniversity };
+        console.log("arr",arr);
         this.UniversitiesListFromDB.push(arr);
       }
     }
+
+    console.log("UNIS: ",this.UniversitiesListFromDB);
   }
 
 

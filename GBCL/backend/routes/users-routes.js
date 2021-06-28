@@ -248,6 +248,16 @@ router.get("/getUniversitiesList", (req, res, next) => {
 });
 
 //following is working properly in signup page for fetching users.
+router.get("/RecieveAllUniversitiesFromDB", (req, res, next) => {
+  Users.find({UserType: 'university', UserzAccessStatus: 'Allowed'}).then((documents) => {
+    res.status(200).json({
+      message: "this is a list of RecieveAllUniversitiesFromDB recieved from DB",
+      users: documents,
+    });
+
+    console.log("   ==> {/RecieveAllUniversitiesFromDB} Universities were downloaded.");
+  });
+});
 router.get("/RecieveUsersFromDB", (req, res, next) => {
   Users.find().then((documents) => {
     res.status(200).json({

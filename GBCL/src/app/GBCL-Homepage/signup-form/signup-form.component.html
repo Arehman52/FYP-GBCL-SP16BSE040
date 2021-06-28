@@ -96,8 +96,8 @@
                 (change)="onUniversitiesSelectChange(UniversitiesList)">
                   <option value="Selectone" selected disabled><b>Select one</b></option>
                   <option value="Not Listed!"><b>Not Listed!</b></option>
-                  <option value="{{list.uniName}}" name="UsersSelectedUniversity"
-                    *ngFor="let list of UniversitiesListFromDB"><b>{{list.uniName}}</b>
+                  <option value="{{list.TitleOfUniversity}}" name="UsersSelectedUniversity"
+                    *ngFor="let list of UniversitiesRecievedFromDBForSignup"><b>{{list?.TitleOfUniversity}}</b>
                   </option>
                 </select>
               </div>
