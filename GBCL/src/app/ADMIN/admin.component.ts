@@ -25,7 +25,7 @@ export class AdminComponent implements OnInit {
       () => {
         this.extractOverallStats();
         this.extractJOINRequestsFromUniversitiesData();
-      }, 800);
+      }, 1800);
   }
 
   AllLabs:Labsmodel[] = [];

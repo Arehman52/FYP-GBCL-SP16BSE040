@@ -16,63 +16,21 @@ export class SignupFormComponent implements OnInit {
   constructor(public usersService: UsersService, private http:HttpClient) { }
 
   ngOnInit() {
-    // this.setALLErrorsToFalse();
     this.setAllErrorsToFalse();
     this.user.UniversityNameOfUser = 'NotListedHere';
-    // this.UniversitiesListFromDB = this.usersService.getUniversitiesListFromDB();
     this.UsersRecievedFromDBForSignup = this.usersService.RecieveAllUsersFromDB();
     this.UniversitiesRecievedFromDBForSignup = this.usersService.RecieveAllUniversitiesFromDB();
-    // this.usersInfoListFromDB = this.usersService.RecieveUsersFromDBForSignup();
     console.log("@@@@this.UniversitiesRecievedFromDBForSignup FROM ngOnInit()",this.UniversitiesRecievedFromDBForSignup);
-    // console.log(this.UniversitiesListFromDB);
-    setTimeout(() => {
-      this.loadUnisListFromDatabase();
-    }, 3500);
+
   }
 
 
-  // universitiesListFromDB = [
-  //     { uniName: 'COMSATS University Islamabad' },
-  //     { uniName: 'IIUI Islamabad' },
-  //     { uniName: 'Islamic University Islamabad' },
-  //     { uniName: 'IBA Karachi' },
-  //     { uniName: 'UET Lahore' },
-  //     { uniName: 'FAST NUCES Islamabad' },
-  //   ];
 
   private UsersRecievedFromDBForSignup: Usersmodel[] = [];
   UniversitiesRecievedFromDBForSignup: Usersmodel[] = [];
-  // private listOfUniversities: {uniName: String}[] = []
-  UniversitiesListFromDB: { uniName: String }[] = [];
 
-  // FOLLOWING FN UPDATES Uni LIST FROM DB
-  // fnUpdListUnis(){
-  loadUnisListFromDatabase() {
-
-    for (var i = 0; i < this.UsersRecievedFromDBForSignup.length; i++) {
-
-      console.log("THISS");
-
-      if (
-        // this.UsersRecievedFromDBForSignup[i].TitleOfUniversity != null &&
-        this.UsersRecievedFromDBForSignup[i].UserType == 'university' &&
-        this.UsersRecievedFromDBForSignup[i].UserzAccessStatus == 'Allowed'
-      ) {
-
-        var arr: { uniName: String } = { uniName: this.UsersRecievedFromDBForSignup[i].TitleOfUniversity };
-        console.log("arr",arr);
-        this.UniversitiesListFromDB.push(arr);
-      }
-    }
-
-    console.log("UNIS: ",this.UniversitiesListFromDB);
-  }
-
-
-  // A create User Fn to create the User.
 
   onSignUpClicked(form: NgForm) {
-    //assigns remaining inputs to user
 
 
 
@@ -84,7 +42,7 @@ export class SignupFormComponent implements OnInit {
         form.value.PasswordOfUniversity == '' ||
         form.value.HECIDOfUniversity == ''
       ) {
-        alert("Youniversity need to fill all the fields first!!!");
+        alert("You need to fill all the fields first!!!");
         return;
       } else { this.Errors.emptyField.status = false };
     } else {
@@ -97,7 +55,7 @@ export class SignupFormComponent implements OnInit {
         form.value.UsersEnteredRegistrationNumber == '' ||
         form.value.UsersEnteredUsername == ''
       ) {
-        alert("Student ot Teacher need to fill all the fields first!!!");
+        alert("You need to fill all the fields first!!!");
         return;
       } else { this.Errors.emptyField.status = false };
     }

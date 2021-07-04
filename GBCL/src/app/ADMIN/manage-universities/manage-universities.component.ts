@@ -11,12 +11,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ManageUniversitiesComponent implements OnInit {
 
-  constructor(private usersService: UsersService, private http:HttpClient) { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.extractAffiliatedAndRejectedUniversitiesData();
-    }, 700);
+    }, 1300);
     this.setALLErrorsToFalse();
     this.AllUsersRecievedFromDB = this.usersService.RecieveAllUsersFromDB();
   }
@@ -146,12 +146,12 @@ export class ManageUniversitiesComponent implements OnInit {
   }
 
 
-  getHECRecognisedUnis(){
-    this.http.get("https://www.hec.gov.pk/_catalogs/masterpage/display%20templates/content%20web%20parts/hec-university/item_universities_sortable.js?ctag=4109$$15.0.5023.1000",)
-    .subscribe((ResponseData)=>{
-      console.log(ResponseData);
-    })
-  }
+  // getHECRecognisedUnis(){
+  //   this.http.get("https://www.hec.gov.pk/_catalogs/masterpage/display%20templates/content%20web%20parts/hec-university/item_universities_sortable.js?ctag=4109$$15.0.5023.1000",)
+  //   .subscribe((ResponseData)=>{
+  //     console.log(ResponseData);
+  //   })
+  // }
 
 
 
