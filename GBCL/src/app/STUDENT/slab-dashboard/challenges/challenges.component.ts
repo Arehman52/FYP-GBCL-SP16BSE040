@@ -312,7 +312,9 @@ export class ChallengesComponent implements OnInit, OnDestroy {
         this.timeLeft--;
       } else {
 
+        // timed out case
 
+        this.playGroansAudio();
 
 
         let TIMEDOUTLabChallenge: StudentAttemptedLabChallengemodel = {
@@ -475,7 +477,7 @@ export class ChallengesComponent implements OnInit, OnDestroy {
         this.Errors.ChallengeFailed.status = true;
         this.XPplusplusOrminusminus = " XPs--"
         let negativeXPs: number = this.unAttemptedChallenges[this.i].ChallengeXPs * -1;
-        console.log("negativeXPsnegativeXPs : ",negativeXPs);
+        console.log("negativeXPsnegativeXPs : ", negativeXPs);
         // let FinallyCountedNegativeXPs = this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs + negativeXPs;
         // console.log("FinallyCountedNegativeXPs : ",FinallyCountedNegativeXPs);
 
@@ -540,16 +542,16 @@ export class ChallengesComponent implements OnInit, OnDestroy {
     this.STUDz_FETCHED_STATS_FROM_Db = this.studentLabDataService.getCurrentStatsOfThisStudent(StudentzUsernameAndLabID);
     setTimeout(() => {
       // this.reInitiallizeCurrentStats();
-      if (this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs > 60 && this.STUDz_FETCHED_STATS_FROM_Db[0].Demoted) {
+      if (this.STUDz_FETCHED_STATS_FROM_Db[0].currentXPs > 0 && this.STUDz_FETCHED_STATS_FROM_Db[0].Demoted) {
         this.playGroansAudio();
-        this.displayThisMessageInModal("You were Demoted, Alas!", "Better Luck next time, Badge Assigned = " + this.CURRENT_BADGE);
+        this.displayThisMessageInModal("You were Demoted, Alas!", "Better Luck next time, Badge Assigned = " + this.STUDz_FETCHED_STATS_FROM_Db[0].currentBadge);
       }
 
 
 
       if (this.STUDz_FETCHED_STATS_FROM_Db[0].Promoted) {
         this.playHurrahAudio();
-        this.displayThisMessageInModal("Hurrah!! You were Promoted.", "YOUR NEW BADGE IS : " + this.CURRENT_BADGE);
+        this.displayThisMessageInModal("Hurrah!! You were Promoted.", "YOUR NEW BADGE IS : " + this.STUDz_FETCHED_STATS_FROM_Db[0].currentBadge);
       }
 
     }, 1500);

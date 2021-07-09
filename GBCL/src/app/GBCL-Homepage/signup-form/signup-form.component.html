@@ -22,51 +22,47 @@
           <!-- //1st Element : UserType here! -->
 
 
-          <div class="row">
-            <div class="col-sm-12  border rounded border-warning p-2 mb-3">
-<!--
-              <div class="form-group">
-                <span class="form-control">
-                  <input type="radio" name="userTypeRadioSelection" id="UserTypeRadioSelection">
-                  Student
-                </span>
-                <span class="form-control">
-                  <input type="radio" name="userTypeRadioSelection" id="UserTypeRadioSelection">
-                  Student
-                </span>
-                <span class="form-control">
-                  <input type="radio" name="userTypeRadioSelection" id="UserTypeRadioSelection">
-                  Student
-                </span>
+          <div class="row input-group p-sm-3 mb-sm-3">
 
-              </div> -->
+            <!--  p-2 mb-3 -->
+            <!-- <div class="col-sm-12 col-md-3 border rounded border-warning"> -->
+              <label class="col-sm-3 bg-secondary p-2 rounded">Sign up as a  </label>
 
-              <div class="input-group ml-2">
-                <div class="" >
-                  <label class="bg-secondary  p-2 rounded" style="width: 160px;">Sign up as a  :</label>
+              <!-- <div class=""> -->
 
+                <!-- <div class="row"> -->
+                  <!-- <div class="col-sm-12 col-md-12">
 
+                  </div> -->
+                  <div class="col-sm-12 col-md-3 pt-md-2">
+                    <div class="form-check-inline m-auto">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" ngModel value="student" name="userTypeRadioSelection"
+                        (change)="onUsersSelectChange(UserTypeSelectS)" #UserTypeSelectS>Student
+                      </label>
+                    </div>
 
-                </div>
+                  </div>
+                  <div class="col-sm-12 col-md-3 pt-md-2">
+                    <div class="form-check-inline m-auto">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" ngModel value="teacher" name="userTypeRadioSelection"
+                        (change)="onUsersSelectChange(UserTypeSelectT)" #UserTypeSelectT>Teacher
+                      </label>
+                    </div>
 
-        <div class="form-check-inline m-auto">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" ngModel value="student" name="userTypeRadioSelection"
-            (change)="onUsersSelectChange(UserTypeSelectS)" #UserTypeSelectS>Student
-          </label>
-        </div>
-        <div class="form-check-inline m-auto">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" ngModel value="teacher" name="userTypeRadioSelection"
-            (change)="onUsersSelectChange(UserTypeSelectT)" #UserTypeSelectT>Teacher
-          </label>
-        </div>
-        <div class="form-check-inline m-auto">
-          <label class="form-check-label">
-            <input type="radio" class="form-check-input" ngModel value="university" name="userTypeRadioSelection"
-            (change)="onUsersSelectChange(UserTypeSelectU)" #UserTypeSelectU>University
-          </label>
-        </div>
+                  </div>
+                  <div class="col-sm-12 col-md-3 pt-md-2">
+                    <div class="form-check-inline m-auto">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" ngModel value="university" name="userTypeRadioSelection"
+                        (change)="onUsersSelectChange(UserTypeSelectU)" #UserTypeSelectU>University
+                      </label>
+                    </div>
+
+                  </div>
+                <!-- </div> -->
+
 
 
 
@@ -77,14 +73,14 @@
                 </option>
                 <option value="university"><b>University</b></option>
               </select> -->
-            </div>
+            <!-- </div> -->
 
-          </div>
+          <!-- </div> -->
         </div>
 
 
 
-          <div class="row" id="">
+          <div class="row mt-2" >
             <!-- //2nd Element: Choose University -->
             <div class="col-sm-12">
               <div class="input-group mb-3" *ngIf="this.user.UserType =='student' || this.user.UserType =='teacher'">

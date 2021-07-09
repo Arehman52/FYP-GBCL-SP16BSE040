@@ -56,6 +56,7 @@ import { Error404Component } from './MISC/error404/error404.component';
 import { UnimanageJoinrequestsComponent } from './university/unimanage-joinrequests/unimanage-joinrequests.component';
 import { ViewalllabsComponent } from './student/slab-dashboard/viewalllabs/viewalllabs.component';
 import { TviewalllabsComponent } from './teacher/tlab-dashboard/tviewalllabs/tviewalllabs.component';
+import { DoksPrototypeComponent } from './misc/tests/doks-prototype/doks-prototype.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { TviewalllabsComponent } from './teacher/tlab-dashboard/tviewalllabs/tvi
     TestConceptsComponent,
     UnimanageJoinrequestsComponent,
     ViewalllabsComponent,
-    TviewalllabsComponent
+    TviewalllabsComponent,
+    DoksPrototypeComponent
   ],
   imports: [
     BrowserModule,

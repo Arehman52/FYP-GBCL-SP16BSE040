@@ -94,12 +94,12 @@ export class TlabDashboardComponent implements OnInit {
   COPIED:boolean = false;
   CopyLJC() {
     this.COPIED = true;
-    setTimeout(()=>{this.COPIED = false},1200);
+    setTimeout(()=>{this.COPIED = false},1400);
     let  copyText = <HTMLInputElement>document.getElementById("LJC");
     copyText.focus();
     copyText.select();
-    document.body.removeChild(copyText);
     document.execCommand("copy");
+    document.body.removeChild(copyText);
   }
 
 

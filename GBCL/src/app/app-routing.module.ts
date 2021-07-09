@@ -30,6 +30,7 @@ import { ManageStudentsComponent } from './teacher/tlab-dashboard/manage-student
 import { EvaluateStudentsComponent } from './teacher/tlab-dashboard/evaluate-students/evaluate-students.component';
 import { ViewalllabsComponent } from './student/slab-dashboard/viewalllabs/viewalllabs.component';
 import { TviewalllabsComponent } from './teacher/tlab-dashboard/tviewalllabs/tviewalllabs.component';
+import { DoksPrototypeComponent } from './misc/tests/doks-prototype/doks-prototype.component';
 // import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 // import { ManageeChallengesComponent } from './teacher/tlab-dashboard/managee-challenges/managee-challenges.component';
 // import { ManageeLabtasksComponent } from './teacher/tlab-dashboard/managee-labtasks/managee-labtasks.component';
@@ -66,6 +67,7 @@ const routes: Routes = [
   { path: 'UNIVERSITY/ManageLabs', component: UnimanageLabsComponent},
   // Misc routes
   { path: 'Testconcepts', component: GithubcodeforformvalidationComponent},
+  { path: 'DoksPrototypeComponent', component: DoksPrototypeComponent},
   { path: '**', component: Error404Component}
 ];
 
