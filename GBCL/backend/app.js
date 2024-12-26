@@ -15,9 +15,9 @@ const LabChallengesRoutes = require('./routes/labChallenges-routes');
 // mongodb+srv://abdurrehman:<password>@cluster0.jlslm.mongodb.net/<dbname>?retryWrites=true&w=majority
 const app = express();
 
-
+// mongodb+srv://abdurrehman:MvceaEr8JnRkWkl7@newgbcl-db.t276j.mongodb.net/
 // following line establishes the connection with GBCLDatabase.
-mongoose.connect("mongodb+srv://abdurrehman:MvceaEr8JnRkWkl7@cluster0.jlslm.mongodb.net/GBCLDatabse",{ useNewUrlParser: true,
+mongoose.connect("mongodb+srv://abdurrehman:MvceaEr8JnRkWkl7@newgbcl-db.t276j.mongodb.net/",{ useNewUrlParser: true,
 useUnifiedTopology: true })
   .then(() => {
     console.log("Connected to DB.");
