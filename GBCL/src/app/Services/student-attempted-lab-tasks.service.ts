@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StudentAttemptedLabTaskmodel } from '../MODELS/Student-Frontend-Models/StudentAttemptedLabTaskmodel.model';
 
+import { environment } from 'src/environments/environment';
+
+const BASE_URL = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +23,7 @@ export class StudentAttemptedLabTasksService {
     var allStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] = [];
     this.http
       .post<{ message: string; AllStudentAttemptedLabTasksOfthisStudandThisLab: StudentAttemptedLabTaskmodel[] }>(
-        'http://localhost:3000/api/StudentAttemptedLabTasks/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab/',
+        BASE_URL+'/api/StudentAttemptedLabTasks/RecieveAllStudentAttemptedLabTasksOfthisStudandThisLab/',
         objStudentzUsernameAndLabJoinCode
       )
       .subscribe((responseData) => {
@@ -41,7 +44,7 @@ export class StudentAttemptedLabTasksService {
 
   createThisStudentAttemptedLabTask(labTask: StudentAttemptedLabTaskmodel): StudentAttemptedLabTaskmodel[] {
     let arrResult: StudentAttemptedLabTaskmodel[] = [];
-    this.http.post<{ message: string, result: StudentAttemptedLabTaskmodel }>('http://localhost:3000/api/StudentAttemptedLabTasks/createThisStudentAttemptedLabTask', labTask)
+    this.http.post<{ message: string, result: StudentAttemptedLabTaskmodel }>(BASE_URL+'/api/StudentAttemptedLabTasks/createThisStudentAttemptedLabTask', labTask)
       .subscribe((responseData) => {
         console.log(responseData);
         arrResult.push(responseData.result);
@@ -55,7 +58,7 @@ export class StudentAttemptedLabTasksService {
     let allStudentAttemptedLabTasksOfThisLab: StudentAttemptedLabTaskmodel[] = [];
     this.http
       .post<{ message: string; AllStudentAttemptedLabTasksOfThisLab: StudentAttemptedLabTaskmodel[] }>(
-        'http://localhost:3000/api/StudentAttemptedLabChallenges/RecieveAllStudentAttemptedLabTasksOfThisLab', objLabJoinCode
+        BASE_URL+'/api/StudentAttemptedLabChallenges/RecieveAllStudentAttemptedLabTasksOfThisLab', objLabJoinCode
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.AllStudentAttemptedLabTasksOfThisLab).length; i++) {
@@ -76,7 +79,7 @@ export class StudentAttemptedLabTasksService {
     let allStudentAttemptedLabTasksOfThisStudent: StudentAttemptedLabTaskmodel[] = [];
     this.http
       .post<{ message: string; AllStudentAttemptedLabTasksOfThisStudent: StudentAttemptedLabTaskmodel[] }>(
-        'http://localhost:3000/api/StudentAttemptedLabTasks/RecieveAllStudentAttemptedLabTasksOfThisStudent', objStudentzUsername
+        BASE_URL+'/api/StudentAttemptedLabTasks/RecieveAllStudentAttemptedLabTasksOfThisStudent', objStudentzUsername
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.AllStudentAttemptedLabTasksOfThisStudent).length; i++) {
@@ -103,7 +106,7 @@ export class StudentAttemptedLabTasksService {
     var alltasks: StudentAttemptedLabTaskmodel[] = [];
     this.http
       .get<{ message: string; AllStudentAttemptedLabTasks: StudentAttemptedLabTaskmodel[] }>(
-        'http://localhost:3000/api//api/StudentAttemptedLabTasks/RecieveAllStudentAttemptedLabTasks'
+        BASE_URL+'/api//api/StudentAttemptedLabTasks/RecieveAllStudentAttemptedLabTasks'
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.AllStudentAttemptedLabTasks).length; i++) {

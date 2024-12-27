@@ -3,6 +3,9 @@ import { Usersmodel } from '../MODELS/Usersmodel.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from 'src/environments/environment';
+
+const BASE_URL = environment.apiUrl;
 @Injectable({ providedIn: 'root' })
 export class UsersService {
 
@@ -24,19 +27,19 @@ export class UsersService {
 
   // DeleteThisUniversityALLrecords(uni: Usersmodel) {
   //   //deletes uni as a usr
-  //   this.http.delete("http://localhost:3000/api/Users/DeleteThisUser/" + uni).subscribe(
+  //   this.http.delete(BASE_URL+"/api/Users/DeleteThisUser/" + uni).subscribe(
   //     response => {
   //       console.log(response);
   //     }
   //   );
 
-  //   // this.http.delete("http://localhost:3000/api/Users/DeleteLabChallengesWhereLabJoinCode/" + uni).subscribe(
+  //   // this.http.delete(BASE_URL+"/api/Users/DeleteLabChallengesWhereLabJoinCode/" + uni).subscribe(
   //   //   response => {
   //   //     console.log(response);
   //   //   }
   //   // );
 
-  //   // this.http.delete("http://localhost:3000/api/Users/DeleteThisUniversityzLabs/" + uni).subscribe(
+  //   // this.http.delete(BASE_URL+"/api/Users/DeleteThisUniversityzLabs/" + uni).subscribe(
   //   //   response => {
   //   //     console.log(response);
   //   //   }
@@ -44,7 +47,7 @@ export class UsersService {
   // }
 
   deleteThisUser(Id: string) {
-    this.http.delete("http://localhost:3000/api/Users/DeleteThisUser/" + Id).subscribe(
+    this.http.delete(BASE_URL+"/api/Users/DeleteThisUser/" + Id).subscribe(
       response => {
         console.log(response);
       }
@@ -55,7 +58,7 @@ export class UsersService {
 
   //updateUniversityNameOfUserBecauseTitleOfUniversityHasBeenChanged
   updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged(UpdatedUser: Usersmodel, OldUser: Usersmodel) {
-    this.http.put("http://localhost:3000/api/Users/updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged/" + OldUser.TitleOfUniversity, UpdatedUser).subscribe(
+    this.http.put(BASE_URL+"/api/Users/updateUniversityNameOfUserEverywhereBecauseTitleOfUniversityHasBeenChanged/" + OldUser.TitleOfUniversity, UpdatedUser).subscribe(
       response => {
         console.log(response);
       }
@@ -66,7 +69,7 @@ export class UsersService {
 
 
   UpdateThisUserWithLABJOINCODES(UpdatedUser: Usersmodel, Id: string) {
-    this.http.put("http://localhost:3000/api/Users/UpdateThisUser/" + Id, UpdatedUser).subscribe(
+    this.http.put(BASE_URL+"/api/Users/UpdateThisUser/" + Id, UpdatedUser).subscribe(
       response => {
         console.log(response);
       }
@@ -75,7 +78,7 @@ export class UsersService {
 
 
   deleteThisUniversity(uniUpdatedUser: Usersmodel, Id: string) {
-    this.http.put("http://localhost:3000/api/Users/UpdateThisUser/"+Id, uniUpdatedUser)
+    this.http.put(BASE_URL+"/api/Users/UpdateThisUser/"+Id, uniUpdatedUser)
       .subscribe(
         response => {
           console.log(response);
@@ -84,7 +87,7 @@ export class UsersService {
  }
 
   updateThisUser(UpdatedUser: Usersmodel, Id: string) {
-    this.http.put("http://localhost:3000/api/Users/UpdateThisUser/" + Id, UpdatedUser)
+    this.http.put(BASE_URL+"/api/Users/UpdateThisUser/" + Id, UpdatedUser)
       .subscribe(
         response => {
           console.log(response);
@@ -99,7 +102,7 @@ export class UsersService {
     var tempRecieveAllUniversitiesFromDB: Usersmodel[] = [];
     this.http
       .get<{ message: string; users: Usersmodel[] }>(
-        'http://localhost:3000/api/Users/RecieveAllUniversitiesFromDB'
+        BASE_URL+'/api/Users/RecieveAllUniversitiesFromDB'
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.users).length; i++) {
@@ -116,7 +119,7 @@ export class UsersService {
     var tempUsers: Usersmodel[] = [];
     this.http
       .get<{ message: string; users: Usersmodel[] }>(
-        'http://localhost:3000/api/Users/RecieveUsersFromDB'
+        BASE_URL+'/api/Users/RecieveUsersFromDB'
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.users).length; i++) {
@@ -131,7 +134,7 @@ export class UsersService {
 
   createUser(User: Usersmodel) {
     this.http
-      .post('http://localhost:3000/api/Users/CreateUser', User)
+      .post(BASE_URL+'/api/Users/CreateUser', User)
       .subscribe((responseData) => {
         // console.log(responseData.message);
         console.log(responseData);
@@ -168,7 +171,7 @@ export class UsersService {
     var objUnizTitle: { TitleOfUniversity: string } = { TitleOfUniversity: UnizTitle };
     this.http
       .post<{ message: string; user: Usersmodel }>(
-        'http://localhost:3000/api/Users/FetchThisUniversityByItsTitle', objUnizTitle
+        BASE_URL+'/api/Users/FetchThisUniversityByItsTitle', objUnizTitle
       )
       .subscribe((responseData) => {
         this.arrFetchThisUniversityByItsTitle.push(responseData.user);
@@ -186,7 +189,7 @@ export class UsersService {
 
     this.http
       .post<{ message: string; user: Usersmodel }>(
-        'http://localhost:3000/api/Users/FetchTHISUser', userToBeSearched
+        BASE_URL+'/api/Users/FetchTHISUser', userToBeSearched
       )
       .subscribe((responseData) => {
 
@@ -215,7 +218,7 @@ export class UsersService {
     let array: any[] = [];
     this.http
       .post(
-        'http://localhost:3000/api/Users/FetchInstructorForThisLab/', LabId
+        BASE_URL+'/api/Users/FetchInstructorForThisLab/', LabId
       )
       .subscribe((responseData) => {
         console.log("responseData ==> ", responseData);
@@ -238,7 +241,7 @@ export class UsersService {
 
     this.http
       .post<{ message: string; user: Usersmodel }>(
-        'http://localhost:3000/api/Users/FetchTHISUser', usernameToBeSearched
+        BASE_URL+'/api/Users/FetchTHISUser', usernameToBeSearched
       )
       .subscribe((responseData) => {
 
@@ -271,7 +274,7 @@ export class UsersService {
   //   // { Usrename: { $in: req.body.arrayUNs}}
   //   this.http
   //     .post<{ message: string; userzzz: Usersmodel[] }>(
-  //       'http://localhost:3000/api/Users/FetchTHeseUserzzz', Username
+  //       BASE_URL+'/api/Users/FetchTHeseUserzzz', Username
   //     )
   //     .subscribe((responseData) => {
   //       // console.log("responseData:::!@@@",responseData);
@@ -294,7 +297,7 @@ export class UsersService {
 
     this.http
       .post<{ message: string; user: Usersmodel }>(
-        'http://localhost:3000/api/Users/FetchTHISUser', username
+        BASE_URL+'/api/Users/FetchTHISUser', username
       )
       .subscribe((responseData) => {
 

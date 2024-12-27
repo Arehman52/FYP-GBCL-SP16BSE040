@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { StudentActivityHistorymodel } from '../MODELS/Student-Frontend-Models/StudentActivityHistorymodel.model';
 import { StudentzUsernameAndLabJoinCodemodel } from '../MODELS/Student-Frontend-Models/StudentzUsernameAndLabJoinCodemodel.model';
 
+import { environment } from 'src/environments/environment';
+
+const BASE_URL = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +22,7 @@ export class StudentActivityHistoryService {
     var fetchedThisRivalzActivitiesHistory: StudentActivityHistorymodel[] = [];
     this.http
       .post<{ message: string, FetchedThisRivalzActivitiesHistory: StudentActivityHistorymodel[] }>(
-        'http://localhost:3000/api/StudentActivityHistory/fetchThisRivalzActivitiesHistory/',
+        BASE_URL+'/api/StudentActivityHistory/fetchThisRivalzActivitiesHistory/',
         objStudentzUsernameAndLabJoinCode
       )
       .subscribe((responseData) => {
@@ -32,7 +35,7 @@ export class StudentActivityHistoryService {
 
   createAStudentActivityHistoryDocument(objStudentActivityHistorymodel: StudentActivityHistorymodel) {
 
-    this.http.post('http://localhost:3000/api/StudentActivityHistory/createAStudentActivityHistoryDocument', objStudentActivityHistorymodel)
+    this.http.post(BASE_URL+'/api/StudentActivityHistory/createAStudentActivityHistoryDocument', objStudentActivityHistorymodel)
       .subscribe((responseData) => {
         console.log(responseData);
       });

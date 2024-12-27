@@ -149,10 +149,6 @@ export class SignupFormComponent implements OnInit {
   };
 
 
-  // updaall(){
-  //   this.http.get("http://localhost:3000/api/Users/updaaaall")
-  //   .subscribe(ResponseData=>{console.log(ResponseData);});
-  // }
 
 
   Errors = {

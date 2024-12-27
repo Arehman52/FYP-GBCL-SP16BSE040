@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LabChallengesmodel } from '../MODELS/Lab-Frontend-Models/labchallengesmodel.model';
+import { environment } from 'src/environments/environment';
 
+const BASE_URL = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +14,7 @@ export class LabChallengesService {
 
   createLabChallenge(labChallenge: LabChallengesmodel) {
     this.http
-      .post('http://localhost:3000/api/LabChallenges/CreateLabChallenge', labChallenge)
+      .post(BASE_URL+'/api/LabChallenges/CreateLabChallenge', labChallenge)
       .subscribe((responseData) => {
         console.log(responseData);
       });
@@ -21,7 +23,7 @@ export class LabChallengesService {
 
 
   DeleteThisLabChallenge(ChallengeId: string) {
-    this.http.delete("http://localhost:3000/api/LabChallenges/DeleteThisLabChallenge/" + ChallengeId).subscribe(
+    this.http.delete(BASE_URL+"/api/LabChallenges/DeleteThisLabChallenge/" + ChallengeId).subscribe(
       response => {
         console.log(response);
       }
@@ -32,7 +34,7 @@ export class LabChallengesService {
     let allChallengesOfThisLabFromDB: LabChallengesmodel[] = [];
     this.http
       .post<{ message: string; AllChallengesOfThisLabFromDB: LabChallengesmodel[] }>(
-        'http://localhost:3000/api/LabChallenges/getAllChallengesOfThisLabFromDB', objLabID
+        BASE_URL+'/api/LabChallenges/getAllChallengesOfThisLabFromDB', objLabID
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.AllChallengesOfThisLabFromDB).length; i++) {
@@ -54,7 +56,7 @@ export class LabChallengesService {
     let AllLabChallenges: LabChallengesmodel[] = [];
     this.http
       .get<{ message: string; labChallenges: LabChallengesmodel[] }>(
-        'http://localhost:3000/api/LabChallenges/GetAllLabChallengesFromDB'
+        BASE_URL+'/api/LabChallenges/GetAllLabChallengesFromDB'
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.labChallenges).length; i++) {
@@ -71,7 +73,7 @@ export class LabChallengesService {
 
 
   updateThisLabChallenge(UpdatedLabChallenge: LabChallengesmodel) {
-    this.http.put("http://localhost:3000/api/LabChallenges/UpdateThisLabChallenge/" + UpdatedLabChallenge._id, UpdatedLabChallenge).subscribe(
+    this.http.put(BASE_URL+"/api/LabChallenges/UpdateThisLabChallenge/" + UpdatedLabChallenge._id, UpdatedLabChallenge).subscribe(
       response => {
         console.log(response);
       });

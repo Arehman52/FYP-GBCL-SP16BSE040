@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { Labsmodel } from '../MODELS/Lab-Frontend-Models/labsmodel.model';
 import { LabsService } from '../Services/labs.service';
 
+import { environment } from 'src/environments/environment';
+
+const BASE_URL = environment.apiUrl;
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -144,7 +147,7 @@ export class AdminComponent implements OnInit {
 
 
   //   deleteThisUniversity(uniUpdatedUser: Usersmodel, Id: string) {
-  //     this.http.put("http://localhost:3000/api/Users/UpdateThisUser/"+Id, uniUpdatedUser)
+  //     this.http.put(BASE_URL+"/api/Users/UpdateThisUser/"+Id, uniUpdatedUser)
   //       .subscribe(
   //         response => {
   //           console.log(response);
@@ -155,18 +158,18 @@ export class AdminComponent implements OnInit {
 
 
   ResetEntrireDatabase() {
-    this.http.get("http://localhost:3000/api/Users/ResetEntrireDatabase/")
+    this.http.get(BASE_URL+"/api/Users/ResetEntrireDatabase/")
       .subscribe(
         response => {
           console.log(response);
         }
       );
-    this.http.get("http://localhost:3000/api/StudentLabData/ResetEntrireDatabase/").subscribe(
+    this.http.get(BASE_URL+"/api/StudentLabData/ResetEntrireDatabase/").subscribe(
       response => {
         console.log(response);
       }
     );
-    this.http.get("http://localhost:3000/api/Labs/ResetEntrireDatabase/")
+    this.http.get(BASE_URL+"/api/Labs/ResetEntrireDatabase/")
       .subscribe(
         response => {
           console.log(response);

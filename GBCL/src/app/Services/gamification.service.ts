@@ -5,6 +5,9 @@ import { StudLabDataAndStatsmodel } from '../MODELS/Student-Frontend-Models/Stud
 import { StudentActivityHistoryService } from './student-activity-history.service';
 import { StudentLabDataService } from './student-lab-data.service';
 
+import { environment } from 'src/environments/environment';
+
+const BASE_URL = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })

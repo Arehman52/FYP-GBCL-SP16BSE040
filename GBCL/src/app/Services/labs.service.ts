@@ -6,6 +6,9 @@ import { StudentzUsernameAndLabJoinCodemodel } from '../MODELS/Student-Frontend-
 import { LabNumbersModel } from '../MODELS/Lab-Frontend-Models/LabNumbersmodel.model';
 
 
+import { environment } from 'src/environments/environment';
+
+const BASE_URL = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +21,7 @@ export class LabsService {
 
 
   updateThisLabNumberOfThisLab(LabNumberToUpdate: LabNumbersModel) {
-    this.http.put("http://localhost:3000/api/Labs/updateThisLabNumberOfThisLab", LabNumberToUpdate)
+    this.http.put(BASE_URL+"/api/Labs/updateThisLabNumberOfThisLab", LabNumberToUpdate)
       .subscribe(ResposeData => {
         console.log(ResposeData);
       });
@@ -30,7 +33,7 @@ export class LabsService {
   fetchLabNumbersOfThisLab(LabID: string): LabNumbersModel[] {
     const obj: StudentzUsernameAndLabJoinCodemodel = { LabJoinCode: LabID, StudentzUsername: null };
     let fetchedLabNumbers: LabNumbersModel[] = [];
-    this.http.post<{ message: string, FetchedLabNumbers: LabNumbersModel[] }>("http://localhost:3000/api/Labs/fetchLabNumbersOfThisLab", obj)
+    this.http.post<{ message: string, FetchedLabNumbers: LabNumbersModel[] }>(BASE_URL+"/api/Labs/fetchLabNumbersOfThisLab", obj)
       .subscribe(responseData => {
         console.log(responseData);
         for (let i = 0; i < Object.keys(responseData.FetchedLabNumbers).length; i++) {
@@ -42,7 +45,7 @@ export class LabsService {
 
   createNewLabNumber(LabID: string, LabNumber: number) {
     const labNumber: LabNumbersModel = { LabJoinCode: LabID, LabNumber: LabNumber, LabTaskIds: [], _id: '' };
-    this.http.post("http://localhost:3000/api/Labs/createNewLabNumber", labNumber)
+    this.http.post(BASE_URL+"/api/Labs/createNewLabNumber", labNumber)
       .subscribe(resposedData => {
         console.log(resposedData);
       });
@@ -51,13 +54,13 @@ export class LabsService {
 
 
   ResetAllChallenegezAttemptedByArraysOfALLLstudzOfThisLab(StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel) {
-    this.http.put("http://localhost:3000/api/Labs/ResetAllChallenegezAttemptedByArraysOfALLLstudzOfThisLab/", StudentzUsernameAndLabID).subscribe(
+    this.http.put(BASE_URL+"/api/Labs/ResetAllChallenegezAttemptedByArraysOfALLLstudzOfThisLab/", StudentzUsernameAndLabID).subscribe(
       response => {
         console.log(response);
       });
   }
   ResetAllLabTaskzAttemptedByArraysOfALLLstudzOfThisLab(StudentzUsernameAndLabID: StudentzUsernameAndLabJoinCodemodel) {
-    this.http.put("http://localhost:3000/api/Labs/ResetAllLabTaskzAttemptedByArraysOfALLLstudzOfThisLab/", StudentzUsernameAndLabID).subscribe(
+    this.http.put(BASE_URL+"/api/Labs/ResetAllLabTaskzAttemptedByArraysOfALLLstudzOfThisLab/", StudentzUsernameAndLabID).subscribe(
       response => {
         console.log(response);
       });
@@ -70,7 +73,7 @@ export class LabsService {
 
   getAllLabs(): Labsmodel[] {
     let allLabs: Labsmodel[] = [];
-    this.http.get<{ message: string; allLabs: Labsmodel[] }>('http://localhost:3000/api/Labs/getAllLabs')
+    this.http.get<{ message: string; allLabs: Labsmodel[] }>(BASE_URL+'/api/Labs/getAllLabs')
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.allLabs).length; i++) {
           allLabs.push(responseData.allLabs[i]);
@@ -82,7 +85,7 @@ export class LabsService {
 
   getAllLabsOfThisUniversity(obj: { UniversityNameOfLab: string }): Labsmodel[] {
     let allLabsOfThisUniversity: Labsmodel[] = [];
-    this.http.post<{ message: string; allLabsOfThisUniversity: Labsmodel[] }>('http://localhost:3000/api/Labs/getAllLabsOfThisUniversity', obj)
+    this.http.post<{ message: string; allLabsOfThisUniversity: Labsmodel[] }>(BASE_URL+'/api/Labs/getAllLabsOfThisUniversity', obj)
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.allLabsOfThisUniversity).length; i++) {
           allLabsOfThisUniversity.push(responseData.allLabsOfThisUniversity[i]);
@@ -149,7 +152,7 @@ export class LabsService {
     var Lab: Labsmodel[] = [];
     this.http
       .post<{ message: string; lab: Labsmodel }>(
-        'http://localhost:3000/api/Labs/FetchTHISLab', objLabId
+        BASE_URL+'/api/Labs/FetchTHISLab', objLabId
       )
       .subscribe((responseData) => {
         Lab.push(responseData.lab);
@@ -162,7 +165,7 @@ export class LabsService {
 
 
   DeleteThisLab(Id: string) {
-    this.http.delete("http://localhost:3000/api/Labs/DeleteThisLab/" + Id).subscribe(
+    this.http.delete(BASE_URL+"/api/Labs/DeleteThisLab/" + Id).subscribe(
       response => {
         console.log(response);
       }
@@ -172,7 +175,7 @@ export class LabsService {
 
 
   //  setThisUserAsInstructorOfThisLab(Lab: Labsmodel) {
-  //    this.http.put("http://localhost:3000/api/Users/setThisUserAsInstructorOfThisLab/" + Lab.LabInstructor, Lab).subscribe(
+  //    this.http.put(BASE_URL+"/api/Users/setThisUserAsInstructorOfThisLab/" + Lab.LabInstructor, Lab).subscribe(
   //      response => {
   //        console.log(response);
   //      }
@@ -181,7 +184,7 @@ export class LabsService {
   //  }
 
   updateThisLab(UpdatedLab: Labsmodel) {
-    this.http.put("http://localhost:3000/api/Labs/UpdateThisLab/" + UpdatedLab._id, UpdatedLab).subscribe(
+    this.http.put(BASE_URL+"/api/Labs/UpdateThisLab/" + UpdatedLab._id, UpdatedLab).subscribe(
       response => {
         console.log(response);
       }
@@ -192,7 +195,7 @@ export class LabsService {
   ChangeUniversityNameOfLabOfThisUnizLabs(oldUniversityNameOfLab:string,newUniversityNameOfLab: string) {
     let UpdatedLab: Labsmodel = { LabClass: '', LabInstructor: '', LabInstructorFN: '', LabInstructorLN: '', LabProgram: '', LabTitle: '', UniversityNameOfLab: newUniversityNameOfLab, _id: '' };
 
-    this.http.put("http://localhost:3000/api/Labs/ChangeUniversityNameOfLabOfThisUnizLabs/"+oldUniversityNameOfLab, UpdatedLab).subscribe(
+    this.http.put(BASE_URL+"/api/Labs/ChangeUniversityNameOfLabOfThisUnizLabs/"+oldUniversityNameOfLab, UpdatedLab).subscribe(
       response => {
         console.log(response);
       }
@@ -206,7 +209,7 @@ export class LabsService {
     // array = [];
     // this.CreatedLab = [];
     this.http
-      .post('http://localhost:3000/api/Labs/CreateLab', Lab)
+      .post(BASE_URL+'/api/Labs/CreateLab', Lab)
       .subscribe((responseData) => {
         // setTimeout(()=>{
         // for (let i = 0; i < Object.keys(responseData.CreatedLab).length; i++) {
@@ -238,7 +241,7 @@ export class LabsService {
     var tempLabs: Labsmodel[] = [];
     this.http
       .get<{ message: string; labs: Labsmodel[] }>(
-        'http://localhost:3000/api/Labs/RecieveLabsFromDB'
+        BASE_URL+'/api/Labs/RecieveLabsFromDB'
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.labs).length; i++) {

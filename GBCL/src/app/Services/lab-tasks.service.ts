@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LabTasksmodel } from '../MODELS/Lab-Frontend-Models/labTasksmodel.model';
 
+import { environment } from 'src/environments/environment';
+
+const BASE_URL = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -41,7 +44,7 @@ export class LabTasksService {
 
     let labTask:LabTasksmodel[] = [];
     this.http
-      .post<{ message: string; JustCreatedLabTask: LabTasksmodel }>('http://localhost:3000/api/LabTasks/CreateLabTask', labtask)
+      .post<{ message: string; JustCreatedLabTask: LabTasksmodel }>(BASE_URL+'/api/LabTasks/CreateLabTask', labtask)
       .subscribe((responseData) => {
         labTask.push(responseData.JustCreatedLabTask);
         console.log("responseData from service : ", responseData);
@@ -52,7 +55,7 @@ export class LabTasksService {
 
 
   DeletThisLabTask(labTaskId: string) {
-    this.http.delete("http://localhost:3000/api/LabTasks/DeleteThisLabTask/" + labTaskId).subscribe(
+    this.http.delete(BASE_URL+"/api/LabTasks/DeleteThisLabTask/" + labTaskId).subscribe(
       response => {
         console.log(response);
       }
@@ -65,7 +68,7 @@ export class LabTasksService {
     let allLabtasksOfthislabFromDB: LabTasksmodel[] = [];
     this.http
       .post<{ message: string; AllLabTasksOfThisLabFromDB: LabTasksmodel[] }>(
-        'http://localhost:3000/api/LabTasks/getAllLabTasksOfThisLabFromDB', objLabID
+        BASE_URL+'/api/LabTasks/getAllLabTasksOfThisLabFromDB', objLabID
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.AllLabTasksOfThisLabFromDB).length; i++) {
@@ -86,7 +89,7 @@ export class LabTasksService {
     let AllLabTasks: LabTasksmodel[] = [];
     this.http
       .get<{ message: string; labTasks: LabTasksmodel[] }>(
-        'http://localhost:3000/api/LabTasks/GetAllLabTasksFromDB'
+        BASE_URL+'/api/LabTasks/GetAllLabTasksFromDB'
       )
       .subscribe((responseData) => {
         for (let i = 0; i < Object.keys(responseData.labTasks).length; i++) {
@@ -104,7 +107,7 @@ export class LabTasksService {
 
   updateThisLabTask(UpdatedLabTask: LabTasksmodel) {
     console.log("loooooooooooooooooooooog");
-    this.http.put("http://localhost:3000/api/LabTasks/UpdateThisLabTask/", UpdatedLabTask).subscribe(
+    this.http.put(BASE_URL+"/api/LabTasks/UpdateThisLabTask/", UpdatedLabTask).subscribe(
       response => {
         console.log(response);
       });
