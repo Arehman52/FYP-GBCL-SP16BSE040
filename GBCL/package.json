@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve -o --port=4600",
     "sa": "ng serve -o --configuration=production --port=4600",
+    "fixSSL":"export NODE_OPTIONS=--openssl-legacy-provider",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
