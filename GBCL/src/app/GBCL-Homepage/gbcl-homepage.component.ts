@@ -15,6 +15,7 @@ export class GBCLHomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.UsersRecieved = this.usersService.RecieveAllUsersFromDB();
+    this.usersService.getServerStatus();
   }
 
   UsersRecieved:Usersmodel[] = [];

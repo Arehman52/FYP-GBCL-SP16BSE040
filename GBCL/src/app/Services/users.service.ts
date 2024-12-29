@@ -11,6 +11,15 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
+  getServerStatus() {
+    this.http
+      .get<{ message: string; users: Usersmodel[] }>(
+        BASE_URL+'/api'
+      )
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
+  }
 
 
 
